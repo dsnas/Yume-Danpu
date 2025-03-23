@@ -1,0 +1,42 @@
+{
+  "$GMProject":"",
+  "%Name":"Yume Danpu",
+  "AudioGroups":[
+    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+  "configs":{
+    "children":[],
+    "name":"Default",
+  },
+  "defaultScriptType":1,
+  "Folders":[
+    {"$GMFolder":"","%Name":"main","folderPath":"folders/main.yy","name":"main","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"wrld","folderPath":"folders/wrld.yy","name":"wrld","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"chara","folderPath":"folders/wrld/chara.yy","name":"chara","resourceType":"GMFolder","resourceVersion":"2.0",},
+  ],
+  "IncludedFiles":[],
+  "isEcma":false,
+  "LibraryEmitters":[],
+  "MetaData":{
+    "IDEVersion":"2024.11.0.179",
+  },
+  "name":"Yume Danpu",
+  "resources":[
+    {"id":{"name":"obj_wrld_chara","path":"objects/obj_wrld_chara/obj_wrld_chara.yy",},},
+    {"id":{"name":"rm_wrld_macaco","path":"rooms/rm_wrld_macaco/rm_wrld_macaco.yy",},},
+    {"id":{"name":"scr_master","path":"scripts/scr_master/scr_master.yy",},},
+    {"id":{"name":"spr_wrld_chara_down","path":"sprites/spr_wrld_chara_down/spr_wrld_chara_down.yy",},},
+    {"id":{"name":"spr_wrld_chara_left","path":"sprites/spr_wrld_chara_left/spr_wrld_chara_left.yy",},},
+    {"id":{"name":"spr_wrld_chara_right","path":"sprites/spr_wrld_chara_right/spr_wrld_chara_right.yy",},},
+    {"id":{"name":"spr_wrld_chara_up","path":"sprites/spr_wrld_chara_up/spr_wrld_chara_up.yy",},},
+  ],
+  "resourceType":"GMProject",
+  "resourceVersion":"2.0",
+  "RoomOrderNodes":[
+    {"roomId":{"name":"rm_wrld_macaco","path":"rooms/rm_wrld_macaco/rm_wrld_macaco.yy",},},
+  ],
+  "templateType":"game",
+  "TextureGroups":[
+    {"$GMTextureGroup":"","%Name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+}
