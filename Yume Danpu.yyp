@@ -22,6 +22,7 @@
   },
   "name":"Yume Danpu",
   "resources":[
+    {"id":{"name":"kjekdkajdka","path":"objects/kjekdkajdka/kjekdkajdka.yy",},},
     {"id":{"name":"obj_wrld_chara","path":"objects/obj_wrld_chara/obj_wrld_chara.yy",},},
     {"id":{"name":"rm_wrld_macaco","path":"rooms/rm_wrld_macaco/rm_wrld_macaco.yy",},},
     {"id":{"name":"scr_master","path":"scripts/scr_master/scr_master.yy",},},
