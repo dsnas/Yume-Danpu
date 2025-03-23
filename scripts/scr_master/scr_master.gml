@@ -114,7 +114,7 @@ global.fnt_main = font_add_sprite_ext(spr_font_main, "qwertyuiopasdfghjklzxcvbnm
 function fn_sett_start()
 {
 	global.sett_lang = 0;
-	global.sett_fscr = false;
+	
 	global.sett_gfx = true;
 	
 	

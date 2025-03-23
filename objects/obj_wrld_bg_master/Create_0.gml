@@ -8,7 +8,10 @@ bg_maxDepth = (layer_get_depth("Background") - 1);
 
 
 
-//
+if (wrld == rm_wrld_macaco)
+{
+	bg_obj[0] = obj_wrld_bg_spr;
+}
 
 
 
@@ -17,6 +20,19 @@ for (var i = 0; i < bg_maxAmt; i++)
 	if (bg_obj[i] != -1)
 		fn_create(bg_obj[i], 0, 0);
 }
+
+
+
+if (wrld == rm_wrld_macaco)
+{
+	bg_obj[0].depth = (bg_maxDepth - 1); // macacos
+	bg_obj[0].draw_spr = spr_wrld_bg_macaco_0;
+	bg_obj[0].draw_alp = 0.1;
+	bg_obj[0].draw_move_xTime = (120 * 60);
+	bg_obj[0].draw_move_yTime = bg_obj[0].draw_move_xTime;
+}
+
+
 
 
 

@@ -1,8 +1,11 @@
 
 function fn_sett_start() // start settings
 {
-	// volume
-	#macro VOL_MASTER 0
+	global.sett_fscr = false;
+	
+	
+	
+	#macro VOL_MASTER 0 // volume
 	#macro VOL_MUSIC 1
 	#macro VOL_PLAYER 2
 	#macro VOL_MENU 3
@@ -17,8 +20,7 @@ function fn_sett_start() // start settings
 	
 	
 	
-	// input
-	#macro INP_LEFT 0
+	#macro INP_LEFT 0 // input
 	#macro INP_RIGHT 1
 	#macro INP_UP 2
 	#macro INP_DOWN 3
