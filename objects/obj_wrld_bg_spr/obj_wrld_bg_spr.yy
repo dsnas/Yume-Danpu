@@ -1,13 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"kjekdkajdka",
-  "eventList":[],
+  "%Name":"obj_wrld_bg_spr",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"kjekdkajdka",
+  "name":"obj_wrld_bg_spr",
   "overriddenProperties":[],
   "parent":{
-    "name":"Yume Danpu",
-    "path":"Yume Danpu.yyp",
+    "name":"bg",
+    "path":"folders/wrld/bg.yy",
   },
   "parentObjectId":null,
   "persistent":false,

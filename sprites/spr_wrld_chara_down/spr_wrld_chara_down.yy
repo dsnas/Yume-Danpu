@@ -26,7 +26,7 @@
   ],
   "name":"spr_wrld_chara_down",
   "nineSlice":null,
-  "origin":0,
+  "origin":6,
   "parent":{
     "name":"chara",
     "path":"folders/wrld/chara.yy",
@@ -88,7 +88,7 @@
     "visibleRange":null,
     "volume":1.0,
     "xorigin":0,
-    "yorigin":0,
+    "yorigin":28,
   },
   "swatchColours":null,
   "swfPrecision":0.5,

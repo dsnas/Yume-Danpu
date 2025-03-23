@@ -1,6 +1,69 @@
 
+fn_wrld_chara_fac();
 
-wrld_chara_fac();
+
+
+if (move_stage == -1) // idle
+{	
+	for (var i = 0; i < 4; i++) // check for movement
+	{
+		if (fac_inp[i] == true)
+		{
+			fac = i;
+			move_stage = 0;
+			
+			sprite_index = fac_spr[fac];
+			image_index += 1;
+			fn_audio_play(snd_wrld_chara_step, false, VOL_PLAYER, 1, 0);
+			
+			break;
+		}
+	}
+}
+
+
+
+if (move_stage == 0) // moving
+{
+	if (fac_orient[fac] == FAC_ORIENT_HOR)
+		x += (move_spd * fac_spdMul[fac]);
+	else if (fac_orient[fac] == FAC_ORIENT_VER)
+		y += (move_spd * fac_spdMul[fac]);
+	depth = -bbox_bottom;
+	
+	move_time += 1;
+	
+	if (move_time == (move_timeMax / 2))
+		image_index += 1;
+	if (move_time >= move_timeMax)
+	{
+		move_time = 0;
+		move_stage = -1;
+		
+		// fn_debug("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | depth = " + string(depth));
+	}
+}
+
+
+
+if (cam_act == true) // camera
+{
+	cam_x = x + (sprite_width / 2)	- (cam_w / 2);
+	cam_y = y - (sprite_height / 2)	- (cam_h / 2);
+	
+	if (cam_clamp == true)
+	{
+		cam_x = clamp(cam_x, 0, wrld_w - cam_w);
+		cam_y = clamp(cam_y, 0, wrld_h - cam_h);
+	}
+	
+	camera_set_view_size(cam, cam_w, cam_h);
+	camera_set_view_pos(cam, cam_x, cam_y);
+	
+	// fn_debug("camera = [" + string(cam) + "] | camera position = [" + string(cam_x) + ", " + string(cam_y) + "]");
+}
+
+
 
 
 
@@ -62,11 +125,6 @@ while (_checkType <= 2)
 }
 */
 
-
-
-
-
-
 /*
 if (move_stage == -1)
 {
@@ -93,88 +151,6 @@ if (move_stage == -1)
 	}
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if (move_stage == -1)
-{	
-	for (var i = 0; i < 4; i++)
-	{
-		if (fac_inp[i] == true)
-		{
-			fac = i;
-			move_stage = 0;
-			
-			sprite_index = fac_spr[fac];
-			image_index += 1;
-			audio_play(snd_wrld_chara_step, 0, 1, 0, VOL_PLAYER);
-			
-			break;
-		}
-	}
-}
-
-
-
-if (move_stage == 0)
-{
-	if (fac_orient[fac] == FAC_ORIENT_HOR)
-		x += (move_spd * fac_spdMul[fac]);
-	else if (fac_orient[fac] == FAC_ORIENT_VER)
-		y += (move_spd * fac_spdMul[fac]);
-	depth = -bbox_bottom;
-	
-	move_time += 1;
-	
-	if (move_time == (move_timeMax / 2))
-		image_index += 1;
-	if (move_time >= move_timeMax)
-	{
-		move_time = 0;
-		move_stage = -1;
-		
-		//debug("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | depth = " + string(depth));
-	}
-}
-
-
-
-if (cam_act == true)
-{
-	cam_x = x + (sprite_width / 2)	- (cam_w / 2);
-	cam_y = y - (sprite_height / 2)	- (cam_h / 2);
-	
-	if (cam_clamp == true)
-	{
-		cam_x = clamp(cam_x, 0, wrld_w - cam_w);
-		cam_y = clamp(cam_y, 0, wrld_h - cam_h);
-	}
-	
-	camera_set_view_size(cam, cam_w, cam_h);
-	camera_set_view_pos(cam, cam_x, cam_y);
-}
-
-
-
-
-
-
-
-
-
-
 
 
 

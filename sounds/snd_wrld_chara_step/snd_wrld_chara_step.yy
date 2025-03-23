@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_wrld_chara_step",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.8,
+  "name":"snd_wrld_chara_step",
+  "parent":{
+    "name":"chara",
+    "path":"folders/wrld/chara.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_wrld_chara_step.wav",
+  "type":0,
+  "volume":1.0,
+}

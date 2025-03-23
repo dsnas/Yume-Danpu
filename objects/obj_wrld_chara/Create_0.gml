@@ -3,7 +3,7 @@ fn_import();
 
 
 
-wrld_chara_fac();
+fn_wrld_chara_fac();
 fac = FAC_DOWN;
 
 
@@ -18,7 +18,7 @@ image_index = 0;
 move_stage = -1;
 /*
 	-2 = can't move due to event/cutscene;
-	-1 = can move;
+	-1 = idle;
 	 0 = moving;
 */
 
@@ -38,7 +38,7 @@ cam_h = 240;
 
 
 
-wrld_chara_int();
+fn_wrld_chara_int();
 
 
 
