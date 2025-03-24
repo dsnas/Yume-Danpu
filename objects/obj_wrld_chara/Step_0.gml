@@ -1,5 +1,6 @@
 
 fn_wrld_chara_fac();
+fn_wrld_chara_coll();
 
 
 
@@ -8,6 +9,7 @@ if (move_stage == -1) // idle
 	for (var i = 0; i < 4; i++) // check for movement
 	{
 		if (fac_inp[i] == true)
+		&& (instance_place(coll_xPlc[i], coll_yPlc[i], obj_coll_parent) == noone)
 		{
 			fac = i;
 			move_stage = 0;

@@ -32,22 +32,17 @@ function fn_wrld_chara_fac() // get each facing direction information
 	fac_orient[FAC_DOWN]	= FAC_ORIENT_VER;
 }
 
-function fn_wrld_chara_int()
+function fn_wrld_chara_coll()
 {
-	/*
-	int_xPl[FAC_LEFT]	= (x - move_timeMax);
-	int_xPl[FAC_RIGHT]	= (x + move_timeMax);
-	int_xPl[FAC_UP]		= x;
-	int_xPl[FAC_DOWN]	= x;
+	coll_xPlc[FAC_LEFT]		= (x - move_timeMax);
+	coll_xPlc[FAC_RIGHT]	= (x + move_timeMax);
+	coll_xPlc[FAC_UP]		= x;
+	coll_xPlc[FAC_DOWN]		= x;
 	
-	int_yPl[FAC_LEFT]	= y;
-	int_yPl[FAC_RIGHT]	= y;
-	int_yPl[FAC_UP]		= (y - move_timeMax);
-	int_yPl[FAC_DOWN]	= (y + move_timeMax);
-	
-	int_obj[0] = instance_place(int_xPl[fac], int_yPl[fac], obj_interact_parent);
-	int_obj[1] = instance_place(int_xPl[fac], int_yPl[fac], obj_interact_collision_parent);
-	*/
+	coll_yPlc[FAC_LEFT]		= y;
+	coll_yPlc[FAC_RIGHT]	= y;
+	coll_yPlc[FAC_UP]		= (y - move_timeMax);
+	coll_yPlc[FAC_DOWN]		= (y + move_timeMax);
 }
 
 

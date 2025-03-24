@@ -38,8 +38,6 @@ cam_h = 240;
 
 
 
-fn_wrld_chara_int();
-
 
 
 

@@ -10,6 +10,7 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"coll","folderPath":"folders/wrld/coll.yy","name":"coll","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"main","folderPath":"folders/main.yy","name":"main","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"assets","folderPath":"folders/main/assets.yy","name":"assets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"wrld","folderPath":"folders/wrld.yy","name":"wrld","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -25,6 +26,8 @@
   },
   "name":"Yume Danpu",
   "resources":[
+    {"id":{"name":"obj_coll_parent","path":"objects/obj_coll_parent/obj_coll_parent.yy",},},
+    {"id":{"name":"obj_coll_wall","path":"objects/obj_coll_wall/obj_coll_wall.yy",},},
     {"id":{"name":"obj_inp","path":"objects/obj_inp/obj_inp.yy",},},
     {"id":{"name":"obj_master","path":"objects/obj_master/obj_master.yy",},},
     {"id":{"name":"obj_wrld_bg_master","path":"objects/obj_wrld_bg_master/obj_wrld_bg_master.yy",},},
@@ -38,6 +41,7 @@
     {"id":{"name":"scr_sett","path":"scripts/scr_sett/scr_sett.yy",},},
     {"id":{"name":"scr_wrld_chara","path":"scripts/scr_wrld_chara/scr_wrld_chara.yy",},},
     {"id":{"name":"snd_wrld_chara_step","path":"sounds/snd_wrld_chara_step/snd_wrld_chara_step.yy",},},
+    {"id":{"name":"spr_coll_wall","path":"sprites/spr_coll_wall/spr_coll_wall.yy",},},
     {"id":{"name":"spr_fnt_main","path":"sprites/spr_fnt_main/spr_fnt_main.yy",},},
     {"id":{"name":"spr_px","path":"sprites/spr_px/spr_px.yy",},},
     {"id":{"name":"spr_wrld_bg_macaco_0_verHist","path":"sprites/spr_wrld_bg_macaco_0_verHist/spr_wrld_bg_macaco_0_verHist.yy",},},
