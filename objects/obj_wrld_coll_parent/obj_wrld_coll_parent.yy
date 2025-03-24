@@ -1,18 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"obj_coll_wall",
+  "%Name":"obj_wrld_coll_parent",
   "eventList":[],
   "managed":true,
-  "name":"obj_coll_wall",
+  "name":"obj_wrld_coll_parent",
   "overriddenProperties":[],
   "parent":{
     "name":"coll",
     "path":"folders/wrld/coll.yy",
   },
-  "parentObjectId":{
-    "name":"obj_coll_parent",
-    "path":"objects/obj_coll_parent/obj_coll_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_coll_wall",
-    "path":"sprites/spr_coll_wall/spr_coll_wall.yy",
+    "name":"spr_parent",
+    "path":"sprites/spr_parent/spr_parent.yy",
   },
   "spriteMaskId":null,
   "visible":true,

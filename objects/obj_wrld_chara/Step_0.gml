@@ -1,23 +1,27 @@
 
 fn_wrld_chara_fac();
 fn_wrld_chara_coll();
+fn_wrld_chara_int();
 
 
 
 if (move_stage == -1) // idle
 {	
-	for (var i = 0; i < 4; i++) // check for movement
+	for (var i = 0; i < 4; i++) // loop through all facings
 	{
-		if (fac_inp[i] == true)
-		&& (instance_place(coll_xPlc[i], coll_yPlc[i], obj_coll_parent) == noone)
-		{
+		if (fac_inp[i] == true) // update facing
 			fac = i;
+		
+		if (fac_inp[i] == true && coll_objPlc[i] == noone && int_objPlc[i] == noone) // start movement
+		{
 			move_stage = 0;
-			
-			sprite_index = fac_spr[fac];
-			image_index += 1;
-			fn_audio_play(snd_wrld_chara_step, false, VOL_PLAYER, 1, 0);
-			
+			break;
+		}
+		
+		if (i == fac && inp.press_sel == true && int_objPlc[i] != noone) // start interaction
+		{
+			move_stage = -2;
+			int_objPlc[i].int_stage = 0;
 			break;
 		}
 	}
@@ -25,8 +29,14 @@ if (move_stage == -1) // idle
 
 
 
-if (move_stage == 0) // moving
+if (move_stage == 0) // movement
 {
+	if (move_time == 0)
+	{
+		image_index += 1;
+		fn_audio_play(snd_wrld_chara_step, false, VOL_PLAYER, 1, 0);
+	}
+	
 	if (fac_orient[fac] == FAC_ORIENT_HOR)
 		x += (move_spd * fac_spdMul[fac]);
 	else if (fac_orient[fac] == FAC_ORIENT_VER)
@@ -67,96 +77,6 @@ if (cam_act == true) // camera
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-var _checkType = 0;
-while (_checkType <= 2)
-{
-	if (move == 1 && moving == 0)
-	{
-		// open chara menu
-		if (_checkType == 0)
-		{
-			if (control.press_master == 1)
-			{
-				create(0, 0, obj_menu_chara);
-				move = 0;
-			}
-		}
-		
-		
-		// check for interact parent objects
-		if (_checkType == 1)
-		{
-			
-		}
-		
-		
-		// check for transition starters
-		if (_checkType == 2)
-		{
-			var _starter = instance_place(x, y, obj_transition_starter);
-			if (_starter != noone)
-			{
-				transition(_starter);
-				move = 0;
-			}
-		}
-	}
-	else
-		break;
-	
-	_checkType += 1;
-}
-*/
-
-/*
-if (move_stage == -1)
-{
-	wrld_chara_int();
-	
-	for (var i = 0; i < 2; i++)
-	{
-		if (control.press_select == 1 && int_obj[i] != noone)
-		{
-			
-		}
-		
-		
-		if (control.press_select == 1 && interact_obj[i] != noone && interact_obj[i].interact_stage == 0 && ((interact_obj[i].interact_type != "npc") || (interact_obj[i].interact_type == "npc" && interact_obj[i].npc_move_stage == 0)))
-		{
-			interact_obj[i].interact_stage = 1;
-			if (interact_obj[i].interact_stopChara == 1)
-				move = 0;
-			break;
-		}
-		else
-			continue;
-		
-	}
-}
-*/
-
-
-
-
-
+sprite_index = fac_spr[fac];
 
 

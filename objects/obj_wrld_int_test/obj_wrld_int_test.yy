@@ -1,15 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_coll_parent",
-  "eventList":[],
+  "%Name":"obj_wrld_int_test",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_coll_parent",
+  "name":"obj_wrld_int_test",
   "overriddenProperties":[],
   "parent":{
-    "name":"coll",
-    "path":"folders/wrld/coll.yy",
+    "name":"int",
+    "path":"folders/wrld/int.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_wrld_int_parent",
+    "path":"objects/obj_wrld_int_parent/obj_wrld_int_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -27,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_wrld_int_test",
+    "path":"sprites/spr_wrld_int_test/spr_wrld_int_test.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

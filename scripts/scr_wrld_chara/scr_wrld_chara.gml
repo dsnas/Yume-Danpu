@@ -43,8 +43,16 @@ function fn_wrld_chara_coll()
 	coll_yPlc[FAC_RIGHT]	= y;
 	coll_yPlc[FAC_UP]		= (y - move_timeMax);
 	coll_yPlc[FAC_DOWN]		= (y + move_timeMax);
+	
+	for (var i = 0; i < 4; i++) // loop through all facings
+		coll_objPlc[i] = instance_place(coll_xPlc[i], coll_yPlc[i], obj_wrld_coll_parent);
 }
 
+function fn_wrld_chara_int()
+{
+	for (var i = 0; i < 4; i++)
+		int_objPlc[i] = instance_place(coll_xPlc[i], coll_yPlc[i], obj_wrld_int_parent);
+}
 
 
 

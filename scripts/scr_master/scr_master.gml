@@ -66,6 +66,10 @@ function fn_audio_gain(_sound_id, _sound_volId, _sound_gainLvl, _sound_gainTime)
 	_sound_gainLvl = (global.sett_vol[VOL_MASTER] * (_sound_gainLvl * global.sett_vol[_sound_volId]) );
 	audio_sound_gain(_sound_id, _sound_gainLvl, _sound_gainTime);
 }
+function fn_audio_stop(_sound)
+{
+	audio_stop_sound(_sound);
+}
 
 
 

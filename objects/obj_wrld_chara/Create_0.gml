@@ -19,7 +19,7 @@ move_stage = -1;
 /*
 	-2 = can't move due to event/cutscene;
 	-1 = idle;
-	 0 = moving;
+	 0 = movement;
 */
 
 move_spd = 1;
