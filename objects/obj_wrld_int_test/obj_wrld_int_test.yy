@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_int_test",
-    "path":"sprites/spr_wrld_int_test/spr_wrld_int_test.yy",
+    "name":"spr_wrld_int",
+    "path":"sprites/spr_wrld_int/spr_wrld_int.yy",
   },
   "spriteMaskId":null,
   "visible":true,

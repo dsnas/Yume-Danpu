@@ -20,7 +20,7 @@ function fn_sett_start() // start settings
 	
 	
 	
-	#macro INP_LEFT 0 // input
+	#macro INP_LEFT 0 // input (controls)
 	#macro INP_RIGHT 1
 	#macro INP_UP 2
 	#macro INP_DOWN 3

@@ -1,6 +1,8 @@
 
 function fn_master_create() // start game
 {
+	// this is the ugliest piece of code i have ever written in my whole life. what the fuck. i swear i'll try to make it better later
+	
 	randomize();
 	window_center();
 	window_set_caption("Yume Danpu");
@@ -10,8 +12,8 @@ function fn_master_create() // start game
 	fn_sett_start();
 	
 	
-	
-	global.fnt_main = font_add_sprite_ext(spr_fnt_main, "abcfmqswçilyíéâùôAFGBHZLÇCNDVMNWÁÈÕÍÛÊÉÀÃ", 0, -2); // to-do
+	// i'm gonna do this later, it will take a really long time
+	global.fnt_main = font_add_sprite_ext(spr_fnt_main, "abcfmqswçilyíéâùôAFGBHZLÇCNDVMNWÁÈÕÍÛÊÉÀÃ", 0, -2);
 	
 	
 	fn_create(obj_inp, 0, 0);
@@ -86,6 +88,8 @@ function fn_spr_h(_spr)
 
 function fn_import()
 {
+	// hello
+	
 	master = obj_master;
 	inp = obj_inp;
 	

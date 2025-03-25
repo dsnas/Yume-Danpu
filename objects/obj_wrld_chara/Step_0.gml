@@ -1,7 +1,6 @@
 
-fn_wrld_chara_fac();
-fn_wrld_chara_coll();
-fn_wrld_chara_int();
+event_user(0);
+event_user(1);
 
 
 
@@ -12,7 +11,7 @@ if (move_stage == -1) // idle
 		if (fac_inp[i] == true) // update facing
 			fac = i;
 		
-		if (fac_inp[i] == true && coll_objPlc[i] == noone && int_objPlc[i] == noone) // start movement
+		if (fac_inp[i] == true && coll_objPlc[i] == noone) // start movement
 		{
 			move_stage = 0;
 			break;
@@ -20,9 +19,14 @@ if (move_stage == -1) // idle
 		
 		if (i == fac && inp.press_sel == true && int_objPlc[i] != noone) // start interaction
 		{
-			move_stage = -2;
-			int_objPlc[i].int_stage = 0;
-			break;
+			var _obj = int_objPlc[i];
+			if (_obj.isNpc == false) || (_obj.isNpc == true && _obj.move_stage < 0 && _obj.move_stage > -2)
+			{
+				move_stage = -2;
+				int_objPlc[i].move_stage = -2;
+				int_objPlc[i].int_stage = 0;
+				break;
+			}
 		}
 	}
 }
@@ -31,6 +35,8 @@ if (move_stage == -1) // idle
 
 if (move_stage == 0) // movement
 {
+	// ugly bazoonga
+	
 	if (move_time == 0)
 	{
 		image_index += 1;
@@ -44,13 +50,12 @@ if (move_stage == 0) // movement
 	depth = -bbox_bottom;
 	
 	move_time += 1;
-	
-	if (move_time == (move_timeMax / 2))
+	if (move_time == (move_maxTime / 2))
 		image_index += 1;
-	if (move_time >= move_timeMax)
+	if (move_time >= move_maxTime)
 	{
-		move_time = 0;
 		move_stage = -1;
+		move_time = 0;
 		
 		// fn_debug("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | depth = " + string(depth));
 	}
@@ -78,5 +83,3 @@ if (cam_act == true) // camera
 
 
 sprite_index = fac_spr[fac];
-
-

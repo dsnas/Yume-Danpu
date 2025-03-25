@@ -9,7 +9,7 @@ function fn_inp_step()
 	can		= global.sett_inp[INP_CAN];
 	
 	press_left	= keyboard_check_pressed(left);
-	press_right = keyboard_check_pressed(right);
+	press_right	= keyboard_check_pressed(right);
 	press_up	= keyboard_check_pressed(up);
 	press_down	= keyboard_check_pressed(down);
 	
