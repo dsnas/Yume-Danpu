@@ -3,8 +3,6 @@ fn_import();
 image_speed = 0;
 image_index = 0;
 
-
-
 event_user(0);
 fac = FAC_DOWN;
 sprite_index = fac_spr[fac];

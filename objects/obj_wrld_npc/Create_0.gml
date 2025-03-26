@@ -4,6 +4,9 @@ isNpc = true;
 
 
 
+image_speed = 0;
+image_index = 0;
+
 event_user(0);
 fac = FAC_DOWN;
 
@@ -13,8 +16,9 @@ move_stage = -1; /*
 	0+	=	movement;
 */
 move_delay = 0;
-move_minDelay = 60;
+move_minDelay = 30;
 move_maxDelay = 180;
+move_delayed = true;
 
 move_xStart = 0;
 move_yStart = 0;
@@ -26,11 +30,22 @@ move_spd = 0.5;
 move_time = 0;
 move_maxTime = 32;
 
+move_chaseChara = false;
 
 
-if (wrld == rm_wrld_macaco) // macacolandia
+
+if (wrld == rm_wrld_debug) // debug
 {
-	
+	if (x == 240 && y == 112)
+	{
+		move_delayed = false;
+		move_maxDist = 99999999999999999999;
+		move_spd = 0.5;
+		move_time = 0;
+		move_maxTime = 32;
+		move_chaseChara = true;
+		image_index = 1;
+	}
 }
 
 

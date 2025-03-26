@@ -19,7 +19,7 @@ function fn_master_create() // start game
 	fn_create(obj_inp, 0, 0);
 	
 	
-	room_goto(rm_wrld_macaco);
+	room_goto(rm_wrld_debug);
 	
 	
 	

@@ -57,7 +57,7 @@ if (move_stage == 0) // movement
 		move_stage = -1;
 		move_time = 0;
 		
-		// fn_debug("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | depth = " + string(depth));
+		fn_debug("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | depth = " + string(depth));
 	}
 }
 

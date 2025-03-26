@@ -8,7 +8,7 @@ bg_maxDepth = (layer_get_depth("Background") - 1);
 
 
 
-if (wrld == rm_wrld_macaco)
+if (wrld == rm_wrld_debug)
 {
 	bg_obj[0] = obj_wrld_bg_spr;
 }
@@ -23,7 +23,7 @@ for (var i = 0; i < bg_maxAmt; i++)
 
 
 
-if (wrld == rm_wrld_macaco)
+if (wrld == rm_wrld_debug)
 {
 	bg_obj[0].depth = (bg_maxDepth - 1); // macacos
 	bg_obj[0].draw_spr = spr_wrld_bg_macaco_0;
