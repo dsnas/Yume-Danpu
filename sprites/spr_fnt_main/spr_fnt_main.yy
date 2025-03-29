@@ -141,8 +141,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"assets",
-    "path":"folders/main/assets.yy",
+    "name":"sprites",
+    "path":"folders/main/sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

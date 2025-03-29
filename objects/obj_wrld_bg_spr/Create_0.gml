@@ -2,6 +2,7 @@
 fn_import();
 
 depth = 0;
+
 active = false;
 
 draw_spr = -1;
@@ -17,9 +18,9 @@ draw_alp = 0.5;
 draw_rpt = true; // repetition
 draw_rpt_amt = 0;
 draw_rpt_autoAmt = true;
-draw_rpt_xDist = 0;
-draw_rpt_yDist = 0;
-draw_rpt_autoDist = true;
+draw_rpt_xDist = 640;
+draw_rpt_yDist = 480;
+draw_rpt_autoDist = false;
 
 draw_move = true; // movement
 draw_move_xSpd = 0;

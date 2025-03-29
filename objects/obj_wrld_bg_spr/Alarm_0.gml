@@ -8,6 +8,8 @@ if (draw_rpt == true) // repetition
 		draw_rpt_xDist = fn_spr_w(draw_spr);
 		draw_rpt_yDist = fn_spr_h(draw_spr);
 	}
+	draw_rpt_xDist *= draw_xSc;
+	draw_rpt_yDist *= draw_ySc;
 	
 	if (draw_rpt_autoAmt == true) // automatically get repetition amount
 	{

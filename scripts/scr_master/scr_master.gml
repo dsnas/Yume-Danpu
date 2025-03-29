@@ -19,9 +19,6 @@ function fn_master_create() // start game
 	fn_create(obj_inp, 0, 0);
 	
 	
-	room_goto(rm_wrld_debug);
-	
-	
 	
 	global.debug = true;
 	show_debug_overlay(global.debug);
@@ -58,19 +55,19 @@ function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp)
 
 
 
-function fn_audio_play(_sound, _sound_loops, _sound_volId, _sound_gainLvl, _sound_gainTime)
+function fn_audio_play(_audio, _audio_loops, _audio_volId, _audio_gainLvl, _audio_gainTime)
 {
-	sound_id = audio_play_sound(_sound, 50, _sound_loops);
-	fn_audio_gain(sound_id, _sound_volId, _sound_gainLvl, _sound_gainTime);
+	audio_id = audio_play_sound(_audio, 50, _audio_loops);
+	fn_audio_gain(audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime);
 }
-function fn_audio_gain(_sound_id, _sound_volId, _sound_gainLvl, _sound_gainTime)
+function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime)
 {
-	_sound_gainLvl = (global.sett_vol[VOL_MASTER] * (_sound_gainLvl * global.sett_vol[_sound_volId]) );
-	audio_sound_gain(_sound_id, _sound_gainLvl, _sound_gainTime);
+	_audio_gainLvl = (global.sett_vol[VOL_MASTER] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
+	audio_sound_gain(_audio_id, _audio_gainLvl, _audio_gainTime);
 }
-function fn_audio_stop(_sound)
+function fn_audio_stop(_audio)
 {
-	audio_stop_sound(_sound);
+	audio_stop_sound(_audio);
 }
 
 
@@ -98,6 +95,8 @@ function fn_import()
 	wrld_h = room_height;
 	
 	wrld_chara = obj_wrld_chara;
+	
+	wrld_rpt = obj_wrld_rpt;
 }
 
 
@@ -112,6 +111,25 @@ function fn_debug(_msg)
 
 
 
+
+
+
+
+/* npc
+if (wrld == rm_wrld_debug) // debug
+{
+	if (x == 240 && y == 112)
+	{
+		move_delayed = false;
+		move_maxDist = 99999999999999999999;
+		move_spd = 0.5;
+		move_time = 0;
+		move_maxTime = 32;
+		move_chaseChara = true;
+		image_index = 1;
+	}
+}
+*/
 
 /* will use this as template for later
 

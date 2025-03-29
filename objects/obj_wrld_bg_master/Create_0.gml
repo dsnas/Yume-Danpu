@@ -1,6 +1,12 @@
 
 fn_import();
 
+image_speed = 0;
+image_index = 0;
+image_alpha = 0;
+
+
+
 bg_maxAmt = 25;
 for (var i = 0; i < bg_maxAmt; i++)
 	bg_obj[i] = -1;
@@ -8,7 +14,7 @@ bg_maxDepth = (layer_get_depth("Background") - 1);
 
 
 
-if (wrld == rm_wrld_debug)
+if (wrld == rm_wrld_macaco)
 {
 	bg_obj[0] = obj_wrld_bg_spr;
 }
@@ -23,17 +29,16 @@ for (var i = 0; i < bg_maxAmt; i++)
 
 
 
-if (wrld == rm_wrld_debug)
+if (wrld == rm_wrld_macaco)
 {
 	bg_obj[0].depth = (bg_maxDepth - 1); // macacos
 	bg_obj[0].draw_spr = spr_wrld_bg_macaco_0;
+	bg_obj[0].draw_xSc = 1;
+	bg_obj[0].draw_ySc = bg_obj[0].draw_xSc;
 	bg_obj[0].draw_alp = 0.1;
 	bg_obj[0].draw_move_xTime = (120 * 60);
 	bg_obj[0].draw_move_yTime = bg_obj[0].draw_move_xTime;
 }
-
-
-
 
 
 

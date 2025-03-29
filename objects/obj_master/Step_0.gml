@@ -16,6 +16,8 @@ else
 
 if (global.debug == true) // debug inputs
 {
+	if (keyboard_check_pressed(ord("G")) == 1)
+		room_goto(rm_wrld_macaco);
 	if (keyboard_check_pressed(ord("R")) == 1)
 		game_restart();
 	

@@ -11,12 +11,12 @@ if (active == true)
 		if (draw_y >= draw_rpt_yDist)
 			draw_y = 0;
 	}
-
-	if (draw_rpt == false) // doesn't repeat
+	
+	if (draw_rpt == false) // background doesn't repeat
 	{
 		fn_draw_spr(draw_spr, draw_img, draw_x, draw_y, draw_xSc, draw_ySc, draw_ang, draw_col, draw_alp);
 	}
-	else if (draw_rpt == true) // does repeat
+	else if (draw_rpt == true) // background does repeat
 	{
 		var _rpt_x = (draw_x - (draw_rpt_xDist * draw_rpt_amt) );
 		var _rpt_y = (draw_y - (draw_rpt_yDist * draw_rpt_amt) );
@@ -31,3 +31,5 @@ if (active == true)
 		}
 	}
 }
+
+
