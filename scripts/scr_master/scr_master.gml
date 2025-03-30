@@ -52,6 +52,10 @@ function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp)
 	else
 		fn_debug("fn_draw_spr() called without a sprite to draw");
 }
+function fn_draw_self(_x, _y, _xSc, _ySc, _ang)
+{
+	fn_draw_spr(sprite_index, image_index, _x, _y, _xSc, _ySc, _ang, image_blend, image_alpha);
+}
 
 
 
@@ -69,6 +73,10 @@ function fn_audio_stop(_audio)
 {
 	audio_stop_sound(_audio);
 }
+function fn_audio_now(_audio_id)
+{
+	return audio_is_playing(_audio_id);
+}
 
 
 
@@ -85,8 +93,6 @@ function fn_spr_h(_spr)
 
 function fn_import()
 {
-	// hello
-	
 	master = obj_master;
 	inp = obj_inp;
 	
@@ -97,6 +103,8 @@ function fn_import()
 	wrld_chara = obj_wrld_chara;
 	
 	wrld_rpt = obj_wrld_rpt;
+	
+	audio_id = -1;
 }
 
 

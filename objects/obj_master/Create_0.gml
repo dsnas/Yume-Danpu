@@ -1,4 +1,8 @@
 
+image_speed = 0;
+image_index = 0;
+image_alpha = 0;
+
 fn_master_create();
 fn_import();
 

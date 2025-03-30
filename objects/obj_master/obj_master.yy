@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_master",
+    "path":"sprites/spr_master/spr_master.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

@@ -1,28 +1,25 @@
 /// @descr movement
 
-if (move_stage == -1) // delay to start movement
+if (move_stage == -1) // prepare and start delay
 {
 	move_delay = (irandom_range(move_minDelay, move_maxDelay) * move_delayed);
 	move_stage = -0.5;
 }
-if (move_stage == -0.5)
+if (move_stage == -0.5) // delay
 {
 	if (move_delay <= 0)
 		move_stage = 0;
 	else
 		move_delay -= 1;
 }
+
 if (move_stage == 0) // start movement
 {
-	move_xTarget = move_xStart;
-	move_yTarget = move_yStart;
-	
-	var i = 0; // so the game doesn't freeze if a position isn't found, the NPC just doesn't move
-	while (i < 25) // get target position and check if it's empty
+	for (var i = 0; i < 25; i++)
 	{
 		if (move_chaseChara == false) // moving normally, get random direction
 			fac = irandom_range(FAC_LEFT, FAC_DOWN);
-		else // chasing player, get closest direction to them
+		else if (move_chaseChara == true) // chasing player, get most logical direction
 		{
 			var _dir = point_direction(x, y, wrld_chara.x, wrld_chara.y);
 			if (_dir >= 0 && _dir < 45) || (_dir >= 315 && _dir < 360)
@@ -35,38 +32,44 @@ if (move_stage == 0) // start movement
 				fac = FAC_DOWN;
 		}
 		
-		move_xTarget = (x + (move_spd * move_maxTime * fac_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR));
-		move_yTarget = (y + (move_spd * move_maxTime * fac_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
+		var _xTgt = (x + (move_spd * move_maxTime * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // get target position
+		var _yTgt = (y + (move_spd * move_maxTime * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
 		
-		if (instance_place(move_xTarget, move_yTarget, obj_wrld_chara) == noone
-		&&  instance_place(move_xTarget, move_yTarget, obj_wrld_coll_parent) == noone
-		&&  abs(xstart - move_xTarget) < move_maxDist // make sure the NPC won't go too far from its starting position
-		&&  abs(ystart - move_yTarget) < move_maxDist)
+		if (instance_place(_xTgt, _yTgt, obj_wrld_chara) == noone
+		&&  instance_place(_xTgt, _yTgt, obj_wrld_coll_parent) == noone
+		&&  abs(xstart - _xTgt) < move_maxDist // make sure the NPC won't go too far from its starting position
+		&&  abs(ystart - _yTgt) < move_maxDist)
 		{
 			move_stage = 1;
+			move_xTgt = _xTgt;
+			move_yTgt = _yTgt;
+			
 			break;
 		}
 		else
-		{
-			i += 1;
 			continue;
-		}
 	}
-	
-	// can the player share a position with a NPC if they move at the same exact moment? yes. does it really matter? nah, the player can just leave.
-	// i may fix this eventually, it's not that hard
 }
-if (move_stage == 1) // movement
+if (move_stage == 1) // prepare for movement
 {
-	var _spd = (move_spd * fac_spdMul[fac]);
-	x += (_spd * (fac_orient[fac] == FAC_ORIENT_HOR));
-	y += (_spd * (fac_orient[fac] == FAC_ORIENT_VER));
-	depth = -bbox_bottom;
+	x = move_xTgt;
+	y = move_yTgt;
+	
+	move_time = 0;
+	move_stage = 2;
+}
+if (move_stage == 2) // movement
+{
+	draw_x += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // move to target position
+	draw_y += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
+	
+	depth = -draw_y;
 	
 	move_time += 1;
 	if (move_time >= move_maxTime)
 	{
+		draw_x = x;
+		draw_y = y;
 		move_stage = -1;
-		move_time = 0;
 	}
 }

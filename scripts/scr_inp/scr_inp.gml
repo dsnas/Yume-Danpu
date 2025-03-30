@@ -5,8 +5,10 @@ function fn_inp_step()
 	right	= global.sett_inp[INP_RIGHT];
 	up		= global.sett_inp[INP_UP];
 	down	= global.sett_inp[INP_DOWN];
-	sel		= global.sett_inp[INP_SEL];
-	can		= global.sett_inp[INP_CAN];
+	select	= global.sett_inp[INP_SELECT];
+	cancel	= global.sett_inp[INP_CANCEL];
+	
+	
 	
 	press_left	= keyboard_check_pressed(left);
 	press_right	= keyboard_check_pressed(right);
@@ -18,11 +20,15 @@ function fn_inp_step()
 	hold_up		= keyboard_check(up);
 	hold_down	= keyboard_check(down);
 	
-	press_sel	= keyboard_check_pressed(sel);
-	press_can	= keyboard_check_pressed(can);
 	
-	hold_sel	= keyboard_check(sel);
-	hold_can	= keyboard_check(can);
+	
+	press_select = keyboard_check_pressed(select);
+	press_cancel = keyboard_check_pressed(cancel);
+	
+	hold_select = keyboard_check(select);
+	hold_cancel = keyboard_check(cancel);
+	
+	
 	
 	press_fscr		= keyboard_check_pressed(global.sett_inp[INP_FSCR]);
 	press_atwalk	= keyboard_check_pressed(global.sett_inp[INP_ATWALK]);

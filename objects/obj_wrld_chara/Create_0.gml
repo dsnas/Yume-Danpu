@@ -7,6 +7,14 @@ image_alpha = 1;
 
 
 
+draw_x = x;
+draw_y = y;
+draw_xSc = 1;
+draw_ySc = 1;
+draw_ang = 0;
+
+
+
 FAC_LEFT = 0;
 FAC_RIGHT = 1;
 FAC_UP = 2;
@@ -23,11 +31,6 @@ fac_spr[FAC_RIGHT]		= spr_wrld_chara_right;
 fac_spr[FAC_UP]			= spr_wrld_chara_up;
 fac_spr[FAC_DOWN]		= spr_wrld_chara_down;
 
-fac_spdMul[FAC_LEFT]	= -1;
-fac_spdMul[FAC_RIGHT]	= 1;
-fac_spdMul[FAC_UP]		= -1;
-fac_spdMul[FAC_DOWN]	= 1;
-
 FAC_ORIENT_HOR = 0;
 FAC_ORIENT_VER = 1;
 
@@ -41,29 +44,38 @@ depth = -bbox_bottom;
 
 
 
-move_stage = -1; /*
+move_stage = -1; 
+
+move_spd = 1;
+move_time = 0;
+move_maxTime = 16;
+move_spdMul[FAC_LEFT]	= -1;
+move_spdMul[FAC_RIGHT]	= 1;
+move_spdMul[FAC_UP]		= -1;
+move_spdMul[FAC_DOWN]	= 1;
+
+move_xTgt = 0;
+move_yTgt = 0;
+
+/* move_stage
 	-2	=	frozen, can't move due to event/menu;
 	-1	=	idle;
 	0	=	movement;
 */
-move_spd = 1;
-move_time = 0;
-move_maxTime = 16;
 
 
 
 cam = view_camera[0];
 cam_act = true;
-cam_clamp = false;
 cam_x = 0;
 cam_y = 0;
 cam_w = 320;
 cam_h = 240;
+cam_clamp = false;
 
 
 
-debug = false;
-
+debug = true;
 
 
 // dear diary, i've had one of those bad dreams again
