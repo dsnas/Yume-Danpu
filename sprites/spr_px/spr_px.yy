@@ -26,13 +26,13 @@
   "origin":0,
   "parent":{
     "name":"sprites",
-    "path":"folders/main/sprites.yy",
+    "path":"folders/sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
   "resourceVersion":"2.0",
   "sequence":{
-    "$GMSequence":"",
+    "$GMSequence":"v1",
     "%Name":"spr_px",
     "autoRecord":true,
     "backdropHeight":768,

@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_coll_wall",
-    "path":"sprites/spr_wrld_coll_wall/spr_wrld_coll_wall.yy",
+    "name":"spr_child",
+    "path":"sprites/spr_child/spr_child.yy",
   },
   "spriteMaskId":null,
   "visible":true,

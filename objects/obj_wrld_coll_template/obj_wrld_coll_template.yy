@@ -1,13 +1,15 @@
 {
   "$GMObject":"",
   "%Name":"obj_wrld_coll_template",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_wrld_coll_template",
   "overriddenProperties":[],
   "parent":{
-    "name":"Yume Danpu",
-    "path":"Yume Danpu.yyp",
+    "name":"coll",
+    "path":"folders/wrld/coll.yy",
   },
   "parentObjectId":{
     "name":"obj_wrld_coll_parent",
@@ -30,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_template",
+    "path":"sprites/spr_template/spr_template.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

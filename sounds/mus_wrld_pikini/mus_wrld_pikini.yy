@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":12.149615,
+  "duration":12.199183,
   "name":"mus_wrld_pikini",
   "parent":{
     "name":"pikini",

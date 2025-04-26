@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_sett",
   "parent":{
-    "name":"main",
-    "path":"folders/main.yy",
+    "name":"game",
+    "path":"folders/game.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

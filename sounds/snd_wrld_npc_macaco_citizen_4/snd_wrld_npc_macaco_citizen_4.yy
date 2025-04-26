@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":3.5004,
+  "duration":3.5004082,
   "name":"snd_wrld_npc_macaco_citizen_4",
   "parent":{
     "name":"macaco",

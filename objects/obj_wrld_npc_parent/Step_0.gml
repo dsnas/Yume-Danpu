@@ -1,10 +1,11 @@
-/// @descr movement
+/// @descr (child) move
 
-if (move_stage == -1) // prepare and start delay
+if (move_stage == -1) // starts delay before moving
 {
 	move_delay = (irandom_range(move_minDelay, move_maxDelay) * move_delayed);
 	move_stage = -0.5;
 }
+
 if (move_stage == -0.5) // delay
 {
 	if (move_delay <= 0)
@@ -13,29 +14,32 @@ if (move_stage == -0.5) // delay
 		move_delay -= 1;
 }
 
-if (move_stage == 0) // start movement
+if (move_stage == 0) // starts movement sequence
 {
-	for (var i = 0; i < 25; i++)
+	for (var i = 0; i < 25; i++) // attempt movement multiple times before canceling
 	{
 		if (move_chaseChara == false) // moving normally, get random direction
+		{
 			fac = irandom_range(FAC_LEFT, FAC_DOWN);
+		}
 		else if (move_chaseChara == true) // chasing player, get most logical direction
 		{
-			var _dir = point_direction(x, y, wrld_chara.x, wrld_chara.y);
-			if (_dir >= 0 && _dir < 45) || (_dir >= 315 && _dir < 360)
+			var pd = point_direction(x, y, wrld_chara.x, wrld_chara.y);
+			
+			if (pd >= 0 && pd < 45) || (pd >= 315 && pd < 360)
 				fac = FAC_RIGHT;
-			else if (_dir >= 45 && _dir < 135)
+			else if (pd >= 45 && pd < 135)
 				fac = FAC_UP;
-			else if (_dir >= 135 && _dir < 225)
+			else if (pd >= 135 && pd < 225)
 				fac = FAC_LEFT;
-			else if (_dir >= 225 && _dir < 315)
+			else if (pd >= 225 && pd < 315)
 				fac = FAC_DOWN;
 		}
 		
 		var _xTgt = (x + (move_spd * move_maxTime * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // get target position
 		var _yTgt = (y + (move_spd * move_maxTime * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
 		
-		if (instance_place(_xTgt, _yTgt, obj_wrld_chara) == noone
+		if (instance_place(_xTgt, _yTgt, obj_wrld_chara) == noone // check for collision
 		&&  instance_place(_xTgt, _yTgt, obj_wrld_coll_parent) == noone
 		&&  abs(xstart - _xTgt) < move_maxDist // make sure the NPC won't go too far from its starting position
 		&&  abs(ystart - _yTgt) < move_maxDist)
@@ -50,20 +54,21 @@ if (move_stage == 0) // start movement
 			continue;
 	}
 }
+
 if (move_stage == 1) // prepare for movement
 {
 	x = move_xTgt;
 	y = move_yTgt;
+	depth = -move_yTgt;
 	
 	move_time = 0;
 	move_stage = 2;
 }
+
 if (move_stage == 2) // movement
 {
 	draw_x += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // move to target position
 	draw_y += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
-	
-	depth = -draw_y;
 	
 	move_time += 1;
 	if (move_time >= move_maxTime)
@@ -72,4 +77,12 @@ if (move_stage == 2) // movement
 		draw_y = y;
 		move_stage = -1;
 	}
+	
+	if (distance_to_object(wrld_chara) <= 8)
+	{
+		fn_dbg("!!!!!!!!!");
+		depth = -draw_y;
+	}
 }
+
+sprite_index = fac_spr[fac];

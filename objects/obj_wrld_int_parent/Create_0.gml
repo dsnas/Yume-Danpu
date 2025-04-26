@@ -1,9 +1,9 @@
 
 event_inherited();
+image_alpha = 0;
 
 
 
 int_stage = -1;
 int_delay = 0;
-
-npc = false;
+int_isNpc = false;

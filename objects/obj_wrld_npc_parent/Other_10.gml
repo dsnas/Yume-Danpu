@@ -1,26 +1,6 @@
-/// @descr int - snd (0)
+/// @descr (child) create
 
-if (int_stage == 0) // stop previous snd and play new one
-{
-	if (int_snd_pos != -1) // stop previous snd
-		fn_audio_stop(int_snd[int_snd_pos]);
-	
-	event_user(1); // choose new snd
-	
-	fn_audio_play(int_snd[int_snd_pos], false, VOL_CREATURES, int_snd_gainLvl[int_snd_pos], 0); // play snd
-	
-	int_stage = 1;
-}
-if (int_stage == 1) // unfreeze player and self
-{
-	if (int_delay >= 30)
-	{
-		int_stage = -1;
-		int_delay = 0;
-		move_stage = -1;
-		
-		wrld_chara.move_stage = -1;
-	}
-	else
-		int_delay += 1;
-}
+fac_spr[FAC_LEFT]	= spr_wrld_npc;
+fac_spr[FAC_RIGHT]	= fac_spr[FAC_LEFT];
+fac_spr[FAC_UP]		= fac_spr[FAC_LEFT];
+fac_spr[FAC_DOWN]	= fac_spr[FAC_LEFT];

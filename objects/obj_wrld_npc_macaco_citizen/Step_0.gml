@@ -1,4 +1,5 @@
+/// @descr move and int
 
-event_inherited(); // movement
+event_inherited(); // move
 
-event_user(0); // int - snd
+event_user(1); // int - snd (0)

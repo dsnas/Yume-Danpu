@@ -1,9 +1,9 @@
 
-fn_import();
-
 image_speed = 0;
 image_index = 0;
 image_alpha = 1;
+
+fn_import();
 
 
 
@@ -15,7 +15,7 @@ draw_ang = 0;
 
 
 
-FAC_LEFT = 0;
+FAC_LEFT = 0; // fac (facing)
 FAC_RIGHT = 1;
 FAC_UP = 2;
 FAC_DOWN = 3;
@@ -33,7 +33,6 @@ fac_spr[FAC_DOWN]		= spr_wrld_chara_down;
 
 FAC_ORIENT_HOR = 0;
 FAC_ORIENT_VER = 1;
-
 fac_orient[FAC_LEFT]	= FAC_ORIENT_HOR;
 fac_orient[FAC_RIGHT]	= FAC_ORIENT_HOR;
 fac_orient[FAC_UP]		= FAC_ORIENT_VER;
@@ -44,7 +43,7 @@ depth = -bbox_bottom;
 
 
 
-move_stage = -1; 
+move_stage = -1; // move (movement)
 
 move_spd = 1;
 move_time = 0;
@@ -53,7 +52,6 @@ move_spdMul[FAC_LEFT]	= -1;
 move_spdMul[FAC_RIGHT]	= 1;
 move_spdMul[FAC_UP]		= -1;
 move_spdMul[FAC_DOWN]	= 1;
-
 move_xTgt = 0;
 move_yTgt = 0;
 
@@ -65,7 +63,7 @@ move_yTgt = 0;
 
 
 
-cam = view_camera[0];
+cam = view_camera[0]; // cam (camera)
 cam_act = true;
 cam_x = 0;
 cam_y = 0;
@@ -75,7 +73,8 @@ cam_clamp = false;
 
 
 
-debug = true;
+dbg = true;
+
 
 
 // dear diary, i've had one of those bad dreams again
