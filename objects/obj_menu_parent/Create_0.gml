@@ -5,6 +5,9 @@ image_alpha = 0;
 
 
 
-fscr = -1;
-fscr_delay = 0;
-fscr_maxDelay = 30;
+level = 0;
+
+for (var i = 0; i < 25; i++)
+{
+	
+}

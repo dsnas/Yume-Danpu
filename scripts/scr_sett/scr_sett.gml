@@ -6,7 +6,9 @@ function fn_sett_start() // start settings
 	global.sett_lang = LANG_EN;
 	
 	
+	
 	global.sett_fscr = false; // fullscreen
+	
 	
 	
 	#macro VOL_MASTER 0	// volume
@@ -15,12 +17,13 @@ function fn_sett_start() // start settings
 	#macro VOL_MENU 3
 	#macro VOL_CREATURES 4
 	#macro VOL_ENVIRONMENT 5
-	global.sett_vol[VOL_MASTER] = 0.5;
-	global.sett_vol[VOL_MUSIC] = 1;
+	global.sett_vol[VOL_MASTER] = 1;
+	global.sett_vol[VOL_MUSIC] = 0;
 	global.sett_vol[VOL_PLAYER] = 1;
 	global.sett_vol[VOL_MENU] = 1;
 	global.sett_vol[VOL_CREATURES] = 1;
 	global.sett_vol[VOL_ENVIRONMENT] = 1;
+	
 	
 	
 	#macro INP_LEFT 0	// inputs (controls)

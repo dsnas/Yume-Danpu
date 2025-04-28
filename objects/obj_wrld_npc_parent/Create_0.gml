@@ -36,8 +36,8 @@ fac_orient[FAC_DOWN]	= FAC_ORIENT_VER;
 
 move_stage = -1; // move (movement)
 move_delay = 0;
-move_minDelay = 30;
-move_maxDelay = 180;
+move_minDelay = 0;
+move_maxDelay = 240;
 move_delayed = true;
 
 move_spd = 0.5;

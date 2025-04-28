@@ -65,7 +65,7 @@ if (move_stage == 1) // prepare for movement
 	move_stage = 2;
 }
 
-if (move_stage == 2) // movement
+if (move_stage == 2) // move
 {
 	draw_x += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // move to target position
 	draw_y += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));

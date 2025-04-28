@@ -3,7 +3,7 @@
   "%Name":"verHist_spr_wrld_tl_pikini",
   "bboxMode":0,
   "bbox_bottom":239,
-  "bbox_left":52,
+  "bbox_left":27,
   "bbox_right":319,
   "bbox_top":0,
   "collisionKind":1,

@@ -1,11 +1,4 @@
 
-function fn_import_img() // adjusts the default image variables to turn the instance invisible
-{
-	image_speed = 0;
-	image_index = 0;
-	image_alpha = 0;
-}
-
 function fn_import() // starts basic variables mostly used for referencing specific objects
 {
 	main	= obj_game_main;
