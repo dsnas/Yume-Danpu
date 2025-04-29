@@ -49,10 +49,11 @@ function fn_audio_curr(_audio_id) // returns whether the specified audio is curr
 
 function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp) // draws a text with the provided characteristics
 {
+	draw_set_font(global.fnt_main);
 	draw_text_ext_transformed_color(_x, _y, _txt, -1, 640, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
-function fn_draw_px(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // draws a rectangle with the provided characteristics (performance is faster with "draw_sprite" than "draw_rectangle")
+function fn_draw_px(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // draws a stretched pixel, forming a rectangle, with the provided characteristics (performance is faster with "draw_sprite" than "draw_rectangle")
 {
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
@@ -63,6 +64,14 @@ function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp) // draws 
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
 	else
 		fn_dbg("fn_draw_spr() called without a sprite to draw");
+}
+
+function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col, _alp)
+{
+	if (_spr != -1)
+		draw_sprite_stretched_ext(_spr, _img, _x, _y, _w, _h, _col, _alp);
+	else
+		fn_dbg("fn_draw_spr_stretch() called without a sprite to draw");
 }
 
 function fn_draw_self(_x, _y, _xSc, _ySc, _ang) // draws the object's own sprite

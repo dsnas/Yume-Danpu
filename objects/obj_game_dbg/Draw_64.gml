@@ -31,5 +31,7 @@ if (global.dbg == true)
 	if (keyboard_check_pressed(ord("R")) == 1) // restart game
 		game_restart();
 	
-	fn_draw_txt("debug :3", 8, 8 + 4, 0.5, 0.5, 0, c_white, c_white, c_white, c_white, 1);
+	var _txt;
+	_txt = "the quick brown fox\njumps over the lazy dog";
+	fn_draw_txt(_txt, 8, 8 + 4, 0.5, 0.5, 0, c_white, c_white, c_white, c_white, 1);
 }
