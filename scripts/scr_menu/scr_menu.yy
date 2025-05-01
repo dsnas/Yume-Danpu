@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_txt",
+  "%Name":"scr_menu",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_txt",
+  "name":"scr_menu",
   "parent":{
-    "name":"game",
-    "path":"folders/game.yy",
+    "name":"menu",
+    "path":"folders/menu.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

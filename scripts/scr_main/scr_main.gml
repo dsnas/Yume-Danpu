@@ -49,7 +49,8 @@ function fn_audio_curr(_audio_id) // returns whether the specified audio is curr
 
 function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp) // draws a text with the provided characteristics
 {
-	draw_set_font(global.fnt_main);
+	var _fnt = global.fnt_main
+	draw_set_font(_fnt);
 	draw_text_ext_transformed_color(_x, _y, _txt, -1, 640, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
