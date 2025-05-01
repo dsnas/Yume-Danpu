@@ -36,7 +36,6 @@
   },
   "name":"Yume Danpu",
   "resources":[
-    {"id":{"name":"Font1","path":"fonts/Font1/Font1.yy",},},
     {"id":{"name":"obj_game_dbg","path":"objects/obj_game_dbg/obj_game_dbg.yy",},},
     {"id":{"name":"obj_game_inp","path":"objects/obj_game_inp/obj_game_inp.yy",},},
     {"id":{"name":"obj_game_main","path":"objects/obj_game_main/obj_game_main.yy",},},
