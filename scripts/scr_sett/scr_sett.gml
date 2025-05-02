@@ -34,14 +34,16 @@ function fn_sett_start() // start settings
 	#macro INP_CANCEL 5
 	#macro INP_FSCR 6
 	#macro INP_ATWALK 7
-	global.sett_inp[INP_LEFT]	= vk_left;
-	global.sett_inp[INP_RIGHT]	= vk_right;
-	global.sett_inp[INP_UP]		= vk_up;
-	global.sett_inp[INP_DOWN]	= vk_down;
-	global.sett_inp[INP_SELECT]	= ord("Z");
-	global.sett_inp[INP_CANCEL]	= ord("X");
-	global.sett_inp[INP_FSCR]	= vk_f4;
-	global.sett_inp[INP_ATWALK]	= ord("V");
+	#macro INP_WRLD_INV 8
+	global.sett_inp[INP_LEFT]		= vk_left;
+	global.sett_inp[INP_RIGHT]		= vk_right;
+	global.sett_inp[INP_UP]			= vk_up;
+	global.sett_inp[INP_DOWN]		= vk_down;
+	global.sett_inp[INP_SELECT]		= ord("Z");
+	global.sett_inp[INP_CANCEL]		= ord("X");
+	global.sett_inp[INP_FSCR]		= vk_f4;
+	global.sett_inp[INP_ATWALK]		= ord("V");
+	global.sett_inp[INP_WRLD_INV]	= ord("C");
 	global.sett_inpAmt = array_length(global.sett_inp);
 }
 

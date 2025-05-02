@@ -8,11 +8,15 @@ function fn_txtdata_start()
 		
 		
 		
-		ds_map_add(en, "salenis", "Salenis");
+		ds_map_add(en, "salenis_0", "Salenis");
+		ds_map_add(en, "salenis_1", "Salenis 2: A Revolta dos Tubarões");
+		ds_map_add(en, "salenis_2", "Salenis 3: O Império Contra-Ataca");
+		ds_map_add(en, "salenis_3", "Salenis 4: O Último Suspiro");
+		ds_map_add(en, "salenis_4", "Salenis 5: Ressureição");
 		
-		ds_map_add(en, "menu_chara_main_0", "Effects");
-		ds_map_add(en, "menu_chara_main_1", "Items");
-		ds_map_add(en, "menu_chara_main_2", "Themes");
+		ds_map_add(en, "menu_inv_main_0", "Effects");
+		ds_map_add(en, "menu_inv_main_1", "Items");
+		ds_map_add(en, "menu_inv_main_2", "Themes");
 	}
 	else if (global.sett_lang == LANG_BR)
 	{

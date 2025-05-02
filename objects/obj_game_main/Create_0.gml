@@ -5,7 +5,6 @@ image_alpha = 0;
 
 randomize();
 window_center();
-display_set_gui_size(320, 240);
 
 var _caption = "Yume Danpu";
 var i = irandom_range(1, 100);

@@ -10,20 +10,18 @@ int_inp = inp.press[INP_SELECT]; // int input
 
 if (move_stage == -1) // idle
 {	
-	for (var i = 0; i < 4; i++)
+	for (var i = 0; i < 4; i++) // loops through each inp
 	{
-		if (fac_inp[i] == true) // change facing
+		if (fac_inp[i] == true) // checks if inp has been pressed, changes facing
 		{
 			fac = i;
 			sprite_index = fac_spr[fac];
 		}
 		
-		
-		var _xTgt = (x + (move_spd * move_maxTime * move_spdMul[i]) * (fac_orient[i] == FAC_ORIENT_HOR)); // get movement target position
+		var _xTgt = (x + (move_spd * move_maxTime * move_spdMul[i]) * (fac_orient[i] == FAC_ORIENT_HOR)); // get move target position
 		var _yTgt = (y + (move_spd * move_maxTime * move_spdMul[i]) * (fac_orient[i] == FAC_ORIENT_VER));
 		
-		
-		var _collTgt = instance_place(_xTgt, _yTgt, obj_wrld_coll_parent); // check for collision and start movement
+		var _collTgt = instance_place(_xTgt, _yTgt, obj_wrld_coll_parent); // check for collision and start move
 		if (fac_inp[i] == true && _collTgt == noone)
 		{
 			move_stage = 0;
@@ -33,8 +31,7 @@ if (move_stage == -1) // idle
 			break;
 		}
 		
-		
-		var _intTgt = instance_place(_xTgt, _yTgt, obj_wrld_int_parent); // check for interaction and start it
+		var _intTgt = instance_place(_xTgt, _yTgt, obj_wrld_int_parent); // check for int and start it
 		if (int_inp == true && _intTgt != noone)
 		{
 			if (_intTgt.int_isNpc == false)
@@ -53,7 +50,7 @@ if (move_stage == -1) // idle
 
 
 
-if (move_stage == 0) // prepare for movement
+if (move_stage == 0) // prepare for move
 {
 	x = move_xTgt;
 	y = move_yTgt;
@@ -65,7 +62,7 @@ if (move_stage == 0) // prepare for movement
 	move_time = 0;
 }
 
-if (move_stage == 1) // movement
+if (move_stage == 1) // move
 {
 	draw_x += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // move to target position
 	draw_y += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_VER));
@@ -115,6 +112,13 @@ if (move_stage == 1) // movement
 
 
 
+if (inp.press[INP_WRLD_INV] == true)
+{
+	fn_create(obj_menu_template, 0, 0);
+}
+
+
+
 if (cam_act == true) // camera
 {
 	cam_x = (draw_x + (sprite_width / 2) - (cam_w / 2));
@@ -128,6 +132,14 @@ if (cam_act == true) // camera
 	camera_set_view_size(cam, cam_w, cam_h);
 	camera_set_view_pos(cam, cam_x, cam_y);
 }
+
+
+
+
+
+
+
+
 
 
 
