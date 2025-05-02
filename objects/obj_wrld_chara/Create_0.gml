@@ -75,6 +75,6 @@ cam_clamp = false;
 
 dbg = true;
 
-
+fn_create(obj_menu_inv, 0, 0);
 
 // dear diary, i've had one of those bad dreams again

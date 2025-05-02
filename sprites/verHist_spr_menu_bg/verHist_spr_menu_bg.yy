@@ -47,8 +47,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"menu",
-    "path":"folders/menu.yy",
+    "name":"verHist",
+    "path":"folders/verHist.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

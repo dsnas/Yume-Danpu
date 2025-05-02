@@ -114,7 +114,7 @@ if (move_stage == 1) // move
 
 if (inp.press[INP_WRLD_INV] == true)
 {
-	fn_create(obj_menu_template, 0, 0);
+	
 }
 
 

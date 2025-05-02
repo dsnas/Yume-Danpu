@@ -6,7 +6,7 @@ LVL_MAIN = 0;
 
 var z = LVL_MAIN;
 
-bg_spr[z, 0] = verHist_spr_menu_bg;
+bg_spr[z, 0] = spr_menu_bg_0;
 bg_x[z, 0] = 16;
 bg_y[z, 0] = 8;
 bg_w[z, 0] = 480;
