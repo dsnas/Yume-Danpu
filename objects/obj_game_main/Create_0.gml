@@ -9,7 +9,7 @@ window_center();
 var _caption = "Yume Danpu";
 var i = irandom_range(1, 100);
 if (i <= 5)
-	_caption = choose("Yume Danpy", "Yume Dapnu");
+	_caption = choose("Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume Fanpu", "Dume Yanpu");
 window_set_caption(_caption);
 
 
@@ -20,12 +20,10 @@ fn_txtdata_start();
 
 
 
-fn_create(obj_game_inp, 0, 0);
 fn_create(obj_game_dbg, 0, 0);
 
 
 
-/* gonna do this later, it'll take a really long time	
-	
-	global.fnt_main = font_add_sprite_ext(spr_font_main, "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMçÇáàâãéèêíìîóòôõúùûÁÀÂÃÉÈÊÍÌÎÓÒÔÕÚÙÛ1234567890 -.,'!?%<>()[]/←→↑↓", 0, -2);
-*/
+fscr = -1;
+fscr_delay = 0;
+fscr_maxDelay = 30;

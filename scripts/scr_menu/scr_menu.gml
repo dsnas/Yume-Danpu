@@ -14,6 +14,11 @@ function menu_lvl_txtdata(_lvl, _key)
 			opt_w[z, i] = string_width(_txt);
 			opt_h[z, i] = string_height(_txt);
 			
+			if (i == 0)
+				opt_wMax[z] = opt_w[z, i];
+			else if (i >= 1)
+				opt_wMax[z] = max(opt_wMax[z], opt_w[z, i])
+			
 			continue;
 		}
 		else

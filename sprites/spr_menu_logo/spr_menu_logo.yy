@@ -14,8 +14,8 @@
   "frames":[
     {"$GMSpriteFrame":"","%Name":"6e078812-5aa7-4cd6-bae6-da77e7d145d0","name":"6e078812-5aa7-4cd6-bae6-da77e7d145d0","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
-  "gridX":0,
-  "gridY":0,
+  "gridX":4,
+  "gridY":4,
   "height":120,
   "HTile":false,
   "layers":[
@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"sprites",
-    "path":"folders/sprites.yy",
+    "name":"menu",
+    "path":"folders/menu.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

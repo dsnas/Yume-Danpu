@@ -1,8 +1,9 @@
 
 function fn_sett_start() // start settings
 {
-	#macro LANG_EN 0	// language
+	#macro LANG_EN 0 // language
 	#macro LANG_BR 1
+	
 	global.sett_lang = LANG_EN;
 	
 	
@@ -17,34 +18,45 @@ function fn_sett_start() // start settings
 	#macro VOL_MENU 3
 	#macro VOL_CREATURES 4
 	#macro VOL_ENVIRONMENT 5
+	
 	global.sett_vol[VOL_MASTER] = 1;
 	global.sett_vol[VOL_MUSIC] = 0;
 	global.sett_vol[VOL_PLAYER] = 1;
 	global.sett_vol[VOL_MENU] = 1;
 	global.sett_vol[VOL_CREATURES] = 1;
-	global.sett_vol[VOL_ENVIRONMENT] = 1;
+	global.sett_vol[VOL_ENVIRONMENT] = 0;
 	
 	
 	
-	#macro INP_LEFT 0	// inputs (controls)
-	#macro INP_RIGHT 1
+	#macro INP_LT 0 // start inp (inputs/controls)
+	#macro INP_RT 1
 	#macro INP_UP 2
-	#macro INP_DOWN 3
-	#macro INP_SELECT 4
-	#macro INP_CANCEL 5
+	#macro INP_DN 3
+	global.sett_inp[INP_LT] = vk_left;
+	global.sett_inp[INP_RT] = vk_right;
+	global.sett_inp[INP_UP] = vk_up;
+	global.sett_inp[INP_DN] = vk_down;
+	
+	#macro INP_SLCT 4
+	#macro INP_CNCL 5
+	global.sett_inp[INP_SLCT] = ord("Z");
+	global.sett_inp[INP_CNCL] = ord("X");
+	
 	#macro INP_FSCR 6
-	#macro INP_ATWALK 7
-	#macro INP_WRLD_INV 8
-	global.sett_inp[INP_LEFT]		= vk_left;
-	global.sett_inp[INP_RIGHT]		= vk_right;
-	global.sett_inp[INP_UP]			= vk_up;
-	global.sett_inp[INP_DOWN]		= vk_down;
-	global.sett_inp[INP_SELECT]		= ord("Z");
-	global.sett_inp[INP_CANCEL]		= ord("X");
-	global.sett_inp[INP_FSCR]		= vk_f4;
-	global.sett_inp[INP_ATWALK]		= ord("V");
-	global.sett_inp[INP_WRLD_INV]	= ord("C");
-	global.sett_inpAmt = array_length(global.sett_inp);
+	global.sett_inp[INP_FSCR] = vk_f4;
+	
+}
+
+function fn_inp(_type, _inp)
+{
+	if (_type == "press")
+	{
+		return keyboard_check_pressed(global.sett_inp[_inp]);
+	}
+	else if (_type == "hold")
+	{
+		return keyboard_check(global.sett_inp[_inp]);
+	}
 }
 
 

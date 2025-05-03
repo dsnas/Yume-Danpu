@@ -2,7 +2,6 @@
 function fn_import() // starts basic variables mostly used for referencing specific objects
 {
 	main	= obj_game_main;
-	inp		= obj_game_inp;
 	dbg		= obj_game_dbg;
 	
 	wrld	= room;
@@ -47,10 +46,12 @@ function fn_audio_curr(_audio_id) // returns whether the specified audio is curr
 
 
 
-function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp) // draws a text with the provided characteristics
+function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp, _val, _hal) // draws a text with the provided characteristics
 {
 	var _fnt = global.fnt_main;
 	draw_set_font(_fnt);
+	draw_set_valign(_val);
+	draw_set_halign(_hal);
 	draw_text_ext_transformed_color(_x, _y, _txt, -1, 640, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
@@ -73,6 +74,13 @@ function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col, _alp)
 		draw_sprite_stretched_ext(_spr, _img, _x, _y, _w, _h, _col, _alp);
 	else
 		fn_dbg("fn_draw_spr_stretch() called without a sprite to draw");
+}
+
+function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness)
+{
+	draw_set_color(_col);
+	draw_set_alpha(_alp);
+	draw_line_width(_x1, _y1, _x2, _y2, _thickness);
 }
 
 function fn_draw_self(_x, _y, _xSc, _ySc, _ang) // draws the object's own sprite
@@ -106,12 +114,22 @@ function fn_exists(_obj) // returns whether if the specified object exists
 
 
 
-function fn_spr_w(_spr) // returns the width of the specified sprite
+function fn_spr_w(_spr) // returns the width of the specified spr
 {
 	return sprite_get_width(_spr);
 }
 
-function fn_spr_h(_spr) // returns the height of the specified sprite
+function fn_spr_h(_spr) // returns the height of the specified spr
 {
 	return sprite_get_height(_spr);
+}
+
+function fn_txt_w(_txt) // returns the width of the specified txt
+{
+	return string_width(_txt);
+}
+
+function fn_txt_h(_txt) // returns the height of the specified txt
+{
+	return string_height(_txt);
 }

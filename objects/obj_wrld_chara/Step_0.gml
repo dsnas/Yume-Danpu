@@ -1,10 +1,10 @@
 
-fac_inp[FAC_LEFT]	= inp.hold[INP_LEFT]; // fac input
-fac_inp[FAC_RIGHT]	= inp.hold[INP_RIGHT];
-fac_inp[FAC_UP]		= inp.hold[INP_UP];
-fac_inp[FAC_DOWN]	= inp.hold[INP_DOWN];
+fac_inp[FAC_LEFT]	= fn_inp("hold", INP_LT); // fac inp
+fac_inp[FAC_RIGHT]	= fn_inp("hold", INP_RT);
+fac_inp[FAC_UP]		= fn_inp("hold", INP_UP);
+fac_inp[FAC_DOWN]	= fn_inp("hold", INP_DN);
 
-int_inp = inp.press[INP_SELECT]; // int input
+int_inp = fn_inp("press", INP_SLCT); // int inp
 
 
 
@@ -112,7 +112,7 @@ if (move_stage == 1) // move
 
 
 
-if (inp.press[INP_WRLD_INV] == true)
+if (int_inp == true)
 {
 	
 }
