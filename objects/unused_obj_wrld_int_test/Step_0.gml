@@ -3,7 +3,7 @@ if (int_delay <= 0)
 {
 	if (int_stage == 0)
 	{
-		fn_audio_play(snd_hulapoca, false, VOL_ENVIRONMENT, 1, 0);
+		fn_audio_play(snd_hulapoca, false, VOL_OBJ, 1, 0);
 	
 		int_stage = 1;
 		int_delay = 30;

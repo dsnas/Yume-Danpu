@@ -20,20 +20,20 @@ if (move_stage == 0) // starts movement sequence
 	{
 		if (move_chaseChara == false) // moving normally, get random direction
 		{
-			fac = irandom_range(FAC_LEFT, FAC_DOWN);
+			fac = irandom_range(FAC_LT, FAC_DN);
 		}
 		else if (move_chaseChara == true) // chasing player, get most logical direction
 		{
 			var pd = point_direction(x, y, wrld_chara.x, wrld_chara.y);
 			
 			if (pd >= 0 && pd < 45) || (pd >= 315 && pd < 360)
-				fac = FAC_RIGHT;
+				fac = FAC_RT;
 			else if (pd >= 45 && pd < 135)
 				fac = FAC_UP;
 			else if (pd >= 135 && pd < 225)
-				fac = FAC_LEFT;
+				fac = FAC_LT;
 			else if (pd >= 225 && pd < 315)
-				fac = FAC_DOWN;
+				fac = FAC_DN;
 		}
 		
 		var _xTgt = (x + (move_spd * move_maxTime * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // get target position

@@ -3,7 +3,7 @@ function menu_lvl_txtdata(_lvl, _key)
 {
 	var z = _lvl;
 	
-	for (var i = 0; i < opt_maxAmt; i++)
+	for (var i = 0; i < opt_amtMax; i++)
 	{	
 		var _txt = fn_txtdata(string(_key) + "_" + string(i));
 		if (_txt != undefined)

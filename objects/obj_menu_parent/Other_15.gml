@@ -2,7 +2,7 @@
 
 if (opt_move == true)
 {
-	opt_pos += (opt_move_inp[lvl, 1] - opt_move_inp[lvl, 0]); // move
+	opt_pos += (fn_inp("press", INP_DN) - fn_inp("press", INP_UP)); // move
 	
 	if (opt_pos < 0) // pos switch sides
 		opt_pos = (opt_amt[lvl] - 1);

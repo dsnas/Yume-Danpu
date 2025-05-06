@@ -30,7 +30,7 @@ function fn_audio_stop(_audio) // stops the specified audio
 
 function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime) // adjusts the volume of the specified audio
 {
-	_audio_gainLvl = (global.sett_vol[VOL_MASTER] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
+	_audio_gainLvl = (global.sett_vol[VOL_MAIN] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
 	audio_sound_gain(_audio_id, _audio_gainLvl, _audio_gainTime);
 }
 
@@ -46,13 +46,23 @@ function fn_audio_curr(_audio_id) // returns whether the specified audio is curr
 
 
 
-function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp, _val, _hal) // draws a text with the provided characteristics
+function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _alp, _val, _hal) // draws a text with the provided characteristics
 {
+	_xSc = (_xSc / 2);
+	_ySc = (_ySc / 2);
+	
 	var _fnt = global.fnt_main;
 	draw_set_font(_fnt);
 	draw_set_valign(_val);
 	draw_set_halign(_hal);
-	draw_text_ext_transformed_color(_x, _y, _txt, -1, 640, _xSc, _ySc, _ang, _col_0, _col_1, _col_2, _col_3, _alp);
+	
+	if (global.thm_txtShdw[global.chara_thm] == true)
+	{
+		var _col_shdw = global.thm_col[global.chara_thm, 4];
+		draw_text_ext_transformed_color((_x + 1), (_y + 1), _txt, -1, 640, _xSc, _ySc, _ang, _col_shdw, _col_shdw, _col_shdw, _col_shdw, _alp);
+	}
+	
+	draw_text_ext_transformed_color(_x, _y, _txt, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
 }
 
 function fn_draw_px(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // draws a stretched pixel, forming a rectangle, with the provided characteristics (performance is faster with "draw_sprite" than "draw_rectangle")
@@ -76,6 +86,14 @@ function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col, _alp)
 		fn_dbg("fn_draw_spr_stretch() called without a sprite to draw");
 }
 
+function fn_draw_spr_part(_spr, _img, _lt, _tp, _w, _h, _x, _y, _xSc, _ySc, _col, _alp)
+{
+	if (_spr != -1)
+		draw_sprite_part_ext(_spr, _img, _lt, _tp, _w, _h, _x, _y, _xSc, _ySc, _col, _alp);
+	else
+		fn_dbg("fn_draw_spr_part() called without a sprite to draw");
+}
+
 function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness)
 {
 	draw_set_color(_col);
@@ -86,6 +104,25 @@ function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness)
 function fn_draw_self(_x, _y, _xSc, _ySc, _ang) // draws the object's own sprite
 {
 	fn_draw_spr(sprite_index, image_index, _x, _y, _xSc, _ySc, _ang, image_blend, image_alpha);
+}
+
+
+
+function fn_lerp_col(_currCol, _tgtCol, _spd)
+{
+	var _currCol_hue = color_get_hue(_currCol);
+	var _currCol_sat = color_get_saturation(_currCol);
+	var _currCol_val = color_get_value(_currCol);
+	
+	var _tgtCol_hue = color_get_hue(_tgtCol);
+	var _tgtCol_sat = color_get_saturation(_tgtCol);
+	var _tgtCol_val = color_get_value(_tgtCol);
+	
+	var _col_hue = lerp(_currCol_hue, _tgtCol_hue, _spd);
+	var _col_sat = lerp(_currCol_sat, _tgtCol_sat, _spd);
+	var _col_val = lerp(_currCol_val, _tgtCol_val, _spd);
+	
+	return make_color_hsv(_col_hue, _col_sat, _col_val);
 }
 
 
@@ -126,10 +163,15 @@ function fn_spr_h(_spr) // returns the height of the specified spr
 
 function fn_txt_w(_txt) // returns the width of the specified txt
 {
-	return string_width(_txt);
+	draw_set_font(global.fnt_main);
+	return (string_width(_txt) / 2);
 }
 
 function fn_txt_h(_txt) // returns the height of the specified txt
 {
-	return string_height(_txt);
+	draw_set_font(global.fnt_main);
+	var _txt_h = (string_height(_txt) / 2);
+	if (_txt_h % 2 == 1)
+		_txt_h += 1;
+	return _txt_h;
 }

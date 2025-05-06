@@ -1,10 +1,9 @@
 
-function fn_sett_start() // start settings
+function fn_sett_start() // start sett (settings)
 {
-	#macro LANG_EN 0 // language
-	#macro LANG_BR 1
-	
-	global.sett_lang = LANG_EN;
+	#macro SETT_LANG_EN 0 // English					// lang (languages)
+	#macro SETT_LANG_BR 1 // Brazilian Portuguese
+	global.sett_lang = SETT_LANG_EN;
 	
 	
 	
@@ -12,19 +11,23 @@ function fn_sett_start() // start settings
 	
 	
 	
-	#macro VOL_MASTER 0	// volume
-	#macro VOL_MUSIC 1
-	#macro VOL_PLAYER 2
-	#macro VOL_MENU 3
-	#macro VOL_CREATURES 4
-	#macro VOL_ENVIRONMENT 5
+	#macro VOL_MAIN 0 // (master volume)	// vol (volume)
+	global.sett_vol[VOL_MAIN] = 1;
 	
-	global.sett_vol[VOL_MASTER] = 1;
-	global.sett_vol[VOL_MUSIC] = 0;
-	global.sett_vol[VOL_PLAYER] = 1;
-	global.sett_vol[VOL_MENU] = 1;
-	global.sett_vol[VOL_CREATURES] = 1;
-	global.sett_vol[VOL_ENVIRONMENT] = 0;
+	#macro VOL_MUS 1 // (music)
+	global.sett_vol[VOL_MUS] = 0;
+	
+	#macro VOL_CHARA 2 // (player)
+	global.sett_vol[VOL_CHARA] = 1;
+	
+	#macro VOL_OBJ 3 // (ambience)
+	global.sett_vol[VOL_OBJ] = 1;
+	
+	#macro VOL_NPC 4 // (NPCs)
+	global.sett_vol[VOL_NPC] = 1;
+	
+	#macro VOL_AMB 5 // (ambience)
+	global.sett_vol[VOL_AMB] = 1;
 	
 	
 	
@@ -44,7 +47,6 @@ function fn_sett_start() // start settings
 	
 	#macro INP_FSCR 6
 	global.sett_inp[INP_FSCR] = vk_f4;
-	
 }
 
 function fn_inp(_type, _inp)

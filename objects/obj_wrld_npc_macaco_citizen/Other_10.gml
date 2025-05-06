@@ -4,10 +4,10 @@ image_speed = random_range(0.5, 1.5);
 
 
 
-fac_spr[FAC_LEFT]	= spr_wrld_npc_macaco_citizen;
-fac_spr[FAC_RIGHT]	= spr_wrld_npc_macaco_citizen;
+fac_spr[FAC_LT]	= spr_wrld_npc_macaco_citizen;
+fac_spr[FAC_RT]	= spr_wrld_npc_macaco_citizen;
 fac_spr[FAC_UP]		= spr_wrld_npc_macaco_citizen;
-fac_spr[FAC_DOWN]	= spr_wrld_npc_macaco_citizen;
+fac_spr[FAC_DN]	= spr_wrld_npc_macaco_citizen;
 
 
 

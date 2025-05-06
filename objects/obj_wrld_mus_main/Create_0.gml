@@ -9,7 +9,7 @@ mus_amt = 5;
 for (var i = 0; i < mus_amt; i++)
 {
 	mus[i] = -1;
-	mus_volId[i] = VOL_MUSIC;
+	mus_volId[i] = VOL_MUS;
 	mus_gainLvl[i] = 1;
 	mus_gainTime[i] = 0;
 }
@@ -28,7 +28,7 @@ if (wrld == rm_wrld_pikini) // fenda bo pikini
 	mus_gainLvl[0] = 0.75;
 	
 	mus[1] = snd_wrld_pikini;
-	mus_volId[1] = VOL_ENVIRONMENT;
+	mus_volId[1] = VOL_AMB;
 	mus_gainLvl[1] = 1;
 }
 

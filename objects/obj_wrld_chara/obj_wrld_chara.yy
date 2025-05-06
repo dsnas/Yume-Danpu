@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_chara_down",
-    "path":"sprites/spr_wrld_chara_down/spr_wrld_chara_down.yy",
+    "name":"spr_wrld_chara_dn",
+    "path":"sprites/spr_wrld_chara_dn/spr_wrld_chara_dn.yy",
   },
   "spriteMaskId":null,
   "visible":true,

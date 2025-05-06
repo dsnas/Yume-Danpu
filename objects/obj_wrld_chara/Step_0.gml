@@ -1,8 +1,8 @@
 
-fac_inp[FAC_LEFT]	= fn_inp("hold", INP_LT); // fac inp
-fac_inp[FAC_RIGHT]	= fn_inp("hold", INP_RT);
-fac_inp[FAC_UP]		= fn_inp("hold", INP_UP);
-fac_inp[FAC_DOWN]	= fn_inp("hold", INP_DN);
+fac_inp[FAC_LT]	= fn_inp("hold", INP_LT); // fac inp
+fac_inp[FAC_RT]	= fn_inp("hold", INP_RT);
+fac_inp[FAC_UP]	= fn_inp("hold", INP_UP);
+fac_inp[FAC_DN]	= fn_inp("hold", INP_DN);
 
 int_inp = fn_inp("press", INP_SLCT); // int inp
 
@@ -56,7 +56,7 @@ if (move_stage == 0) // prepare for move
 	y = move_yTgt;
 	image_index += 1;
 	
-	fn_audio_play(snd_wrld_chara_foot, false, VOL_PLAYER, 1, 0);
+	fn_audio_play(snd_wrld_chara_foot, false, VOL_CHARA, 1, 0);
 	
 	move_stage = 1;
 	move_time = 0;
