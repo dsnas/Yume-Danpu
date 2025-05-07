@@ -6,6 +6,7 @@ image_alpha = 0;
 fn_import();
 
 
+
 bg_maxAmt = 25;
 for (var i = 0; i < bg_maxAmt; i++)
 	bg_obj[i] = -1;
@@ -41,7 +42,7 @@ if (wrld == rm_wrld_macaco) // macacolandia
 	bg_obj[0].draw_spr = spr_wrld_bg_macaco_0; // macaco
 	bg_obj[0].draw_xSc = 1;
 	bg_obj[0].draw_ySc = bg_obj[0].draw_xSc;
-	bg_obj[0].draw_alp = 0.1;
+	bg_obj[0].draw_alp = 0.25;
 	bg_obj[0].draw_move_xTime = (120 * 60);
 	bg_obj[0].draw_move_yTime = bg_obj[0].draw_move_xTime;
 }

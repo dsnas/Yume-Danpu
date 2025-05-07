@@ -18,9 +18,9 @@ var z = LVL_MAIN;
 
 
 bg_act[z, 0] = true; // (main lvl) info box
-bg_x[z, 0] = -(draw_dist / 2);
+bg_x[z, 0] = (draw_dist / 2);
 bg_y[z, 0] = (draw_dist / 2);
-bg_w[z, 0] = 120;
+bg_w[z, 0] = (draw_dist * 6);
 bg_h[z, 0] = (draw_dist * 4);
 
 main_chara_spr = wrld_chara.fac_spr[wrld_chara.FAC_DN];
@@ -34,7 +34,7 @@ main_chara_y = (bg_y[z, 0] + (bg_h[z, 0] / 4));
 bg_act[z, 1] = true; // (main lvl) options box
 bg_x[z, 1] = (draw_dist / 2);
 bg_y[z, 1] = (bg_y[z, 0] + bg_h[z, 0] + bg_y[z, 0]);
-bg_w[z, 1] = (bg_w[z, 0] - abs(bg_x[z, 1]) - (bg_x[z, 1] * 2));
+bg_w[z, 1] = bg_w[z, 0];
 bg_h[z, 1] = 70;
 
 menu_lvl_txtdata(z, "menu_inv_main");
@@ -56,6 +56,7 @@ for (var i = 0; i < opt_amt[z]; i++)
 
 
 
+fn_audio_play(snd_menu_opt_slct, false, SETT_VOL_MENU, 1, 0);
 
 
 // name's Template. Menu Template.

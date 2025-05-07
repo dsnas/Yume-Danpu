@@ -1,10 +1,13 @@
 
-fac_inp[FAC_LT]	= fn_inp("hold", INP_LT); // fac inp
-fac_inp[FAC_RT]	= fn_inp("hold", INP_RT);
-fac_inp[FAC_UP]	= fn_inp("hold", INP_UP);
-fac_inp[FAC_DN]	= fn_inp("hold", INP_DN);
+fac_inp[FAC_LT]	= fn_inp("hold", SETT_INP_LT); // fac inp
+fac_inp[FAC_RT]	= fn_inp("hold", SETT_INP_RT);
+fac_inp[FAC_UP]	= fn_inp("hold", SETT_INP_UP);
+fac_inp[FAC_DN]	= fn_inp("hold", SETT_INP_DN);
 
-int_inp = fn_inp("press", INP_SLCT); // int inp
+inp_slct = fn_inp("press", SETT_INP_SLCT);
+inp_cncl = fn_inp("press", SETT_INP_CNCL);
+
+inv_inp = fn_inp("press", SETT_INP_MENU_INV); // inv inp
 
 
 
@@ -32,7 +35,7 @@ if (move_stage == -1) // idle
 		}
 		
 		var _intTgt = instance_place(_xTgt, _yTgt, obj_wrld_int_parent); // check for int and start it
-		if (int_inp == true && _intTgt != noone)
+		if (inp_slct == true && _intTgt != noone)
 		{
 			if (_intTgt.int_isNpc == false)
 			|| (_intTgt.int_isNpc == true && _intTgt.move_stage < 0 && _intTgt.move_stage > -2)
@@ -47,21 +50,17 @@ if (move_stage == -1) // idle
 		}
 	}
 }
-
-
-
 if (move_stage == 0) // prepare for move
 {
 	x = move_xTgt;
 	y = move_yTgt;
 	image_index += 1;
 	
-	fn_audio_play(snd_wrld_chara_foot, false, VOL_CHARA, 1, 0);
+	fn_audio_play(snd_wrld_chara_foot, false, SETT_VOL_CHARA, 0.75, 0);
 	
 	move_stage = 1;
 	move_time = 0;
 }
-
 if (move_stage == 1) // move
 {
 	draw_x += ((move_spd * move_spdMul[fac]) * (fac_orient[fac] == FAC_ORIENT_HOR)); // move to target position
@@ -112,9 +111,16 @@ if (move_stage == 1) // move
 
 
 
-if (int_inp == true)
+var _inv = obj_menu_inv; // inv (inventory)
+if (inv_inp == true && move_stage == -1) // open
 {
-	
+	fn_create(_inv, 0, 0);
+	move_stage = -2;
+}
+else if ((inv_inp == true || inp_cncl == true) && move_stage == -2 && fn_exists(_inv) == true) // close
+{
+	fn_destroy(_inv);
+	move_stage = -1;
 }
 
 
@@ -138,12 +144,7 @@ if (cam_act == true) // camera
 
 
 
-
-
-
-
-
-/*
+/* (unused) deactivate NPCs outside of the screen
 instance_activate_all();
 var _npc_parent = obj_wrld_npc_parent;
 for (var i = 0; i < instance_number(_npc_parent); i++)

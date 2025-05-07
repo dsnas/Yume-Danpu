@@ -8,6 +8,8 @@ function fn_game_main_create()
 	
 	
 	
+	global.game_ver = "0.02";
+	
 	fn_sett_start(); // start sett (settings)
 	fn_txtdata_start(); // start txtdata of the selected lang
 	

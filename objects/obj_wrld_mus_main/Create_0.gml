@@ -9,7 +9,7 @@ mus_amt = 5;
 for (var i = 0; i < mus_amt; i++)
 {
 	mus[i] = -1;
-	mus_volId[i] = VOL_MUS;
+	mus_volId[i] = SETT_VOL_MUS;
 	mus_gainLvl[i] = 1;
 	mus_gainTime[i] = 0;
 }
@@ -20,7 +20,7 @@ for (var i = 0; i < mus_amt; i++)
 if (wrld == rm_wrld_macaco) // macacolandia
 {
 	mus[0] = mus_wrld_macaco;
-	mus_gainLvl[0] = 0.5;
+	mus_gainLvl[0] = 0.35;
 }
 if (wrld == rm_wrld_pikini) // fenda bo pikini
 {
@@ -28,7 +28,7 @@ if (wrld == rm_wrld_pikini) // fenda bo pikini
 	mus_gainLvl[0] = 0.75;
 	
 	mus[1] = snd_wrld_pikini;
-	mus_volId[1] = VOL_AMB;
+	mus_volId[1] = SETT_VOL_AMB;
 	mus_gainLvl[1] = 1;
 }
 

@@ -15,7 +15,7 @@ draw_ang = 0;
 
 
 
-FAC_LT = 0; // fac (facing)
+FAC_LT = 0; // fac (facing) (the direction the player is looking)
 FAC_RT = 1;
 FAC_UP = 2;
 FAC_DN = 3;
@@ -74,8 +74,5 @@ cam_clamp = false;
 
 
 dbg = true;
-move_stage = -2;
-
-fn_create(obj_menu_inv, 0, 0);
 
 // dear diary, i've had one of those bad dreams again

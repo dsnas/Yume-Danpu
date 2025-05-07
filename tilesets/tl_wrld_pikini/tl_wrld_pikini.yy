@@ -12,8 +12,8 @@
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
-    "name":"pikini",
-    "path":"folders/wrld/pikini.yy",
+    "name":"assets",
+    "path":"folders/wrld/pikini/assets.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

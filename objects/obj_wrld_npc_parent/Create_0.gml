@@ -47,7 +47,8 @@ move_spdMul[FAC_LT]	= -1;
 move_spdMul[FAC_RT]	= 1;
 move_spdMul[FAC_UP]		= -1;
 move_spdMul[FAC_DN]	= 1;
-move_maxDist = 48;
+move_distMaxed = true;
+move_distMax = 48;
 move_xTgt = 0;
 move_yTgt = 0;
 

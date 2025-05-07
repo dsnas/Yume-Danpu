@@ -12,8 +12,8 @@
   "duration":4.0489798,
   "name":"snd_wrld_npc_macaco_citizen_2",
   "parent":{
-    "name":"macaco",
-    "path":"folders/wrld/macaco.yy",
+    "name":"assets",
+    "path":"folders/wrld/macaco/assets.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

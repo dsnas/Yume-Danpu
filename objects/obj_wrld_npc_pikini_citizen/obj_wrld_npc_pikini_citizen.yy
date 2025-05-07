@@ -2,9 +2,9 @@
   "$GMObject":"",
   "%Name":"obj_wrld_npc_pikini_citizen",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":10,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":12,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":17,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":11,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_wrld_npc_pikini_citizen",
@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_npc_pikini_citizen_0",
-    "path":"sprites/spr_wrld_npc_pikini_citizen_0/spr_wrld_npc_pikini_citizen_0.yy",
+    "name":"spr_wrld_npc_pikini_citizen",
+    "path":"sprites/spr_wrld_npc_pikini_citizen/spr_wrld_npc_pikini_citizen.yy",
   },
   "spriteMaskId":null,
   "visible":true,

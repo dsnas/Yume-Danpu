@@ -30,7 +30,7 @@ function fn_audio_stop(_audio) // stops the specified audio
 
 function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime) // adjusts the volume of the specified audio
 {
-	_audio_gainLvl = (global.sett_vol[VOL_MAIN] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
+	_audio_gainLvl = (global.sett_vol[SETT_VOL_MAIN] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
 	audio_sound_gain(_audio_id, _audio_gainLvl, _audio_gainTime);
 }
 

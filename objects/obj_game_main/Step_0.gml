@@ -1,5 +1,5 @@
 
-if (fn_inp("press", INP_FSCR) == true) // toggles fscr sett
+if (fn_inp("press", SETT_INP_FSCR) == true) // toggles fscr sett
 {
 	global.sett_fscr = !global.sett_fscr;
 }

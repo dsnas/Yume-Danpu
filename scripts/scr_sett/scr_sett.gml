@@ -11,42 +11,48 @@ function fn_sett_start() // start sett (settings)
 	
 	
 	
-	#macro VOL_MAIN 0 // (master volume)	// vol (volume)
-	global.sett_vol[VOL_MAIN] = 1;
+	#macro SETT_VOL_MAIN 0 // (master volume)	// vol (volume)
+	global.sett_vol[SETT_VOL_MAIN] = 1;
 	
-	#macro VOL_MUS 1 // (music)
-	global.sett_vol[VOL_MUS] = 0;
+	#macro SETT_VOL_MUS 1 // (music)
+	global.sett_vol[SETT_VOL_MUS] = 1;
 	
-	#macro VOL_CHARA 2 // (player)
-	global.sett_vol[VOL_CHARA] = 1;
+	#macro SETT_VOL_MENU 2 // (menu)
+	global.sett_vol[SETT_VOL_MENU] = 1;
 	
-	#macro VOL_OBJ 3 // (ambience)
-	global.sett_vol[VOL_OBJ] = 1;
+	#macro SETT_VOL_CHARA 3 // (player)
+	global.sett_vol[SETT_VOL_CHARA] = 1;
 	
-	#macro VOL_NPC 4 // (NPCs)
-	global.sett_vol[VOL_NPC] = 1;
+	#macro SETT_VOL_OBJ 4 // (ambience)
+	global.sett_vol[SETT_VOL_OBJ] = 1;
 	
-	#macro VOL_AMB 5 // (ambience)
-	global.sett_vol[VOL_AMB] = 1;
+	#macro SETT_VOL_NPC 5 // (NPCs)
+	global.sett_vol[SETT_VOL_NPC] = 1;
+	
+	#macro SETT_VOL_AMB 6 // (ambience)
+	global.sett_vol[SETT_VOL_AMB] = 1;
 	
 	
 	
-	#macro INP_LT 0 // start inp (inputs/controls)
-	#macro INP_RT 1
-	#macro INP_UP 2
-	#macro INP_DN 3
-	global.sett_inp[INP_LT] = vk_left;
-	global.sett_inp[INP_RT] = vk_right;
-	global.sett_inp[INP_UP] = vk_up;
-	global.sett_inp[INP_DN] = vk_down;
+	#macro SETT_INP_LT 0 // start inp (inputs/controls)
+	#macro SETT_INP_RT 1
+	#macro SETT_INP_UP 2
+	#macro SETT_INP_DN 3
+	global.sett_inp[SETT_INP_LT] = vk_left;
+	global.sett_inp[SETT_INP_RT] = vk_right;
+	global.sett_inp[SETT_INP_UP] = vk_up;
+	global.sett_inp[SETT_INP_DN] = vk_down;
 	
-	#macro INP_SLCT 4
-	#macro INP_CNCL 5
-	global.sett_inp[INP_SLCT] = ord("Z");
-	global.sett_inp[INP_CNCL] = ord("X");
+	#macro SETT_INP_SLCT 4
+	#macro SETT_INP_CNCL 5
+	global.sett_inp[SETT_INP_SLCT] = ord("Z");
+	global.sett_inp[SETT_INP_CNCL] = ord("X");
 	
-	#macro INP_FSCR 6
-	global.sett_inp[INP_FSCR] = vk_f4;
+	#macro SETT_INP_MENU_INV 6
+	global.sett_inp[SETT_INP_MENU_INV] = ord("C");
+	
+	#macro SETT_INP_FSCR 7
+	global.sett_inp[SETT_INP_FSCR] = vk_f4;
 }
 
 function fn_inp(_type, _inp)

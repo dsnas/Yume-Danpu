@@ -12,8 +12,8 @@
   "duration":12.199183,
   "name":"snd_wrld_pikini",
   "parent":{
-    "name":"pikini",
-    "path":"folders/wrld/pikini.yy",
+    "name":"assets",
+    "path":"folders/wrld/pikini/assets.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
