@@ -20,13 +20,11 @@ for (var i = 0; i < int_snd_amt; i++)
 	if (_audio != -1)
 	{
 		int_snd[i] = _audio;
-		
 		continue;
 	}
 	else
 	{
 		int_snd_amt = i;
-		
 		break;
 	}
 }
@@ -36,3 +34,8 @@ int_snd_gainLvl[2] = 0.35;
 int_snd_gainLvl[3] = 1.25;
 int_snd_gainLvl[5] = 0.5;
 int_snd_gainLvl[6] = 0.35;
+
+int_snd_time[0] = 0.25;
+int_snd_time[1] = 0.25;
+int_snd_time[3] = 0.25;
+int_snd_time[6] = 0.25;

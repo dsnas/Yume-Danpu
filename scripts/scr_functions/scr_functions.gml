@@ -23,11 +23,6 @@ function fn_audio_play(_audio, _audio_loops, _audio_volId, _audio_gainLvl, _audi
 	fn_audio_gain(audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime);
 }
 
-function fn_audio_stop(_audio) // stops the specified audio
-{
-	audio_stop_sound(_audio);
-}
-
 function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime) // adjusts the volume of the specified audio
 {
 	_audio_gainLvl = (global.sett_vol[SETT_VOL_MAIN] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
@@ -37,6 +32,16 @@ function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime)
 function fn_audio_pitch(_audio_id, _audio_pitch) // adjusts the pitch of the specified audio
 {
 	audio_sound_pitch(_audio_id, _audio_pitch);
+}
+
+function fn_audio_time(_audio_id, _time) // adjusts the playing position of the specified audio
+{
+	audio_sound_set_track_position(_audio_id, _time)
+}
+
+function fn_audio_stop(_audio) // stops the specified audio
+{
+	audio_stop_sound(_audio);
 }
 
 function fn_audio_curr(_audio_id) // returns whether the specified audio is currently playing

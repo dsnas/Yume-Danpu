@@ -67,6 +67,7 @@ for (var i = 0; i < int_snd_amt; i++)
 {
 	int_snd[i] = -1;
 	int_snd_gainLvl[i] = 1;
+	int_snd_time[i] = 0;
 }
 int_snd_pos = -1;
 

@@ -12,8 +12,8 @@
   "duration":1.7502041,
   "name":"snd_menu_opt_slct",
   "parent":{
-    "name":"menu",
-    "path":"folders/menu.yy",
+    "name":"assets",
+    "path":"folders/menu/assets.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
