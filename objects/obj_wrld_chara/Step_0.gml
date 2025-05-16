@@ -119,7 +119,7 @@ if (inv_inp == true && move_stage == -1) // open
 }
 else if ((inv_inp == true || inp_cncl == true) && move_stage == -2 && fn_exists(_inv) == true) // close
 {
-	fn_destroy(_inv);
+	_inv.destroy_stg = 0;
 	move_stage = -1;
 }
 

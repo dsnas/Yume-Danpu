@@ -10,10 +10,8 @@ function menu_lvl_txtdata(_lvl, _key)
 		{
 			opt_txt[z, i] = _txt;
 			
-			draw_set_font(global.fnt_main);
-			opt_w[z, i] = string_width(_txt);
-			opt_h[z, i] = string_height(_txt);
-			
+			opt_w[z, i] = fn_txt_w(_txt);
+			opt_h[z, i] = fn_txt_h(_txt);
 			if (i == 0)
 				opt_wMax[z] = opt_w[z, i];
 			else if (i >= 1)

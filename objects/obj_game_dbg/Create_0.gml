@@ -9,5 +9,5 @@ fn_import();
 
 fn_game_dbg_create();
 
-fntTest = false;
+fntTest_act = false;
 fntTest_txt = "the quick brown fox\njumps over the lazy dog\n\noh, brother, this\nguy stinks!\n\nTHE QUICK BROWN FOX\nJUMPS OVER THE LAZY DOG\n\nvocê deveria fazer\nalgo bem excitante!\n\najatagem de gatarajem\n\n1234567890 quilômetros\nde ouro puro";

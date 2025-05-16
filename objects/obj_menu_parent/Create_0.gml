@@ -12,7 +12,7 @@ draw_dist = 16;
 draw_x = 0;
 draw_y = 0;
 draw_hTxt = fn_txt_h("Salenis");
-draw_alp = 1;
+draw_alp = 0;
 
 
 
@@ -66,21 +66,30 @@ for (var z = 0; z < lvl_amtMax; z++)
 		opt_txt[z, i] = "";
 		opt_w[z, i] = 0;
 		opt_h[z, i] = 0;
+		opt_wMax[z] = 0;
 		
 		opt_x[z, i] = 0;
 		opt_y[z, i] = 0;
-		opt_col_0[z, i] = c_white;
-		opt_col_1[z, i] = c_white;
+		opt_col_0[z, i] = global.thm_col[global.chara_thm, 2];
+		opt_col_1[z, i] = global.thm_col[global.chara_thm, 3];
+		opt_colSpd = 0.5;
 		opt_alp[z, i] = 1;
 		opt_val[z, i] = fa_top;
 		opt_hal[z, i] = fa_left;
-		
-		opt_wMax[z] = 0;
-		opt_col_slctSpd = 0.5;
 	}
 }
 opt_move = true;
 opt_pos = 0;
+
+
+
+trans_stg = -1; // trans (fade in/out transition animation) (trans rights, am i right?!!)
+trans_alpAmt = 0.1;
+trans_oooooooooooooooooooooooooooooooo = 0; // God .   All these  Letters  really  Do  make me wanna  Jump  from the  Balcony  of my  Apartment Building  .
+
+
+
+destroy_stg = -1;
 
 
 

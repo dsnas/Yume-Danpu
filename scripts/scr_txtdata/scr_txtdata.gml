@@ -18,6 +18,7 @@ function fn_txtdata_start() // start txtdata of the selected lang
 		ds_map_add(i, "menu_inv_main_2", "Themes");
 		
 		ds_map_add(i, "thm_name_0", "Default");
+		ds_map_add(i, "thm_name_1", "Simple");
 		ds_map_add(i, "thm_name_2", "Madotsuki");
 		
 		/*
@@ -42,6 +43,7 @@ function fn_txtdata_start() // start txtdata of the selected lang
 		ds_map_add(i, "menu_inv_main_2", "Temas");
 		
 		ds_map_add(i, "thm_name_0", "Padrão");
+		ds_map_add(i, "thm_name_1", "Simples");
 		ds_map_add(i, "thm_name_2", "Nikki");
 	}
 	

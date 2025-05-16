@@ -1,19 +1,23 @@
 /// @descr create
 
+draw_x = 0;
+trans_stg = 1;
+
 for (var z = 0; z < lvl_amtMax; z++)
 {
 	px_x[z, 0] = -draw_dist;
 	px_y[z, 0] = -draw_dist;
 	px_w[z, 0] = (draw_dist + 320 + draw_dist);
 	px_h[z, 0] = (draw_dist + 240 + draw_dist);
-	px_col[z, 0] = c_white;
-	px_alp[z, 0] = 0;
+	px_col[z, 0] = global.thm_col[global.chara_thm, 4];
+	px_alp[z, 0] = global.thm_pxAlp[global.chara_thm];
 }
 
 
 
 LVL_MAIN = 0; // main lvl
 var z = LVL_MAIN;
+menu_lvl_txtdata(z, "menu_inv_main");
 
 
 
@@ -21,13 +25,53 @@ bg_act[z, 0] = true; // (main lvl) info box
 bg_x[z, 0] = (draw_dist / 2);
 bg_y[z, 0] = (draw_dist / 2);
 bg_w[z, 0] = (draw_dist * 6);
-bg_h[z, 0] = (draw_dist * 4);
+bg_h[z, 0] = (draw_dist * 7) + (draw_dist / 4);
+
+main_chrFrm_spr = global.thm_chrFrm_spr[global.chara_thm];
+main_chrFrm_w = fn_spr_w(main_chrFrm_spr);
+main_chrFrm_h = fn_spr_h(main_chrFrm_spr);
+main_chrFrm_x = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (main_chrFrm_w / 2));
+main_chrFrm_y = (bg_y[z, 0] + draw_dist);
 
 main_chara_spr = wrld_chara.fac_spr[wrld_chara.FAC_DN];
 main_chara_w = fn_spr_w(main_chara_spr);
 main_chara_h = fn_spr_h(main_chara_spr);
-main_chara_x = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (main_chara_w / 2));
-main_chara_y = (bg_y[z, 0] + (bg_h[z, 0] / 4));
+main_chara_x = (main_chrFrm_x + (main_chrFrm_w / 2) - (main_chara_w / 2));
+main_chara_y = (main_chrFrm_y + (main_chrFrm_h / 2) + (main_chara_h / 2) - 1);
+
+main_chrName_txt = global.chara_name_txt;
+main_chrName_x = (main_chrFrm_x + (main_chrFrm_w / 2));
+main_chrName_y = (main_chrFrm_y + main_chrFrm_h + (draw_dist / 8));
+if (global.chara_thm == 1)
+	main_chrName_y -= (draw_dist / 2);
+main_chrName_y = round(main_chrName_y);
+main_chrName_col[0] = global.thm_col[global.chara_thm, 0];
+main_chrName_col[1] = global.thm_col[global.chara_thm, 1];
+main_chrName_val = fa_top;
+main_chrName_hal = fa_center;
+
+main_ccy_txt = string(global.chara_ccy[global.chara_awake]);
+main_ccy_x = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (fn_txt_w(opt_wMax[0]) / 1));
+main_ccy_y = (main_chrName_y + draw_hTxt - 1);
+main_ccy_y = main_ccy_y + ((bg_h[z, 0] - (main_ccy_y - bg_y[z, 0]) - (draw_dist / 4)) / 2) - (draw_hTxt / 2); // i hate this
+main_ccy_y = round(main_ccy_y);
+main_ccy_col[0] = global.thm_col[global.chara_thm, 2];
+main_ccy_col[1] = global.thm_col[global.chara_thm, 3];
+main_ccy_val = fa_top;
+main_ccy_hal = fa_left;
+
+main_mny_txt = string(global.chara_mny[global.chara_awake]);
+main_mny_x = (main_ccy_x + fn_txt_w(main_ccy_txt));
+main_mny_y = main_ccy_y;
+main_mny_col[0] = global.thm_col[global.chara_thm, 0];
+main_mny_col[1] = global.thm_col[global.chara_thm, 1];
+main_mny_val = fa_top;
+main_mny_hal = fa_left;
+
+main_mnyImg_spr = temp_spr_menu_mnyImg;
+main_mnyImg_x = (main_ccy_x - draw_dist + 2);
+main_mnyImg_y = (main_ccy_y + (draw_hTxt / 2));
+main_mnyImg_col = global.thm_col[global.chara_thm, 0];
 
 
 
@@ -37,17 +81,14 @@ bg_y[z, 1] = (bg_y[z, 0] + bg_h[z, 0] + bg_y[z, 0]);
 bg_w[z, 1] = bg_w[z, 0];
 bg_h[z, 1] = 70;
 
-menu_lvl_txtdata(z, "menu_inv_main");
 for (var i = 0; i < opt_amt[z]; i++)
 {
-	opt_x[z, i] = (bg_x[z, 1] + (draw_dist / 4) + (bg_w[z, 1] / 3));
+	opt_x[z, i] = main_ccy_x; //(bg_x[z, 1] + (draw_dist / 4) + (bg_w[z, 1] / 3));
 	opt_y[z, i] = (bg_y[z, 1] + (bg_h[z, 1] / 2) - (draw_dist * (opt_amt[z] / 2)) + (draw_dist * i));
-	opt_col_0[z, i] = global.thm_col[global.chara_thm, 0];
-	opt_col_1[z, i] = global.thm_col[global.chara_thm, 1];
 }
 
-main_optImg_spr	= spr_menu_inv_optIcon;
-main_optImg_x = (bg_x[z, 1] + (draw_dist / 4) + ((bg_w[z, 1] / 3) / 2) + 1);
+main_optImg_spr	= spr_menu_optImg;
+main_optImg_x = main_mnyImg_x; //(bg_x[z, 1] + (draw_dist / 4) + ((bg_w[z, 1] / 3) / 2) + 1);
 for (var i = 0; i < opt_amt[z]; i++)
 {
 	main_optImg_y[i] = (opt_y[z, i] + (draw_hTxt / 2));
@@ -57,14 +98,21 @@ for (var i = 0; i < opt_amt[z]; i++)
 
 
 fn_audio_play(snd_menu_opt_slct, false, SETT_VOL_MENU, 1, 0);
-
-
 // name's Template. Menu Template.
 
 
 
 
 
+
+/* (unused) chara portrait fade bg
+main_chrBg_w = (bg_w[z, 0] - (draw_dist * 3));
+main_chrBg_hDist = (draw_dist / 2);
+main_chrBg_h = (main_chara_h + main_chrBg_hDist);
+main_chrBg_x = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (main_chrBg_w / 2));
+main_chrBg_y = (bg_y[z, 0] + draw_dist);
+main_chrBg_col = global.thm_col[global.chara_thm, 3];
+*/
 
 /* (unused) blur
 blur = fx_create("_effect_gaussian_blur");

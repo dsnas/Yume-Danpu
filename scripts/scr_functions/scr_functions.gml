@@ -75,10 +75,15 @@ function fn_draw_px(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // dra
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
-function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp) // draws the specified sprite with the provided characteristics
+function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp, _shdw_act) // draws the specified sprite with the provided characteristics
 {
 	if (_spr != -1)
+	{
+		if (_shdw_act == true && global.thm_txtShdw[global.chara_thm] == true) // shdw (shadow)
+			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.chara_thm, 4], _alp);
+		
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
+	}
 	else
 		fn_dbg("fn_draw_spr() called without a sprite to draw");
 }
@@ -158,12 +163,24 @@ function fn_exists(_obj) // returns whether if the specified object exists
 
 function fn_spr_w(_spr) // returns the width of the specified spr
 {
-	return sprite_get_width(_spr);
+	if (_spr != -1)
+		return sprite_get_width(_spr);
+	else
+	{
+		fn_dbg("fn_spr_w() called without a sprite");
+		return 0;
+	}
 }
 
 function fn_spr_h(_spr) // returns the height of the specified spr
 {
-	return sprite_get_height(_spr);
+	if (_spr != -1)
+		return sprite_get_height(_spr);
+	else
+	{
+		fn_dbg("fn_spr_h() called without a sprite");
+		return 0;
+	}
 }
 
 function fn_txt_w(_txt) // returns the width of the specified txt
