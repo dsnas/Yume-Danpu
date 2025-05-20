@@ -50,6 +50,63 @@ main_chrName_col[1] = global.thm_col[global.chara_thm, 1];
 main_chrName_val = fa_top;
 main_chrName_hal = fa_center;
 
+info_txt[z, 0] = string(global.chara_ccy[global.chara_awake]);
+info_x[z, 0] = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (fn_txt_w(opt_wMax[0]) / 1));
+info_y[z, 0] = (main_chrName_y + draw_hTxt - 1);
+info_y[z, 0] = (info_y[z, 0] + ((bg_h[z, 0] - (info_y[z, 0] - bg_y[z, 0]) - (draw_dist / 4)) / 2) - (draw_hTxt / 2)); // i hate this
+info_y[z, 0] = round(info_y[z, 0]);
+info_col_0[z, 0] = global.thm_col[global.chara_thm, 2];
+info_col_1[z, 0] = global.thm_col[global.chara_thm, 3];
+info_val[z, 0] = fa_top;
+info_hal[z, 0] = fa_left;
+
+info_txt[z, 1] = string(global.chara_mny[global.chara_awake]);
+info_x[z, 1] = (info_x[z, 0] + fn_txt_w(info_txt[z, 0]));
+info_y[z, 1] = info_y[z, 0];
+info_col_0[z, 1] = global.thm_col[global.chara_thm, 0];
+info_col_1[z, 1] = global.thm_col[global.chara_thm, 1];
+info_val[z, 1] = fa_top;
+info_hal[z, 1] = fa_left;
+
+main_mnyImg_spr = temp_spr_menu_mnyImg;
+main_mnyImg_x = (info_x[z, 0] - draw_dist + 2);
+main_mnyImg_y = (info_y[z, 0] + (draw_hTxt / 2));
+main_mnyImg_col = global.thm_col[global.chara_thm, 0];
+
+
+
+bg_act[z, 1] = true; // (main lvl) options box
+bg_x[z, 1] = (draw_dist / 2);
+bg_y[z, 1] = (bg_y[z, 0] + bg_h[z, 0] + bg_y[z, 0]);
+bg_w[z, 1] = bg_w[z, 0];
+bg_h[z, 1] = 70;
+
+for (var i = 0; i < opt_amt[z]; i++)
+{
+	opt_x[z, i] = info_x[z, 0];
+	opt_y[z, i] = (bg_y[z, 1] + (bg_h[z, 1] / 2) - (draw_dist * (opt_amt[z] / 2)) + (draw_dist * i));
+}
+
+main_optImg_spr	= spr_menu_optImg;
+main_optImg_x = main_mnyImg_x;
+for (var i = 0; i < opt_amt[z]; i++)
+{
+	main_optImg_y[i] = (opt_y[z, i] + (draw_hTxt / 2));
+}
+
+
+
+
+fn_audio_play(snd_menu_opt_slct, false, SETT_VOL_MENU, 1, 0);
+
+// name's Template. Menu Template.
+
+
+
+
+
+
+/* (unused) (main lvl) old ccy and mny txt, before i made info
 main_ccy_txt = string(global.chara_ccy[global.chara_awake]);
 main_ccy_x = (bg_x[z, 0] + (bg_w[z, 0] / 2) - (fn_txt_w(opt_wMax[0]) / 1));
 main_ccy_y = (main_chrName_y + draw_hTxt - 1);
@@ -67,43 +124,7 @@ main_mny_col[0] = global.thm_col[global.chara_thm, 0];
 main_mny_col[1] = global.thm_col[global.chara_thm, 1];
 main_mny_val = fa_top;
 main_mny_hal = fa_left;
-
-main_mnyImg_spr = temp_spr_menu_mnyImg;
-main_mnyImg_x = (main_ccy_x - draw_dist + 2);
-main_mnyImg_y = (main_ccy_y + (draw_hTxt / 2));
-main_mnyImg_col = global.thm_col[global.chara_thm, 0];
-
-
-
-bg_act[z, 1] = true; // (main lvl) options box
-bg_x[z, 1] = (draw_dist / 2);
-bg_y[z, 1] = (bg_y[z, 0] + bg_h[z, 0] + bg_y[z, 0]);
-bg_w[z, 1] = bg_w[z, 0];
-bg_h[z, 1] = 70;
-
-for (var i = 0; i < opt_amt[z]; i++)
-{
-	opt_x[z, i] = main_ccy_x; //(bg_x[z, 1] + (draw_dist / 4) + (bg_w[z, 1] / 3));
-	opt_y[z, i] = (bg_y[z, 1] + (bg_h[z, 1] / 2) - (draw_dist * (opt_amt[z] / 2)) + (draw_dist * i));
-}
-
-main_optImg_spr	= spr_menu_optImg;
-main_optImg_x = main_mnyImg_x; //(bg_x[z, 1] + (draw_dist / 4) + ((bg_w[z, 1] / 3) / 2) + 1);
-for (var i = 0; i < opt_amt[z]; i++)
-{
-	main_optImg_y[i] = (opt_y[z, i] + (draw_hTxt / 2));
-}
-
-
-
-
-fn_audio_play(snd_menu_opt_slct, false, SETT_VOL_MENU, 1, 0);
-// name's Template. Menu Template.
-
-
-
-
-
+*/
 
 /* (unused) chara portrait fade bg
 main_chrBg_w = (bg_w[z, 0] - (draw_dist * 3));

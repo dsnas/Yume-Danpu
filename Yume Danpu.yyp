@@ -12,11 +12,11 @@
   "Folders":[
     {"$GMFolder":"","%Name":"audio","folderPath":"folders/audio.yy","name":"audio","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"game","folderPath":"folders/game.yy","name":"game","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"temp","folderPath":"folders/temp.yy","name":"temp","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"menu","folderPath":"folders/menu.yy","name":"menu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"assets","folderPath":"folders/menu/assets.yy","name":"assets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"thm","folderPath":"folders/menu/thm.yy","name":"thm","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"sprites","folderPath":"folders/sprites.yy","name":"sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"temp","folderPath":"folders/temp.yy","name":"temp","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"unused","folderPath":"folders/unused.yy","name":"unused","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"verHist","folderPath":"folders/verHist.yy","name":"verHist","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"wrld","folderPath":"folders/wrld.yy","name":"wrld","resourceType":"GMFolder","resourceVersion":"2.0",},

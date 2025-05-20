@@ -37,8 +37,8 @@ for (var z = 0; z < lvl_amtMax; z++)
 
 
 
-bg_amtMax = 5; // bg (backgrounds) (those gray boxes that stay behind the text)
-for (var z = 0; z < lvl_amtMax; z++) // options
+bg_amtMax = 5; // bg (backgrounds) (those boxes that stay behind the text)
+for (var z = 0; z < lvl_amtMax; z++)
 {
 	for (var i = 0; i < bg_amtMax; i++)
 	{
@@ -63,7 +63,7 @@ for (var z = 0; z < lvl_amtMax; z++)
 	
 	for (var i = 0; i < opt_amtMax; i++)
 	{
-		opt_txt[z, i] = "";
+		opt_txt[z, i] = "%%%";
 		opt_w[z, i] = 0;
 		opt_h[z, i] = 0;
 		opt_wMax[z] = 0;
@@ -72,7 +72,7 @@ for (var z = 0; z < lvl_amtMax; z++)
 		opt_y[z, i] = 0;
 		opt_col_0[z, i] = global.thm_col[global.chara_thm, 2];
 		opt_col_1[z, i] = global.thm_col[global.chara_thm, 3];
-		opt_colSpd = 0.5;
+		opt_colSpd = 0.4;
 		opt_alp[z, i] = 1;
 		opt_val[z, i] = fa_top;
 		opt_hal[z, i] = fa_left;
@@ -83,8 +83,26 @@ opt_pos = 0;
 
 
 
+info_amtMax = 25; // info (texts that aren't options, but information)
+for (var z = 0; z < lvl_amtMax; z++)
+{
+	for (var i = 0; i < info_amtMax; i++)
+	{
+		info_txt[z, i] = "%%%";
+		info_x[z, i] = 0;
+		info_y[z, i] = 0;
+		info_col_0[z, i] = global.thm_col[global.chara_thm, 0];
+		info_col_1[z, i] = global.thm_col[global.chara_thm, 1];
+		info_alp[z, i] = 1;
+		info_val[z, i] = fa_top;
+		info_hal[z, i] = fa_left;
+	}
+}
+
+
+
 trans_stg = -1; // trans (fade in/out transition animation) (trans rights, am i right?!!)
-trans_alpAmt = 0.1;
+trans_alpAmt = 0.125;
 trans_oooooooooooooooooooooooooooooooo = 0; // God .   All these  Letters  really  Do  make me wanna  Jump  from the  Balcony  of my  Apartment Building  .
 
 

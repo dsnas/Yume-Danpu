@@ -2,7 +2,7 @@
 function fn_thm_start()
 {
 	/* Default */	fn_thm_setup(0, fn_txtdata("thm_name_0"), spr_menu_bg_0, spr_menu_chrFrm_1, c_white, -1, #9E7B9B, -1, #442343, true, 0.5);
-	/* Simple */	fn_thm_setup(1, fn_txtdata("thm_name_1"), spr_menu_bg_1, spr_menu_chrFrm_1, c_white, -1, make_color_hsv(0, 0, (255 * 0.5)), -1, c_black, false, 0);
+	/* Simple */	fn_thm_setup(1, fn_txtdata("thm_name_1"), spr_menu_bg_1, spr_menu_chrFrm_1, c_white, -1, make_color_hsv(0, 0, (255 * 0.45)), -1, c_black, false, 0);
 	/* Madotsuki*/	fn_thm_setup(2, fn_txtdata("thm_name_2"), spr_menu_bg_2, spr_menu_chrFrm_2, #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, 0.35);
 	
 	

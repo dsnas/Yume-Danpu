@@ -15,7 +15,14 @@ for (var i = 0; i < bg_amtMax; i++) // bg
 
 for (var i = 0; i < opt_amt[z]; i++) // opt
 {
-	fn_draw_txt(opt_txt[z, i], (draw_x + opt_x[z, i]), (draw_y + opt_y[z, i]), 1, 1, 0, opt_col_0[z, i], opt_col_1[z, i], (opt_alp[z, i] * draw_alp), opt_val[z, i], opt_hal[z, i]);
+	if (opt_txt[z, i] != "%%%")
+		fn_draw_txt(opt_txt[z, i], (draw_x + opt_x[z, i]), (draw_y + opt_y[z, i]), 1, 1, 0, opt_col_0[z, i], opt_col_1[z, i], (opt_alp[z, i] * draw_alp), opt_val[z, i], opt_hal[z, i]);
+}
+
+for (var i = 0; i < info_amtMax; i++) // info
+{
+	if (info_txt[z, i] != "%%%")
+		fn_draw_txt(info_txt[z, i], info_x[z, i], info_y[z, i], 1, 1, 0, info_col_0[z, i], info_col_1[z, i], draw_alp, info_val[z, i], info_hal[z, i]);
 }
 
 

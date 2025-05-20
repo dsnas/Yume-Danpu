@@ -9,8 +9,6 @@ if (lvl == LVL_MAIN) // main lvl
 	/* (main) chrFrm */		fn_draw_spr(main_chrFrm_spr, 0, (draw_x + main_chrFrm_x), (draw_y + main_chrFrm_y), 1, 1, 0, c_white, draw_alp, false);
 	/* (main) chara */		fn_draw_spr(main_chara_spr, 0, (draw_x + main_chara_x), (draw_y + main_chara_y), 1, 1, 0, c_white, draw_alp, false);
 	/* (main) chrName */	fn_draw_txt(main_chrName_txt, (draw_x + main_chrName_x), (draw_y + main_chrName_y), 1, 1, 0, main_chrName_col[0], main_chrName_col[1], draw_alp, main_chrName_val, main_chrName_hal);
-	/* (main) ccy */		fn_draw_txt(main_ccy_txt, (draw_x + main_ccy_x), (draw_y + main_ccy_y), 1, 1, 0, main_ccy_col[0], main_ccy_col[1], draw_alp, main_ccy_val, main_ccy_hal);
-	/* (main) mny */		fn_draw_txt(main_mny_txt, (draw_x + main_mny_x), (draw_y + main_mny_y), 1, 1, 0, main_mny_col[0], main_mny_col[1], draw_alp, main_mny_val, main_mny_hal);
 	/* (main) mnyImg */		fn_draw_spr(main_mnyImg_spr, 0, (draw_x + main_mnyImg_x), (draw_y + main_mnyImg_y), 1, 1, 0, main_mnyImg_col, draw_alp, true);
 	
 	for (var i = 0; i < opt_amt[z]; i++)
@@ -19,11 +17,16 @@ if (lvl == LVL_MAIN) // main lvl
 	}
 }
 
-		
-		
-		
-		
-		
+
+
+
+
+
+/* (unused) (main lvl) old ccy and mny txt, before i made info		
+(main) ccy 		fn_draw_txt(main_ccy_txt, (draw_x + main_ccy_x), (draw_y + main_ccy_y), 1, 1, 0, main_ccy_col[0], main_ccy_col[1], draw_alp, main_ccy_val, main_ccy_hal);
+(main) mny 		fn_draw_txt(main_mny_txt, (draw_x + main_mny_x), (draw_y + main_mny_y), 1, 1, 0, main_mny_col[0], main_mny_col[1], draw_alp, main_mny_val, main_mny_hal);
+*/
+
 /* (unused) chara portrait fade bg
 for (var c = 0; c < main_chrBg_h; c++)
 {
