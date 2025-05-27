@@ -51,15 +51,15 @@ function fn_audio_curr(_audio_id) // returns whether the specified audio is curr
 
 
 
-function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _alp, _val, _hal) // draws a text with the provided characteristics
+function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _alp, _vAl, _hAl) // draws a text with the provided characteristics
 {
-	_xSc = (_xSc / 2);
-	_ySc = (_ySc / 2);
+	_xSc = (_xSc / 1);
+	_ySc = (_ySc / 1);
 	
 	var _fnt = global.fnt_main;
 	draw_set_font(_fnt);
-	draw_set_valign(_val);
-	draw_set_halign(_hal);
+	draw_set_valign(_vAl);
+	draw_set_halign(_hAl);
 	
 	if (global.thm_txtShdw[global.chara_thm] == true)
 	{
@@ -122,17 +122,17 @@ function fn_lerp_col(_currCol, _tgtCol, _spd)
 {
 	var _currCol_hue = color_get_hue(_currCol);
 	var _currCol_sat = color_get_saturation(_currCol);
-	var _currCol_val = color_get_value(_currCol);
+	var _currCol_vAl = color_get_value(_currCol);
 	
 	var _tgtCol_hue = color_get_hue(_tgtCol);
 	var _tgtCol_sat = color_get_saturation(_tgtCol);
-	var _tgtCol_val = color_get_value(_tgtCol);
+	var _tgtCol_vAl = color_get_value(_tgtCol);
 	
 	var _col_hue = lerp(_currCol_hue, _tgtCol_hue, _spd);
 	var _col_sat = lerp(_currCol_sat, _tgtCol_sat, _spd);
-	var _col_val = lerp(_currCol_val, _tgtCol_val, _spd);
+	var _col_vAl = lerp(_currCol_vAl, _tgtCol_vAl, _spd);
 	
-	return make_color_hsv(_col_hue, _col_sat, _col_val);
+	return make_color_hsv(_col_hue, _col_sat, _col_vAl);
 }
 
 
@@ -186,13 +186,13 @@ function fn_spr_h(_spr) // returns the height of the specified spr
 function fn_txt_w(_txt) // returns the width of the specified txt
 {
 	draw_set_font(global.fnt_main);
-	return (string_width(_txt) / 2);
+	return string_width(_txt);
 }
 
 function fn_txt_h(_txt) // returns the height of the specified txt
 {
 	draw_set_font(global.fnt_main);
-	var _txt_h = (string_height(_txt) / 2);
+	var _txt_h = string_height(_txt);
 	if (_txt_h % 2 == 1)
 		_txt_h += 1;
 	return _txt_h;

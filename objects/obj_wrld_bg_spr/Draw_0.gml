@@ -14,7 +14,7 @@ if (active == true)
 	
 	if (draw_rpt == false) // background doesn't repeat
 	{
-		fn_draw_spr(draw_spr, draw_img, draw_x, draw_y, draw_xSc, draw_ySc, draw_ang, draw_col, draw_alp);
+		fn_draw_spr(draw_spr, draw_img, draw_x, draw_y, draw_xSc, draw_ySc, draw_ang, draw_col, draw_alp, false);
 	}
 	else if (draw_rpt == true) // background does repeat
 	{
@@ -27,7 +27,7 @@ if (active == true)
 		for (var h = 0; h < _rpt_hAmt; h++)
 		{
 			for (var v = 0; v < _rpt_vAmt; v++)
-				fn_draw_spr(draw_spr, draw_img, _rpt_x + (draw_rpt_xDist * h), _rpt_y + (draw_rpt_yDist * v), draw_xSc, draw_ySc, draw_ang, draw_col, draw_alp);
+				fn_draw_spr(draw_spr, draw_img, _rpt_x + (draw_rpt_xDist * h), _rpt_y + (draw_rpt_yDist * v), draw_xSc, draw_ySc, draw_ang, draw_col, draw_alp, false);
 		}
 	}
 }

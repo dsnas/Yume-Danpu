@@ -13,9 +13,15 @@ function fn_txtdata_start() // start txtdata of the selected lang
 		global.txtdata[SETT_LANG_EN] = ds_map_create();
 		var i = global.txtdata[SETT_LANG_EN];
 		
-		ds_map_add(i, "menu_inv_main_0", "Effects");
-		ds_map_add(i, "menu_inv_main_1", "Items");
-		ds_map_add(i, "menu_inv_main_2", "Themes");
+		
+		ds_map_add(i, "menu_inv_main_opt_0", "Effects");
+		var ovos = irandom_range(1, 99999999);
+		if (ovos == 1)
+			ds_map_set(i, "menu_inv_main_opt_0", "Êggects");
+		ds_map_add(i, "menu_inv_main_opt_1", "Items");
+		ds_map_add(i, "menu_inv_main_opt_2", "Themes");
+		
+		ds_map_add(i, "menu_inv_eff_lbl_0", "Effects");
 		
 		ds_map_add(i, "thm_name_0", "Default");
 		ds_map_add(i, "thm_name_1", "Simple");

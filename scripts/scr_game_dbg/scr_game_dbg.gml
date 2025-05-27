@@ -1,5 +1,5 @@
 
-function fn_game_dbg_create()
+function fn_game_dwin_create()
 {
 	global.dbg = true;
 	if (global.dbg == true)

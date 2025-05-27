@@ -11,7 +11,5 @@ function fn_chara_start() // start chara info
 	global.chara_ccy[0] = "₢$ "; // (while sleeping)	// ccy (currency)
 	global.chara_ccy[1] = "R$ "; // (while awake)
 	
-	global.chara_thm = 2; // thm (current theme)
+	global.chara_thm = 2; // thm (equipped theme)
 }
-
-

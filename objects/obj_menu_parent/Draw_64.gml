@@ -4,25 +4,31 @@ var z = lvl;
 
 
 for (var i = 0; i < px_amtMax; i++) // px
-	fn_draw_px((draw_x + px_x[z, i]), (draw_y + px_y[z, i]), px_w[z, i], px_h[z, i], px_col[z, i], px_col[z, i], px_col[z, i], px_col[z, i], (px_alp[z, i] * draw_alp));
-
-for (var i = 0; i < bg_amtMax; i++) // bg
 {
-	var _spr = bg_spr[z, i];
-	if (_spr != -1)
-		fn_draw_spr_stretch(_spr, bg_img[z, i], (draw_x + bg_x[z, i]), (draw_y + bg_y[z, i]), bg_w[z, i], bg_h[z, i], bg_col[z, i], (bg_alp[z, i] * draw_alp));
+	if (px_act[z, i] == true)
+		fn_draw_px((draw_x + px_x[z, i]), (draw_y + px_y[z, i]), px_w[z, i], px_h[z, i], px_col[z, i], px_col[z, i], px_col[z, i], px_col[z, i], (px_alp[z, i] * draw_alp));
 }
 
-for (var i = 0; i < opt_amt[z]; i++) // opt
+for (var i = 0; i < win_amtMax; i++) // bg
+{
+	if (win_act[z, i] == true && win_spr[z, i] != -1)
+		fn_draw_spr_stretch(win_spr[z, i], win_img[z, i], (draw_x + win_x[z, i]), (draw_y + win_y[z, i]), win_w[z, i], win_h[z, i], win_col[z, i], (win_alp[z, i] * draw_alp));
+}
+
+for (var i = 0; i < opt_amt[z]; i++) // opt and optSlctr
 {
 	if (opt_txt[z, i] != "%%%")
-		fn_draw_txt(opt_txt[z, i], (draw_x + opt_x[z, i]), (draw_y + opt_y[z, i]), 1, 1, 0, opt_col_0[z, i], opt_col_1[z, i], (opt_alp[z, i] * draw_alp), opt_val[z, i], opt_hal[z, i]);
+	{
+		/* optSlctr */ fn_draw_spr_stretch(optSlctr_spr[z, i], 0, optSlctr_x[z, i], optSlctr_y[z, i], optSlctr_w[z, i], optSlctr_h[z, i], c_white, (optSlctr_alp[z, i] * draw_alp));
+		
+		/* opt */ fn_draw_txt(opt_txt[z, i], (draw_x + opt_x[z, i]), (draw_y + opt_y[z, i]), 1, 1, 0, opt_col_0[z, i], opt_col_1[z, i], (opt_alp[z, i] * draw_alp), opt_vAl[z, i], opt_hAl[z, i]);
+	}
 }
 
-for (var i = 0; i < info_amtMax; i++) // info
+for (var i = 0; i < lbl_amtMax; i++) // lbl
 {
-	if (info_txt[z, i] != "%%%")
-		fn_draw_txt(info_txt[z, i], info_x[z, i], info_y[z, i], 1, 1, 0, info_col_0[z, i], info_col_1[z, i], draw_alp, info_val[z, i], info_hal[z, i]);
+	if (lbl_str[z, i] != "%%%")
+		fn_draw_txt(lbl_str[z, i], lbl_x[z, i], lbl_y[z, i], 1, 1, 0, lbl_col_0[z, i], lbl_col_1[z, i], (lbl_alp[z, i] * draw_alp), lbl_vAl[z, i], lbl_hAl[z, i]);
 }
 
 
