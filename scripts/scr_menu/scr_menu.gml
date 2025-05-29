@@ -1,5 +1,5 @@
 
-function menu_lvl_optSize(_lvl, _id)
+function menu_opt_sizeData(_lvl, _id)
 {
 	var z = _lvl;
 	var i = _id;
@@ -12,7 +12,7 @@ function menu_lvl_optSize(_lvl, _id)
 		opt_wMax[z] = max(opt_wMax[z], opt_w[z, i])
 }
 
-function menu_lvl_opt_txtdata(_lvl, _key)
+function menu_opt_txtdata(_lvl, _key)
 {
 	var z = _lvl;
 	
@@ -22,7 +22,7 @@ function menu_lvl_opt_txtdata(_lvl, _key)
 		if (_txt != undefined)
 		{
 			opt_txt[z, i] = _txt;
-			menu_lvl_optSize(z, i);
+			menu_opt_sizeData(z, i);
 			
 			continue;
 		}
@@ -35,7 +35,7 @@ function menu_lvl_opt_txtdata(_lvl, _key)
 	}
 }
 
-function menu_lvl_lbl_txtdata(_lvl, _id, _key)
+function menu_lbl_txtdata(_lvl, _id, _key)
 {
 	var z = _lvl;
 	var i = _id;

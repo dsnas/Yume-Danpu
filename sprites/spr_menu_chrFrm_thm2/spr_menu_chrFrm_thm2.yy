@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"thm",
-    "path":"folders/menu/thm.yy",
+    "name":"Madotsuki",
+    "path":"folders/menu/thm/Madotsuki.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

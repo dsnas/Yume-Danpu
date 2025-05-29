@@ -15,7 +15,7 @@ function fn_sett_start() // start sett (settings)
 	global.sett_vol[SETT_VOL_MAIN] = 1;
 	
 	#macro SETT_VOL_MUS 1 // (music)
-	global.sett_vol[SETT_VOL_MUS] = 0;
+	global.sett_vol[SETT_VOL_MUS] = 1;
 	
 	#macro SETT_VOL_MENU 2 // (menu)
 	global.sett_vol[SETT_VOL_MENU] = 1;

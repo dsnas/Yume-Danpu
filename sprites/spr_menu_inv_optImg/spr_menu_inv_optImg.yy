@@ -46,8 +46,8 @@
   },
   "origin":5,
   "parent":{
-    "name":"assets",
-    "path":"folders/menu/assets.yy",
+    "name":"inv",
+    "path":"folders/menu/inv.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

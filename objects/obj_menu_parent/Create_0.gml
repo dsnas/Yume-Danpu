@@ -10,113 +10,121 @@ draw_dist = 16;
 draw_x = 0;
 draw_y = 0;
 draw_hTxt = fn_txt_h("Salenis");
-draw_alp = 0;
+draw_alp = 1;
 
 
-lvl = 0; // level (like play, settings, controls or credits)
-lvl_amtMax = 10;
+lvl_amtMax = 10; // lvl (level) (like play, settings, controls or credits)
+lvl = lvl_amtMax;
+for (var l = 0; l < (lvl_amtMax + 1); l++)
+	lvl_alp[l] = 0;
+
+lvlTrans_act = false; // lvlTrans (transition between levels) (trans rights, am i right?!!)
+lvlTrans_alpSpd = 0.25;
+lvlTrans_tgtLvl = -1; // (target level)
+lvlTrans_tgtOptPos = 0; // (target option position)
+lvlTrans_kill = false;
 
 
 px_amtMax = 25; // px (stretched pixels)
-for (var z = 0; z < lvl_amtMax; z++)
+for (var l = 0; l < lvl_amtMax; l++)
 {
 	for (var i = 0; i < px_amtMax; i++)
 	{
-		px_act[z, i] = false;
-		px_x[z, i] = 0;
-		px_y[z, i] = 0;
-		px_w[z, i] = 0;
-		px_h[z, i] = 0;
-		px_col[z, i] = c_black;
-		px_alp[z, i] = 1;
+		px_act[l, i] = false;
+		px_x[l, i] = 0;
+		px_y[l, i] = 0;
+		px_w[l, i] = 0;
+		px_h[l, i] = 0;
+		px_col[l, i] = c_black;
+		px_alp[l, i] = 1;
 	}
 }
 
 
-win_amtMax = 5; // win (windows) (those boxes that stay behind the text)
-for (var z = 0; z < lvl_amtMax; z++)
+wnd_amtMax = 5; // wnd (window) (those boxes that stay behind the text)
+for (var l = 0; l < lvl_amtMax; l++)
 {
-	for (var i = 0; i < win_amtMax; i++)
+	for (var i = 0; i < wnd_amtMax; i++)
 	{
-		win_act[z, i] = false;
-		win_spr[z, i] = global.thm_win_spr[global.chara_thm];
-		win_img[z, i] = 0;
-		win_x[z, i] = 0;
-		win_y[z, i] = 0;
-		win_w[z, i] = 0;
-		win_h[z, i] = 0;
-		win_col[z, i] = c_white;
-		win_alp[z, i] = 1;
+		wnd_act[l, i] = false;
+		wnd_spr[l, i] = global.thm_wnd_spr[global.chara_thm];
+		wnd_img[l, i] = 0;
+		wnd_x[l, i] = 0;
+		wnd_y[l, i] = 0;
+		wnd_w[l, i] = 0;
+		wnd_h[l, i] = 0;
+		wnd_col[l, i] = c_white;
+		wnd_alp[l, i] = 1;
 	}
 }
 
 
-opt_amtMax = 25; // opt (options)
-for (var z = 0; z < lvl_amtMax; z++)
+opt_amtMax = 25; // opt (option) and optSlctr (option selector, selection/focus indicator)
+for (var l = 0; l < lvl_amtMax; l++)
 {
-	opt_amt[z] = 0;
+	opt_amt[l] = 0;
 	
 	for (var i = 0; i < opt_amtMax; i++)
 	{
-		opt_txt[z, i] = "%%%";
-		opt_w[z, i] = 0;
-		opt_h[z, i] = 0;
-		opt_wMax[z] = 0;
+		opt_txt[l, i] = "%%%"; // opt
 		
-		opt_x[z, i] = 0;
-		opt_y[z, i] = 0;
-		opt_col_0[z, i] = global.thm_col[global.chara_thm, 2];
-		opt_col_1[z, i] = global.thm_col[global.chara_thm, 3];
-		opt_colSpd = 0.4;
-		opt_alp[z, i] = 1;
-		opt_vAl[z, i] = fa_top;
-		opt_hAl[z, i] = fa_left;
+		opt_w[l, i] = 0;
+		opt_h[l, i] = 0;
+		opt_wMax[l] = 0;
 		
-		optSlctr_act[z, i] = false; // optSlctr (option selector, selection/focus indicator)
-		optSlctr_spr[z, i] = global.thm_optSlctr_spr[global.chara_thm];
-		optSlctr_x[z, i] = 0;
-		optSlctr_xDistFix[z, i] = 1; // (font sprite's extra pixels on the sides)
-		optSlctr_xDist[z, i] = global.thm_optSlctr_xDist[global.chara_thm];
-		optSlctr_y[z, i] = 0;
-		optSlctr_yDistFix_0[z, i] = 3; // (acute, grave, and circumflex accent diacritics)
-		optSlctr_yDistFix_1[z, i] = 1; // (descenders)
-		optSlctr_yDist[z, i] = global.thm_optSlctr_yDist[global.chara_thm];
-		optSlctr_w[z, i] = 0;
-		optSlctr_h[z, i] = 0;
-		optSlctr_alp[z, i] = 0;
-		optSlctr_alpSpd = 0.25;
+		opt_x[l, i] = 0;
+		opt_y[l, i] = 0;
+		opt_colDflt[l][i][0] = global.thm_col[global.chara_thm, 2]; // (colors of the option when the it's not selected)
+		opt_colDflt[l][i][1] = global.thm_col[global.chara_thm, 3]; // (colors of the option when the it's not selected)
+		opt_colSlct[l][i][0] = global.thm_col[global.chara_thm, 0]; // (colors of the option when it's selected)
+		opt_colSlct[l][i][1] = global.thm_col[global.chara_thm, 1]; // (colors of the option when it's selected)
+		opt_col[l][i][0] = opt_colDflt[l][i][0]; // (current colors of the option)
+		opt_col[l][i][1] = opt_colDflt[l][i][1];
+		opt_colSpd = 0.35;
+		opt_alp[l, i] = 1;
+		opt_vAl[l, i] = fa_top;
+		opt_hAl[l, i] = fa_left;
+		
+		optSlctr_act[l, i] = false; // optSlctr
+		optSlctr_spr[l, i] = global.thm_optSlctr_spr[global.chara_thm];
+		optSlctr_x[l, i] = 0;
+		optSlctr_xDistFix[l, i] = 1; // (fixes font sprite's empty space on the left)
+		optSlctr_xDist[l, i] = global.thm_optSlctr_xDist[global.chara_thm];
+		optSlctr_y[l, i] = 0;
+		optSlctr_yDistFix_0[l, i] = 3; // (fixes acute, grave, and circumflex accent diacritics)
+		optSlctr_yDistFix_1[l, i] = 1; // (fixes descenders)
+		optSlctr_yDist[l, i] = global.thm_optSlctr_yDist[global.chara_thm];
+		optSlctr_w[l, i] = 0;
+		optSlctr_h[l, i] = 0;
+		optSlctr_alp[l, i] = 0;
+		optSlctr_alpSpd = opt_colSpd;
+		
+		opt_pos[l] = 0; // opt pos (the position of the selected option in its array) (per lvl due to lvlTrans)
 	}
 }
 opt_move = true;
-opt_pos = 0;
 
 
-lbl_amtMax = 25; // lbl (labels) (text that aren't options, but information)
-for (var z = 0; z < lvl_amtMax; z++)
+lbl_amtMax = 25; // lbl (label) (text that aren't options, but information)
+for (var l = 0; l < lvl_amtMax; l++)
 {
 	for (var i = 0; i < lbl_amtMax; i++)
 	{
-		lbl_str[z, i] = "%%%";
-		lbl_w[z, i] = 0;
-		lbl_h[z, i] = 0;
+		lbl_txt[l, i] = "%%%";
+		lbl_w[l, i] = 0;
+		lbl_h[l, i] = 0;
 		
-		lbl_x[z, i] = 0;
-		lbl_y[z, i] = 0;
-		lbl_col_0[z, i] = global.thm_col[global.chara_thm, 0];
-		lbl_col_1[z, i] = global.thm_col[global.chara_thm, 1];
-		lbl_alp[z, i] = 1;
-		lbl_vAl[z, i] = fa_top;
-		lbl_hAl[z, i] = fa_left;
+		lbl_x[l, i] = 0;
+		lbl_y[l, i] = 0;
+		lbl_col[l][i][0] = global.thm_col[global.chara_thm, 0];
+		lbl_col[l][i][1] = global.thm_col[global.chara_thm, 1];
+		lbl_alp[l, i] = 1;
+		lbl_vAl[l, i] = fa_top;
+		lbl_hAl[l, i] = fa_left;
 	}
 }
 
 
-trans_stg = -1; // trans (fade in/out transition animation) (trans rights, am i right?!!)
-trans_alpAmt = 0.125;
-trans_lvl = -1; // lvl to adjust during the trans (transition)
-trans_oooooooooooooooooooooooooooooooo = 0; // God .   All these  Letters  really  Do  make me wanna  Jump  from the  Balcony  of my  Apartment Building  .
-
-destroy_stg = -1;
 
 
 event_user(0); // (child) create

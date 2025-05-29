@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_menu_optMove_thm2",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.13591836,
+  "name":"snd_menu_optMove_thm2",
+  "parent":{
+    "name":"Madotsuki",
+    "path":"folders/menu/thm/Madotsuki.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_menu_optMove_thm2.WAV",
+  "type":0,
+  "volume":1.0,
+}

@@ -25,7 +25,14 @@ function fn_audio_play(_audio, _audio_loops, _audio_volId, _audio_gainLvl, _audi
 
 function fn_audio_gain(_audio_id, _audio_volId, _audio_gainLvl, _audio_gainTime) // adjusts the volume of the specified audio
 {
-	_audio_gainLvl = (global.sett_vol[SETT_VOL_MAIN] * (_audio_gainLvl * global.sett_vol[_audio_volId]));
+	var _audio = audio_sound_get_asset(_audio_id);
+	
+	if (_audio == snd_menu_optMove_thm2)
+		_audio_gainLvl = 0.4;
+	else if (_audio == snd_menu_optSlct_thm2) || (_audio == snd_menu_optCncl_thm2)
+		_audio_gainLvl = 0.2;
+	
+	_audio_gainLvl = ((_audio_gainLvl * global.sett_vol[_audio_volId]) * global.sett_vol[SETT_VOL_MAIN]);
 	audio_sound_gain(_audio_id, _audio_gainLvl, _audio_gainTime);
 }
 
@@ -144,14 +151,14 @@ function fn_dbg(_msg) // sends a message to the debug log
 
 
 
-function fn_create(_obj, _x, _y) // creates the specified object at the given position
+function fn_spawn(_obj, _x, _y) // spawns/creates the specified object at the given position
 {
 	obj = instance_create_layer(_x, _y, "Instances", _obj);
 }
 
-function fn_destroy(_obj_id) // destroys the specified object
+function fn_kill(_obj) // kills/destroys the specified object
 {
-	instance_destroy(_obj_id);
+	instance_destroy(_obj);
 }
 
 function fn_exists(_obj) // returns whether if the specified object exists

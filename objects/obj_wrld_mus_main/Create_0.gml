@@ -20,7 +20,7 @@ for (var i = 0; i < mus_amt; i++)
 if (wrld == rm_wrld_macaco) // macacolandia
 {
 	mus[0] = mus_wrld_macaco;
-	mus_gainLvl[0] = 0.35;
+	mus_gainLvl[0] = 0.25;
 }
 if (wrld == rm_wrld_pikini) // fenda bo pikini
 {

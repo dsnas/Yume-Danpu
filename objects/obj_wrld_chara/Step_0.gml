@@ -7,9 +7,6 @@ fac_inp[FAC_DN]	= fn_inp("hold", SETT_INP_DN);
 inp_slct = fn_inp("press", SETT_INP_SLCT);
 inp_cncl = fn_inp("press", SETT_INP_CNCL);
 
-inv_inp = fn_inp("press", SETT_INP_MENU_INV); // inv inp
-
-
 
 if (move_stage == -1) // idle
 {	
@@ -110,19 +107,11 @@ if (move_stage == 1) // move
 }
 
 
-
-var _inv = obj_menu_inv; // inv (inventory)
-if (inv_inp == true && move_stage == -1) // open
+if (fn_inp("press", SETT_INP_MENU_INV) == true && move_stage == -1 && fn_exists(obj_menu_inv) == false) // inv open (inventory)
 {
-	fn_create(_inv, 0, 0);
+	fn_spawn(obj_menu_inv, 0, 0);
 	move_stage = -2;
 }
-else if ((inv_inp == true || inp_cncl == true) && move_stage == -2 && fn_exists(_inv) == true) // close
-{
-	_inv.destroy_stg = 0;
-	move_stage = -1;
-}
-
 
 
 if (cam_act == true) // camera

@@ -30,7 +30,7 @@ for (var i = 0; i < bg_maxAmt; i++)
 {
 	if (bg_obj[i] != -1)
 	{
-		fn_create(bg_obj[i], 0, 0);
+		fn_spawn(bg_obj[i], 0, 0);
 		obj.depth = (bg_maxDepth - i);
 	}
 }
@@ -70,8 +70,8 @@ if (wrld == rm_wrld_pikini) // fenda bo pikini
 /*
 if (wrld == rm_wrld_bikini)
 {
-	child_obj[0] = obj_wrld_win_px;
-	child_obj[1] = obj_wrld_win_spr;
+	child_obj[0] = obj_wrld_wnd_px;
+	child_obj[1] = obj_wrld_wnd_spr;
 }
 */
 
@@ -103,7 +103,7 @@ if (wrld == rm_wrld_bikini)
 	_child = child_obj[1];
 	
 	_child.depth = (child_depthMax - 1);
-	_child.draw_spr = spr_wrld_win_bikini_0;
+	_child.draw_spr = spr_wrld_wnd_bikini_0;
 	_child.draw_col = _sky_col_0;
 	_child.draw_alp = 0.1;
 	_child.draw_move_xTime = (120 * 60);
