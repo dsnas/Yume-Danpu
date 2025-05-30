@@ -1,5 +1,6 @@
 # Yume Danpu
 ![Version](https://img.shields.io/badge/version-0.01-65FF8A)
+![Commit activity](https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=65FF8A)
 [![Itch.io](https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5)](https://dsnas.itch.io/yume-danpu)
 [![YouTube](https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5)](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)
 
