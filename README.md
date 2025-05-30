@@ -22,3 +22,8 @@ This repository is updated regularly while we're working on it, not just when ne
 We occasionally post videos on YouTube showcasing upcoming or newly released changes and features.  
 Follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)!
 
+&nbsp;
+
+<p align="center">
+  <img src="./sprites/spr_wrld_npc_macaco_citizen/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" />
+</p>
