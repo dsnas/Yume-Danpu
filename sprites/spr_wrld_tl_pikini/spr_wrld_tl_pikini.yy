@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"pikini",
-    "path":"folders/wrld/pikini.yy",
+    "path":"folders/wrld/wrlds/pikini.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

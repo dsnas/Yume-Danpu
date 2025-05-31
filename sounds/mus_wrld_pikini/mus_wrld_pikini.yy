@@ -12,8 +12,8 @@
   "duration":12.199183,
   "name":"mus_wrld_pikini",
   "parent":{
-    "name":"assets",
-    "path":"folders/wrld/pikini/assets.yy",
+    "name":"pikini",
+    "path":"folders/wrld/wrlds/pikini.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

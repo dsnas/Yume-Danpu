@@ -12,8 +12,8 @@
   "duration":0.0,
   "name":"mus_wrld_macaco",
   "parent":{
-    "name":"assets",
-    "path":"folders/wrld/macaco/assets.yy",
+    "name":"macaco",
+    "path":"folders/wrld/wrlds/macaco.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

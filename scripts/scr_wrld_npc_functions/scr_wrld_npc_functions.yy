@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_wrld_npc_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_wrld_npc_functions",
+  "parent":{
+    "name":"npc",
+    "path":"folders/wrld/solid/interactable/npc.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

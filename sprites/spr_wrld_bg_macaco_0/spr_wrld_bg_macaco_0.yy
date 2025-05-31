@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"assets",
-    "path":"folders/wrld/macaco/assets.yy",
+    "name":"macaco",
+    "path":"folders/wrld/wrlds/macaco.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

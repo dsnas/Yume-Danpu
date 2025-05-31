@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_penyplocde",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.7207256,
+  "name":"snd_penyplocde",
+  "parent":{
+    "name":"audio",
+    "path":"folders/audio.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_penyplocde.wav",
+  "type":0,
+  "volume":1.0,
+}

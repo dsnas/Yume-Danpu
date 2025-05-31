@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_txtdata",
+  "%Name":"scr_txtData",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_txtdata",
+  "name":"scr_txtData",
   "parent":{
-    "name":"game",
-    "path":"folders/game.yy",
+    "name":"Yume Danpu",
+    "path":"Yume Danpu.yyp",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"assets",
-    "path":"folders/wrld/pikini/assets.yy",
+    "name":"pikini",
+    "path":"folders/wrld/wrlds/pikini.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

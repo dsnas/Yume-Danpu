@@ -6,4 +6,22 @@ image_alpha = 0;
 fn_import();
 
 
-fn_game_dbg_create();
+
+
+global.dbg_act = true;
+global.dbg_mod = vk_alt; // (modifier key)
+global.dbg_pwd = "hunter2"; // (password)
+if (global.dbg_act == true)
+{
+	room_goto(rm_wrld_macaco);
+}
+
+
+fntTest_act = false;
+fntTest_txt = @"
+the quick brown fox\njumps over the lazy dog\n\n
+oh, brother, this\nguy stinks!\n\n
+THE QUICK BROWN FOX\nJUMPS OVER THE LAZY DOG\n\n
+você deveria fazer\nalgo bem excitante!\n\n
+ajatagem de gatarajem\n\n
+1234567890 quilômetros\nde ouro puro";

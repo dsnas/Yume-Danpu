@@ -46,7 +46,7 @@
   "origin":6,
   "parent":{
     "name":"npc",
-    "path":"folders/wrld/npc.yy",
+    "path":"folders/wrld/solid/interactable/npc.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

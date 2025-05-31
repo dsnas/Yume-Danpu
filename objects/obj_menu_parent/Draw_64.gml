@@ -1,8 +1,8 @@
 
 if (lvlTrans_act == true)
 {
-	lvl_alp[lvl] = lerp(lvl_alp[lvl], 0, lvlTrans_alpSpd);
-	lvl_alp[lvlTrans_tgtLvl] = lerp(lvl_alp[lvlTrans_tgtLvl], 1, lvlTrans_alpSpd);
+	lvl_alp[lvl] = fn_lerp(lvl_alp[lvl], 0, lvlTrans_alpSpd);
+	lvl_alp[lvlTrans_tgtLvl] = fn_lerp(lvl_alp[lvlTrans_tgtLvl], 1, lvlTrans_alpSpd);
 	
 	var _slack = 0.05;
 	if (lvl_alp[lvl] <= _slack && lvl_alp[lvlTrans_tgtLvl] >= (1 - _slack))
@@ -43,7 +43,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 			if (opt_txt[l, i] != "%%%")
 			{
 				if (lvlTrans_tgtLvl == -1) || (lvlTrans_tgtLvl != -1 && l == lvlTrans_tgtLvl)
-					optSlctr_alp[l, i] = lerp(optSlctr_alp[l, i], (i == opt_pos[l]), optSlctr_alpSpd); // optSlctr alp animation
+					optSlctr_alp[l, i] = fn_lerp(optSlctr_alp[l, i], (i == opt_pos[l]), optSlctr_alpSpd); // optSlctr alp animation
 				/* optSlctr */ fn_draw_spr_stretch(optSlctr_spr[l, i], 0, optSlctr_x[l, i], optSlctr_y[l, i], optSlctr_w[l, i], optSlctr_h[l, i], c_white, (optSlctr_alp[l, i] * lvl_alp[l] * draw_alp));
 				
 				
@@ -67,16 +67,15 @@ for (var l = 0; l < lvl_amtMax; l++)
 		}
 		
 		ll = l;
-		event_user(2); // draw gui  →  inside lvls loop
+		event_user(2); // draw gui → inside lvls loop
 	}
 }
 
 
+
+
 // um pato de cada vez...
 // yellow babies dancing in a circle
-
-
-
 
 /* (old) lvlTrans
 trans_stg = -1; // trans (fade in/out transition animation) (trans rights, am i right?!!)
