@@ -67,7 +67,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 		}
 		
 		ll = l;
-		event_user(2); // draw gui → inside lvls loop
+		event_user(2); // [draw gui] inside lvls loop
 	}
 }
 

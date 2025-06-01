@@ -20,7 +20,7 @@ function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur 
 	audio_sound_set_track_position(aud_id, aud_ofs);
 }
 
-function fn_aud_fix() // (adjusts the volume of the specified audio to be consistent with other sounds, and its offset) (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED)
+function fn_aud_fix() // (adjusts the volume of the specified audio to be consistent with other sounds, but also its offset and pitch) (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED)
 {
 	if (aud == snd_wrld_chara_foot) // (player footsteps)
 		aud_vol *= 0.75;
@@ -45,7 +45,7 @@ function fn_aud_fix() // (adjusts the volume of the specified audio to be consis
 	if (aud == global.thm_snd_optFail[_thm])
 	{
 		if (_thm == THM.MADOT)
-			aud_vol *= 0.35;
+			aud_vol *= 0.4;
 	}
 	
 	

@@ -14,21 +14,21 @@ function menu_opt_sizeData(_lvl, _id)
 
 function menu_opt_txtData(_lvl, _key)
 {
-	var z = _lvl;
+	var l = _lvl;
 	
 	for (var i = 0; i < opt_amtMax; i++)
 	{	
 		var _txt = fn_txtData(string(_key) + "_" + string(i));
 		if (_txt != undefined)
 		{
-			opt_txt[z, i] = _txt;
-			menu_opt_sizeData(z, i);
+			opt_txt[l, i] = _txt;
+			menu_opt_sizeData(l, i);
 			
 			continue;
 		}
 		else
 		{
-			opt_amt[z] = i;
+			opt_amt[l] = i;
 			break;
 		}	
 	}

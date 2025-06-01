@@ -19,7 +19,7 @@ function fn_import() // starts basic variables mostly used for referencing speci
 
 function fn_spawn(_obj, _x, _y) // spawns/creates the specified object at the given position
 {
-	obj = instance_create_layer(_x, _y, "Instances", _obj);
+	obj_id = instance_create_layer(_x, _y, "Instances", _obj);
 }
 
 function fn_kill(_obj) // kills/destroys the specified object

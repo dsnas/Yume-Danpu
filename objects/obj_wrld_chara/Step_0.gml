@@ -5,7 +5,7 @@ move_inp[MOVE_UP] = fn_inp("hold", SETT_INP.UP);
 move_inp[MOVE_DN] = fn_inp("hold", SETT_INP.DN);
 
 
-if (move_stg == -1) // idle
+if (move_stg == -1) // idle (checks for the player's movement input and for collision)
 {	
 	for (var d = 0; d < 4; d++) // loops through each direction
 	{
@@ -103,10 +103,16 @@ if (move_stg == 1) // (movement sequence)
 }
 
 
-if (fn_inp("press", SETT_INP.MENU_INV) == true && move_stg == -1 && fn_exists(obj_menu_inv) == false) // inv open (inventory)
+if (move_stg == -1) // idle (checks for menu inputs)
 {
-	fn_spawn(obj_menu_inv, 0, 0);
-	move_stg = -2;
+	for (var m = 0; m < array_length(menu_inp); m++)
+	{
+		if (fn_inp("press", menu_inp[m]) == true && fn_exists(menu_obj[m]) == false)
+		{
+			fn_spawn(menu_obj[m], 0, 0);
+			move_stg = -2;
+		}
+	}
 }
 
 

@@ -12,13 +12,6 @@ function fn_txtData_start() // start txtData of the selected lang
 		global.txtData[SETT_LANG_EN] = ds_map_create();
 		var i = global.txtData[SETT_LANG_EN];
 		
-		ds_map_add(i, "menu_inv_main_opt_0", "Effects");
-		ds_map_add(i, "menu_inv_main_opt_1", "Items");
-		ds_map_add(i, "menu_inv_main_opt_2", "Themes");
-		
-		ds_map_add(i, "menu_inv_eff_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_0"));
-		ds_map_add(i, "menu_inv_itm_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_1"));
-		ds_map_add(i, "menu_inv_thm_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_2"));
 		
 		ds_map_add(i, "thm_name_dflt", "Default");
 		ds_map_add(i, "thm_name_smpl", "Simple");
@@ -27,6 +20,23 @@ function fn_txtData_start() // start txtData of the selected lang
 		ds_map_add(i, "thm_desc_dflt", "The default theme.");
 		ds_map_add(i, "thm_desc_smpl", "A simple, yet elegant, theme.");
 		ds_map_add(i, "thm_desc_madot", "The Yume Nikki theme.");
+		
+		
+		ds_map_add(i, "menu_inv_main_opt_0", "Effects");
+		ds_map_add(i, "menu_inv_main_opt_1", "Items");
+		ds_map_add(i, "menu_inv_main_opt_2", "Themes");
+		
+		ds_map_add(i, "menu_inv_eff_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_0"));
+		ds_map_add(i, "menu_inv_itm_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_1"));
+		ds_map_add(i, "menu_inv_thm_lbl_0", ds_map_find_value(i, "menu_inv_main_opt_2"));
+		
+		
+		ds_map_add(i, "menu_pse_main_lbl_0", "Game Paused");
+		
+		ds_map_add(i, "menu_pse_main_opt_0", "Resume");
+		ds_map_add(i, "menu_pse_main_opt_1", "Settings");
+		ds_map_add(i, "menu_pse_main_opt_2", "Instructions");
+		ds_map_add(i, "menu_pse_main_opt_3", "Quit to Menu");
 	}
 	
 	

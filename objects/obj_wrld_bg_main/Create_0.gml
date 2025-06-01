@@ -26,7 +26,7 @@ for (var i = 0; i < bg_amtMax; i++)
 	if (bg_obj[i] != -1)
 	{
 		fn_spawn(bg_obj[i], 0, 0);
-		obj.depth = (bg_depthMax - i);
+		obj_id.depth = (bg_depthMax - i);
 	}
 }
 

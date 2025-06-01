@@ -69,6 +69,12 @@ cam_h = 240;
 cam_clamp = false;
 
 
+menu_inp[0] = SETT_INP.MENU_INV; // (needed input to open the menu)	// (inventory)	// (menus)
+menu_obj[0] = obj_menu_inv; // (object of the menu)
+
+menu_inp[1] = SETT_INP.MENU_PSE;
+menu_obj[1] = obj_menu_pse;
+
 
 
 // dear diary, i've had one of those bad dreams again

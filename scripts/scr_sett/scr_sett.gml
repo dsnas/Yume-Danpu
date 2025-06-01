@@ -20,7 +20,7 @@ function fn_sett_start() // start sett (settings)
 		AMB = 6
 	}
 	global.sett_vol[SETT_VOL.MAIN]	= 1; // (master: controls all the others)
-	global.sett_vol[SETT_VOL.MUS]	= 0; // (music)
+	global.sett_vol[SETT_VOL.MUS]	= 1; // (music)
 	global.sett_vol[SETT_VOL.MENU]	= 1; // (menu) 
 	global.sett_vol[SETT_VOL.CHARA]	= 1; // (player)
 	global.sett_vol[SETT_VOL.PROP]	= 1; // (props)
@@ -37,7 +37,8 @@ function fn_sett_start() // start sett (settings)
 		SLCT = 4,
 		CNCL = 5,
 		MENU_INV = 6,
-		FSCR = 7
+		MENU_PSE = 7,
+		FSCR = 8
 	}
 	global.sett_inp[SETT_INP.LT] = vk_left;
 	global.sett_inp[SETT_INP.RT] = vk_right;
@@ -46,6 +47,7 @@ function fn_sett_start() // start sett (settings)
 	global.sett_inp[SETT_INP.SLCT] = ord("Z");
 	global.sett_inp[SETT_INP.CNCL] = ord("X");
 	global.sett_inp[SETT_INP.MENU_INV] = ord("C");
+	global.sett_inp[SETT_INP.MENU_PSE] = vk_escape;
 	global.sett_inp[SETT_INP.FSCR] = vk_f4;
 	
 	

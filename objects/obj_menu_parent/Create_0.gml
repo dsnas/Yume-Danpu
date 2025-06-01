@@ -6,6 +6,8 @@ image_alpha = 0;
 fn_import();
 
 
+
+
 draw_dist = 16;
 draw_x = 0;
 draw_y = 0;
@@ -18,7 +20,7 @@ lvl = lvl_amtMax;
 for (var l = 0; l < (lvl_amtMax + 1); l++)
 	lvl_alp[l] = 0;
 
-lvlTrans_act = false; // lvlTrans (transition between levels) (trans rights, am i right?!!)
+lvlTrans_act = false; // lvlTrans (transition sequence between levels) (trans rights, am i right?!!)
 lvlTrans_alpSpd = 0.25;
 lvlTrans_tgtLvl = -1; // (target level)
 lvlTrans_tgtOptPos = 0; // (target option position)
@@ -99,7 +101,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 		optSlctr_alp[l, i] = 0;
 		optSlctr_alpSpd = opt_colSpd;
 		
-		opt_pos[l] = 0; // opt pos (the position of the selected option in its array) (per lvl due to lvlTrans)
+		opt_pos[l] = 0; // (the position of the selected option in its array) (per level due to lvlTrans)
 	}
 }
 opt_move = true;
@@ -127,4 +129,4 @@ for (var l = 0; l < lvl_amtMax; l++)
 
 
 
-event_user(0); // (child) create
+event_user(0); // [child] create

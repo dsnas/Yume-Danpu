@@ -1,6 +1,6 @@
 /// @descr [draw gui] inside lvls loop
 
-if (ll == LVL_MAIN) // main lvl
+if (ll == LVL_MAIN) // [main lvl]
 {
 	/* [main lvl] chrFrm */		fn_draw_spr(main_chrFrm_spr, 0, (draw_x + main_chrFrm_x), (draw_y + main_chrFrm_y), 1, 1, 0, c_white, (lvl_alp[ll] * draw_alp), false);
 	/* [main lvl] chara */		fn_draw_spr(main_chara_spr, 0, (draw_x + main_chara_x), (draw_y + main_chara_y), 1, 1, 0, c_white, (lvl_alp[ll] * draw_alp), false);
