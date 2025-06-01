@@ -44,7 +44,7 @@ lbl_w[l, 1] = fn_txt_w(lbl_txt[l, 1]);
 lbl_txt[l, 2] = string(global.chara_mny[global.chara_awake]); // (main lvl) mny
 lbl_w[l, 2] = fn_txt_w(lbl_txt[l, 2]);
 
-main_mnyImg_spr = temp_spr_menu_mnyImg; // (main lvl) mnyImg
+main_mnyImg_spr = spr_menu_mnyImg; // (main lvl) mnyImg
 main_mnyImg_w = fn_spr_w(main_mnyImg_spr);
 var _xDist = (draw_dist / 3);
 var _wAll = (_xDist + lbl_w[l, 1] + lbl_w[l, 2]);

@@ -10,8 +10,8 @@
   "name":"obj_game_main",
   "overriddenProperties":[],
   "parent":{
-    "name":"game",
-    "path":"folders/game.yy",
+    "name":"Yume Danpu",
+    "path":"Yume Danpu.yyp",
   },
   "parentObjectId":null,
   "persistent":true,

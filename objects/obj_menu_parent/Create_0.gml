@@ -82,19 +82,19 @@ for (var l = 0; l < lvl_amtMax; l++)
 		opt_colSlct[l][i][1] = global.thm_col[global.chara_thm, 1]; // (colors of the option when it's selected)
 		opt_col[l][i][0] = opt_colDflt[l][i][0]; // (current colors of the option)
 		opt_col[l][i][1] = opt_colDflt[l][i][1];
-		opt_colSpd = 1//0.35;
+		opt_colSpd = 1;
 		opt_alp[l, i] = 1;
 		opt_vAl[l, i] = fa_top;
 		opt_hAl[l, i] = fa_left;
 		
-		optSlctr_act[l, i] = false; // optSlctr
+		optSlctr_act[l, i] = false; // optSlctr (selection/focus indicator)
 		optSlctr_spr[l, i] = global.thm_optSlctr_spr[global.chara_thm];
 		optSlctr_x[l, i] = 0;
-		optSlctr_xDistFix[l, i] = 1; // (fixes font sprite's empty space on the left)
+		optSlctr_xFix[l, i] = 1; // (fixes font sprite's empty space on the left)
 		optSlctr_xDist[l, i] = global.thm_optSlctr_xDist[global.chara_thm];
 		optSlctr_y[l, i] = 0;
-		optSlctr_yDistFix_0[l, i] = 3; // (fixes acute, grave, and circumflex accent diacritics)
-		optSlctr_yDistFix_1[l, i] = 1; // (fixes descenders)
+		optSlctr_yFix_0[l, i] = 3; // (fixes acute, grave, and circumflex accent diacritics)
+		optSlctr_yFix_1[l, i] = 1; // (fixes descenders)
 		optSlctr_yDist[l, i] = global.thm_optSlctr_yDist[global.chara_thm];
 		optSlctr_w[l, i] = 0;
 		optSlctr_h[l, i] = 0;
@@ -102,6 +102,9 @@ for (var l = 0; l < lvl_amtMax; l++)
 		optSlctr_alpSpd = opt_colSpd;
 		
 		opt_pos[l] = 0; // (the position of the selected option in its array) (per level due to lvlTrans)
+		
+		opt_moveDflt_inp[l][i][0] = SETT_INP.UP;
+		opt_moveDflt_inp[l][i][1] = SETT_INP.DN;
 	}
 }
 opt_move = true;

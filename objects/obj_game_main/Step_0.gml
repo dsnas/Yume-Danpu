@@ -1,4 +1,9 @@
 
+fn_mus_upd(); // upd mus (updates, starts and stops the music of the player is currently in)
+
+
+
+
 if (fn_inp("press", SETT_INP.FSCR) == true) // toggles fscr sett
 {
 	global.sett_fscr = !global.sett_fscr;

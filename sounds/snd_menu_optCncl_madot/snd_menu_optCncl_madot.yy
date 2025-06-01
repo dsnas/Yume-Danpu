@@ -13,7 +13,7 @@
   "name":"snd_menu_optCncl_madot",
   "parent":{
     "name":"Madotsuki",
-    "path":"folders/menu/thm/Madotsuki.yy",
+    "path":"folders/menu/assets/Madotsuki.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

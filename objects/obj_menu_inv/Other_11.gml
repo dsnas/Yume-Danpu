@@ -5,8 +5,8 @@ var l = lvl;
 
 if (lvlTrans_act == false)
 {
-	if (lvl == LVL_MAIN) // [main lvl] [opt move] normal
-		event_user(5);
+	if (lvl == LVL_MAIN) // [main lvl] opt move
+		event_user(5); // [opt move] dflt/normal
 	else if (lvl == LVL_EFF) || (lvl == LVL_ITM) || (lvl == LVL_THM) // [eff/itm/thm lvl] opt move → horizontal and vertical
 	{
 		var _pos_old = opt_pos[l];

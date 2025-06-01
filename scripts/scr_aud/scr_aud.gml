@@ -21,24 +21,30 @@ function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur 
 }
 
 function fn_aud_fix() // (adjusts the volume of the specified audio to be consistent with other sounds, but also its offset and pitch) (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED)
-{
-	if (aud == snd_wrld_chara_foot) // (player footsteps)
-		aud_vol *= 0.75;
+{	
+	if (aud == mus_menu_main) // (main menu music)
+		aud_vol *= 0.5;
 	
 	
 	var _thm = global.chara_thm;
 	if (aud == global.thm_snd_optMove[_thm]) // (menu sounds)
 	{
+		if (_thm == THM.DFLT) // (THE SOUND WHOSE VOLUME SHOULD BE USED AS THE REFERENCE POINT FOR ALL OTHERS)
+			aud_vol *= 1; // (MUST BE ONE)
 		if (_thm == THM.MADOT)
 			aud_vol *= 0.4;
 	}
 	if (aud == global.thm_snd_optSlct[_thm])
 	{
+		if (_thm == THM.DFLT)
+			aud_vol *= 1.35;
 		if (_thm == THM.MADOT)
 			aud_vol *= 0.2;
 	}
 	if (aud == global.thm_snd_optCncl[_thm])
 	{
+		if (_thm == THM.DFLT)
+			aud_vol *= 0.9;
 		if (_thm == THM.MADOT)
 			aud_vol *= 0.2;
 	}
@@ -49,20 +55,28 @@ function fn_aud_fix() // (adjusts the volume of the specified audio to be consis
 	}
 	
 	
+	if (aud == snd_wrld_chara_foot) // (player footsteps)
+		aud_vol *= 0.75;
+	
+	
+	if (aud == mus_wrld_macaco) // (Macacolandia's music)
+		aud_vol *= 0.225;
 	if (aud == snd_wrld_npc_macaco_citizen_0) // (Macacolandia citizens sounds)
 	{
-		aud_vol *= 0.75;
+		aud_vol *= 0.5;
 		aud_ofs = 0.25;
 	}
 	if (aud == snd_wrld_npc_macaco_citizen_1)
 		aud_ofs = 0.25;
 	if (aud == snd_wrld_npc_macaco_citizen_2)
-		aud_vol *= 0.35;
+		aud_vol *= 0.3;
 	if (aud == snd_wrld_npc_macaco_citizen_3)
 	{
-		aud_vol *= 1;
+		aud_vol *= 0.85;
 		aud_ofs = 0.25;
 	}
+	if (aud == snd_wrld_npc_macaco_citizen_4)
+		aud_vol *= 0.65;
 	if (aud == snd_wrld_npc_macaco_citizen_5)
 		aud_vol *= 0.5;
 	if (aud == snd_wrld_npc_macaco_citizen_6)
@@ -70,6 +84,10 @@ function fn_aud_fix() // (adjusts the volume of the specified audio to be consis
 		aud_vol *= 0.35;
 		aud_ofs = 0.25;
 	}
+	
+	
+	if (aud == mus_wrld_pikini)
+		aud_vol *= 0.75;
 	
 	
 	return aud_vol;

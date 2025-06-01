@@ -59,13 +59,13 @@ function fn_spr_h(_spr) // returns the height of the specified spr
 
 function fn_txt_w(_txt) // returns the width of the specified txt
 {
-	draw_set_font(global.fnt_main);
+	draw_set_font(global.game_fnt);
 	return string_width(_txt);
 }
 
 function fn_txt_h(_txt) // returns the height of the specified txt
 {
-	draw_set_font(global.fnt_main);
+	draw_set_font(global.game_fnt);
 	var _txt_h = string_height(_txt);
 	if (_txt_h % 2 == 1)
 		_txt_h += 1;
@@ -109,7 +109,7 @@ function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _alp, _vAl,
 	_xSc = (_xSc / 1);
 	_ySc = (_ySc / 1);
 	
-	var _fnt = global.fnt_main;
+	var _fnt = global.game_fnt;
 	draw_set_font(_fnt);
 	draw_set_valign(_vAl);
 	draw_set_halign(_hAl);

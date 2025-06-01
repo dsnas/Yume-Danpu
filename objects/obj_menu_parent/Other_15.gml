@@ -1,12 +1,13 @@
-/// @descr [opt move] normal
+/// @descr [opt move] dflt/normal
 
 var l = lvl;
+
 
 if (opt_move == true)
 {
 	var _pos_old = opt_pos[l];
 	
-	opt_pos[l] += (fn_inp("press", SETT_INP.DN) - fn_inp("press", SETT_INP.UP)); // (movement)
+	opt_pos[l] += (fn_inp("press", opt_moveDflt_inp[l][opt_pos[l]][1]) - fn_inp("press", opt_moveDflt_inp[l][opt_pos[l]][0])); // (movement)
 	
 	if (opt_pos[l] < 0) // (teleports the position to the opposite side of the array if it had crossed limits)
 		opt_pos[l] = (opt_amt[l] - 1);

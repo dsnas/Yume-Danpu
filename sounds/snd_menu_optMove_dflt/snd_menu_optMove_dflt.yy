@@ -13,7 +13,7 @@
   "name":"snd_menu_optMove_dflt",
   "parent":{
     "name":"Default",
-    "path":"folders/menu/thm/Default.yy",
+    "path":"folders/menu/assets/Default.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -52,24 +52,24 @@ function fn_wrld_npc_move() // move (movement)
 {
 	if (move_stg == -1) // (delays movement)
 	{
-		if (move_dly_stg == 0) // (gets delay duration)
+		if (move_dly_stg == -1) // (gets delay duration)
 		{
 			move_dly_dur = (irandom_range(move_dly_durMin, move_dly_durMax) * move_dly_act);
-			move_dly_stg = 1;
+			move_dly_stg = 0;
 		}
-		if (move_dly_stg == 1) // (delays)
+		if (move_dly_stg == 0) // (delays)
 		{
 			move_dly_dur -= 1;
 			if (move_dly_dur <= 0)
 			{
 				move_stg = 0;
-				move_dly_stg = 0;
+				move_dly_stg = -1;
 			}
 		}
 	}
 	if (move_stg == 0) // (starts movement sequence)
 	{
-		for (var i = 0; i < 25; i++) // (attempt movement multiple times before giving up)
+		for (var i = 0; i < 25; i++) // (attempts movement multiple times before giving up)
 		{
 			if (move_chaseChara == false) // (moving normally, get random direction)
 			{
@@ -106,6 +106,8 @@ function fn_wrld_npc_move() // move (movement)
 				}
 			}
 		}
+		if (i == 25) // (cancel movement sequence if all attempts fail)
+			move_stg = -1;
 	}
 	if (move_stg == 1) // (prepares for movement)
 	{

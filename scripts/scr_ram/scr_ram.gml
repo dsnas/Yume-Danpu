@@ -66,8 +66,8 @@ function fn_thm_start() // start thms (themes)
 	global.thm_amtMax = global.eff_amtMax;
 	for (var i = 0; i < global.thm_amtMax; i++)
 	{
-		fn_thm_setup_0(i, "Salenis", "The Salenis description", 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 
-		fn_thm_setup_1(i, -1, -1, -1, -1, -1);
+		fn_thm_setup_0(i, "Salenis", "The Salenis description", c_white, c_white, c_gray, c_gray, c_black, false, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0, 6, 4); 
+		fn_thm_setup_1(i, snd_menu_optMove_dflt, snd_menu_optSlct_dflt, snd_menu_optCncl_dflt, snd_menu_optFail_dflt, spr_menu_chrFrm_madot);
 		global.thm_amt -= 1;
 	}
 	
@@ -81,8 +81,8 @@ function fn_thm_start() // start thms (themes)
 	
 	
 	/* (Default) */
-	fn_thm_setup_0(THM.DFLT, fn_txtData("thm_name_dflt"), fn_txtData("thm_desc_dflt"), 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 
-	fn_thm_setup_1(THM.DFLT, -1, -1, -1, -1, -1);
+	fn_thm_setup_0(THM.DFLT, "Salenis", "The Salenis description", c_white, c_white, c_gray, c_gray, c_black, false, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0, 6, 4); 
+	fn_thm_setup_1(THM.DFLT, snd_menu_optMove_dflt, snd_menu_optSlct_dflt, snd_menu_optCncl_dflt, snd_menu_optFail_dflt, spr_menu_chrFrm_madot);
 	
 	/* (Simple) */
 	fn_thm_setup_0(THM.SMPL, fn_txtData("thm_name_smpl"), fn_txtData("thm_desc_smpl"), 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 

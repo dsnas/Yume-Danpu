@@ -43,7 +43,10 @@ function fn_wrld_interactable_chirp() // chirp (plays audio as an answer to bein
 		{
 			poke_stg = -1;
 			if (isNpc == true)
+			{
 				move_stg = -1;
+				move_dly_stg = -1;
+			}
 			
 			wrld_chara.move_stg = -1;
 		}

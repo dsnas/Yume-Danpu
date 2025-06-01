@@ -39,7 +39,7 @@ move_axis[MOVE_DN] = MOVE_VER;
 move_spdMul[MOVE_DN] = 1;
 
 move_stg = -1;
-move_dly_stg = 0;
+move_dly_stg = -1;
 move_dly_dur = 0;
 move_dly_durMin = 0;
 move_dly_durMax = 240;

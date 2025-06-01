@@ -27,5 +27,5 @@ function fn_chara_start() // start chara info
 	global.chara_thmInv[THM.DFLT] = true;
 	global.chara_thmInv[THM.SMPL] = true;
 	global.chara_thmInv[THM.MADOT] = true;
-	global.chara_thm = THM.MADOT; // (equipped theme)
+	global.chara_thm = THM.DFLT; // (equipped theme)
 }

@@ -17,8 +17,8 @@
   ],
   "name":"rm_game_start",
   "parent":{
-    "name":"game",
-    "path":"folders/game.yy",
+    "name":"Yume Danpu",
+    "path":"Yume Danpu.yyp",
   },
   "parentRoom":null,
   "physicsSettings":{

@@ -24,7 +24,7 @@ if (lvlTrans_act == true)
 
 for (var l = 0; l < lvl_amtMax; l++)
 {
-	if (l == lvl) || (l == lvlTrans_tgtLvl)
+	if (l == lvl) || (l == lvlTrans_tgtLvl) // (if the "l" variable equals the current level or the one the transition is going to)
 	{
 		for (var i = 0; i < px_amtMax; i++) // px
 		{
@@ -42,9 +42,11 @@ for (var l = 0; l < lvl_amtMax; l++)
 		{
 			if (opt_txt[l, i] != "%%%")
 			{
-				if (lvlTrans_tgtLvl == -1) || (lvlTrans_tgtLvl != -1 && l == lvlTrans_tgtLvl)
-					optSlctr_alp[l, i] = fn_lerp(optSlctr_alp[l, i], (i == opt_pos[l]), optSlctr_alpSpd); // optSlctr alp animation
-				/* optSlctr */ fn_draw_spr_stretch(optSlctr_spr[l, i], 0, optSlctr_x[l, i], optSlctr_y[l, i], optSlctr_w[l, i], optSlctr_h[l, i], c_white, (optSlctr_alp[l, i] * lvl_alp[l] * draw_alp));
+				if (lvlTrans_tgtLvl == -1) || (lvlTrans_tgtLvl != -1 && l == lvlTrans_tgtLvl) // optSlctr alp animation
+					optSlctr_alp[l, i] = fn_lerp(optSlctr_alp[l, i], (i == opt_pos[l]), optSlctr_alpSpd);
+				var _optSlctr_alp = (optSlctr_alp[l, i] * lvl_alp[l] * draw_alp);
+				if (_optSlctr_alp > 0)
+					/* optSlctr */ fn_draw_spr_stretch(optSlctr_spr[l, i], 0, optSlctr_x[l, i], optSlctr_y[l, i], optSlctr_w[l, i], optSlctr_h[l, i], c_white, _optSlctr_alp);
 				
 				
 				var _tgtCol_0 = opt_colDflt[l][i][0]; // opt col animation
@@ -65,6 +67,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 			if (lbl_txt[l, i] != "%%%")
 				fn_draw_txt(lbl_txt[l, i], lbl_x[l, i], lbl_y[l, i], 1, 1, 0, lbl_col[l][i][0], lbl_col[l][i][1], (lbl_alp[l, i] * lvl_alp[l] * draw_alp), lbl_vAl[l, i], lbl_hAl[l, i]);
 		}
+		
 		
 		ll = l;
 		event_user(2); // [draw gui] inside lvls loop

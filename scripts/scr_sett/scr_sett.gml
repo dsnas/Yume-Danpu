@@ -1,12 +1,15 @@
 
 function fn_sett_start() // start sett (settings)
 {
-	#macro SETT_LANG_EN 0 // English					// lang (languages)
-	#macro SETT_LANG_BR 1 // Brazilian Portuguese
-	global.sett_lang = SETT_LANG_EN;
+	enum SETT_LANG // lang (languages)
+	{
+		EN = 0, // (English)
+		BR = 1 // (Brazilian Portuguese)
+	}
+	global.sett_lang = SETT_LANG.EN;
 	
 	
-	global.sett_fscr = false; // fullscreen
+	global.sett_fscr = false; // fscr (fullscreen)
 	
 	
 	enum SETT_VOL // vol (volume)
@@ -28,10 +31,10 @@ function fn_sett_start() // start sett (settings)
 	global.sett_vol[SETT_VOL.AMB]	= 1; // (ambience)
 	
 	
-	enum SETT_INP // start inp (inputs/controls)
+	enum SETT_INP // inp (inputs/controls)
 	{
-		LT = 0,
-		RT = 1,
+		RT = 0,
+		LT = 1,
 		UP = 2,
 		DN = 3,
 		SLCT = 4,
@@ -40,8 +43,8 @@ function fn_sett_start() // start sett (settings)
 		MENU_PSE = 7,
 		FSCR = 8
 	}
-	global.sett_inp[SETT_INP.LT] = vk_left;
 	global.sett_inp[SETT_INP.RT] = vk_right;
+	global.sett_inp[SETT_INP.LT] = vk_left;
 	global.sett_inp[SETT_INP.UP] = vk_up;
 	global.sett_inp[SETT_INP.DN] = vk_down;
 	global.sett_inp[SETT_INP.SLCT] = ord("Z");
@@ -51,6 +54,7 @@ function fn_sett_start() // start sett (settings)
 	global.sett_inp[SETT_INP.FSCR] = vk_f4;
 	
 	
+	global.sett_lowGFX = false; // lowGFX (low graphics)
 	global.sett_rdcdMot = false; // rdcdMot (reduced motion)
 }
 

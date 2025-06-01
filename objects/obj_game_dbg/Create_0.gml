@@ -11,10 +11,7 @@ fn_import();
 global.dbg_act = true;
 global.dbg_mod = vk_alt; // (modifier key)
 global.dbg_pwd = "hunter2"; // (password)
-if (global.dbg_act == true)
-{
-	room_goto(rm_wrld_macaco);
-}
+global.dbg_rm = rm_wrld_macaco;
 
 
 fntTest_act = false;

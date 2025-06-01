@@ -76,5 +76,10 @@ menu_inp[1] = SETT_INP.MENU_PSE;
 menu_obj[1] = obj_menu_pse;
 
 
+view_enabled = true;
+view_visible[0] = true;
+
+
+
 
 // dear diary, i've had one of those bad dreams again

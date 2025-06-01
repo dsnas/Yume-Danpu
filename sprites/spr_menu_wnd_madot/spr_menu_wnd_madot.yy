@@ -45,7 +45,7 @@
   "origin":0,
   "parent":{
     "name":"Madotsuki",
-    "path":"folders/menu/thm/Madotsuki.yy",
+    "path":"folders/menu/assets/Madotsuki.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

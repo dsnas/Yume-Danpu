@@ -45,7 +45,7 @@
   "origin":0,
   "parent":{
     "name":"Default",
-    "path":"folders/menu/thm/Default.yy",
+    "path":"folders/menu/assets/Default.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

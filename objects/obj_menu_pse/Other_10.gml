@@ -51,16 +51,19 @@ for (var i = 0; i < opt_amt[l]; i++)
 lvlTrans_act = true;
 lvlTrans_tgtLvl = LVL_MAIN;
 
-scrSv_fname = "menu_pause_scrSv.png"; // takes a screenshot of the game to use as the background, since all objects will be deactivated, frozen.
-surface_save(application_surface, working_directory + string(scrSv_fname));
-//screen_save(working_directory + string(scrSv_fname));
-scrSv_spr = sprite_add(scrSv_fname, 1, false, false, 0, 0);
-scrSv_xSc = 0.5;
-scrSv_ySc = 0.5;
+scrSv_spr = -1;
+if (global.sett_lowGFX == false) // (if the low graphics option is enabled) (taking a screenshot of the game can freeze the game for half a second)
+{
+	scrSv_fname = "menu_pause_scrSv.png"; // (takes a screenshot of the game to use as the background, since all objects will temporarily deactivate and disappear)
+	surface_save(application_surface, working_directory + string(scrSv_fname));
+	scrSv_spr = sprite_add(scrSv_fname, 1, false, false, 0, 0);
+	scrSv_xSc = 0.5;
+	scrSv_ySc = 0.5;
+}
 
-instance_deactivate_all(true); // deactivates all objects in the room, excluding the main ones
+instance_deactivate_all(true); // (deactivates all objects in the room, excluding the main persistent ones)
 instance_activate_object(obj_game_main);
 instance_activate_object(obj_game_dbg);
-audio_pause_all(); // pauses all currently playing audio
+audio_pause_all(); // (pauses all currently playing audio)
 
 fn_aud_play(global.thm_snd_optSlct[global.chara_thm], SETT_VOL.MENU);

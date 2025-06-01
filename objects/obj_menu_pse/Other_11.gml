@@ -2,7 +2,8 @@
 
 if (lvlTrans_act == false)
 {
-	event_user(5); // [opt move] normal
+	if (lvl == LVL_MAIN) // [main lvl] opt move
+		event_user(5); // [opt move] dflt/normal
 	
 	if (fn_inp("press", SETT_INP.SLCT) == true) // (checks for the player's selection input) (selects the option)
 	{

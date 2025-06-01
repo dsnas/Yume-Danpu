@@ -11,10 +11,10 @@ if (global.dbg_act == false) || (global.dbg_act == true)
 
 if (global.dbg_act == true && keyboard_check(global.dbg_mod) == true)
 {
-	if (keyboard_check_pressed(ord("E")) == true) // (chara) zoom in
-		show_debug_overlay(!is_debug_overlay_open());
+	if (keyboard_check_pressed(ord("G")) == true) // (goes to desired room)
+		room_goto(global.dbg_rm);
 	
-	if (keyboard_check(ord("I")) == true) // (chara) zoom in
+	if (keyboard_check(ord("I")) == true) // [chara] (zooms in)
 	{
 		if (fn_exists(wrld_chara) == true)
 		{
@@ -22,7 +22,7 @@ if (global.dbg_act == true && keyboard_check(global.dbg_mod) == true)
 			wrld_chara.cam_h -= 6;
 		}
 	}
-	else if (keyboard_check(ord("O")) == true) // (chara) zoom out
+	else if (keyboard_check(ord("O")) == true) // [chara] (zooms out)
 	{
 		if (fn_exists(wrld_chara) == true)
 		{
@@ -31,6 +31,9 @@ if (global.dbg_act == true && keyboard_check(global.dbg_mod) == true)
 		}
 	}
 	
-	if (keyboard_check_pressed(ord("R")) == true) // restart game
+	if (keyboard_check_pressed(ord("R")) == true) // (restarts game)
 		game_restart();
+	
+	if (keyboard_check_pressed(ord("P")) == true) // (plays the player footstep sound)
+		fn_aud_play(snd_wrld_chara_foot, SETT_VOL.CHARA);
 }

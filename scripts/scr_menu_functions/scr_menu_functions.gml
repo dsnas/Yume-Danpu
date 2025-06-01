@@ -54,10 +54,10 @@ function menu_optSlctr_drawData(_lvl, _id) // enable default optSlctr position a
 	var z = _lvl;
 	var i = _id;
 	
-	optSlctr_x[z, i] = (opt_x[z, i] + optSlctr_xDistFix[z, i] - optSlctr_xDist[z, i]); // this took SO long omgg
-	optSlctr_y[z, i] = (opt_y[z, i] + optSlctr_yDistFix_0[z, i] - optSlctr_yDist[z, i]);
-	optSlctr_w[z, i] = (opt_w[z, i] - optSlctr_xDistFix[z, i] + (optSlctr_xDist[z, i] * 2));
-	optSlctr_h[z, i] = (opt_h[z, i] - 1 - optSlctr_yDistFix_0[z, i] - optSlctr_yDistFix_1[z, i] + (optSlctr_yDist[z, i] * 2));
+	optSlctr_x[z, i] = (opt_x[z, i] + optSlctr_xFix[z, i] - optSlctr_xDist[z, i]); // this took SO long omgg
+	optSlctr_y[z, i] = (opt_y[z, i] + optSlctr_yFix_0[z, i] - optSlctr_yDist[z, i]);
+	optSlctr_w[z, i] = (opt_w[z, i] - optSlctr_xFix[z, i] + (optSlctr_xDist[z, i] * 2));
+	optSlctr_h[z, i] = (opt_h[z, i] - 1 - optSlctr_yFix_0[z, i] - optSlctr_yFix_1[z, i] + (optSlctr_yDist[z, i] * 2));
 }
 
 

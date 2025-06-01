@@ -5,11 +5,14 @@ function fn_menu_pse_resume() // resumes the game
 	lvlTrans_tgtLvl = lvl_amtMax;
 	lvlTrans_kill = true;
 	
-	if (file_exists(scrSv_fname) == true)
-		file_delete(scrSv_fname);
-	if (sprite_exists(scrSv_spr) == true)
-		sprite_delete(scrSv_spr);
-	scrSv_spr = -1;
+	if (scrSv_spr != -1)
+	{
+		if (file_exists(scrSv_fname) == true)
+			file_delete(scrSv_fname);
+		if (sprite_exists(scrSv_spr) == true)
+			sprite_delete(scrSv_spr);
+		scrSv_spr = -1;
+	}
 	
 	instance_activate_all();
 	audio_resume_all();
