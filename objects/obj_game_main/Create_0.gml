@@ -9,8 +9,7 @@ fn_import();
 
 
 randomize();
-window_set_position(display_get_width() / 1.5, display_get_height / 4);
-//window_center();
+window_center();
 var _caption = "Yume Danpu";
 var i = irandom_range(1, 100);
 if (i <= 5)
@@ -22,7 +21,7 @@ global.game_ver = "0.02";
 global.game_fnt = font_add_sprite_ext(spr_game_fnt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"1234567890%()[]/_-—<>←→↑↓", false, -1);
 
 fn_sett_start(); // start sett (settings)
-fn_txtData_start(); // start txtData of the selected lang
+fn_txtdata_start(); // start txtdata of the selected lang
 
 fn_eff_start(); // start effs (effects)
 fn_itm_start(); // start itms (items)
@@ -31,7 +30,7 @@ fn_chara_start(); // start chara (player)
 
 fn_mus_start(); // start mus (starts/resets the array that will store the music's information)
 
-room_goto(temp_rm_menu_main);
+room_goto(temp_rm_menu_home);
 fn_spawn(obj_game_dbg, 0, 0);
 
 

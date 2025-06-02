@@ -2,20 +2,20 @@
 if (lvlTrans_act == true)
 {
 	lvl_alp[lvl] = fn_lerp(lvl_alp[lvl], 0, lvlTrans_alpSpd);
-	lvl_alp[lvlTrans_tgtLvl] = fn_lerp(lvl_alp[lvlTrans_tgtLvl], 1, lvlTrans_alpSpd);
+	lvl_alp[lvlTrans_lvlTgt] = fn_lerp(lvl_alp[lvlTrans_lvlTgt], 1, lvlTrans_alpSpd);
 	
 	var _slack = 0.05;
-	if (lvl_alp[lvl] <= _slack && lvl_alp[lvlTrans_tgtLvl] >= (1 - _slack))
+	if (lvl_alp[lvl] <= _slack && lvl_alp[lvlTrans_lvlTgt] >= (1 - _slack))
 	{
 		lvl_alp[lvl] = 0;
-		lvl_alp[lvlTrans_tgtLvl] = 1;
+		lvl_alp[lvlTrans_lvlTgt] = 1;
 		
-		lvl = lvlTrans_tgtLvl;
-		lvlTrans_tgtLvl = -1;
-		if (lvlTrans_kill == true)
+		if (lvlTrans_killMenu == true)
 			fn_kill(id);
 		
+		lvl = lvlTrans_lvlTgt;
 		lvlTrans_act = false;
+		lvlTrans_lvlTgt = -1;
 	}
 }
 
@@ -24,25 +24,25 @@ if (lvlTrans_act == true)
 
 for (var l = 0; l < lvl_amtMax; l++)
 {
-	if (l == lvl) || (l == lvlTrans_tgtLvl) // (if the "l" variable equals the current level or the one the transition is going to)
+	if (l == lvl) || (l == lvlTrans_lvlTgt) // (if the "l" variable equals the current level or the one the transition is going to)
 	{
-		for (var i = 0; i < px_amtMax; i++) // px
+		for (var i = 0; i < px_amtMax; i++) // draw pxs
 		{
 			if (px_act[l, i] == true)
 				fn_draw_px((draw_x + px_x[l, i]), (draw_y + px_y[l, i]), px_w[l, i], px_h[l, i], px_col[l, i], px_col[l, i], px_col[l, i], px_col[l, i], (px_alp[l, i] * lvl_alp[l] * draw_alp));
 		}
 
-		for (var i = 0; i < wnd_amtMax; i++) // wnd
+		for (var i = 0; i < wnd_amtMax; i++) // draw wnds
 		{
 			if (wnd_act[l, i] == true && wnd_spr[l, i] != -1)
 				fn_draw_spr_stretch(wnd_spr[l, i], wnd_img[l, i], (draw_x + wnd_x[l, i]), (draw_y + wnd_y[l, i]), wnd_w[l, i], wnd_h[l, i], wnd_col[l, i], (wnd_alp[l, i] * lvl_alp[l] * draw_alp));
 		}
 
-		for (var i = 0; i < opt_amt[l]; i++) // opt and optSlctr
+		for (var i = 0; i < opt_amt[l]; i++) // draw opts and optSlctr
 		{
 			if (opt_txt[l, i] != "%%%")
 			{
-				if (lvlTrans_tgtLvl == -1) || (lvlTrans_tgtLvl != -1 && l == lvlTrans_tgtLvl) // optSlctr alp animation
+				if (lvlTrans_lvlTgt == -1) || (lvlTrans_lvlTgt != -1 && l == lvlTrans_lvlTgt) // optSlctr alp animation
 					optSlctr_alp[l, i] = fn_lerp(optSlctr_alp[l, i], (i == opt_pos[l]), optSlctr_alpSpd);
 				var _optSlctr_alp = (optSlctr_alp[l, i] * lvl_alp[l] * draw_alp);
 				if (_optSlctr_alp > 0)
@@ -62,7 +62,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 			}
 		}
 
-		for (var i = 0; i < lbl_amtMax; i++) // lbl
+		for (var i = 0; i < lbl_amtMax; i++) // draw lbls
 		{
 			if (lbl_txt[l, i] != "%%%")
 				fn_draw_txt(lbl_txt[l, i], lbl_x[l, i], lbl_y[l, i], 1, 1, 0, lbl_col[l][i][0], lbl_col[l][i][1], (lbl_alp[l, i] * lvl_alp[l] * draw_alp), lbl_vAl[l, i], lbl_hAl[l, i]);

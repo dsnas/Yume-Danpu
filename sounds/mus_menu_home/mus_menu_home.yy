@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"mus_menu_main",
+  "%Name":"mus_menu_home",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,16 +10,16 @@
   "compression":0,
   "conversionMode":0,
   "duration":46.027664,
-  "name":"mus_menu_main",
+  "name":"mus_menu_home",
   "parent":{
-    "name":"main",
-    "path":"folders/menu/main.yy",
+    "name":"home",
+    "path":"folders/menu/home.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_menu_main.mp3",
+  "soundFile":"mus_menu_home.mp3",
   "type":0,
   "volume":1.0,
 }

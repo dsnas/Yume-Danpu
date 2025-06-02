@@ -7,7 +7,7 @@ if (l == LVL_LANG) // lang lvl
 {
 	for (var f = 0; f < opt_amt[l]; f++) // [lang lvl] flags and slctr
 	{
-		if (lvlTrans_tgtLvl == -1) || (lvlTrans_tgtLvl != -1 && l == lvlTrans_tgtLvl) // [lang lvl] slctr alp animation
+		if (lvlTrans_lvlTgt == -1) || (lvlTrans_lvlTgt != -1 && l == lvlTrans_lvlTgt) // [lang lvl] slctr alp animation
 			lang_slctr_alp[f] = fn_lerp(lang_slctr_alp[f], (f == opt_pos[l]), optSlctr_alpSpd);
 		var _slctr_alp = (lang_slctr_alp[f]);
 		/* [lang lvl] slctr */ fn_draw_spr(lang_slctr_spr, 0, lang_slctr_x[f], lang_slctr_y[f], 1, 1, 0, lang_slctr_col, _slctr_alp, true);

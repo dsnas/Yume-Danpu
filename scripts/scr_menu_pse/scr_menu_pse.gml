@@ -1,9 +1,7 @@
 
 function fn_menu_pse_resume() // resumes the game
 {
-	lvlTrans_act = true;
-	lvlTrans_tgtLvl = lvl_amtMax;
-	lvlTrans_kill = true;
+	fn_menu_lvlTrans(lvl_amtMax, true);
 	
 	if (scrSv_spr != -1)
 	{

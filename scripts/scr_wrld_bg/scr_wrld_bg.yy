@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_wrld_bg_functions",
+  "%Name":"scr_wrld_bg",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_wrld_bg_functions",
+  "name":"scr_wrld_bg",
   "parent":{
     "name":"bg",
     "path":"folders/wrld/bg.yy",

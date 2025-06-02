@@ -1,8 +1,9 @@
 /// @descr [create]
+/// [wrld] pse menu (Pause menu) (tambem conhecido como "pois-é menu")
 
 LVL_MAIN = 0;
 var l = LVL_MAIN;
-menu_opt_txtData(l, "menu_pse_main_opt");
+fn_menu_opt_txtdata(l, "menu_pse_main_opt");
 
 px_act[l, 0] = true; // [main lvl] dark translucent background
 px_x[l, 0] = 0;
@@ -19,7 +20,7 @@ wnd_w[l, 0] = ((abs(wnd_x[l, 0]) * 2) + 320);
 var _wnd_hDist = (draw_dist * 2);
 wnd_h[l, 0] = (abs(wnd_y[l, 0]) + _wnd_hDist);
 
-lbl_txt[l, 0] = fn_txtData("menu_pse_main_lbl_0"); // [main lvl] title lbl
+lbl_txt[l, 0] = fn_txtdata("menu_pse_main_lbl_0"); // [main lvl] title lbl
 lbl_w[l, 0] = fn_txt_w(lbl_txt[l, 0]);
 lbl_x[l, 0] = wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (lbl_w[l, 0] / 2);
 var _lbl_yDistFix = 1;
@@ -42,14 +43,13 @@ for (var i = 0; i < opt_amt[l]; i++)
 	opt_x[l, i] = (wnd_x[l, 1] + (wnd_w[l, 1] / 2) - (opt_w[l, i] / 2));
 	opt_y[l, i] = (wnd_y[l, 1] + (wnd_h[l, 1] / 2) - (_opt_hAll / 2) - _opt_yFix + (_opt_yDist * i));
 	
-	menu_optSlctr_drawData(l, i);
+	fn_menu_optSlctr_drawdata(l, i);
 }
 
 
 
 
-lvlTrans_act = true;
-lvlTrans_tgtLvl = LVL_MAIN;
+fn_menu_lvlTrans(LVL_MAIN);
 
 scrSv_spr = -1;
 if (global.sett_lowGFX == false) // (if the low graphics option is enabled) (taking a screenshot of the game can freeze the game for half a second)

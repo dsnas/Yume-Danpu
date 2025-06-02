@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_wrld_npc_functions",
+  "%Name":"scr_wrld_npc",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_wrld_npc_functions",
+  "name":"scr_wrld_npc",
   "parent":{
     "name":"npc",
     "path":"folders/wrld/solid/interactable/npc.yy",

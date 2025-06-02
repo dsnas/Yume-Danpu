@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_game_mus",
+  "%Name":"scr_mus",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_game_mus",
+  "name":"scr_mus",
   "parent":{
     "name":"Yume Danpu",
     "path":"Yume Danpu.yyp",

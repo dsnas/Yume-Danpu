@@ -85,11 +85,11 @@ function fn_thm_start() // start thms (themes)
 	fn_thm_setup_1(THM.DFLT, snd_menu_optMove_dflt, snd_menu_optSlct_dflt, snd_menu_optCncl_dflt, snd_menu_optFail_dflt, spr_menu_chrFrm_madot);
 	
 	/* (Simple) */
-	fn_thm_setup_0(THM.SMPL, fn_txtData("thm_name_smpl"), fn_txtData("thm_desc_smpl"), 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 
+	fn_thm_setup_0(THM.SMPL, fn_txtdata("thm_name_smpl"), fn_txtdata("thm_desc_smpl"), 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 
 	fn_thm_setup_1(THM.SMPL, -1, -1, -1, -1, -1);
 	
 	/* (Madotsuki) */
-	fn_thm_setup_0(THM.MADOT, fn_txtData("thm_name_madot"), fn_txtData("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0.25, 6, 4); 
+	fn_thm_setup_0(THM.MADOT, fn_txtdata("thm_name_madot"), fn_txtdata("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0.25, 6, 4); 
 	fn_thm_setup_1(THM.MADOT, snd_menu_optMove_madot, snd_menu_optSlct_madot, snd_menu_optCncl_madot, snd_menu_optFail_madot, spr_menu_chrFrm_madot);
 }
 

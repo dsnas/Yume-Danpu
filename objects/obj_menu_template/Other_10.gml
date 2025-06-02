@@ -2,13 +2,13 @@
 
 LVL_MAIN = 0;
 var l = LVL_MAIN;
-menu_opt_txtData(l, "menu_pse_main_opt");
+fn_menu_opt_txtdata(l, "menu_pse_main_opt");
 
 
 
 
 lvlTrans_act = true;
-lvlTrans_tgtLvl = LVL_MAIN;
+lvlTrans_lvlTgt = LVL_MAIN;
 
 
 

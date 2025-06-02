@@ -34,71 +34,111 @@ function fn_exists(_obj) // returns whether if the specified object exists
 
 
 
-
-function fn_spr_w(_spr) // returns the width of the specified spr
+function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur = 0, _aud_pit = 1, _aud_ofs = 0) // (plays the specified audio with the given characteristics)
 {
-	if (_spr != -1)
-		return sprite_get_width(_spr);
-	else
+	aud = _aud;					// (audio)
+	aud_volIdx = _aud_volIdx;	// (volume index) (index in the volume array from settings) (audio_vol will be multiplied to the volume in the array)
+	aud_lps = _aud_lps;			// (loops)
+	aud_vol = _aud_vol;			// (volume)
+	aud_volDur = _aud_volDur;	// (volume duration) (duration of the volume fade-in)
+	aud_pit = _aud_pit;			// (pitch)
+	aud_ofs = _aud_ofs;			// (offset) (the time in seconds to start playing)
+	
+	fn_aud_fix(); // (adjusts the volume of the specified audio to be consistent with other sounds, and its offset)
+	
+	aud_id = audio_play_sound(aud, 0, aud_lps, 0, aud_ofs, aud_pit); // (plays audio)
+	
+	aud_vol = ((aud_vol * global.sett_vol[aud_volIdx]) * global.sett_vol[SETT_VOL.MAIN]);
+	audio_sound_gain(aud_id, aud_vol, aud_volDur);
+	
+	audio_sound_pitch(aud_id, aud_pit);
+	audio_sound_set_track_position(aud_id, aud_ofs);
+}
+
+function fn_aud_fix() // (adjusts the volume of the specified audio to be consistent with other sounds, but also its offset and pitch)
+{
+	// (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED!!!!!!!!!!)
+	
+	
+	if (aud == mus_menu_home) // (main menu music)
+		aud_vol *= 0.45;
+	
+	
+	var _thm = global.chara_thm;
+	if (aud == global.thm_snd_optMove[_thm]) // (menu sounds)
 	{
-		fn_dbg_log("fn_spr_w() called without a sprite");
-		return 0;
+		if (_thm == THM.DFLT) // (THE SOUND WHOSE VOLUME SHOULD BE USED AS THE REFERENCE POINT FOR ALL OTHERS)
+			aud_vol *= 1; // (MUST BE ONE)
+		if (_thm == THM.MADOT)
+			aud_vol *= 0.4;
 	}
-}
-
-function fn_spr_h(_spr) // returns the height of the specified spr
-{
-	if (_spr != -1)
-		return sprite_get_height(_spr);
-	else
+	if (aud == global.thm_snd_optSlct[_thm])
 	{
-		fn_dbg_log("fn_spr_h() called without a sprite");
-		return 0;
+		if (_thm == THM.DFLT)
+			aud_vol *= 1.35;
+		if (_thm == THM.MADOT)
+			aud_vol *= 0.2;
 	}
+	if (aud == global.thm_snd_optCncl[_thm])
+	{
+		if (_thm == THM.DFLT)
+			aud_vol *= 0.9;
+		if (_thm == THM.MADOT)
+			aud_vol *= 0.2;
+	}
+	if (aud == global.thm_snd_optFail[_thm])
+	{
+		if (_thm == THM.MADOT)
+			aud_vol *= 0.4;
+	}
+	
+	
+	if (aud == snd_wrld_chara_foot) // (player footsteps)
+		aud_vol *= 0.75;
+	
+	
+	if (aud == mus_wrld_macaco) // (Macacolandia's music)
+		aud_vol *= 0.25;
+	if (aud == snd_wrld_npc_macaco_citizen_0) // (Macacolandia citizens sounds)
+	{
+		aud_vol *= 0.5;
+		aud_ofs = 0.25;
+	}
+	if (aud == snd_wrld_npc_macaco_citizen_1)
+		aud_ofs = 0.25;
+	if (aud == snd_wrld_npc_macaco_citizen_2)
+		aud_vol *= 0.3;
+	if (aud == snd_wrld_npc_macaco_citizen_3)
+	{
+		aud_vol *= 0.85;
+		aud_ofs = 0.25;
+	}
+	if (aud == snd_wrld_npc_macaco_citizen_4)
+		aud_vol *= 0.65;
+	if (aud == snd_wrld_npc_macaco_citizen_5)
+		aud_vol *= 0.5;
+	if (aud == snd_wrld_npc_macaco_citizen_6)
+	{
+		aud_vol *= 0.35;
+		aud_ofs = 0.25;
+	}
+	
+	
+	if (aud == mus_wrld_pikini)
+		aud_vol *= 0.75;
+	
+	
+	return aud_vol;
 }
 
-function fn_txt_w(_txt) // returns the width of the specified txt
+function fn_aud_stop(_aud_id)
 {
-	draw_set_font(global.game_fnt);
-	return string_width(_txt);
+	audio_stop_sound(_aud_id);
 }
 
-function fn_txt_h(_txt) // returns the height of the specified txt
+function fn_aud_playing(_aud_id) // (returns if audio is playing)
 {
-	draw_set_font(global.game_fnt);
-	var _txt_h = string_height(_txt);
-	if (_txt_h % 2 == 1)
-		_txt_h += 1;
-	return _txt_h;
-}
-
-
-
-
-function fn_lerp(_valCur, _valTgt, _spd)
-{
-	var _val = lerp(_valCur, _valTgt, _spd);
-	if (global.sett_rdcdMot == true) // rdcdMot (reduced motion)  →  skips animation and sets current value to target one
-		_val = _valTgt;
-	
-	return _val;
-}
-
-function fn_lerp_col(_currCol, _tgtCol, _spd)
-{
-	var _currCol_hue = color_get_hue(_currCol);
-	var _currCol_sat = color_get_saturation(_currCol);
-	var _currCol_vAl = color_get_value(_currCol);
-	
-	var _tgtCol_hue = color_get_hue(_tgtCol);
-	var _tgtCol_sat = color_get_saturation(_tgtCol);
-	var _tgtCol_vAl = color_get_value(_tgtCol);
-	
-	var _col_hue = fn_lerp(_currCol_hue, _tgtCol_hue, _spd);
-	var _col_sat = fn_lerp(_currCol_sat, _tgtCol_sat, _spd);
-	var _col_vAl = fn_lerp(_currCol_vAl, _tgtCol_vAl, _spd);
-	
-	return make_color_hsv(_col_hue, _col_sat, _col_vAl);
+	return audio_is_playing(_aud_id);
 }
 
 
@@ -169,6 +209,74 @@ function fn_draw_self(_x, _y, _xSc, _ySc, _ang) // draws the object's own sprite
 	fn_draw_spr(sprite_index, image_index, _x, _y, _xSc, _ySc, _ang, image_blend, image_alpha);
 }
 
+
+
+
+function fn_lerp(_valCur, _valTgt, _spd)
+{
+	var _val = lerp(_valCur, _valTgt, _spd);
+	if (global.sett_rdcdMot == true) // rdcdMot (reduced motion)  →  skips animation and sets current value to target one
+		_val = _valTgt;
+	
+	return _val;
+}
+
+function fn_lerp_col(_currCol, _tgtCol, _spd)
+{
+	var _currCol_hue = color_get_hue(_currCol);
+	var _currCol_sat = color_get_saturation(_currCol);
+	var _currCol_vAl = color_get_value(_currCol);
+	
+	var _tgtCol_hue = color_get_hue(_tgtCol);
+	var _tgtCol_sat = color_get_saturation(_tgtCol);
+	var _tgtCol_vAl = color_get_value(_tgtCol);
+	
+	var _col_hue = fn_lerp(_currCol_hue, _tgtCol_hue, _spd);
+	var _col_sat = fn_lerp(_currCol_sat, _tgtCol_sat, _spd);
+	var _col_vAl = fn_lerp(_currCol_vAl, _tgtCol_vAl, _spd);
+	
+	return make_color_hsv(_col_hue, _col_sat, _col_vAl);
+}
+
+
+
+
+function fn_spr_w(_spr) // returns the width of the specified spr
+{
+	if (_spr != -1)
+		return sprite_get_width(_spr);
+	else
+	{
+		fn_dbg_log("fn_spr_w() called without a sprite");
+		return 0;
+	}
+}
+
+function fn_spr_h(_spr) // returns the height of the specified spr
+{
+	if (_spr != -1)
+		return sprite_get_height(_spr);
+	else
+	{
+		fn_dbg_log("fn_spr_h() called without a sprite");
+		return 0;
+	}
+}
+
+function fn_txt_w(_txt) // returns the width of the specified txt
+{
+	draw_set_font(global.game_fnt);
+	return string_width(_txt);
+}
+
+function fn_txt_h(_txt) // returns the height of the specified txt
+{
+	draw_set_font(global.game_fnt);
+	var _txt_h = string_height(_txt);
+	if (_txt_h % 2 == 1)
+		_txt_h += 1;
+	return _txt_h;
+}
 
 
 

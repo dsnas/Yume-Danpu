@@ -2,7 +2,7 @@
 
 LVL_MAIN = 0; // main lvl
 var l = LVL_MAIN;
-menu_opt_txtData(l, "menu_inv_main_opt");
+fn_menu_opt_txtdata(l, "menu_inv_main_opt");
 
 px_act[l, 0] = true; // [main lvl] dark translucent background
 px_x[l, 0] = 0;
@@ -93,7 +93,7 @@ for (var i = 0; i < opt_amt[l]; i++) // (main lvl) opts
 	opt_y[l, i] = (main_optImg_y[i] - (draw_hTxt / 2));
 	
 	optSlctr_act[l, i] = true;
-	menu_optSlctr_drawData(l, i);
+	fn_menu_optSlctr_drawdata(l, i);
 	optSlctr_x[l, i] = (optSlctr_x[l, i] - _xDist - main_optImg_w - 1);
 	optSlctr_w[l, i] = (optSlctr_w[l, i] + _xDist + main_optImg_w + 1);
 }
@@ -154,7 +154,7 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 				opt_colSlct[l][i][0] = opt_colSlct[l][i][1];
 			}
 	
-			menu_opt_sizeData(l, i);
+			fn_menu_opt_sizedata(l, i);
 		}
 		opt_amt[l] = ram_amtMax[l];
 		
@@ -172,7 +172,7 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 		wnd_w[l, 0] = ((abs(wnd_x[l, 0]) * 2) + 320);
 		wnd_h[l, 0] = (abs(wnd_y[l, 0]) + (draw_dist * 2));
 		
-		lbl_txt[l, 0] = fn_txtData("menu_inv_" + string(ram_lblKey_txt[l]) + "_lbl_0"); // title lbl
+		lbl_txt[l, 0] = fn_txtdata("menu_inv_" + string(ram_lblKey_txt[l]) + "_lbl_0"); // title lbl
 		lbl_w[l, 0] = fn_txt_w(lbl_txt[l, 0]);
 		lbl_x[l, 0] = wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (lbl_w[l, 0] / 2);
 		var _yDistFix = 1;
@@ -197,7 +197,7 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 				_opt_yPos += 1;
 			}
 			
-			menu_optSlctr_drawData(l, i);
+			fn_menu_optSlctr_drawdata(l, i);
 		}
 		
 		if (array_get(ram_invArr[l], opt_pos[l]) == true) // desc (description)
@@ -214,7 +214,6 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 
 
 
-lvlTrans_act = true;
-lvlTrans_tgtLvl = LVL_MAIN;
+fn_menu_lvlTrans(LVL_MAIN);
 
 fn_aud_play(global.thm_snd_optSlct[global.chara_thm], SETT_VOL.MENU);

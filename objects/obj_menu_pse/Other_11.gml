@@ -3,9 +3,9 @@
 if (lvlTrans_act == false)
 {
 	if (lvl == LVL_MAIN) // [main lvl] opt move
-		event_user(5); // [opt move] dflt/normal
+		fn_menu_opt_move(0); // [opt move] dflt
 	
-	if (fn_inp("press", SETT_INP.SLCT) == true) // (checks for the player's selection input) (selects the option)
+	if (inp_slct == true) // (checks for the player's selection input) (selects the option)
 	{
 		if (lvl == LVL_MAIN) // [main lvl]
 		{
@@ -20,7 +20,7 @@ if (lvlTrans_act == false)
 		}
 	}
 	
-	if (fn_inp("press", SETT_INP.CNCL) == true || fn_inp("press", SETT_INP.MENU_PSE) == true) // (checks for the player's cancel or pause input) (resumes the game)
+	if (inp_cncl == true) || (fn_inp("press", SETT_INP.MENU_PSE) == true) // (checks for the player's cancel or pause input) (resumes the game)
 	{
 		fn_menu_pse_resume(); // resumes the game
 		fn_aud_play(global.thm_snd_optCncl[global.chara_thm], SETT_VOL.MENU);

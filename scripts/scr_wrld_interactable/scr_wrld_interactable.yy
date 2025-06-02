@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_wrld_interactable_functions",
+  "%Name":"scr_wrld_interactable",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_wrld_interactable_functions",
+  "name":"scr_wrld_interactable",
   "parent":{
     "name":"interactable",
     "path":"folders/wrld/solid/interactable.yy",

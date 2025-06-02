@@ -1,97 +1,91 @@
 /// @descr [step]
 
-var l = lvl;
-
-
 if (lvlTrans_act == false)
 {
 	if (lvl == LVL_MAIN) // [main lvl] opt move
-		event_user(5); // [opt move] dflt/normal
+		fn_menu_opt_move(0); // [opt move] dflt
 	else if (lvl == LVL_EFF) || (lvl == LVL_ITM) || (lvl == LVL_THM) // [eff/itm/thm lvl] opt move → horizontal and vertical
 	{
-		var _pos_old = opt_pos[l];
+		var _pos_old = opt_pos[lvl];
 		
-		if (fn_inp("press", SETT_INP.RT) == true && opt_pos[l] % 2 == 0) // move (horizontal)
-			opt_pos[l] += 1;
-		else if (fn_inp("press", SETT_INP.LT) == true && opt_pos[l] % 2 == 1)
-			opt_pos[l] -= 1;
+		if (inp_lt == true && opt_pos[lvl] % 2 == 0) // (Horizontal option movement)
+			opt_pos[lvl] -= 1;
+		else if (inp_rt == true && opt_pos[lvl] % 2 == 1)
+			opt_pos[lvl] += 1;
 		
-		if (fn_inp("press", SETT_INP.DN) == true && (opt_pos[l] + 2) < (opt_amt[l] - 0)) // move (vertical)
-			opt_pos[l] += 2;
-		else if (fn_inp("press", SETT_INP.UP) == true && (opt_pos[l] - 2) > -1)
-			opt_pos[l] -= 2;
+		if (inp_dn == true && (opt_pos[lvl] + 2) < (opt_amt[lvl] - 0)) // (Vertical option movement)
+			opt_pos[lvl] += 2;
+		else if (inp_up == true && (opt_pos[lvl] - 2) > -1)
+			opt_pos[lvl] -= 2;
 		
-		if (_pos_old != opt_pos[l]) // play snd
+		if (_pos_old != opt_pos[lvl]) // play snd
 			fn_aud_play(global.thm_snd_optMove[global.chara_thm], SETT_VOL.MENU);
 		
 		
 		var _lbl_alpTgt = 0; // (change description text, and animate its alpha)
 		var _lbl_alpSpd = opt_colSpd;
-		if (array_get(ram_invArr[l], opt_pos[l]) == true)
+		if (array_get(ram_invArr[lvl], opt_pos[lvl]) == true)
 		{
-			lbl_txt[l, 1] = array_get(ram_descArr[l], opt_pos[l]);
-			if (_pos_old != opt_pos[l])
-				lbl_alp[l, 1] = 0.5;
+			lbl_txt[lvl, 1] = array_get(ram_descArr[lvl], opt_pos[lvl]);
+			if (_pos_old != opt_pos[lvl])
+				lbl_alp[lvl, 1] = 0.5;
 			_lbl_alpTgt = 1;
 		}
-		lbl_alp[l, 1] = fn_lerp(lbl_alp[l, 1], _lbl_alpTgt, _lbl_alpSpd);
+		lbl_alp[lvl, 1] = fn_lerp(lbl_alp[lvl, 1], _lbl_alpTgt, _lbl_alpSpd);
 	}
 	
 	
-	if (fn_inp("press", SETT_INP.SLCT) == true) // (checks for the player's selection input) (selects the option)
+	if (inp_slct == true) // (checks for the player's selection input) (selects the option)
 	{
 		var _opt_snd = global.thm_snd_optSlct[global.chara_thm];
 		
+		
 		if (lvl == LVL_MAIN) // [main lvl]
-		{
-			lvlTrans_act = true;
-			lvlTrans_tgtLvl = (opt_pos[l] + 1);
-			lvlTrans_tgtOptPos = 0;
-		}
+			fn_menu_lvlTrans((opt_pos[lvl] + 1));
+		
 		
 		if (lvl == LVL_EFF) || (lvl == LVL_ITM) || (lvl == LVL_THM) // [ram lvl]
 		{
-			if (array_get(ram_invArr[l], opt_pos[l]) == false)
+			if (array_get(ram_invArr[lvl], opt_pos[lvl]) == false)
 				_opt_snd = global.thm_snd_optFail[global.chara_thm];
 			else
 			{
-				event_user(0);
 				if (lvl == LVL_THM)
 				{
-					global.chara_thm = opt_pos[l];
-					
+					global.chara_thm = opt_pos[lvl];
+					event_user(0);
 				}
 			}
 		}
 		
+		
 		fn_aud_play(_opt_snd, SETT_VOL.MENU);
 	}
 	
-	if (fn_inp("press", SETT_INP.CNCL) == true || fn_inp("press", SETT_INP.MENU_INV) == true) // (checks for the player's cancel or inventory input) (returns to the previous level, or closes the inventory)
+	
+	if (inp_cncl == true) || (fn_inp("press", SETT_INP.MENU_INV) == true) // (checks for the player's cancel or inventory input) (returns to the previous level, or closes the inventory)
 	{
-		lvlTrans_act = true;
-		
 		if (lvl == LVL_MAIN) // [main lvl]
 		{
-			lvlTrans_tgtLvl = lvl_amtMax;
-			lvlTrans_kill = true;
+			fn_menu_lvlTrans(lvl_amtMax, true);
 			
 			wrld_chara.move_stg = -1;
 		}
 		
+		
 		if (lvl == LVL_EFF) || (lvl == LVL_ITM) || (lvl == LVL_THM) // [ram lvl]
 		{
 			var _lbl_alpTgt = 0; // (reset description text and alpha)
-			if (array_get(ram_invArr[l], opt_pos[l]) == true)
+			if (array_get(ram_invArr[lvl], opt_pos[lvl]) == true)
 			{
-				lbl_txt[l, 1] = array_get(ram_descArr[l], opt_pos[l]);
+				lbl_txt[lvl, 1] = array_get(ram_descArr[lvl], opt_pos[lvl]);
 				_lbl_alpTgt = 1;
 			}
-			lbl_alp[l, 1] = _lbl_alpTgt;
+			lbl_alp[lvl, 1] = _lbl_alpTgt;
 			
-			lvlTrans_tgtLvl = LVL_MAIN;
-			lvlTrans_tgtOptPos = 0;
+			fn_menu_lvlTrans(LVL_MAIN);
 		}
+		
 		
 		fn_aud_play(global.thm_snd_optCncl[global.chara_thm], SETT_VOL.MENU);
 	}

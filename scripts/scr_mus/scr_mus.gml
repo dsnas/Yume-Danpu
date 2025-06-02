@@ -26,16 +26,13 @@ function fn_mus_upd() // upd mus (updates, starts and stops the music of the pla
 	
 	
 	
-	if (room == temp_rm_menu_main) // main menu
+	if (room == temp_rm_menu_home) // main menu
 	{
-		mus_aud[0] = mus_menu_main;
+		mus_aud[0] = mus_menu_home;
 	}
 	
 	if (room == rm_wrld_macaco) // Macacolandia
-	{
 		mus_aud[0] = mus_wrld_macaco;
-		mus_vol[0] = 0.25;
-	}
 
 	if (room == rm_wrld_pikini) // Fenda bo Pikini
 	{

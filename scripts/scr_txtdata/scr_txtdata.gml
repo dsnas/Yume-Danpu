@@ -1,16 +1,16 @@
 
-function fn_txtData_start() // start txtData of the selected lang
+function fn_txtdata_start() // start txtdata of the selected lang
 {
-	global.txtData[SETT_LANG.EN] = -1;
-	global.txtData[SETT_LANG.BR] = -1;
-	global.txtData_amt = array_length(global.txtData);
+	global.txtdata[SETT_LANG.EN] = -1;
+	global.txtdata[SETT_LANG.BR] = -1;
+	global.txtdata_amt = array_length(global.txtdata);
 	
 	
 	if (global.sett_lang == SETT_LANG.EN) // English
 	{
-		fn_txtData_destroy();
-		global.txtData[SETT_LANG.EN] = ds_map_create();
-		var i = global.txtData[SETT_LANG.EN];
+		fn_txtdata_destroy();
+		global.txtdata[SETT_LANG.EN] = ds_map_create();
+		var i = global.txtdata[SETT_LANG.EN];
 		
 		
 		ds_map_add(i, "thm_name_dflt", "Default");
@@ -41,9 +41,9 @@ function fn_txtData_start() // start txtData of the selected lang
 	
 	else if (global.sett_lang == SETT_LANG.BR) // Brazilian Portuguese
 	{
-		fn_txtData_destroy();
-		global.txtData[SETT_LANG.BR] = ds_map_create();
-		var i = global.txtData[SETT_LANG.BR];
+		fn_txtdata_destroy();
+		global.txtdata[SETT_LANG.BR] = ds_map_create();
+		var i = global.txtdata[SETT_LANG.BR];
 		
 		
 		ds_map_add(i, "thm_name_dflt", "Padrão");
@@ -78,21 +78,21 @@ function fn_txtData_start() // start txtData of the selected lang
 		ds_map_set(i, "menu_inv_main_opt_0", "Êggects");
 }
 
-function fn_txtData_destroy() // destroys txtData of the previous lang to avoid issues (ex.: if the current lang is set to English, this deletes the PT-Br txtData if it was previously selected and then unselected)
+function fn_txtdata_destroy() // destroys txtdata of the previous lang to avoid issues (ex.: if the current lang is set to English, this deletes the PT-Br txtdata if it was previously selected and then unselected)
 {
-	for (var i = 0; i < global.txtData_amt; i++)
+	for (var i = 0; i < global.txtdata_amt; i++)
 	{
-		if (i != global.sett_lang && global.txtData[i] != -1)
+		if (i != global.sett_lang && global.txtdata[i] != -1)
 		{
-			ds_map_destroy(global.txtData[i]);
-			global.txtData[i] = -1;
+			ds_map_destroy(global.txtdata[i]);
+			global.txtdata[i] = -1;
 		}
 	}
 }
 
-function fn_txtData(_key) // get txt from the selected lang's txtData
+function fn_txtdata(_key) // get txt from the selected lang's txtdata
 {
-	return ds_map_find_value(global.txtData[global.sett_lang], _key);
+	return ds_map_find_value(global.txtdata[global.sett_lang], _key);
 }
 
 

@@ -15,16 +15,15 @@ draw_hTxt = fn_txt_h("Salenis");
 draw_alp = 1;
 
 
-lvl_amtMax = 10; // lvl (level) (like play, settings, controls or credits)
+lvl_amtMax = 10; // lvl (Menu level, like play, settings, controls and credits)
 lvl = lvl_amtMax;
 for (var l = 0; l < (lvl_amtMax + 1); l++)
 	lvl_alp[l] = 0;
 
-lvlTrans_act = false; // lvlTrans (transition sequence between levels) (trans rights, am i right?!!)
-lvlTrans_alpSpd = 0.25;
-lvlTrans_tgtLvl = -1; // (target level)
-lvlTrans_tgtOptPos = 0; // (target option position)
-lvlTrans_kill = false;
+lvlTrans_act = false;		// lvlTrans (Transition sequence between levels) (trans rights, am i right?!!)
+lvlTrans_lvlTgt = -1;		// (Target level of the transition)
+lvlTrans_killMenu = false;	// (Destroy menu object when transition ends)
+lvlTrans_alpSpd = 0.25;		// (speed of the fade)
 
 
 px_amtMax = 25; // px (stretched pixels)
@@ -76,10 +75,10 @@ for (var l = 0; l < lvl_amtMax; l++)
 		
 		opt_x[l, i] = 0;
 		opt_y[l, i] = 0;
-		opt_colDflt[l][i][0] = global.thm_col[global.chara_thm, 2]; // (colors of the option when the it's not selected)
-		opt_colDflt[l][i][1] = global.thm_col[global.chara_thm, 3]; // (colors of the option when the it's not selected)
-		opt_colSlct[l][i][0] = global.thm_col[global.chara_thm, 0]; // (colors of the option when it's selected)
-		opt_colSlct[l][i][1] = global.thm_col[global.chara_thm, 1]; // (colors of the option when it's selected)
+		opt_colDflt[l][i][0] = global.thm_col[global.chara_thm, 2]; // colDflt (Option's colors while not selected) (Upper color)
+		opt_colDflt[l][i][1] = global.thm_col[global.chara_thm, 3]; // (Lower color)
+		opt_colSlct[l][i][0] = global.thm_col[global.chara_thm, 0]; // colSlct (Option's colors while selected) (Upper color)
+		opt_colSlct[l][i][1] = global.thm_col[global.chara_thm, 1]; // (Lower color)
 		opt_col[l][i][0] = opt_colDflt[l][i][0]; // (current colors of the option)
 		opt_col[l][i][1] = opt_colDflt[l][i][1];
 		opt_colSpd = 1;
@@ -128,6 +127,14 @@ for (var l = 0; l < lvl_amtMax; l++)
 		lbl_hAl[l, i] = fa_left;
 	}
 }
+
+
+inp_lt = 0;
+inp_rt = 0;
+inp_up = 0;
+inp_dn = 0;
+inp_slct = 0;
+inp_cncl = 0;
 
 
 
