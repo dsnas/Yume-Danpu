@@ -9,4 +9,4 @@ inp_cncl = fn_inp("press", SETT_INP.CNCL);
 
 
 
-event_user(1); // [child] (Step event)
+event_user(1); // [Child] [Step]

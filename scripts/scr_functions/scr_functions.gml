@@ -64,7 +64,7 @@ function fn_aud_fix() // (adjusts the volume of the specified audio to be consis
 		aud_vol *= 0.45;
 	
 	
-	var _thm = global.chara_thm;
+	var _thm = global.thm_cur;
 	if (aud == global.thm_snd_optMove[_thm]) // (menu sounds)
 	{
 		if (_thm == THM.DFLT) // (THE SOUND WHOSE VOLUME SHOULD BE USED AS THE REFERENCE POINT FOR ALL OTHERS)
@@ -154,9 +154,9 @@ function fn_draw_txt(_txt, _x, _y, _xSc, _ySc, _ang, _col_0, _col_1, _alp, _vAl,
 	draw_set_valign(_vAl);
 	draw_set_halign(_hAl);
 	
-	if (global.thm_shdw_act[global.chara_thm] == true)
+	if (global.thm_shdw_act[global.thm_cur] == true)
 	{
-		var _col_shdw = global.thm_col[global.chara_thm, 4];
+		var _col_shdw = global.thm_col[global.thm_cur, 4];
 		draw_text_ext_transformed_color((_x + 1), (_y + 1), _txt, -1, 640, _xSc, _ySc, _ang, _col_shdw, _col_shdw, _col_shdw, _col_shdw, _alp);
 	}
 	
@@ -172,10 +172,10 @@ function fn_draw_spr(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp, _shdw_act
 {
 	if (_spr != -1)
 	{
-		if (_shdw_act == true && global.thm_shdw_act[global.chara_thm] == true) // shdw (shadow)
-			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.chara_thm, 4], _alp);
+		if (_shdw_act == true && global.thm_shdw_act[global.thm_cur] == true)
+			/* shdw (shadow) */ draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm_cur, 4], _alp);
 		
-		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
+		/* spr */ draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
 	}
 	else
 		fn_dbg_log("fn_draw_spr() called without a sprite to draw");

@@ -4,7 +4,7 @@ LVL_MAIN = 0; // main lvl
 var l = LVL_MAIN;
 fn_menu_opt_txtdata(l, "menu_inv_main_opt");
 
-px_act[l, 0] = true; // [main lvl] dark translucent background
+px_act[l, 0] = true; // [main lvl] (dark translucent background)
 px_x[l, 0] = 0;
 px_y[l, 0] = 0;
 px_w[l, 0] = 320;
@@ -12,19 +12,19 @@ px_h[l, 0] = 240;
 px_col[l, 0] = c_black;
 px_alp[l, 0] = 0.5;
 
-wnd_act[l, 0] = true; // (main lvl) lbls wnd
+wnd_act[l, 0] = true; // [main lvl] lbls wnd (labels/information wnd)
 wnd_x[l, 0] = (draw_dist / 2);
 wnd_y[l, 0] = (draw_dist / 2);
 wnd_w[l, 0] = (draw_dist * 6);
 wnd_h[l, 0] = (draw_dist * 7) + (draw_dist / 4);
 
-main_chrFrm_spr = global.thm_chrFrm_spr[global.chara_thm]; // (main lvl) chrFrm
+main_chrFrm_spr = global.thm_chrFrm_spr[global.thm_cur]; // [main lvl] chrFrm (player's picture fliste)
 main_chrFrm_w = fn_spr_w(main_chrFrm_spr);
 main_chrFrm_h = fn_spr_h(main_chrFrm_spr);
 main_chrFrm_x = (wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (main_chrFrm_w / 2));
 main_chrFrm_y = (wnd_y[l, 0] + draw_dist);
 
-main_chara_spr = wrld_chara.move_spr[wrld_chara.MOVE_DN]; // (main lvl) chara
+main_chara_spr = wrld_chara.move_spr[wrld_chara.MOVE_DN]; // [main lvl] chara
 main_chara_w = fn_spr_w(main_chara_spr);
 main_chara_h = fn_spr_h(main_chara_spr);
 main_chara_x = (main_chrFrm_x + (main_chrFrm_w / 2) - (main_chara_w / 2));
@@ -33,8 +33,8 @@ main_chara_y = (main_chrFrm_y + (main_chrFrm_h / 2) + (main_chara_h / 2) - 1);
 lbl_txt[l, 0] = global.chara_name_txt; // (main lvl) chrName
 lbl_x[l, 0] = (main_chrFrm_x + (main_chrFrm_w / 2));
 lbl_y[l, 0] = round(main_chrFrm_y + main_chrFrm_h + (draw_dist / 8));
-lbl_col[l][0][0] = global.thm_col[global.chara_thm, 0];
-lbl_col[l][0][1] = global.thm_col[global.chara_thm, 1];
+lbl_col[l][0][0] = global.thm_col[global.thm_cur, 0];
+lbl_col[l][0][1] = global.thm_col[global.thm_cur, 1];
 lbl_vAl[l, 0] = fa_top;
 lbl_hAl[l, 0] = fa_center;
 
@@ -50,20 +50,20 @@ var _xDist = (draw_dist / 3);
 var _wAll = (_xDist + lbl_w[l, 1] + lbl_w[l, 2]);
 main_mnyImg_x = (wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (_wAll / 2) + (main_mnyImg_w / 2));
 main_mnyImg_y = (lbl_y[l, 0] + draw_hTxt + draw_dist - 1);
-main_mnyImg_col = global.thm_col[global.chara_thm, 0];
+main_mnyImg_col = global.thm_col[global.thm_cur, 0];
 main_mnyImg_alp = 1;
 
 lbl_x[l, 1] = (main_mnyImg_x + _xDist); // (main lvl) ccy
 lbl_y[l, 1] = (main_mnyImg_y - (draw_hTxt / 2));
-lbl_col[l][1][0] = global.thm_col[global.chara_thm, 2];
-lbl_col[l][1][1] = global.thm_col[global.chara_thm, 3];
+lbl_col[l][1][0] = global.thm_col[global.thm_cur, 2];
+lbl_col[l][1][1] = global.thm_col[global.thm_cur, 3];
 lbl_vAl[l, 1] = fa_top;
 lbl_hAl[l, 1] = fa_left;
 
 lbl_x[l, 2] = (lbl_x[l, 1] + lbl_w[l, 1]); // (main lvl) mny
 lbl_y[l, 2] = lbl_y[l, 1];
-lbl_col[l][2][0] = global.thm_col[global.chara_thm, 0];
-lbl_col[l][2][1] = global.thm_col[global.chara_thm, 1];
+lbl_col[l][2][0] = global.thm_col[global.thm_cur, 0];
+lbl_col[l][2][1] = global.thm_col[global.thm_cur, 1];
 lbl_vAl[l, 2] = fa_top;
 lbl_hAl[l, 2] = fa_left;
 
@@ -75,90 +75,83 @@ wnd_h[l, 1] = 70;
 
 main_optImg_spr = spr_menu_inv_optImg; // (main lvl) optImgs
 main_optImg_w = fn_spr_w(main_optImg_spr);
-var _xDist = (draw_dist / 8);
-var _wAll = (_xDist + opt_wMax[l]);
-main_optImg_x = wnd_x[l, 1] + (wnd_w[l, 1] / 2) - (_wAll / 2) + (main_optImg_w / 2);
-var _yDist = draw_dist;
-var _yDistFix = 1;
-var _hAll = (_yDist * (opt_amt[l] - 1));
+var _optImg_xDist = (draw_dist / 8);
+var _optImg_wAll = (_optImg_xDist + opt_wMax[l]);
+main_optImg_x = wnd_x[l, 1] + (wnd_w[l, 1] / 2) - (_optImg_wAll / 2) + (main_optImg_w / 2);
+var _optImg_yDist = draw_dist;
+var _optImg_yFix = 1;
+var _optImg_hAll = (_optImg_yDist * (opt_amt[l] - 1));
 for (var i = 0; i < opt_amt[l]; i++)
-	main_optImg_y[i] = (wnd_y[l, 1] + (wnd_h[l, 1] / 2) - (_hAll / 2) + (_yDist * i) - _yDistFix);
+	main_optImg_y[i] = (wnd_y[l, 1] + (wnd_h[l, 1] / 2) - (_optImg_hAll / 2) + (_optImg_yDist * i) - _optImg_yFix);
 main_optImg_alp = 1;
-
-	fn_dbg_log(opt_amt[l]);
 
 for (var i = 0; i < opt_amt[l]; i++) // (main lvl) opts
 {
-	opt_x[l, i] = (main_optImg_x + _xDist);
+	opt_x[l, i] = (main_optImg_x + _optImg_xDist);
 	opt_y[l, i] = (main_optImg_y[i] - (draw_hTxt / 2));
 	
-	optSlctr_act[l, i] = true;
 	fn_menu_optSlctr_drawdata(l, i);
-	optSlctr_x[l, i] = (optSlctr_x[l, i] - _xDist - main_optImg_w - 1);
-	optSlctr_w[l, i] = (optSlctr_w[l, i] + _xDist + main_optImg_w + 1);
+	optSlctr_x[l, i] = (optSlctr_x[l, i] - _optImg_xDist - main_optImg_w - 1);
+	optSlctr_w[l, i] = (optSlctr_w[l, i] + _optImg_xDist + main_optImg_w + 1);
 }
 
 
 
 
-LVL_EFF = 1; // eff lvl (effects level)
-LVL_ITM = 2; // itm lvl (items level)
-LVL_THM = 3; // thm lvl (themes level)
+LVL_LIST_EFF = 1; // lvl eff (Effects level)
+LVL_LIST_ITM = 2; // lvl itm (Items level)
+LVL_LIST_THM = 3; // lvl thm (Themes level)
 
-for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels can be added easily
+for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 {
-	ram_amtMax[l] = 0;
-	ram_invArr[l] = -1;
-	ram_nameArr[l] = -1;
-	ram_descArr[l] = -1;
-	ram_lblKey_txt[l] = "%%%";
-	if (l == LVL_EFF) // (eff lvl) get info
+	list_amtMax[l] = 0;
+	list_hasArr[l] = -1;
+	list_nameArr[l] = -1;
+	list_descArr[l] = -1;
+	list_lblKey_txt[l] = "%%%";
+	if (l == LVL_LIST_EFF) // [lvl eff] Get data
 	{
-		ram_amtMax[l] = global.eff_amtMax;
-		ram_invArr[l] = global.chara_effInv;
-		ram_nameArr[l] = global.eff_name_txt;
-		ram_descArr[l] = global.eff_desc_txt;
-		ram_lblKey_txt[l] = "eff";
+		list_amtMax[l] = global.eff_amtMax;
+		list_hasArr[l] = global.eff_has;
+		list_nameArr[l] = global.eff_name_txt;
+		list_descArr[l] = global.eff_desc_txt;
+		list_lblKey_txt[l] = "eff";
 	}
-	else if (l == LVL_ITM) // (itm lvl) get info
+	else if (l == LVL_LIST_ITM) // [lvl itm] Get data
 	{
-		ram_amtMax[l] = global.itm_amtMax;
-		ram_invArr[l] = global.chara_itmInv;
-		ram_nameArr[l] = global.itm_name_txt;
-		ram_descArr[l] = global.itm_desc_txt;
-		ram_lblKey_txt[l] = "itm";
+		list_amtMax[l] = global.itm_amtMax;
+		list_hasArr[l] = global.itm_has;
+		list_nameArr[l] = global.itm_name_txt;
+		list_descArr[l] = global.itm_desc_txt;
+		list_lblKey_txt[l] = "itm";
 	}
-	else if (l == LVL_THM) // (thm lvl) get info
+	else if (l == LVL_LIST_THM) // [lvl thm] Get data
 	{
-		ram_amtMax[l] = global.thm_amtMax;
-		ram_invArr[l] = global.chara_thmInv;
-		ram_nameArr[l] = global.thm_name_txt;
-		ram_descArr[l] = global.thm_desc_txt;
-		ram_lblKey_txt[l] = "thm";
+		list_amtMax[l] = global.thm_amtMax;
+		list_hasArr[l] = global.thm_has;
+		list_nameArr[l] = global.thm_name_txt;
+		list_descArr[l] = global.thm_desc_txt;
+		list_lblKey_txt[l] = "thm";
 	}
 	
 	
-	if (l == LVL_EFF) || (l == LVL_ITM) || (l == LVL_THM)
+	if (l == LVL_LIST_EFF) || (l == LVL_LIST_ITM) || (l == LVL_LIST_THM)
 	{
-		for (var i = 0; i < ram_amtMax[l]; i++) // opts  →  get text
+		for (var i = 0; i < list_amtMax[l]; i++) // opts  →  Get text
 		{
-			if (array_get(ram_invArr[l], i) == true)
+			if (array_get(list_hasArr[l], i) == true)
 			{
-				fn_dbg_log(array_get(ram_nameArr[l], i));
-				opt_txt[l, i] = array_get(ram_nameArr[l], i);
+				fn_dbg_log(array_get(list_nameArr[l], i));
+				opt_txt[l, i] = array_get(list_nameArr[l], i);
 			}
 			else
-			{
 				opt_txt[l, i] = "----------";
-				opt_colDflt[l][i][0] = opt_colDflt[l][i][1];
-				opt_colSlct[l][i][0] = opt_colSlct[l][i][1];
-			}
 	
 			fn_menu_opt_sizedata(l, i);
 		}
-		opt_amt[l] = ram_amtMax[l];
+		opt_amt[l] = list_amtMax[l];
 		
-		px_act[l, 0] = true; // dark translucent background
+		px_act[l, 0] = true; // Dark translucent background
 		px_x[l, 0] = 0;
 		px_y[l, 0] = 0;
 		px_w[l, 0] = 320;
@@ -166,25 +159,15 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 		px_col[l, 0] = c_black;
 		px_alp[l, 0] = 0.75;
 		
-		wnd_act[l, 0] = true; // lbl wnd
-		wnd_x[l, 0] = -draw_dist;
-		wnd_y[l, 0] = -draw_dist;
-		wnd_w[l, 0] = ((abs(wnd_x[l, 0]) * 2) + 320);
-		wnd_h[l, 0] = (abs(wnd_y[l, 0]) + (draw_dist * 2));
+		ttl_txt[l] = fn_txtdata("menu_inv_" + string(list_lblKey_txt[l]) + "_ttl"); // ttl (Title label and window)
 		
-		lbl_txt[l, 0] = fn_txtdata("menu_inv_" + string(ram_lblKey_txt[l]) + "_lbl_0"); // title lbl
-		lbl_w[l, 0] = fn_txt_w(lbl_txt[l, 0]);
-		lbl_x[l, 0] = wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (lbl_w[l, 0] / 2);
-		var _yDistFix = 1;
-		lbl_y[l, 0] = (draw_dist - (draw_hTxt / 2) - _yDistFix);
-		
-		wnd_act[l, 1] = true; // opts wnd
+		wnd_act[l, 1] = true; // opts wnd (Options window)
 		wnd_x[l, 1] = (draw_dist * 2);
-		wnd_y[l, 1] = (wnd_y[l, 0] + wnd_h[l, 0] + draw_dist);
+		wnd_y[l, 1] = (ttlWnd_y[l] + ttlWnd_h[l] + draw_dist);
 		wnd_w[l, 1] = (320 - (wnd_x[l, 1] * 2));
 		wnd_h[l, 1] = (240 - wnd_y[l, 1] - draw_dist);
 		
-		var _opt_xPos = 0; // opts  →  get positions
+		var _opt_xPos = 0; // opts (Options)  →  Get positions
 		var _opt_yPos = 0;
 		for (var i = 0; i < opt_amt[l]; i++)
 		{
@@ -197,15 +180,15 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 				_opt_yPos += 1;
 			}
 			
-			fn_menu_optSlctr_drawdata(l, i);
+			fn_menu_optSlctr_drawdata(l, i); // optSlctr (Option selector)
 		}
 		
-		if (array_get(ram_invArr[l], opt_pos[l]) == true) // desc (description)
-			lbl_txt[l, 1] = array_get(ram_descArr[l], opt_pos[l]);
+		if (array_get(list_hasArr[l], opt_pos[l]) == true) // desc (Description)
+			lbl_txt[l, 1] = array_get(list_descArr[l], opt_pos[l]);
 		lbl_x[l, 1] = (wnd_x[l, 1] + draw_dist);
 		lbl_y[l, 1] = (wnd_y[l, 1] + wnd_h[l, 1] - draw_dist);
-		lbl_col[l][1][0] = global.thm_col[global.chara_thm, 0];
-		lbl_col[l][1][1] = global.thm_col[global.chara_thm, 1];
+		lbl_col[l][1][0] = global.thm_col[global.thm_cur, 0];
+		lbl_col[l][1][1] = global.thm_col[global.thm_cur, 1];
 		lbl_alp[l, 1] = 1;
 		lbl_vAl[l, 1] = fa_bottom;
 	}
@@ -216,4 +199,4 @@ for (var l = 0; l < lvl_amtMax; l++) // eff/itm/thm lvl  →  made so new levels
 
 fn_menu_lvlTrans(LVL_MAIN);
 
-fn_aud_play(global.thm_snd_optSlct[global.chara_thm], SETT_VOL.MENU);
+fn_aud_play(global.thm_snd_optSlct[global.thm_cur], SETT_VOL.MENU);

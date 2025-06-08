@@ -13,13 +13,14 @@ window_center();
 var _caption = "Yume Danpu";
 var i = irandom_range(1, 100);
 if (i <= 5)
-	_caption = choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume Fanpu", "Dume Yanpu", "Yume Champu");
+	_caption = choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu");
 window_set_caption(_caption);
 display_set_gui_size(320, 240);
 
 global.game_ver = "0.02";
 global.game_fnt = font_add_sprite_ext(spr_game_fnt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"1234567890%()[]/_-—<>←→↑↓", false, -1);
 
+fn_flag_start(); // Starts flags (variables that makes certain events happen only once)
 fn_sett_start(); // start sett (settings)
 fn_txtdata_start(); // start txtdata of the selected lang
 
@@ -50,6 +51,6 @@ for (var v = 0; v < 2; v++)
 	var c = 0;
 	if (v == 1)
 		c = 2;
-	verNum_col[v] = global.thm_col[global.chara_thm, c];
+	verNum_col[v] = global.thm_col[global.thm_cur, c];
 }
 verNum_alp = 0.5;

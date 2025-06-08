@@ -1,4 +1,4 @@
-/// @descr [child] [draw gui] inside lvls loop
+/// @descr [Child] [Draw GUI]
 
 if (ll == 0)
 {
