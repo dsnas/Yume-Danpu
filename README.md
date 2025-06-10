@@ -1,8 +1,9 @@
 <h1 align="center">Yume Danpu</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.01-65FF8A" alt="Game version" />
-  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=65FF8A" alt="Commit activity" />
+  <img src="https://img.shields.io/badge/version-0.01-4BFF84" alt="Game version" />
+  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
+  <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License" />
   <a href="https://dsnas.itch.io/yume-danpu">
     <img src="https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5" alt="Itch.io" /></a>
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
@@ -20,7 +21,17 @@ This repository is updated regularly while we're working on it, not just when ne
 
 ## Development and release videos
 We occasionally post videos on YouTube showcasing upcoming or newly released changes and features.  
-Follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)!
+You can follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)!
+
+&nbsp;
+
+## Infrequently asked questions
+
+### Why make the game open-source?
+> I put Yume Danpu on GitHub after the original GameMaker project randomly got corrupted. I made the repository public because, well, I figured, what the hell? We'd be more than happy if someone used what we made to create something new.
+
+### Why use GameMaker to make the game?
+> I started using GameMaker back in 2021, so I’ve picked up a few things since then. It also gives us a lot more freedom to do whatever we want compared to RPG Maker.
 
 &nbsp;
 
