@@ -46,8 +46,8 @@
   },
   "origin":5,
   "parent":{
-    "name":"inv",
-    "path":"folders/menu/inv.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

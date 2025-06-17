@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_interact",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_interact",
+  "parent":{
+    "name":"interact",
+    "path":"folders/interact.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

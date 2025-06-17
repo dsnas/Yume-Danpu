@@ -1,67 +1,65 @@
 
-function fn_thm_start() // Start thms (themes)
-{
-	global.thm_amtMax = global.eff_amtMax;
-	for (var t = 0; t < global.thm_amtMax; t++)
-	{
-		fn_thm_setup_0(t, "%%%", "%%%", c_white, c_white, c_gray, c_gray, c_black, false, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0, 6, 4); 
-		fn_thm_setup_1(t, snd_menu_optMove_dflt, snd_menu_optSlct_dflt, snd_menu_optCncl_dflt, snd_menu_optFail_dflt, spr_menu_chrFrm_madot);
-		global.thm_has[t] = false;  // (Determines if the player currently has the theme)
-	}
-	enum THM
-	{
-		DFLT = 0, // (Default)
-		SMPL = 1, // (Simple)
-		MADOT = 2 // (Madotsuki)
-	}
-	global.thm_cur = THM.DFLT; // (Determines which theme is currently active)
-	
-	
-	/* (Default) */
-	fn_thm_setup_0(THM.DFLT, fn_txtdata("thm_name_dflt"), fn_txtdata("thm_desc_dflt"), #949299, #949299, #545359, #545359, #100F11, false, spr_menu_wnd_dflt, spr_menu_optSlctr_dflt, 0, 6, 4); 
-	fn_thm_setup_1(THM.DFLT, snd_menu_optMove_dflt, snd_menu_optSlct_dflt, snd_menu_optCncl_dflt, snd_menu_optFail_dflt, spr_menu_chrFrm_madot);
-	global.thm_has[0] = true;
-	
-	/* (Simple) */
-	fn_thm_setup_0(THM.SMPL, fn_txtdata("thm_name_smpl"), fn_txtdata("thm_desc_smpl"), 0, 0, 0, 0, 0, true, -1, -1, 0, 0, 0); 
-	fn_thm_setup_1(THM.SMPL, -1, -1, -1, -1, -1);
-	global.thm_has[1] = true;
-	
-	/* (Madotsuki) */
-	fn_thm_setup_0(THM.MADOT, fn_txtdata("thm_name_madot"), fn_txtdata("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_wnd_madot, spr_menu_optSlctr_madot, 0.25, 6, 4); 
-	fn_thm_setup_1(THM.MADOT, snd_menu_optMove_madot, snd_menu_optSlct_madot, snd_menu_optCncl_madot, snd_menu_optFail_madot, spr_menu_chrFrm_madot);
-	global.thm_has[2] = true;
-}
+//////// Functions related to menu themes
 
-function fn_thm_setup_0(_id, _name_txt, _desc_txt, _col_0, _col_1, _col_2, _col_3, _col_4, _shdw_act, _wnd_spr, _optSlctr_spr, _optSlctr_frmSpd, _optSlctr_xDist, _optSlctr_yDist) // (the function had to be split into two parts because GameMaker has a limit on how many arguments you can use)
+
+function fn_thm_setup() // Sets up variables for enabling menu themes
 {
-	var i = _id;
+	enum THM_IDX // Stores the index of each theme in their arrays
+	{
+		DFLT = 0,	// Default theme
+		MADOT = 1	// Madotsuki theme
+	}
 	
-	global.thm_name_txt[i] = _name_txt;
-	global.thm_desc_txt[i] = _desc_txt;
+	global.thm_amtMax = global.eff_amtMax;
+	for (var _THM_IDX = 0; _THM_IDX < global.thm_amtMax; _THM_IDX++)
+	{
+		fn_thm_add(_THM_IDX, "%%%", "%%%", c_black, c_black, c_black, c_black, c_black, false, -1, -1, 0, -1); 
 		
-	global.thm_col[i, 0] = _col_0; // lighter white (txt  →  upper main) // col (colors)
-	global.thm_col[i, 1] = _col_1; // darker white (txt  →  lower main)
-	global.thm_col[i, 2] = _col_2; // lighter gray (txt  →  upper other)
-	global.thm_col[i, 3] = _col_3; // darker gray (txt  →  lower other)
-	global.thm_col[i, 4] = _col_4; // black (txt  →  shdw)
-	global.thm_shdw_act[i] = _shdw_act;
+		global.thm_optSlctr_xDist[_THM_IDX] = 6;
+		global.thm_optSlctr_yDist[_THM_IDX] = 4;
 		
-	global.thm_wnd_spr[i] = _wnd_spr; // wnd (wnds/backgrounds)
+		global.thm_opt_move_snd[_THM_IDX] = snd_menu_opt_move_dflt;
+		global.thm_opt_slct_snd[_THM_IDX] = snd_menu_opt_slct_dflt;
+		global.thm_opt_cncl_snd[_THM_IDX] = snd_menu_opt_cncl_dflt;
+		global.thm_opt_fail_snd[_THM_IDX] = snd_menu_opt_fail_dflt;
 		
-	global.thm_optSlctr_spr[i] = _optSlctr_spr; // optSlctr (option selection indicator)
-	global.thm_optSlctr_frmSpd[i] = _optSlctr_frmSpd;
-	global.thm_optSlctr_xDist[i] = _optSlctr_xDist;
-	global.thm_optSlctr_yDist[i] = _optSlctr_yDist;
+		global.thm_has[_THM_IDX] = false; // (Determines if the player currently has this theme)
+	}
+	
+	global.thm_cur = THM_IDX.DFLT; // Determines which theme is currently active
+	
+	
+	// Default theme
+	fn_thm_add(THM_IDX.DFLT, fn_textData("thm_name_dflt"), fn_textData("thm_desc_dflt"), #949299, #949299, #545359, #545359, #100F11, false, spr_menu_box_dflt, spr_menu_optSlctr_dflt, 0, spr_menu_plyrFrm_madot);
+	global.thm_has[THM_IDX.DFLT] = true;
+	
+	// Madotsuki theme
+	fn_thm_add(THM_IDX.MADOT, fn_textData("thm_name_madot"), fn_textData("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_box_madot, spr_menu_optSlctr_madot, 0.25, spr_menu_plyrFrm_madot); 
+	global.thm_opt_move_snd[THM_IDX.MADOT] = snd_menu_opt_move_madot;
+	global.thm_opt_slct_snd[THM_IDX.MADOT] = snd_menu_opt_slct_madot;
+	global.thm_opt_cncl_snd[THM_IDX.MADOT] = snd_menu_opt_cncl_madot;
+	global.thm_opt_fail_snd[THM_IDX.MADOT] = snd_menu_opt_fail_madot;
+	global.thm_has[THM_IDX.MADOT] = true;
 }
-function fn_thm_setup_1(_id, _snd_optMove, _snd_optSlct, _snd_optCncl, _snd_optFail, _inv_chrFrm_spr)
+function fn_thm_add(_THM_IDX, _name, _desc, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_black, _shdw_act, _box_spr, _optSlctr_spr, _optSlctr_imgSpd, _plyrFrm_spr)
 {
-	var i = _id;
+	global.thm_name[_THM_IDX] = _name;
+	global.thm_desc[_THM_IDX] = _desc;
 	
-	global.thm_snd_optMove[i] = _snd_optMove; // snds (sounds)
-	global.thm_snd_optSlct[i] = _snd_optSlct;
-	global.thm_snd_optCncl[i] = _snd_optCncl;
-	global.thm_snd_optFail[i] = _snd_optFail;
-		
-	global.thm_chrFrm_spr[i] = _inv_chrFrm_spr; // chrFrm (inv  →  player portrait fliste)
+	global.thm_col[_THM_IDX] =
+	{
+		whiteLight	: _col_whiteLight,
+		whiteDark	: _col_whiteDark,
+		grayLight	: _col_grayLight,
+		grayDark	: _col_grayDark,
+		black		: _col_black
+	}
+	global.thm_shdw_act[_THM_IDX] = _shdw_act;
+	
+	global.thm_box_spr[_THM_IDX] = _box_spr;
+	
+	global.thm_optSlctr_spr[_THM_IDX]		= _optSlctr_spr;
+	global.thm_optSlctr_imgSpd[_THM_IDX]	= _optSlctr_imgSpd;
+	
+	global.thm_plyrFrm_spr[_THM_IDX] = _plyrFrm_spr;
 }

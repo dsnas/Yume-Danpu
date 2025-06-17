@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_flag",
   "parent":{
-    "name":"Yume Danpu",
-    "path":"Yume Danpu.yyp",
+    "name":"[!] Scripts",
+    "path":"folders/[!] Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

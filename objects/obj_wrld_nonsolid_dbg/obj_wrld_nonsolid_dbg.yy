@@ -7,11 +7,11 @@
   "overriddenProperties":[],
   "parent":{
     "name":"dbg",
-    "path":"folders/wrld/wrlds/dbg.yy",
+    "path":"folders/INSANIDADE/dbg.yy",
   },
   "parentObjectId":{
-    "name":"obj_wrld_nonsolid_parent",
-    "path":"objects/obj_wrld_nonsolid_parent/obj_wrld_nonsolid_parent.yy",
+    "name":"obj_nonsolid_parent",
+    "path":"objects/obj_nonsolid_parent/obj_nonsolid_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

@@ -28,7 +28,7 @@
   "origin":9,
   "parent":{
     "name":"pikini",
-    "path":"folders/wrld/wrlds/pikini.yy",
+    "path":"folders/INSANIDADE/pikini.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

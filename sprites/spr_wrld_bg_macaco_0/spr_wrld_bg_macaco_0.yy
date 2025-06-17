@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"macaco",
-    "path":"folders/wrld/wrlds/macaco.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

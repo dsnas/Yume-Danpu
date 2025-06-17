@@ -13,7 +13,7 @@
   "out_tilevborder":2,
   "parent":{
     "name":"pikini",
-    "path":"folders/wrld/wrlds/pikini.yy",
+    "path":"folders/INSANIDADE/pikini.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

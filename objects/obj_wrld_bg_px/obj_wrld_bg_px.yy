@@ -9,8 +9,8 @@
   "name":"obj_wrld_bg_px",
   "overriddenProperties":[],
   "parent":{
-    "name":"bg",
-    "path":"folders/wrld/bg.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

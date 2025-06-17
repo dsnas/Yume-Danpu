@@ -12,8 +12,8 @@
   "duration":4.075102,
   "name":"SND_OVOS",
   "parent":{
-    "name":"audio",
-    "path":"folders/audio.yy",
+    "name":"[!] Sounds",
+    "path":"folders/[!] Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

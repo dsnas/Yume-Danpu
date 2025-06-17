@@ -1,23 +1,23 @@
-/// @descr [create]
+/// @descr [Create]
 /// [wrld] pse menu (Pause menu) (tambem conhecido como "pois-é menu")
 
 LVL_MAIN = 0;
 var l = LVL_MAIN;
-fn_menu_opt_txtdata(l, "menu_pse_main_opt");
+fn_menu_opt_textdata(l, "menu_pse_main_opt");
 
 px_act[l, 0] = true; // [lvl MAIN] dark translucent background
 px_x[l, 0] = 0;
 px_y[l, 0] = 0;
 px_w[l, 0] = 320;
 px_h[l, 0] = 240;
-px_col[l, 0] = c_black;
+px_col[l, 0] = global.thm_col[global.thm_cur, 4];
 px_alp[l, 0] = 0.75;
 
-ttl_txt[l] = fn_txtdata("menu_pse_main_ttl"); // [lvl MAIN] ttl (Title)
+ttl_text[l] = fn_textdata("menu_pse_main_ttl"); // [lvl MAIN] ttl (Title)
 
 var _opt_yDist = draw_dist; // [lvl MAIN] opts (Options)
 var _opt_yFix = 1;
-var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + draw_hTxt);
+var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.game_fnt_h);
 
 wnd_act[l, 1] = true;
 var _wnd_xDist = (draw_dist * 3); // [lvl MAIN] lbls wnd (Labels window)
@@ -39,10 +39,10 @@ for (var i = 0; i < opt_amt[l]; i++)
 
 
 
-fn_menu_lvlTrans(LVL_MAIN);
+fn_menu_lvlTrans_start(LVL_MAIN);
 
 scrSv_spr = -1;
-if (global.sett_lowGFX == false) // (Checks if the low graphics setting is enabled, since taking a screenshot of the screen can freeze the game for half a second)
+if (global.sett_lowGfx == false) // (Checks if the low graphics setting is enabled, since taking a screenshot of the screen can freeze the game for half a second)
 {
 	scrSv_fname = "menu_pause_scrSv.png"; // (Takes a screenshot of the game to use as the background, since all objects will temporarily deactivate and disappear)
 	surface_save(application_surface, working_directory + string(scrSv_fname));
@@ -56,4 +56,4 @@ instance_activate_object(obj_game_main);
 instance_activate_object(obj_game_dbg);
 audio_pause_all(); // (Pauses all currently playing audio)
 
-fn_aud_play(global.thm_snd_optSlct[global.thm_cur], SETT_VOL.MENU);
+fn_aud_play(global.thm_snd_optSlct[global.thm_cur], VOL_IDX.MENU);

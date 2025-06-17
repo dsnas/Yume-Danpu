@@ -1,7 +1,7 @@
 
 function fn_menu_pse_resume() // resumes the game
 {
-	fn_menu_lvlTrans(lvl_amtMax, true);
+	fn_menu_lvlTrans_start(lvl_amtMax, true);
 	
 	if (scrSv_spr != -1)
 	{

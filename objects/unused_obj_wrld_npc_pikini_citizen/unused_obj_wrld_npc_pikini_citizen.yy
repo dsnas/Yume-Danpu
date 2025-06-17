@@ -13,10 +13,7 @@
     "name":"unused",
     "path":"folders/unused.yy",
   },
-  "parentObjectId":{
-    "name":"obj_wrld_npc",
-    "path":"objects/obj_wrld_npc/obj_wrld_npc.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

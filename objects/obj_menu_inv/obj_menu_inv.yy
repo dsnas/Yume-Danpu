@@ -10,13 +10,10 @@
   "name":"obj_menu_inv",
   "overriddenProperties":[],
   "parent":{
-    "name":"inv",
-    "path":"folders/menu/inv.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
-  "parentObjectId":{
-    "name":"obj_menu_parent",
-    "path":"objects/obj_menu_parent/obj_menu_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

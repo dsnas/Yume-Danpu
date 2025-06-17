@@ -3,8 +3,6 @@ image_speed = 0;
 image_index = 0;
 image_alpha = 0;
 
-fn_import();
-
 
 
 
@@ -25,7 +23,7 @@ for (var i = 0; i < bg_amtMax; i++)
 {
 	if (bg_obj[i] != -1)
 	{
-		fn_spawn(bg_obj[i], 0, 0);
+		fn_obj_create(bg_obj[i], 0, 0);
 		obj_id.depth = (bg_depthMax - i);
 	}
 }

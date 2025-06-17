@@ -8,8 +8,8 @@
   "name":"obj_wrld_rpt",
   "overriddenProperties":[],
   "parent":{
-    "name":"wrld",
-    "path":"folders/wrld.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "parentObjectId":null,
   "persistent":false,

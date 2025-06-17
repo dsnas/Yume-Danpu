@@ -26,7 +26,7 @@
   "origin":6,
   "parent":{
     "name":"dbg",
-    "path":"folders/wrld/wrlds/dbg.yy",
+    "path":"folders/INSANIDADE/dbg.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

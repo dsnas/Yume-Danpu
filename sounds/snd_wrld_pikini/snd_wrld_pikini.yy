@@ -13,7 +13,7 @@
   "name":"snd_wrld_pikini",
   "parent":{
     "name":"pikini",
-    "path":"folders/wrld/wrlds/pikini.yy",
+    "path":"folders/INSANIDADE/pikini.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

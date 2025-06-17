@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_menu_pse",
   "parent":{
-    "name":"pse",
-    "path":"folders/menu/pse.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

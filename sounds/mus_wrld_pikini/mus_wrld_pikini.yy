@@ -13,13 +13,13 @@
   "name":"mus_wrld_pikini",
   "parent":{
     "name":"pikini",
-    "path":"folders/wrld/wrlds/pikini.yy",
+    "path":"folders/INSANIDADE/pikini.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"mus_wrld_pikini.wav",
+  "soundFile":"mus_wrld_pikini.mp3",
   "type":0,
   "volume":1.0,
 }

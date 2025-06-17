@@ -12,8 +12,8 @@
   "duration":0.95238096,
   "name":"snd_hulapoca",
   "parent":{
-    "name":"audio",
-    "path":"folders/audio.yy",
+    "name":"[!] Sounds",
+    "path":"folders/[!] Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -148,8 +148,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Yume Danpu",
-    "path":"Yume Danpu.yyp",
+    "name":"[!] Sprites",
+    "path":"folders/[!] Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

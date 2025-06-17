@@ -22,8 +22,8 @@ if (draw_act == true)
 		var _rpt_x = (draw_x - (draw_rpt_xDist * draw_rpt_amt));
 		var _rpt_y = (draw_y - (draw_rpt_yDist * draw_rpt_amt));
 	
-		var _rpt_hAmt = (draw_rpt_amt + (wrld_w / draw_rpt_xDist) + draw_rpt_amt);
-		var _rpt_vAmt = (draw_rpt_amt + (wrld_h / draw_rpt_yDist) + draw_rpt_amt);
+		var _rpt_hAmt = (draw_rpt_amt + (room_width / draw_rpt_xDist) + draw_rpt_amt);
+		var _rpt_vAmt = (draw_rpt_amt + (room_height / draw_rpt_yDist) + draw_rpt_amt);
 	
 		for (var h = 0; h < _rpt_hAmt; h++)
 		{

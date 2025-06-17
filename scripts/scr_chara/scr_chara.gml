@@ -1,18 +1,57 @@
 
-function fn_chara_start() // Start chara info (the player's information)
+//////// Functions related to characters, like entities and the player
+
+
+function fn_chara_start() // Sets up the main variables of the character (Some of them are used only by entities or by the player)
 {
-	global.chara_name_txt = "Eleanor";
-	global.chara_awake = false;
+	fn_draw_self_setup();
 	
 	
-	/* mny (Money) */
-	global.chara_mny[0] = 0; // (While sleeping)
-	global.chara_mny[1] = 0; // (While awake)
+	// Movement sequence
+	MOVE_DIR_LT = 0; // ID numbers of each direction the character can move to
+	MOVE_DIR_RT = 1;
+	MOVE_DIR_UP = 2;
+	MOVE_DIR_DN = 3;
+	move_dir = MOVE_DIR_DN; // Current direction the character is looking to
 	
-	/* ccy (Currency) */
-	global.chara_ccy[0] = "₢$ "; // (While sleeping)
-	global.chara_ccy[1] = "R$ "; // (While awake)
+	MOVE_DIR_AXIS_HOR = 0; // ID numbers of each axis the character can move to
+	MOVE_DIR_AXIS_VER = 1;
+	move_dir_axis[MOVE_DIR_LT] = MOVE_DIR_AXIS_HOR; // Axis of each direction the character can move to
+	move_dir_axis[MOVE_DIR_RT] = MOVE_DIR_AXIS_HOR;
+	move_dir_axis[MOVE_DIR_UP] = MOVE_DIR_AXIS_VER;
+	move_dir_axis[MOVE_DIR_DN] = MOVE_DIR_AXIS_VER;
 	
+	for (var d = 0; d < 4; d++)
+	{
+		move_dir_spr[d] = -1;
+		move_dir_x[d] = 0;
+		move_dir_y[d] = 0;
+	}
 	
+	move_dir_spdMul[MOVE_DIR_LT] = -1;
+	move_dir_spdMul[MOVE_DIR_RT] = 1;
+	move_dir_spdMul[MOVE_DIR_UP] = -1;
+	move_dir_spdMul[MOVE_DIR_DN] = 1;
 	
+	move_dir_key[MOVE_DIR_LT] = KEY_IDX.LT;
+	move_dir_key[MOVE_DIR_RT] = KEY_IDX.RT;
+	move_dir_key[MOVE_DIR_UP] = KEY_IDX.UP;
+	move_dir_key[MOVE_DIR_DN] = KEY_IDX.DN;
+	
+	move_stg = -1;	// ID of the current stage of the movement sequence (-1 == idle, 0+ active)
+	move_spd = 1;
+	move_dur = 0;
+	move_durMax = 16;
+	move_tgtX = 0;
+	move_tgtY = 0;
+	move_chasePlayer = false;
+	
+	moveDelay_stg = -1;
+	moveDelay_dur = 0;
+	moveDelay_durMin = 0;
+	moveDelay_durMax = 240;
+	moveDelay_act = true;
+	
+	moveChain_act = false;	// Determines if the character can NOT move too far from their starting position
+	moveChain_dist = 48;
 }

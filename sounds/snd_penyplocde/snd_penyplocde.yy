@@ -12,8 +12,8 @@
   "duration":0.7207256,
   "name":"snd_penyplocde",
   "parent":{
-    "name":"audio",
-    "path":"folders/audio.yy",
+    "name":"[!] Sounds",
+    "path":"folders/[!] Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

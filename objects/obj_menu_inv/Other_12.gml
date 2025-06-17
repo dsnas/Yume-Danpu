@@ -1,4 +1,4 @@
-/// @descr [draw gui] inside lvls loop
+/// @descr [Draw GUI #0]
 
 if (ll == LVL_MAIN) // [main lvl]
 {

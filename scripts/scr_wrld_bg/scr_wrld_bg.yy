@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_wrld_bg",
   "parent":{
-    "name":"bg",
-    "path":"folders/wrld/bg.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

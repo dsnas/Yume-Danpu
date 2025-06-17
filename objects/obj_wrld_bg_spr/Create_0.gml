@@ -1,9 +1,6 @@
 
-fn_import();
-
 depth = 0;
 alarm[0] = 1;
-
 
 
 draw_act = false;

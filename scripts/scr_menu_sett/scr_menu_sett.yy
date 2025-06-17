@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_menu_sett",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_menu_sett",
+  "parent":{
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

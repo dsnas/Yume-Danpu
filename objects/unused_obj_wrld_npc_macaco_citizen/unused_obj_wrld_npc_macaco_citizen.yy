@@ -13,10 +13,7 @@
     "name":"unused",
     "path":"folders/unused.yy",
   },
-  "parentObjectId":{
-    "name":"obj_wrld_npc",
-    "path":"objects/obj_wrld_npc/obj_wrld_npc.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -35,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_npc_macaco_citizen",
-    "path":"sprites/spr_wrld_npc_macaco_citizen/spr_wrld_npc_macaco_citizen.yy",
+    "name":"spr_wrld_entity_macaco_citizen",
+    "path":"sprites/spr_wrld_entity_macaco_citizen/spr_wrld_entity_macaco_citizen.yy",
   },
   "spriteMaskId":null,
   "visible":true,
