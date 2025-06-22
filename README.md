@@ -27,15 +27,15 @@ You can follow the game's progress through the [playlist](https://www.youtube.co
 
 ## Infrequently asked questions
 
-### Why make the game open-source?
-> I put Yume Danpu on GitHub after the original GameMaker project randomly got corrupted. I made the repository public because, well, I figured, what the hell? We'd be more than happy if someone used what we made to create something new.
-
 ### Why use GameMaker to make the game?
 > I started using GameMaker back in 2021, so I’ve picked up a few things since then. It also gives us a lot more freedom to do whatever we want compared to RPG Maker.
+
+### Why make the game open-source?
+> I put Yume Danpu on GitHub after the original GameMaker project randomly got corrupted. I made the repository public because, well, I figured, what the hell? We'd be more than happy if someone used what we made to create something new.
 
 &nbsp;
 
 <p align="center">
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_wrld_npc_macaco_citizen/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="48" /></a>
+    <img src="./sprites/spr_player_dn/12ae5a06-47d6-4b9f-b8ed-2ff6dd9e5bff.png" alt="Macacolandia citizen" height="48" /></a>
 </p>
