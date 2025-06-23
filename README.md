@@ -37,5 +37,5 @@ You can follow the game's progress through the [playlist](https://www.youtube.co
 
 <p align="center">
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_player_dn/12ae5a06-47d6-4b9f-b8ed-2ff6dd9e5bff.png" alt="Macacolandia citizen" height="48" /></a>
+    <img src="./sprites/spr_entity_macaco_citizen/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="48" /></a>
 </p>
