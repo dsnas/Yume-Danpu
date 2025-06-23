@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.0,
+  "duration":1.4106122,
   "name":"unused_snd_menu_inv_close",
   "parent":{
     "name":"[!] unused",
