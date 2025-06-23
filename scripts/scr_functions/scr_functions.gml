@@ -2,8 +2,47 @@
 //////// Functions that are basic for the game to work
 
 
+// Functions related to objects
+function fn_obj_create(_obj, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
+{
+	obj_id = instance_create_layer(_x, _y, "Instances", _obj, _varStruct);
+	return obj_id;
+}
+function fn_obj_destroy(_obj) // Destroys the specified object
+{
+	instance_destroy(_obj);
+}
+function fn_obj_exists(_obj) // Returns whether if the specified object exists
+{
+	return instance_exists(_obj);
+}
+function fn_obj_img(_obj, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the main information of the specified object's image
+{
+	with (_obj)
+	{
+		image_speed = _spd;
+		image_index = _idx;
+		image_blend = _col;
+		image_alpha = _alp;
+		image_xscale = _xSc;
+		image_yscale = _ySc;
+		image_angle = _ang;
+		
+		// Disables animation
+		if (global.sett_rdcdMot == true) // Checks if the setting Reduced Motion is active
+		{
+			image_speed = 0;
+			image_index = 0;
+		}
+	}
+}
+function fn_obj_depth(_val = -bbox_bottom)
+{
+	depth = _val
+}
+
 // Functions related to audio
-function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur = 0, _aud_pit = 1, _aud_ofs = 0)	// (Starts playing the specified audio)
+function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur = 0, _aud_pit = 1, _aud_ofs = 0) // Starts playing the specified audio
 {
 	aud = _aud;					// Audio
 	aud_volIdx = _aud_volIdx;	// 
@@ -23,17 +62,16 @@ function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur 
 	audio_sound_pitch(aud_id, aud_pit);
 	audio_sound_set_track_position(aud_id, aud_ofs);
 }
-function fn_aud_fix()																								// (Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch)
+function fn_aud_fix() // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
 {
 	// (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED!!!!!!!!!!)
 	
 	
-	if (aud == mus_menu_home) // (main menu music)
-		aud_vol *= 0.45;
-	
-	
+	// Menu
+	if (aud == snd_menu_start)
+		aud_ofs = 0.1;
 	var _thm_cur = global.thm_cur;
-	if (aud == global.thm_opt_move_snd[_thm_cur]) // (menu sounds)
+	if (aud == global.thm_opt_move_snd[_thm_cur])
 	{
 		if (_thm_cur == THM_IDX.DFLT) // (THE SOUND WHOSE VOLUME SHOULD BE USED AS THE REFERENCE POINT FOR ALL OTHERS)
 			aud_vol *= 1; // (MUST BE ONE)
@@ -60,14 +98,12 @@ function fn_aud_fix()																								// (Adjusts the volume of the audio
 			aud_vol *= 0.4;
 	}
 	
-	
-	if (aud == snd_player_fstep) // (player footsteps)
+	// Player
+	if (aud == snd_player_fstep)
 		aud_vol *= 0.75;
 	
-	
-	if (aud == mus_macaco) // (Macacolandia's music)
-		aud_vol *= 0.25;
-	if (aud == snd_entity_macaco_citizen_0) // (Macacolandia citizens sounds)
+	// Macacolandia
+	if (aud == snd_entity_macaco_citizen_0)
 	{
 		aud_vol *= 0.5;
 		aud_ofs = 0.25;
@@ -91,48 +127,22 @@ function fn_aud_fix()																								// (Adjusts the volume of the audio
 		aud_ofs = 0.25;
 	}
 	
-	
-	if (aud == mus_wrld_pikini)
-		aud_vol *= 0.75;
+	// Other
+	if (aud == snd_hulapoca)
+		aud_vol *= 0.5;
+	if (aud == snd_penyplocde)
+		aud_vol *= 0.35;
 	
 	
 	return aud_vol;
 }
-function fn_aud_stop(_aud_id) // (Stops playing the specified audio)
+function fn_aud_stop(_aud_id) // Stops playing the specified audio
 {
 	audio_stop_sound(_aud_id);
 }
-function fn_aud_playing(_aud_id) // (Returns if the specified audio is currently playing)
+function fn_aud_playing(_aud_id) // Returns if the specified audio is currently playing
 {
 	return audio_is_playing(_aud_id);
-}
-
-// Functions related to objects
-function fn_obj_create(_obj, _x = 0, _y = 0)	// Creates the specified object at the given position
-{
-	obj_id = instance_create_layer(_x, _y, "Instances", _obj);
-}
-function fn_obj_destroy(_obj)					// Destroys the specified object
-{
-	instance_destroy(_obj);
-}
-function fn_obj_exists(_obj)					// Returns whether if the specified object exists
-{
-	return instance_exists(_obj);
-}
-function fn_obj_imgSpd(_obj, _imgSpd)			// Adjusts the specified object's image speed to the given value
-{
-	with (_obj)
-	{
-		image_speed = _imgSpd;
-	
-		/* (Reduced Motion) */
-		if (global.sett_rdcdMot == true) // (Disables animation)
-		{
-			image_speed = 0;
-			image_index = 0;
-		}
-	}
 }
 
 // Functions related to sprites
@@ -142,7 +152,7 @@ function fn_spr_w(_spr)		// Returns the width of the specified sprite
 		return sprite_get_width(_spr);
 	else
 	{
-		fn_dbg_log("The function fn_spr_w() was called with an invalid sprite ID");
+		fn_log("The function fn_spr_w() was called with an invalid sprite ID");
 		return 0;
 	}
 }
@@ -152,7 +162,7 @@ function fn_spr_h(_spr)		// Returns the height of the specified sprite
 		return sprite_get_height(_spr);
 	else
 	{
-		fn_dbg_log("The function fn_spr_h() was called with an invalid sprite ID");
+		fn_log("The function fn_spr_h() was called with an invalid sprite ID");
 		return 0;
 	}
 }
@@ -206,21 +216,21 @@ function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _yS
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
 	}
 	else
-		fn_dbg_log("The function fn_draw_spr() was called with an invalid sprite ID");
+		fn_log("The function fn_draw_spr() was called with an invalid sprite ID");
 }
 function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col = c_white, _alp = 1)												// Draws the specified sprite, but STRETCHED
 {
 	if (_spr != -1)
 		draw_sprite_stretched_ext(_spr, _img, _x, _y, _w, _h, _col, _alp);
 	else
-		fn_dbg_log("The function fn_draw_spr_stretch() was called with an invalid sprite ID");
+		fn_log("The function fn_draw_spr_stretch() was called with an invalid sprite ID");
 }
 function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1)					// Draws only a part of the specified sprite
 {
 	if (_spr != -1)
 		draw_sprite_part_ext(_spr, _img, _lt, _top, _w, _h, _x, _y, _xSc, _ySc, _col, _alp);
 	else
-		fn_dbg_log("The function fn_draw_spr_part() was called with an invalid sprite ID");
+		fn_log("The function fn_draw_spr_part() was called with an invalid sprite ID");
 }
 
 function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness)																// Draws a line
@@ -234,9 +244,9 @@ function fn_draw_self_setup()	// Sets up variables for manual self-drawing
 {
 	self_x = x;
 	self_y = y;
-	self_xSc = 1;
-	self_ySc = 1;
-	self_ang = 0;
+	self_xSc = image_xscale;
+	self_ySc = image_yscale;
+	self_ang = image_angle;
 }
 function fn_draw_self()			// Manually self-draws
 {
@@ -277,8 +287,8 @@ function fn_lerp_col(_colCur, _colTgt, _spd)
 
 
 
-// Functions related to debugging
-function fn_dbg_log(_msg)	// Sends a message to the debug log
+// Other functions
+function fn_log(_msg) // Sends a message to the log
 {
-	show_debug_message("[" + string(current_time) + "]  [" + string(object_get_name(object_index)) + "]  " + string(_msg));
+	show_debug_message($"[{current_time}]  [{object_get_name(object_index)}]  {_msg}");
 }

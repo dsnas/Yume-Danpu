@@ -25,10 +25,10 @@ function fn_eff_setup()
 	fn_eff_add(2, "Salenis 2", "The Salenis is a political symbol.\nIts texture is horrifying.");
 	global.eff_has[2] = true;
 }
-function fn_eff_add(_id, _name_text, _desc_text)
+function fn_eff_add(_EFF_IDX, _name_text, _desc_text)
 {
-	var i = _id;
+	var i = _EFF_IDX;
 	
-	global.eff_name_text[i] = _name_text;
-	global.eff_desc_text[i] = _desc_text;
+	global.eff_name_[i] = _name_text;
+	global.eff_desc[i] = _desc_text;
 }

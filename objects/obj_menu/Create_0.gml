@@ -9,11 +9,7 @@ draw_dist = 16;
 draw_alp = 1;
 
 
-
-
 fn_menu_getId();
-
-
 
 
 // Levels, the different sections of the menu the player can navigate through, like "Effects", "Items" and "Themes" from the inventory, or "Start" from the main menu
@@ -27,13 +23,9 @@ for (var l = 0; l < (lvl_amtMax + 1); l++) // This is the only for() loop that g
 	lvl_alp[l] = 0; // Alpha of everything that's being drawn in that level
 
 
-
-
 // Transition sequence between menu levels
 fn_menu_lvlTrans_start(-1);	// !!!!!!!!! The menu extension only needs to redefine "lvlTrans_lvlTgt" to its main level index, there's no need to repeat the function
 lvlTrans_alpSpd = 0.25;		// Speed of the transition sequence
-
-
 
 
 // Rectangles, boxes, options, information and titles (Per-level)

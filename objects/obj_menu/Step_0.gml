@@ -1,5 +1,8 @@
 
-fn_keyQuick();
+fn_key_quick();
+
+
+fn_menu_evStep();
 
 
 // Option movement, selection and cancellation
@@ -37,6 +40,9 @@ if (lvlTrans_stg == 0) // Checks if the transition sequence is active
 		lvl = lvlTrans_lvlTgt;
 		lvlTrans_stg = -1;
 		lvlTrans_lvlTgt = -1;
+		
+		if (lvlTrans_rmTgt != -1)
+			room_goto(lvlTrans_rmTgt)
 	}
 }
 

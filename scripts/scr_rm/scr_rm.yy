@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_textData",
+  "%Name":"scr_rm",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_textData",
+  "name":"scr_rm",
   "parent":{
-    "name":"[!] Scripts",
-    "path":"folders/[!] Scripts.yy",
+    "name":"rm",
+    "path":"folders/rm.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

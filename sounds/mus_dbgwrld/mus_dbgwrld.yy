@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"mus_dbgwrld",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":9.6,
+  "name":"mus_dbgwrld",
+  "parent":{
+    "name":"Debug World",
+    "path":"folders/Debug World.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mus_dbgwrld.wav",
+  "type":1,
+  "volume":1.0,
+}

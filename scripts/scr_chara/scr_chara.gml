@@ -38,7 +38,7 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	move_dir_key[MOVE_DIR_UP] = KEY_IDX.UP;
 	move_dir_key[MOVE_DIR_DN] = KEY_IDX.DN;
 	
-	move_stg = -1;	// ID of the current stage of the movement sequence (-1 == idle, 0+ active)
+	move_stg = -1; // ID of the current stage of the movement sequence (-1 == idle, 0+ active)
 	move_spd = 1;
 	move_dur = 0;
 	move_durMax = 16;
@@ -50,8 +50,36 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	moveDelay_dur = 0;
 	moveDelay_durMin = 0;
 	moveDelay_durMax = 240;
-	moveDelay_act = true;
+	moveDelay_act = false;
 	
-	moveChain_act = false;	// Determines if the character can NOT move too far from their starting position
+	moveChain_act = false; // Determines if the character can NOT move too far from their starting position
 	moveChain_dist = 48;
+}
+
+function fn_chara_rm_loop()
+{
+	var _xDist = 0;
+	var _yDist = 0;
+	
+	if (obj_rm.loop_xAct == true)
+	{
+		if (self_x < 0)
+			_xDist = room_width;
+		if (self_x >= room_width)
+			_xDist = -room_width;
+		
+		x += _xDist;
+		self_x += _xDist;
+	}
+	
+	if (obj_rm.loop_yAct == true)
+	{
+		if (self_y <= 0)
+			_yDist = room_height;
+		if (self_y > room_height)
+			_yDist = -room_height;
+		
+		y += _yDist;
+		self_y += _yDist;
+	}
 }

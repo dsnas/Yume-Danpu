@@ -7,12 +7,12 @@ function fn_menu_sett_lbl_textdata(_lvl_id)
 	
 	if (l == LVL_MAIN) // LVL MAIN
 	{
-		lbl_text[l, 0] = global.sett_langName[global.sett_lang];
+		lbl_text[l, 0] = global.sett_langName[global.lang_idx];
 	}
 	
 	else if (l == LVL_VID) // LVL VID (Video Settings)
 	{
-		lbl_text[l, 0] = fn_textdata("menu_sett_main_lbl_" + string(global.sett_fscr));
+		lbl_text[l, 0] = fn_lang_textData("menu_sett_main_lbl_" + string(global.sett_fscr));
 	}
 	
 	

@@ -42,8 +42,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

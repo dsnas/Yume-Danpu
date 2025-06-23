@@ -1,7 +1,5 @@
 
-image_speed = 0;
-image_index = 0;
-image_alpha = 1;
+fn_obj_img(id);
 view_enabled = true;
 view_visible[0] = true;
 
@@ -20,6 +18,9 @@ menu_key_idx[0] = KEY_IDX.MENU_INV;
 
 menu_id[1] = "pse";
 menu_key_idx[1] = KEY_IDX.MENU_PSE;
+
+menu_amt = array_length(menu_id);
+menu_amt = 0;
 
 
 // Camera movement

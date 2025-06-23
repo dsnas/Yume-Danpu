@@ -1,13 +1,13 @@
 
-fn_mus();
+fn_key_quick();
 
 
 // Toggles fullscreen setting on/off
-if (fn_key("press", KEY_IDX.FSCR) == true)
+if (key_press_fscr == true)
 	global.sett_fscr = !global.sett_fscr;
 
 // Toggles autowalk on/off
-if (fn_key("press", KEY_IDX.ATWLK) == true)
+if (key_press_atwlk == true)
 	global.player_atwlk = !global.player_atwlk;
 
 

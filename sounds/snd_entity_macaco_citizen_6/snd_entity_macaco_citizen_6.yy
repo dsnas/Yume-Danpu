@@ -12,8 +12,8 @@
   "duration":5.355102,
   "name":"snd_entity_macaco_citizen_6",
   "parent":{
-    "name":"INSANIDADE",
-    "path":"folders/INSANIDADE.yy",
+    "name":"Macacolandia",
+    "path":"folders/Macacolandia.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

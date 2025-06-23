@@ -6,26 +6,28 @@ function fn_interact_getId() // Fetches the ID of the interactable, which determ
 {
 	interact_id = "";
 	
-	if (room == rm_wrld_dbg)
-		interact_id = "dbg_0";
+	if (room == rm_dbgwrld)
+		interact_id = "dbgwrld";
 }
 
 function fn_interact_evCreate() // Create Event determined by the interactable's ID
 {
 	// Debug
-	if (interact_id == "dbg_0")
+	if (interact_id == "dbgwrld")
 	{
 		pet_type = PET_TYPE_MEOW;
 		pet_meow_aud[0] = snd_hulapoca;
+		pet_meow_aud[1] = snd_penyplocde;
 	}
 }
 function fn_interact_evStep() // Step Event determined by the NPC's ID
 {
 	// Debug
-	if (interact_id == "dbg_0")
+	if (interact_id == "dbgwrld")
 	{
 		if (pet_stg == 0)
-			pet_meow_idx = 0;
+			pet_meow_idx = choose(0, 1);
+		
 		fn_interact_pet();
 	}
 }
@@ -64,7 +66,7 @@ function fn_interact_pet() // Interaction sequence
 	}
 }
 
-function fn_interact_pet_meow_addAud(_aud_nameWithoutIdx) // Adds the 
+function fn_interact_pet_meow_aud_add(_aud_nameWithoutIdx) // Adds the 
 {
 	for (var a = 0; a < pet_meow_amtMax; a++)
 	{

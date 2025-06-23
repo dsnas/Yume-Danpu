@@ -13,7 +13,7 @@ px_h[l, 0] = 240;
 px_col[l, 0] = global.thm_col[global.thm_cur, 4];
 px_alp[l, 0] = 0.75;
 
-ttl_text[l] = fn_textdata("menu_pse_main_ttl"); // [lvl MAIN] ttl (Title)
+ttl_text[l] = fn_lang_textData("menu_pse_main_ttl"); // [lvl MAIN] ttl (Title)
 
 var _opt_yDist = draw_dist; // [lvl MAIN] opts (Options)
 var _opt_yFix = 1;

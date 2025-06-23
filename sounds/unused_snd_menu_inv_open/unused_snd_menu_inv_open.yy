@@ -12,8 +12,8 @@
   "duration":1.4106122,
   "name":"unused_snd_menu_inv_open",
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

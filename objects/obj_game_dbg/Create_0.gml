@@ -7,7 +7,9 @@ image_alpha = 0;
 global.dbg_act = true;
 global.dbg_mod = vk_alt; // Modifier key
 global.dbg_pwd = "hunter2"; // Password
-global.dbg_rm = rm_macaco;
+global.dbg_rm[0] = rm_dbgwrld;
+global.dbg_rm[1] = rm_macaco;
+global.dbg_excessLog = false;	// Determines if log messages will show excessively and unnecessarily (NOT recommended AT ALL)
 
 
 fntTest_act = false;

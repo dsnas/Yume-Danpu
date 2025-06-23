@@ -6,8 +6,8 @@
   "name":"unused_obj_wrld_solid_template",
   "overriddenProperties":[],
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -10,8 +10,8 @@
   "name":"unused_obj_wrld_npc_pikini_citizen",
   "overriddenProperties":[],
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "parentObjectId":null,
   "persistent":false,

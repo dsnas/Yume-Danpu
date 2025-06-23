@@ -12,8 +12,8 @@
   "duration":9.794694,
   "name":"unused_mus_wrld_pikini",
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

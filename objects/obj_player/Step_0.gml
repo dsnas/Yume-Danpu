@@ -1,10 +1,10 @@
 
-fn_keyQuick();
+fn_key_quick();
 
-move_dir_key[MOVE_DIR_LT] = key_lt_hold;
-move_dir_key[MOVE_DIR_RT] = key_rt_hold;
-move_dir_key[MOVE_DIR_UP] = key_up_hold;
-move_dir_key[MOVE_DIR_DN] = key_dn_hold;
+move_dir_key[MOVE_DIR_LT] = key_hold_lt;
+move_dir_key[MOVE_DIR_RT] = key_hold_rt;
+move_dir_key[MOVE_DIR_UP] = key_hold_up;
+move_dir_key[MOVE_DIR_DN] = key_hold_dn;
 
 
 // Autowalk
@@ -34,17 +34,17 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 	
 	// Loops through each movement direction
 	for (var d = 0; d < 4; d++)
-	{		
+	{
+		// Calculates movement target position
+		move_dir_x[d] = (x + (move_spd * move_durMax * move_dir_spdMul[d]) * (move_dir_axis[d] == MOVE_DIR_AXIS_HOR));
+		move_dir_y[d] = (y + (move_spd * move_durMax * move_dir_spdMul[d]) * (move_dir_axis[d] == MOVE_DIR_AXIS_VER));
+		
+		
 		// Checks for movement key inputs
 		if (move_dir_key[d] == true)
 		{
 			sprite_index = move_dir_spr[d];
 			move_dir = d;
-			
-			
-			// Calculates movement target position
-			move_dir_x[d] = (x + (move_spd * move_durMax * move_dir_spdMul[d]) * (move_dir_axis[d] == MOVE_DIR_AXIS_HOR));
-			move_dir_y[d] = (y + (move_spd * move_durMax * move_dir_spdMul[d]) * (move_dir_axis[d] == MOVE_DIR_AXIS_VER));
 			
 			
 			// Checks for collision
@@ -72,7 +72,7 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 		
 		// Checks for interaction key input and for interactables
 		var _interact_obj = instance_place(move_dir_x[d], move_dir_y[d], obj_interact);
-		if (d == move_dir && key_slct_press && _interact_obj != noone)
+		if (d == move_dir && key_press_slct && _interact_obj != noone)
 		{
 			if (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_INTERACT)
 			|| (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_ENTITY && _interact_obj.move_stg == -1)
@@ -93,9 +93,9 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 }
 if (move_stg == -1) // Checks for menu key inputs and created the menu object
 {
-	for (var m = 0; m < array_length(menu_key_idx); m++)
+	for (var m = 0; m < menu_amt; m++)
 	{
-		if (fn_key(KEY_CHECKtype.PRESS, menu_key_idx[m]) == true && fn_obj_exists(obj_menu) == false)
+		if (fn_key_press(menu_key_idx[m]) == true && fn_obj_exists(obj_menu) == false)
 		{
 			fn_menu_create(menu_id[m]);
 			move_stg = -2;
@@ -113,6 +113,7 @@ if (move_stg == 0) // Moves
 {
 	self_x += ((move_spd * move_dir_spdMul[move_dir]) * (move_dir_axis[move_dir] == MOVE_DIR_AXIS_HOR));
 	self_y += ((move_spd * move_dir_spdMul[move_dir]) * (move_dir_axis[move_dir] == MOVE_DIR_AXIS_VER));
+	fn_chara_rm_loop();
 	depth = -self_y;
 	
 	move_dur -= 1;
@@ -124,12 +125,9 @@ if (move_stg == 0) // Moves
 		self_y = y;
 		move_stg = -1;
 		
-		if (global.dbg_act == true)
-		{
-			fn_dbg_log("room position = [" + string(x) + ", " + string(y) + "] | grid position = [" + string(x / 16) + ", " + string(y / 16) + "] | room depth = " + string(depth));
-			fn_dbg_log("camera = [" + string(cam_id) + "] | camera position = [" + string(cam_x) + ", " + string(cam_y) + "]");
-			fn_dbg_log("");
-		}
+		
+		if (global.dbg_act == true && global.dbg_excessLog == true)
+			fn_log($"position = [{x}, {y}] | grid position = [{x / 16}, {y / 16}] | depth = {depth} | camera id = {cam_id} | camera position = {cam_x}, {cam_y}}");
 	}
 }
 
@@ -139,7 +137,7 @@ if (cam_act == true)
 {
 	cam_x = (self_x + (sprite_width / 2) - (cam_w / 2));
 	cam_y = (self_y - (sprite_height / 2) - (cam_h / 2));
-	if (cam_clamp == true)
+	if (obj_rm.loop_camLock == true)
 	{
 		cam_x = clamp(cam_x, 0, (room_width - cam_w));
 		cam_y = clamp(cam_y, 0, (room_height - cam_h));

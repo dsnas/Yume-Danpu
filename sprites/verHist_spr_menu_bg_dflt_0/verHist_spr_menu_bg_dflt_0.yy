@@ -49,8 +49,8 @@
   },
   "origin":0,
   "parent":{
-    "name":"verHist",
-    "path":"folders/verHist.yy",
+    "name":"[!] verHist",
+    "path":"folders/[!] verHist.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

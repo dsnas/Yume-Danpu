@@ -2,55 +2,67 @@
 //////// Funtions related to keybinds/controls
 
 
-function fn_key(_KEY_CHECKtype, _KEY_IDX) // Returns if the given keybind is currently being pressed or held
+function fn_key_setup() // Sets up the default and alternative keybinds
 {
-	var _key, _KEY_TYPE_IDX;
-	var _key_inp = false;
+	fn_key_add(0, -1, -1);
 	
-	// Loops through the two keybind types: defaults and alternatives
-	for (var i = 0; i < 2; i++)
+	enum KEY_IDX // Index of each keybind in the array
 	{
-		_KEY_TYPE_IDX = KEY_TYPE_IDX.DFLT;
-		if (i == 1)
-			_KEY_TYPE_IDX = KEY_TYPE_IDX.ALT;
-		_key = global.sett_key[_KEY_TYPE_IDX, _KEY_IDX];
-		
-		// Checks if the given key is valid
-		if (_key != -1)
-		{
-			_key_inp = keyboard_check_pressed(_key);
-			if (_KEY_CHECKtype == KEY_CHECKtype.HOLD)
-				_key_inp = keyboard_check(_key);
-			
-			if (_key_inp == false)
-				continue;
-			else if (_key_inp == true)
-				break;
-		}
-		
-		// Checks if the given key is invalid
-		else if (_key == -1)
-			continue;
+		LT = 0,			// Left
+		RT = 1,			// Right
+		UP = 2,			// Up
+		DN = 3,			// Down
+		SLCT = 4,		// Select
+		CNCL = 5,		// Cancel
+		MENU_INV = 6,	// Inventory menu
+		MENU_PSE = 7,	// Pause menu
+		FSCR = 8,		// Fullscreen
+		ATWLK = 9		// Autowalk
 	}
-	
-	return _key_inp;
+	fn_key_add(KEY_IDX.LT,			vk_left,	ord("A"));
+	fn_key_add(KEY_IDX.RT,			vk_right,	ord("D"));
+	fn_key_add(KEY_IDX.UP,			vk_up,		ord("W"));
+	fn_key_add(KEY_IDX.DN,			vk_down,	ord("S"));
+	fn_key_add(KEY_IDX.SLCT,		ord("Z"),	vk_enter);
+	fn_key_add(KEY_IDX.CNCL,		ord("X"),	vk_shift);
+	fn_key_add(KEY_IDX.MENU_INV,	ord("C"),	vk_control);
+	fn_key_add(KEY_IDX.MENU_PSE,	vk_escape,	-1);
+	fn_key_add(KEY_IDX.FSCR,		vk_f4,		-1);
+	fn_key_add(KEY_IDX.ATWLK,		ord("R"),	-1);
+}
+function fn_key_add(_key_idx, _key_dflt, _key_alt)
+{
+	global.key_dflt[_key_idx] = _key_dflt;
+	global.key_alt[_key_idx] = _key_alt;
 }
 
 
-function fn_keyQuick() // Provides several variables to make input-checking tasks quicker
+
+function fn_key_press(_key_idx) // Returns if the specified keybind has been pressed
 {
-	key_lt_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.LT);
-	key_rt_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.RT);
-	key_up_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.UP);
-	key_dn_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.DN);
-	key_slct_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.SLCT);
-	key_cncl_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.CNCL);
-	key_inv_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.MENU_INV);
-	key_pse_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.MENU_PSE);
-	key_atwlk_press = fn_key(KEY_CHECKtype.PRESS, KEY_IDX.ATWLK);
+	return max(keyboard_check_pressed(global.key_dflt[_key_idx]), keyboard_check_pressed(global.key_alt[_key_idx]));
+}
+function fn_key_hold(_key_idx) // Returns if the specified keybind is currently being held
+{
+	return max(keyboard_check(global.key_dflt[_key_idx]), keyboard_check(global.key_alt[_key_idx]));
+}
+
+
+function fn_key_quick() // Provides several variables to make input-checking tasks quicker
+{
+	key_press_lt	= fn_key_press(KEY_IDX.LT);
+	key_press_rt	= fn_key_press(KEY_IDX.RT);
+	key_press_up	= fn_key_press(KEY_IDX.UP);
+	key_press_dn	= fn_key_press(KEY_IDX.DN);
+	key_press_slct	= fn_key_press(KEY_IDX.SLCT);
+	key_press_cncl	= fn_key_press(KEY_IDX.CNCL);
+	key_press_inv	= fn_key_press(KEY_IDX.MENU_INV);
+	key_press_pse	= fn_key_press(KEY_IDX.MENU_PSE);
+	key_press_fscr	= fn_key_press(KEY_IDX.FSCR);
+	key_press_atwlk	= fn_key_press(KEY_IDX.ATWLK);
 	
-	key_lt_hold = fn_key(KEY_CHECKtype.HOLD, KEY_IDX.LT);
-	key_rt_hold = fn_key(KEY_CHECKtype.HOLD, KEY_IDX.RT);
-	key_up_hold = fn_key(KEY_CHECKtype.HOLD, KEY_IDX.UP);
-	key_dn_hold = fn_key(KEY_CHECKtype.HOLD, KEY_IDX.DN);
+	key_hold_lt		= fn_key_hold(KEY_IDX.LT);
+	key_hold_rt		= fn_key_hold(KEY_IDX.RT);
+	key_hold_up		= fn_key_hold(KEY_IDX.UP);
+	key_hold_dn		= fn_key_hold(KEY_IDX.DN);
 }

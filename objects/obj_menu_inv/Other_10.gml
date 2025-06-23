@@ -141,7 +141,7 @@ for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 		{
 			if (array_get(list_hasArr[l], i) == true)
 			{
-				fn_dbg_log(array_get(list_nameArr[l], i));
+				fn_log(array_get(list_nameArr[l], i));
 				opt_text[l, i] = array_get(list_nameArr[l], i);
 			}
 			else

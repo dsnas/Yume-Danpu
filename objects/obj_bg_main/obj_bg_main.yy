@@ -1,18 +1,18 @@
 {
   "$GMObject":"",
-  "%Name":"obj_wrld_nonsolid_dbg",
-  "eventList":[],
+  "%Name":"obj_bg_main",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_wrld_nonsolid_dbg",
+  "name":"obj_bg_main",
   "overriddenProperties":[],
   "parent":{
-    "name":"dbg",
-    "path":"folders/INSANIDADE/dbg.yy",
+    "name":"bg",
+    "path":"folders/INSANIDADE/bg.yy",
   },
-  "parentObjectId":{
-    "name":"obj_nonsolid_parent",
-    "path":"objects/obj_nonsolid_parent/obj_nonsolid_parent.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_solid_dbg",
-    "path":"sprites/spr_wrld_solid_dbg/spr_wrld_solid_dbg.yy",
+    "name":"spr_main",
+    "path":"sprites/spr_main/spr_main.yy",
   },
   "spriteMaskId":null,
   "visible":true,

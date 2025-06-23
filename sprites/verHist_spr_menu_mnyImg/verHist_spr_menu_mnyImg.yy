@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"verHist",
-    "path":"folders/verHist.yy",
+    "name":"[!] verHist",
+    "path":"folders/[!] verHist.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

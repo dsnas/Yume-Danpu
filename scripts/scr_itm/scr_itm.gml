@@ -17,10 +17,10 @@ function fn_itm_setup()
 	fn_itm_add(0, "Axenis", "The powerful axe of the world-famous\nwriter Sal de Enis.");
 	global.itm_has[0] = true;
 }
-function fn_itm_add(_id, _name_text, _desc_text)
+function fn_itm_add(_ITM_IDX, _name_text, _desc_text)
 {
-	var i = _id;
+	var i = _ITM_IDX;
 	
-	global.itm_name_text[i] = _name_text;
-	global.itm_desc_text[i] = _desc_text;
+	global.itm_name[i] = _name_text;
+	global.itm_desc[i] = _desc_text;
 }

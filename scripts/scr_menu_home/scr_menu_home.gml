@@ -8,14 +8,16 @@ function fn_menu_home_evCreate()
 	LVL_LANG = 0;
 	var l = LVL_LANG;
 	lvlTrans_lvlTgt = l;
+	if (global.flag[0] == false)
+		lvlTrans_lvlTgt_delay = 120;
 	
-	for (var o = 0; o < global.sett_lang_amt; o++)
+	for (var o = 0; o < global.lang_amt; o++)
 	{
 		opt_text[l, o] = "";
 		optSlctr_act[l, o] = false;
 	}
 	opt_move_type[l] = OPT_MOVE_TYPE_dfltHor; // Toggles horizontal default option movement
-	opt_amt[l] = global.sett_lang_amt;
+	opt_amt[l] = global.lang_amt;
 	
 		// Flags [#0]
 	lang_flag_spr = spr_menu_home_flag;
@@ -60,6 +62,9 @@ function fn_menu_home_evCreate()
 		lang_flagSlctr_alp[f] = 0;
 	}
 	
+	lang_snd_act = false;
+	lang_snd = global.thm_start_snd[global.thm_cur];
+	
 	
 	
 	
@@ -94,6 +99,15 @@ function fn_menu_home_evCreate()
 	// Settings level
 	LVL_SETT = 2;
 }
+function fn_menu_home_evStep()
+{
+	// Languages level
+	if (((lvlTrans_lvlTgt == LVL_LANG && lvlTrans_stg > -1 && lvlTrans_lvlTgt_delay <= 0) || (lvl == LVL_LANG && lvlTrans_stg == -1)) && lang_snd_act == false)
+	{
+		fn_aud_play(lang_snd, VOL_IDX.MENU);
+		lang_snd_act = true;
+	}
+}
 function fn_menu_home_evDrawGUI_1(l)
 {
 	// Language level
@@ -120,10 +134,10 @@ function fn_menu_home_opt_slct()
 	if (lvl == LVL_LANG)
 	{
 		if (opt_move_pos[lvl] == 0) // Selected English (United States)
-			global.sett_lang = LANG_IDX.EN_US;
+			global.lang_idx = LANG_IDX.EN_US;
 		else if (opt_move_pos[lvl] == 1) // Selected Português (Brasil)
-			global.sett_lang = LANG_IDX.PT_BR;
-		fn_textData_setup()
+			global.lang_idx = LANG_IDX.PT_BR;
+		fn_lang_textData_setup()
 		
 		global.flag[0] = true;
 		

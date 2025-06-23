@@ -1,8 +1,9 @@
 
-// Draws rectangles, boxes, options, information and titles
+// Loops through each level until the maximum amount is reached
 for (var l = 0; l < lvl_amtMax; l++)
 {
-	if (l == lvl) || (l == lvlTrans_lvlTgt) // Only draws at the same time the current level and the one the transition sequence is going to
+	// Draws rectangles, boxes, options, information and titles of the current level and the one the transition sequence may be going to
+	if (l == lvl) || (l == lvlTrans_lvlTgt)
 	{
 		fn_menu_evDrawGUI_0(l);
 		

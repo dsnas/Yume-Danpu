@@ -1,7 +1,6 @@
 
-depth = -bbox_bottom;
-image_speed = 0;
-image_index = 0;
+fn_obj_img(id);
+fn_obj_depth();
 
 
 fn_draw_self_setup();

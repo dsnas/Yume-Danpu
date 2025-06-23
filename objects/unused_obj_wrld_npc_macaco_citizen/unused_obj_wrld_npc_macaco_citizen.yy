@@ -10,8 +10,8 @@
   "name":"unused_obj_wrld_npc_macaco_citizen",
   "overriddenProperties":[],
   "parent":{
-    "name":"unused",
-    "path":"folders/unused.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -32,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_wrld_entity_macaco_citizen",
-    "path":"sprites/spr_wrld_entity_macaco_citizen/spr_wrld_entity_macaco_citizen.yy",
+    "name":"spr_entity_macaco_citizen",
+    "path":"sprites/spr_entity_macaco_citizen/spr_entity_macaco_citizen.yy",
   },
   "spriteMaskId":null,
   "visible":true,

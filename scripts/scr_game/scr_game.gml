@@ -19,8 +19,10 @@ function fn_game_start()
 	window_set_caption(_caption);
 	
 	
+	fn_lang_setup();
+	fn_key_setup();
 	fn_sett_setup();
-	fn_textData_setup();
+	fn_lang_textData_setup();
 	fn_flag_setup();
 	
 	fn_eff_setup();
@@ -28,9 +30,11 @@ function fn_game_start()
 	fn_thm_setup();
 	fn_player_setup();
 	
-	fn_mus_setup();
+	fn_obj_create(obj_rm);
 	fn_obj_create(obj_game_dbg, 0, 0);
 	
 	
-	room_goto(temp_rm_menu_home);
+	var _rm = temp_rm_menu_home;
+	//_rm = rm_dbgwrld;
+	room_goto(_rm);
 }

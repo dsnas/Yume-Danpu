@@ -1,6 +1,6 @@
 {
   "$GMSprite":"",
-  "%Name":"spr_wrld_solid_dbg",
+  "%Name":"spr_nonsolid_dbgwrld",
   "bboxMode":2,
   "bbox_bottom":15,
   "bbox_left":0,
@@ -21,19 +21,19 @@
   "layers":[
     {"$GMImageLayer":"","%Name":"a089dff4-d43c-4a42-aef9-5cc62e41a7f6","blendMode":0,"displayName":"default","isLocked":false,"name":"a089dff4-d43c-4a42-aef9-5cc62e41a7f6","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name":"spr_wrld_solid_dbg",
+  "name":"spr_nonsolid_dbgwrld",
   "nineSlice":null,
   "origin":6,
   "parent":{
-    "name":"dbg",
-    "path":"folders/INSANIDADE/dbg.yy",
+    "name":"Debug World",
+    "path":"folders/Debug World.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
   "resourceVersion":"2.0",
   "sequence":{
     "$GMSequence":"v1",
-    "%Name":"spr_wrld_solid_dbg",
+    "%Name":"spr_nonsolid_dbgwrld",
     "autoRecord":true,
     "backdropHeight":768,
     "backdropImageOpacity":0.5,
@@ -57,7 +57,7 @@
       "resourceType":"KeyframeStore<MomentsEventKeyframe>",
       "resourceVersion":"2.0",
     },
-    "name":"spr_wrld_solid_dbg",
+    "name":"spr_nonsolid_dbgwrld",
     "playback":1,
     "playbackSpeed":30.0,
     "playbackSpeedType":0,
@@ -71,7 +71,7 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"6912efea-6336-4f28-aa33-cb3c87b67cb3","path":"sprites/spr_wrld_solid_dbg/spr_wrld_solid_dbg.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"6912efea-6336-4f28-aa33-cb3c87b67cb3","path":"sprites/spr_nonsolid_dbgwrld/spr_nonsolid_dbgwrld.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
               },"Disabled":false,"id":"bab1a230-9985-4452-a6ca-e64b931ba1e1","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
