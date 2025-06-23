@@ -19,7 +19,7 @@ if (lvlTrans_act == true) // lvlTrans (Transition sequence between levels) (tran
 		lvl_alp[lvlTrans_lvlTgt] = 1;
 		
 		if (lvlTrans_menuKill == true)
-			fn_obj_destroy(id);
+			fn_obj_dstr(id);
 		if (lvlTrans_rmTgt != -1)
 			room_goto(lvlTrans_rmTgt);
 		if (lvlTrans_gameKill == true)

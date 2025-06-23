@@ -20,7 +20,6 @@ menu_id[1] = "pse";
 menu_key_idx[1] = KEY_IDX.MENU_PSE;
 
 menu_amt = array_length(menu_id);
-menu_amt = 0;
 
 
 // Camera movement
@@ -30,7 +29,6 @@ cam_x = 0;
 cam_y = 0;
 cam_w = 320;
 cam_h = 240;
-cam_clamp = false;
 
 
 

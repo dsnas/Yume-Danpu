@@ -3,12 +3,12 @@
 
 
 // Functions related to objects
-function fn_obj_create(_obj, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
+function fn_obj_create(_obj = id, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
 {
 	obj_id = instance_create_layer(_x, _y, "Instances", _obj, _varStruct);
 	return obj_id;
 }
-function fn_obj_destroy(_obj) // Destroys the specified object
+function fn_obj_dstr(_obj = id) // Destroys the specified object
 {
 	instance_destroy(_obj);
 }
@@ -16,7 +16,7 @@ function fn_obj_exists(_obj) // Returns whether if the specified object exists
 {
 	return instance_exists(_obj);
 }
-function fn_obj_img(_obj, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the main information of the specified object's image
+function fn_obj_img(_obj = id, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the main information of the specified object's image
 {
 	with (_obj)
 	{

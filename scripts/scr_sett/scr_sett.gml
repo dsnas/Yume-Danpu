@@ -7,7 +7,7 @@ function fn_sett_setup() // Sets up the game's settings
 	// Video Settings
 	global.sett_fscr = false; // Fullscreen
 	global.sett_lowGfx = false; // Low Graphics
-	global.sett_showFps = false; // Show FPS)
+	global.sett_showFps = false; // Show FPS
 	global.sett_showBdr = false; // Show Border
 	
 	
@@ -24,7 +24,7 @@ function fn_sett_setup() // Sets up the game's settings
 	}
 	
 	global.sett_vol[VOL_IDX.MASTER] = 1;
-	global.sett_vol[VOL_IDX.MUS] = 1;
+	global.sett_vol[VOL_IDX.MUS] = 0;
 	global.sett_vol[VOL_IDX.MENU] = 1;
 	global.sett_vol[VOL_IDX.PLAYER] = 1;
 	global.sett_vol[VOL_IDX.INTERACT] = 1;

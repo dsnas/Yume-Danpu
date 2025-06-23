@@ -63,7 +63,7 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 		
 		
 		// Main menu
-		ds_map_add(t, "menu_home_lang_lbl_0", "Language");
+		ds_map_add(t, "menu_home_lang_info_0", "Language");
 		
 		ds_map_add(t, "menu_home_main_opt_0", "Start");
 		ds_map_add(t, "menu_home_main_opt_1", "Options");
@@ -86,8 +86,8 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 		ds_map_add(t, "menu_sett_vid_opt_2", "Show FPS");
 		ds_map_add(t, "menu_sett_vid_opt_3", "Show Border");
 		
-		ds_map_add(t, "menu_sett_main_lbl_0", "No");
-		ds_map_add(t, "menu_sett_main_lbl_1", "Yes");
+		ds_map_add(t, "menu_sett_main_info_0", "No");
+		ds_map_add(t, "menu_sett_main_info_1", "Yes");
 		
 		
 		// Inventory menu
@@ -113,7 +113,7 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 	else if (i == LANG_IDX.PT_BR)	// Português (Brasil)
 	{
 		// Main menu
-		ds_map_add(t, "menu_home_lang_lbl_0", "Idioma");
+		ds_map_add(t, "menu_home_lang_info_0", "Idioma");
 		
 		ds_map_add(t, "menu_home_main_opt_0", "Jogar");
 		ds_map_add(t, "menu_home_main_opt_1", "Opções");

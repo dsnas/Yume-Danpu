@@ -15,48 +15,71 @@ function fn_menu_getId() // Fetches the ID of the menu, which determines its beh
 	menu_id = "";
 	if (variable_global_exists("menu_idTemp") == false)
 		global.menu_idTemp = "";
+	else
+		menu_id = global.menu_idTemp;
 	global.menu_home_obj = -1;
+	global.menu_pse_obj = -1;
 	
-	if (room == temp_rm_menu_home) // Main menu
+	
+	// Main menu
+	if (room == temp_rm_menu_home)
 	{
 		menu_id = "home";
 		global.menu_home_obj = id;
 	}
+	
+	// Pause menu
+	if (menu_id == "pse")
+		global.menu_pse_obj = id;
 }
 
 function fn_menu_evCreate() // Create Event determined by the menu's ID
 {
-	if (menu_id == "home") // Main menu
+	// Main menu
+	if (menu_id == "home")
 		fn_menu_home_evCreate();
+	
+	// Pause menu
+	if (menu_id == "pse")
+		fn_menu_pse_evCreate();
 }
 function fn_menu_evStep() // Step Event determined by the menu's ID
 {
+	// Main menu
 	if (menu_id == "home")
 		fn_menu_home_evStep();
 }
 function fn_menu_evDrawGUI_0(l) // Draw GUI Event (pre-core menu system's drawings) determined by the menu's ID
 {
-	
+	// Pause menu
+	if (menu_id == "pse")
+		fn_menu_pse_DrawGUI_0(l);
 }
 function fn_menu_evDrawGUI_1(l) // Draw GUI Event (post-core menu system's drawings) determined by the menu's ID
 {
-	if (menu_id == "home") // Main menu
+	// Main menu
+	if (menu_id == "home")
 		fn_menu_home_evDrawGUI_1(l);
 }
 
 
 // Functions related to the transition sequence
-function fn_menu_lvlTrans_start(_lvlTgt, _lvl_delay = 0, _lvlTgt_delay = 0, _killMe = false, _rmTgt = -1, _endGame = false) // Starts the transition sequence to the specified level
-{
-	lvlTrans_stg = 0; // Current stage of the transition sequence (-1 == inactive, 0+ == active)
+function fn_menu_lvlTrans_start(_tgt, _preDelay = 0, _postDelay = 0, _selfDstr = false, _gameEnd = false) // Starts the transition sequence to the specified level
+{	
+	lvlTrans_stg = 0; // ID of the current stage of the transition sequence (-1 == inactive, 0+ == active)
+	lvlTrans_tgt = _tgt; // ID of the level the transition sequence will take the menu to
 	
-	lvlTrans_lvlTgt = _lvlTgt; // Target menu level
+	lvlTrans_preDelay = _preDelay; // Duration of the delay in frames before the transition sequence starts
+	lvlTrans_postDelay = _postDelay; // Duration of the delay in frames after the transition sequence has started
 	
-	lvlTrans_lvl_delay = _lvl_delay;		// Duration of the delay in frames before the transition sequence starts
-	lvlTrans_lvlTgt_delay = _lvlTgt_delay;	// Duration of the delay in frames after the initial menu level has faded out
-	lvlTrans_killMe = _killMe;				// Determines if the menu system object should be destroyed when the transition sequence ends
-	lvlTrans_rmTgt = _rmTgt;				// Determines the room to go when the transition sequence ends
-	lvlTrans_endGame = _endGame;			// Determines if the game should end when the transition sequence ends
+	lvlTrans_selfDstr = _selfDstr; // Determines if the menu object should be destroyed when the transition sequence ends
+	lvlTrans_gameEnd = _gameEnd; // Determines if the game should end when the transition sequence ends
+	
+	lvlTrans_spd = 0.25; // Speed of the transition sequence
+	
+	opt_move_act[lvl] = false;
+	opt_slct_act[lvl] = false;
+	opt_cncl_act[lvl] = false;
 }
 
 
@@ -114,7 +137,7 @@ function fn_menu_opt_add(_lvl_idx, _opt_idx, _opt_text, _opt_x, _opt_y, _opt_col
 	opt_vAl[l, o] = _opt_vAl;
 	opt_hAl[l, o] = _opt_hAl;
 }
-function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx)	// Adds as options the several texts fetched from their text data value (Their positions will keep undefined)
+function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx) // Adds as options the several texts fetched from their text data value (Their positions will keep undefined)
 {
 	var l = _lvl_idx;
 	
@@ -125,7 +148,7 @@ function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx)	// Adds as 
 		
 		if (_opt_text != undefined)
 		{
-			opt_amt[l] += 1;
+			opt_amt[l] = (o + 1);
 			opt_text[l, o] = _opt_text;
 			fn_menu_opt_getSize(l, o);
 			
@@ -137,7 +160,7 @@ function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx)	// Adds as 
 			break;
 	}
 }
-function fn_menu_opt_getSize(_lvl_idx, _opt_idx)						// Fetches the width and height of the specified option
+function fn_menu_opt_getSize(_lvl_idx, _opt_idx) // Fetches the width and height of the specified option
 {
 	var l = _lvl_idx;
 	var o = _opt_idx;
@@ -155,7 +178,7 @@ function fn_menu_opt_getSize(_lvl_idx, _opt_idx)						// Fetches the width and h
 		opt_hMax[l] = max(opt_hMax[l], opt_h[l, o])
 }
 
-function fn_menu_opt_move()		// Option movement
+function fn_menu_opt_move() // Option movement sequence determined by its type ID
 {
 	if (opt_move_act[lvl] == true) // Checks whether the player is allowed to move
 	{
@@ -217,20 +240,47 @@ function fn_menu_opt_move()		// Option movement
 			fn_aud_play(opt_move_snd[lvl], VOL_IDX.MENU);
 	}
 }
-function fn_menu_opt_slct()		// Option selection										(!!! Also must be updated when a new menu is added)
+function fn_menu_opt_slct() // Option selection sequence determined by the menu's ID					(!!! Also must be updated when a new menu is added)
 {
-	if (opt_slct_act[lvl] == true && key_press_slct == true) // Checks whether the player is allowed to select an option, and for their input
+	// Checks whether the player is allowed to select an option, and for their input
+	if (opt_slct_act[lvl] == true && key_press_slct == true)
 	{
-		opt_slct_sndCur = opt_slct_snd[lvl];
+		_opt_slct_snd = opt_slct_snd[lvl];
 		
 		
-		// Fetches the selection sequence determined by the menu ID
-		if (menu_id == "home") // Main menu
+		// Main menu
+		if (menu_id == "home")
 			fn_menu_home_opt_slct();
+		
+		// Pause menu
+		if (menu_id == "pse")
+			fn_menu_pse_opt_slct();
 		
 		
 		// Plays sound when the player selects an option
-		fn_aud_play(opt_slct_sndCur, VOL_IDX.MENU);
+		fn_aud_play(_opt_slct_snd, VOL_IDX.MENU);
+	}
+}
+function fn_menu_opt_cncl() // Option cancellation sequence determined by the menu's ID
+{
+	// Loops through each the level-specific keys the player can press
+	for (var k = 0; k < array_length(opt_cncl_key_idx[lvl]); k++)
+	{
+		// Checks whether the player is allowed to cancel the previous selection of an option, and for their input
+		if (opt_cncl_act[lvl] == true && fn_key_press(opt_cncl_key_idx[lvl, k]) == true)
+		{
+			_opt_cncl_snd = -1;
+			
+			
+			// Pause menu
+			if (menu_id == "pse")
+				fn_menu_pse_opt_cncl();
+			
+			
+			// Plays sound when the player selects an option
+			if (_opt_cncl_snd != -1)
+				fn_aud_play(_opt_cncl_snd, VOL_IDX.MENU);
+		}
 	}
 }
 
@@ -317,14 +367,47 @@ function fn_menu_ttl_add(_lvl_idx, _ttl_text)
 	ttlBox_w[l] = ((abs(ttlBox_x[l]) * 2) + 320);
 	ttlBox_h[l] = (abs(ttlBox_y[l]) + (draw_dist * 2));
 	
-	var _ttl_yDistFix = 1;
 	ttl_x[l] = (ttlBox_x[l] + (ttlBox_w[l] / 2));
-	ttl_y[l] = (abs(ttlBox_y[l]) + (ttlBox_h[l] / 2) - (global.game_fnt_h / 2) - _ttl_yDistFix);
+	ttl_y[l] = ((ttlBox_h[l] - abs(ttlBox_y[l])) / 4);
 	ttl_col[l][0] = global.thm_col[global.thm_cur].whiteLight;
 	ttl_col[l][1] = global.thm_col[global.thm_cur].whiteDark;
 	ttl_vAl[l] = fa_top;
 	ttl_hAl[l] = fa_center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -404,7 +487,6 @@ function fn_menu_ttlWnd_hDiff(_lvl_id)
 
 
 */
-
 
 
 

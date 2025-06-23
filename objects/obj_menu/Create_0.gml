@@ -1,7 +1,7 @@
 
-image_speed = 0;
-image_index = 0;
-image_alpha = 0;
+fn_obj_img( , , , , 0);
+fn_obj_depth(-10000);
+
 
 draw_x = 0;
 draw_y = 0;
@@ -25,7 +25,6 @@ for (var l = 0; l < (lvl_amtMax + 1); l++) // This is the only for() loop that g
 
 // Transition sequence between menu levels
 fn_menu_lvlTrans_start(-1);	// !!!!!!!!! The menu extension only needs to redefine "lvlTrans_lvlTgt" to its main level index, there's no need to repeat the function
-lvlTrans_alpSpd = 0.25;		// Speed of the transition sequence
 
 
 // Rectangles, boxes, options, information and titles (Per-level)
@@ -68,11 +67,12 @@ for (var l = 0; l < lvl_amtMax; l++)
 	
 	// Option selection
 	opt_slct_act[l] = true;										// Determines if the player can select any options
-	opt_slct_snd[l] = global.thm_opt_slct_snd[global.thm_cur];	// Option selection sound
-	opt_slct_sndCur = opt_slct_snd[l];
+	opt_slct_snd[l] = global.thm_opt_slct_snd[global.thm_cur];	// Sound
 	
 	// Option cancellation
 	opt_cncl_act[l] = true;										// Determines if the player can cancel the last option selection
+	opt_cncl_snd[l] = global.thm_opt_cncl_snd[global.thm_cur];	// Sound
+	opt_cncl_key_idx[l, 0] = KEY_IDX.CNCL;						// Key to check for input
 	
 	
 	// Information, text that can't be interacted with in any way, like "Eleanor" in the inventory

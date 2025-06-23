@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_menu_pse",
+  "%Name":"scr_rmTrans",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_menu_pse",
+  "name":"scr_rmTrans",
   "parent":{
-    "name":"pause",
-    "path":"folders/menu/pause.yy",
+    "name":"rmTrans",
+    "path":"folders/rmTrans.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

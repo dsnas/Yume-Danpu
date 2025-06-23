@@ -57,7 +57,8 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 	// Main menu
 	if (rm_id == "menu_home")
 	{
-		if (global.menu_home_obj != -1 && global.menu_home_obj.lvl != global.menu_home_obj.lvl_amtMax && global.flag[0] == true)
+		menu_obj = global.menu_home_obj;
+		if (menu_obj != -1 && menu_obj.lvlTrans_stg == -1 && global.flag[0] == true) //(global.menu_home_obj != -1 && global.menu_home_obj.lvl != global.menu_home_obj.lvl_amtMax && global.flag[0] == true)
 			fn_rm_mus_add(0, mus_menu_home, 0.45);
 	}
 	

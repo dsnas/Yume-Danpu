@@ -8,5 +8,5 @@ function fn_flag_setup() // Sets up flags
 	for (var f = 0; f < global.flag_amtMax; f++)
 		global.flag[f] = -1;
 	
-	global.flag[0] = true; // Determines whether the player has selected a language when game started for the first time
+	global.flag[0] = false; // Determines whether the player has selected a language when game started for the first time
 }
