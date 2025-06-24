@@ -1,10 +1,10 @@
 
-fn_key_quick();
+fn_config_key_quick();
 
-move_dir_key[MOVE_DIR_LT] = key_hold_lt;
-move_dir_key[MOVE_DIR_RT] = key_hold_rt;
-move_dir_key[MOVE_DIR_UP] = key_hold_up;
-move_dir_key[MOVE_DIR_DN] = key_hold_dn;
+move_dir_key[MOVE_DIR_LT] = hold_lt;
+move_dir_key[MOVE_DIR_RT] = hold_rt;
+move_dir_key[MOVE_DIR_UP] = hold_up;
+move_dir_key[MOVE_DIR_DN] = hold_dn;
 
 
 // Autowalk
@@ -61,7 +61,7 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 				move_tgtX = move_dir_x[d];
 				move_tgtY = move_dir_y[d];
 				
-				fn_aud_play(snd_player_fstep, VOL_IDX.PLAYER);
+				fn_aud_play(snd_player_fstep, CONFIG_VOL_IDX.PLAYER);
 				
 				break;
 			}
@@ -72,7 +72,7 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 		
 		// Checks for interaction key input and for interactables
 		var _interact_obj = instance_place(move_dir_x[d], move_dir_y[d], obj_interact);
-		if (d == move_dir && key_press_slct && _interact_obj != noone)
+		if (d == move_dir && press_slct && _interact_obj != noone)
 		{
 			if (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_INTERACT)
 			|| (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_ENTITY && _interact_obj.move_stg == -1)
@@ -95,7 +95,7 @@ if (move_stg == -1) // Checks for menu key inputs and created the menu object
 {
 	for (var m = 0; m < menu_amt; m++)
 	{
-		if (fn_key_press(menu_key_idx[m]) == true && fn_obj_exists(obj_menu) == false)
+		if (fn_config_key_press(menu_key_idx[m]) == true && fn_obj_exists(obj_menu) == false)
 		{
 			fn_menu_create(menu_id[m]);
 			move_stg = -2;
@@ -134,18 +134,7 @@ if (move_stg == 0) // Moves
 
 // Camera movement
 if (cam_act == true)
-{
-	cam_x = (self_x + (sprite_width / 2) - (cam_w / 2));
-	cam_y = (self_y - (sprite_height / 2) - (cam_h / 2));
-	if (obj_rm.loop_camLock == true)
-	{
-		cam_x = clamp(cam_x, 0, (room_width - cam_w));
-		cam_y = clamp(cam_y, 0, (room_height - cam_h));
-	}
-	
-	camera_set_view_size(cam_id, cam_w, cam_h);
-	camera_set_view_pos(cam_id, cam_x, cam_y);
-}
+	fn_chara_cam();
 
 
 

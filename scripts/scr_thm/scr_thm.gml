@@ -4,7 +4,7 @@
 
 function fn_thm_setup() // Sets up variables for enabling menu themes
 {
-	enum THM_IDX // Stores the index of each theme in their arrays
+	enum THM_IDX // Index of each theme in their arrays
 	{
 		DFLT = 0,	// Default theme
 		MADOT = 1	// Madotsuki theme
@@ -30,11 +30,11 @@ function fn_thm_setup() // Sets up variables for enabling menu themes
 	
 	
 	// Default theme
-	fn_thm_add(THM_IDX.DFLT, fn_lang_textData("thm_name_dflt"), fn_lang_textData("thm_desc_dflt"), #949299, #949299, #545359, #545359, #100F11, false, spr_menu_box_dflt, spr_menu_optSlctr_dflt, 0, spr_menu_plyrFrm_madot);
+	fn_thm_add(THM_IDX.DFLT, fn_getText("thm_name_dflt"), fn_getText("thm_desc_dflt"), #949299, #949299, #545359, #545359, #100F11, false, spr_menu_box_dflt, spr_menu_optSlctr_dflt, 0, spr_menu_plyrFrm_madot);
 	global.thm_has[THM_IDX.DFLT] = true;
 	
 	// Madotsuki theme
-	fn_thm_add(THM_IDX.MADOT, fn_lang_textData("thm_name_madot"), fn_lang_textData("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_box_madot, spr_menu_optSlctr_madot, 0.25, spr_menu_plyrFrm_madot); 
+	fn_thm_add(THM_IDX.MADOT, fn_getText("thm_name_madot"), fn_getText("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_box_madot, spr_menu_optSlctr_madot, 0.25, spr_menu_plyrFrm_madot); 
 	global.thm_opt_move_snd[THM_IDX.MADOT] = snd_menu_opt_move_madot;
 	global.thm_opt_slct_snd[THM_IDX.MADOT] = snd_menu_opt_slct_madot;
 	global.thm_opt_cncl_snd[THM_IDX.MADOT] = snd_menu_opt_cncl_madot;

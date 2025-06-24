@@ -1,5 +1,6 @@
 
 fn_obj_img(id);
+fn_obj_depth();
 view_enabled = true;
 view_visible[0] = true;
 
@@ -14,21 +15,12 @@ move_atwlk_lastDirKey = -1;
 
 // Opening and closing menus
 menu_id[0] = "inv";
-menu_key_idx[0] = KEY_IDX.MENU_INV;
+menu_key_idx[0] = CONFIG_KEY_IDX.MENU_INV;
 
 menu_id[1] = "pse";
-menu_key_idx[1] = KEY_IDX.MENU_PSE;
+menu_key_idx[1] = CONFIG_KEY_IDX.MENU_PSE;
 
 menu_amt = array_length(menu_id);
-
-
-// Camera movement
-cam_act = true;
-cam_id = view_camera[0];
-cam_x = 0;
-cam_y = 0;
-cam_w = 320;
-cam_h = 240;
 
 
 

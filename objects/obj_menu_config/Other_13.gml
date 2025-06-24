@@ -3,7 +3,7 @@
 var l = ll;
 
 
-fn_menu_sett_lbl_textdata(l);
+fn_menu_config_lbl_textdata(l);
 
 for (var i = 0; i < lbl_amtMax; i++)
 {

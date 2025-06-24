@@ -4,7 +4,8 @@
 
 function fn_game_start()
 {
-	global.game_ver = "0.02";
+	global.GAME_VER = "0.02";
+	
 	global.game_fnt = font_add_sprite_ext(spr_game_fnt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"1234567890%()[]/_-—<>←→↑↓", false, -1);
 	global.game_fnt_h = fn_text_h("Salenis");
 	
@@ -18,12 +19,7 @@ function fn_game_start()
 		_caption = choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu", "Yummy Nicky");
 	window_set_caption(_caption);
 	
-	
-	fn_lang_setup();
-	fn_key_setup();
-	fn_sett_setup();
-	fn_lang_textData_setup();
-	fn_flag_setup();
+	fn_config_setup();
 	
 	fn_eff_setup();
 	fn_itm_setup();
@@ -36,6 +32,8 @@ function fn_game_start()
 	
 	
 	var _rm = temp_rm_menu_home;
-	//_rm = rm_dbgwrld;
+	//_rm = rm_nexus;
 	room_goto(_rm);
+	
+	fn_log(object_get_name(object_index));
 }

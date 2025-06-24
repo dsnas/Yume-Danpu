@@ -19,9 +19,9 @@ if (lvlTrans_act == false)
 			if (optMove_pos[lvl] == 0) // (Languages)
 				_lvlTrans_lvlTgt = LVL_MAIN;
 			*/
-			if (optMove_pos[lvl] == 1) // (Video Settings)
+			if (optMove_pos[lvl] == 1) // (Video settings)
 				_lvlTrans_lvlTgt = LVL_VID;
-			else if (optMove_pos[lvl] == 2) // (Audio Settings)
+			else if (optMove_pos[lvl] == 2) // (Audio settings)
 				_lvlTrans_lvlTgt = LVL_AUD;
 			else if (optMove_pos[lvl] == 3) // (Controls)
 				_lvlTrans_lvlTgt = LVL_INP;
@@ -32,7 +32,7 @@ if (lvlTrans_act == false)
 				fn_menu_lvlTrans_start(_lvlTrans_lvlTgt);
 		}
 		
-		fn_aud_play(global.thm_snd_optSlct[global.thm_cur], VOL_IDX.MENU);
+		fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOL_IDX.MENU);
 	}
 	else if (opt_canCncl == true && opt_inpCncl == true) // (Option cancellation) (Checks for the player's cancel input)
 	{
@@ -48,7 +48,7 @@ if (lvlTrans_act == false)
 			}
 		}
 		
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], VOL_IDX.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOL_IDX.MENU);
 	}
 }
 

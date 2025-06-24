@@ -2,7 +2,8 @@
 fn_game_start();
 
 
-fn_obj_img(id, , , , 0);
+fn_obj_img( , , , , 0);
+fn_obj_depth( , -15000);
 
 
 // For toggling fullscreen
@@ -12,11 +13,11 @@ fscr_delayMax = 30;
 
 
 // For drawing the version number
-verNum_spr = spr_verNum;
-verNum_w = fn_spr_w(verNum_spr);
-verNum_h = fn_spr_h(verNum_spr);
-verNum_x = (320 - 4 - verNum_w);
-verNum_y = (240 - 4 - verNum_h);
-verNum_col[0] = global.thm_col[global.thm_cur].grayLight;
-verNum_col[1] = global.thm_col[global.thm_cur].whiteLight;
-verNum_alp = 0.5;
+verText_spr = spr_verText;
+verText_w = fn_spr_w(verText_spr);
+verText_h = fn_spr_h(verText_spr);
+verText_x = (320 - 4 - verText_w);
+verText_y = (240 - 4 - verText_h);
+verText_col[0] = global.thm_col[global.thm_cur].grayLight;
+verText_col[1] = global.thm_col[global.thm_cur].whiteLight;
+verText_alp = 0.5;

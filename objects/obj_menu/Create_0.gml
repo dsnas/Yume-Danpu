@@ -1,6 +1,6 @@
 
 fn_obj_img( , , , , 0);
-fn_obj_depth(-10000);
+fn_obj_depth( , -10000);
 
 
 draw_x = 0;
@@ -72,7 +72,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 	// Option cancellation
 	opt_cncl_act[l] = true;										// Determines if the player can cancel the last option selection
 	opt_cncl_snd[l] = global.thm_opt_cncl_snd[global.thm_cur];	// Sound
-	opt_cncl_key_idx[l, 0] = KEY_IDX.CNCL;						// Key to check for input
+	opt_cncl_key_idx[l, 0] = CONFIG_KEY_IDX.CNCL;						// Key to check for input
 	
 	
 	// Information, text that can't be interacted with in any way, like "Eleanor" in the inventory

@@ -2,15 +2,20 @@
 //////// Functions related to the room controller
 
 
-// Functions related to setting up the current room's music, background and looping
-function fn_rm_getId() // Fetches the ID of the room, which determines its information, background and music
+// Functions related to configing up the current room's music, background and looping
+function fn_rm_getId() // Retrieves the ID of the room, which determines its information, background and music
 {
 	rm_id = "";
+	rm_name = "";
 	
 	
 	// Main menu
 	if (room == temp_rm_menu_home)
 		rm_id = "menu_home";
+	
+	// Nexus
+	if (room == rm_nexus)
+		rm_id = "nexus";
 	
 	// Macacolandia
 	if (room == rm_macaco)
@@ -21,7 +26,8 @@ function fn_rm_getId() // Fetches the ID of the room, which determines its infor
 		rm_id = "dbgwrld";
 	
 	
-	rm_name = fn_lang_textData("rm_" + string(rm_id));
+	if (rm_name == "")
+		rm_name = fn_getText("rm_" + string(rm_id));
 }
 
 function fn_rm_evCreate() // Create Event determined by the room's ID
@@ -35,6 +41,18 @@ function fn_rm_evCreate() // Create Event determined by the room's ID
 		
 	}
 	
+	// Nexus
+	if (rm_id == "nexus")
+	{
+		var _sky_col = make_color_hsv(color_get_hue(#07070E), color_get_saturation(#07070E), 50); // #4F0E34
+		fn_rm_bg_sky_add(0, temp_spr_rm_bg_sky_nexus, , , , , _sky_col, 0);
+		fn_rm_bg_sky_loop_act(0, 16, 16);
+		fn_rm_bg_sky_loop_move_act(0, , 2, );
+		nexus_skySiner = 0;
+		
+		fn_rm_loop_act(true, true, true);
+	}
+	
 	// Macacolandia and Debug World
 	if (rm_id == "macaco") || (rm_id == "dbgwrld")
 	{
@@ -46,7 +64,7 @@ function fn_rm_evCreate() // Create Event determined by the room's ID
 		fn_rm_bg_sky_loop_act(1);
 		fn_rm_bg_sky_loop_move_act(1);
 		
-		fn_rm_loop_act(true, true, );
+		fn_rm_loop_act(true, true);
 	}
 }
 function fn_rm_evStep() // Step Event determined by the room's ID
@@ -58,8 +76,17 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 	if (rm_id == "menu_home")
 	{
 		menu_obj = global.menu_home_obj;
-		if (menu_obj != -1 && menu_obj.lvlTrans_stg == -1 && global.flag[0] == true) //(global.menu_home_obj != -1 && global.menu_home_obj.lvl != global.menu_home_obj.lvl_amtMax && global.flag[0] == true)
+		if (menu_obj != -1 && menu_obj.lvlTrans_stg == -1 && global.config_lang_hasChosen == true)
 			fn_rm_mus_add(0, mus_menu_home, 0.45);
+	}
+	
+	// Nexus
+	if (rm_id == "nexus")
+	{
+		nexus_skySiner += 0.1;
+		bg_sky_obj[0].sky_alp = (0.4 + ((sin(nexus_skySiner / 6) + 1) / 10));
+		
+		fn_rm_mus_add(0, mus_nexus, 0.35);
 	}
 	
 	// Macacolandia
@@ -77,17 +104,17 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 
 
 // Functions related to the current room's music
-function fn_rm_mus_add(_idx, _aud, _aud_vol = 1, _aud_volDur = 0, _aud_volIdx = VOL_IDX.MUS, _aud_pit = 1)
+function fn_rm_mus_add(_idx, _aud, _aud_vol = 1, _aud_volDur = 0, _aud_volIdx = CONFIG_VOL_IDX.MUS, _aud_pit = 1)
 {
 	var i = _idx;
 	
-	mus_aud[i] = _aud;
+	mus_asset[i] = _aud;
 	mus_vol[i] = _aud_vol;
 	mus_volDur[i] = _aud_volDur;
 	mus_volIdx[i] = _aud_volIdx;
-	mus_pit[i] = _aud_pit;
+	mus_pitch[i] = _aud_pit;
 	
-	mus_aud_id[i] = -1;
+	mus_id[i] = -1;
 }
 
 

@@ -3,4 +3,4 @@
 
 
 
-fn_aud_play(global.thm_snd_optSlct[global.thm_cur], VOL_IDX.MENU);
+fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOL_IDX.MENU);

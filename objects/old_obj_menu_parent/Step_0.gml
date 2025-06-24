@@ -1,10 +1,10 @@
 
-opt_inpLt = fn_sett_inp("press", SETT_INP.LT);
-opt_inpRt = fn_sett_inp("press", SETT_INP.RT);
-opt_inpUp = fn_sett_inp("press", SETT_INP.UP);
-opt_inpDn = fn_sett_inp("press", SETT_INP.DN);
-opt_inpSlct = fn_sett_inp("press", SETT_INP.SLCT);
-opt_inpCncl = fn_sett_inp("press", SETT_INP.CNCL);
+opt_inpLt = fn_config_inp("press", config_INP.LT);
+opt_inpRt = fn_config_inp("press", config_INP.RT);
+opt_inpUp = fn_config_inp("press", config_INP.UP);
+opt_inpDn = fn_config_inp("press", config_INP.DN);
+opt_inpSlct = fn_config_inp("press", config_INP.SLCT);
+opt_inpCncl = fn_config_inp("press", config_INP.CNCL);
 
 
 if (lvlTrans_act == true) // lvlTrans (Transition sequence between levels) (trans rights, am i right?!!)

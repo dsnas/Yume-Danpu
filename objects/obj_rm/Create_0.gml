@@ -11,7 +11,7 @@ for (var i = 0; i < mus_amtMax; i++)
 
 fn_rm_loop_act();
 
-temp_rm_cur = room;
+rm_curTemp = room;
 
 
 fn_rm_evCreate();

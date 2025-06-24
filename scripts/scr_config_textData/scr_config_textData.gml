@@ -1,42 +1,16 @@
 
-//////// Functions related to the game's languages
+//////// Functions related to the game's text data
 
 
-function fn_lang_setup() // Sets up the available languages without loading their text data
-{
-	fn_lang_add(0, "");
-	
-	enum LANG_IDX // Index of each available language
-	{
-		EN_US = 0,	// English (United States)
-		PT_BR = 1	// Português (Brasil)
-	}
-	fn_lang_add(LANG_IDX.EN_US, "English (United States)");
-	fn_lang_add(LANG_IDX.PT_BR, "Português (Brasil)");
-	
-	global.lang_idx = LANG_IDX.EN_US;					// The current language
-	global.lang_amt = array_length(global.lang_name);	// Total amount of available languages
-	
-	fn_lang_textData_setup();
-}
-function fn_lang_add(_lang_idx, _lang_name)
-{
-	var i = _lang_idx;
-	
-	global.lang_name[i] = _lang_name;
-	global.lang_textData[i] = -1;
-}
-
-
-function fn_lang_textData_setup() // Destroys the text data of the previous language, and creates one of the current language, adding all the text to it
+function fn_config_lang_textData_setup() // Sets up all the text of the current language
 {
 	// Destroys the text data of the previous language
-	for (var m = 0; m < global.lang_amt; m++)
+	for (var m = 0; m < global.config_lang_amt; m++)
 	{
-		if (global.lang_textData[m] != -1)
+		if (global.config_lang_textData[m] != -1)
 		{
-			ds_map_destroy(global.lang_textData[m]);
-			global.lang_textData[m] = -1;
+			ds_map_destroy(global.config_lang_textData[m]);
+			global.config_lang_textData[m] = -1;
 			
 			break;
 		}
@@ -46,12 +20,12 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 	
 	
 	// Creates the text data of the current language and adds all the text to it
-	var i = global.lang_idx;
-	global.lang_textData[i] = ds_map_create();
-	var t = global.lang_textData[i];
+	var i = global.config_lang_idx;
+	global.config_lang_textData[i] = ds_map_create();
+	var t = global.config_lang_textData[i];
 	
-	if (i == LANG_IDX.EN_US)		// English (United States)
-	{		
+	if (i == CONFIG_LANG_IDX.EN_US) // English (United States)
+	{
 		// Menu themes
 		ds_map_add(t, "thm_name_dflt", "Default");
 		ds_map_add(t, "thm_name_smpl", "Simple");
@@ -70,24 +44,24 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 		ds_map_add(t, "menu_home_main_opt_2", "Exit");
 		
 		
-		// Settings menu
-		ds_map_add(t, "menu_sett_main_ttl", "Options");
-		ds_map_add(t, "menu_sett_main_opt_0", "Languages");
-		ds_map_add(t, "menu_sett_main_opt_1", "Video Settings");
-		ds_map_add(t, "menu_sett_main_opt_2", "Audio Settings");
-		ds_map_add(t, "menu_sett_main_opt_3", "Controls");
-		ds_map_add(t, "menu_sett_main_opt_4", "Accessibility");
+		// settings menu
+		ds_map_add(t, "menu_config_main_ttl", "Options");
+		ds_map_add(t, "menu_config_main_opt_0", "Languages");
+		ds_map_add(t, "menu_config_main_opt_1", "Video settings");
+		ds_map_add(t, "menu_config_main_opt_2", "Audio settings");
+		ds_map_add(t, "menu_config_main_opt_3", "Controls");
+		ds_map_add(t, "menu_config_main_opt_4", "Accessibility");
 		
-		ds_map_add(t, "menu_sett_lang_info", ds_map_find_value(t, "menu_sett_main_opt_0"));
+		ds_map_add(t, "menu_config_lang_info", ds_map_find_value(t, "menu_config_main_opt_0"));
 		
-		ds_map_add(t, "menu_sett_vid_ttl", ds_map_find_value(t, "menu_sett_main_opt_1"));
-		ds_map_add(t, "menu_sett_vid_opt_0", "Fullscreen");
-		ds_map_add(t, "menu_sett_vid_opt_1", "Low Graphics");
-		ds_map_add(t, "menu_sett_vid_opt_2", "Show FPS");
-		ds_map_add(t, "menu_sett_vid_opt_3", "Show Border");
+		ds_map_add(t, "menu_config_vid_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
+		ds_map_add(t, "menu_config_vid_opt_0", "Fullscreen");
+		ds_map_add(t, "menu_config_vid_opt_1", "Low Graphics");
+		ds_map_add(t, "menu_config_vid_opt_2", "Show FPS");
+		ds_map_add(t, "menu_config_vid_opt_3", "Show Border");
 		
-		ds_map_add(t, "menu_sett_main_info_0", "No");
-		ds_map_add(t, "menu_sett_main_info_1", "Yes");
+		ds_map_add(t, "menu_config_main_info_0", "No");
+		ds_map_add(t, "menu_config_main_info_1", "Yes");
 		
 		
 		// Inventory menu
@@ -102,15 +76,16 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 		// Pause menu
 		ds_map_add(t, "menu_pse_main_ttl", "Game Paused");
 		ds_map_add(t, "menu_pse_main_opt_0", "Resume");
-		ds_map_add(t, "menu_pse_main_opt_1", "Settings");
+		ds_map_add(t, "menu_pse_main_opt_1", "settings");
 		ds_map_add(t, "menu_pse_main_opt_2", "Instructions");
 		ds_map_add(t, "menu_pse_main_opt_3", "Quit to Menu");
 		
 		
 		// Rooms
+		ds_map_add(t, "rm_nexus", "Nexus");
 		ds_map_add(t, "rm_macaco", "Macacolandia");
 	}
-	else if (i == LANG_IDX.PT_BR)	// Português (Brasil)
+	else if (i == CONFIG_LANG_IDX.PT_BR) // Português (Brasil)
 	{
 		// Main menu
 		ds_map_add(t, "menu_home_lang_info_0", "Idioma");
@@ -121,14 +96,16 @@ function fn_lang_textData_setup() // Destroys the text data of the previous lang
 		
 		
 		// Rooms
+		ds_map_add(t, "rm_nexus", "Nexus");
 		ds_map_add(t, "rm_macaco", "Macacolândia");
 	}
 }
-function fn_lang_textData(_textData_key)
+
+function fn_getText(_textData_key) // Retrieves the specified entry from the current language's text data
 {
-	var _text = ds_map_find_value(global.lang_textData[global.lang_idx], _textData_key);
+	var _text = ds_map_find_value(global.config_lang_textData[global.config_lang_idx], _textData_key);
 	if (_text == undefined)
-		fn_log("The function fn_lang_textData() was called and unable to retrieve the desired text");
+		fn_log("The function fn_getText() was called and unable to retrieve the desired text");
 	
 	return _text;
 }

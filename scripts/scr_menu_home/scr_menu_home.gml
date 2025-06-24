@@ -2,6 +2,7 @@
 //////// Functions related to the main menu
 
 
+// Functions related to configing up the menu
 function fn_menu_home_evCreate()
 {
 	// MEU DEUS !!!!!!!!! QUE MURAL COLORIDO!!!!!!!!!! AAAAAAAAAAAAAAAAAAAAAAAA
@@ -11,17 +12,17 @@ function fn_menu_home_evCreate()
 	LVL_LANG = 0;
 	var l = LVL_LANG;
 	lvlTrans_tgt = l;
-	if (global.flag[0] == false)
+	if (global.config_lang_hasChosen == false)
 		lvlTrans_postDelay = 120;
 	
 		// Options
-	for (var o = 0; o < global.lang_amt; o++)
+	for (var o = 0; o < global.config_lang_amt; o++)
 	{
 		opt_text[l, o] = "";
 		optSlctr_act[l, o] = false;
 	}
 	opt_move_type[l] = OPT_MOVE_TYPE_dfltHor; // Toggles horizontal default option movement
-	opt_amt[l] = global.lang_amt;
+	opt_amt[l] = global.config_lang_amt;
 	
 		// Flags [#0]
 	lang_flag_spr = spr_menu_home_flag;
@@ -75,8 +76,12 @@ function fn_menu_home_evCreate()
 	// Main level
 	LVL_MAIN = 1;
 	var l = LVL_MAIN;
-	if (global.flag[0] == true)
+	if (global.config_lang_hasChosen == true)
 		lvlTrans_tgt = l;
+	
+	main_logo_spr = spr_menu_home_logo;
+	main_logo_x = (160 - (fn_spr_w(main_logo_spr) / 2));
+	main_logo_y = (draw_dist * 2);
 	
 		// Options [#0]
 	fn_menu_opt_addText(l, "menu_home_main_opt_");
@@ -103,15 +108,15 @@ function fn_menu_home_evCreate()
 	
 	
 	
-	// Settings level
-	LVL_SETT = 2;
+	// settings level
+	LVL_config = 2;
 }
 function fn_menu_home_evStep()
 {
 	// Plays menu start sound when the languages level opens
 	if (((lvlTrans_tgt == LVL_LANG && lvlTrans_stg > -1 && lvlTrans_postDelay <= 0) || (lvl == LVL_LANG && lvlTrans_stg == -1)) && lang_snd_act == false)
 	{
-		fn_aud_play(lang_snd, VOL_IDX.MENU);
+		fn_aud_play(lang_snd, CONFIG_VOL_IDX.MENU);
 		lang_snd_act = true;
 	}
 }
@@ -136,9 +141,17 @@ function fn_menu_home_evDrawGUI_1(l)
 			fn_draw_spr(lang_flag_spr, f, lang_flag_x[f], lang_flag_y[f], , (lang_flag_alp[f] * lvl_alp[l] * draw_alp), , , , true);
 		}
 	}
+	
+	// Main level
+	else if (l == LVL_MAIN)
+	{
+		// Draws logo
+		fn_draw_spr(main_logo_spr, 0, main_logo_x, main_logo_y, , (lvl_alp[l] * draw_alp));
+	}
 }
 
 
+// Functions related to the options
 function fn_menu_home_opt_slct()
 {
 	// Languages level
@@ -146,15 +159,15 @@ function fn_menu_home_opt_slct()
 	{
 		// Selected English (United States)
 		if (opt_move_pos[lvl] == 0)
-			global.lang_idx = LANG_IDX.EN_US;
+			global.config_lang_idx = CONFIG_LANG_IDX.EN_US;
 		
 		// Selected Português (Brasil)
 		else if (opt_move_pos[lvl] == 1)
-			global.lang_idx = LANG_IDX.PT_BR;
+			global.config_lang_idx = CONFIG_LANG_IDX.PT_BR;
 		
-		
-		global.flag[0] = true;
-		fn_lang_textData_setup();
+		global.config_lang_hasChosen = true;
+		fn_config_file_save();
+		fn_config_lang_textData_setup();
 		fn_menu_home_evCreate();
 		fn_menu_lvlTrans_start(LVL_MAIN, 60, 120);
 	}
@@ -166,7 +179,7 @@ function fn_menu_home_opt_slct()
 		// "Start"
 		if (opt_move_pos[lvl] == 0)
 		{
-			fn_rmTrans_start(rm_macaco);
+			fn_rmTrans_start(rm_nexus);
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
 			opt_cncl_act[lvl] = false;
@@ -175,8 +188,8 @@ function fn_menu_home_opt_slct()
 		// "Options"
 		else if (opt_move_pos[lvl] == 1)
 		{
-			fn_menu_lvlTrans_start(LVL_SETT);
-			fn_obj_create(obj_menu_sett);
+			fn_menu_lvlTrans_start(LVL_config);
+			fn_obj_create(obj_menu_config);
 		}
 		
 		// "Exit"

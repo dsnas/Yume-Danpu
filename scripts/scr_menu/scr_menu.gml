@@ -9,8 +9,8 @@ function fn_menu_create(_id)
 }
 
 
-// Functions related to setting up the menu (they must be updated to add a new menu to the game)
-function fn_menu_getId() // Fetches the ID of the menu, which determines its behavior and appearance
+// Functions related to configing up the menu (they must be updated to add a new menu to the game)
+function fn_menu_getId() // Retrieves the ID of the menu, which determines its behavior and appearance
 {
 	menu_id = "";
 	if (variable_global_exists("menu_idTemp") == false)
@@ -32,7 +32,6 @@ function fn_menu_getId() // Fetches the ID of the menu, which determines its beh
 	if (menu_id == "pse")
 		global.menu_pse_obj = id;
 }
-
 function fn_menu_evCreate() // Create Event determined by the menu's ID
 {
 	// Main menu
@@ -144,7 +143,7 @@ function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx) // Adds as 
 	for (var o = 0; o < opt_amtMax[l]; o++)
 	{	
 		var _opt_textKey = (string(_info_textData_keyWithoutIdx) + string(o));
-		var _opt_text = fn_lang_textData(_opt_textKey);
+		var _opt_text = fn_getText(_opt_textKey);
 		
 		if (_opt_text != undefined)
 		{
@@ -160,7 +159,7 @@ function fn_menu_opt_addText(_lvl_idx, _info_textData_keyWithoutIdx) // Adds as 
 			break;
 	}
 }
-function fn_menu_opt_getSize(_lvl_idx, _opt_idx) // Fetches the width and height of the specified option
+function fn_menu_opt_getSize(_lvl_idx, _opt_idx) // Retrieves the width and height of the specified option
 {
 	var l = _lvl_idx;
 	var o = _opt_idx;
@@ -188,13 +187,13 @@ function fn_menu_opt_move() // Option movement sequence determined by its type I
 		// Checks the type of option movement and moves
 		if (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltVer) || (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltHor)	// Vertical and horizontal default
 		{
-			// Fetches keys the player should press to move based on the movement type
-			var _dflt_inp_0 = key_press_dn;
-			var _dflt_inp_1 = key_press_up;
+			// Retrieves keys the player should press to move based on the movement type
+			var _dflt_inp_0 = press_dn;
+			var _dflt_inp_1 = press_up;
 			if (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltHor)
 			{
-				_dflt_inp_0 = key_press_rt;
-				_dflt_inp_1 = key_press_lt;
+				_dflt_inp_0 = press_rt;
+				_dflt_inp_1 = press_lt;
 			}
 			
 			// Movement
@@ -210,7 +209,7 @@ function fn_menu_opt_move() // Option movement sequence determined by its type I
 		{
 			// I don't know. I made this while only half-awake. Surprisingly, it WORKS ?
 			
-			if (key_press_rt == true) || (key_press_lt == true)
+			if (press_rt == true) || (press_lt == true)
 			{
 				if (opt_move_pos[lvl] % 2 == 0)
 					opt_move_pos[lvl] += 1;
@@ -218,14 +217,14 @@ function fn_menu_opt_move() // Option movement sequence determined by its type I
 					opt_move_pos[lvl] -= 1;
 			}
 			
-			if (key_press_dn == true)
+			if (press_dn == true)
 			{
 				if (opt_move_pos[lvl] + 2) <= (opt_amt[lvl] - 1)
 					opt_move_pos[lvl] += 2;
 				else
 					opt_move_pos[lvl] = (0 + (opt_move_pos[lvl] % 2));
 			}
-			else if (key_press_up == true)
+			else if (press_up == true)
 			{
 				if ((opt_move_pos[lvl] - 2) >= 0)
 					opt_move_pos[lvl] -= 2;
@@ -237,13 +236,13 @@ function fn_menu_opt_move() // Option movement sequence determined by its type I
 		
 		// Plays sound when the player moves through the options
 		if (_opt_move_posOld != opt_move_pos[lvl])
-			fn_aud_play(opt_move_snd[lvl], VOL_IDX.MENU);
+			fn_aud_play(opt_move_snd[lvl], CONFIG_VOL_IDX.MENU);
 	}
 }
 function fn_menu_opt_slct() // Option selection sequence determined by the menu's ID					(!!! Also must be updated when a new menu is added)
 {
 	// Checks whether the player is allowed to select an option, and for their input
-	if (opt_slct_act[lvl] == true && key_press_slct == true)
+	if (opt_slct_act[lvl] == true && press_slct == true)
 	{
 		_opt_slct_snd = opt_slct_snd[lvl];
 		
@@ -258,7 +257,7 @@ function fn_menu_opt_slct() // Option selection sequence determined by the menu'
 		
 		
 		// Plays sound when the player selects an option
-		fn_aud_play(_opt_slct_snd, VOL_IDX.MENU);
+		fn_aud_play(_opt_slct_snd, CONFIG_VOL_IDX.MENU);
 	}
 }
 function fn_menu_opt_cncl() // Option cancellation sequence determined by the menu's ID
@@ -267,7 +266,7 @@ function fn_menu_opt_cncl() // Option cancellation sequence determined by the me
 	for (var k = 0; k < array_length(opt_cncl_key_idx[lvl]); k++)
 	{
 		// Checks whether the player is allowed to cancel the previous selection of an option, and for their input
-		if (opt_cncl_act[lvl] == true && fn_key_press(opt_cncl_key_idx[lvl, k]) == true)
+		if (opt_cncl_act[lvl] == true && fn_config_key_press(opt_cncl_key_idx[lvl, k]) == true)
 		{
 			_opt_cncl_snd = -1;
 			
@@ -279,7 +278,7 @@ function fn_menu_opt_cncl() // Option cancellation sequence determined by the me
 			
 			// Plays sound when the player selects an option
 			if (_opt_cncl_snd != -1)
-				fn_aud_play(_opt_cncl_snd, VOL_IDX.MENU);
+				fn_aud_play(_opt_cncl_snd, CONFIG_VOL_IDX.MENU);
 		}
 	}
 }
@@ -333,7 +332,7 @@ function fn_menu_info_addText(_lvl_idx, _info_idx, _info_textData_keyWithoutIdx)
 	var l = _lvl_idx;
 	var i = _info_idx;
 	
-	var _info_text = fn_lang_textData(_info_textData_keyWithoutIdx);
+	var _info_text = fn_getText(_info_textData_keyWithoutIdx);
 	if (_info_text != undefined)
 	{
 		info_text[l, i] = _info_text;
@@ -423,22 +422,22 @@ function fn_menu_ttl_add(_lvl_idx, _ttl_text)
 
 /*
 
-function fn_menu_optSett_add(_lvl_idx, _opt_idx, _optSett_text, _optSett_x, _optSett_y, _optSett_colTgt_0_0 = global.thm_col[global.thm_cur, 2], _optSett_colTgt_1_0 = global.thm_col[global.thm_cur, 3], _optSett_colTgt_0_1 = global.thm_col[global.thm_cur, 0], _optSett_colTgt_1_1 = global.thm_col[global.thm_cur, 1], _optSett_alp = 1)
+function fn_menu_optconfig_add(_lvl_idx, _opt_idx, _optconfig_text, _optconfig_x, _optconfig_y, _optconfig_colTgt_0_0 = global.thm_col[global.thm_cur, 2], _optconfig_colTgt_1_0 = global.thm_col[global.thm_cur, 3], _optconfig_colTgt_0_1 = global.thm_col[global.thm_cur, 0], _optconfig_colTgt_1_1 = global.thm_col[global.thm_cur, 1], _optconfig_alp = 1)
 {
 	var l = _lvl_idx;
 	var o = _opt_idx;
 	
-	optSett_act[l, o] = true;
+	optconfig_act[l, o] = true;
 	
-	optSett_text[l, o] = _optSett_text;
-	optSett_x[l, o] = _optSett_x;
-	optSett_y[l, o] = _optSett_y;
+	optconfig_text[l, o] = _optconfig_text;
+	optconfig_x[l, o] = _optconfig_x;
+	optconfig_y[l, o] = _optconfig_y;
 	
-	optSett_colTgt[l][o][0][0] = _optSett_colTgt_0_0;
-	optSett_colTgt[l][o][1][0] = _optSett_colTgt_1_0;
-	optSett_colTgt[l][o][0][1] = _optSett_colTgt_0_1;
-	optSett_colTgt[l][o][1][1] = _optSett_colTgt_1_1;
-	optSett_alp[l, o] = _optSett_alp;
+	optconfig_colTgt[l][o][0][0] = _optconfig_colTgt_0_0;
+	optconfig_colTgt[l][o][1][0] = _optconfig_colTgt_1_0;
+	optconfig_colTgt[l][o][0][1] = _optconfig_colTgt_0_1;
+	optconfig_colTgt[l][o][1][1] = _optconfig_colTgt_1_1;
+	optconfig_alp[l, o] = _optconfig_alp;
 }
 
 function fn_menu_lbl_textdata(_lvl_id, _lbl_idx, _lbl_textdata_key)
@@ -446,7 +445,7 @@ function fn_menu_lbl_textdata(_lvl_id, _lbl_idx, _lbl_textdata_key)
 	var l = _lvl_id;
 	var i = _lbl_idx;
 	
-	var _lbl_text = fn_lang_textData(_lbl_textdata_key);
+	var _lbl_text = fn_getText(_lbl_textdata_key);
 	if (_lbl_text != undefined)
 	{
 		lbl_text[l, i] = _lbl_text;
@@ -471,7 +470,7 @@ function fn_menu_ttl_textdata(_lvl_id, _ttl_textdata_key)
 {
 	var l = _lvl_id;
 	
-	var _ttl_text = fn_lang_textData(_ttl_textdata_key);
+	var _ttl_text = fn_getText(_ttl_textdata_key);
 	if (_ttl_text != undefined)
 		ttl_text[l] = _ttl_text
 }

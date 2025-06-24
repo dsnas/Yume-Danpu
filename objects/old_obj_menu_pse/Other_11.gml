@@ -1,6 +1,6 @@
 /// @descr [Step]
 
-opt_inpPse = fn_sett_inp("press", SETT_INP.MENU_PSE);
+opt_inpPse = fn_config_inp("press", config_INP.MENU_PSE);
 
 
 if (lvlTrans_act == false)
@@ -25,12 +25,12 @@ if (lvlTrans_act == false)
 			else
 				_opt_snd = global.thm_snd_optFail[global.thm_cur];
 			
-			fn_aud_play(_opt_snd, VOL_IDX.MENU);
+			fn_aud_play(_opt_snd, CONFIG_VOL_IDX.MENU);
 		}
 	}
 	else if (opt_canCncl == true && (opt_inpCncl == true || opt_inpPse == true)) // (checks for the player's cancel or pause input) (resumes the game)
 	{
 		fn_menu_pse_resume(); // resumes the game
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], VOL_IDX.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOL_IDX.MENU);
 	}
 }

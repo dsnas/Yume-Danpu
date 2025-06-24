@@ -1,6 +1,6 @@
 /// @descr [Step]
 
-opt_inpInv = fn_sett_inp("press", SETT_INP.MENU_INV);
+opt_inpInv = fn_config_inp("press", config_INP.MENU_INV);
 
 
 if (lvlTrans_act == false)
@@ -44,7 +44,7 @@ if (lvlTrans_act == false)
 		}
 		
 		
-		fn_aud_play(_opt_snd, VOL_IDX.MENU);
+		fn_aud_play(_opt_snd, CONFIG_VOL_IDX.MENU);
 	}
 	else if (opt_canCncl == true && (opt_inpCncl == true || opt_inpInv == true)) // (Checks for the player's cancel or inventory inputs) (Returns to the previous level, or closes the menu)
 	{
@@ -59,6 +59,6 @@ if (lvlTrans_act == false)
 			fn_menu_lvlTrans_start(LVL_MAIN);
 		
 		
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], VOL_IDX.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOL_IDX.MENU);
 	}
 }

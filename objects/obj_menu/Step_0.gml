@@ -2,7 +2,7 @@
 // Option movement, selection and cancellation
 if (lvl >= 0 && lvl <= (lvl_amtMax - 1) && lvlTrans_stg == -1) // Checks if the current level is valid
 {
-	fn_key_quick();
+	fn_config_key_quick();
 	
 	
 	fn_menu_evStep();

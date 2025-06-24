@@ -2,17 +2,39 @@
 //////// Functions related to interactable objects
 
 
-function fn_interact_getId() // Fetches the ID of the interactable, which determines its behavior and appearance
+function fn_interact_getId() // Retrieves the ID of the interactable, which determines its behavior and appearance
 {
 	interact_id = "";
 	
+	// Door of Macacolandia
+	if (object_index == obj_interact_macaco_door)
+		interact_id = "door_macaco";
+	
+	// Debug World
 	if (room == rm_dbgwrld)
 		interact_id = "dbgwrld";
 }
 
 function fn_interact_evCreate() // Create Event determined by the interactable's ID
 {
-	// Debug
+	// Doors
+	if (string_starts_with(interact_id, "door_") == true)
+	{
+		image_alpha = 1;
+		pet_type = PET_TYPE_DOOR;
+		
+		
+		// Door of Macacolandia
+		if (interact_id == "door_macaco")
+			pet_door_tgt = rm_macaco;
+		
+		
+		// Nexus
+		if (room == pet_door_tgt)
+			pet_door_tgt = rm_nexus;
+	}
+	
+	// Debug World
 	if (interact_id == "dbgwrld")
 	{
 		pet_type = PET_TYPE_MEOW;
@@ -22,7 +44,11 @@ function fn_interact_evCreate() // Create Event determined by the interactable's
 }
 function fn_interact_evStep() // Step Event determined by the NPC's ID
 {
-	// Debug
+	// Door of Macacolandia
+	if (interact_id == "door_macaco")
+		fn_interact_pet();
+	
+	// Debug World
 	if (interact_id == "dbgwrld")
 	{
 		if (pet_stg == 0)
@@ -36,7 +62,7 @@ function fn_interact_evStep() // Step Event determined by the NPC's ID
 function fn_interact_pet() // Interaction sequence
 {
 	// Checks the type of the interaction sequence
-	if (pet_type == 0) // Audio response type
+	if (pet_type == PET_TYPE_MEOW) // Audio response type
 	{
 		// Starts playing the audio
 		if (pet_stg == 0)
@@ -62,6 +88,14 @@ function fn_interact_pet() // Interaction sequence
 					moveDelay_stg = -1;
 				}
 			}
+		}
+	}
+	else if (pet_type == PET_TYPE_DOOR) // Room transition type
+	{
+		if (pet_stg == 0)
+		{
+			fn_rmTrans_start(pet_door_tgt, pet_door_type, pet_door_player_x, pet_door_player_y, pet_door_player_dir);
+			pet_stg = 1;
 		}
 	}
 }

@@ -2,6 +2,7 @@
 //////// Functions related to the pause menu
 
 
+// Functions related to configing up the menu
 function fn_menu_pse_evCreate()
 {
 	// Main level
@@ -18,7 +19,7 @@ function fn_menu_pse_evCreate()
 	rect_alp[l, 0] = 0.75;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_lang_textData("menu_pse_main_ttl"));
+	fn_menu_ttl_add(l, fn_getText("menu_pse_main_ttl"));
 	
 		// Options [#0]
 	fn_menu_opt_addText(l, "menu_pse_main_opt_");
@@ -44,14 +45,14 @@ function fn_menu_pse_evCreate()
 		
 		fn_menu_optSlctr_add(l, o);
 	}
-	opt_cncl_key_idx[l, 1] = KEY_IDX.MENU_PSE;
+	opt_cncl_key_idx[l, 1] = CONFIG_KEY_IDX.MENU_PSE;
 	
 	
 	
 	
 	// Takes a screenshot of the game to use as the background, since all objects will temporarily deactivate and disappear
 	sshot_spr = -1;
-	if (global.sett_lowGfx == false) // Checks if the low graphics setting is enabled, since taking a screenshot can freeze the game for half a second
+	if (global.config_lowGfx == false) // Checks if the low graphics configing is enabled, since taking a screenshot can freeze the game for half a second
 	{
 		sshot_fname = "menu_pause_sshot.png"; 
 		surface_save(application_surface, working_directory + string(sshot_fname));
@@ -75,6 +76,7 @@ function fn_menu_pse_DrawGUI_0(l)
 }
 
 
+// Functions related to the options
 function fn_menu_pse_opt_slct()
 {
 	// Main level
@@ -84,7 +86,7 @@ function fn_menu_pse_opt_slct()
 		if (opt_move_pos[lvl] == 0)
 			fn_menu_pse_resume();
 		
-		// "Settings"
+		// "settings"
 		if (opt_move_pos[lvl] == 1)
 		{
 			
@@ -115,6 +117,7 @@ function fn_menu_pse_opt_cncl()
 }
 
 
+// Functions unrelated to the core menu system
 function fn_menu_pse_resume()
 {
 	fn_menu_lvlTrans_start(lvl_amtMax, , , true);

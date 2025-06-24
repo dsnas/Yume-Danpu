@@ -1,5 +1,5 @@
 
-function fn_menu_sett_lbl_textdata(_lvl_id)
+function fn_menu_config_lbl_textdata(_lvl_id)
 {
 	var l = _lvl_id;
 	var _lblSlctr_xDist = (draw_dist * 2);
@@ -7,12 +7,12 @@ function fn_menu_sett_lbl_textdata(_lvl_id)
 	
 	if (l == LVL_MAIN) // LVL MAIN
 	{
-		lbl_text[l, 0] = global.sett_langName[global.lang_idx];
+		lbl_text[l, 0] = global.config_lang_Name[global.config_lang_idx];
 	}
 	
-	else if (l == LVL_VID) // LVL VID (Video Settings)
+	else if (l == LVL_VID) // LVL VID (Video settings)
 	{
-		lbl_text[l, 0] = fn_lang_textData("menu_sett_main_lbl_" + string(global.sett_fscr));
+		lbl_text[l, 0] = fn_getText("menu_config_main_lbl_" + string(global.config_fscr));
 	}
 	
 	

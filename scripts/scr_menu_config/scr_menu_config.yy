@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_lang",
+  "%Name":"scr_menu_config",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_lang",
+  "name":"scr_menu_config",
   "parent":{
-    "name":"[!] Scripts",
-    "path":"folders/[!] Scripts.yy",
+    "name":"INSANIDADE",
+    "path":"folders/INSANIDADE.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

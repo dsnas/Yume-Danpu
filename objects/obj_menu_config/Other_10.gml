@@ -20,7 +20,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 
 LVL_MAIN = 0; // LVL MAIN
 var l = LVL_MAIN;
-fn_menu_sett_lbl_textdata(l);
+fn_menu_config_lbl_textdata(l);
 
 px_act[l, 0] = true; // [LVL MAIN] (Dark translucent background)
 px_x[l, 0] = 0;
@@ -30,12 +30,12 @@ px_h[l, 0] = 240;
 px_col[l, 0] = global.thm_col[global.thm_cur, 4];
 px_alp[l, 0] = 0.5;
 
-fn_menu_ttl_textdata(l, "menu_sett_main_ttl"); // [LVL MAIN] (Title window and text)
+fn_menu_ttl_textdata(l, "menu_config_main_ttl"); // [LVL MAIN] (Title window and text)
 
 fn_menu_lbl_sizedata(l, 0); // [LVL MAIN] (Label #0)
 var _lblSlctr_xDist = (draw_dist * 2);
 
-fn_menu_opt_textdata(l, "menu_sett_main_opt"); // [LVL MAIN] (Options #0)
+fn_menu_opt_textdata(l, "menu_config_main_opt"); // [LVL MAIN] (Options #0)
 var _opt_wAll = (opt_wMax[l] + _lblSlctr_xDist + (lblSlctr_w * 2) + lbl_wMax[l]);
 
 wnd_act[l, 0] = true; // [LVL MAIN] (Options window)
@@ -67,23 +67,23 @@ lbl_y[l, 0] = opt_y[l, 0];
 
 
 LVL_LANG = 1; // LVL LANG (Languages) (Temporarily unused)
-LVL_VID = 2; // LVL VID (Video Settings)
-LVL_AUD = 3; // LVL AUD (Audio Settings)
+LVL_VID = 2; // LVL VID (Video settings)
+LVL_AUD = 3; // LVL AUD (Audio settings)
 LVL_INP = 4; // LVL INP (Controls)
 LVL_A11Y = 5; // LVL A11Y (Accessibility)
 
 for (var l = 0; l < lvl_amtMax; l++)
 {
-	sett_textKey[l] = "%%%";
+	config_textKey[l] = "%%%";
 	/* (Temporarily unused)
 	if (l == LVL_LANG)
 	{
-		sett_textKey[l] = "lang";
+		config_textKey[l] = "lang";
 	}
 	*/
 	if (l == LVL_VID)
 	{
-		sett_textKey[l] = "vid";
+		config_textKey[l] = "vid";
 	}
 	
 	
@@ -97,7 +97,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 		px_col[l, 0] = global.thm_col[global.thm_cur, 4];
 		px_alp[l, 0] = 0.75;
 		
-		fn_menu_ttl_textdata(l, "menu_sett_" + string(sett_textKey[l]) + "_ttl"); // (Title window and label)
+		fn_menu_ttl_textdata(l, "menu_config_" + string(config_textKey[l]) + "_ttl"); // (Title window and label)
 		
 		wnd_act[l, 0] = true; // [LVL MAIN] (Options window)
 		var _wnd_wDist = (draw_dist * 3);
@@ -107,7 +107,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 		wnd_x[l, 0] = (160 - (wnd_w[l, 0] / 2));
 		wnd_y[l, 0] = (120 - (wnd_h[l, 0] / 2) + (fn_menu_ttlWnd_hDiff(l) / 2));
 		
-		fn_menu_opt_textdata(l, "menu_sett_" + string(sett_textKey[l]) + "_opt");
+		fn_menu_opt_textdata(l, "menu_config_" + string(config_textKey[l]) + "_opt");
 		var _opt_xDistWnd = (draw_dist * 2); // [LVL MAIN] (Options)
 		var _opt_yDistWnd = (draw_dist * 2);
 		var _opt_yDist = draw_dist;
@@ -118,7 +118,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 	
 			fn_menu_optSlctr_drawdata(l, o);
 			
-			fn_menu_sett_lbl_textdata(l);
+			fn_menu_config_lbl_textdata(l);
 			
 			
 		}

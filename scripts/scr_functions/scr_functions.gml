@@ -3,22 +3,22 @@
 
 
 // Functions related to objects
-function fn_obj_create(_obj = id, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
+function fn_obj_create(_asset = id, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
 {
-	obj_id = instance_create_layer(_x, _y, "Instances", _obj, _varStruct);
+	obj_id = instance_create_layer(_x, _y, "Instances", _asset, _varStruct);
 	return obj_id;
 }
-function fn_obj_dstr(_obj = id) // Destroys the specified object
+function fn_obj_dstr(_asset = id) // Destroys the specified object
 {
-	instance_destroy(_obj);
+	instance_destroy(_asset);
 }
-function fn_obj_exists(_obj) // Returns whether if the specified object exists
+function fn_obj_exists(_asset) // Returns whether if the specified object exists
 {
-	return instance_exists(_obj);
+	return instance_exists(_asset);
 }
-function fn_obj_img(_obj = id, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the main information of the specified object's image
+function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the specified object's image
 {
-	with (_obj)
+	with (_asset)
 	{
 		image_speed = _spd;
 		image_index = _idx;
@@ -29,151 +29,141 @@ function fn_obj_img(_obj = id, _spd = 0, _idx = 0, _col = image_blend, _alp = im
 		image_angle = _ang;
 		
 		// Disables animation
-		if (global.sett_rdcdMot == true) // Checks if the setting Reduced Motion is active
+		if (global.config_rdcdMot == true) // Checks if the configing Reduced Motion is active
 		{
 			image_speed = 0;
 			image_index = 0;
 		}
 	}
 }
-function fn_obj_depth(_val = -bbox_bottom)
+function fn_obj_depth(_asset = id, _val = -bbox_bottom)
 {
-	depth = _val
+	with (_asset)
+		depth = _val;
 }
 
 // Functions related to audio
-function fn_aud_play(_aud, _aud_volIdx, _aud_lps = 0, _aud_vol = 1, _aud_volDur = 0, _aud_pit = 1, _aud_ofs = 0) // Starts playing the specified audio
+function fn_aud_play(_asset, _volIdx, _vol = 1, _volDur = 0, _ofsPos = 0, _loops = false, _pitch = 1) // Starts playing the specified audio
 {
-	aud = _aud;					// Audio
-	aud_volIdx = _aud_volIdx;	// 
-	aud_lps = _aud_lps;			// Determines if the audio should loop
-	aud_vol = _aud_vol;			// Volume
-	aud_volDur = _aud_volDur;	// Duration in frames of the volume fade-in
-	aud_pit = _aud_pit;			// Pitch
-	aud_ofs = _aud_ofs;			// Offset, the time in seconds of the audio to start playing
+	aud_asset = _asset; // ID of the audio's asset
+	aud_volIdx = _volIdx; // Index of the volume in the array (global.config_vol[-])
+	aud_vol = _vol; // Volume which will be multiplied to the one in the array
+	aud_volDur = _volDur; // Duration in frames of the volume fade-in
+	aud_ofsPos = _ofsPos; // Starting offset position of the audio
+	aud_loops = _loops; // Determines if the audio loops
+	aud_pitch = _pitch; // Pitch of the audio
 	
-	fn_aud_fix();
+	// Retrieves the fixed volume, offset and pitch of the audio
+	fn_aud_fix(aud_asset, aud_vol, aud_ofsPos, aud_pitch);
+	aud_vol = ((aud_vol * global.config_vol[aud_volIdx]) * global.config_vol[CONFIG_VOL_IDX.MASTER]); // Multiplies the audio's volume to the one in the array
 	
-	aud_id = audio_play_sound(aud, 0, aud_lps, 0, aud_ofs, aud_pit); // (plays audio)
-	
-	aud_vol = ((aud_vol * global.sett_vol[aud_volIdx]) * global.sett_vol[VOL_IDX.MASTER]);
+	// Starts playing the specified audio
+	aud_id = audio_play_sound(aud_asset, 0, aud_loops);
 	audio_sound_gain(aud_id, aud_vol, aud_volDur);
-	
-	audio_sound_pitch(aud_id, aud_pit);
-	audio_sound_set_track_position(aud_id, aud_ofs);
+	audio_sound_set_track_position(aud_id, aud_ofsPos);
+	audio_sound_pitch(aud_id, aud_pitch);
 }
-function fn_aud_fix() // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
+function fn_aud_fix(_asset, _vol, _ofsPos, _pitch) // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
 {
-	// (!!!!!!!!!!!! aud_vol MUST BE MULTIPLIED, NOT ADDED OR SUBTRACTED!!!!!!!!!!)
+	// "aud_vol" MUST BE MULTIPLIED, NOT ADDED or SUBTRACTED
+	// "aud_ofsPos" MUST BE	ADDED, NOT SUBTRACTED or MULTIPLIED
+	// "aud_pitch" MUST BE ADDED or SUBTRACTED, NOT MULTIPLIED
 	
 	
 	// Menu
-	if (aud == snd_menu_start)
-		aud_ofs = 0.1;
-	var _thm_cur = global.thm_cur;
-	if (aud == global.thm_opt_move_snd[_thm_cur])
-	{
-		if (_thm_cur == THM_IDX.DFLT) // (THE SOUND WHOSE VOLUME SHOULD BE USED AS THE REFERENCE POINT FOR ALL OTHERS)
-			aud_vol *= 1; // (MUST BE ONE)
-		if (_thm_cur == THM_IDX.MADOT)
-			aud_vol *= 0.4;
-	}
-	if (aud == global.thm_opt_slct_snd[_thm_cur])
-	{
-		if (_thm_cur == THM_IDX.DFLT)
-			aud_vol *= 1.35;
-		if (_thm_cur == THM_IDX.MADOT)
-			aud_vol *= 0.2;
-	}
-	if (aud == global.thm_opt_cncl_snd[_thm_cur])
-	{
-		if (_thm_cur == THM_IDX.DFLT)
-			aud_vol *= 0.9;
-		if (_thm_cur == THM_IDX.MADOT)
-			aud_vol *= 0.2;
-	}
-	if (aud == global.thm_opt_fail_snd[_thm_cur])
-	{
-		if (_thm_cur == THM_IDX.MADOT)
-			aud_vol *= 0.4;
-	}
+	if (aud_asset == snd_menu_start)
+		aud_ofsPos += 0.15;
+	if (aud_asset == snd_menu_opt_move_dflt)
+		aud_vol = 1;
+	if (aud_asset == snd_menu_opt_slct_dflt)
+		aud_vol *= 1.35;
+	if (aud_asset == snd_menu_opt_cncl_dflt)
+		aud_vol *= 0.9;
+	if (aud_asset == snd_menu_opt_move_madot)
+		aud_vol *= 0.4;
+	if (aud_asset == snd_menu_opt_slct_madot)
+		aud_vol *= 0.2;
+	if (aud_asset == snd_menu_opt_cncl_madot)
+		aud_vol *= 0.2;
+	if (aud_asset == snd_menu_opt_fail_madot)
+		aud_vol *= 0.4;
 	
 	// Player
-	if (aud == snd_player_fstep)
+	if (aud_asset == snd_player_fstep)
 		aud_vol *= 0.75;
 	
 	// Macacolandia
-	if (aud == snd_entity_macaco_citizen_0)
+	if (aud_asset == snd_entity_macaco_citizen_0)
 	{
 		aud_vol *= 0.5;
-		aud_ofs = 0.25;
+		aud_ofsPos = 0.25;
 	}
-	if (aud == snd_entity_macaco_citizen_1)
-		aud_ofs = 0.25;
-	if (aud == snd_entity_macaco_citizen_2)
+	if (aud_asset == snd_entity_macaco_citizen_1)
+		aud_ofsPos = 0.25;
+	if (aud_asset == snd_entity_macaco_citizen_2)
 		aud_vol *= 0.3;
-	if (aud == snd_entity_macaco_citizen_3)
+	if (aud_asset == snd_entity_macaco_citizen_3)
 	{
 		aud_vol *= 0.85;
-		aud_ofs = 0.25;
+		aud_ofsPos = 0.25;
 	}
-	if (aud == snd_entity_macaco_citizen_4)
+	if (aud_asset == snd_entity_macaco_citizen_4)
 		aud_vol *= 0.65;
-	if (aud == snd_entity_macaco_citizen_5)
+	if (aud_asset == snd_entity_macaco_citizen_5)
 		aud_vol *= 0.5;
-	if (aud == snd_entity_macaco_citizen_6)
+	if (aud_asset == snd_entity_macaco_citizen_6)
 	{
 		aud_vol *= 0.35;
-		aud_ofs = 0.25;
+		aud_ofsPos = 0.25;
 	}
 	
 	// Other
-	if (aud == snd_hulapoca)
+	if (aud_asset == snd_hulapoca)
 		aud_vol *= 0.5;
-	if (aud == snd_penyplocde)
+	if (aud_asset == snd_penyplocde)
 		aud_vol *= 0.35;
 	
 	
-	return aud_vol;
+	// the WORST fucking FUNCTION i've EVER made in my LIFE. Jesus       !!!!!
 }
-function fn_aud_stop(_aud_id) // Stops playing the specified audio
+function fn_aud_stop(_asset) // Stops playing the specified audio
 {
-	audio_stop_sound(_aud_id);
+	audio_stop_sound(_asset);
 }
-function fn_aud_playing(_aud_id) // Returns if the specified audio is currently playing
+function fn_aud_playing(_asset) // Returns if the specified audio is currently playing
 {
-	return audio_is_playing(_aud_id);
+	return audio_is_playing(_asset);
 }
 
 // Functions related to sprites
-function fn_spr_w(_spr)		// Returns the width of the specified sprite
+function fn_spr_w(_asset) // Returns the width of the specified sprite
 {
-	if (_spr != -1)
-		return sprite_get_width(_spr);
+	if (_asset != -1)
+		return sprite_get_width(_asset);
 	else
 	{
-		fn_log("The function fn_spr_w() was called with an invalid sprite ID");
+		fn_log("The function fn_spr_w() was called with an invalid sprite asset");
 		return 0;
 	}
 }
-function fn_spr_h(_spr)		// Returns the height of the specified sprite
+function fn_spr_h(_asset) // Returns the height of the specified sprite
 {
-	if (_spr != -1)
-		return sprite_get_height(_spr);
+	if (_asset != -1)
+		return sprite_get_height(_asset);
 	else
 	{
-		fn_log("The function fn_spr_h() was called with an invalid sprite ID");
+		fn_log("The function fn_spr_h() was called with an invalid sprite asset");
 		return 0;
 	}
 }
 
 // Functions related to text
-function fn_text_w(_text)	// Returns the width of the specified text)
+function fn_text_w(_text) // Returns the width of the specified text)
 {
 	draw_set_font(global.game_fnt);
 	return string_width(_text);
 }
-function fn_text_h(_text)	// Returns the height of the specified text
+function fn_text_h(_text) // Returns the height of the specified text
 {
 	draw_set_font(global.game_fnt);
 	return string_height(_text);
@@ -261,8 +251,8 @@ function fn_lerp(_valCur, _valTgt, _spd)
 {
 	var _val = lerp(_valCur, _valTgt, _spd);
 	
-	// Checks if the setting Reduced Motion is on to skip lerp()'s animation
-	if (global.sett_rdcdMot == true)
+	// Checks if the configing Reduced Motion is on to skip lerp()'s animation
+	if (global.config_rdcdMot == true)
 		_val = _valTgt;
 	
 	return _val;

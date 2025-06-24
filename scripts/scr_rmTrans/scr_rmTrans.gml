@@ -4,19 +4,24 @@
 
 function fn_rmTrans_setup() // Sets up the main variables of the room transition sequence
 {
-	enum RMTRANS_TYPE // ID of each type
+	// ID of each type
+	global.rmTrans_type =
 	{
-		FADE = 0 // Fades out of the current room and in to the target one
+		fade : 0 // Fades out of the current room, and fades in to the target one
 	}
 }
 
 
-function fn_rmTrans_start(_rmTgt, _type = RMTRANS_TYPE.FADE) // Starts the transition sequence to the specified room
+function fn_rmTrans_start(_tgt, _type = global.rmTrans_type.fade, _player_x = undefined, _player_y = undefined, _player_dir = undefined) // Starts the transition sequence to the specified room
 {
 	rmTrans_obj = fn_obj_create(obj_rmTrans);
 	with (rmTrans_obj)
 	{
-		rmTgt = _rmTgt;
+		tgt = _tgt;
 		type = _type;
+		
+		player_x = _player_x;
+		player_y = _player_y;
+		player_dir = _player_dir;
 	}
 }

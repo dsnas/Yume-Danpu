@@ -2,7 +2,7 @@
 //////// Functions related to entities/NPCs
 
 
-function fn_entity_getId() // Fetches the ID of the NPC, which determines its behavior and appearance
+function fn_entity_getId() // Retrieves the ID of the NPC, which determines its behavior and appearance
 {
 	entity_id = "";
 	
