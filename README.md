@@ -15,23 +15,24 @@ This repository is updated regularly while we're working on it, not just when ne
 
 &nbsp;
 
-### We strongly recommend playing the game first before searching for any secrets in the code, as they definitely aren’t hard to find. If a secret exists, there will ALWAYS be something to guide you to it. We would never hide an invisible door on one specific tree that looks just like the other three hundred around it. That would be really, really embarrassing, and completely unfair to you, the player.
+### We strongly recommend playing the game first before searching for any secrets in the code, as they definitely aren't hard to find. If a secret exists, there will ALWAYS be something to guide you to it. We would never hide an invisible door on one specific tree that looks just like the other three hundred around it. That would be really, really embarrassing, and completely unfair to you, the player.
 
 &nbsp;
 
 ## Development and release videos
-We occasionally post videos on YouTube showcasing upcoming or newly released changes and features.  
+We _very occasionally_ post videos on YouTube showcasing upcoming or newly released changes and features.  
 You can follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)!
 
 &nbsp;
 
 ## Infrequently asked questions
 
-### Why use GameMaker to make the game?
-> I started using GameMaker back in 2021, so I’ve picked up a few things since then. It also gives us a lot more freedom to do whatever we want compared to RPG Maker.
+### Why use GameMaker?
+> I started using GameMaker back in 2021, so I've picked up a thing or two since then. Also, GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003, but that doesn't mean we're going to completely change the style of the game.  
+> **We're trying to make Yume Danpu in a way that still feels like it was made in RPG Maker 2003.**
 
-### Why make the game open-source?
-> I put Yume Danpu on GitHub after the original GameMaker project randomly got corrupted. I made the repository public because, well, I figured, what the hell? We'd be more than happy if someone used what we made to create something new.
+### Why is it open-source?
+> During the development of version 0.02, the GameMaker project randomly got corrupted. That's when I decided to put the game on GitHub, since it makes backing up way faster and easier. I made the repository public because, well... **What Could Possibly Go Wrong™**? We'd be more than happy if someone used what we made to create something new, even though that's not really our Mango.
 
 &nbsp;
 
