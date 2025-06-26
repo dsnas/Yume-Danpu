@@ -4,7 +4,10 @@ fn_config_key_quick();
 
 // Toggles fullscreen configing on/off
 if (press_fscr == true)
+{
 	global.config_fscr = !global.config_fscr;
+	fn_config_file_save();
+}
 
 // Toggles autowalk on/off
 if (press_atwlk == true)

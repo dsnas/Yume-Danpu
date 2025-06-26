@@ -9,7 +9,7 @@ function fn_menu_create(_id)
 }
 
 
-// Functions related to configing up the menu (they must be updated to add a new menu to the game)
+// Functions related to setting up the menu (they must be updated to add a new menu to the game)
 function fn_menu_getId() // Retrieves the ID of the menu, which determines its behavior and appearance
 {
 	menu_id = "";
@@ -236,7 +236,7 @@ function fn_menu_opt_move() // Option movement sequence determined by its type I
 		
 		// Plays sound when the player moves through the options
 		if (_opt_move_posOld != opt_move_pos[lvl])
-			fn_aud_play(opt_move_snd[lvl], CONFIG_VOL_IDX.MENU);
+			fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
 	}
 }
 function fn_menu_opt_slct() // Option selection sequence determined by the menu's ID					(!!! Also must be updated when a new menu is added)
@@ -257,7 +257,7 @@ function fn_menu_opt_slct() // Option selection sequence determined by the menu'
 		
 		
 		// Plays sound when the player selects an option
-		fn_aud_play(_opt_slct_snd, CONFIG_VOL_IDX.MENU);
+		fn_aud_play(_opt_slct_snd, CONFIG_VOLTYPE.MENU);
 	}
 }
 function fn_menu_opt_cncl() // Option cancellation sequence determined by the menu's ID
@@ -278,7 +278,7 @@ function fn_menu_opt_cncl() // Option cancellation sequence determined by the me
 			
 			// Plays sound when the player selects an option
 			if (_opt_cncl_snd != -1)
-				fn_aud_play(_opt_cncl_snd, CONFIG_VOL_IDX.MENU);
+				fn_aud_play(_opt_cncl_snd, CONFIG_VOLTYPE.MENU);
 		}
 	}
 }

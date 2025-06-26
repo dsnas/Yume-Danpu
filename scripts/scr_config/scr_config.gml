@@ -2,6 +2,7 @@
 //////// Functions related to the game's settings
 
 
+// Functions related the game's settings
 function fn_config_setup() // Sets up the game's settings 
 {
 	// Languages
@@ -14,7 +15,7 @@ function fn_config_setup() // Sets up the game's settings
 	global.config_showBdr = false; // Show Border
 	
 	// Audio settings
-	fn_config_vol_setup();
+	fn_config_volType_setup();
 	
 	// Keybinds
 	fn_config_key_setup();
@@ -58,10 +59,10 @@ function fn_config_lang_add(_lang_idx, _lang_name) // Adds a language to the lan
 }
 
 
-// Functions related to the volume
-function fn_config_vol_setup() // Sets up the volume array
+// Functions related to the volume types
+function fn_config_volType_setup() // Sets up the volume array
 {
-	enum CONFIG_VOL_IDX // Index of each volume in the array
+	enum CONFIG_VOLTYPE // Index of each volume in the array
 	{
 		MASTER = 0,		// Controls all others volumes
 		MUS = 1,		// Music
@@ -71,14 +72,14 @@ function fn_config_vol_setup() // Sets up the volume array
 		ENTITY = 5,		// Sounds played by interacting with NPCs
 		AMBIENT = 6		// Sounds played in the background by the world
 	}
-	global.config_vol[CONFIG_VOL_IDX.MASTER] = 1;
-	global.config_vol[CONFIG_VOL_IDX.MUS] = 0;
-	global.config_vol[CONFIG_VOL_IDX.MENU] = 1;
-	global.config_vol[CONFIG_VOL_IDX.PLAYER] = 1;
-	global.config_vol[CONFIG_VOL_IDX.INTERACT] = 1;
-	global.config_vol[CONFIG_VOL_IDX.ENTITY] = 1;
-	global.config_vol[CONFIG_VOL_IDX.AMBIENT] = 1;
-	global.config_volAmt = array_length(global.config_vol);
+	global.config_volType[CONFIG_VOLTYPE.MASTER] = 1;
+	global.config_volType[CONFIG_VOLTYPE.MUS] = 0;
+	global.config_volType[CONFIG_VOLTYPE.MENU] = 1;
+	global.config_volType[CONFIG_VOLTYPE.PLAYER] = 1;
+	global.config_volType[CONFIG_VOLTYPE.INTERACT] = 1;
+	global.config_volType[CONFIG_VOLTYPE.ENTITY] = 1;
+	global.config_volType[CONFIG_VOLTYPE.AMBIENT] = 1;
+	global.config_volType_amt = array_length(global.config_volType);
 }
 
 
@@ -108,8 +109,7 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 	fn_config_key_add(CONFIG_KEY_IDX.MENU_PSE,		vk_escape,	-1);
 	fn_config_key_add(CONFIG_KEY_IDX.FSCR,			vk_f4,		-1);
 	fn_config_key_add(CONFIG_KEY_IDX.ATWLK,			ord("R"),	-1);
-	
-	global.config_keyAmt = array_length(global.config_key_dflt);
+	global.config_key_amt = array_length(global.config_key_dflt);
 }
 function fn_config_key_add(_key_idx, _key_dflt, _key_alt) // Adds a key to the specified position on the keybind list
 {
@@ -236,13 +236,13 @@ function fn_config_file_save()
 	ini_write_real("video", "showBdr", global.config_showBdr);
 	
 	// Audio Settings
-	for (var i = 0; i < global.config_volAmt; i++)
-		ini_write_real("audio", $"vol_idx_{i}", global.config_vol[i]);
+	for (var i = 0; i < global.config_volType_amt; i++)
+		ini_write_real("audio", $"vol_idx_{i}", global.config_volType[i]);
 	
 	// Keybinds
-	for (var i = 0; i < global.config_keyAmt; i++)
+	for (var i = 0; i < global.config_key_amt; i++)
 		ini_write_real("keys", $"dflt_idx_{i}", global.config_key_dflt[i]);
-	for (var i = 0; i < global.config_keyAmt; i++)
+	for (var i = 0; i < global.config_key_amt; i++)
 		ini_write_real("keys", $"alt_idx_{i}", global.config_key_alt[i]);
 	
 	// Accessibility
@@ -267,13 +267,13 @@ function fn_config_file_load()
 	global.config_showBdr = ini_read_real("video", "showBdr", 0);
 	
 	// Audio Settings
-	for (var i = 0; i < global.config_volAmt; i++)
-		global.config_vol[i] = ini_read_real("audio", $"vol_idx_{i}", 1);
+	for (var i = 0; i < global.config_volType_amt; i++)
+		global.config_volType[i] = ini_read_real("audio", $"vol_idx_{i}", 1);
 	
 	// Keybinds
-	for (var i = 0; i < global.config_keyAmt; i++)
+	for (var i = 0; i < global.config_key_amt; i++)
 		global.config_key_dflt[i] = ini_read_real("keys", $"dflt_idx_{i}", 0);
-	for (var i = 0; i < global.config_keyAmt; i++)
+	for (var i = 0; i < global.config_key_amt; i++)
 		global.config_key_alt[i] = ini_read_real("keys", $"alt_idx_{i}", 0);
 	
 	// Accessibility

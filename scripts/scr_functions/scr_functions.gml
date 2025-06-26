@@ -8,7 +8,7 @@ function fn_obj_create(_asset = id, _x = 0, _y = 0, _varStruct = {}) // Creates 
 	obj_id = instance_create_layer(_x, _y, "Instances", _asset, _varStruct);
 	return obj_id;
 }
-function fn_obj_dstr(_asset = id) // Destroys the specified object
+function fn_obj_destroy(_asset = id) // Destroys the specified object
 {
 	instance_destroy(_asset);
 }
@@ -43,36 +43,37 @@ function fn_obj_depth(_asset = id, _val = -bbox_bottom)
 }
 
 // Functions related to audio
-function fn_aud_play(_asset, _volIdx, _vol = 1, _volDur = 0, _ofsPos = 0, _loops = false, _pitch = 1) // Starts playing the specified audio
+function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops = false) // Starts playing the specified audio
 {
 	aud_asset = _asset; // ID of the audio's asset
-	aud_volIdx = _volIdx; // Index of the volume in the array (global.config_vol[-])
-	aud_vol = _vol; // Volume which will be multiplied to the one in the array
-	aud_volDur = _volDur; // Duration in frames of the volume fade-in
-	aud_ofsPos = _ofsPos; // Starting offset position of the audio
-	aud_loops = _loops; // Determines if the audio loops
+	aud_volType = _volType; // Volume type index (global.config_volType[-])
+	
+	aud_vol = _vol; // Volume
+	aud_offset = _offset; // Track position where playback starts
 	aud_pitch = _pitch; // Pitch of the audio
+	aud_loops = _loops; // Determines if the audio loops
+	
 	
 	// Retrieves the fixed volume, offset and pitch of the audio
-	fn_aud_fix(aud_asset, aud_vol, aud_ofsPos, aud_pitch);
-	aud_vol = ((aud_vol * global.config_vol[aud_volIdx]) * global.config_vol[CONFIG_VOL_IDX.MASTER]); // Multiplies the audio's volume to the one in the array
+	fn_aud_fix();
+	aud_vol = ((aud_vol * global.config_volType[aud_volType]) * global.config_volType[CONFIG_VOLTYPE.MASTER]); // Multiplies the audio's volume to the one in the array
 	
 	// Starts playing the specified audio
 	aud_id = audio_play_sound(aud_asset, 0, aud_loops);
-	audio_sound_gain(aud_id, aud_vol, aud_volDur);
-	audio_sound_set_track_position(aud_id, aud_ofsPos);
+	audio_sound_gain(aud_id, aud_vol, 0);
+	audio_sound_set_track_position(aud_id, aud_offset);
 	audio_sound_pitch(aud_id, aud_pitch);
 }
-function fn_aud_fix(_asset, _vol, _ofsPos, _pitch) // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
+function fn_aud_fix() // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
 {
 	// "aud_vol" MUST BE MULTIPLIED, NOT ADDED or SUBTRACTED
-	// "aud_ofsPos" MUST BE	ADDED, NOT SUBTRACTED or MULTIPLIED
+	// "aud_offset" MUST BE	ADDED, NOT SUBTRACTED or MULTIPLIED
 	// "aud_pitch" MUST BE ADDED or SUBTRACTED, NOT MULTIPLIED
 	
 	
 	// Menu
 	if (aud_asset == snd_menu_start)
-		aud_ofsPos += 0.15;
+		aud_offset += 0.15;
 	if (aud_asset == snd_menu_opt_move_dflt)
 		aud_vol = 1;
 	if (aud_asset == snd_menu_opt_slct_dflt)
@@ -96,16 +97,16 @@ function fn_aud_fix(_asset, _vol, _ofsPos, _pitch) // Adjusts the volume of the 
 	if (aud_asset == snd_entity_macaco_citizen_0)
 	{
 		aud_vol *= 0.5;
-		aud_ofsPos = 0.25;
+		aud_offset = 0.25;
 	}
 	if (aud_asset == snd_entity_macaco_citizen_1)
-		aud_ofsPos = 0.25;
+		aud_offset = 0.25;
 	if (aud_asset == snd_entity_macaco_citizen_2)
 		aud_vol *= 0.3;
 	if (aud_asset == snd_entity_macaco_citizen_3)
 	{
 		aud_vol *= 0.85;
-		aud_ofsPos = 0.25;
+		aud_offset = 0.25;
 	}
 	if (aud_asset == snd_entity_macaco_citizen_4)
 		aud_vol *= 0.65;
@@ -114,7 +115,7 @@ function fn_aud_fix(_asset, _vol, _ofsPos, _pitch) // Adjusts the volume of the 
 	if (aud_asset == snd_entity_macaco_citizen_6)
 	{
 		aud_vol *= 0.35;
-		aud_ofsPos = 0.25;
+		aud_offset = 0.25;
 	}
 	
 	// Other

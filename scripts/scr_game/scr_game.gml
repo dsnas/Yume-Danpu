@@ -26,14 +26,11 @@ function fn_game_start()
 	fn_thm_setup();
 	fn_player_setup();
 	
-	fn_rmTrans_setup();
 	fn_obj_create(obj_rm);
 	fn_obj_create(obj_game_dbg, 0, 0);
 	
 	
 	var _rm = temp_rm_menu_home;
-	//_rm = rm_nexus;
+	_rm = rm_nexus;
 	room_goto(_rm);
-	
-	fn_log(object_get_name(object_index));
 }

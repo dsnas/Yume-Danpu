@@ -47,7 +47,7 @@ if (lvlTrans_stg == 0)
 				lvlTrans_stg = -1;
 				
 				if (lvlTrans_selfDstr == true)
-					fn_obj_dstr();
+					fn_obj_destroy();
 				if (lvlTrans_gameEnd == true)
 					game_end();
 				
@@ -89,7 +89,7 @@ if (lvlTrans_stg == 0 && lvlTrans_rmTgt == -1) // Checks if the transition seque
 		lvlTrans_lvlTgt = -1;
 		
 		if (lvlTrans_killMe == true)
-			fn_obj_dstr();
+			fn_obj_destroy();
 		
 		if (lvlTrans_endGame == true)
 			game_end();

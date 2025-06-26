@@ -7,15 +7,9 @@ move_dir_key[MOVE_DIR_UP] = hold_up;
 move_dir_key[MOVE_DIR_DN] = hold_dn;
 
 
-// Autowalk
-if (global.player_atwlk == true)
-{
-	for (var d = 0; d < 4; d++)
-	{
-		if (move_dir_key[d] == true)
-			move_atwlk_lastDirKey = d;
-	}
-}
+// Frozen, movement sequence will not activate
+if (move_stg == -2)
+	sprite_index = move_dir_spr[move_dir];
 
 
 // Idle, inactive movement sequence
@@ -61,7 +55,7 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 				move_tgtX = move_dir_x[d];
 				move_tgtY = move_dir_y[d];
 				
-				fn_aud_play(snd_player_fstep, CONFIG_VOL_IDX.PLAYER);
+				fn_aud_play(snd_player_fstep, CONFIG_VOLTYPE.PLAYER);
 				
 				break;
 			}
@@ -74,12 +68,12 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 		var _interact_obj = instance_place(move_dir_x[d], move_dir_y[d], obj_interact);
 		if (d == move_dir && press_slct && _interact_obj != noone)
 		{
-			if (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_INTERACT)
-			|| (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_ENTITY && _interact_obj.move_stg == -1)
+			if (_interact_obj.solid_type == _interact_obj.solid_type_interact)
+			|| (_interact_obj.solid_type == _interact_obj.solid_type_entity && _interact_obj.move_stg == -1)
 			{
 				// Starts the interactable's interaction sequence
-				_interact_obj.pet_stg = 0;
-				if (_interact_obj.solid_type == _interact_obj.SOLID_TYPE_ENTITY)
+				_interact_obj.interact_stg = 0;
+				if (_interact_obj.solid_type == _interact_obj.solid_type_entity)
 					_interact_obj.move_stg = -2;
 				
 				move_stg = -2;
@@ -107,7 +101,6 @@ if (move_stg == -1) // Checks for menu key inputs and created the menu object
 	}
 }
 
-
 // Moving, active movement sequence
 if (move_stg == 0) // Moves
 {
@@ -128,6 +121,17 @@ if (move_stg == 0) // Moves
 		
 		if (global.dbg_act == true && global.dbg_excessLog == true)
 			fn_log($"position = [{x}, {y}] | grid position = [{x / 16}, {y / 16}] | depth = {depth} | camera id = {cam_id} | camera position = {cam_x}, {cam_y}}");
+	}
+	
+	
+	// Autowalk
+	if (global.player_atwlk == true)
+	{
+		for (var d = 0; d < 4; d++)
+		{
+			if (move_dir_key[d] == true)
+				move_atwlk_lastDirKey = d;
+		}
 	}
 }
 

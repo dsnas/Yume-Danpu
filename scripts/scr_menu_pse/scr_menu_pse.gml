@@ -67,6 +67,7 @@ function fn_menu_pse_evCreate()
 	instance_activate_object(obj_game_dbg);
 	instance_activate_object(obj_rm);
 	audio_pause_all();
+	fn_aud_play(global.thm_opt_slct_snd[global.thm_cur], CONFIG_VOLTYPE.MENU);
 }
 function fn_menu_pse_DrawGUI_0(l)
 {
@@ -84,9 +85,12 @@ function fn_menu_pse_opt_slct()
 	{
 		// "Resume"
 		if (opt_move_pos[lvl] == 0)
+		{
+			_opt_slct_snd = opt_cncl_snd[lvl];
 			fn_menu_pse_resume();
+		}
 		
-		// "settings"
+		// "Settings"
 		if (opt_move_pos[lvl] == 1)
 		{
 			
@@ -99,7 +103,7 @@ function fn_menu_pse_opt_slct()
 		// "Quit to Menu"
 		if (opt_move_pos[lvl] == 3)
 		{
-			fn_rmTrans_start(temp_rm_menu_home);
+			fn_rmTrans_start();
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
 			opt_cncl_act[lvl] = false;

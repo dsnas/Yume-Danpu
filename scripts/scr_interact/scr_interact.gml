@@ -21,68 +21,56 @@ function fn_interact_evCreate() // Create Event determined by the interactable's
 	if (string_starts_with(interact_id, "door_") == true)
 	{
 		image_alpha = 1;
-		pet_type = PET_TYPE_DOOR;
-		
-		
-		// Door of Macacolandia
-		if (interact_id == "door_macaco")
-			pet_door_tgt = rm_macaco;
-		
-		
-		// Nexus
-		if (room == pet_door_tgt)
-			pet_door_tgt = rm_nexus;
+		interact_type = interact_type_portal;
 	}
 	
 	// Debug World
 	if (interact_id == "dbgwrld")
 	{
-		pet_type = PET_TYPE_MEOW;
-		pet_meow_aud[0] = snd_hulapoca;
-		pet_meow_aud[1] = snd_penyplocde;
+		interact_type = interact_type_meow;
+		interact_meow_asset[0] = snd_hulapoca;
+		interact_meow_asset[1] = snd_penyplocde;
 	}
 }
 function fn_interact_evStep() // Step Event determined by the NPC's ID
 {
 	// Door of Macacolandia
-	if (interact_id == "door_macaco")
-		fn_interact_pet();
+	if (string_starts_with(interact_id, "door_") == true)
+		fn_interact_seq();
 	
 	// Debug World
 	if (interact_id == "dbgwrld")
 	{
-		if (pet_stg == 0)
-			pet_meow_idx = choose(0, 1);
-		
-		fn_interact_pet();
+		if (interact_stg == 0)
+			interact_meow_idx = choose(0, 1);
+		fn_interact_seq();
 	}
 }
 
 
-function fn_interact_pet() // Interaction sequence
+function fn_interact_seq() // Interaction sequence
 {
-	// Checks the type of the interaction sequence
-	if (pet_type == PET_TYPE_MEOW) // Audio response type
+	// Audio type
+	if (interact_type == interact_type_meow)
 	{
 		// Starts playing the audio
-		if (pet_stg == 0)
+		if (interact_stg == 0)
 		{
-			fn_aud_play(pet_meow_aud[pet_meow_idx], pet_meow_aud_volIdx[pet_meow_idx]);	
-		
-			pet_dur = pet_durMax;
-			pet_stg = 1;
+			fn_aud_play(interact_meow_asset[interact_meow_idx], interact_meow_volType);	
+			interact_delay_dur = interact_delay_durMax;
+			interact_stg = 1;
 		}
 		
 		// Delays the unfreezing of the interactable and the player
-		if (pet_stg == 1)
+		if (interact_stg == 1)
 		{
-			pet_dur -= 1;
-			if (pet_dur <= 0)
+			interact_delay_dur -= 1;
+			if (interact_delay_dur <= 0)
 			{
 				obj_player.move_stg = -1;
 				
-				pet_stg = -1;
-				if (solid_type == SOLID_TYPE_ENTITY)
+				interact_stg = -1;
+				if (solid_type == solid_type_entity)
 				{
 					move_stg = -1;
 					moveDelay_stg = -1;
@@ -90,29 +78,32 @@ function fn_interact_pet() // Interaction sequence
 			}
 		}
 	}
-	else if (pet_type == PET_TYPE_DOOR) // Room transition type
+	
+	// Room transition type
+	else if (interact_type == interact_type_portal)
 	{
-		if (pet_stg == 0)
+		if (interact_stg == 0)
 		{
-			fn_rmTrans_start(pet_door_tgt, pet_door_type, pet_door_player_x, pet_door_player_y, pet_door_player_dir);
-			pet_stg = 1;
+			fn_rmTrans_start();
+			interact_stg = -1;
 		}
 	}
 }
 
-function fn_interact_pet_meow_aud_add(_aud_nameWithoutIdx) // Adds the 
+
+function fn_interact_meow_addAsset(_asset_nameWithoutIdx)
 {
-	for (var a = 0; a < pet_meow_amtMax; a++)
+	for (var i = 0; i < 35; i++)
 	{
-		var _meow_aud = asset_get_index(string(_aud_nameWithoutIdx) + string(a));
-		if (_meow_aud != -1)
+		var _asset = asset_get_index($"{_asset_nameWithoutIdx}{i}");
+		if (_asset != undefined)
 		{
-			pet_meow_aud[a] = _meow_aud;
+			interact_meow_asset[i] = _asset;
 			continue;
 		}
-		else if (_meow_aud == -1)
+		else
 		{
-			pet_meow_amt = a;
+			interact_meow_amt = array_length(interact_meow_asset);
 			break;
 		}
 	}

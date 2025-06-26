@@ -11,20 +11,20 @@ function fn_thm_setup() // Sets up variables for enabling menu themes
 	}
 	
 	global.thm_amtMax = global.eff_amtMax;
-	for (var _THM_IDX = 0; _THM_IDX < global.thm_amtMax; _THM_IDX++)
+	for (var i = 0; i < global.thm_amtMax; i++)
 	{
-		fn_thm_add(_THM_IDX, "%%%", "%%%", c_black, c_black, c_black, c_black, c_black, false, -1, -1, 0, -1); 
+		fn_thm_add(i, "%%%", "%%%", c_black, c_black, c_black, c_black, c_black, false, -1, -1, 0, -1); 
 		
-		global.thm_optSlctr_xDist[_THM_IDX] = 6;
-		global.thm_optSlctr_yDist[_THM_IDX] = 4;
+		global.thm_optSlctr_xDist[i] = 6;
+		global.thm_optSlctr_yDist[i] = 4;
 		
-		global.thm_start_snd[_THM_IDX] = snd_menu_start;
-		global.thm_opt_move_snd[_THM_IDX] = snd_menu_opt_move_dflt;
-		global.thm_opt_slct_snd[_THM_IDX] = snd_menu_opt_slct_dflt;
-		global.thm_opt_cncl_snd[_THM_IDX] = snd_menu_opt_cncl_dflt;
-		global.thm_opt_fail_snd[_THM_IDX] = snd_menu_opt_fail_dflt;
+		global.thm_start_snd[i] = snd_menu_start;
+		global.thm_opt_move_snd[i] = snd_menu_opt_move_dflt;
+		global.thm_opt_slct_snd[i] = snd_menu_opt_slct_dflt;
+		global.thm_opt_cncl_snd[i] = snd_menu_opt_cncl_dflt;
+		global.thm_opt_fail_snd[i] = snd_menu_opt_fail_dflt;
 		
-		global.thm_has[_THM_IDX] = false; // (Determines if the player currently has this theme)
+		global.thm_has[i] = false; // (Determines if the player currently has this theme)
 	}
 	global.thm_cur = THM_IDX.DFLT; // Determines which theme is currently active
 	
@@ -32,6 +32,7 @@ function fn_thm_setup() // Sets up variables for enabling menu themes
 	// Default theme
 	fn_thm_add(THM_IDX.DFLT, fn_getText("thm_name_dflt"), fn_getText("thm_desc_dflt"), #949299, #949299, #545359, #545359, #100F11, false, spr_menu_box_dflt, spr_menu_optSlctr_dflt, 0, spr_menu_plyrFrm_madot);
 	global.thm_has[THM_IDX.DFLT] = true;
+	
 	
 	// Madotsuki theme
 	fn_thm_add(THM_IDX.MADOT, fn_getText("thm_name_madot"), fn_getText("thm_desc_madot"), #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_box_madot, spr_menu_optSlctr_madot, 0.25, spr_menu_plyrFrm_madot); 

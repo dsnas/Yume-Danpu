@@ -31,7 +31,7 @@ for (var i = 0; i < mus_amtMax; i++)
 	// Starts playing the current music
 	if (mus_asset[i] != -1 && mus_asset[i] != musOld_asset[i])
 	{
-		fn_aud_play(mus_asset[i], mus_volIdx[i], mus_vol[i], mus_volDur[i], 0, true, mus_pitch[i]);
+		fn_aud_play(mus_asset[i], mus_volType[i], mus_vol[i], 0, mus_pitch[i], true);
 		mus_id[i] = aud_id;
 			
 		fn_log($"Started playing the current music ({audio_get_name(mus_asset[i])})");

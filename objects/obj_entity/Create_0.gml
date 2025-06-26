@@ -2,7 +2,7 @@
 
 event_inherited();
 image_alpha = 1;
-solid_type = SOLID_TYPE_ENTITY;
+solid_type = solid_type_entity;
 
 
 fn_entity_getId();

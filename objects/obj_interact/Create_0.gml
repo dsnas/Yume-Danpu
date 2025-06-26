@@ -3,35 +3,29 @@ event_inherited();
 image_alpha = 0;
 if (room == rm_dbgwrld)
 	image_alpha = 1;
-solid_type = SOLID_TYPE_INTERACT;
+solid_type = solid_type_interact;
 
 
-// Interaction sequence
-	// ID numbers of the types of interaction sequence
-PET_TYPE_MEOW = 0; // Audio response type
-PET_TYPE_DOOR = 1; // Room transition type
-pet_type = PET_TYPE_MEOW; // Type of the interaction sequence (-1 == none)
+// Stages and delay
+interact_stg = -1; // ID number of the current stage (-1 == inactive, 0+ active)
 
-pet_stg = -1; // Current stage of the interaction sequence (-1 == inactive, 0+ active)
-pet_durMax = 30; // Duration of the interaction sequence, how much time the entity and the player will be frozen
-pet_dur = 0;
+interact_delay_dur = 0;
+interact_delay_durMax = 30;
 
-	// Audio response type
-pet_meow_amtMax = 10;
-for (var a = 0; a < pet_meow_amtMax; a++)
-{
-	pet_meow_aud[a] = -1;
-	pet_meow_aud_volIdx[a] = CONFIG_VOL_IDX.INTERACT;
-}
-pet_meow_amt = 0;
-pet_meow_idx = -1;
 
-	// Room transition type
-pet_door_tgt = -1;
-pet_door_type = global.rmTrans_type.fade;
-pet_door_player_x = undefined;
-pet_door_player_y = undefined;
-pet_door_player_dir = undefined;
+// Types, which determine the interaction sequence's behavior
+interact_type = -1; // ID number of the current type (-1 == none)
+
+	// Audio type, plays an audio as response
+interact_type_meow = 0; // ID number of the audio type
+interact_meow_asset[0] = -1;
+interact_meow_volType = CONFIG_VOLTYPE.INTERACT;
+interact_meow_idx = 0;
+interact_meow_amt = 0;
+
+	// Portal type, starts a room transition sequence as response
+interact_type_portal = 1;
+
 
 
 fn_interact_getId();

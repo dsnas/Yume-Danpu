@@ -1,4 +1,9 @@
 
+// Frozen, movement sequence will not activate
+if (move_stg == -2)
+	sprite_index = move_dir_spr[move_dir];
+
+
 // Idle, movement sequence inactive
 if (move_stg == -1) // Delays movement
 {
@@ -20,7 +25,6 @@ if (move_stg == -1) // Delays movement
 		}
 	}
 }
-
 
 // Moving, movement sequence active
 if (move_stg == 0) // Calculates movement target position and checks for collision
@@ -103,8 +107,8 @@ if (move_stg == 1) // Moves
 		move_stg = -1;
 	}
 }
-	
-	
+
+
 // Checks if the entity is near the player and fixes its own depth
 if (distance_to_object(obj_player) <= 8)
 	depth = -self_y;

@@ -116,7 +116,7 @@ function fn_menu_home_evStep()
 	// Plays menu start sound when the languages level opens
 	if (((lvlTrans_tgt == LVL_LANG && lvlTrans_stg > -1 && lvlTrans_postDelay <= 0) || (lvl == LVL_LANG && lvlTrans_stg == -1)) && lang_snd_act == false)
 	{
-		fn_aud_play(lang_snd, CONFIG_VOL_IDX.MENU);
+		fn_aud_play(lang_snd, CONFIG_VOLTYPE.MENU);
 		lang_snd_act = true;
 	}
 }
@@ -179,7 +179,7 @@ function fn_menu_home_opt_slct()
 		// "Start"
 		if (opt_move_pos[lvl] == 0)
 		{
-			fn_rmTrans_start(rm_nexus);
+			fn_rmTrans_start();
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
 			opt_cncl_act[lvl] = false;

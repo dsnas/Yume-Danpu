@@ -23,8 +23,10 @@ function fn_entity_evCreate() // Create Event determined by the NPC's ID
 		move_dir_spr[MOVE_DIR_UP] = move_dir_spr[MOVE_DIR_LT];
 		move_dir_spr[MOVE_DIR_DN] = move_dir_spr[MOVE_DIR_LT];
 		
-		pet_durMax = 60;
-		fn_interact_pet_meow_aud_add("snd_entity_macaco_citizen_");
+		interact_type = interact_type_meow;
+		interact_delay_durMax = 60;
+		
+		fn_interact_meow_addAsset("snd_entity_macaco_citizen_");
 	}
 }
 function fn_entity_evStep() // Step Event determined by the NPC's ID
@@ -33,13 +35,15 @@ function fn_entity_evStep() // Step Event determined by the NPC's ID
 	if (entity_id == "macaco_citizen")
 	{
 		// Interaction sequence
-		if (pet_stg == 0)
+		if (interact_stg == 0)
 		{
-			pet_meow_idx = irandom_range(0, 4);
+			interact_meow_idx = irandom_range(0, 4);
 			var i = irandom_range(1, 100);
 			if (i <= 5)
-				pet_meow_idx = irandom_range(5, 6);
+				interact_meow_idx = irandom_range(5, 6);
 		}
-		fn_interact_pet();
+		fn_interact_seq();
 	}
 }
+
+

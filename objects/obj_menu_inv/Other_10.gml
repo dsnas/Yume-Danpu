@@ -199,4 +199,4 @@ for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 
 fn_menu_lvlTrans_start(LVL_MAIN);
 
-fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOL_IDX.MENU);
+fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOLTYPE.MENU);

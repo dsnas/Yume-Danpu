@@ -102,7 +102,7 @@ if (trans_stg == 0) // fade-out trans (transition animation)
 			trans_lvl = -1;
 		}
 		if (destroy_stg == 1)
-			fn_obj_dstr(id);
+			fn_obj_destroy(id);
 	}
 }
 else if (trans_stg == 1) // fade-in trans (transition animation)

@@ -1,5 +1,5 @@
 
-if (type == global.rmTrans_type.fade)
-{
-	fn_draw_rect(0, 0, 320, 240, type_fade_col, type_fade_col, type_fade_col, type_fade_col, type_fade_alp);
-}
+// Draws the room transition sequence based on its type
+if (type == type_fade) // Fade type
+|| (type == type_doorNormal) // Normal door type
+	fn_draw_rect(0, 0, 320, 240, fade_col, fade_col, fade_col, fade_col, fade_alp);

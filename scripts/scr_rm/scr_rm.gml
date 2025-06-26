@@ -104,15 +104,15 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 
 
 // Functions related to the current room's music
-function fn_rm_mus_add(_idx, _aud, _aud_vol = 1, _aud_volDur = 0, _aud_volIdx = CONFIG_VOL_IDX.MUS, _aud_pit = 1)
+function fn_rm_mus_add(_idx, _asset, _vol = 1, _pitch = 1, _volType = CONFIG_VOLTYPE.MUS)
 {
 	var i = _idx;
 	
-	mus_asset[i] = _aud;
-	mus_vol[i] = _aud_vol;
-	mus_volDur[i] = _aud_volDur;
-	mus_volIdx[i] = _aud_volIdx;
-	mus_pitch[i] = _aud_pit;
+	mus_asset[i] = _asset;
+	mus_vol[i] = _vol;
+	
+	mus_pitch[i] = _pitch;
+	mus_volType[i] = _volType;
 	
 	mus_id[i] = -1;
 }

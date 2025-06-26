@@ -38,7 +38,10 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	move_dir_key[MOVE_DIR_UP] = CONFIG_KEY_IDX.UP;
 	move_dir_key[MOVE_DIR_DN] = CONFIG_KEY_IDX.DN;
 	
-	move_stg = -1; // ID of the current stage of the movement sequence (-1 == idle, 0+ active)
+	move_stg = -1; // ID of the current stage of the movement sequence (-2 == frozen, -1 == idle, 0+ active)
+		// Freezes the character if the room transition sequence is active
+	if (fn_obj_exists(obj_rmTrans) == true && obj_rmTrans.destroy == false)
+		move_stg = -2;
 	move_spd = 1;
 	move_dur = 0;
 	move_durMax = 16;
@@ -67,10 +70,13 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	cam_y = 0;
 	cam_spd = 1;
 	fn_chara_cam();
+	
+	
+	// Cutscenes
+	cutsc_act = false;
 }
 
 
-// Other functions
 function fn_chara_cam()
 {
 	cam_xTgt = (self_x + (sprite_width / 2) - (cam_w / 2));
@@ -86,6 +92,7 @@ function fn_chara_cam()
 	camera_set_view_size(cam_id, cam_w, cam_h);
 	camera_set_view_pos(cam_id, cam_x, cam_y);
 }
+
 function fn_chara_rm_loop() // Room looping system
 {
 	var _xDist = 0;

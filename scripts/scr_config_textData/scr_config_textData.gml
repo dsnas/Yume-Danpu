@@ -44,7 +44,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		ds_map_add(t, "menu_home_main_opt_2", "Exit");
 		
 		
-		// settings menu
+		// Settings menu
 		ds_map_add(t, "menu_config_main_ttl", "Options");
 		ds_map_add(t, "menu_config_main_opt_0", "Languages");
 		ds_map_add(t, "menu_config_main_opt_1", "Video settings");
@@ -76,7 +76,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		// Pause menu
 		ds_map_add(t, "menu_pse_main_ttl", "Game Paused");
 		ds_map_add(t, "menu_pse_main_opt_0", "Resume");
-		ds_map_add(t, "menu_pse_main_opt_1", "settings");
+		ds_map_add(t, "menu_pse_main_opt_1", "Settings");
 		ds_map_add(t, "menu_pse_main_opt_2", "Instructions");
 		ds_map_add(t, "menu_pse_main_opt_3", "Quit to Menu");
 		
