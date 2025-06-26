@@ -4,9 +4,21 @@
 
 function fn_rmTrans_getData()
 {
-	end_player_dir = obj_player.MOVE_DIR_DN;
-	delay_durMax = 15;
+	if (fn_obj_exists(obj_player) == true)
+		end_player_dir = obj_player.MOVE_DIR_DN;
+	delay_durMax = 10;
 	type = type_fade;
+	
+	// Menus
+	if (start_obj == obj_menu)
+	{
+		var i = start_obj.menu_id
+		
+		if (i == "home") // Main menu
+			end_rm = rm_nexus;
+		else if (i == "pse") // Pause menu
+			end_rm = temp_rm_menu_home;
+	}
 	
 	// Door of Macacolandia
 	if (start_obj == obj_interact_macaco_door)

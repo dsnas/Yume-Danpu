@@ -71,7 +71,7 @@ if (room == end_rm && end_player_changed == false && fn_obj_exists(obj_player) =
 			self_y = y;
 		}
 	}
-	if (end_player_dir != 0)
+	if (end_player_dir != -1)
 		obj_player.move_dir = end_player_dir;
 	
 	end_player_changed = true;

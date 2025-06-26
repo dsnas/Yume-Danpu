@@ -22,8 +22,8 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 			move_dir_key[move_atwlk_lastDirKey] = true;
 		else
 			move_dir_key[move_dir] = true;
-		move_atwlk_lastDirKey = -1;
 	}
+	move_atwlk_lastDirKey = -1;
 	
 	
 	// Loops through each movement direction

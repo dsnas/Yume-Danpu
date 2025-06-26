@@ -30,7 +30,7 @@ type = -1; // ID number of the current type (-1 == none)
 type_fade = 0;
 fade_col = c_black;
 fade_alp = 0;
-fade_alpSpd = 0.15;
+fade_alpSpd = 0.2;
 
 	// Normal door type, opens the door and fades out of the starting room, and then fades in to the ending one
 type_doorNormal = 1;

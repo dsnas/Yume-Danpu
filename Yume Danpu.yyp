@@ -28,7 +28,7 @@
     {"$GMFolder":"","%Name":"Madotsuki","folderPath":"folders/menu/assets/Madotsuki.yy","name":"Madotsuki","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Simple","folderPath":"folders/menu/assets/Simple.yy","name":"Simple","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"home","folderPath":"folders/menu/home.yy","name":"home","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"pause","folderPath":"folders/menu/pause.yy","name":"pause","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"pse","folderPath":"folders/menu/pse.yy","name":"pse","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Nexus","folderPath":"folders/Nexus.yy","name":"Nexus","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"nonsolid","folderPath":"folders/nonsolid.yy","name":"nonsolid","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"player","folderPath":"folders/player.yy","name":"player","resourceType":"GMFolder","resourceVersion":"2.0",},

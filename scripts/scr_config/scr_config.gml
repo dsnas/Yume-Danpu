@@ -73,7 +73,7 @@ function fn_config_volType_setup() // Sets up the volume array
 		AMBIENT = 6		// Sounds played in the background by the world
 	}
 	global.config_volType[CONFIG_VOLTYPE.MASTER] = 1;
-	global.config_volType[CONFIG_VOLTYPE.MUS] = 0;
+	global.config_volType[CONFIG_VOLTYPE.MUS] = 1;
 	global.config_volType[CONFIG_VOLTYPE.MENU] = 1;
 	global.config_volType[CONFIG_VOLTYPE.PLAYER] = 1;
 	global.config_volType[CONFIG_VOLTYPE.INTERACT] = 1;

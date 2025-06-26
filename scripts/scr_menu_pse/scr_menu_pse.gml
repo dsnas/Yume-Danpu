@@ -54,7 +54,7 @@ function fn_menu_pse_evCreate()
 	sshot_spr = -1;
 	if (global.config_lowGfx == false) // Checks if the low graphics configing is enabled, since taking a screenshot can freeze the game for half a second
 	{
-		sshot_fname = "menu_pause_sshot.png"; 
+		sshot_fname = "menu_pse_sshot.png"; 
 		surface_save(application_surface, working_directory + string(sshot_fname));
 		sshot_spr = sprite_add(sshot_fname, 1, false, false, 0, 0);
 		sshot_xSc = 0.5;
@@ -103,10 +103,11 @@ function fn_menu_pse_opt_slct()
 		// "Quit to Menu"
 		if (opt_move_pos[lvl] == 3)
 		{
-			fn_rmTrans_start();
+			fn_menu_pse_sshot_delete();
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
 			opt_cncl_act[lvl] = false;
+			fn_rmTrans_start();
 		}
 	}
 }
@@ -122,11 +123,8 @@ function fn_menu_pse_opt_cncl()
 
 
 // Functions unrelated to the core menu system
-function fn_menu_pse_resume()
+function fn_menu_pse_sshot_delete() // Deletes the image file of the screenshot
 {
-	fn_menu_lvlTrans_start(lvl_amtMax, , , true);
-	
-	// Deletes the screenshot
 	if (sshot_spr != -1)
 	{
 		if (file_exists(sshot_fname) == true)
@@ -135,11 +133,13 @@ function fn_menu_pse_resume()
 			sprite_delete(sshot_spr);
 		sshot_spr = -1;
 	}
-	
-	// Activates everything in the room
+}
+function fn_menu_pse_resume() // Resumes the game
+{
+	fn_menu_pse_sshot_delete();
 	instance_activate_all();
 	audio_resume_all();
-	
-	// Unfreezes the player
 	obj_player.move_stg = -1;
+	
+	fn_menu_lvlTrans_start(lvl_amtMax, , , true);
 }
