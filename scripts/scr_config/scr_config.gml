@@ -36,16 +36,16 @@ function fn_config_setup() // Sets up the game's settings
 // Functions related to the languages
 function fn_config_lang_setup() // Sets up the available languages without loading their text data
 {
-	enum CONFIG_LANG_IDX // Index of each available language
+	enum CONFIG_LANG // Index of each available language
 	{
 		EN_US = 0,	// English (United States)
 		PT_BR = 1	// Português (Brasil)
 	}
-	fn_config_lang_add(CONFIG_LANG_IDX.EN_US, "English (United States)");
-	fn_config_lang_add(CONFIG_LANG_IDX.PT_BR, "Português (Brasil)");
+	fn_config_lang_add(CONFIG_LANG.EN_US, "English (US)");
+	fn_config_lang_add(CONFIG_LANG.PT_BR, "Português (BR)");
 	global.config_lang_amt = array_length(global.config_lang_name);	// Total amount of available languages
 	
-	global.config_lang_idx = CONFIG_LANG_IDX.EN_US; // The current language
+	global.config_lang = CONFIG_LANG.EN_US; // The current language
 	global.config_lang_hasChosen = false; // Determines whether the player has selected a language when game opened for the first time
 	
 	fn_config_lang_textData_setup();
@@ -86,7 +86,7 @@ function fn_config_volType_setup() // Sets up the volume array
 // Functions related to keybinds/controls
 function fn_config_key_setup() // Sets up the list of the player's current keybinds
 {
-	enum CONFIG_KEY_IDX // Index of each keybind in the array
+	enum CONFIG_KEY // Index of each keybind in the array
 	{
 		LT = 0,			// Left
 		RT = 1,			// Right
@@ -99,50 +99,50 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 		FSCR = 8,		// Fullscreen
 		ATWLK = 9		// Autowalk
 	}
-	fn_config_key_add(CONFIG_KEY_IDX.LT,			vk_left,	ord("A"));
-	fn_config_key_add(CONFIG_KEY_IDX.RT,			vk_right,	ord("D"));
-	fn_config_key_add(CONFIG_KEY_IDX.UP,			vk_up,		ord("W"));
-	fn_config_key_add(CONFIG_KEY_IDX.DN,			vk_down,	ord("S"));
-	fn_config_key_add(CONFIG_KEY_IDX.SLCT,			ord("Z"),	vk_enter);
-	fn_config_key_add(CONFIG_KEY_IDX.CNCL,			ord("X"),	vk_shift);
-	fn_config_key_add(CONFIG_KEY_IDX.MENU_INV,		ord("C"),	vk_control);
-	fn_config_key_add(CONFIG_KEY_IDX.MENU_PSE,		vk_escape,	-1);
-	fn_config_key_add(CONFIG_KEY_IDX.FSCR,			vk_f4,		-1);
-	fn_config_key_add(CONFIG_KEY_IDX.ATWLK,			ord("R"),	-1);
+	fn_config_key_add(CONFIG_KEY.LT,			vk_left,	ord("A"));
+	fn_config_key_add(CONFIG_KEY.RT,			vk_right,	ord("D"));
+	fn_config_key_add(CONFIG_KEY.UP,			vk_up,		ord("W"));
+	fn_config_key_add(CONFIG_KEY.DN,			vk_down,	ord("S"));
+	fn_config_key_add(CONFIG_KEY.SLCT,			ord("Z"),	vk_enter);
+	fn_config_key_add(CONFIG_KEY.CNCL,			ord("X"),	vk_shift);
+	fn_config_key_add(CONFIG_KEY.MENU_INV,		ord("C"),	vk_control);
+	fn_config_key_add(CONFIG_KEY.MENU_PSE,		vk_escape,	-1);
+	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
+	fn_config_key_add(CONFIG_KEY.ATWLK,			ord("R"),	-1);
 	global.config_key_amt = array_length(global.config_key_dflt);
 }
-function fn_config_key_add(_key_idx, _key_dflt, _key_alt) // Adds a key to the specified position on the keybind list
+function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the keybind list
 {
-	global.config_key_dflt[_key_idx] = _key_dflt;
-	global.config_key_alt[_key_idx] = _key_alt;
+	global.config_key_dflt[_key] = _key_dflt_id;
+	global.config_key_alt[_key] = _key_alt_id;
 }
 
-function fn_config_key_press(_key_idx) // Returns if the specified keybind has been pressed
+function fn_config_key_press(_key) // Returns if the specified keybind has been pressed
 {
-	return max(keyboard_check_pressed(global.config_key_dflt[_key_idx]), keyboard_check_pressed(global.config_key_alt[_key_idx]));
+	return max(keyboard_check_pressed(global.config_key_dflt[_key]), keyboard_check_pressed(global.config_key_alt[_key]));
 }
-function fn_config_key_hold(_key_idx) // Returns if the specified keybind is currently being held
+function fn_config_key_hold(_key) // Returns if the specified keybind is currently being held
 {
-	return max(keyboard_check(global.config_key_dflt[_key_idx]), keyboard_check(global.config_key_alt[_key_idx]));
+	return max(keyboard_check(global.config_key_dflt[_key]), keyboard_check(global.config_key_alt[_key]));
 }
 
 function fn_config_key_quick() // Provides several variables to make input-checking tasks quicker
 {
-	press_lt = fn_config_key_press(CONFIG_KEY_IDX.LT);
-	press_rt = fn_config_key_press(CONFIG_KEY_IDX.RT);
-	press_up = fn_config_key_press(CONFIG_KEY_IDX.UP);
-	press_dn = fn_config_key_press(CONFIG_KEY_IDX.DN);
-	press_slct = fn_config_key_press(CONFIG_KEY_IDX.SLCT);
-	press_cncl = fn_config_key_press(CONFIG_KEY_IDX.CNCL);
-	press_inv = fn_config_key_press(CONFIG_KEY_IDX.MENU_INV);
-	press_pse = fn_config_key_press(CONFIG_KEY_IDX.MENU_PSE);
-	press_fscr = fn_config_key_press(CONFIG_KEY_IDX.FSCR);
-	press_atwlk = fn_config_key_press(CONFIG_KEY_IDX.ATWLK);
+	press_lt = fn_config_key_press(CONFIG_KEY.LT);
+	press_rt = fn_config_key_press(CONFIG_KEY.RT);
+	press_up = fn_config_key_press(CONFIG_KEY.UP);
+	press_dn = fn_config_key_press(CONFIG_KEY.DN);
+	press_slct = fn_config_key_press(CONFIG_KEY.SLCT);
+	press_cncl = fn_config_key_press(CONFIG_KEY.CNCL);
+	press_inv = fn_config_key_press(CONFIG_KEY.MENU_INV);
+	press_pse = fn_config_key_press(CONFIG_KEY.MENU_PSE);
+	press_fscr = fn_config_key_press(CONFIG_KEY.FSCR);
+	press_atwlk = fn_config_key_press(CONFIG_KEY.ATWLK);
 	
-	hold_lt = fn_config_key_hold(CONFIG_KEY_IDX.LT);
-	hold_rt = fn_config_key_hold(CONFIG_KEY_IDX.RT);
-	hold_up = fn_config_key_hold(CONFIG_KEY_IDX.UP);
-	hold_dn = fn_config_key_hold(CONFIG_KEY_IDX.DN);
+	hold_lt = fn_config_key_hold(CONFIG_KEY.LT);
+	hold_rt = fn_config_key_hold(CONFIG_KEY.RT);
+	hold_up = fn_config_key_hold(CONFIG_KEY.UP);
+	hold_dn = fn_config_key_hold(CONFIG_KEY.DN);
 }
 
 function fn_config_keyList_setup() // Sets up the list of keys the player can bind an action to
@@ -209,11 +209,11 @@ function fn_config_keyList_setup() // Sets up the list of keys the player can bi
 	fn_config_keyList_add(k++, vk_f11,	"F11");
 	fn_config_keyList_add(k++, vk_f12,	"F12");
 }
-function fn_config_keyList_add(_key_idx, _key, _key_name) // Adds a key and its name to the specified position on the list
+function fn_config_keyList_add(_key, _key_id, _key_name) // Adds a key and its name to the specified position on the list
 {
-	var i = _key_idx;
+	var i = _key;
 	
-	global.config_keyList[i] = _key;
+	global.config_keyList[i] = _key_id;
 	global.config_keyList_name[i] = _key_name;
 }
 
@@ -226,7 +226,7 @@ function fn_config_file_save()
 	
 	
 	// Languages
-	ini_write_real("langs", "lang_idx", global.config_lang_idx);
+	ini_write_real("langs", "lang", global.config_lang);
 	ini_write_real("langs", "hasChosen", global.config_lang_hasChosen);
 	
 	// Video Settings
@@ -237,13 +237,13 @@ function fn_config_file_save()
 	
 	// Audio Settings
 	for (var i = 0; i < global.config_volType_amt; i++)
-		ini_write_real("audio", $"vol_idx_{i}", global.config_volType[i]);
+		ini_write_real("audio", $"vol_{i}", global.config_volType[i]);
 	
 	// Keybinds
 	for (var i = 0; i < global.config_key_amt; i++)
-		ini_write_real("keys", $"dflt_idx_{i}", global.config_key_dflt[i]);
+		ini_write_real("keys", $"dflt_{i}", global.config_key_dflt[i]);
 	for (var i = 0; i < global.config_key_amt; i++)
-		ini_write_real("keys", $"alt_idx_{i}", global.config_key_alt[i]);
+		ini_write_real("keys", $"alt_{i}", global.config_key_alt[i]);
 	
 	// Accessibility
 	ini_write_real("a11y", "rdcdMot", global.config_rdcdMot);
@@ -257,7 +257,7 @@ function fn_config_file_load()
 	
 	
 	// Languages
-	global.config_lang_idx = ini_read_real("langs", "lang_idx", 0);
+	global.config_lang = ini_read_real("langs", "lang", 0);
 	global.config_lang_hasChosen = ini_read_real("langs", "hasChosen", 0);
 	
 	// Video Settings
@@ -268,13 +268,13 @@ function fn_config_file_load()
 	
 	// Audio Settings
 	for (var i = 0; i < global.config_volType_amt; i++)
-		global.config_volType[i] = ini_read_real("audio", $"vol_idx_{i}", 1);
+		global.config_volType[i] = ini_read_real("audio", $"vol_{i}", 1);
 	
 	// Keybinds
 	for (var i = 0; i < global.config_key_amt; i++)
-		global.config_key_dflt[i] = ini_read_real("keys", $"dflt_idx_{i}", 0);
+		global.config_key_dflt[i] = ini_read_real("keys", $"dflt_{i}", 0);
 	for (var i = 0; i < global.config_key_amt; i++)
-		global.config_key_alt[i] = ini_read_real("keys", $"alt_idx_{i}", 0);
+		global.config_key_alt[i] = ini_read_real("keys", $"alt_{i}", 0);
 	
 	// Accessibility
 	global.config_rdcdMot = ini_read_real("a11y", "rdcdMot", 0);

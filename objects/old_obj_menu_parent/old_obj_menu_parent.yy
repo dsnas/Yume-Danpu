@@ -14,8 +14,8 @@
   "name":"old_obj_menu_parent",
   "overriddenProperties":[],
   "parent":{
-    "name":"INSANIDADE",
-    "path":"folders/INSANIDADE.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "parentObjectId":null,
   "persistent":false,

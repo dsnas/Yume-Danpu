@@ -4,7 +4,7 @@ image_index = 0;
 image_alpha = 0;
 
 
-global.dbg_act = false;
+global.dbg_act = true;
 global.dbg_mod = vk_alt; // Modifier key
 global.dbg_pwd = "hunter2"; // Password
 global.dbg_rm[0] = rm_dbgwrld;

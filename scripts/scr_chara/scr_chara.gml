@@ -33,10 +33,10 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	move_dir_spdMul[MOVE_DIR_UP] = -1;
 	move_dir_spdMul[MOVE_DIR_DN] = 1;
 	
-	move_dir_key[MOVE_DIR_LT] = CONFIG_KEY_IDX.LT;
-	move_dir_key[MOVE_DIR_RT] = CONFIG_KEY_IDX.RT;
-	move_dir_key[MOVE_DIR_UP] = CONFIG_KEY_IDX.UP;
-	move_dir_key[MOVE_DIR_DN] = CONFIG_KEY_IDX.DN;
+	move_dir_key[MOVE_DIR_LT] = CONFIG_KEY.LT;
+	move_dir_key[MOVE_DIR_RT] = CONFIG_KEY.RT;
+	move_dir_key[MOVE_DIR_UP] = CONFIG_KEY.UP;
+	move_dir_key[MOVE_DIR_DN] = CONFIG_KEY.DN;
 	
 	move_stg = -1; // ID of the current stage of the movement sequence (-2 == frozen, -1 == idle, 0+ active)
 		// Freezes the character if the room transition sequence is active

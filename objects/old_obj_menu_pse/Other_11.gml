@@ -21,7 +21,7 @@ if (lvlTrans_act == false)
 			if (optMove_pos[lvl] == 0) // ("Resume" option)
 				fn_menu_pse_resume();
 			else if (optMove_pos[lvl] == (opt_amt[lvl] - 1))
-				fn_menu_lvlTrans_start(lvl_amtMax, undefined, temp_rm_menu_home);
+				fn_menu_lvlTrans_start(LVL_EMPTY, undefined, temp_rm_menu_home);
 			else
 				_opt_snd = global.thm_snd_optFail[global.thm_cur];
 			

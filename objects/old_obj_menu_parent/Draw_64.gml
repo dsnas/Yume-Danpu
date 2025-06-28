@@ -23,14 +23,14 @@ for (var l = 0; l < lvl_amtMax; l++) // Draws pxs, wnds, opts, lbls and ttls
 		}
 		
 		
-		for (var o = 0; o < opt_amt[l]; o++) // Draws opts (options) and optSlctr (option selector)
+		for (var o = 0; o < opt_amt[l]; o++) // Draws opts (options) and opt_slctr (option selector)
 		{
-			if (optSlctr_act[l, o] == true)
+			if (opt_slctr_act[l, o] == true)
 			{
 				/* (Animates the option selector's alpha) */
-				optSlctr_alp[l, o] = fn_lerp(optSlctr_alp[l, o], (o == optMove_pos[l]), optSlctr_alpSpd);
+				opt_slctr_alp[l, o] = fn_lerp(opt_slctr_alp[l, o], (o == optMove_pos[l]), opt_slctr_alpSpd);
 				
-				/* optSlctr */ fn_draw_spr_stretch(optSlctr_spr[l, o], 0, optSlctr_x[l, o], optSlctr_y[l, o], optSlctr_w[l, o], optSlctr_h[l, o], c_white, (optSlctr_alp[l, o] * lvl_alp[l] * draw_alp));
+				/* opt_slctr */ fn_draw_spr_stretch(opt_slctr_spr[l, o], 0, opt_slctr_x[l, o], opt_slctr_y[l, o], opt_slctr_w[l, o], opt_slctr_h[l, o], c_white, (opt_slctr_alp[l, o] * lvl_alp[l] * draw_alp));
 			}
 			
 			

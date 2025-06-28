@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_menu_config",
+  "%Name":"old_scr_menu_config",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_menu_config",
+  "name":"old_scr_menu_config",
   "parent":{
-    "name":"config",
-    "path":"folders/menu/config.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

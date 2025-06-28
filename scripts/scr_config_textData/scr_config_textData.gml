@@ -20,11 +20,11 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 	
 	// Creates the text data of the current language and adds all the text to it
-	var i = global.config_lang_idx;
+	var i = global.config_lang;
 	global.config_lang_textData[i] = ds_map_create();
 	var t = global.config_lang_textData[i];
 	
-	if (i == CONFIG_LANG_IDX.EN_US) // English (United States)
+	if (i == CONFIG_LANG.EN_US) // English (United States)
 	{
 		// Menu themes
 		ds_map_add(t, "thm_name_dflt", "Default");
@@ -45,11 +45,11 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		
 		
 		// Settings menu
-		ds_map_add(t, "menu_config_main_ttl", "Options");
-		ds_map_add(t, "menu_config_main_opt_0", "Languages");
-		ds_map_add(t, "menu_config_main_opt_1", "Video settings");
-		ds_map_add(t, "menu_config_main_opt_2", "Audio settings");
-		ds_map_add(t, "menu_config_main_opt_3", "Controls");
+		ds_map_add(t, "menu_config_main_ttl", ds_map_find_value(t, "menu_home_main_opt_1"));
+		ds_map_add(t, "menu_config_main_opt_0", "Language");
+		ds_map_add(t, "menu_config_main_opt_1", "Controls");
+		ds_map_add(t, "menu_config_main_opt_2", "Video Settings");
+		ds_map_add(t, "menu_config_main_opt_3", "Audio Settings");
 		ds_map_add(t, "menu_config_main_opt_4", "Accessibility");
 		
 		ds_map_add(t, "menu_config_lang_info", ds_map_find_value(t, "menu_config_main_opt_0"));
@@ -60,8 +60,8 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		ds_map_add(t, "menu_config_vid_opt_2", "Show FPS");
 		ds_map_add(t, "menu_config_vid_opt_3", "Show Border");
 		
-		ds_map_add(t, "menu_config_main_info_0", "No");
-		ds_map_add(t, "menu_config_main_info_1", "Yes");
+		ds_map_add(t, "menu_config_main_opt_config_0", "No");
+		ds_map_add(t, "menu_config_main_opt_config_1", "Yes");
 		
 		
 		// Inventory menu
@@ -85,7 +85,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		ds_map_add(t, "rm_nexus", "Nexus");
 		ds_map_add(t, "rm_macaco", "Macacolandia");
 	}
-	else if (i == CONFIG_LANG_IDX.PT_BR) // Português (Brasil)
+	else if (i == CONFIG_LANG.PT_BR) // Português (Brasil)
 	{
 		// Main menu
 		ds_map_add(t, "menu_home_lang_info_0", "Idioma");
@@ -103,7 +103,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 
 function fn_getText(_textData_key) // Retrieves the specified entry from the current language's text data
 {
-	var _text = ds_map_find_value(global.config_lang_textData[global.config_lang_idx], _textData_key);
+	var _text = ds_map_find_value(global.config_lang_textData[global.config_lang], _textData_key);
 	if (_text == undefined)
 		fn_log("The function fn_getText() was called and unable to retrieve the desired text");
 	

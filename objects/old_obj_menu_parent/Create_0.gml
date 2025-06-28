@@ -103,23 +103,23 @@ opt_inpSlct = 0; // (Select input)
 opt_inpCncl = 0; // (Cancel input)
 
 
-for (var l = 0; l < lvl_amtMax; l++) // optSlctr (Option selector; Selection/Focus indicator)
+for (var l = 0; l < lvl_amtMax; l++) // opt_slctr (Option selector; Selection/Focus indicator)
 {
 	for (var i = 0; i < opt_amtMax; i++)
 	{
-		optSlctr_act[l, i] = true; // (Determines if the selector is active for this option)
-		optSlctr_spr[l, i] = global.thm_optSlctr_spr[global.thm_cur];
-		optSlctr_x[l, i] = 0;
-		optSlctr_xFix[l, i] = 1; // (Fixes font sprite's empty space on the left)
-		optSlctr_xDist[l, i] = global.thm_optSlctr_xDist[global.thm_cur];
-		optSlctr_y[l, i] = 0;
-		optSlctr_yFix_0[l, i] = 3; // (Fixes acute, grave, and circumflex accent diacritics)
-		optSlctr_yFix_1[l, i] = 1; // (Fixes descenders)
-		optSlctr_yDist[l, i] = global.thm_optSlctr_yDist[global.thm_cur];
-		optSlctr_w[l, i] = 0;
-		optSlctr_h[l, i] = 0;
-		optSlctr_alp[l, i] = 0;
-		optSlctr_alpSpd = opt_colSpd;
+		opt_slctr_act[l, i] = true; // (Determines if the selector is active for this option)
+		opt_slctr_spr[l, i] = global.thm_opt_slctr_spr[global.thm_cur];
+		opt_slctr_x[l, i] = 0;
+		opt_slctr_xFix[l, i] = 1; // (Fixes font sprite's empty space on the left)
+		opt_slctr_xDist[l, i] = global.thm_opt_slctr_xDist[global.thm_cur];
+		opt_slctr_y[l, i] = 0;
+		opt_slctr_yFix_0[l, i] = 3; // (Fixes acute, grave, and circumflex accent diacritics)
+		opt_slctr_yFix_1[l, i] = 1; // (Fixes descenders)
+		opt_slctr_yDist[l, i] = global.thm_opt_slctr_yDist[global.thm_cur];
+		opt_slctr_w[l, i] = 0;
+		opt_slctr_h[l, i] = 0;
+		opt_slctr_alp[l, i] = 0;
+		opt_slctr_alpSpd = opt_colSpd;
 	}
 }
 

@@ -15,10 +15,10 @@ move_atwlk_lastDirKey = -1;
 
 // Opening and closing menus
 menu_id[0] = "inv";
-menu_key_idx[0] = CONFIG_KEY_IDX.MENU_INV;
+menu_key[0] = CONFIG_KEY.MENU_INV;
 
 menu_id[1] = "pse";
-menu_key_idx[1] = CONFIG_KEY_IDX.MENU_PSE;
+menu_key[1] = CONFIG_KEY.MENU_PSE;
 
 menu_amt = array_length(menu_id);
 

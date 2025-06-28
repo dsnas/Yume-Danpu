@@ -2,7 +2,7 @@
 //////// Functions related to the pause menu
 
 
-// Functions related to configing up the menu
+// Functions related to setting up the menu
 function fn_menu_pse_evCreate()
 {
 	// Main level
@@ -15,14 +15,13 @@ function fn_menu_pse_evCreate()
 	rect_y[l, 0] = 0;
 	rect_w[l, 0] = 320;
 	rect_h[l, 0] = 240;
-	rect_col[l, 0] = global.thm_col[global.thm_cur].black;
-	rect_alp[l, 0] = 0.75;
+	fn_menu_rect_addOther(l, 0, global.thm_col[global.thm_cur].black, 0.75);
 	
 		// Title
 	fn_menu_ttl_add(l, fn_getText("menu_pse_main_ttl"));
 	
 		// Options [#0]
-	fn_menu_opt_addText(l, "menu_pse_main_opt_");
+	fn_menu_opt_add_ext(l, "menu_pse_main_opt_");
 	fn_log(opt_text[l, 0]);
 	var _opt_yDist = draw_dist;
 	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.game_fnt_h);
@@ -37,15 +36,16 @@ function fn_menu_pse_evCreate()
 	box_x[l, 0] = (160 - round(box_w[l, 0] / 2));
 	box_y[l, 0] = (120 + _box_yDist - round(box_h[l, 0] / 2));
 	
+	fn_menu_box_addOther(l, 0);
+	
 		// Options [#1]
 	for (var o = 0; o < opt_amt[l]; o++)
 	{
 		opt_x[l, o] = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(opt_w[l, o] / 2));
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
-		
-		fn_menu_optSlctr_add(l, o);
+		fn_menu_opt_slctr_add(l, o);
 	}
-	opt_cncl_key_idx[l, 1] = CONFIG_KEY_IDX.MENU_PSE;
+	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_PSE;
 	
 	
 	
@@ -86,7 +86,7 @@ function fn_menu_pse_opt_slct()
 		// "Resume"
 		if (opt_move_pos[lvl] == 0)
 		{
-			_opt_slct_snd = opt_cncl_snd[lvl];
+			_opt_slct_snd = opt_cncl_sndDflt[lvl];
 			fn_menu_pse_resume();
 		}
 		
@@ -103,11 +103,11 @@ function fn_menu_pse_opt_slct()
 		// "Quit to Menu"
 		if (opt_move_pos[lvl] == 3)
 		{
-			fn_menu_pse_sshot_delete();
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
 			opt_cncl_act[lvl] = false;
 			fn_rmTrans_start();
+			fn_menu_pse_sshot_delete();
 		}
 	}
 }
@@ -115,10 +115,7 @@ function fn_menu_pse_opt_cncl()
 {
 	// Main level
 	if (lvl == LVL_MAIN)
-	{
-		_opt_cncl_snd = opt_cncl_snd[lvl];
 		fn_menu_pse_resume();
-	}
 }
 
 
@@ -137,9 +134,10 @@ function fn_menu_pse_sshot_delete() // Deletes the image file of the screenshot
 function fn_menu_pse_resume() // Resumes the game
 {
 	fn_menu_pse_sshot_delete();
+	
 	instance_activate_all();
 	audio_resume_all();
 	obj_player.move_stg = -1;
 	
-	fn_menu_lvlTrans_start(lvl_amtMax, , , true);
+	fn_menu_lvlTrans_start(LVL_EMPTY, , , true);
 }

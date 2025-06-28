@@ -31,6 +31,5 @@ function fn_game_start()
 	
 	
 	var _rm = temp_rm_menu_home;
-	_rm = rm_nexus;
 	room_goto(_rm);
 }
