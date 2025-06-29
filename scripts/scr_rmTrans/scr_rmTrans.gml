@@ -22,13 +22,29 @@ function fn_rmTrans_getData()
 	
 	// Door of Macacolandia
 	if (start_obj == obj_interact_macaco_door)
-	{	
+	{
 		end_rm = rm_macaco;
+		
 		if (room == rm_macaco)
 		{
 			end_rm = rm_nexus;
 			end_player_x = 160;
 			end_player_y = 112;
+		}
+		
+		type = type_doorNormal;
+	}
+	
+	// Door of Debug World
+	if (start_obj == obj_interact_dgwrld_door)
+	{
+		end_rm = rm_dbgwrld;
+		
+		if (room == rm_dbgwrld)
+		{
+			end_rm = rm_nexus;
+			end_player_x = 272;
+			end_player_y = 224;
 		}
 		
 		type = type_doorNormal;

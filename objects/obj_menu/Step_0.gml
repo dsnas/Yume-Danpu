@@ -60,7 +60,7 @@ if (lvlTrans_stg == -1 && lvl != LVL_EMPTY) // Also checks if the current level 
 
 
 // Active level transition sequence
-else if (lvlTrans_stg == 0)
+if (lvlTrans_stg == 0)
 {
 	if (lvlTrans_preDelay <= 0) // Checks if the pre-sequence delay is inactive
 	{

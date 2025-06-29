@@ -26,6 +26,22 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 	if (i == CONFIG_LANG.EN_US) // English (United States)
 	{
+		// Keybinds
+		ds_map_add(t, "config_key_name_0", "Go Left");
+		ds_map_add(t, "config_key_name_1", "Go Right");
+		ds_map_add(t, "config_key_name_2", "Go Up");
+		ds_map_add(t, "config_key_name_3", "Go Down");
+		
+		ds_map_add(t, "config_key_name_4", "Select");
+		ds_map_add(t, "config_key_name_5", "Cancel");
+		
+		ds_map_add(t, "config_key_name_6", "Open Inventory");
+		ds_map_add(t, "config_key_name_7", "Pause Game");
+		
+		ds_map_add(t, "config_key_name_8", "Toggle Autowalk");
+		ds_map_add(t, "config_key_name_9", "Toggle Fullscreen");
+		
+		
 		// Menu themes
 		ds_map_add(t, "thm_name_dflt", "Default");
 		ds_map_add(t, "thm_name_smpl", "Simple");
@@ -47,21 +63,27 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		// Settings menu
 		ds_map_add(t, "menu_config_main_ttl", ds_map_find_value(t, "menu_home_main_opt_1"));
 		ds_map_add(t, "menu_config_main_opt_0", "Language");
-		ds_map_add(t, "menu_config_main_opt_1", "Controls");
-		ds_map_add(t, "menu_config_main_opt_2", "Video Settings");
-		ds_map_add(t, "menu_config_main_opt_3", "Audio Settings");
-		ds_map_add(t, "menu_config_main_opt_4", "Accessibility");
+		ds_map_add(t, "menu_config_main_opt_1", "Video Settings");
+		ds_map_add(t, "menu_config_main_opt_2", "Audio Settings");
+		ds_map_add(t, "menu_config_main_opt_3", "Accessibility");
 		
-		ds_map_add(t, "menu_config_lang_info", ds_map_find_value(t, "menu_config_main_opt_0"));
+			// Languages (unused)
+		ds_map_add(t, "menu_config_lang_ttl", ds_map_find_value(t, "menu_config_main_opt_0"));
 		
+			// Keybinds
+		ds_map_add(t, "menu_config_key_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
+		ds_map_add(t, "menu_config_key_opt_0", "Keybinds Type");
+		
+			// Video Settings
 		ds_map_add(t, "menu_config_vid_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
 		ds_map_add(t, "menu_config_vid_opt_0", "Fullscreen");
 		ds_map_add(t, "menu_config_vid_opt_1", "Low Graphics");
 		ds_map_add(t, "menu_config_vid_opt_2", "Show FPS");
 		ds_map_add(t, "menu_config_vid_opt_3", "Show Border");
 		
-		ds_map_add(t, "menu_config_main_opt_config_0", "No");
-		ds_map_add(t, "menu_config_main_opt_config_1", "Yes");
+			// All levels
+		ds_map_add(t, "menu_config_all_opt_config_0", "No");
+		ds_map_add(t, "menu_config_all_opt_config_1", "Yes");
 		
 		
 		// Inventory menu

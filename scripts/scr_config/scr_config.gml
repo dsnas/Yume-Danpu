@@ -96,8 +96,8 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 		CNCL = 5,		// Cancel
 		MENU_INV = 6,	// Inventory menu
 		MENU_PSE = 7,	// Pause menu
-		FSCR = 8,		// Fullscreen
-		ATWLK = 9		// Autowalk
+		ATWLK = 8,		// Autowalk
+		FSCR = 9		// Fullscreen
 	}
 	fn_config_key_add(CONFIG_KEY.LT,			vk_left,	ord("A"));
 	fn_config_key_add(CONFIG_KEY.RT,			vk_right,	ord("D"));
@@ -107,14 +107,15 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 	fn_config_key_add(CONFIG_KEY.CNCL,			ord("X"),	vk_shift);
 	fn_config_key_add(CONFIG_KEY.MENU_INV,		ord("C"),	vk_control);
 	fn_config_key_add(CONFIG_KEY.MENU_PSE,		vk_escape,	-1);
-	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
 	fn_config_key_add(CONFIG_KEY.ATWLK,			ord("R"),	-1);
+	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
 	global.config_key_amt = array_length(global.config_key_dflt);
 }
 function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the keybind list
 {
 	global.config_key_dflt[_key] = _key_dflt_id;
 	global.config_key_alt[_key] = _key_alt_id;
+	global.config_key_name[_key] = fn_getText($"config_key_name_{_key}");
 }
 
 function fn_config_key_press(_key) // Returns if the specified keybind has been pressed

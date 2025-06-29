@@ -10,8 +10,12 @@ function fn_interact_getId() // Retrieves the ID of the interactable, which dete
 	if (object_index == obj_interact_macaco_door)
 		interact_id = "door_macaco";
 	
+	// Door of Debug World
+	if (object_index == obj_interact_dgwrld_door)
+		interact_id = "door_dbgwrld";
+	
 	// Debug World
-	if (room == rm_dbgwrld)
+	else if (room == rm_dbgwrld)
 		interact_id = "dbgwrld";
 }
 

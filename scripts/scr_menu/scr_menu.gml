@@ -283,14 +283,21 @@ function fn_menu_opt_slct() // Option selection sequence determined by the menu'
 	// Main menu
 	if (menu_id == "home")
 		fn_menu_home_opt_slct();
-		
+	
+	// Settings menu
+	if (menu_id == "config")
+		fn_menu_config_opt_slct();
+	
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_opt_slct();
-	
 }
 function fn_menu_opt_cncl() // Option cancellation sequence determined by the menu's ID
 {
+	// Settings menu
+	if (menu_id == "config")
+		fn_menu_config_opt_cncl();
+	
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_opt_cncl();
