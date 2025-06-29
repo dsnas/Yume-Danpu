@@ -20,8 +20,8 @@ This repository is updated regularly while we're working on it, not just when ne
 &nbsp;
 
 ## Development and release videos
-We _very occasionally_ post videos on YouTube showcasing upcoming or newly released changes and features.  
-You can follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)!
+We occasionally post videos on YouTube showcasing upcoming or newly released changes and features.  
+You can follow the game's progress through the [playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)! I guess it would blow some of the surprises, though...
 
 &nbsp;
 
