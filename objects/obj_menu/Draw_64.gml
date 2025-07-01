@@ -1,11 +1,13 @@
 
-// Loops through each level until the maximum amount is reached
-for (var l = 0; l < lvl_amtMax; l++)
+fn_menu_evDrawGUI_0(lvl);
+
+
+// Draws the rectangles, boxes, options, information and titles
+for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maximum amount is reached
 {
-	// Draws the rectangles, boxes, options, information and titles of the current level and the one the transition sequence may be going to
-	if (l == lvl) || (l == lvlTrans_tgt)
+	if (lvl_alp[l] > 0)
 	{
-		fn_menu_evDrawGUI_0(l);
+		fn_menu_evDrawGUI_1(l);
 		
 		
 		// Draws the rectangles
@@ -25,7 +27,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 			if (o < array_length(opt_slctr_act[l]) && opt_slctr_act[l, o] == true)
 			{
 				opt_slctr_alp[l, o] = fn_lerp(opt_slctr_alp[l, o], (o == opt_move_pos[l]), opt_colSpd);
-				fn_draw_spr_stretch(opt_slctr_spr, 0, (draw_x + opt_slctr_x[l, o]), (draw_y + opt_slctr_y[l, o]), opt_slctr_w[l, o], opt_slctr_h[l, o], c_white, (opt_slctr_alp[l, o] * lvl_alp[l] * draw_alp));
+				fn_draw_spr_stretch(opt_slctr_spr, opt_slctr_img, (draw_x + opt_slctr_x[l, o]), (draw_y + opt_slctr_y[l, o]), opt_slctr_w[l, o], opt_slctr_h[l, o], c_white, (opt_slctr_alp[l, o] * lvl_alp[l] * draw_alp));
 			}
 			
 			
@@ -46,15 +48,27 @@ for (var l = 0; l < lvl_amtMax; l++)
 			// Draws the option's setting
 			if (o < array_length(opt_config_text[l]) && opt_config_text[l, o] != "%%%")
 			{
+				fn_menu_opt_config_getSize(l, o);
 				opt_config_alp[l, o] = fn_lerp(opt_config_alp[l, o], (0.5 + ((o == opt_move_pos[l]) * 0.5)), opt_colSpd);
-				fn_draw_text(opt_config_text[l, o], opt_config_x[l, o], opt_config_y[l, o], opt_config_col[l][o][0], opt_config_col[l][o][1], (opt_config_alp[l, o] * lvl_alp[l] * draw_alp), opt_config_vAl[l, o], opt_config_hAl[l, o]);
+				
+				fn_draw_text(opt_config_text[l, o], opt_config_x[l, o], opt_config_y[l, o], opt_config_col[l][o][0], opt_config_col[l][o][1], (opt_config_alp[l, o] * lvl_alp[l] * draw_alp), fa_top, fa_left);
 				
 				
 				// Draws the selector of the option's setting
 				if (o < array_length(opt_config_slctr_act[l]) && opt_config_slctr_act[l, o] == true)
 				{
-					opt_config_slctr_x[l][o][0] = (opt_config_x[l, o] - opt_config_slctr_w[l, o]);
-					opt_config_slctr_x[l][o][1] = (opt_config_x[l, o] + fn_text_w(opt_config_text[l, o]));
+					if (opt_config_slctr_shkDelay_dur[l, o] <= 0)
+					{
+						opt_config_slctr_shk_dist[l, o] += opt_config_slctr_shk_spd[l, o];
+						if (opt_config_slctr_shk_dist[l, o] >= opt_config_slctr_shk_distMax[l, o])
+							opt_config_slctr_shk_dist[l, o] = 0;
+						
+						opt_config_slctr_shkDelay_dur[l, o] = opt_config_slctr_shkDelay_durMax[l, o];
+					}
+					opt_config_slctr_shkDelay_dur[l, o] -= 1;
+					
+					opt_config_slctr_x[l][o][0] = (opt_config_x[l, o] - opt_config_slctr_w[l, o] - (opt_config_slctr_shk_dist[l, o] * (!global.config_rdcdMot)));
+					opt_config_slctr_x[l][o][1] = (opt_config_x[l, o] + opt_config_w[l, o] + (opt_config_slctr_shk_dist[l, o] * (!global.config_rdcdMot)));
 					
 					opt_config_slctr_alp[l, o] = fn_lerp(opt_config_slctr_alp[l, o], (o == opt_move_pos[l]), opt_colSpd);
 					for (var i = 0; i < 2; i++)
@@ -80,7 +94,14 @@ for (var l = 0; l < lvl_amtMax; l++)
 		}
 		
 		
-		fn_menu_evDrawGUI_1(l);
+		fn_menu_evDrawGUI_2(l);
 	}
 }
+
+
+// Animates the option selector
+if (global.config_rdcdMot == false) // Checks if the Reduced Motion setting is disabled
+	opt_slctr_img += global.thm_opt_slctr_imgSpd[global.thm];
+else
+	opt_slctr_img = 0;
 

@@ -91,7 +91,7 @@ if (move_stg == -1) // Checks for menu key inputs and created the menu object
 	{
 		if (fn_config_key_press(menu_key[m]) == true && fn_obj_exists(obj_menu) == false)
 		{
-			fn_menu_create(menu_id[m]);
+			fn_menu_obj_create(menu_id[m]);
 			move_stg = -2;
 			
 			break;

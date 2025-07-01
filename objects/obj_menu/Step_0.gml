@@ -1,100 +1,160 @@
 
-fn_menu_evStep_0();
+fn_config_key_quick();
+
+fn_menu_evStep();
 
 
-// Inactive level transition sequence
-if (lvlTrans_stg == -1 && lvl != LVL_EMPTY) // Also checks if the current level is valid
-{
-	fn_config_key_quick();
-	
-	
-	fn_menu_evStep_1();
-	
-	
-	// Option movement, selection and cancellation
-	if (opt_amt[lvl] > 0)
+// Option movement, selection and cancellation sequences
+if (opt_amt[lvl] > 0)
+{	
+	// Option movement sequence
+	if (opt_move_act[lvl] == true)
 	{
-		// Option movement
-		if (opt_move_act[lvl] == true)
+		var _opt_move_posOld = opt_move_pos[lvl];
+		
+		
+		// Vertical and horizontal default types
+		if (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltVer) || (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltHor)
 		{
-			var _opt_move_posOld = opt_move_pos[lvl];
-			
-			fn_menu_opt_move(); // Retrieves the option movement sequence determined by the menu's ID
-			
-			if (_opt_move_posOld != opt_move_pos[lvl])
-				fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
-		}
-		
-		
-		// Option selection
-		if (opt_slct_act[lvl] == true && press_slct == true)
-		{
-			_opt_slct_snd = -1;
-			
-			fn_menu_opt_slct(); // Retrieves the option selection sequence determined by the menu's ID
-			
-			if (_opt_slct_snd == -1 && (lvlTrans_stg > -1 || fn_obj_exists(obj_rmTrans) == true))
-				_opt_slct_snd = opt_slct_sndDflt[lvl]
-			if (_opt_slct_snd != -1)
-				fn_aud_play(_opt_slct_snd, CONFIG_VOLTYPE.MENU);
-		}
-		
-		
-		// Option cancellation
-		for (var k = 0; k < (array_length(opt_cncl_key[lvl]) * opt_cncl_act[lvl]); k++) // Loops through each key the player can press to cancel an option
-		{
-			if (fn_config_key_press(opt_cncl_key[lvl, k]) == true)
+			var _key_0 = press_dn;
+			var _key_1 = press_up;
+			if (opt_move_type[lvl] == OPT_MOVE_TYPE_dfltHor)
 			{
-				_opt_cncl_snd = -1;
-				
-				fn_menu_opt_cncl(); // Retrieves the option cancellation sequence determined by the menu's ID
-				
-				if (_opt_cncl_snd == -1 && (lvlTrans_stg > -1 || fn_obj_exists(obj_rmTrans) == true))
-					_opt_cncl_snd = opt_cncl_sndDflt[lvl]
-				if (_opt_cncl_snd != -1)
-					fn_aud_play(_opt_cncl_snd, CONFIG_VOLTYPE.MENU);
+				_key_0 = press_rt;
+				_key_1 = press_lt;
+			}
+			
+			opt_move_pos[lvl] += (_key_0 - _key_1);
+			if (opt_move_pos[lvl] < 0)
+				opt_move_pos[lvl] = (opt_amt[lvl] - 1);
+			if (opt_move_pos[lvl] >= opt_amt[lvl])
+				opt_move_pos[lvl] = 0;
+		}
+		
+		// Inventory's effects, items and themes list type
+		else if (opt_move_type[lvl] == OPT_MOVE_TYPE_invList)
+		{
+			// I don't know. I made this while only half-awake. Surprisingly, it WORKS ?
+			
+			if (press_rt == true) || (press_lt == true)
+			{
+				if (opt_move_pos[lvl] % 2 == 0)
+					opt_move_pos[lvl] += 1;
+				else if (opt_move_pos[lvl] % 2 == 1)
+					opt_move_pos[lvl] -= 1;
+			}
+			
+			if (press_dn == true)
+			{
+				if (opt_move_pos[lvl] + 2) <= (opt_amt[lvl] - 1)
+					opt_move_pos[lvl] += 2;
+				else
+					opt_move_pos[lvl] = (0 + (opt_move_pos[lvl] % 2));
+			}
+			else if (press_up == true)
+			{
+				if ((opt_move_pos[lvl] - 2) >= 0)
+					opt_move_pos[lvl] -= 2;
+				else
+					opt_move_pos[lvl] = (opt_amt[lvl] - 1 - !(opt_move_pos[lvl] % 2));
 			}
 		}
+		
+		
+		// Starts playing the option movement sound
+		if (_opt_move_posOld != opt_move_pos[lvl])
+			fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
+	}
+	
+	
+	// Option selection and cancellation sequences, and options' settings movement sequence
+	var l = lvl;
+	var o = opt_move_pos[lvl];
+	
+		// Options' settings movement sequence
+	if (o < array_length(opt_config_text[l]) && opt_config_text[l, o] != "%%%")
+		fn_menu_opt_config_move();
+	
+		// Option selection sequence
+	if (opt_slct_key[l] != -1 && fn_config_key_press(opt_slct_key[l]) == true)
+	{
+		fn_menu_opt_slct(); // Retrieves the option selection sequence determined by the menu's ID
+		
+		// Starts playing the option selection sound
+		if (opt_slct_snd[l, o] != -1)
+			fn_aud_play(opt_slct_snd[l, o], CONFIG_VOLTYPE.MENU);
+	}
+	
+		// Option cancellation sequence
+	else if (opt_cncl_key[l] != -1 && fn_config_key_press(opt_cncl_key[l]) == true)
+	{
+		fn_menu_opt_cncl(); // Retrieves the option cancellation sequence determined by the menu's ID
+		
+		// Starts playing the option cancellation sound
+		if (opt_cncl_snd[l, o] != -1)
+			fn_aud_play(opt_cncl_snd[l, o], CONFIG_VOLTYPE.MENU);
 	}
 }
 
 
-// Active level transition sequence
-if (lvlTrans_stg == 0)
+// 
+if (lvlNew != -1)
 {
-	if (lvlTrans_preDelay <= 0) // Checks if the pre-sequence delay is inactive
+	lvl = lvlNew;
+	lvl_alpDelay[lvl] = lvlNew_alpDelay;
+	lvl_selfDstr[lvl] = lvlNew_selfDstr;
+	lvl_gameEnd[lvl] = lvlNew_gameEnd;
+	
+	lvlNew = -1;
+}
+
+
+// Updates the alpha of each level
+for (var l = 0; l < (lvl_amtMax + 1); l++)
+{
+	if (lvl_alpDelay[l] <= 0)
 	{
-		// Changes the alpha of the current level
-		lvl_alp[lvl] = fn_lerp(lvl_alp[lvl], 0, lvlTrans_spd);
+		// Changes the alpha of the level
+		var _alpTgt = (l == lvl);
+		lvl_alp[l] = fn_lerp(lvl_alp[l], _alpTgt, lvl_alpSpd);
 		
-		
-		if (lvlTrans_postDelay <= 0) // Checks if the post-sequence delay is inactive
+		var _alpDiff = abs(lvl_alp[l] - _alpTgt); // Difference between the current alpha and the target alpha
+		var _alpSlack = 0.05;
+		if (_alpDiff <= _alpSlack)
 		{
-			// Changes the alpha of the target level
-			lvl_alp[lvlTrans_tgt] = fn_lerp(lvl_alp[lvlTrans_tgt], 1, lvlTrans_spd);
+			lvl_alp[l] = _alpTgt;
 			
+			// Destroys itself
+			if (lvl_selfDstr[l] == true)
+				fn_obj_destroy();
 			
-			var _alpSlack = 0.05;
-			if (lvl_alp[lvl] <= _alpSlack && lvl_alp[lvlTrans_tgt] >= (1 - _alpSlack)) // Checks if the alpha of both levels equal their respective values
-			{
-				lvl_alp[lvl] = 0;
-				lvl_alp[lvlTrans_tgt] = 1;
-				lvl = lvlTrans_tgt;
-				lvlTrans_stg = -1;
-				
-				if (lvlTrans_selfDstr == true)
-					fn_obj_destroy();
-				if (lvlTrans_gameEnd == true)
-					game_end();
-				
-				opt_move_act[lvl] = true;
-				opt_slct_act[lvl] = true;
-				opt_cncl_act[lvl] = true;
-			}
+			// Ends the game
+			if (lvl_gameEnd[l] == true)
+				game_end();
 		}
-		else
-			lvlTrans_postDelay -= 1;
 	}
 	else
-		lvlTrans_preDelay -= 1;
+		lvl_alpDelay[l] -= 1;
 }
+
+
+// Reloads all the text if the selected language changed
+if (config_langOld != global.config_lang)
+{
+	fn_menu_evCreate_0();
+	config_langOld = global.config_lang;
+}
+
+
+
+/*
+// Update the text of the options' settings
+fn_menu_opt_config_upd();
+
+// Movement sequence of the option's setting
+if (opt_move_pos[lvl] < array_length(opt_config_text[lvl]) && opt_config_text[lvl, opt_move_pos[lvl]] != "%%%" && (press_lt == true || press_rt == true))
+{
+	fn_menu_opt_config_move();
+	fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
+}
+*/

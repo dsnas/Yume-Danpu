@@ -3,11 +3,11 @@ fn_obj_img( , , , , 0);
 fn_obj_depth( , -11000);
 
 
-// 
-start_obj = -1; // Its object index (== object_index)
+// Data of the starting position of the room transition sequence
+start_obj = -1; // Object index of the one that started the room transition sequence
+start_obj_id = -1;
 
-
-// 
+// Data of the ending/target position of the room transition sequence
 end_rm = -1;
 
 end_player_x = 0;
@@ -27,13 +27,13 @@ delay_durMax = 0;
 type = -1; // ID number of the current type (-1 == none)
 
 	// Fade type, fades out of the starting room and fades in to the ending one
-type_fade = 0;
+TYPE_FADE = 0;
 fade_col = c_black;
 fade_alp = 0;
-fade_alpSpd = 0.2;
+fade_alpSpd = 0.15;
 
 	// Normal door type, opens the door and fades out of the starting room, and then fades in to the ending one
-type_doorNormal = 1;
+TYPE_DOORNORMAL = 1;
 doorNormal_stg = 0;
 
 

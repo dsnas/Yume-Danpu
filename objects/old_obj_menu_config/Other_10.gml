@@ -27,7 +27,7 @@ px_x[l, 0] = 0;
 px_y[l, 0] = 0;
 px_w[l, 0] = 320;
 px_h[l, 0] = 240;
-px_col[l, 0] = global.thm_col[global.thm_cur, 4];
+px_col[l, 0] = global.thm_col[global.thm, 4];
 px_alp[l, 0] = 0.5;
 
 fn_menu_ttl_textdata(l, "menu_config_main_ttl"); // [LVL MAIN] (Title window and text)
@@ -67,7 +67,7 @@ lbl_y[l, 0] = opt_y[l, 0];
 
 
 LVL_LANG = 1; // LVL LANG (Languages) (Temporarily unused)
-LVL_VID = 2; // LVL VID (Video settings)
+LVL_GFX = 2; // LVL VID (Video settings)
 LVL_AUD = 3; // LVL AUD (Audio settings)
 LVL_INP = 4; // LVL INP (Controls)
 LVL_A11Y = 5; // LVL A11Y (Accessibility)
@@ -81,20 +81,20 @@ for (var l = 0; l < lvl_amtMax; l++)
 		config_textKey[l] = "lang";
 	}
 	*/
-	if (l == LVL_VID)
+	if (l == LVL_GFX)
 	{
 		config_textKey[l] = "vid";
 	}
 	
 	
-	if /*(l == LVL_LANG) && (Temporarily unused) */ (l == LVL_VID)
+	if /*(l == LVL_LANG) && (Temporarily unused) */ (l == LVL_GFX)
 	{
 		px_act[l, 0] = true; // (Dark translucent background)
 		px_x[l, 0] = 0;
 		px_y[l, 0] = 0;
 		px_w[l, 0] = 320;
 		px_h[l, 0] = 240;
-		px_col[l, 0] = global.thm_col[global.thm_cur, 4];
+		px_col[l, 0] = global.thm_col[global.thm, 4];
 		px_alp[l, 0] = 0.75;
 		
 		fn_menu_ttl_textdata(l, "menu_config_" + string(config_textKey[l]) + "_ttl"); // (Title window and label)

@@ -4,7 +4,7 @@ if (lvlTrans_act == false)
 {
 	if (opt_canMove == true) // (Option movement)
 	{
-		if (lvl == LVL_MAIN) || (lvl == LVL_VID) // (LVL MAIN, LVL VID)
+		if (lvl == LVL_MAIN) || (lvl == LVL_GFX) // (LVL MAIN, LVL VID)
 			fn_menu_opt_move(0); // dflt (Default)
 	}
 	
@@ -20,7 +20,7 @@ if (lvlTrans_act == false)
 				_lvlTrans_lvlTgt = LVL_MAIN;
 			*/
 			if (optMove_pos[lvl] == 1) // (Video settings)
-				_lvlTrans_lvlTgt = LVL_VID;
+				_lvlTrans_lvlTgt = LVL_GFX;
 			else if (optMove_pos[lvl] == 2) // (Audio settings)
 				_lvlTrans_lvlTgt = LVL_AUD;
 			else if (optMove_pos[lvl] == 3) // (Controls)
@@ -32,7 +32,7 @@ if (lvlTrans_act == false)
 				fn_menu_lvlTrans_start(_lvlTrans_lvlTgt);
 		}
 		
-		fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOLTYPE.MENU);
+		fn_aud_play(global.thm_snd_optSlct[global.thm], CONFIG_VOLTYPE.MENU);
 	}
 	else if (opt_canCncl == true && opt_inpCncl == true) // (Option cancellation) (Checks for the player's cancel input)
 	{
@@ -48,7 +48,7 @@ if (lvlTrans_act == false)
 			}
 		}
 		
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOLTYPE.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm], CONFIG_VOLTYPE.MENU);
 	}
 }
 

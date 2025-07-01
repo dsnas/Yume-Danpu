@@ -36,7 +36,7 @@ function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = image_blend, _alp = 
 		}
 	}
 }
-function fn_obj_depth(_asset = id, _val = -bbox_bottom)
+function fn_obj_depth(_asset = id, _val = -_asset.bbox_bottom)
 {
 	with (_asset)
 		depth = _val;
@@ -46,31 +46,29 @@ function fn_obj_depth(_asset = id, _val = -bbox_bottom)
 function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops = false) // Starts playing the specified audio
 {
 	aud_asset = _asset; // ID of the audio's asset
-	aud_volType = _volType; // Volume type index (global.config_volType[-])
 	
-	aud_vol = _vol; // Volume
-	aud_offset = _offset; // Track position where playback starts
-	aud_pitch = _pitch; // Pitch of the audio
-	aud_loops = _loops; // Determines if the audio loops
+	aud_volType = _volType;
+	aud_vol = _vol; // MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
+	aud_offset = _offset; // MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
+	aud_pitch = _pitch; // MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
+	aud_loops = _loops;
 	
 	
-	// Retrieves the fixed volume, offset and pitch of the audio
-	fn_aud_fix();
-	aud_vol = ((aud_vol * global.config_volType[aud_volType]) * global.config_volType[CONFIG_VOLTYPE.MASTER]); // Multiplies the audio's volume to the one in the array
+	fn_aud_playData();
 	
-	// Starts playing the specified audio
-	aud_id = audio_play_sound(aud_asset, 0, aud_loops);
-	audio_sound_gain(aud_id, aud_vol, 0);
-	audio_sound_set_track_position(aud_id, aud_offset);
-	audio_sound_pitch(aud_id, aud_pitch);
+	
+	aud_id = audio_play_sound(aud_asset, 0, false);
+	fn_aud_vol(aud_id, aud_volType, aud_vol);
+	if (aud_offset > 0)
+		audio_sound_set_track_position(aud_id, aud_offset);
+	fn_aud_pitch(aud_id, aud_pitch);
+	audio_sound_loop(aud_id, aud_loops);
+	
+	
+	return aud_id;
 }
-function fn_aud_fix() // Adjusts the volume of the audio to be consistent with other sounds, and its offset and pitch
+function fn_aud_playData()
 {
-	// "aud_vol" MUST BE MULTIPLIED, NOT ADDED or SUBTRACTED
-	// "aud_offset" MUST BE	ADDED, NOT SUBTRACTED or MULTIPLIED
-	// "aud_pitch" MUST BE ADDED or SUBTRACTED, NOT MULTIPLIED
-	
-	
 	// Menu
 	if (aud_asset == snd_menu_start)
 		aud_offset += 0.15;
@@ -89,9 +87,11 @@ function fn_aud_fix() // Adjusts the volume of the audio to be consistent with o
 	if (aud_asset == snd_menu_opt_fail_madot)
 		aud_vol *= 0.4;
 	
+	
 	// Player
 	if (aud_asset == snd_player_fstep)
 		aud_vol *= 0.75;
+	
 	
 	// Macacolandia
 	if (aud_asset == snd_entity_macaco_citizen_0)
@@ -118,6 +118,7 @@ function fn_aud_fix() // Adjusts the volume of the audio to be consistent with o
 		aud_offset = 0.25;
 	}
 	
+	
 	// Other
 	if (aud_asset == snd_hulapoca)
 		aud_vol *= 0.5;
@@ -127,6 +128,17 @@ function fn_aud_fix() // Adjusts the volume of the audio to be consistent with o
 	
 	// the WORST fucking FUNCTION i've EVER made in my LIFE. Jesus       !!!!!
 }
+
+function fn_aud_vol(_id, _volType, _vol) // Changes the playing audio's volume to the specified value
+{
+	_vol = ((_vol * global.config_volType[_volType]) * global.config_volType[CONFIG_VOLTYPE.MASTER]); // Multiplies the audio's volume to the one in the array
+	audio_sound_gain(_id, _vol, 0);
+}
+function fn_aud_pitch(_id, _pitch)
+{
+	audio_sound_pitch(_id, _pitch);
+}
+
 function fn_aud_stop(_asset) // Stops playing the specified audio
 {
 	audio_stop_sound(_asset);
@@ -161,12 +173,12 @@ function fn_spr_h(_asset) // Returns the height of the specified sprite
 // Functions related to text
 function fn_text_w(_text) // Returns the width of the specified text)
 {
-	draw_set_font(global.game_fnt);
+	draw_set_font(global.GAME_FNT);
 	return string_width(_text);
 }
 function fn_text_h(_text) // Returns the height of the specified text
 {
-	draw_set_font(global.game_fnt);
+	draw_set_font(global.GAME_FNT);
 	return string_height(_text);
 }
 
@@ -174,34 +186,34 @@ function fn_text_h(_text) // Returns the height of the specified text
 
 
 // Functions related to drawing
-function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _hAl = fa_left, _xSc = 1, _ySc = 1, _ang = 0)		// Draws the specified text
+function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _hAl = fa_left, _xSc = 1, _ySc = 1, _ang = 0) // Draws the specified text
 {
-	var _fnt = global.game_fnt;
+	var _fnt = global.GAME_FNT;
 	draw_set_font(_fnt);
 	draw_set_valign(_vAl);
 	draw_set_halign(_hAl);
 	
-	if (global.thm_shdw_act[global.thm_cur] == true)
+	if (global.thm_shdw_act[global.thm] == true)
 	{
-		var _col_shdw = global.thm_col[global.thm_cur, 4];
+		var _col_shdw = global.thm_col[global.thm, 4];
 		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _col_shdw, _col_shdw, _col_shdw, _col_shdw, _alp);
 	}
 	
 	draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
 }
 
-function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp)														// Draws a rectangle 
+function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // Draws a rectangle with the specified size
 {
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
-function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shdw_act = false)				// Draws the specified sprite
+function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shdw_act = false) // Draws the specified sprite
 {
 	if (_spr != -1)
 	{
 		// Draws the shadow of the specified sprite
-		if (_shdw_act == true && global.thm_shdw_act[global.thm_cur] == true)
-			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm_cur, 4], _alp);
+		if (_shdw_act == true && global.thm_shdw_act[global.thm] == true)
+			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm, 4], _alp);
 		
 		// Draws the specified sprite
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
@@ -209,14 +221,14 @@ function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _yS
 	else
 		fn_log("The function fn_draw_spr() was called with an invalid sprite ID");
 }
-function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col = c_white, _alp = 1)												// Draws the specified sprite, but STRETCHED
+function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col = c_white, _alp = 1) // Draws the specified sprite, but STRETCHED
 {
 	if (_spr != -1)
 		draw_sprite_stretched_ext(_spr, _img, _x, _y, _w, _h, _col, _alp);
 	else
 		fn_log("The function fn_draw_spr_stretch() was called with an invalid sprite ID");
 }
-function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1)					// Draws only a part of the specified sprite
+function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1) // Draws only a part of the specified sprite
 {
 	if (_spr != -1)
 		draw_sprite_part_ext(_spr, _img, _lt, _top, _w, _h, _x, _y, _xSc, _ySc, _col, _alp);
@@ -224,24 +236,31 @@ function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white,
 		fn_log("The function fn_draw_spr_part() was called with an invalid sprite ID");
 }
 
-function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness)																// Draws a line
+function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness) // Draws a line
 {
 	draw_set_color(_col);
 	draw_set_alpha(_alp);
 	draw_line_width(_x1, _y1, _x2, _y2, _thickness);
 }
 
-function fn_draw_self_setup()	// Sets up variables for manual self-drawing
+function fn_draw_self_setup() // Sets up variables for manual self-drawing
 {
+	self_imgSpd = 0;
 	self_x = x;
 	self_y = y;
 	self_xSc = image_xscale;
 	self_ySc = image_yscale;
 	self_ang = image_angle;
 }
-function fn_draw_self()			// Manually self-draws
+function fn_draw_self() // Manually self-draws
 {
 	fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
+	
+	// Animates the object
+	if (global.config_rdcdMot == false)
+		image_index += self_imgSpd;
+	else
+		image_index = 0;
 }
 
 

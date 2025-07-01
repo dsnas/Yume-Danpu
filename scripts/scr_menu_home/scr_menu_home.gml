@@ -3,7 +3,7 @@
 
 
 // Functions related to setting up the menu
-function fn_menu_home_evCreate()
+function fn_menu_home_evCreate_0()
 {
 	// MEU DEUS !!!!!!!!! QUE MURAL COLORIDO!!!!!!!!!! AAAAAAAAAAAAAAAAAAAAAAAA
 	
@@ -11,9 +11,6 @@ function fn_menu_home_evCreate()
 	// Languages level
 	LVL_LANG = 0;
 	var l = LVL_LANG;
-	lvlTrans_tgt = l;
-	if (global.config_lang_hasChosen == false)
-		lvlTrans_postDelay = 120;
 	
 		// Options
 	for (var o = 0; o < global.config_lang_amt; o++)
@@ -34,7 +31,7 @@ function fn_menu_home_evCreate()
 	
 		// Flag selector [#0]
 	lang_flag_slctr_spr = spr_menu_home_flag_slctr;
-	lang_flag_slctr_col = global.thm_col[global.thm_cur].whiteLight;
+	lang_flag_slctr_col = global.thm_col[global.thm].whiteLight;
 	
 		// Title info [#0]
 	fn_menu_info_addText(l, 0, "menu_home_lang_info_0");
@@ -43,11 +40,11 @@ function fn_menu_home_evCreate()
 		// Box
 	var _box_wDist = round(draw_dist * 1.25);
 	var _box_hDist = draw_dist;
-	box_w[l, 0] = (_box_wDist + _flag_wAll + _box_wDist);
-	box_h[l, 0] = (_box_hDist + _info_hAll + _box_hDist);
-	box_x[l, 0] = (160 - round(box_w[l, 0] / 2));
-	box_y[l, 0] = (120 - round(box_h[l, 0] / 2));
-	fn_menu_box_addOther(l, 0);
+	var _box_w = (_box_wDist + _flag_wAll + _box_wDist);
+	var _box_h = (_box_hDist + _info_hAll + _box_hDist);
+	var _box_x = (160 - round(_box_w / 2));
+	var _box_y = (120 - round(_box_h / 2));
+	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Title info [#1]
 	var _info_yFix = 2;
@@ -68,8 +65,7 @@ function fn_menu_home_evCreate()
 		lang_flag_slctr_alp[f] = 0;
 	}
 	
-	lang_snd_act = false;
-	lang_snd = global.thm_start_snd[global.thm_cur];
+	lang_snd = global.thm_start_snd[global.thm];
 	
 	
 	
@@ -77,8 +73,6 @@ function fn_menu_home_evCreate()
 	// Main level
 	LVL_MAIN = 1;
 	var l = LVL_MAIN;
-	if (global.config_lang_hasChosen == true)
-		lvlTrans_tgt = l;
 	
 	main_logo_spr = spr_menu_home_logo;
 	main_logo_x = (160 - (fn_spr_w(main_logo_spr) / 2));
@@ -87,16 +81,16 @@ function fn_menu_home_evCreate()
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_home_main_opt_");
 	var _opt_yDist = round(draw_dist * 1.25);
-	var _opt_hAll = (round(_opt_yDist * (opt_amt[l] - 1)) + global.game_fnt_h);
+	var _opt_hAll = (round(_opt_yDist * (opt_amt[l] - 1)) + global.GAME_FNT_H);
 		
 		// Box
 	var _box_wDist = round(draw_dist * 1.25);
 	var _box_hDist = round(draw_dist * 0.75);
-	box_w[l, 0] = (_box_wDist + opt_wMax[l] + _box_wDist);
-	box_h[l, 0] = (_box_hDist + _opt_hAll + _box_hDist);
-	box_x[l, 0] = (160 - round(box_w[l, 0] / 2));
-	box_y[l, 0] = (120 + round(draw_dist * 3) - round(box_h[l, 0] / 2));
-	fn_menu_box_addOther(l, 0);
+	var _box_w = (_box_wDist + opt_wMax[l] + _box_wDist);
+	var _box_h = (_box_hDist + _opt_hAll + _box_hDist);
+	var _box_x = (160 - round(_box_w / 2));
+	var _box_y = (120 + round(draw_dist * 3) - round(_box_h / 2));
+	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Options [#1]
 	for (var o = 0; o < opt_amt[l]; o++)
@@ -105,23 +99,31 @@ function fn_menu_home_evCreate()
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
 		fn_menu_opt_slctr_add(l, o);
 	}
-	
-	
-	
-	
-	// settings level
-	LVL_CONFIG = 2;
 }
-function fn_menu_home_evStep_1()
+function fn_menu_home_evCreate_1()
+{
+	// Languages level
+	if (global.config_lang_hasChosen == false)
+	{
+		lvl = LVL_LANG;
+		lvl_alpDelay[lvl] = 120;
+		lang_snd_act = false;
+	}
+	
+	// Main level
+	else if (global.config_lang_hasChosen == true)
+		lvl = LVL_MAIN;
+}
+function fn_menu_home_evStep()
 {
 	// Plays menu start sound when the languages level opens
-	if (((lvlTrans_tgt == LVL_LANG && lvlTrans_stg > -1 && lvlTrans_postDelay <= 0) || (lvl == LVL_LANG && lvlTrans_stg == -1)) && lang_snd_act == false)
+	if (lvl == LVL_LANG && lvl_alp[lvl] == 1 && lang_snd_act == false)
 	{
 		fn_aud_play(lang_snd, CONFIG_VOLTYPE.MENU);
 		lang_snd_act = true;
 	}
 }
-function fn_menu_home_evDrawGUI_1(l)
+function fn_menu_home_evDrawGUI_2(l)
 {
 	// Language level
 	if (l == LVL_LANG)
@@ -130,8 +132,6 @@ function fn_menu_home_evDrawGUI_1(l)
 		for (var f = 0; f < opt_amt[l]; f++)
 		{
 			var fPos = (f == opt_move_pos[l]);
-			if (lvlTrans_stg > -1 && lvlTrans_tgt == LVL_MAIN)
-				fPos = false;
 			
 			// Draws the flag selector
 			lang_flag_slctr_alp[f] = fn_lerp(lang_flag_slctr_alp[f], fPos, opt_colSpd);
@@ -158,21 +158,26 @@ function fn_menu_home_opt_slct()
 	// Languages level
 	if (lvl == LVL_LANG)
 	{
-		// Selected English (United States)
+		// Flag of United States
 		if (opt_move_pos[lvl] == 0)
 			global.config_lang = CONFIG_LANG.EN_US;
 		
-		// Selected Português (Brasil)
+		// Flag of Brazil
 		else if (opt_move_pos[lvl] == 1)
 			global.config_lang = CONFIG_LANG.PT_BR;
 		
-		global.config_lang_hasChosen = true;
-		fn_config_file_save();
-		fn_config_lang_textData_setup();
-		fn_menu_home_evCreate();
-		fn_menu_lvlTrans_start(LVL_MAIN, 60, 120);
+		// Flag of United States, flag of Brazil
+		if (opt_move_pos[lvl] == 0) || (opt_move_pos[lvl] == 1)
+		{
+			global.config_lang_hasChosen = true;
+			fn_config_lang_textData_setup();
+			fn_config_file_save();
+			
+			event_perform(ev_create, 0);
+			lvl = LVL_MAIN;
+			lvl_alp[LVL_LANG] = 1;
+		}
 	}
-	
 	
 	// Main level
 	else if (lvl == LVL_MAIN)
@@ -189,12 +194,12 @@ function fn_menu_home_opt_slct()
 		// "Options"
 		else if (opt_move_pos[lvl] == 1)
 		{
-			fn_menu_lvlTrans_start(LVL_EMPTY);
-			fn_menu_create("config");
+			fn_menu_lvlNew(LVL_EMPTY);
+			fn_menu_obj_create("config");
 		}
 		
 		// "Exit"
 		else if (opt_move_pos[lvl] == 2)
-			fn_menu_lvlTrans_start(LVL_EMPTY, , , , true);
+			fn_menu_lvlNew(LVL_EMPTY, 30, , true);
 	}
 }

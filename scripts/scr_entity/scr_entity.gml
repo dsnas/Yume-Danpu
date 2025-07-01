@@ -16,7 +16,7 @@ function fn_entity_evCreate() // Create Event determined by the NPC's ID
 	// Macacolandia monkey citizen
 	if (entity_id == "macaco_citizen")
 	{
-		fn_obj_img(id, random_range(0.5, 1.5));
+		self_imgSpd = (random_range(0.5, 1.5) / 30);
 		
 		move_dir_spr[MOVE_DIR_LT] = spr_entity_macaco_citizen
 		move_dir_spr[MOVE_DIR_RT] = move_dir_spr[MOVE_DIR_LT];

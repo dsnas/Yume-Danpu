@@ -44,7 +44,7 @@ function fn_rm_evCreate() // Create Event determined by the room's ID
 	// Nexus
 	if (rm_id == "nexus")
 	{
-		var _sky_col = make_color_hsv(color_get_hue(#07070E), color_get_saturation(#07070E), 50); // #4F0E34
+		var _sky_col = make_color_hsv(color_get_hue(#07070E), color_get_saturation(#07070E), 50);
 		fn_rm_bg_sky_add(0, temp_spr_rm_bg_sky_nexus, , , , , _sky_col, 0);
 		fn_rm_bg_sky_loop_act(0, 16, 16);
 		fn_rm_bg_sky_loop_move_act(0, , 2, );
@@ -75,8 +75,8 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 	// Main menu
 	if (rm_id == "menu_home")
 	{
-		menu_obj = global.menu_home_obj;
-		if (menu_obj != -1 && menu_obj.lvlTrans_stg == -1 && global.config_lang_hasChosen == true)
+		var _menu_home_obj = fn_menu_obj_find("home");
+		if (_menu_home_obj != -1 && global.config_lang_hasChosen == true && _menu_home_obj.lvl != _menu_home_obj.LVL_LANG)
 			fn_rm_mus_add(0, mus_menu_home, 0.45);
 	}
 	
@@ -106,15 +106,15 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 // Functions related to the current room's music
 function fn_rm_mus_add(_idx, _asset, _vol = 1, _pitch = 1, _volType = CONFIG_VOLTYPE.MUS)
 {
-	var i = _idx;
+	var m = _idx;
 	
-	mus_asset[i] = _asset;
-	mus_vol[i] = _vol;
+	mus_asset[m] = _asset;
+	mus_vol[m] = _vol;
+	mus_pitch[m] = _pitch;
+	mus_volType[m] = _volType;
+	mus_volType_vol[m] = global.config_volType[mus_volType[m]];
 	
-	mus_pitch[i] = _pitch;
-	mus_volType[i] = _volType;
-	
-	mus_id[i] = -1;
+	mus_id[m] = -1;
 }
 
 
@@ -149,8 +149,8 @@ function fn_rm_bg_sky_loop_act(_idx, _xDist = 640, _yDist = 480)
 		sky_loop_act = true;
 		sky_loop_xDist = _xDist;
 		sky_loop_yDist = _yDist;
-		sky_loop_xAmtOut = (ceil(obj_player.cam_w / sky_loop_xDist) * 2);
-		sky_loop_yAmtOut = (ceil(obj_player.cam_h / sky_loop_yDist) * 2);
+		sky_loop_xAmtOut = (ceil(320 / sky_loop_xDist) * 2);
+		sky_loop_yAmtOut = (ceil(240 / sky_loop_yDist) * 2);
 		sky_loop_xAmt =	(sky_loop_xAmtOut + ceil(room_width / sky_loop_xDist) + sky_loop_xAmtOut);
 		sky_loop_yAmt =	(sky_loop_yAmtOut + ceil(room_height / sky_loop_yDist) + sky_loop_yAmtOut);
 	}

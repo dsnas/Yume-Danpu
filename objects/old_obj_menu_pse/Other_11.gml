@@ -16,14 +16,14 @@ if (lvlTrans_act == false)
 	{
 		if (lvl == LVL_MAIN) // [main lvl]
 		{
-			var _opt_snd = global.thm_snd_optSlct[global.thm_cur];
+			var _opt_snd = global.thm_snd_optSlct[global.thm];
 			
 			if (optMove_pos[lvl] == 0) // ("Resume" option)
 				fn_menu_pse_resume();
 			else if (optMove_pos[lvl] == (opt_amt[lvl] - 1))
-				fn_menu_lvlTrans_start(LVL_EMPTY, undefined, temp_rm_menu_home);
+				fn_menu_lvlNew(LVL_EMPTY, undefined, temp_rm_menu_home);
 			else
-				_opt_snd = global.thm_snd_optFail[global.thm_cur];
+				_opt_snd = global.thm_snd_optFail[global.thm];
 			
 			fn_aud_play(_opt_snd, CONFIG_VOLTYPE.MENU);
 		}
@@ -31,6 +31,6 @@ if (lvlTrans_act == false)
 	else if (opt_canCncl == true && (opt_inpCncl == true || opt_inpPse == true)) // (checks for the player's cancel or pause input) (resumes the game)
 	{
 		fn_menu_pse_resume(); // resumes the game
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOLTYPE.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm], CONFIG_VOLTYPE.MENU);
 	}
 }

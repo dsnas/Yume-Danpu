@@ -4,7 +4,7 @@
 
 function fn_config_lang_textData_setup() // Sets up all the text of the current language
 {
-	// Destroys the text data of the previous language
+	// Destroys the text data of all languages
 	for (var m = 0; m < global.config_lang_amt; m++)
 	{
 		if (global.config_lang_textData[m] != -1)
@@ -20,13 +20,140 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 	
 	// Creates the text data of the current language and adds all the text to it
-	var i = global.config_lang;
-	global.config_lang_textData[i] = ds_map_create();
-	var t = global.config_lang_textData[i];
+	global.config_lang_textData[global.config_lang] = ds_map_create();
 	
-	if (i == CONFIG_LANG.EN_US) // English (United States)
-	{
-		// Keybinds
+	
+	// Volumes
+	fn_config_lang_textData_addText("volType_name_0", "Master Volume", "Volume Geral");
+	fn_config_lang_textData_addText("volType_name_1", "Music", "Música");
+	fn_config_lang_textData_addText("volType_name_2", "Menu", "Menu");
+	fn_config_lang_textData_addText("volType_name_3", "Player", "Jogador");
+	fn_config_lang_textData_addText("volType_name_4", "Objects", "Objetos");
+	fn_config_lang_textData_addText("volType_name_5", "Entities", "Entidades");
+	fn_config_lang_textData_addText("volType_name_6", "Ambience", "Ambiente");
+	
+	
+	// Effects
+	fn_config_lang_textData_addText("eff_name_0", "Salenis 0");
+	fn_config_lang_textData_addText("eff_name_1", "Salenis 1");
+	fn_config_lang_textData_addText("eff_name_2", "Salenis 2");
+	
+	fn_config_lang_textData_addText("eff_desc_0", "The Salenis is a world-famous dish.\nIt tastes funny.");
+	fn_config_lang_textData_addText("eff_desc_1", "The Salenis is a fascinating creation.\nIts smell is pleasing.");
+	fn_config_lang_textData_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.");
+	
+	
+	// Items
+	fn_config_lang_textData_addText("itm_name_0", "Axenis");
+	
+	fn_config_lang_textData_addText("itm_desc_0", "The powerful axe of the world-famous\nwriter Sal de Enis.");
+	
+	
+	// Themes
+	fn_config_lang_textData_addText("thm_name_0", "Default", "Padrão");
+	fn_config_lang_textData_addText("thm_name_1", "Simple", "Simples");
+	fn_config_lang_textData_addText("thm_name_2", "Madotsuki", "Madotsuki");
+	
+	fn_config_lang_textData_addText("thm_desc_0", "The default theme.", "O tema padrão.");
+	fn_config_lang_textData_addText("thm_desc_1", "A simple, yet elegant, theme.", "Um tema simples, mas elegante.");
+	fn_config_lang_textData_addText("thm_desc_2", "The classic theme.", "O tema clássico.");
+	
+	
+	// Main menu
+	fn_config_lang_textData_addText("menu_home_lang_info_0", "Language", "Idioma");
+	
+	fn_config_lang_textData_addText("menu_home_main_opt_0", "Start", "Jogar");
+	fn_config_lang_textData_addText("menu_home_main_opt_1", "Options", "Opções");
+	fn_config_lang_textData_addText("menu_home_main_opt_2", "Exit", "Sair");
+	
+	
+	// Settings menu
+	fn_config_lang_textData_dupeText("menu_config_main_ttl", "menu_home_main_opt_1");
+	fn_config_lang_textData_addText("menu_config_main_opt_0", "Language", "Idioma");
+	fn_config_lang_textData_addText("menu_config_main_opt_1", "Graphics", "Gráficos");
+	fn_config_lang_textData_addText("menu_config_main_opt_2", "Music & Sounds", "Músicas e Sons");
+	fn_config_lang_textData_addText("menu_config_main_opt_3", "Accessibility", "Acessibilidade");
+	
+		// Graphics
+	fn_config_lang_textData_dupeText("menu_config_gfx_ttl", "menu_config_main_opt_1");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_0", "Fullscreen", "Tela Cheia");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_1", "Low Graphics", "Gráficos Baixos");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_2", "Show FPS", "Mostrar FPS");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_3", "Show Border", "Mostrar Borda");
+	
+		// Music & Sounds
+	fn_config_lang_textData_dupeText("menu_config_aud_ttl", "menu_config_main_opt_2");
+	for (var v = 0; v < global.config_volType_amt; v++)
+		fn_config_lang_textData_dupeText($"menu_config_aud_opt_{v}", $"volType_name_{v}");
+	
+		// Accessibility
+	fn_config_lang_textData_dupeText("menu_config_a11y_ttl", "menu_config_main_opt_3");
+	fn_config_lang_textData_addText("menu_config_a11y_opt_0", "Reduced Motion", "Reduzir Movimento");
+	
+		// All
+	fn_config_lang_textData_addText("menu_config_all_opt_config_0", "No", "Não");
+	fn_config_lang_textData_addText("menu_config_all_opt_config_1", "Yes", "Sim");
+	
+	
+	// Inventory menu
+	fn_config_lang_textData_addText("menu_inv_main_opt_0", "Effects", "Efeitos");
+	fn_config_lang_textData_addText("menu_inv_main_opt_1", "Items", "Itens");
+	fn_config_lang_textData_addText("menu_inv_main_opt_2", "Themes", "Temas");
+	
+	fn_config_lang_textData_dupeText("menu_inv_eff_ttl", "menu_inv_main_opt_0");
+	fn_config_lang_textData_dupeText("menu_inv_itm_ttl", "menu_inv_main_opt_1");
+	fn_config_lang_textData_dupeText("menu_inv_thm_ttl", "menu_inv_main_opt_2");
+	
+	
+	// Pause menu
+	fn_config_lang_textData_addText("menu_pse_main_ttl", "Game Paused", "Jogo Pausado");
+	fn_config_lang_textData_addText("menu_pse_main_opt_0", "Resume", "Continuar");
+	fn_config_lang_textData_dupeText("menu_pse_main_opt_1", "menu_home_main_opt_1");
+	fn_config_lang_textData_addText("menu_pse_main_opt_2", "Instructions", "Instruções");
+	fn_config_lang_textData_addText("menu_pse_main_opt_3", "Quit to Menu", "Voltar ao Menu");
+	
+	
+	// Rooms
+	fn_config_lang_textData_addText("rm_menu_home", "Main Menu", "Menu Principal");
+	fn_config_lang_textData_addText("rm_nexus", "Nexus", "Nexus");
+	fn_config_lang_textData_addText("rm_macaco", "Macacolandia", "Macacolândia");
+	fn_config_lang_textData_addText("rm_dbgwrld", "Debug World", "Mundo Debug");
+}
+function fn_config_lang_textData_addText(_lang_textData_key, _text_enUS = "", _text_ptBR = "")
+{
+	var _lang = global.config_lang;
+	var _lang_textData = global.config_lang_textData[_lang];
+	ds_map_add(_lang_textData, _lang_textData_key, argument[1 + _lang]);
+	
+	_text_enUS = "Por favor GameMaker tira essa mensagem de erro inútil do meu código";
+	_text_ptBR = _text_enUS;
+	
+}
+function fn_config_lang_textData_dupeText(_lang_textData_key, _lang_textData_keySrc)
+{
+	var _lang = global.config_lang;
+	var _lang_textData = global.config_lang_textData[_lang];
+	
+	var _text = ds_map_find_value(_lang_textData, _lang_textData_keySrc);
+	
+	ds_map_add(_lang_textData, _lang_textData_key, _text);
+}
+
+
+function fn_getText(_lang_textData_key) // Retrieves the specified entry from the current language's text data
+{
+	var _text = ds_map_find_value(global.config_lang_textData[global.config_lang], _lang_textData_key);
+	if (_text == undefined)
+		fn_log($"The function fn_getText() was called and unable to retrieve the desired text. The provided key was \"{_lang_textData_key}\".");
+	
+	return _text;
+}
+
+
+
+
+/*
+// Keybinds
 		ds_map_add(t, "config_key_name_0", "Go Left");
 		ds_map_add(t, "config_key_name_1", "Go Right");
 		ds_map_add(t, "config_key_name_2", "Go Up");
@@ -40,128 +167,10 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 		
 		ds_map_add(t, "config_key_name_8", "Toggle Autowalk");
 		ds_map_add(t, "config_key_name_9", "Toggle Fullscreen");
-		
-		
-		// Menu themes
-		ds_map_add(t, "thm_name_dflt", "Default");
-		ds_map_add(t, "thm_name_smpl", "Simple");
-		ds_map_add(t, "thm_name_madot", "Madotsuki");
-		
-		ds_map_add(t, "thm_desc_dflt", "The default theme.");
-		ds_map_add(t, "thm_desc_smpl", "A simple, yet elegant, theme.");
-		ds_map_add(t, "thm_desc_madot", "The Yume Nikki theme.");
-		
-		
-		// Main menu
-		ds_map_add(t, "menu_home_lang_info_0", "Language");
-		
-		ds_map_add(t, "menu_home_main_opt_0", "Start");
-		ds_map_add(t, "menu_home_main_opt_1", "Options");
-		ds_map_add(t, "menu_home_main_opt_2", "Exit");
-		
-		
-		// Settings menu
-		ds_map_add(t, "menu_config_main_ttl", ds_map_find_value(t, "menu_home_main_opt_1"));
-		ds_map_add(t, "menu_config_main_opt_0", "Language");
-		ds_map_add(t, "menu_config_main_opt_1", "Video Settings");
-		ds_map_add(t, "menu_config_main_opt_2", "Audio Settings");
-		ds_map_add(t, "menu_config_main_opt_3", "Accessibility");
-		
-			// Languages (unused)
+
+	// Languages (unused)
 		ds_map_add(t, "menu_config_lang_ttl", ds_map_find_value(t, "menu_config_main_opt_0"));
 		
-			// Keybinds
+			// Keybinds (unused)
 		ds_map_add(t, "menu_config_key_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
-		ds_map_add(t, "menu_config_key_opt_0", "Keybinds Type");
-		
-			// Video Settings
-		ds_map_add(t, "menu_config_vid_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
-		ds_map_add(t, "menu_config_vid_opt_0", "Fullscreen");
-		ds_map_add(t, "menu_config_vid_opt_1", "Low Graphics");
-		ds_map_add(t, "menu_config_vid_opt_2", "Show FPS");
-		ds_map_add(t, "menu_config_vid_opt_3", "Show Border");
-		
-			// All levels
-		ds_map_add(t, "menu_config_all_opt_config_0", "No");
-		ds_map_add(t, "menu_config_all_opt_config_1", "Yes");
-		
-		
-		// Inventory menu
-		ds_map_add(t, "menu_inv_main_opt_0", "Effects");
-		ds_map_add(t, "menu_inv_main_opt_1", "Items");
-		ds_map_add(t, "menu_inv_main_opt_2", "Themes");
-		ds_map_add(t, "menu_inv_eff_ttl", ds_map_find_value(t, "menu_inv_main_opt_0"));
-		ds_map_add(t, "menu_inv_itm_ttl", ds_map_find_value(t, "menu_inv_main_opt_1"));
-		ds_map_add(t, "menu_inv_thm_ttl", ds_map_find_value(t, "menu_inv_main_opt_2"));
-		
-		
-		// Pause menu
-		ds_map_add(t, "menu_pse_main_ttl", "Game Paused");
-		ds_map_add(t, "menu_pse_main_opt_0", "Resume");
-		ds_map_add(t, "menu_pse_main_opt_1", "Settings");
-		ds_map_add(t, "menu_pse_main_opt_2", "Instructions");
-		ds_map_add(t, "menu_pse_main_opt_3", "Quit to Menu");
-		
-		
-		// Rooms
-		ds_map_add(t, "rm_nexus", "Nexus");
-		ds_map_add(t, "rm_macaco", "Macacolandia");
-	}
-	else if (i == CONFIG_LANG.PT_BR) // Português (Brasil)
-	{
-		// Main menu
-		ds_map_add(t, "menu_home_lang_info_0", "Idioma");
-		
-		ds_map_add(t, "menu_home_main_opt_0", "Jogar");
-		ds_map_add(t, "menu_home_main_opt_1", "Opções");
-		ds_map_add(t, "menu_home_main_opt_2", "Sair");
-		
-		
-		// Rooms
-		ds_map_add(t, "rm_nexus", "Nexus");
-		ds_map_add(t, "rm_macaco", "Macacolândia");
-	}
-}
-
-function fn_getText(_textData_key) // Retrieves the specified entry from the current language's text data
-{
-	var _text = ds_map_find_value(global.config_lang_textData[global.config_lang], _textData_key);
-	if (_text == undefined)
-		fn_log("The function fn_getText() was called and unable to retrieve the desired text");
-	
-	return _text;
-}
-
-
-
-
-/*
-ds_map_add(i, "thm_name_dflt", "Padrão");
-ds_map_add(i, "thm_name_smpl", "Simples");
-ds_map_add(i, "thm_name_madot", "Madotsuki");
-		
-ds_map_add(i, "thm_desc_dflt", "O tema padrão.");
-ds_map_add(i, "thm_desc_smpl", "Um tema simples, mas elegante.");
-ds_map_add(i, "thm_desc_madot", "O tema do Yume Nikki.");
-		
-		
-ds_map_add(i, "menu_main_lang_lbl_0", "Idioma");
-ds_map_add(i, "menu_home_main_opt_0", "Jogar");
-ds_map_add(i, "menu_home_main_opt_1", "Opções");
-ds_map_add(i, "menu_home_main_opt_2", "Sair");
-		
-		
-ds_map_add(i, "menu_inv_main_opt_0", "Efeitos");
-ds_map_add(i, "menu_inv_main_opt_1", "Itens");
-ds_map_add(i, "menu_inv_main_opt_2", "Temas");
-ds_map_add(i, "menu_inv_eff_ttl", ds_map_find_value(i, "menu_inv_main_opt_0"));
-ds_map_add(i, "menu_inv_itm_ttl", ds_map_find_value(i, "menu_inv_main_opt_1"));
-ds_map_add(i, "menu_inv_thm_ttl", ds_map_find_value(i, "menu_inv_main_opt_2"));
-		
-		
-ds_map_add(i, "menu_pse_main_ttl", "Jogo Pausado");
-ds_map_add(i, "menu_pse_main_opt_0", "Despausar");
-ds_map_add(i, "menu_pse_main_opt_1", "Opções");
-ds_map_add(i, "menu_pse_main_opt_2", "Instruções");
-ds_map_add(i, "menu_pse_main_opt_3", "Voltar ao Menu");
 */

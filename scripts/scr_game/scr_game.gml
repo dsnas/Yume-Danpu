@@ -6,8 +6,8 @@ function fn_game_start()
 {
 	global.GAME_VER = "0.02";
 	
-	global.game_fnt = font_add_sprite_ext(spr_game_fnt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"1234567890%()[]/_-—<>←→↑↓", false, -1);
-	global.game_fnt_h = fn_text_h("Salenis");
+	global.GAME_FNT = font_add_sprite_ext(spr_GAME_FNT, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, -1);
+	global.GAME_FNT_H = fn_text_h("Salenis");
 	
 	
 	randomize();
@@ -31,5 +31,6 @@ function fn_game_start()
 	
 	
 	var _rm = temp_rm_menu_home;
+	//_rm = rm_nexus;
 	room_goto(_rm);
 }

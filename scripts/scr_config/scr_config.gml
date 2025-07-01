@@ -5,17 +5,17 @@
 // Functions related the game's settings
 function fn_config_setup() // Sets up the game's settings 
 {
-	// Languages
+	// Languages [#0]
 	fn_config_lang_setup();
 	
-	// Video settings
+	// Graphics
 	global.config_fscr = false; // Fullscreen
 	global.config_lowGfx = false; // Low Graphics
 	global.config_showFps = false; // Show FPS
 	global.config_showBdr = false; // Show Border
 	
-	// Audio settings
-	fn_config_volType_setup();
+	// Music & Sounds [#0]
+	fn_config_volType_setup_0();
 	
 	// Keybinds
 	fn_config_key_setup();
@@ -24,12 +24,20 @@ function fn_config_setup() // Sets up the game's settings
 	// Accessibility
 	global.config_rdcdMot = false; // Reduced Motion
 	
+	
 	// Save/Load the game's settings
 	global.config_file_name = "config.ini";
 	if (file_exists(global.config_file_name) == false)
 		fn_config_file_save();
 	else
 		fn_config_file_load();
+	
+	
+	// Languages [#1]
+	fn_config_lang_textData_setup();
+	
+	// Music & Sounds [#1]
+	fn_config_volType_setup_1();
 }
 
 
@@ -47,22 +55,19 @@ function fn_config_lang_setup() // Sets up the available languages without loadi
 	
 	global.config_lang = CONFIG_LANG.EN_US; // The current language
 	global.config_lang_hasChosen = false; // Determines whether the player has selected a language when game opened for the first time
-	
-	fn_config_lang_textData_setup();
 }
-function fn_config_lang_add(_lang_idx, _lang_name) // Adds a language to the language list
+function fn_config_lang_add(_idx, _name) // Adds a language to the language list
 {
-	var i = _lang_idx;
-	
-	global.config_lang_name[i] = _lang_name;
-	global.config_lang_textData[i] = -1;
+	var l = _idx;
+	global.config_lang_name[l] = _name;
+	global.config_lang_textData[l] = -1;
 }
 
 
 // Functions related to the volume types
-function fn_config_volType_setup() // Sets up the volume array
+function fn_config_volType_setup_0() // Sets up the volume types array
 {
-	enum CONFIG_VOLTYPE // Index of each volume in the array
+	enum CONFIG_VOLTYPE // Index of each volume type in the array
 	{
 		MASTER = 0,		// Controls all others volumes
 		MUS = 1,		// Music
@@ -72,18 +77,29 @@ function fn_config_volType_setup() // Sets up the volume array
 		ENTITY = 5,		// Sounds played by interacting with NPCs
 		AMBIENT = 6		// Sounds played in the background by the world
 	}
-	global.config_volType[CONFIG_VOLTYPE.MASTER] = 1;
-	global.config_volType[CONFIG_VOLTYPE.MUS] = 1;
-	global.config_volType[CONFIG_VOLTYPE.MENU] = 1;
-	global.config_volType[CONFIG_VOLTYPE.PLAYER] = 1;
-	global.config_volType[CONFIG_VOLTYPE.INTERACT] = 1;
-	global.config_volType[CONFIG_VOLTYPE.ENTITY] = 1;
-	global.config_volType[CONFIG_VOLTYPE.AMBIENT] = 1;
+	fn_config_volType_add(CONFIG_VOLTYPE.MASTER, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.MUS, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.MENU, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.PLAYER, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.INTERACT, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.ENTITY, 1);
+	fn_config_volType_add(CONFIG_VOLTYPE.AMBIENT, 1);
 	global.config_volType_amt = array_length(global.config_volType);
+}
+function fn_config_volType_setup_1()
+{
+	for (var v = 0; v < global.config_volType_amt; v++)
+		global.config_volType_name[v] = fn_getText(global.config_volType_name[v]);
+}
+function fn_config_volType_add(_idx, _vol)
+{
+	var v = _idx;
+	global.config_volType[v] = _vol;
+	global.config_volType_name[v] = $"volType_name_{v}";
 }
 
 
-// Functions related to keybinds/controls
+// Functions related to the player's keybinds
 function fn_config_key_setup() // Sets up the list of the player's current keybinds
 {
 	enum CONFIG_KEY // Index of each keybind in the array
@@ -111,11 +127,10 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
 	global.config_key_amt = array_length(global.config_key_dflt);
 }
-function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the keybind list
+function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the current keybinds list
 {
 	global.config_key_dflt[_key] = _key_dflt_id;
 	global.config_key_alt[_key] = _key_alt_id;
-	global.config_key_name[_key] = fn_getText($"config_key_name_{_key}");
 }
 
 function fn_config_key_press(_key) // Returns if the specified keybind has been pressed
@@ -126,7 +141,6 @@ function fn_config_key_hold(_key) // Returns if the specified keybind is current
 {
 	return max(keyboard_check(global.config_key_dflt[_key]), keyboard_check(global.config_key_alt[_key]));
 }
-
 function fn_config_key_quick() // Provides several variables to make input-checking tasks quicker
 {
 	press_lt = fn_config_key_press(CONFIG_KEY.LT);
@@ -149,66 +163,66 @@ function fn_config_key_quick() // Provides several variables to make input-check
 function fn_config_keyList_setup() // Sets up the list of keys the player can bind an action to
 {
 	var k = 0;
-	fn_config_keyList_add(k++, vk_left,	"←");
-	fn_config_keyList_add(k++, vk_right,	"→");
-	fn_config_keyList_add(k++, vk_up,		"↑");
-	fn_config_keyList_add(k++, vk_down,	"↓");
-	fn_config_keyList_add(k++, ord("A"),	"A");
-	fn_config_keyList_add(k++, ord("B"),	"B");
-	fn_config_keyList_add(k++, ord("C"),	"C");
-	fn_config_keyList_add(k++, ord("D"),	"D");
-	fn_config_keyList_add(k++, ord("E"),	"E");
-	fn_config_keyList_add(k++, ord("F"),	"F");
-	fn_config_keyList_add(k++, ord("G"),	"G");
-	fn_config_keyList_add(k++, ord("H"),	"H");
-	fn_config_keyList_add(k++, ord("I"),	"I");
-	fn_config_keyList_add(k++, ord("J"),	"J");
-	fn_config_keyList_add(k++, ord("K"),	"K");
-	fn_config_keyList_add(k++, ord("L"),	"L");
-	fn_config_keyList_add(k++, ord("M"),	"M");
-	fn_config_keyList_add(k++, ord("N"),	"N");
-	fn_config_keyList_add(k++, ord("O"),	"O");
-	fn_config_keyList_add(k++, ord("P"),	"P");
-	fn_config_keyList_add(k++, ord("Q"),	"Q");
-	fn_config_keyList_add(k++, ord("R"),	"R");
-	fn_config_keyList_add(k++, ord("S"),	"S");
-	fn_config_keyList_add(k++, ord("T"),	"T");
-	fn_config_keyList_add(k++, ord("U"),	"U");
-	fn_config_keyList_add(k++, ord("V"),	"V");
-	fn_config_keyList_add(k++, ord("W"),	"W");
-	fn_config_keyList_add(k++, ord("X"),	"X");
-	fn_config_keyList_add(k++, ord("Y"),	"Y");
-	fn_config_keyList_add(k++, ord("Z"),	"Z");
-	fn_config_keyList_add(k++, vk_space,		"Space");
-	fn_config_keyList_add(k++, vk_enter,		"Enter");
-	fn_config_keyList_add(k++, vk_backspace,	"Backspace");
-	fn_config_keyList_add(k++, vk_shift,		"Shift");
-	fn_config_keyList_add(k++, vk_control,	"Ctrl");
-	fn_config_keyList_add(k++, vk_alt,		"Alt");
-	fn_config_keyList_add(k++, vk_tab,		"Tab");
-	fn_config_keyList_add(k++, vk_escape,		"Esc");
-	fn_config_keyList_add(k++, vk_numpad0,	"0");
-	fn_config_keyList_add(k++, vk_numpad1,	"1");
-	fn_config_keyList_add(k++, vk_numpad2,	"2");
-	fn_config_keyList_add(k++, vk_numpad3,	"3");
-	fn_config_keyList_add(k++, vk_numpad4,	"4");
-	fn_config_keyList_add(k++, vk_numpad5,	"5");
-	fn_config_keyList_add(k++, vk_numpad6,	"6");
-	fn_config_keyList_add(k++, vk_numpad7,	"7");
-	fn_config_keyList_add(k++, vk_numpad8,	"8");
-	fn_config_keyList_add(k++, vk_numpad9,	"9");
-	fn_config_keyList_add(k++, vk_f1,		"F1");
-	fn_config_keyList_add(k++, vk_f2,		"F2");
-	fn_config_keyList_add(k++, vk_f3,		"F3");
-	fn_config_keyList_add(k++, vk_f4,		"F4");
-	fn_config_keyList_add(k++, vk_f5,		"F5");
-	fn_config_keyList_add(k++, vk_f6,		"F6");
-	fn_config_keyList_add(k++, vk_f7,		"F7");
-	fn_config_keyList_add(k++, vk_f8,		"F8");
-	fn_config_keyList_add(k++, vk_f9,		"F9");
-	fn_config_keyList_add(k++, vk_f10,	"F10");
-	fn_config_keyList_add(k++, vk_f11,	"F11");
-	fn_config_keyList_add(k++, vk_f12,	"F12");
+	fn_config_keyList_add(k++, vk_left, "←");
+	fn_config_keyList_add(k++, vk_right, "→");
+	fn_config_keyList_add(k++, vk_up, "↑");
+	fn_config_keyList_add(k++, vk_down, "↓");
+	fn_config_keyList_add(k++, ord("A"), "A");
+	fn_config_keyList_add(k++, ord("B"), "B");
+	fn_config_keyList_add(k++, ord("C"), "C");
+	fn_config_keyList_add(k++, ord("D"), "D");
+	fn_config_keyList_add(k++, ord("E"), "E");
+	fn_config_keyList_add(k++, ord("F"), "F");
+	fn_config_keyList_add(k++, ord("G"), "G");
+	fn_config_keyList_add(k++, ord("H"), "H");
+	fn_config_keyList_add(k++, ord("I"), "I");
+	fn_config_keyList_add(k++, ord("J"), "J");
+	fn_config_keyList_add(k++, ord("K"), "K");
+	fn_config_keyList_add(k++, ord("L"), "L");
+	fn_config_keyList_add(k++, ord("M"), "M");
+	fn_config_keyList_add(k++, ord("N"), "N");
+	fn_config_keyList_add(k++, ord("O"), "O");
+	fn_config_keyList_add(k++, ord("P"), "P");
+	fn_config_keyList_add(k++, ord("Q"), "Q");
+	fn_config_keyList_add(k++, ord("R"), "R");
+	fn_config_keyList_add(k++, ord("S"), "S");
+	fn_config_keyList_add(k++, ord("T"), "T");
+	fn_config_keyList_add(k++, ord("U"), "U");
+	fn_config_keyList_add(k++, ord("V"), "V");
+	fn_config_keyList_add(k++, ord("W"), "W");
+	fn_config_keyList_add(k++, ord("X"), "X");
+	fn_config_keyList_add(k++, ord("Y"), "Y");
+	fn_config_keyList_add(k++, ord("Z"), "Z");
+	fn_config_keyList_add(k++, vk_space, "Space");
+	fn_config_keyList_add(k++, vk_enter, "Enter");
+	fn_config_keyList_add(k++, vk_backspace, "Backspace");
+	fn_config_keyList_add(k++, vk_shift, "Shift");
+	fn_config_keyList_add(k++, vk_control, "Ctrl");
+	fn_config_keyList_add(k++, vk_alt, "Alt");
+	fn_config_keyList_add(k++, vk_tab, "Tab");
+	fn_config_keyList_add(k++, vk_escape, "Esc");
+	fn_config_keyList_add(k++, vk_numpad0, "0");
+	fn_config_keyList_add(k++, vk_numpad1, "1");
+	fn_config_keyList_add(k++, vk_numpad2, "2");
+	fn_config_keyList_add(k++, vk_numpad3, "3");
+	fn_config_keyList_add(k++, vk_numpad4, "4");
+	fn_config_keyList_add(k++, vk_numpad5, "5");
+	fn_config_keyList_add(k++, vk_numpad6, "6");
+	fn_config_keyList_add(k++, vk_numpad7, "7");
+	fn_config_keyList_add(k++, vk_numpad8, "8");
+	fn_config_keyList_add(k++, vk_numpad9, "9");
+	fn_config_keyList_add(k++, vk_f1, "F1");
+	fn_config_keyList_add(k++, vk_f2, "F2");
+	fn_config_keyList_add(k++, vk_f3, "F3");
+	fn_config_keyList_add(k++, vk_f4, "F4");
+	fn_config_keyList_add(k++, vk_f5, "F5");
+	fn_config_keyList_add(k++, vk_f6, "F6");
+	fn_config_keyList_add(k++, vk_f7, "F7");
+	fn_config_keyList_add(k++, vk_f8, "F8");
+	fn_config_keyList_add(k++, vk_f9, "F9");
+	fn_config_keyList_add(k++, vk_f10, "F10");
+	fn_config_keyList_add(k++, vk_f11, "F11");
+	fn_config_keyList_add(k++, vk_f12, "F12");
 }
 function fn_config_keyList_add(_key, _key_id, _key_name) // Adds a key and its name to the specified position on the list
 {
@@ -231,14 +245,14 @@ function fn_config_file_save()
 	ini_write_real("langs", "hasChosen", global.config_lang_hasChosen);
 	
 	// Video Settings
-	ini_write_real("video", "fscr", global.config_fscr);
-	ini_write_real("video", "lowGfx", global.config_lowGfx);
-	ini_write_real("video", "showFps", global.config_showFps);
-	ini_write_real("video", "showBdr", global.config_showBdr);
+	ini_write_real("vid", "fscr", global.config_fscr);
+	ini_write_real("vid", "lowGfx", global.config_lowGfx);
+	ini_write_real("vid", "showFps", global.config_showFps);
+	ini_write_real("vid", "showBdr", global.config_showBdr);
 	
 	// Audio Settings
 	for (var i = 0; i < global.config_volType_amt; i++)
-		ini_write_real("audio", $"vol_{i}", global.config_volType[i]);
+		ini_write_real("aud", $"vol_{i}", global.config_volType[i]);
 	
 	// Keybinds
 	for (var i = 0; i < global.config_key_amt; i++)
@@ -262,14 +276,14 @@ function fn_config_file_load()
 	global.config_lang_hasChosen = ini_read_real("langs", "hasChosen", 0);
 	
 	// Video Settings
-	global.config_fscr = ini_read_real("video", "fscr", 0);
-	global.config_lowGfx = ini_read_real("video", "lowGfx", 0);
-	global.config_showFps = ini_read_real("video", "showFps", 0);
-	global.config_showBdr = ini_read_real("video", "showBdr", 0);
+	global.config_fscr = ini_read_real("vid", "fscr", 0);
+	global.config_lowGfx = ini_read_real("vid", "lowGfx", 0);
+	global.config_showFps = ini_read_real("vid", "showFps", 0);
+	global.config_showBdr = ini_read_real("vid", "showBdr", 0);
 	
 	// Audio Settings
 	for (var i = 0; i < global.config_volType_amt; i++)
-		global.config_volType[i] = ini_read_real("audio", $"vol_{i}", 1);
+		global.config_volType[i] = ini_read_real("aud", $"vol_{i}", 1);
 	
 	// Keybinds
 	for (var i = 0; i < global.config_key_amt; i++)

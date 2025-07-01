@@ -7,7 +7,7 @@ image_alpha = 0;
 draw_dist = 16;
 draw_x = 0;
 draw_y = 0;
-global.game_fnt_h = 0
+global.GAME_FNT_H = 0
 draw_alp = 1;
 
 
@@ -50,7 +50,7 @@ for (var l = 0; l < lvl_amtMax; l++)
 	for (var i = 0; i < wnd_amtMax; i++)
 	{
 		wnd_act[l, i] = false;
-		wnd_spr[l, i] = global.thm_wnd_spr[global.thm_cur];
+		wnd_spr[l, i] = global.thm_wnd_spr[global.thm];
 		wnd_img[l, i] = 0;
 		wnd_x[l, i] = 0;
 		wnd_y[l, i] = 0;
@@ -79,10 +79,10 @@ for (var l = 0; l < lvl_amtMax; l++)
 		opt_x[l, i] = 0;
 		opt_y[l, i] = 0;
 		
-		opt_colTgt[l][i][0][0] = global.thm_col[global.thm_cur, 2]; // (Level, option index, vertical extreme of the option, default/selected)
-		opt_colTgt[l][i][1][0] = global.thm_col[global.thm_cur, 3];
-		opt_colTgt[l][i][0][1] = global.thm_col[global.thm_cur, 0];
-		opt_colTgt[l][i][1][1] = global.thm_col[global.thm_cur, 1];
+		opt_colTgt[l][i][0][0] = global.thm_col[global.thm, 2]; // (Level, option index, vertical extreme of the option, default/selected)
+		opt_colTgt[l][i][1][0] = global.thm_col[global.thm, 3];
+		opt_colTgt[l][i][0][1] = global.thm_col[global.thm, 0];
+		opt_colTgt[l][i][1][1] = global.thm_col[global.thm, 1];
 		opt_col[l][i][0] = opt_colTgt[l][i][0][0]; // (current colors of the option)
 		opt_col[l][i][1] = opt_colTgt[l][i][1][0];
 		opt_colSpd = 1;
@@ -108,14 +108,14 @@ for (var l = 0; l < lvl_amtMax; l++) // opt_slctr (Option selector; Selection/Fo
 	for (var i = 0; i < opt_amtMax; i++)
 	{
 		opt_slctr_act[l, i] = true; // (Determines if the selector is active for this option)
-		opt_slctr_spr[l, i] = global.thm_opt_slctr_spr[global.thm_cur];
+		opt_slctr_spr[l, i] = global.thm_opt_slctr_spr[global.thm];
 		opt_slctr_x[l, i] = 0;
 		opt_slctr_xFix[l, i] = 1; // (Fixes font sprite's empty space on the left)
-		opt_slctr_xDist[l, i] = global.thm_opt_slctr_xDist[global.thm_cur];
+		opt_slctr_xDist[l, i] = global.thm_opt_slctr_xDist[global.thm];
 		opt_slctr_y[l, i] = 0;
 		opt_slctr_yFix_0[l, i] = 3; // (Fixes acute, grave, and circumflex accent diacritics)
 		opt_slctr_yFix_1[l, i] = 1; // (Fixes descenders)
-		opt_slctr_yDist[l, i] = global.thm_opt_slctr_yDist[global.thm_cur];
+		opt_slctr_yDist[l, i] = global.thm_opt_slctr_yDist[global.thm];
 		opt_slctr_w[l, i] = 0;
 		opt_slctr_h[l, i] = 0;
 		opt_slctr_alp[l, i] = 0;
@@ -136,8 +136,8 @@ for (var l = 0; l < lvl_amtMax; l++)
 		
 		lbl_x[l, i] = 0;
 		lbl_y[l, i] = 0;
-		lbl_col[l][i][0] = global.thm_col[global.thm_cur, 0];
-		lbl_col[l][i][1] = global.thm_col[global.thm_cur, 1];
+		lbl_col[l][i][0] = global.thm_col[global.thm, 0];
+		lbl_col[l][i][1] = global.thm_col[global.thm, 1];
 		lbl_alp[l, i] = 1;
 		lbl_vAl[l, i] = fa_top;
 		lbl_hAl[l, i] = fa_left;
@@ -149,7 +149,7 @@ for (var l = 0; l < lvl_amtMax; l++) // ttls (Titles, the name of the current le
 {
 	ttl_text[l] = "%%%";
 	
-	ttlWnd_spr[l] = global.thm_wnd_spr[global.thm_cur];
+	ttlWnd_spr[l] = global.thm_wnd_spr[global.thm];
 	ttlWnd_x[l] = -draw_dist;
 	ttlWnd_y[l] = -draw_dist;
 	ttlWnd_w[l] = ((abs(ttlWnd_x[l]) * 2) + 320);
@@ -157,9 +157,9 @@ for (var l = 0; l < lvl_amtMax; l++) // ttls (Titles, the name of the current le
 	
 	ttl_x[l] = (ttlWnd_x[l] + (ttlWnd_w[l] / 2));
 	var _ttl_yDistFix = 1;
-	ttl_y[l] = (draw_dist - (global.game_fnt_h / 2) - _ttl_yDistFix);
-	ttl_col[l][0] = global.thm_col[global.thm_cur, 0];
-	ttl_col[l][1] = global.thm_col[global.thm_cur, 1];
+	ttl_y[l] = (draw_dist - (global.GAME_FNT_H / 2) - _ttl_yDistFix);
+	ttl_col[l][0] = global.thm_col[global.thm, 0];
+	ttl_col[l][1] = global.thm_col[global.thm, 1];
 	ttl_vAl[l] = fa_top;
 	ttl_hAl[l] = fa_center;
 }

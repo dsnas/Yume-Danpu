@@ -10,7 +10,7 @@ function fn_menu_config_lbl_textdata(_lvl_id)
 		lbl_text[l, 0] = global.config_lang_Name[global.config_lang];
 	}
 	
-	else if (l == LVL_VID) // LVL VID (Video settings)
+	else if (l == LVL_GFX) // LVL VID (Video settings)
 	{
 		lbl_text[l, 0] = fn_getText("menu_config_main_lbl_" + string(global.config_fscr));
 	}

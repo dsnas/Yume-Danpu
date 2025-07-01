@@ -3,34 +3,33 @@
 
 
 // Functions related to setting up the menu
-function fn_menu_config_evCreate()
+function fn_menu_config_evCreate_0()
 {
 	// Main level [#0]
 	LVL_MAIN = 0;
 	var l = LVL_MAIN;
-	lvlTrans_tgt = l;
 	
 	fn_menu_ttl_add(l, fn_getText("menu_config_main_ttl"));
 	
 	
 	
 	
-	// All levels
+	// All levels [#0]
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
 		// Box
-		var _box_xDist = (draw_dist * 4);
-		var _box_yDist = (draw_dist * 3);
+		var _box_xMargin = (draw_dist * 4);
+		var _box_yMargin = (draw_dist * 3);
 		if (l != LVL_MAIN)
 		{
-			_box_xDist = draw_dist;
-			_box_yDist = _box_xDist;
+			_box_xMargin = (draw_dist * 2);
+			_box_yMargin = _box_xMargin;
 		}
 		
-		var _box_x = _box_xDist;
-		var _box_y = (ttl_box_y[l] + ttl_box_h[l] + _box_yDist);
+		var _box_x = _box_xMargin;
+		var _box_y = (ttl_box_y[l] + ttl_box_h[l] + _box_yMargin);
 		var _box_w = (320 - (_box_x * 2));
-		var _box_h = (240 - _box_y - _box_yDist);
+		var _box_h = (240 - _box_y - _box_yMargin);
 		
 		fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	}
@@ -44,101 +43,238 @@ function fn_menu_config_evCreate()
 		// Options
 	fn_menu_opt_add_ext(l, "menu_config_main_opt_");
 	
-	var _opt_yDist = draw_dist;
-	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.game_fnt_h);
+	var _opt_yDist_0 = (draw_dist * 1.5);
+	var _opt_yDist_1 = draw_dist;
+	
+	var _opt_hAll = _opt_yDist_0;
+	for (var o = 1; o < (opt_amt[l] - 1); o++)
+		_opt_hAll += _opt_yDist_1;
+	_opt_hAll += global.GAME_FNT_H;
+	
+	var _opt_yAdd = 0;
 	for (var o = 0; o < opt_amt[l]; o++)
 	{	
-		opt_x[l, o] = (box_x[l, 0] + draw_dist);
-		opt_y[l, o] = (box_y[l, 0] + (box_h[l, 0] / 2) - (_opt_hAll / 2) + (_opt_yDist * o));
+		if (o == 0)
+			opt_x[l, o] = (box_x[l, 0] + draw_dist);
+		else if (o >= 1)
+			opt_x[l, o] = (box_x[l, 0] + (box_w[l, 0] / 2) - (opt_w[l, o] / 2));
+		
+		opt_y[l, o] = (box_y[l, 0] + (box_h[l, 0] / 2) - (_opt_hAll / 2) + _opt_yAdd);
 		fn_menu_opt_slctr_add(l, o); // Option selector
+		
+		if (o == 0)
+			_opt_yAdd += _opt_yDist_0;
+		else
+			_opt_yAdd += _opt_yDist_1;
 	}
 	
-			// Option's setting
+			// Options' settings
 	var _opt_config_xDist = (draw_dist * 2);
-	fn_menu_opt_config_add(l, 0, opt_x[l, 0] + opt_w[l, 0] + _opt_config_xDist, opt_y[l, 0]);
+	var _opt_config_x = (opt_x[l, 0] + opt_w[l, 0] + _opt_config_xDist);
+	var _opt_config_y = opt_y[l, 0];
+	fn_menu_opt_config_add(l, 0, "Salenis", _opt_config_x, _opt_config_y);
 	fn_menu_opt_config_slctr_add(l, 0); // Selector of the option's setting
 	
 	
 	
 	
-	// Languages level (unused)
-	LVL_LANG = 1;
-	var l = LVL_LANG;
+	// Graphics level
+	LVL_GFX = 3;
+	var l = LVL_GFX;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_lang_ttl"));
-	
-	
-	
-	
-	// Controls level (unused)
-	LVL_KEY = 2;
-	var l = LVL_KEY;
-	
-		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_key_ttl"));
+	fn_menu_ttl_add(l, fn_getText("menu_config_gfx_ttl"));
 	
 		// Options
-	var _opt_x = (box_x[l, 0] + draw_dist);
-	var _opt_y = (box_y[l, 0] + draw_dist);
-	fn_menu_opt_add(l, 0, fn_getText("menu_config_key_opt_0"), _opt_x, _opt_y);
-	fn_menu_opt_slctr_add(l, 0);
+	fn_menu_opt_add_ext(l, "menu_config_gfx_opt_");
 	
 	
 	
 	
-	// Video Settings level
-	LVL_VID = 3;
-	var l = LVL_VID;
+	// Music & Sounds level
+	LVL_AUD = 4;
+	var l = LVL_AUD;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_vid_ttl"));
+	fn_menu_ttl_add(l, fn_getText("menu_config_aud_ttl"));
 	
 		// Options
-	fn_menu_opt_add_ext(l, "menu_config_vid_opt_");
+	fn_menu_opt_add_ext(l, "menu_config_aud_opt_");
 	
-	for (var o = 0; o < opt_amt[l]; o++)
+	
+	
+	
+	// Accessibility
+	LVL_A11Y = 5;
+	var l = LVL_A11Y;
+	
+		// Title
+	fn_menu_ttl_add(l, fn_getText("menu_config_a11y_ttl"));
+	
+		// Options
+	fn_menu_opt_add_ext(l, "menu_config_a11y_opt_");
+	
+	
+	
+	// All levels [#1]
+	for (var l = 0; l < lvl_amtMax; l++)
 	{
-		var _opt_x = (box_x[l, 0] + draw_dist);
-		var _opt_y = (box_y[l, 0] + draw_dist + (draw_dist * o));
-		fn_menu_opt_add(l, o, , _opt_x, _opt_y);
+		// Dark translucent background
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].black, 0.75);
+		
+		// Options and their settings
+		for (var o = 0; o < opt_amt[l]; o++)
+		{
+			if (opt_x[l, o] == 0 && opt_y[l, o] == 0)
+			{
+				// Option
+				opt_x[l, o] = (box_x[l, 0] + draw_dist);
+				opt_y[l, o] = (box_y[l, 0] + draw_dist + (draw_dist * o));
+				fn_menu_opt_slctr_add(l, o);
+				
+					// Option's setting
+				var _opt_config_x = (box_x[l, 0] + (box_w[l, 0] / 2));
+				var _opt_config_y = opt_y[l, o];
+				fn_menu_opt_config_add(l, o, "", _opt_config_x, _opt_config_y);
+				fn_menu_opt_config_slctr_add(l, o); // Selector of the option's setting
+			}
+		}
 	}
 }
-function fn_menu_config_evStep_0()
+function fn_menu_config_evCreate_1()
 {
 	// Main level
-	if (lvl == LVL_MAIN) || (lvlTrans_tgt == LVL_MAIN)
-	{	
-		var l = lvl;
-		if (lvlTrans_tgt == LVL_MAIN)
-			 l = lvlTrans_tgt;
-		
-		opt_config_text[l, 0] = global.config_lang_name[global.config_lang];
-	}
+	lvl = LVL_MAIN;
 }
 
 
 // Functions related to the options
 function fn_menu_config_opt_slct()
 {
+	var l = lvl;
+	var o = opt_move_pos[l];
+	
 	// Main level
-	if (lvl == LVL_MAIN)
+	if (l == LVL_MAIN)
 	{
-		// "Video Settings"
-		if (opt_move_pos[lvl] == 1)
-		{
-			fn_menu_lvlTrans_start(LVL_VID);
-		}
+		// "Graphics"
+		if (o == 1)
+			fn_menu_lvlNew(LVL_GFX);
+		
+		// "Music & Sounds"
+		if (o == 2)
+			fn_menu_lvlNew(LVL_AUD);
+			
+		// "Music & Sounds"
+		if (o == 3)
+			fn_menu_lvlNew(LVL_A11Y);
 	}
 }
 function fn_menu_config_opt_cncl()
 {
+	var l = lvl;
+	
 	// Main level
-	if (lvl == LVL_MAIN)
+	if (l == LVL_MAIN)
 	{
-		fn_menu_lvlTrans_start(LVL_EMPTY, , , true);
+		fn_menu_lvlNew(LVL_EMPTY, , true);
 		
-		with (global.menu_home_obj)
-			fn_menu_lvlTrans_start(LVL_MAIN);
+		var _menu_home_obj = fn_menu_obj_find("home");
+		if (_menu_home_obj != -1)
+		{
+			with (_menu_home_obj)
+				fn_menu_lvlNew(LVL_MAIN);
+		}
+		
+		var _menu_pse_obj = fn_menu_obj_find("pse");
+		if (_menu_pse_obj != -1)
+		{
+			with (_menu_pse_obj)
+				fn_menu_lvlNew(LVL_MAIN);
+		}
 	}
+	
+	// Graphics level
+	if (l == LVL_GFX) || (l == LVL_AUD) || (l == LVL_A11Y)
+		fn_menu_lvlNew(LVL_MAIN);
+}
+
+function fn_menu_config_opt_config_move()
+{
+	if (press_lt == true) || (press_rt == true)
+	{
+		var l = lvl;
+		var o = opt_move_pos[l];
+		
+		// Main level
+		if (l == LVL_MAIN)
+		{
+			// "Language"
+			if (o == 0)
+			{
+				var _config_langOld = global.config_lang;
+			
+				global.config_lang += (press_rt - press_lt);
+				if (global.config_lang < 0)
+					global.config_lang = (global.config_lang_amt - 1);
+				if (global.config_lang >= global.config_lang_amt)
+					global.config_lang = 0;
+			
+				if (_config_langOld != global.config_lang)
+					fn_config_lang_textData_setup();
+			}
+		}
+		
+		// Graphics level
+		else if (l == LVL_GFX)
+		{
+			// "Fullscreen"
+			if (o == 0)
+				global.config_fscr = !global.config_fscr;
+			
+			// "Low Graphics"
+			if (o == 1)
+				global.config_lowGfx = !global.config_lowGfx;
+			
+			// "Show FPS"
+			if (o == 2)
+				global.config_showFps = !global.config_showFps;
+			
+			// "Show Border"
+			if (o == 3)
+				global.config_showBdr = !global.config_showBdr;
+		}
+		
+		// Music & Sounds level
+		else if (l == LVL_AUD)
+		{
+			// Volumes
+			global.config_volType[o] += ((press_rt - press_lt) * 0.1);
+			global.config_volType[o] = clamp(global.config_volType[o], 0, 1);
+		}
+		
+		// Accessiblity
+		else if (l == LVL_A11Y)
+		{
+			// "Reduced Motion"
+			if (o == 0)
+				global.config_rdcdMot = !global.config_rdcdMot;
+		}
+		
+		fn_aud_play(opt_move_snd[l], CONFIG_VOLTYPE.MENU);
+		fn_config_file_save();
+	}
+	
+	
+	opt_config_text[LVL_MAIN, 0] = global.config_lang_name[global.config_lang];
+	
+	opt_config_text[LVL_GFX, 0] = fn_getText($"menu_config_all_opt_config_{global.config_fscr}");
+	opt_config_text[LVL_GFX, 1] = fn_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
+	opt_config_text[LVL_GFX, 2] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
+	opt_config_text[LVL_GFX, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
+	
+	for (var v = 0; v < global.config_volType_amt; v++)
+		opt_config_text[LVL_AUD, v] = $"{round(global.config_volType[v] * 100)}%";
+	
+	opt_config_text[LVL_A11Y, 0] = fn_getText($"menu_config_all_opt_config_{global.config_rdcdMot}");
 }

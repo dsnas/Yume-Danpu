@@ -1,5 +1,5 @@
 
-fn_obj_img(id);
+fn_obj_img();
 fn_obj_depth();
 
 

@@ -22,7 +22,7 @@ if (lvlTrans_act == false)
 	
 	if (opt_canSlct && opt_inpSlct == true) // (Checks for the player's selection input) (Selects the option)
 	{
-		var _opt_snd = global.thm_snd_optSlct[global.thm_cur];
+		var _opt_snd = global.thm_snd_optSlct[global.thm];
 		
 		
 		if (lvl == LVL_MAIN) // [LVL MAIN] (Starts transition to the level of the selected option)
@@ -32,12 +32,12 @@ if (lvlTrans_act == false)
 		if (lvl == LVL_LIST_EFF) || (lvl == LVL_LIST_ITM) || (lvl == LVL_LIST_THM) // [LVL LIST] Activates the selected eff/itm/thm
 		{
 			if (array_get(list_hasArr[lvl], optMove_pos[lvl]) == false)
-				_opt_snd = global.thm_snd_optFail[global.thm_cur];
+				_opt_snd = global.thm_snd_optFail[global.thm];
 			else
 			{
 				if (lvl == LVL_LIST_THM)
 				{
-					global.thm_cur = optMove_pos[lvl];
+					global.thm = optMove_pos[lvl];
 					event_user(0);
 				}
 			}
@@ -59,6 +59,6 @@ if (lvlTrans_act == false)
 			fn_menu_lvlTrans_start(LVL_MAIN);
 		
 		
-		fn_aud_play(global.thm_snd_optCncl[global.thm_cur], CONFIG_VOLTYPE.MENU);
+		fn_aud_play(global.thm_snd_optCncl[global.thm], CONFIG_VOLTYPE.MENU);
 	}
 }

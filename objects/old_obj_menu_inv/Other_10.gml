@@ -9,7 +9,7 @@ px_x[l, 0] = 0;
 px_y[l, 0] = 0;
 px_w[l, 0] = 320;
 px_h[l, 0] = 240;
-px_col[l, 0] = global.thm_col[global.thm_cur, 4];
+px_col[l, 0] = global.thm_col[global.thm, 4];
 px_alp[l, 0] = 0.5;
 
 wnd_act[l, 0] = true; // [main lvl] lbls wnd (labels/information wnd)
@@ -18,7 +18,7 @@ wnd_y[l, 0] = (draw_dist / 2);
 wnd_w[l, 0] = (draw_dist * 6);
 wnd_h[l, 0] = (draw_dist * 7) + (draw_dist / 4);
 
-main_chrFrm_spr = global.thm_chrFrm_spr[global.thm_cur]; // [main lvl] chrFrm (player's picture fliste)
+main_chrFrm_spr = global.thm_chrFrm_spr[global.thm]; // [main lvl] chrFrm (player's picture fliste)
 main_chrFrm_w = fn_spr_w(main_chrFrm_spr);
 main_chrFrm_h = fn_spr_h(main_chrFrm_spr);
 main_chrFrm_x = (wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (main_chrFrm_w / 2));
@@ -33,8 +33,8 @@ main_chara_y = (main_chrFrm_y + (main_chrFrm_h / 2) + (main_chara_h / 2) - 1);
 lbl_text[l, 0] = global.chara_name_text; // (main lvl) chrName
 lbl_x[l, 0] = (main_chrFrm_x + (main_chrFrm_w / 2));
 lbl_y[l, 0] = round(main_chrFrm_y + main_chrFrm_h + (draw_dist / 8));
-lbl_col[l][0][0] = global.thm_col[global.thm_cur, 0];
-lbl_col[l][0][1] = global.thm_col[global.thm_cur, 1];
+lbl_col[l][0][0] = global.thm_col[global.thm, 0];
+lbl_col[l][0][1] = global.thm_col[global.thm, 1];
 lbl_vAl[l, 0] = fa_top;
 lbl_hAl[l, 0] = fa_center;
 
@@ -49,21 +49,21 @@ main_mnyImg_w = fn_spr_w(main_mnyImg_spr);
 var _xDist = (draw_dist / 3);
 var _wAll = (_xDist + lbl_w[l, 1] + lbl_w[l, 2]);
 main_mnyImg_x = (wnd_x[l, 0] + (wnd_w[l, 0] / 2) - (_wAll / 2) + (main_mnyImg_w / 2));
-main_mnyImg_y = (lbl_y[l, 0] + global.game_fnt_h + draw_dist - 1);
-main_mnyImg_col = global.thm_col[global.thm_cur, 0];
+main_mnyImg_y = (lbl_y[l, 0] + global.GAME_FNT_H + draw_dist - 1);
+main_mnyImg_col = global.thm_col[global.thm, 0];
 main_mnyImg_alp = 1;
 
 lbl_x[l, 1] = (main_mnyImg_x + _xDist); // (main lvl) ccy
-lbl_y[l, 1] = (main_mnyImg_y - (global.game_fnt_h / 2));
-lbl_col[l][1][0] = global.thm_col[global.thm_cur, 2];
-lbl_col[l][1][1] = global.thm_col[global.thm_cur, 3];
+lbl_y[l, 1] = (main_mnyImg_y - (global.GAME_FNT_H / 2));
+lbl_col[l][1][0] = global.thm_col[global.thm, 2];
+lbl_col[l][1][1] = global.thm_col[global.thm, 3];
 lbl_vAl[l, 1] = fa_top;
 lbl_hAl[l, 1] = fa_left;
 
 lbl_x[l, 2] = (lbl_x[l, 1] + lbl_w[l, 1]); // (main lvl) mny
 lbl_y[l, 2] = lbl_y[l, 1];
-lbl_col[l][2][0] = global.thm_col[global.thm_cur, 0];
-lbl_col[l][2][1] = global.thm_col[global.thm_cur, 1];
+lbl_col[l][2][0] = global.thm_col[global.thm, 0];
+lbl_col[l][2][1] = global.thm_col[global.thm, 1];
 lbl_vAl[l, 2] = fa_top;
 lbl_hAl[l, 2] = fa_left;
 
@@ -88,7 +88,7 @@ main_optImg_alp = 1;
 for (var i = 0; i < opt_amt[l]; i++) // (main lvl) opts
 {
 	opt_x[l, i] = (main_optImg_x + _optImg_xDist);
-	opt_y[l, i] = (main_optImg_y[i] - (global.game_fnt_h / 2));
+	opt_y[l, i] = (main_optImg_y[i] - (global.GAME_FNT_H / 2));
 	
 	fn_menu_opt_slctr_drawdata(l, i);
 	opt_slctr_x[l, i] = (opt_slctr_x[l, i] - _optImg_xDist - main_optImg_w - 1);
@@ -156,7 +156,7 @@ for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 		px_y[l, 0] = 0;
 		px_w[l, 0] = 320;
 		px_h[l, 0] = 240;
-		px_col[l, 0] = global.thm_col[global.thm_cur, 4];
+		px_col[l, 0] = global.thm_col[global.thm, 4];
 		px_alp[l, 0] = 0.75;
 		
 		fn_menu_ttl_textdata(l, "menu_inv_" + string(list_lblKey_text[l]) + "_ttl"); // ttl (Title window and label)
@@ -187,8 +187,8 @@ for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 			lbl_text[l, 1] = array_get(list_descArr[l], optMove_pos[l]);
 		lbl_x[l, 1] = (wnd_x[l, 1] + draw_dist);
 		lbl_y[l, 1] = (wnd_y[l, 1] + wnd_h[l, 1] - draw_dist);
-		lbl_col[l][1][0] = global.thm_col[global.thm_cur, 0];
-		lbl_col[l][1][1] = global.thm_col[global.thm_cur, 1];
+		lbl_col[l][1][0] = global.thm_col[global.thm, 0];
+		lbl_col[l][1][1] = global.thm_col[global.thm, 1];
 		lbl_alp[l, 1] = 1;
 		lbl_vAl[l, 1] = fa_bottom;
 	}
@@ -199,4 +199,4 @@ for (var l = 0; l < lvl_amtMax; l++) // [lvl eff/itm/thm]
 
 fn_menu_lvlTrans_start(LVL_MAIN);
 
-fn_aud_play(global.thm_snd_optSlct[global.thm_cur], CONFIG_VOLTYPE.MENU);
+fn_aud_play(global.thm_snd_optSlct[global.thm], CONFIG_VOLTYPE.MENU);

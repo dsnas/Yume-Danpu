@@ -3,40 +3,31 @@
 
 
 // Functions related to setting up the menu
-function fn_menu_pse_evCreate()
+function fn_menu_pse_evCreate_0()
 {
 	// Main level
 	LVL_MAIN = 0;
 	var l = LVL_MAIN;
-	lvlTrans_tgt = l;
-	
-		// Dark translucent background
-	rect_x[l, 0] = 0;
-	rect_y[l, 0] = 0;
-	rect_w[l, 0] = 320;
-	rect_h[l, 0] = 240;
-	fn_menu_rect_addOther(l, 0, global.thm_col[global.thm_cur].black, 0.75);
 	
 		// Title
 	fn_menu_ttl_add(l, fn_getText("menu_pse_main_ttl"));
 	
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_pse_main_opt_");
-	fn_log(opt_text[l, 0]);
 	var _opt_yDist = draw_dist;
-	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.game_fnt_h);
+	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.GAME_FNT_H);
 	
 		// Box
 	var _box_wDist = round(draw_dist * 1.5);
 	var _box_hDist = draw_dist;
-	box_w[l, 0] = (_box_wDist + opt_wMax[l] + _box_wDist);
-	box_h[l, 0] = (_box_hDist + _opt_hAll + _box_hDist);
+	var _box_w = (_box_wDist + opt_wMax[l] + _box_wDist);
+	var _box_h = (_box_hDist + _opt_hAll + _box_hDist);
 	
 	var _box_yDist = draw_dist;
-	box_x[l, 0] = (160 - round(box_w[l, 0] / 2));
-	box_y[l, 0] = (120 + _box_yDist - round(box_h[l, 0] / 2));
+	var _box_x = (160 - round(_box_w / 2));
+	var _box_y = (120 + _box_yDist - round(_box_h / 2));
 	
-	fn_menu_box_addOther(l, 0);
+	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Options [#1]
 	for (var o = 0; o < opt_amt[l]; o++)
@@ -45,9 +36,26 @@ function fn_menu_pse_evCreate()
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
 		fn_menu_opt_slctr_add(l, o);
 	}
-	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_PSE;
+	opt_slct_snd[l, 2] = global.thm_opt_fail_snd[global.thm];
 	
 	
+	
+	
+	// All levels
+	for (var l = 0; l < lvl_amtMax; l++)
+	{
+		// Dark translucent background
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].black, 0.75);
+	}
+}
+function fn_menu_pse_evCreate_1()
+{
+	fn_obj_depth( , (depth + 1));
+	
+	
+	// Main level
+	lvl = LVL_MAIN;
+	lvl_alp[lvl] = 0.1;
 	
 	
 	// Takes a screenshot of the game to use as the background, since all objects will temporarily deactivate and disappear
@@ -67,9 +75,9 @@ function fn_menu_pse_evCreate()
 	instance_activate_object(obj_game_dbg);
 	instance_activate_object(obj_rm);
 	audio_pause_all();
-	fn_aud_play(global.thm_opt_slct_snd[global.thm_cur], CONFIG_VOLTYPE.MENU);
+	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_VOLTYPE.MENU);
 }
-function fn_menu_pse_DrawGUI_0(l)
+function fn_menu_pse_evDrawGUI_0(l)
 {
 	// Draws the screenshot
 	if (sshot_spr != -1)
@@ -85,23 +93,17 @@ function fn_menu_pse_opt_slct()
 	{
 		// "Resume"
 		if (opt_move_pos[lvl] == 0)
-		{
-			_opt_slct_snd = opt_cncl_sndDflt[lvl];
 			fn_menu_pse_resume();
-		}
 		
-		// "Settings"
-		if (opt_move_pos[lvl] == 1)
+		// "Options"
+		else if (opt_move_pos[lvl] == 1)
 		{
-			
+			fn_menu_lvlNew(LVL_EMPTY);
+			fn_menu_obj_create("config");
 		}
-		
-		// "Instructions"
-		if (opt_move_pos[lvl] == 2)
-			_opt_slct_snd = global.thm_opt_fail_snd[global.thm_cur];
 		
 		// "Quit to Menu"
-		if (opt_move_pos[lvl] == 3)
+		else if (opt_move_pos[lvl] == 3)
 		{
 			opt_move_act[lvl] = false;
 			opt_slct_act[lvl] = false;
@@ -139,5 +141,5 @@ function fn_menu_pse_resume() // Resumes the game
 	audio_resume_all();
 	obj_player.move_stg = -1;
 	
-	fn_menu_lvlTrans_start(LVL_EMPTY, , , true);
+	fn_menu_lvlNew(LVL_EMPTY, , true);
 }
