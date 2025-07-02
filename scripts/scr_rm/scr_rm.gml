@@ -54,7 +54,7 @@ function fn_rm_evCreate() // Create Event determined by the room's ID
 	}
 	
 	// Macacolandia and Debug World
-	if (rm_id == "macaco") || (rm_id == "dbgwrld")
+	if (rm_id == "macaco")
 	{
 		fn_rm_bg_sky_add(0, temp_spr_rm_bg_sky_macaco_0, , , , , , 0.2);
 		fn_rm_bg_sky_loop_act(0);
@@ -62,6 +62,39 @@ function fn_rm_evCreate() // Create Event determined by the room's ID
 		
 		fn_rm_bg_sky_add(1, temp_spr_rm_bg_sky_macaco_1, , , , , , 0.35, 0.75, 0.75);
 		fn_rm_bg_sky_loop_act(1);
+		fn_rm_bg_sky_loop_move_act(1);
+		
+		fn_rm_loop_act(true, true);
+	}
+	
+	// Debug World
+	if (rm_id == "dbgwrld")
+	{
+		var _spr_amt = 0;
+		for (var s = 0; s < 99; s++)
+		{
+			if (sprite_exists(s) == true)
+				continue;
+			else
+			{
+				_spr_amt = s;
+				break;
+			}
+		}
+		
+		for (var b = 0; b < 2; b++)
+		{
+			_bg_sky_spr[b] = irandom_range(0, (_spr_amt - 1));
+			_bg_sky_img[b] = irandom_range(0, (sprite_get_number(_bg_sky_spr[b]) - 1));
+		}
+		
+		
+		fn_rm_bg_sky_add(0, _bg_sky_spr[0], _bg_sky_img[0], , , , , 1);
+		fn_rm_bg_sky_loop_act(0, 120, 240);
+		fn_rm_bg_sky_loop_move_act(0);
+		
+		fn_rm_bg_sky_add(1, _bg_sky_spr[1], _bg_sky_img[1], , , , , 0.5, 0.75, 0.75);
+		fn_rm_bg_sky_loop_act(1, 120, 240);
 		fn_rm_bg_sky_loop_move_act(1);
 		
 		fn_rm_loop_act(true, true);
@@ -75,8 +108,8 @@ function fn_rm_evStep() // Step Event determined by the room's ID
 	// Main menu
 	if (rm_id == "menu_home")
 	{
-		var _menu_home_obj = fn_menu_obj_find("home");
-		if (_menu_home_obj != -1 && global.config_lang_hasChosen == true && _menu_home_obj.lvl != _menu_home_obj.LVL_LANG)
+		var m = fn_menu_obj_find("home");
+		if (m != -1 && global.config_lang_hasChosen == true && m.lvl_alpDelay[m.lvl] <= 0 && m.lvl_alpTgt_gameEnd[m.lvl] == false)
 			fn_rm_mus_add(0, mus_menu_home, 0.45);
 	}
 	

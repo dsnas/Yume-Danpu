@@ -27,9 +27,10 @@ for (var l = 0; l < (lvl_amtMax + 1); l++)
 	// Levels
 	lvl_alp[l] = 0; // Alpha of all elements drawn at the level
 	lvl_alpDelay[l] = 0; // Duration of the delay for the level's alpha to be updated
-	lvl_selfDstr[l] = false;
-	lvl_gameEnd[l] = false;
-	lvl_alpSpd = 0.2;
+	lvl_alpSpd = 0.2; // Speed of the level's alpha transition
+	
+	lvl_alpTgt_selfDstr[l] = false; // Determines if the menu will destroy itself after the current level reaches its target alpha
+	lvl_alpTgt_gameEnd[l] = false; // Determines if the menu will end the game after the current level reaches its target alpha
 	
 	
 	// Rectangles
@@ -62,6 +63,7 @@ fn_menu_lvlNew(); // There's no need for the child menu to call this function ag
 
 
 config_langOld = global.config_lang;
+thmOld = global.thm;
 
 
 fn_menu_evCreate_0();

@@ -48,6 +48,10 @@ function fn_menu_evCreate_0() // Create Event (that may be run more than once if
 	if (menu_id == "config")
 		fn_menu_config_evCreate_0();
 	
+	// Inventory menu
+	if (menu_id == "inv")
+		fn_menu_inv_evCreate_0();
+	
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_evCreate_0();
@@ -61,6 +65,10 @@ function fn_menu_evCreate_1() // Create Event (that must be run only once) deter
 	// Settings menu
 	if (menu_id == "config")
 		fn_menu_config_evCreate_1();
+	
+	// Inventory menu
+	if (menu_id == "inv")
+		fn_menu_inv_evCreate_1();
 	
 	// Pause menu
 	if (menu_id == "pse")
@@ -87,6 +95,16 @@ function fn_menu_evDrawGUI_2(l) // Draw GUI Event (inside the levels loop, post-
 	// Main menu
 	if (menu_id == "home")
 		fn_menu_home_evDrawGUI_2(l);
+	
+	// Inventory menu
+	if (menu_id == "inv")
+		fn_menu_inv_evDrawGUI_2(l);
+}
+function fn_menu_evDestroy() // Destroy Event determined by the menu's ID
+{
+	// Pause menu
+	if (menu_id == "pse")
+		fn_menu_pse_evDestroy();
 }
 
 
@@ -162,7 +180,7 @@ function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, 
 	opt_colTgt[l][o][1][1] = _opt_colTgt_1_1;
 	opt_col[l][o][0] = opt_colTgt[l][o][0][0];
 	opt_col[l][o][1] = opt_colTgt[l][o][1][0];
-	opt_colSpd = 0.5; // Speed of the option's selection animation (1 == instantaneous)
+	opt_colSpd = 1; // Speed of the option's selection animation (1 == instantaneous)
 	
 	opt_alp[l, o] = _opt_alp;
 	opt_vAl[l, o] = _opt_vAl;
@@ -172,7 +190,7 @@ function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, 
 	// Option movement
 	OPT_MOVE_TYPE_dfltVer = 0; // ID number of the vertical default type
 	OPT_MOVE_TYPE_dfltHor = 1; // ID number of the horizontal default type
-	OPT_MOVE_TYPE_invList = 2; // ID number of the inventory's effects, items and themes list type
+	OPT_MOVE_TYPE_invOther = 2; // ID number of the inventory's effects, items and themes list type
 	opt_move_type[l] = OPT_MOVE_TYPE_dfltVer; // ID number of the current type
 	
 	opt_move_act[l] = true; // Determines if the player can move through the options
@@ -181,15 +199,21 @@ function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, 
 	
 	
 	// Option selection
+	opt_slct_act[l] = true;
 	opt_slct_key[l] = CONFIG_KEY.SLCT; // Key to check for input
 	opt_slct_snd[l, o] = global.thm_opt_slct_snd[global.thm]; // Asset of the option selection sound
 	
 	
 	// Option cancellation
-	opt_cncl_key[l] = CONFIG_KEY.CNCL; // Key to check for input
-	opt_cncl_snd[l, o] = global.thm_opt_cncl_snd[global.thm]; // Asset of the option cancellation sound
+	opt_cncl_act[l] = true;
+	opt_cncl_key[l, 0] = CONFIG_KEY.CNCL; // Default cancellation key
+	opt_cncl_key[l, 1] = -1; // Alt cancellation key
+	opt_cncl_snd[l] = global.thm_opt_cncl_snd[global.thm]; // Asset of the option cancellation sound
 	
 	
+	opt_slctr_act[l, o] = false;
+	opt_config_text[l, o] = "%%%";
+	opt_desc_text[l, o] = "%%%";
 	if (o == 0)
 		opt_amt[l] = 0;
 	if (opt_text[l, o] != "%%%")
@@ -241,15 +265,23 @@ function fn_menu_opt_slct() // Option selection sequence determined by the menu'
 	if (menu_id == "config")
 		fn_menu_config_opt_slct();
 	
+	// Inventory menu
+	if (menu_id == "inv")
+		fn_menu_inv_opt_slct();
+	
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_opt_slct();
 }
 function fn_menu_opt_cncl() // Option cancellation sequence determined by the menu's ID
-{
+{	
 	// Settings menu
 	if (menu_id == "config")
 		fn_menu_config_opt_cncl();
+	
+	// Inventory menu
+	if (menu_id == "inv")
+		fn_menu_inv_opt_cncl();
 	
 	// Pause menu
 	if (menu_id == "pse")
@@ -303,11 +335,18 @@ function fn_menu_opt_config_getSize(_lvl, _opt)
 	opt_config_w[l, o] = fn_text_w(opt_config_text[l, o]);
 	opt_config_h[l, o] = fn_text_h(opt_config_text[l, o]);
 }
-function fn_menu_opt_config_move() //																	(!!! Also must be updated when a new menu is added)
+
+function fn_menu_opt_config_move() // Movement sequence of the options' settings								(!!! Must be updated to add a setting to an option)
 {
 	// Settings menu
 	if (menu_id == "config")
 		fn_menu_config_opt_config_move();
+}
+function fn_menu_opt_config_update() // Updates the options' settings											(!!! Must be updated to add a setting to an option)
+{
+	// Settings menu
+	if (menu_id == "config")
+		fn_menu_config_opt_config_update();
 }
 
 		// Functions related to the selector of the options' settings
@@ -366,8 +405,7 @@ function fn_menu_info_add(_lvl, _info, _info_text = "%%%", _info_x = 0, _info_y 
 	
 	info_x[l, i] = _info_x;
 	info_y[l, i] = _info_y;
-	info_w[l, i] = fn_text_w(info_text[l, i]);
-	info_h[l, i] = fn_text_h(info_text[l, i]);
+	fn_menu_info_getSize(l, i);
 	
 	info_col[l][i][0] = _info_col_0;
 	info_col[l][i][1] = _info_col_1;
@@ -382,7 +420,7 @@ function fn_menu_info_add(_lvl, _info, _info_text = "%%%", _info_x = 0, _info_y 
 	if (info_text[l, i] != "%%%")
 		info_amt[l] += 1;
 }
-function fn_menu_info_addText(_lvl, _info, _info_textDataKeyWithoutIdx)	// Adds only the text of the specified information
+function fn_menu_info_add_ext(_lvl, _info, _info_textDataKeyWithoutIdx)	// Adds only the text of the specified information
 {
 	var l = _lvl;
 	var i = _info;

@@ -68,7 +68,6 @@ function fn_interact_seq() // Interaction sequence
 		// Delays the unfreezing of the interactable and the player
 		if (interact_stg == 1)
 		{
-			interact_delay_dur -= 1;
 			if (interact_delay_dur <= 0)
 			{
 				obj_player.move_stg = -1;
@@ -80,6 +79,8 @@ function fn_interact_seq() // Interaction sequence
 					moveDelay_stg = -1;
 				}
 			}
+			else
+				interact_delay_dur -= 1;
 		}
 	}
 	

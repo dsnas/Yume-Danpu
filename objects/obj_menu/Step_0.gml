@@ -5,7 +5,7 @@ fn_menu_evStep();
 
 
 // Option movement, selection and cancellation sequences
-if (opt_amt[lvl] > 0)
+if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
 {	
 	// Option movement sequence
 	if (opt_move_act[lvl] == true)
@@ -32,7 +32,7 @@ if (opt_amt[lvl] > 0)
 		}
 		
 		// Inventory's effects, items and themes list type
-		else if (opt_move_type[lvl] == OPT_MOVE_TYPE_invList)
+		else if (opt_move_type[lvl] == OPT_MOVE_TYPE_invOther)
 		{
 			// I don't know. I made this while only half-awake. Surprisingly, it WORKS ?
 			
@@ -72,11 +72,11 @@ if (opt_amt[lvl] > 0)
 	var o = opt_move_pos[lvl];
 	
 		// Options' settings movement sequence
-	if (o < array_length(opt_config_text[l]) && opt_config_text[l, o] != "%%%")
+	if (opt_config_text[l, o] != "%%%")
 		fn_menu_opt_config_move();
 	
 		// Option selection sequence
-	if (opt_slct_key[l] != -1 && fn_config_key_press(opt_slct_key[l]) == true)
+	if (opt_slct_act[l] == true && opt_slct_key[l] != -1 && fn_config_key_press(opt_slct_key[l]) == true)
 	{
 		fn_menu_opt_slct(); // Retrieves the option selection sequence determined by the menu's ID
 		
@@ -86,75 +86,84 @@ if (opt_amt[lvl] > 0)
 	}
 	
 		// Option cancellation sequence
-	else if (opt_cncl_key[l] != -1 && fn_config_key_press(opt_cncl_key[l]) == true)
+	else if (opt_cncl_act[l] == true && ((opt_cncl_key[l, 0] != -1 && fn_config_key_press(opt_cncl_key[l, 0]) == true) || (opt_cncl_key[l, 1] != -1 && fn_config_key_press(opt_cncl_key[l, 1]) == true)))
 	{
 		fn_menu_opt_cncl(); // Retrieves the option cancellation sequence determined by the menu's ID
 		
 		// Starts playing the option cancellation sound
-		if (opt_cncl_snd[l, o] != -1)
-			fn_aud_play(opt_cncl_snd[l, o], CONFIG_VOLTYPE.MENU);
+		if (opt_cncl_snd[l] != -1)
+			fn_aud_play(opt_cncl_snd[l], CONFIG_VOLTYPE.MENU);
 	}
 }
 
 
-// 
+// Updates the text of the options' settings
+if (opt_amt[lvl] > 0 && opt_config_text[lvl, opt_move_pos[lvl]] != "%%%")
+	fn_menu_opt_config_update();
+
+
+// Changes the current level to the new one
 if (lvlNew != -1)
 {
 	lvl = lvlNew;
 	lvl_alpDelay[lvl] = lvlNew_alpDelay;
-	lvl_selfDstr[lvl] = lvlNew_selfDstr;
-	lvl_gameEnd[lvl] = lvlNew_gameEnd;
+	lvl_alpTgt_selfDstr[lvl] = lvlNew_selfDstr;
+	lvl_alpTgt_gameEnd[lvl] = lvlNew_gameEnd;
 	
 	lvlNew = -1;
 }
 
 
-// Updates the alpha of each level
-for (var l = 0; l < (lvl_amtMax + 1); l++)
+// Updates the alpha of each levels
+for (var l = 0; l < (lvl_amtMax + 1); l++) // Loops through each level, including the empty one
 {
-	if (lvl_alpDelay[l] <= 0)
+	var _lvl_alpTgt = (l == lvl);
+	if (lvl_alp[l] != _lvl_alpTgt)
 	{
-		// Changes the alpha of the level
-		var _alpTgt = (l == lvl);
-		lvl_alp[l] = fn_lerp(lvl_alp[l], _alpTgt, lvl_alpSpd);
-		
-		var _alpDiff = abs(lvl_alp[l] - _alpTgt); // Difference between the current alpha and the target alpha
-		var _alpSlack = 0.05;
-		if (_alpDiff <= _alpSlack)
+		if (lvl_alpDelay[l] <= 0)
 		{
-			lvl_alp[l] = _alpTgt;
+			lvl_alp[l] = fn_lerp(lvl_alp[l], _lvl_alpTgt, lvl_alpSpd);
+			var _lvl_alpTgtDiff = abs(lvl_alp[l] - _lvl_alpTgt); // Difference between the current alpha and the target alpha
+			if (_lvl_alpTgtDiff <= 0.05)
+			{
+				lvl_alp[l] = _lvl_alpTgt;
 			
-			// Destroys itself
-			if (lvl_selfDstr[l] == true)
-				fn_obj_destroy();
-			
-			// Ends the game
-			if (lvl_gameEnd[l] == true)
-				game_end();
+				// Destroys itself
+				if (lvl_alpTgt_selfDstr[l] == true)
+				{
+					if (fn_obj_exists(obj_player) == true)
+					{
+						with (obj_player)
+						{
+							move_stg = -1;
+							menu_delay_dur = 5;
+						}
+					}
+					
+					fn_obj_destroy();
+				}
+				
+				// Ends the game
+				if (lvl_alpTgt_gameEnd[l] == true)
+					game_end();
+			}
 		}
+		else
+			lvl_alpDelay[l] -= 1;
 	}
-	else
-		lvl_alpDelay[l] -= 1;
 }
 
 
-// Reloads all the text if the selected language changed
-if (config_langOld != global.config_lang)
+// Reloads all the text if the language or theme changed
+if (config_langOld != global.config_lang) || (thmOld != global.thm)
 {
+	for (l = 0; l < lvl_amtMax; l++)
+		opt_move_posOld[l] = opt_move_pos[l];
+	
 	fn_menu_evCreate_0();
 	config_langOld = global.config_lang;
+	thmOld = global.thm;
+	
+	for (var l = 0; l < lvl_amtMax; l++)
+		opt_move_pos[l] = opt_move_posOld[l];
 }
-
-
-
-/*
-// Update the text of the options' settings
-fn_menu_opt_config_upd();
-
-// Movement sequence of the option's setting
-if (opt_move_pos[lvl] < array_length(opt_config_text[lvl]) && opt_config_text[lvl, opt_move_pos[lvl]] != "%%%" && (press_lt == true || press_rt == true))
-{
-	fn_menu_opt_config_move();
-	fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
-}
-*/

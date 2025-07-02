@@ -27,12 +27,12 @@ function fn_thm_setup() // Sets up variables for enabling menu themes
 	
 	
 	// Default theme
-	fn_thm_add(THM.DFLT, #949299, #949299, #545359, #545359, #100F11, false, spr_menu_box_dflt, spr_menu_opt_slctr_dflt, 0, spr_menu_plyrFrm_madot);
+	fn_thm_add(THM.DFLT, #949299, #949299, #545359, #545359, #100F11, #100F11, false, spr_menu_box_dflt, spr_menu_opt_slctr_dflt, 0, spr_menu_plyrFrm_dflt);
 	global.thm_has[THM.DFLT] = true;
 	
 	
 	// Madotsuki theme
-	fn_thm_add(THM.MADOT, #DEB2E7, #9C619C, #7B5184, #420439, #290831, true, spr_menu_box_madot, spr_menu_opt_slctr_madot, 0.25, spr_menu_plyrFrm_madot); 
+	fn_thm_add(THM.MADOT, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, true, spr_menu_box_madot, spr_menu_opt_slctr_madot, 0.1, spr_menu_plyrFrm_madot); 
 	global.thm_opt_move_snd[THM.MADOT] = snd_menu_opt_move_madot;
 	global.thm_opt_slct_snd[THM.MADOT] = snd_menu_opt_slct_madot;
 	global.thm_opt_cncl_snd[THM.MADOT] = snd_menu_opt_cncl_madot;
@@ -42,7 +42,7 @@ function fn_thm_setup() // Sets up variables for enabling menu themes
 	
 	global.thm = THM.DFLT; // Determines which theme is currently active
 }
-function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_black, _shdw_act, _box_spr, _opt_slctr_spr, _opt_slctr_imgSpd, _plyrFrm_spr)
+function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_blackLight, _col_blackDark, _shdw_act, _box_spr, _opt_slctr_spr, _opt_slctr_imgSpd, _plyrFrm_spr)
 {
 	var i = _idx;
 	
@@ -55,7 +55,8 @@ function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_
 		whiteDark	: _col_whiteDark,
 		grayLight	: _col_grayLight,
 		grayDark	: _col_grayDark,
-		black		: _col_black
+		blackLight	: _col_blackLight,
+		blackDark	: _col_blackDark
 	}
 	global.thm_shdw_act[i] = _shdw_act;
 	

@@ -19,7 +19,7 @@ function fn_itm_setup()
 	
 	// [DBG] Axenis
 	fn_itm_add(ITM.DBG_AXE);
-	global.itm_has[ITM.DBG_AXE] = true;
+	global.itm_has[ITM.DBG_AXE] = false;
 	
 	
 	global.itm = -1; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)

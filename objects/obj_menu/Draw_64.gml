@@ -24,37 +24,30 @@ for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maxim
 		for (var o = 0; o < opt_amt[l]; o++)
 		{
 			// Draws the option selector
-			if (o < array_length(opt_slctr_act[l]) && opt_slctr_act[l, o] == true)
+			if (opt_slctr_act[l, o] == true)
 			{
-				opt_slctr_alp[l, o] = fn_lerp(opt_slctr_alp[l, o], (o == opt_move_pos[l]), opt_colSpd);
+				opt_slctr_alp[l, o] = fn_lerp(opt_slctr_alp[l, o], (o == opt_move_pos[l]), (opt_colSpd * 1));
 				fn_draw_spr_stretch(opt_slctr_spr, opt_slctr_img, (draw_x + opt_slctr_x[l, o]), (draw_y + opt_slctr_y[l, o]), opt_slctr_w[l, o], opt_slctr_h[l, o], c_white, (opt_slctr_alp[l, o] * lvl_alp[l] * draw_alp));
 			}
 			
 			
-			// Draws the option
+			// Draws the options
 			opt_col[l][o][0] = fn_lerp_col(opt_col[l][o][0], opt_colTgt[l][o][0][(o == opt_move_pos[l])], opt_colSpd);
 			opt_col[l][o][1] = fn_lerp_col(opt_col[l][o][1], opt_colTgt[l][o][1][(o == opt_move_pos[l])], opt_colSpd);
 			fn_draw_text(opt_text[l, o], (draw_x + opt_x[l, o]), (draw_y + opt_y[l, o]), opt_col[l][o][0], opt_col[l][o][1], (opt_alp[l, o] * lvl_alp[l] * draw_alp), opt_vAl[l, o], opt_hAl[l, o]);
 			
 			
-			// Draws the option's description
-			if (o < array_length(opt_desc_text[l]) && opt_desc_text[l, o] != "%%%")
+			// Draws the options' settings and their selector
+			if (opt_config_text[l, o] != "%%%")
 			{
-				opt_desc_alp[l, o] = fn_lerp(opt_desc_alp[l, o], (o == opt_move_pos[l]), opt_colSpd);
-				fn_draw_text(opt_desc_text[l, o], opt_desc_x[l, o], opt_desc_y[l, o], opt_desc_col[l][o][0], opt_desc_col[l][o][1], (opt_desc_alp[l, o] * lvl_alp[l] * draw_alp), opt_desc_vAl[l, o], opt_desc_hAl[l, o]);
-			}
-			
-			
-			// Draws the option's setting
-			if (o < array_length(opt_config_text[l]) && opt_config_text[l, o] != "%%%")
-			{
+				// Draws the options' settings
 				fn_menu_opt_config_getSize(l, o);
 				opt_config_alp[l, o] = fn_lerp(opt_config_alp[l, o], (0.5 + ((o == opt_move_pos[l]) * 0.5)), opt_colSpd);
 				
 				fn_draw_text(opt_config_text[l, o], opt_config_x[l, o], opt_config_y[l, o], opt_config_col[l][o][0], opt_config_col[l][o][1], (opt_config_alp[l, o] * lvl_alp[l] * draw_alp), fa_top, fa_left);
 				
 				
-				// Draws the selector of the option's setting
+				// Draws the selector of the options' settings
 				if (o < array_length(opt_config_slctr_act[l]) && opt_config_slctr_act[l, o] == true)
 				{
 					if (opt_config_slctr_shkDelay_dur[l, o] <= 0)
@@ -74,6 +67,14 @@ for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maxim
 					for (var i = 0; i < 2; i++)
 						fn_draw_text(opt_config_slctr_text[l][o][i], opt_config_slctr_x[l][o][i], opt_config_slctr_y[l, o], opt_config_slctr_col[l][o][0], opt_config_slctr_col[l][o][1], (opt_config_slctr_alp[l, o] * lvl_alp[l] * draw_alp));
 				}
+			}
+			
+			
+			// Draws the option's description
+			if (opt_desc_text[l, o] != "%%%")
+			{
+				opt_desc_alp[l, o] = fn_lerp(opt_desc_alp[l, o], (o == opt_move_pos[l]), opt_colSpd);
+				fn_draw_text(opt_desc_text[l, o], opt_desc_x[l, o], opt_desc_y[l, o], opt_desc_col[l][o][0], opt_desc_col[l][o][1], (opt_desc_alp[l, o] * lvl_alp[l] * draw_alp), opt_desc_vAl[l, o], opt_desc_hAl[l, o]);
 			}
 		}
 		

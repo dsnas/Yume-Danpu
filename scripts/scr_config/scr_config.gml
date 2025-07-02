@@ -12,7 +12,8 @@ function fn_config_setup() // Sets up the game's settings
 	global.config_fscr = false; // Fullscreen
 	global.config_lowGfx = false; // Low Graphics
 	global.config_showFps = false; // Show FPS
-	global.config_showBdr = false; // Show Border
+	global.config_showBdr = true; // Show Border
+	global.config_showVer = true; // Show Version
 	
 	// Music & Sounds [#0]
 	fn_config_volType_setup_0();

@@ -51,12 +51,12 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 	// Themes
 	fn_config_lang_textData_addText("thm_name_0", "Default", "Padrão");
-	fn_config_lang_textData_addText("thm_name_1", "Simple", "Simples");
-	fn_config_lang_textData_addText("thm_name_2", "Madotsuki", "Madotsuki");
+	fn_config_lang_textData_addText("thm_name_1", "Madotsuki", "Madotsuki");
+	//fn_config_lang_textData_addText("thm_name_1", "Simple", "Simples");
 	
 	fn_config_lang_textData_addText("thm_desc_0", "The default theme.", "O tema padrão.");
-	fn_config_lang_textData_addText("thm_desc_1", "A simple, yet elegant, theme.", "Um tema simples, mas elegante.");
-	fn_config_lang_textData_addText("thm_desc_2", "The classic theme.", "O tema clássico.");
+	fn_config_lang_textData_addText("thm_desc_1", "The classic theme.", "O tema clássico.");
+	//fn_config_lang_textData_addText("thm_desc_1", "A simple, yet elegant, theme.", "Um tema simples, mas elegante.");
 	
 	
 	// Main menu
@@ -80,6 +80,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	fn_config_lang_textData_addText("menu_config_gfx_opt_1", "Low Graphics", "Gráficos Baixos");
 	fn_config_lang_textData_addText("menu_config_gfx_opt_2", "Show FPS", "Mostrar FPS");
 	fn_config_lang_textData_addText("menu_config_gfx_opt_3", "Show Border", "Mostrar Borda");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_4", "Show Version", "Mostrar Versão");
 	
 		// Music & Sounds
 	fn_config_lang_textData_dupeText("menu_config_aud_ttl", "menu_config_main_opt_2");

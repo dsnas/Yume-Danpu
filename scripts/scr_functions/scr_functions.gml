@@ -193,12 +193,14 @@ function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _h
 	draw_set_valign(_vAl);
 	draw_set_halign(_hAl);
 	
+	// Draws the shadow of the text
 	if (global.thm_shdw_act[global.thm] == true)
 	{
-		var _col_shdw = global.thm_col[global.thm, 4];
+		var _col_shdw = global.thm_col[global.thm].blackLight;
 		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _col_shdw, _col_shdw, _col_shdw, _col_shdw, _alp);
 	}
 	
+	// Draws the text
 	draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
 }
 
@@ -213,7 +215,7 @@ function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _yS
 	{
 		// Draws the shadow of the specified sprite
 		if (_shdw_act == true && global.thm_shdw_act[global.thm] == true)
-			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm, 4], _alp);
+			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm].blackLight, _alp);
 		
 		// Draws the specified sprite
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
@@ -236,7 +238,7 @@ function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white,
 		fn_log("The function fn_draw_spr_part() was called with an invalid sprite ID");
 }
 
-function fn_draw_line(_x1, _y1, _x2, _y2, _col, _alp, _thickness) // Draws a line
+function fn_draw_line(_x1, _y1, _x2, _y2, _col = c_white, _alp = 1, _thickness = 1) // Draws a line
 {
 	draw_set_color(_col);
 	draw_set_alpha(_alp);
@@ -251,18 +253,38 @@ function fn_draw_self_setup() // Sets up variables for manual self-drawing
 	self_xSc = image_xscale;
 	self_ySc = image_yscale;
 	self_ang = image_angle;
+	
+	self_ignoreRdcdMot = false;
 }
 function fn_draw_self() // Manually self-draws
 {
 	fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
 	
 	// Animates the object
-	if (global.config_rdcdMot == false)
+	if (self_imgSpd > 0)
+	{
 		image_index += self_imgSpd;
-	else
-		image_index = 0;
+		if (global.config_rdcdMot == true && self_ignoreRdcdMot == false)
+			image_index = 0;
+	}
 }
 
+
+
+
+// Functions related to the game's window
+function fn_wnd_caption(_text)
+{
+	var _chance = irandom_range(1, 100);
+	
+	if (_text == "Yume Danpu")
+	{
+		if (_chance <= 5)
+			_text = choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu", "Yummy Nicky");
+	}
+	
+	window_set_caption(_text);
+}
 
 
 

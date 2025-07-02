@@ -22,6 +22,8 @@ menu_key[1] = CONFIG_KEY.MENU_PSE;
 
 menu_amt = array_length(menu_id);
 
+menu_delay_dur = 0;
+
 
 
 

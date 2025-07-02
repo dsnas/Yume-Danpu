@@ -24,7 +24,6 @@ function fn_entity_evCreate() // Create Event determined by the NPC's ID
 		move_dir_spr[MOVE_DIR_DN] = move_dir_spr[MOVE_DIR_LT];
 		
 		interact_type = interact_type_meow;
-		interact_delay_durMax = 60;
 		
 		fn_interact_meow_addAsset("snd_entity_macaco_citizen_");
 	}

@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.0,
+  "duration":5.2506123,
   "name":"snd_entity_macaco_citizen_5",
   "parent":{
     "name":"Macacolandia",

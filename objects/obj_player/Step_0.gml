@@ -59,8 +59,6 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 				
 				break;
 			}
-			else
-				continue;
 		}
 		
 		
@@ -87,18 +85,23 @@ if (move_stg == -1) // Checks for movement key inputs and collision, also for in
 }
 if (move_stg == -1) // Checks for menu key inputs and created the menu object
 {
-	for (var m = 0; m < menu_amt; m++)
+	if (menu_delay_dur <= 0)
 	{
-		if (fn_config_key_press(menu_key[m]) == true && fn_obj_exists(obj_menu) == false)
+		for (var m = 0; m < menu_amt; m++)
 		{
-			fn_menu_obj_create(menu_id[m]);
-			move_stg = -2;
+			if (fn_config_key_press(menu_key[m]) == true && fn_obj_exists(obj_menu) == false)
+			{
+				fn_menu_obj_create(menu_id[m]);
+				move_stg = -2;
 			
-			break;
+				break;
+			}
+			else
+				continue;
 		}
-		else
-			continue;
 	}
+	else
+		menu_delay_dur -= 1;
 }
 
 // Moving, active movement sequence

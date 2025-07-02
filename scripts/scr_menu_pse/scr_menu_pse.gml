@@ -1,5 +1,5 @@
 
-//////// Functions related to the pause menu
+//////// Functions related to the pause menu, also known as "Pois-É menu"
 
 
 // Functions related to setting up the menu
@@ -14,6 +14,8 @@ function fn_menu_pse_evCreate_0()
 	
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_pse_main_opt_");
+	opt_slct_snd[l, 2] = global.thm_opt_fail_snd[global.thm];
+	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_PSE;
 	var _opt_yDist = draw_dist;
 	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.GAME_FNT_H);
 	
@@ -36,7 +38,6 @@ function fn_menu_pse_evCreate_0()
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
 		fn_menu_opt_slctr_add(l, o);
 	}
-	opt_slct_snd[l, 2] = global.thm_opt_fail_snd[global.thm];
 	
 	
 	
@@ -45,7 +46,7 @@ function fn_menu_pse_evCreate_0()
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
 		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].black, 0.75);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blackDark, 0.75);
 	}
 }
 function fn_menu_pse_evCreate_1()
@@ -71,17 +72,29 @@ function fn_menu_pse_evCreate_1()
 	
 	// Deactivates/Pauses everything in the room, excluding the ones that should persist
 	instance_deactivate_all(true);
-	instance_activate_object(obj_game_main);
-	instance_activate_object(obj_game_dbg);
+	instance_activate_object(obj_GAME_MAIN);
 	instance_activate_object(obj_rm);
+	instance_activate_object(obj_dbg);
 	audio_pause_all();
 	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_VOLTYPE.MENU);
 }
 function fn_menu_pse_evDrawGUI_0(l)
 {
 	// Draws the screenshot
-	if (sshot_spr != -1)
+	if (sshot_spr != -1 && lvl_alpTgt_selfDstr[LVL_EMPTY] == false)
 		draw_sprite_ext(sshot_spr, 0, 0, 0, sshot_xSc, sshot_ySc, 0, c_white, 1);
+}
+function fn_menu_pse_evDestroy()
+{
+	// Deletes the image file of the screenshot
+	if (sshot_spr != -1)
+	{
+		if (file_exists(sshot_fname) == true)
+			file_delete(sshot_fname);
+		if (sprite_exists(sshot_spr) == true)
+			sprite_delete(sshot_spr);
+		sshot_spr = -1;
+	}
 }
 
 
@@ -105,11 +118,10 @@ function fn_menu_pse_opt_slct()
 		// "Quit to Menu"
 		else if (opt_move_pos[lvl] == 3)
 		{
-			opt_move_act[lvl] = false;
-			opt_slct_act[lvl] = false;
-			opt_cncl_act[lvl] = false;
+			fn_menu_lvlNew(LVL_EMPTY);
 			fn_rmTrans_start();
-			fn_menu_pse_sshot_delete();
+			
+			global.thm = THM.DFLT;
 		}
 	}
 }
@@ -122,24 +134,10 @@ function fn_menu_pse_opt_cncl()
 
 
 // Functions unrelated to the core menu system
-function fn_menu_pse_sshot_delete() // Deletes the image file of the screenshot
-{
-	if (sshot_spr != -1)
-	{
-		if (file_exists(sshot_fname) == true)
-			file_delete(sshot_fname);
-		if (sprite_exists(sshot_spr) == true)
-			sprite_delete(sshot_spr);
-		sshot_spr = -1;
-	}
-}
 function fn_menu_pse_resume() // Resumes the game
 {
-	fn_menu_pse_sshot_delete();
+	fn_menu_lvlNew(LVL_EMPTY, , true);
 	
 	instance_activate_all();
 	audio_resume_all();
-	obj_player.move_stg = -1;
-	
-	fn_menu_lvlNew(LVL_EMPTY, , true);
 }

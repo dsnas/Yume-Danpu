@@ -9,6 +9,7 @@ function fn_menu_config_evCreate_0()
 	LVL_MAIN = 0;
 	var l = LVL_MAIN;
 	
+		// Title
 	fn_menu_ttl_add(l, fn_getText("menu_config_main_ttl"));
 	
 	
@@ -17,6 +18,9 @@ function fn_menu_config_evCreate_0()
 	// All levels [#0]
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
+		// Dark translucent background
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blackDark, 0.75);
+		
 		// Box
 		var _box_xMargin = (draw_dist * 4);
 		var _box_yMargin = (draw_dist * 3);
@@ -30,7 +34,6 @@ function fn_menu_config_evCreate_0()
 		var _box_y = (ttl_box_y[l] + ttl_box_h[l] + _box_yMargin);
 		var _box_w = (320 - (_box_x * 2));
 		var _box_h = (240 - _box_y - _box_yMargin);
-		
 		fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	}
 	
@@ -119,9 +122,6 @@ function fn_menu_config_evCreate_0()
 	// All levels [#1]
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
-		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].black, 0.75);
-		
 		// Options and their settings
 		for (var o = 0; o < opt_amt[l]; o++)
 		{
@@ -133,7 +133,7 @@ function fn_menu_config_evCreate_0()
 				fn_menu_opt_slctr_add(l, o);
 				
 					// Option's setting
-				var _opt_config_x = (box_x[l, 0] + (box_w[l, 0] / 2));
+				var _opt_config_x = (box_x[l, 0] + round(box_w[l, 0] / 1.75));
 				var _opt_config_y = opt_y[l, o];
 				fn_menu_opt_config_add(l, o, "", _opt_config_x, _opt_config_y);
 				fn_menu_opt_config_slctr_add(l, o); // Selector of the option's setting
@@ -243,17 +243,28 @@ function fn_menu_config_opt_config_move()
 			// "Show Border"
 			if (o == 3)
 				global.config_showBdr = !global.config_showBdr;
+			
+			// "Show Version"
+			if (o == 4)
+				global.config_showVer = !global.config_showVer;
 		}
 		
 		// Music & Sounds level
 		else if (l == LVL_AUD)
 		{
+			var _volType = global.config_volType[o];
+			
 			// Volumes
-			global.config_volType[o] += ((press_rt - press_lt) * 0.1);
-			global.config_volType[o] = clamp(global.config_volType[o], 0, 1);
+			_volType += ((press_rt - press_lt) * 0.1);
+			if (_volType < 0)
+				_volType = 1;
+			else if (_volType > 1)
+				_volType = 0;
+			
+			global.config_volType[o] = _volType;
 		}
 		
-		// Accessiblity
+		// Accessibility level
 		else if (l == LVL_A11Y)
 		{
 			// "Reduced Motion"
@@ -263,18 +274,34 @@ function fn_menu_config_opt_config_move()
 		
 		fn_aud_play(opt_move_snd[l], CONFIG_VOLTYPE.MENU);
 		fn_config_file_save();
+	}	
+}
+function fn_menu_config_opt_config_update()
+{
+	var l = lvl;
+	
+	// Main level
+	if (l == LVL_MAIN)
+		opt_config_text[l, 0] = global.config_lang_name[global.config_lang];
+	
+	// Graphics level
+	else if (l == LVL_GFX)
+	{
+		opt_config_text[l, 0] = fn_getText($"menu_config_all_opt_config_{global.config_fscr}");
+		opt_config_text[l, 1] = fn_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
+		opt_config_text[l, 2] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
+		opt_config_text[l, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
+		opt_config_text[l, 4] = fn_getText($"menu_config_all_opt_config_{global.config_showVer}");
 	}
 	
+	// Music & Sounds level
+	else if (l == LVL_AUD)
+	{
+		for (var v = 0; v < global.config_volType_amt; v++)
+			opt_config_text[l, v] = $"{round(global.config_volType[v] * 100)}%";
+	}
 	
-	opt_config_text[LVL_MAIN, 0] = global.config_lang_name[global.config_lang];
-	
-	opt_config_text[LVL_GFX, 0] = fn_getText($"menu_config_all_opt_config_{global.config_fscr}");
-	opt_config_text[LVL_GFX, 1] = fn_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
-	opt_config_text[LVL_GFX, 2] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
-	opt_config_text[LVL_GFX, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
-	
-	for (var v = 0; v < global.config_volType_amt; v++)
-		opt_config_text[LVL_AUD, v] = $"{round(global.config_volType[v] * 100)}%";
-	
-	opt_config_text[LVL_A11Y, 0] = fn_getText($"menu_config_all_opt_config_{global.config_rdcdMot}");
+	// Accessibility level
+	else if (l == LVL_A11Y)
+		opt_config_text[l, 0] = fn_getText($"menu_config_all_opt_config_{global.config_rdcdMot}");
 }

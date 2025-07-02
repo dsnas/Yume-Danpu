@@ -10,7 +10,7 @@ solid_type = solid_type_interact;
 interact_stg = -1; // ID number of the current stage (-1 == inactive, 0+ active)
 
 interact_delay_dur = 0;
-interact_delay_durMax = 30;
+interact_delay_durMax = 0;
 
 
 // Types, which determine the interaction sequence's behavior

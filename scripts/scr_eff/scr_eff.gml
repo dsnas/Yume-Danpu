@@ -21,15 +21,15 @@ function fn_eff_setup()
 	
 	// [DBG] Salenis [#0]
 	fn_eff_add(EFF.DBG_SAL0);
-	global.eff_has[EFF.DBG_SAL0] = true;
+	global.eff_has[EFF.DBG_SAL0] = false;
 	
 	// [DBG] Salenis [#1]
 	fn_eff_add(EFF.DBG_SAL1);
-	global.eff_has[EFF.DBG_SAL1] = true;
+	global.eff_has[EFF.DBG_SAL1] = false;
 	
 	// [DBG] Salenis [#2]
 	fn_eff_add(EFF.DBG_SAL2);
-	global.eff_has[EFF.DBG_SAL2] = true;
+	global.eff_has[EFF.DBG_SAL2] = false;
 	
 	
 	global.eff = -1; // Determines which effect is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)

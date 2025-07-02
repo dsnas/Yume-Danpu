@@ -14,10 +14,7 @@ function fn_menu_home_evCreate_0()
 	
 		// Options
 	for (var o = 0; o < global.config_lang_amt; o++)
-	{
 		fn_menu_opt_add(l, o, "");
-		fn_menu_opt_slctr_add(l, o);
-	}
 	opt_move_type[l] = OPT_MOVE_TYPE_dfltHor; // Toggles horizontal default option movement
 	opt_amt[l] = global.config_lang_amt;
 	
@@ -34,7 +31,7 @@ function fn_menu_home_evCreate_0()
 	lang_flag_slctr_col = global.thm_col[global.thm].whiteLight;
 	
 		// Title info [#0]
-	fn_menu_info_addText(l, 0, "menu_home_lang_info_0");
+	fn_menu_info_add_ext(l, 0, "menu_home_lang_info_0");
 	var _info_hAll = (_flag_yDistInfo + lang_flag_h); // Total height of the title info and the flags
 	
 		// Box
@@ -74,9 +71,20 @@ function fn_menu_home_evCreate_0()
 	LVL_MAIN = 1;
 	var l = LVL_MAIN;
 	
+		// Logo
 	main_logo_spr = spr_menu_home_logo;
-	main_logo_x = (160 - (fn_spr_w(main_logo_spr) / 2));
+	main_logo_w = fn_spr_w(main_logo_spr);
+	main_logo_x = (160 - (main_logo_w / 2));
 	main_logo_y = (draw_dist * 2);
+	
+		// Production
+	main_prod_spr = spr_menu_home_prod;
+	main_prod_img = global.config_lang;
+	main_prod_w = fn_spr_w(main_prod_spr);
+	main_prod_h = fn_spr_h(main_prod_spr);
+	main_prod_x = (main_logo_x + (main_logo_w / 2) - (main_prod_w / 2));
+	main_prod_y = (240 - 4 - main_prod_h);
+	main_prod_alp = 0.5;
 	
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_home_main_opt_");
@@ -89,7 +97,7 @@ function fn_menu_home_evCreate_0()
 	var _box_w = (_box_wDist + opt_wMax[l] + _box_wDist);
 	var _box_h = (_box_hDist + _opt_hAll + _box_hDist);
 	var _box_x = (160 - round(_box_w / 2));
-	var _box_y = (120 + round(draw_dist * 3) - round(_box_h / 2));
+	var _box_y = (120 + round(draw_dist * 2.5) - round(_box_h / 2));
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Options [#1]
@@ -112,7 +120,10 @@ function fn_menu_home_evCreate_1()
 	
 	// Main level
 	else if (global.config_lang_hasChosen == true)
+	{
 		lvl = LVL_MAIN;
+		lvl_alpDelay[lvl] = 60;
+	}
 }
 function fn_menu_home_evStep()
 {
@@ -122,6 +133,9 @@ function fn_menu_home_evStep()
 		fn_aud_play(lang_snd, CONFIG_VOLTYPE.MENU);
 		lang_snd_act = true;
 	}
+	
+	if (lvl == LVL_MAIN && lvl_alpDelay[lvl] <= 0 && window_get_caption() == "")
+		fn_wnd_caption("Yume Danpu");
 }
 function fn_menu_home_evDrawGUI_2(l)
 {
@@ -148,6 +162,9 @@ function fn_menu_home_evDrawGUI_2(l)
 	{
 		// Draws logo
 		fn_draw_spr(main_logo_spr, 0, main_logo_x, main_logo_y, , (lvl_alp[l] * draw_alp));
+		
+		// Draws production
+		fn_draw_spr(main_prod_spr, main_prod_img, main_prod_x, main_prod_y, , (main_prod_alp * lvl_alp[l] * draw_alp));
 	}
 }
 
@@ -155,51 +172,47 @@ function fn_menu_home_evDrawGUI_2(l)
 // Functions related to the options
 function fn_menu_home_opt_slct()
 {
+	var l = lvl;
+	var o = opt_move_pos[l];
+	
 	// Languages level
-	if (lvl == LVL_LANG)
+	if (l == LVL_LANG)
 	{
 		// Flag of United States
-		if (opt_move_pos[lvl] == 0)
+		if (o == 0)
 			global.config_lang = CONFIG_LANG.EN_US;
 		
 		// Flag of Brazil
-		else if (opt_move_pos[lvl] == 1)
+		else if (o == 1)
 			global.config_lang = CONFIG_LANG.PT_BR;
 		
 		// Flag of United States, flag of Brazil
-		if (opt_move_pos[lvl] == 0) || (opt_move_pos[lvl] == 1)
-		{
-			global.config_lang_hasChosen = true;
-			fn_config_lang_textData_setup();
-			fn_config_file_save();
-			
-			event_perform(ev_create, 0);
-			lvl = LVL_MAIN;
-			lvl_alp[LVL_LANG] = 1;
-		}
+		global.config_lang_hasChosen = true;
+		fn_config_lang_textData_setup();
+		fn_config_file_save();
+		
+		fn_menu_lvlNew(LVL_MAIN, 180);
 	}
 	
 	// Main level
-	else if (lvl == LVL_MAIN)
+	else if (l == LVL_MAIN)
 	{
 		// "Start"
-		if (opt_move_pos[lvl] == 0)
+		if (o == 0)
 		{
+			fn_menu_lvlNew(LVL_EMPTY);
 			fn_rmTrans_start();
-			opt_move_act[lvl] = false;
-			opt_slct_act[lvl] = false;
-			opt_cncl_act[lvl] = false;
 		}
 		
 		// "Options"
-		else if (opt_move_pos[lvl] == 1)
+		else if (o == 1)
 		{
 			fn_menu_lvlNew(LVL_EMPTY);
 			fn_menu_obj_create("config");
 		}
 		
 		// "Exit"
-		else if (opt_move_pos[lvl] == 2)
+		else if (o == 2)
 			fn_menu_lvlNew(LVL_EMPTY, 30, , true);
 	}
 }
