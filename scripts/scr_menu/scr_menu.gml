@@ -102,9 +102,7 @@ function fn_menu_evDrawGUI_2(l) // Draw GUI Event (inside the levels loop, post-
 }
 function fn_menu_evDestroy() // Destroy Event determined by the menu's ID
 {
-	// Pause menu
-	if (menu_id == "pse")
-		fn_menu_pse_evDestroy();
+	
 }
 
 

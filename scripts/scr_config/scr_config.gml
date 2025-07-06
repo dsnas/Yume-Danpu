@@ -3,9 +3,9 @@
 
 
 // Functions related the game's settings
-function fn_config_setup() // Sets up the game's settings 
+function fn_config_setup_0() // Sets up the game's settings (does not require the current language's text data)
 {
-	// Languages [#0]
+	// Languages
 	fn_config_lang_setup();
 	
 	// Graphics
@@ -15,12 +15,11 @@ function fn_config_setup() // Sets up the game's settings
 	global.config_showBdr = true; // Show Border
 	global.config_showVer = true; // Show Version
 	
-	// Music & Sounds [#0]
+	// Music & Sounds
 	fn_config_volType_setup_0();
 	
 	// Keybinds
 	fn_config_key_setup();
-	fn_config_keyList_setup();	
 	
 	// Accessibility
 	global.config_rdcdMot = false; // Reduced Motion
@@ -32,13 +31,20 @@ function fn_config_setup() // Sets up the game's settings
 		fn_config_file_save();
 	else
 		fn_config_file_load();
-	
-	
-	// Languages [#1]
+}
+function fn_config_setup_1() // Sets up the game's settings (requires the current language's text data) (everything set up here mustn't be saved)
+{
+	// Languages
 	fn_config_lang_textData_setup();
 	
-	// Music & Sounds [#1]
+	// Music & Sounds
 	fn_config_volType_setup_1();
+	
+	// Keybinds
+	fn_config_keyList_setup();
+	
+	// Other
+	global.config_atwlk = false; // Autowalk
 }
 
 
@@ -50,10 +56,11 @@ function fn_config_lang_setup() // Sets up the available languages without loadi
 		EN_US = 0,	// English (United States)
 		PT_BR = 1	// Português (Brasil)
 	}
+	
 	fn_config_lang_add(CONFIG_LANG.EN_US, "English (US)");
 	fn_config_lang_add(CONFIG_LANG.PT_BR, "Português (BR)");
-	global.config_lang_amt = array_length(global.config_lang_name);	// Total amount of available languages
 	
+	global.config_lang_amt = array_length(global.config_lang_name);	// Total amount of available languages
 	global.config_lang = CONFIG_LANG.EN_US; // The current language
 	global.config_lang_hasChosen = false; // Determines whether the player has selected a language when game opened for the first time
 }
@@ -62,6 +69,20 @@ function fn_config_lang_add(_idx, _name) // Adds a language to the language list
 	var l = _idx;
 	global.config_lang_name[l] = _name;
 	global.config_lang_textData[l] = -1;
+}
+
+function fn_config_lang_mod(_idx) // Changes the current language to the specified one
+{
+	global.config_lang = _idx;
+	fn_config_file_save();
+	
+	// Settings
+	fn_config_setup_1();
+	
+	// Effects, items and themes
+	fn_eff_setup();
+	fn_itm_setup();
+	fn_thm_setup();
 }
 
 
@@ -78,6 +99,7 @@ function fn_config_volType_setup_0() // Sets up the volume types array
 		ENTITY = 5,		// Sounds played by interacting with NPCs
 		AMBIENT = 6		// Sounds played in the background by the world
 	}
+	
 	fn_config_volType_add(CONFIG_VOLTYPE.MASTER, 1);
 	fn_config_volType_add(CONFIG_VOLTYPE.MUS, 1);
 	fn_config_volType_add(CONFIG_VOLTYPE.MENU, 1);
@@ -85,6 +107,7 @@ function fn_config_volType_setup_0() // Sets up the volume types array
 	fn_config_volType_add(CONFIG_VOLTYPE.INTERACT, 1);
 	fn_config_volType_add(CONFIG_VOLTYPE.ENTITY, 1);
 	fn_config_volType_add(CONFIG_VOLTYPE.AMBIENT, 1);
+	
 	global.config_volType_amt = array_length(global.config_volType);
 }
 function fn_config_volType_setup_1()
@@ -116,6 +139,7 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 		ATWLK = 8,		// Autowalk
 		FSCR = 9		// Fullscreen
 	}
+	
 	fn_config_key_add(CONFIG_KEY.LT,			vk_left,	ord("A"));
 	fn_config_key_add(CONFIG_KEY.RT,			vk_right,	ord("D"));
 	fn_config_key_add(CONFIG_KEY.UP,			vk_up,		ord("W"));
@@ -126,6 +150,7 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 	fn_config_key_add(CONFIG_KEY.MENU_PSE,		vk_escape,	-1);
 	fn_config_key_add(CONFIG_KEY.ATWLK,			ord("R"),	-1);
 	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
+	
 	global.config_key_amt = array_length(global.config_key_dflt);
 }
 function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the current keybinds list
@@ -161,9 +186,12 @@ function fn_config_key_quick() // Provides several variables to make input-check
 	hold_dn = fn_config_key_hold(CONFIG_KEY.DN);
 }
 
-function fn_config_keyList_setup() // Sets up the list of keys the player can bind an action to
+
+	// Functions related to the list of keys the player can bind an action to
+function fn_config_keyList_setup() // Sets up the list key list
 {
 	var k = 0;
+	
 	fn_config_keyList_add(k++, vk_left, "←");
 	fn_config_keyList_add(k++, vk_right, "→");
 	fn_config_keyList_add(k++, vk_up, "↑");
@@ -271,30 +299,39 @@ function fn_config_file_load()
 {
 	ini_open(global.config_file_name);
 	
+	if (ini_read_real("game", "ver", 0) == global.GAME_VER)
+	{
+		// Languages
+		global.config_lang = ini_read_real("langs", "lang", 0);
+		global.config_lang_hasChosen = ini_read_real("langs", "hasChosen", 0);
 	
-	// Languages
-	global.config_lang = ini_read_real("langs", "lang", 0);
-	global.config_lang_hasChosen = ini_read_real("langs", "hasChosen", 0);
+		// Video Settings
+		global.config_fscr = ini_read_real("vid", "fscr", 0);
+		global.config_lowGfx = ini_read_real("vid", "lowGfx", 0);
+		global.config_showFps = ini_read_real("vid", "showFps", 0);
+		global.config_showBdr = ini_read_real("vid", "showBdr", 0);
 	
-	// Video Settings
-	global.config_fscr = ini_read_real("vid", "fscr", 0);
-	global.config_lowGfx = ini_read_real("vid", "lowGfx", 0);
-	global.config_showFps = ini_read_real("vid", "showFps", 0);
-	global.config_showBdr = ini_read_real("vid", "showBdr", 0);
+		// Audio Settings
+		for (var i = 0; i < global.config_volType_amt; i++)
+			global.config_volType[i] = ini_read_real("aud", $"vol_{i}", 1);
 	
-	// Audio Settings
-	for (var i = 0; i < global.config_volType_amt; i++)
-		global.config_volType[i] = ini_read_real("aud", $"vol_{i}", 1);
+		// Keybinds
+		for (var i = 0; i < global.config_key_amt; i++)
+			global.config_key_dflt[i] = ini_read_real("keys", $"dflt_{i}", 0);
+		for (var i = 0; i < global.config_key_amt; i++)
+			global.config_key_alt[i] = ini_read_real("keys", $"alt_{i}", 0);
 	
-	// Keybinds
-	for (var i = 0; i < global.config_key_amt; i++)
-		global.config_key_dflt[i] = ini_read_real("keys", $"dflt_{i}", 0);
-	for (var i = 0; i < global.config_key_amt; i++)
-		global.config_key_alt[i] = ini_read_real("keys", $"alt_{i}", 0);
-	
-	// Accessibility
-	global.config_rdcdMot = ini_read_real("a11y", "rdcdMot", 0);
-	
-	
-	ini_close();
+		// Accessibility
+		global.config_rdcdMot = ini_read_real("a11y", "rdcdMot", 0);
+		
+		
+		ini_close();
+	}
+	else
+	{
+		ini_close();
+		file_delete(global.config_file_name);
+		
+		fn_config_file_save();
+	}
 }

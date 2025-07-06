@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_eff",
   "parent":{
-    "name":"[!] Scripts",
-    "path":"folders/[!] Scripts.yy",
+    "name":"profile",
+    "path":"folders/profile.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

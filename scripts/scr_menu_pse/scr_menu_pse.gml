@@ -46,7 +46,7 @@ function fn_menu_pse_evCreate_0()
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
 		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blackDark, 0.75);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
 	}
 }
 function fn_menu_pse_evCreate_1()
@@ -61,19 +61,21 @@ function fn_menu_pse_evCreate_1()
 	
 	// Takes a screenshot of the game to use as the background, since all objects will temporarily deactivate and disappear
 	sshot_spr = -1;
-	if (global.config_lowGfx == false) // Checks if the low graphics configing is enabled, since taking a screenshot can freeze the game for half a second
+	if (global.config_lowGfx == false) // Checks if the low graphics setting is disabled, since taking a screenshot can freeze the game for half a second
 	{
-		sshot_fname = "menu_pse_sshot.png"; 
-		surface_save(application_surface, working_directory + string(sshot_fname));
-		sshot_spr = sprite_add(sshot_fname, 1, false, false, 0, 0);
+		sshot_name = "menu_pse_sshot.png"; 
+		surface_save(application_surface, $"{working_directory}{sshot_name}");
+		
+		sshot_spr = sprite_add(sshot_name, 1, false, false, 0, 0);
 		sshot_xSc = 0.5;
 		sshot_ySc = 0.5;
 	}
 	
+	
 	// Deactivates/Pauses everything in the room, excluding the ones that should persist
 	instance_deactivate_all(true);
-	instance_activate_object(obj_GAME_MAIN);
-	instance_activate_object(obj_rm);
+	instance_activate_object(OBJ_GAME);
+	instance_activate_object(obj_rmCtrl);
 	instance_activate_object(obj_dbg);
 	audio_pause_all();
 	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_VOLTYPE.MENU);
@@ -83,18 +85,6 @@ function fn_menu_pse_evDrawGUI_0(l)
 	// Draws the screenshot
 	if (sshot_spr != -1 && lvl_alpTgt_selfDstr[LVL_EMPTY] == false)
 		draw_sprite_ext(sshot_spr, 0, 0, 0, sshot_xSc, sshot_ySc, 0, c_white, 1);
-}
-function fn_menu_pse_evDestroy()
-{
-	// Deletes the image file of the screenshot
-	if (sshot_spr != -1)
-	{
-		if (file_exists(sshot_fname) == true)
-			file_delete(sshot_fname);
-		if (sprite_exists(sshot_spr) == true)
-			sprite_delete(sshot_spr);
-		sshot_spr = -1;
-	}
 }
 
 
@@ -121,7 +111,7 @@ function fn_menu_pse_opt_slct()
 			fn_menu_lvlNew(LVL_EMPTY);
 			fn_rmTrans_start();
 			
-			global.thm = THM.DFLT;
+			fn_menu_pse_sshot_destroy();
 		}
 	}
 }
@@ -138,6 +128,20 @@ function fn_menu_pse_resume() // Resumes the game
 {
 	fn_menu_lvlNew(LVL_EMPTY, , true);
 	
+	fn_menu_pse_sshot_destroy();
+	
 	instance_activate_all();
 	audio_resume_all();
+}
+function fn_menu_pse_sshot_destroy()
+{
+	// Deletes the image file of the screenshot
+	if (sshot_spr != -1)
+	{
+		if (file_exists(sshot_name) == true)
+			file_delete(sshot_name);
+		if (sprite_exists(sshot_spr) == true)
+			sprite_delete(sshot_spr);
+		sshot_spr = -1;
+	}
 }

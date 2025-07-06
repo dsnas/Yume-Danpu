@@ -1,69 +1,99 @@
 
-//////// Functions related to menu themes
+//////// Functions related to themes
 
 
-function fn_thm_setup() // Sets up variables for enabling menu themes
+function fn_thm_setup() // Sets up the themes
 {
-	global.thm_amtMax = global.eff_amtMax;
-	for (var i = 0; i < global.thm_amtMax; i++)
-	{
-		fn_thm_add(i, c_black, c_black, c_black, c_black, c_black, false, -1, -1, 0, -1); 
-		
-		global.thm_opt_slctr_xDist[i] = 6;
-		global.thm_opt_slctr_yDist[i] = 4;
-		global.thm_start_snd[i] = snd_menu_start;
-		global.thm_opt_move_snd[i] = snd_menu_opt_move_dflt;
-		global.thm_opt_slct_snd[i] = snd_menu_opt_slct_dflt;
-		global.thm_opt_cncl_snd[i] = snd_menu_opt_cncl_dflt;
-		global.thm_opt_fail_snd[i] = snd_menu_opt_fail_dflt;
-		global.thm_has[i] = false; // (Determines if the player currently has this theme)
-	}
-	
 	enum THM // Index of each theme in their arrays
 	{
 		DFLT = 0,	// Default theme
 		MADOT = 1	// Madotsuki theme
 	}
 	
-	
 	// Default theme
-	fn_thm_add(THM.DFLT, #949299, #949299, #545359, #545359, #100F11, #100F11, false, spr_menu_box_dflt, spr_menu_opt_slctr_dflt, 0, spr_menu_plyrFrm_dflt);
-	global.thm_has[THM.DFLT] = true;
-	
+	fn_thm_add(THM.DFLT, #949299, #949299, #545359, #545359, #100F11, #100F11, 0);
+	fn_thm_unlock(THM.DFLT);
 	
 	// Madotsuki theme
-	fn_thm_add(THM.MADOT, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, true, spr_menu_box_madot, spr_menu_opt_slctr_madot, 0.1, spr_menu_plyrFrm_madot); 
-	global.thm_opt_move_snd[THM.MADOT] = snd_menu_opt_move_madot;
-	global.thm_opt_slct_snd[THM.MADOT] = snd_menu_opt_slct_madot;
-	global.thm_opt_cncl_snd[THM.MADOT] = snd_menu_opt_cncl_madot;
-	global.thm_opt_fail_snd[THM.MADOT] = snd_menu_opt_fail_madot;
-	global.thm_has[THM.MADOT] = true;
+	fn_thm_add(THM.MADOT, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1);
+	fn_thm_unlock(THM.MADOT);
 	
-	
-	global.thm = THM.DFLT; // Determines which theme is currently active
+	global.thm = THM.DFLT;
 }
-function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_blackLight, _col_blackDark, _shdw_act, _box_spr, _opt_slctr_spr, _opt_slctr_imgSpd, _plyrFrm_spr)
+function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurDark = 0.75)
 {
-	var i = _idx;
+	var t = _idx;
 	
-	global.thm_name[i] = fn_getText($"thm_name_{i}");
-	global.thm_desc[i] = fn_getText($"thm_desc_{i}");
 	
-	global.thm_col[i] =
+	// Main
+	global.thm_unlocked[t] = false;
+	global.thm_name[t] = fn_getText($"thm_name_{t}");
+	global.thm_desc[t] = fn_getText($"thm_desc_{t}");
+	
+		// Colors
+	global.thm_col[t] =
 	{
-		whiteLight	: _col_whiteLight,
-		whiteDark	: _col_whiteDark,
-		grayLight	: _col_grayLight,
-		grayDark	: _col_grayDark,
-		blackLight	: _col_blackLight,
-		blackDark	: _col_blackDark
+		whiteLight : _col_whiteLight,
+		whiteDark : _col_whiteDark,
+		grayLight : _col_grayLight,
+		grayDark : _col_grayDark,
+		
+		shadow : _col_shadow, // Shadow color for elements (options, information, etc.)
+		blur : _col_blur // Color for dimmed background
 	}
-	global.thm_shdw_act[i] = _shdw_act;
 	
-	global.thm_box_spr[i] = _box_spr;
+		// Alpha
+	global.thm_alp[t] =
+	{
+		shadow: _alp_shadow, // Shadow alpha for elements (options, information, etc.)
+		blurLight : _alp_blurLight, // Alpha for lightly dimmed background
+		blurDark : _alp_blurDark // Alpha for heavily dimmed background
+	}
 	
-	global.thm_opt_slctr_spr[i]		= _opt_slctr_spr;
-	global.thm_opt_slctr_imgSpd[i]	= _opt_slctr_imgSpd;
 	
-	global.thm_plyrFrm_spr[i] = _plyrFrm_spr;
+	// Other
+		// Box
+	global.thm_box_spr[t] = fn_thm_getAsset(t, "spr_thm_box_");
+	
+		// Options
+	global.thm_opt_move_snd[t] = fn_thm_getAsset(t, "snd_thm_opt_move_");
+	global.thm_opt_slct_snd[t] = fn_thm_getAsset(t, "snd_thm_opt_slct_");
+	global.thm_opt_cncl_snd[t] = fn_thm_getAsset(t, "snd_thm_opt_cncl_");
+	global.thm_opt_fail_snd[t] = fn_thm_getAsset(t, "snd_thm_opt_fail_");
+	
+		// Option selector
+	global.thm_opt_slctr_spr[t] = fn_thm_getAsset(t, "spr_thm_opt_slctr_");
+	global.thm_opt_slctr_imgSpd[t] = 0.1;
+	global.thm_opt_slctr_xDist[t] = 6;
+	global.thm_opt_slctr_yDist[t] = 4;
+	
+		// Inventory  →  Frame of the player's picture
+	global.thm_inv_picFrm_spr[t] = fn_thm_getAsset(t, "spr_thm_inv_picFrm_");
+	
+		// Misc
+	global.thm_start_snd[t] = fn_thm_getAsset(t, "snd_thm_start_");
+}
+function fn_thm_getAsset(_idx, _asset_nameWithoutIdx)
+{
+	var t = _idx;
+	
+	var _asset = asset_get_index($"{_asset_nameWithoutIdx}{t}");
+	if (_asset == -1)
+		_asset = asset_get_index($"{_asset_nameWithoutIdx}0");
+	
+	return _asset;
+}
+
+
+function fn_thm_unlock(_idx)
+{
+	var t = _idx;
+	
+	global.thm_unlocked[t] = true;
+	
+	/*
+	if (fn_obj_exists(obj_player) == true && 
+	
+	fn_menu_obj_create("unlock");
+	*/
 }

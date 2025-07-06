@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_chara",
   "parent":{
-    "name":"[!] Scripts",
-    "path":"folders/[!] Scripts.yy",
+    "name":"Yume Danpu",
+    "path":"Yume Danpu.yyp",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

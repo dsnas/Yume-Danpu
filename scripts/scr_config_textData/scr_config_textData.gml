@@ -98,6 +98,8 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 	// Inventory menu
 	fn_config_lang_textData_addText("menu_inv_main_opt_0", "Effects", "Efeitos");
+	if (irandom_range(1, 99999999) == 1)
+		fn_config_lang_textData_modText("menu_inv_main_opt_0", "Êggects", "Êgeitos");
 	fn_config_lang_textData_addText("menu_inv_main_opt_1", "Items", "Itens");
 	fn_config_lang_textData_addText("menu_inv_main_opt_2", "Themes", "Temas");
 	
@@ -129,6 +131,12 @@ function fn_config_lang_textData_addText(_lang_textData_key, _text_enUS = "", _t
 	_text_enUS = "Por favor GameMaker tira essa mensagem de erro inútil do meu código";
 	_text_ptBR = _text_enUS;
 	
+}
+function fn_config_lang_textData_modText(_lang_textData_key, _text_enUS = "", _text_ptBR = "")
+{
+	var _lang = global.config_lang;
+	var _lang_textData = global.config_lang_textData[_lang];
+	ds_map_replace(_lang_textData, _lang_textData_key, argument[1 + _lang]);
 }
 function fn_config_lang_textData_dupeText(_lang_textData_key, _lang_textData_keySrc)
 {

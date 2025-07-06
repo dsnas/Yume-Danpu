@@ -178,18 +178,21 @@ function fn_menu_home_opt_slct()
 	// Languages level
 	if (l == LVL_LANG)
 	{
+		var _config_lang = global.config_lang;
+		var _config_langOld = _config_lang;
+		
 		// Flag of United States
 		if (o == 0)
-			global.config_lang = CONFIG_LANG.EN_US;
+			_config_lang = CONFIG_LANG.EN_US;
 		
 		// Flag of Brazil
 		else if (o == 1)
-			global.config_lang = CONFIG_LANG.PT_BR;
+			_config_lang = CONFIG_LANG.PT_BR;
 		
 		// Flag of United States, flag of Brazil
 		global.config_lang_hasChosen = true;
-		fn_config_lang_textData_setup();
-		fn_config_file_save();
+		if (_config_langOld != _config_lang)
+			fn_config_lang_mod(_config_lang);
 		
 		fn_menu_lvlNew(LVL_MAIN, 180);
 	}

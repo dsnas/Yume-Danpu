@@ -19,7 +19,7 @@ function fn_menu_inv_evCreate_0()
 		var _rect_alp = 0.5;
 		if (l != LVL_MAIN)
 			_rect_alp = 0.75;
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blackDark, _rect_alp);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, _rect_alp);
 	}
 	
 	
@@ -37,7 +37,7 @@ function fn_menu_inv_evCreate_0()
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 			// Player's picture frame
-	main_picFrm_spr = global.thm_plyrFrm_spr[global.thm];
+	main_picFrm_spr = global.thm_inv_picFrm_spr[global.thm];
 	main_picFrm_w = fn_spr_w(main_picFrm_spr);
 	main_picFrm_h = fn_spr_h(main_picFrm_spr);
 	main_picFrm_x = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(main_picFrm_w / 2));
@@ -74,13 +74,13 @@ function fn_menu_inv_evCreate_0()
 	info_y[l, 0] = _name_y;
 	
 			// Player's currency [#0]
-	var _ccy_text = global.player_ccy[global.player_awake];
+	var _ccy_text = global.money_ccy[global.player_awake];
 	fn_menu_info_add(l, 1, _ccy_text);
 	var _ccy_w = info_w[l, 1];
 	var _ccy_h = info_h[l, 1];
 	
 			// Player's money [#0]
-	var _mny_text = global.player_mny[global.player_awake];
+	var _mny_text = global.money[global.player_awake];
 	fn_menu_info_add(l, 2, _mny_text);
 	var _mny_w = info_w[l, 2];
 	
@@ -165,16 +165,14 @@ function fn_menu_inv_evCreate_0()
 	{
 		// Get data of the current level
 		other_textData_key = "eff";
-		other_amtMax = global.eff_amtMax;
-		other_hasArr = global.eff_has;
+		other_unlockedArr = global.eff_unlocked;
 		other_nameArr = global.eff_name;
 		other_descArr = global.eff_desc;
 		
 		if (l == LVL_OTHER_ITM)
 		{
 			other_textData_key = "itm";
-			other_amtMax = global.itm_amtMax;
-			other_hasArr = global.itm_has;
+			other_unlockedArr = global.itm_unlocked;
 			other_nameArr = global.itm_name;
 			other_descArr = global.itm_desc;
 		}
@@ -182,11 +180,12 @@ function fn_menu_inv_evCreate_0()
 		else if (l == LVL_OTHER_THM)
 		{
 			other_textData_key = "thm";
-			other_amtMax = global.thm_amtMax;
-			other_hasArr = global.thm_has;
+			other_unlockedArr = global.thm_unlocked;
 			other_nameArr = global.thm_name;
 			other_descArr = global.thm_desc;
 		}
+		
+		other_amtMax = 14;
 		
 		
 		// Title
@@ -210,7 +209,7 @@ function fn_menu_inv_evCreate_0()
 			// Options
 			var _opt_text = "----------";
 			var _opt_slct_snd = global.thm_opt_fail_snd[global.thm];
-			if (array_get(other_hasArr, o) == true)
+			if (o < array_length(other_unlockedArr) && array_get(other_unlockedArr, o) == true)
 			{
 				_opt_text = array_get(other_nameArr, o);
 				_opt_slct_snd = global.thm_opt_slct_snd[global.thm];
@@ -231,7 +230,7 @@ function fn_menu_inv_evCreate_0()
 			
 			
 				// Options' description
-			if (array_get(other_hasArr, o) == true)
+			if (o < array_length(other_unlockedArr) && array_get(other_unlockedArr, o) == true)
 			{
 				var _info_text = array_get(other_descArr, o);
 				fn_menu_opt_desc_add(l, o, _info_text);
@@ -309,7 +308,7 @@ function fn_menu_inv_opt_slct()
 	// Other levels (Effects, Items and Themes)
 	else if (l == LVL_OTHER_THM)
 	{
-		if (global.thm_has[o] == true)
+		if (global.thm_unlocked[o] == true)
 			global.thm = o;
 	}
 }

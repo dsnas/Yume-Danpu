@@ -16,7 +16,7 @@ if (move_stg == -2)
 if (move_stg == -1) // Checks for movement key inputs and collision, also for interaction key input and interactables
 {
 	// Autowalk
-	if (global.player_atwlk == true)
+	if (global.config_atwlk == true)
 	{
 		if (move_atwlk_lastDirKey != -1)
 			move_dir_key[move_atwlk_lastDirKey] = true;
@@ -128,7 +128,7 @@ if (move_stg == 0) // Moves
 	
 	
 	// Autowalk
-	if (global.player_atwlk == true)
+	if (global.config_atwlk == true)
 	{
 		for (var d = 0; d < 4; d++)
 		{
@@ -137,11 +137,3 @@ if (move_stg == 0) // Moves
 		}
 	}
 }
-
-
-// Camera movement
-if (cam_act == true)
-	fn_chara_cam();
-
-
-

@@ -46,7 +46,6 @@ function fn_obj_depth(_asset = id, _val = -_asset.bbox_bottom)
 function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops = false) // Starts playing the specified audio
 {
 	aud_asset = _asset; // ID of the audio's asset
-	
 	aud_volType = _volType;
 	aud_vol = _vol; // MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
 	aud_offset = _offset; // MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
@@ -70,21 +69,21 @@ function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops
 function fn_aud_playData()
 {
 	// Menu
-	if (aud_asset == snd_menu_start)
+	if (aud_asset == snd_thm_start_0)
 		aud_offset += 0.15;
-	if (aud_asset == snd_menu_opt_move_dflt)
+	if (aud_asset == snd_thm_opt_move_0)
 		aud_vol = 1;
-	if (aud_asset == snd_menu_opt_slct_dflt)
+	if (aud_asset == snd_thm_opt_slct_0)
 		aud_vol *= 1.35;
-	if (aud_asset == snd_menu_opt_cncl_dflt)
+	if (aud_asset == snd_thm_opt_cncl_0)
 		aud_vol *= 0.9;
-	if (aud_asset == snd_menu_opt_move_madot)
+	if (aud_asset == snd_thm_opt_move_1)
 		aud_vol *= 0.4;
-	if (aud_asset == snd_menu_opt_slct_madot)
+	if (aud_asset == snd_thm_opt_slct_1)
 		aud_vol *= 0.2;
-	if (aud_asset == snd_menu_opt_cncl_madot)
+	if (aud_asset == snd_thm_opt_cncl_1)
 		aud_vol *= 0.2;
-	if (aud_asset == snd_menu_opt_fail_madot)
+	if (aud_asset == snd_thm_opt_fail_1)
 		aud_vol *= 0.4;
 	
 	
@@ -143,10 +142,6 @@ function fn_aud_stop(_asset) // Stops playing the specified audio
 {
 	audio_stop_sound(_asset);
 }
-function fn_aud_playing(_asset) // Returns if the specified audio is currently playing
-{
-	return audio_is_playing(_asset);
-}
 
 // Functions related to sprites
 function fn_spr_w(_asset) // Returns the width of the specified sprite
@@ -194,11 +189,9 @@ function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _h
 	draw_set_halign(_hAl);
 	
 	// Draws the shadow of the text
-	if (global.thm_shdw_act[global.thm] == true)
-	{
-		var _col_shdw = global.thm_col[global.thm].blackLight;
-		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _col_shdw, _col_shdw, _col_shdw, _col_shdw, _alp);
-	}
+	var _shadow_col = global.thm_col[global.thm].shadow;
+	var _shadow_alp = (global.thm_alp[global.thm].shadow * _alp);
+	draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _shadow_col, _shadow_col, _shadow_col, _shadow_col, _shadow_alp);
 	
 	// Draws the text
 	draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
@@ -209,13 +202,17 @@ function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // D
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
-function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shdw_act = false) // Draws the specified sprite
+function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shadow_act) // Draws the specified sprite
 {
 	if (_spr != -1)
 	{
 		// Draws the shadow of the specified sprite
-		if (_shdw_act == true && global.thm_shdw_act[global.thm] == true)
-			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, global.thm_col[global.thm].blackLight, _alp);
+		if (_shadow_act == true)
+		{
+			var _shadow_col = global.thm_col[global.thm].shadow;
+			var _shadow_alp = (global.thm_alp[global.thm].shadow * _alp);
+			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, _shadow_col, _shadow_alp);
+		}
 		
 		// Draws the specified sprite
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);

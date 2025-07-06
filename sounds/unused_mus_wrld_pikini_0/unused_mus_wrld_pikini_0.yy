@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.0,
+  "duration":-1.0,
   "name":"unused_mus_wrld_pikini_0",
   "parent":{
     "name":"[!] unused",

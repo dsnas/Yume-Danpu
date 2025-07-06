@@ -19,7 +19,7 @@ function fn_menu_config_evCreate_0()
 	for (var l = 0; l < lvl_amtMax; l++)
 	{
 		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blackDark, 0.75);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
 		
 		// Box
 		var _box_xMargin = (draw_dist * 4);
@@ -212,16 +212,17 @@ function fn_menu_config_opt_config_move()
 			// "Language"
 			if (o == 0)
 			{
+				var _config_lang = global.config_lang;
 				var _config_langOld = global.config_lang;
+				
+				_config_lang += (press_rt - press_lt);
+				if (_config_lang < 0)
+					_config_lang = (global.config_lang_amt - 1);
+				if (_config_lang >= global.config_lang_amt)
+					_config_lang = 0;
 			
-				global.config_lang += (press_rt - press_lt);
-				if (global.config_lang < 0)
-					global.config_lang = (global.config_lang_amt - 1);
-				if (global.config_lang >= global.config_lang_amt)
-					global.config_lang = 0;
-			
-				if (_config_langOld != global.config_lang)
-					fn_config_lang_textData_setup();
+				if (_config_langOld != _config_lang)
+					fn_config_lang_mod(_config_lang);
 			}
 		}
 		

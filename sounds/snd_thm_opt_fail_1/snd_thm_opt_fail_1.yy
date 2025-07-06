@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_thm_opt_fail_1",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.2261678,
+  "name":"snd_thm_opt_fail_1",
+  "parent":{
+    "name":"Madotsuki (1)",
+    "path":"folders/profile/thm/Madotsuki (1).yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_thm_opt_fail_1.WAV",
+  "type":0,
+  "volume":1.0,
+}

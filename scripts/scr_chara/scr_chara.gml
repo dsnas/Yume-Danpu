@@ -59,78 +59,52 @@ function fn_chara_start() // Sets up the main variables of the character (Some o
 	moveChain_dist = 48;
 	
 	
-	// Camera
-	cam_act = true;
-	cam_id = view_camera[0];
-	cam_w = 320;
-	cam_h = 240;
-	cam_xTgt = 0;
-	cam_yTgt = 0;
-	cam_x = 0;
-	cam_y = 0;
-	cam_spd = 1;
-	fn_chara_cam();
-	
-	
 	// Cutscenes
 	cutsc_act = false;
 }
 
-
-function fn_chara_cam()
-{
-	cam_xTgt = (self_x + (sprite_width / 2) - (cam_w / 2));
-	cam_yTgt = (self_y - (sprite_height / 2) - (cam_h / 2));
-	if (obj_rm.loop_camLock == true)
-	{
-		cam_xTgt = clamp(cam_xTgt, 0, (room_width - cam_w));
-		cam_yTgt = clamp(cam_yTgt, 0, (room_height - cam_h));
-	}
-	
-	cam_x = lerp(cam_x, cam_xTgt, cam_spd);
-	cam_y = lerp(cam_y, cam_yTgt, cam_spd);
-	camera_set_view_size(cam_id, cam_w, cam_h);
-	camera_set_view_pos(cam_id, cam_x, cam_y);
-}
 
 function fn_chara_rm_loop() // Room looping system
 {
 	var _xDist = 0;
 	var _yDist = 0;
 	
-	
-	if (obj_rm.loop_camLock == false)
+	rmCtrl = obj_rmCtrl;
+	if (fn_obj_exists(rmCtrl) == true)
 	{
-		if (obj_rm.loop_xAct == true)
+		if (rmCtrl.loop_xAct == true)
 		{
-			if (self_x < 0)
-				_xDist = room_width;
-			if (self_x >= room_width)
-				_xDist = -room_width;
+			if (rmCtrl.cam_lock_xAct == false)
+			{
+				if (self_x < 0)
+					_xDist = room_width;
+				if (self_x >= room_width)
+					_xDist = -room_width;
+			}
+			else
+			{
+				if (self_x <= -16)
+					_xDist = (room_width + 16);
+				if (self_x > room_width)
+					_xDist = -(room_width + 16);
+			}
 		}
-		if (obj_rm.loop_yAct == true)
+		if (rmCtrl.loop_yAct == true)
 		{
-			if (self_y <= 0)
-				_yDist = room_height;
-			if (self_y > room_height)
-				_yDist = -room_height;
-		}
-	}
-	if (obj_rm.loop_camLock == true)
-	{
-		if (obj_rm.loop_xAct == true)
-		{
-			if (self_x <= -16)
-				_xDist = (room_width + 16);
-			if (self_x > room_width)
-				_xDist = -(room_width + 16);
-		}
-		if (obj_rm.loop_yAct == true)
-		{
-			if (self_y <= 0)
-				_yDist = (room_height + 32);
-			if (self_y > (room_height + 32))
-				_yDist = -(room_height + 32);
+			if (rmCtrl.cam_lock_yAct == false)
+			{
+				if (self_y <= 0)
+					_yDist = room_height;
+				if (self_y > room_height)
+					_yDist = -room_height;
+			}
+			else
+			{
+				if (self_y <= 0)
+					_yDist = (room_height + 32);
+				if (self_y > (room_height + 32))
+					_yDist = -(room_height + 32);
+			}
 		}
 	}
 	
