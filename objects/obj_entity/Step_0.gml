@@ -30,13 +30,13 @@ if (move_stg == -1) // Delays movement
 if (move_stg == 0) // Calculates movement target position and checks for collision
 {
 	// Retrieves amount of attempts the character will try for movement
-	var _move_attAmt = 16;
+	var _move_attLen = 16;
 	if (move_chasePlayer == true) // Checks if the entity is chasing the player
-		_move_attAmt = 1;
+		_move_attLen = 1;
 		
 		
 	// Calculates movement target position and checks for collision
-	for (var a = 0; a < _move_attAmt; a++)
+	for (var a = 0; a < _move_attLen; a++)
 	{
 		// Retrieves the direction the character will move to
 		move_dir = choose(MOVE_DIR_LT, MOVE_DIR_RT, MOVE_DIR_UP, MOVE_DIR_DN);
@@ -91,7 +91,7 @@ if (move_stg == 0) // Calculates movement target position and checks for collisi
 		
 		
 	// Cancels movement sequence if no position was found
-	if (a >= _move_attAmt)
+	if (a >= _move_attLen)
 		move_stg = -1;
 }
 if (move_stg == 1) // Moves

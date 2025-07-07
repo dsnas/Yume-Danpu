@@ -12,6 +12,6 @@ if (global.config_rdcdMot == false)
 }
 else
 {
-	clouds_x = clouds_move_xStart;
-	clouds_y = clouds_move_yStart;
+	sky_x = sky_move_xStart;
+	sky_y = sky_move_yStart;
 }

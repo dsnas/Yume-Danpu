@@ -2,7 +2,7 @@
 if (active == true)
 {
 	// Room's music [#0]
-	for (var m = 0; m < mus_amtMax; m++)
+	for (var m = 0; m < mus_lenMax; m++)
 	{
 		// Saves the previous music's main data and resets of the current's
 		musOld_asset[m] = mus_asset[m];
@@ -16,7 +16,7 @@ if (active == true)
 
 
 	// Room's music [#1]
-	for (var m = 0; m < mus_amtMax; m++)
+	for (var m = 0; m < mus_lenMax; m++)
 	{
 		// Checks if the music that should be playing is already playing, saving its audio ID
 		if (musOld_id[m] != -1 && musOld_asset[m] == mus_asset[m])

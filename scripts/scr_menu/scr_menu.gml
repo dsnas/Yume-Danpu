@@ -152,9 +152,9 @@ function fn_menu_rect_add(_lvl, _rect, _rect_x = 0, _rect_y = 0, _rect_w = 0, _r
 	
 	
 	if (r == 0)
-		rect_amt[l] = 0;
+		rect_len[l] = 0;
 	if (rect_w[l, r] > 0 && rect_h[l, r] > 0)
-		rect_amt[l] += 1;
+		rect_len[l] += 1;
 }
 
 
@@ -173,9 +173,9 @@ function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h 
 	
 	
 	if (b == 0)
-		box_amt[l] = 0;
+		box_len[l] = 0;
 	if (box_w[l, b] > 0 && box_h[l, b] > 0)
-		box_amt[l] += 1;
+		box_len[l] += 1;
 }
 
 
@@ -233,9 +233,9 @@ function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, 
 	opt_config_text[l, o] = "%%%";
 	opt_desc_text[l, o] = "%%%";
 	if (o == 0)
-		opt_amt[l] = 0;
+		opt_len[l] = 0;
 	if (opt_text[l, o] != "%%%")
-		opt_amt[l] += 1;
+		opt_len[l] += 1;
 }
 function fn_menu_opt_add_ext(_lvl, _info_textDataKeyWithoutIdx) // Adds as options the several texts fetched from their text data value (Their positions will keep undefined)
 {
@@ -434,9 +434,9 @@ function fn_menu_info_add(_lvl, _info, _info_text = "%%%", _info_x = 0, _info_y 
 	
 	
 	if (i == 0)
-		info_amt[l] = 0;
+		info_len[l] = 0;
 	if (info_text[l, i] != "%%%")
-		info_amt[l] += 1;
+		info_len[l] += 1;
 }
 function fn_menu_info_add_ext(_lvl, _info, _info_textDataKeyWithoutIdx)	// Adds only the text of the specified information
 {

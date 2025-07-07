@@ -5,7 +5,7 @@ fn_menu_evStep();
 
 
 // Option movement, selection and cancellation sequences
-if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
+if (opt_len[lvl] > 0 && lvl_alp[lvl] == 1)
 {	
 	// Option movement sequence
 	if (opt_move_act[lvl] == true)
@@ -26,8 +26,8 @@ if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
 			
 			opt_move_pos[lvl] += (_key_0 - _key_1);
 			if (opt_move_pos[lvl] < 0)
-				opt_move_pos[lvl] = (opt_amt[lvl] - 1);
-			if (opt_move_pos[lvl] >= opt_amt[lvl])
+				opt_move_pos[lvl] = (opt_len[lvl] - 1);
+			if (opt_move_pos[lvl] >= opt_len[lvl])
 				opt_move_pos[lvl] = 0;
 		}
 		
@@ -46,7 +46,7 @@ if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
 			
 			if (press_dn == true)
 			{
-				if (opt_move_pos[lvl] + 2) <= (opt_amt[lvl] - 1)
+				if (opt_move_pos[lvl] + 2) <= (opt_len[lvl] - 1)
 					opt_move_pos[lvl] += 2;
 				else
 					opt_move_pos[lvl] = (0 + (opt_move_pos[lvl] % 2));
@@ -56,7 +56,7 @@ if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
 				if ((opt_move_pos[lvl] - 2) >= 0)
 					opt_move_pos[lvl] -= 2;
 				else
-					opt_move_pos[lvl] = (opt_amt[lvl] - 1 - !(opt_move_pos[lvl] % 2));
+					opt_move_pos[lvl] = (opt_len[lvl] - 1 - !(opt_move_pos[lvl] % 2));
 			}
 		}
 		
@@ -98,7 +98,7 @@ if (opt_amt[lvl] > 0 && lvl_alp[lvl] == 1)
 
 
 // Updates the text of the options' settings
-if (opt_amt[lvl] > 0 && opt_config_text[lvl, opt_move_pos[lvl]] != "%%%")
+if (opt_len[lvl] > 0 && opt_config_text[lvl, opt_move_pos[lvl]] != "%%%")
 	fn_menu_opt_config_update();
 
 
@@ -115,7 +115,7 @@ if (lvlNew != -1)
 
 
 // Updates the alpha of each levels
-for (var l = 0; l < (lvl_amtMax + 1); l++) // Loops through each level, including the empty one
+for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, including the empty one
 {
 	var _lvl_alpTgt = (l == lvl);
 	if (lvl_alp[l] != _lvl_alpTgt)
@@ -157,13 +157,13 @@ for (var l = 0; l < (lvl_amtMax + 1); l++) // Loops through each level, includin
 // Reloads all the text if the language or theme changed
 if (config_langOld != global.config_lang) || (thmOld != global.thm)
 {
-	for (l = 0; l < lvl_amtMax; l++)
+	for (l = 0; l < lvl_lenMax; l++)
 		opt_move_posOld[l] = opt_move_pos[l];
 	
 	fn_menu_evCreate_0();
 	config_langOld = global.config_lang;
 	thmOld = global.thm;
 	
-	for (var l = 0; l < lvl_amtMax; l++)
+	for (var l = 0; l < lvl_lenMax; l++)
 		opt_move_pos[l] = opt_move_posOld[l];
 }

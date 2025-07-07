@@ -5,7 +5,7 @@
 function fn_config_lang_textData_setup() // Sets up all the text of the current language
 {
 	// Destroys the text data of all languages
-	for (var m = 0; m < global.config_lang_amt; m++)
+	for (var m = 0; m < global.config_lang_len; m++)
 	{
 		if (global.config_lang_textData[m] != -1)
 		{
@@ -33,23 +33,22 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	fn_config_lang_textData_addText("volType_name_6", "Ambience", "Ambiente");
 	
 	
-	// Effects
-	fn_config_lang_textData_addText("eff_name_0", "Salenis 0");
-	fn_config_lang_textData_addText("eff_name_1", "Salenis 1");
-	fn_config_lang_textData_addText("eff_name_2", "Salenis 2");
+	// Loot
+		// Effects
+	fn_config_lang_textData_addText("eff_name_0", "Salenis 0", "Salenis 0");
+	fn_config_lang_textData_addText("eff_name_1", "Salenis 1", "Salenis 1");
+	fn_config_lang_textData_addText("eff_name_2", "Salenis 2", "Salenis 2");
 	
-	fn_config_lang_textData_addText("eff_desc_0", "The Salenis is a world-famous dish.\nIt tastes funny.");
-	fn_config_lang_textData_addText("eff_desc_1", "The Salenis is a fascinating creation.\nIts smell is pleasing.");
-	fn_config_lang_textData_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.");
+	fn_config_lang_textData_addText("eff_desc_0", "The Salenis is a world-famous dish.\nIt tastes funny.", "O Salenis é uma comida muito famosa.\nO gosto dele é peculiar.");
+	fn_config_lang_textData_addText("eff_desc_1", "The Salenis is a fascinating creation.\nIts smell is pleasing.", "O Salenis é uma criação fascinante.\nO cheiro dele é delicioso.");
+	fn_config_lang_textData_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.", "O Salenis é um símbolo político.\nA textura dele é horrível.");
 	
+		// Items
+	fn_config_lang_textData_addText("itm_name_0", "Axenis", "Machenis");
 	
-	// Items
-	fn_config_lang_textData_addText("itm_name_0", "Axenis");
+	fn_config_lang_textData_addText("itm_desc_0", "The powerful axe of the world-famous\nwriter Sal de Enis.", "O poderoso machado do Sal de Enis,\num escritor famoso mundialmente.");
 	
-	fn_config_lang_textData_addText("itm_desc_0", "The powerful axe of the world-famous\nwriter Sal de Enis.");
-	
-	
-	// Themes
+		// Themes
 	fn_config_lang_textData_addText("thm_name_0", "Default", "Padrão");
 	fn_config_lang_textData_addText("thm_name_1", "Madotsuki", "Madotsuki");
 	//fn_config_lang_textData_addText("thm_name_1", "Simple", "Simples");
@@ -84,7 +83,7 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	
 		// Music & Sounds
 	fn_config_lang_textData_dupeText("menu_config_aud_ttl", "menu_config_main_opt_2");
-	for (var v = 0; v < global.config_volType_amt; v++)
+	for (var v = 0; v < global.config_volType_len; v++)
 		fn_config_lang_textData_dupeText($"menu_config_aud_opt_{v}", $"volType_name_{v}");
 	
 		// Accessibility
@@ -92,8 +91,8 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	fn_config_lang_textData_addText("menu_config_a11y_opt_0", "Reduced Motion", "Reduzir Movimento");
 	
 		// All
-	fn_config_lang_textData_addText("menu_config_all_opt_config_0", "No", "Não");
-	fn_config_lang_textData_addText("menu_config_all_opt_config_1", "Yes", "Sim");
+	fn_config_lang_textData_addText("menu_config_all_opt_config_0", "OFF", "Não");
+	fn_config_lang_textData_addText("menu_config_all_opt_config_1", "ON", "Sim");
 	
 	
 	// Inventory menu

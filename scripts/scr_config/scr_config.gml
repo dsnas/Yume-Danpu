@@ -60,7 +60,7 @@ function fn_config_lang_setup() // Sets up the available languages without loadi
 	fn_config_lang_add(CONFIG_LANG.EN_US, "English (US)");
 	fn_config_lang_add(CONFIG_LANG.PT_BR, "Português (BR)");
 	
-	global.config_lang_amt = array_length(global.config_lang_name);	// Total amount of available languages
+	global.config_lang_len = array_length(global.config_lang_name);	// Total amount of available languages
 	global.config_lang = CONFIG_LANG.EN_US; // The current language
 	global.config_lang_hasChosen = false; // Determines whether the player has selected a language when game opened for the first time
 }
@@ -74,15 +74,10 @@ function fn_config_lang_add(_idx, _name) // Adds a language to the language list
 function fn_config_lang_mod(_idx) // Changes the current language to the specified one
 {
 	global.config_lang = _idx;
+	
 	fn_config_file_save();
-	
-	// Settings
 	fn_config_setup_1();
-	
-	// Effects, items and themes
-	fn_eff_setup();
-	fn_itm_setup();
-	fn_thm_setup();
+	fn_profile_setup();
 }
 
 
@@ -108,11 +103,11 @@ function fn_config_volType_setup_0() // Sets up the volume types array
 	fn_config_volType_add(CONFIG_VOLTYPE.ENTITY, 1);
 	fn_config_volType_add(CONFIG_VOLTYPE.AMBIENT, 1);
 	
-	global.config_volType_amt = array_length(global.config_volType);
+	global.config_volType_len = array_length(global.config_volType);
 }
 function fn_config_volType_setup_1()
 {
-	for (var v = 0; v < global.config_volType_amt; v++)
+	for (var v = 0; v < global.config_volType_len; v++)
 		global.config_volType_name[v] = fn_getText(global.config_volType_name[v]);
 }
 function fn_config_volType_add(_idx, _vol)
@@ -151,7 +146,7 @@ function fn_config_key_setup() // Sets up the list of the player's current keybi
 	fn_config_key_add(CONFIG_KEY.ATWLK,			ord("R"),	-1);
 	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		-1);
 	
-	global.config_key_amt = array_length(global.config_key_dflt);
+	global.config_key_len = array_length(global.config_key_dflt);
 }
 function fn_config_key_add(_key, _key_dflt_id, _key_alt_id) // Adds a key to the specified position on the current keybinds list
 {
@@ -267,6 +262,7 @@ function fn_config_file_save()
 {
 	ini_open(global.config_file_name);
 	ini_write_real("game", "ver", global.GAME_VER);
+	ini_write_string("game", "msg", "You know, there's an in-game options menu. I think you'll like it!");
 	
 	
 	// Languages
@@ -280,13 +276,13 @@ function fn_config_file_save()
 	ini_write_real("vid", "showBdr", global.config_showBdr);
 	
 	// Audio Settings
-	for (var i = 0; i < global.config_volType_amt; i++)
+	for (var i = 0; i < global.config_volType_len; i++)
 		ini_write_real("aud", $"vol_{i}", global.config_volType[i]);
 	
 	// Keybinds
-	for (var i = 0; i < global.config_key_amt; i++)
+	for (var i = 0; i < global.config_key_len; i++)
 		ini_write_real("keys", $"dflt_{i}", global.config_key_dflt[i]);
-	for (var i = 0; i < global.config_key_amt; i++)
+	for (var i = 0; i < global.config_key_len; i++)
 		ini_write_real("keys", $"alt_{i}", global.config_key_alt[i]);
 	
 	// Accessibility
@@ -312,13 +308,13 @@ function fn_config_file_load()
 		global.config_showBdr = ini_read_real("vid", "showBdr", 0);
 	
 		// Audio Settings
-		for (var i = 0; i < global.config_volType_amt; i++)
+		for (var i = 0; i < global.config_volType_len; i++)
 			global.config_volType[i] = ini_read_real("aud", $"vol_{i}", 1);
 	
 		// Keybinds
-		for (var i = 0; i < global.config_key_amt; i++)
+		for (var i = 0; i < global.config_key_len; i++)
 			global.config_key_dflt[i] = ini_read_real("keys", $"dflt_{i}", 0);
-		for (var i = 0; i < global.config_key_amt; i++)
+		for (var i = 0; i < global.config_key_len; i++)
 			global.config_key_alt[i] = ini_read_real("keys", $"alt_{i}", 0);
 	
 		// Accessibility

@@ -3,7 +3,7 @@ fn_menu_evDrawGUI_0(lvl);
 
 
 // Draws the rectangles, boxes, options, information and titles
-for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maximum amount is reached
+for (var l = 0; l < lvl_lenMax; l++) // Loops through each level until the maximum amount is reached
 {
 	if (lvl_alp[l] > 0)
 	{
@@ -11,17 +11,17 @@ for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maxim
 		
 		
 		// Draws the rectangles
-		for (var r = 0; r < rect_amt[l]; r++)
+		for (var r = 0; r < rect_len[l]; r++)
 			fn_draw_rect((draw_x + rect_x[l, r]), (draw_y + rect_y[l, r]), rect_w[l, r], rect_h[l, r], rect_col[l, r], rect_col[l, r], rect_col[l, r], rect_col[l, r], (rect_alp[l, r] * lvl_alp[l] * draw_alp));
 		
 		
 		// Draws the boxes
-		for (var b = 0; b < box_amt[l]; b++)
+		for (var b = 0; b < box_len[l]; b++)
 			fn_draw_spr_stretch(box_spr, 0, (draw_x + box_x[l, b]), (draw_y + box_y[l, b]), box_w[l, b], box_h[l, b], c_white, (box_alp[l, b] * lvl_alp[l] * draw_alp));
 		
 		
 		// Draws the options and their selector
-		for (var o = 0; o < opt_amt[l]; o++)
+		for (var o = 0; o < opt_len[l]; o++)
 		{
 			// Draws the option selector
 			if (opt_slctr_act[l, o] == true)
@@ -80,7 +80,7 @@ for (var l = 0; l < lvl_amtMax; l++) // Loops through each level until the maxim
 		
 		
 		// Draws the information
-		for (var i = 0; i < info_amt[l]; i++)
+		for (var i = 0; i < info_len[l]; i++)
 			fn_draw_text(info_text[l, i], (draw_x + info_x[l, i]), (draw_y + info_y[l, i]), info_col[l][i][0], info_col[l][i][1], (info_alp[l, i] * lvl_alp[l] * draw_alp), info_vAl[l, i], info_hAl[l, i]);
 		
 		

@@ -17,8 +17,9 @@ function fn_interact_getId() // Retrieves the ID of the interactable, which dete
 	// Gift
 	else if (object_index == obj_interact_gift)
 	{
-		// Axenis
-		interact_id = "gift_axe";
+		// [Debug] Axenis
+		if (room == rm_nexus && x == 64 && y == 128)
+			interact_id = "gift_kart";
 	}
 	
 	// Debug World
@@ -34,6 +35,7 @@ function fn_interact_evCreate() // Create Event determined by the interactable's
 		image_alpha = 1;
 		interact_type = INTERACT_TYPE_RMTRANS;
 		
+		
 		// Door of Debug World
 		if (object_index == obj_interact_dgwrld_door)
 		{
@@ -48,12 +50,17 @@ function fn_interact_evCreate() // Create Event determined by the interactable's
 		image_alpha = 1;
 		interact_type = INTERACT_TYPE_LOOT;
 		
-		// Axenis
-		interact_loot_id = LOOT.ITM;
-		interact_loot_piece = ITM.DBG_AXE;
+		
+		// [Debug] Axenis
+		if (interact_id == "gift_kart")
+		{
+			interact_loot = LOOT.ITM;
+			interact_loot_piece = ITM.DBG_AXE;
+		}
+		
 		
 		// All
-		if (global.itm_unlocked[interact_loot_piece] == true)
+		if (array_get(global.loot_unlocked[interact_loot], interact_loot_piece) == true)
 			image_index = 1;
 	}
 	
@@ -77,10 +84,10 @@ function fn_interact_evStep() // Step Event determined by the NPC's ID
 		{
 			var _secret_dist = abs(distance_to_object(obj_player));
 			var _secret_distMin = 32;
-			var _secret_alpAmt = (_secret_dist / _secret_distMin);
-			_secret_alpAmt = clamp(_secret_alpAmt, 0, 1);
+			var _secret_alpLen = (_secret_dist / _secret_distMin);
+			_secret_alpLen = clamp(_secret_alpLen, 0, 1);
 			var _secret_alpSpd = 0.05;
-			image_alpha = lerp(image_alpha, (1 - _secret_alpAmt), _secret_alpSpd);
+			image_alpha = lerp(image_alpha, (1 - _secret_alpLen), _secret_alpSpd);
 		}
 	}
 	
@@ -134,7 +141,7 @@ function fn_interact_seq() // Interaction sequence
 		}
 	}
 	
-	// Portal type
+	// Room transition type
 	else if (interact_type == INTERACT_TYPE_RMTRANS)
 	{
 		if (interact_stg == 0)
@@ -149,12 +156,10 @@ function fn_interact_seq() // Interaction sequence
 	{
 		if (interact_stg == 0)
 		{
-			var l = interact_loot_id;
+			var l = interact_loot;
 			var p = interact_loot_piece;
 			
-			if (l == LOOT.EFF && global.eff_unlocked[p] == false)
-			|| (l == LOOT.ITM && global.itm_unlocked[p] == false)
-			|| (l == LOOT.THM && global.thm_unlocked[p] == false)
+			if (array_get(global.loot_unlocked[l], p) == false)
 				fn_loot_unlock(l, p);
 			else if (fn_obj_exists(obj_player) == true)
 				obj_player.move_stg = -1;
@@ -177,7 +182,7 @@ function fn_interact_meow_addAsset(_asset_nameWithoutIdx)
 		}
 		else
 		{
-			interact_meow_amt = array_length(interact_meow_asset);
+			interact_meow_len = array_length(interact_meow_asset);
 			break;
 		}
 	}

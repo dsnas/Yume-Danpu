@@ -13,10 +13,10 @@ function fn_menu_home_evCreate_0()
 	var l = LVL_LANG;
 	
 		// Options
-	for (var o = 0; o < global.config_lang_amt; o++)
+	for (var o = 0; o < global.config_lang_len; o++)
 		fn_menu_opt_add(l, o, "");
 	opt_move_type[l] = OPT_MOVE_TYPE_dfltHor; // Toggles horizontal default option movement
-	opt_amt[l] = global.config_lang_amt;
+	opt_len[l] = global.config_lang_len;
 	
 		// Flags [#0]
 	lang_flag_spr = spr_menu_home_flag;
@@ -24,7 +24,7 @@ function fn_menu_home_evCreate_0()
 	lang_flag_h = fn_spr_h(lang_flag_spr);
 	var _flag_xDist = round(draw_dist * 2.5);
 	var _flag_yDistInfo = (draw_dist * 1.5); // The flags' vertical distance from the title info
-	var _flag_wAll = ((_flag_xDist * (opt_amt[l] - 1)) + lang_flag_w);
+	var _flag_wAll = ((_flag_xDist * (opt_len[l] - 1)) + lang_flag_w);
 	
 		// Flag selector [#0]
 	lang_flag_slctr_spr = spr_menu_home_flag_slctr;
@@ -49,7 +49,7 @@ function fn_menu_home_evCreate_0()
 	info_y[l, 0] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_info_hAll / 2) - _info_yFix);
 	
 		// Flags [#1] and their selector [#1]
-	for (var f = 0; f < opt_amt[l]; f++)
+	for (var f = 0; f < opt_len[l]; f++)
 	{
 		lang_flag_x[f] = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(_flag_wAll / 2) + round(_flag_xDist * f));
 		lang_flag_y[f] = (info_y[l, 0] + _flag_yDistInfo);
@@ -89,7 +89,7 @@ function fn_menu_home_evCreate_0()
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_home_main_opt_");
 	var _opt_yDist = round(draw_dist * 1.25);
-	var _opt_hAll = (round(_opt_yDist * (opt_amt[l] - 1)) + global.GAME_FNT_H);
+	var _opt_hAll = (round(_opt_yDist * (opt_len[l] - 1)) + global.GAME_FNT_H);
 		
 		// Box
 	var _box_wDist = round(draw_dist * 1.25);
@@ -101,7 +101,7 @@ function fn_menu_home_evCreate_0()
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Options [#1]
-	for (var o = 0; o < opt_amt[l]; o++)
+	for (var o = 0; o < opt_len[l]; o++)
 	{
 		opt_x[l, o] = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(opt_w[l, o] / 2));
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
@@ -143,7 +143,7 @@ function fn_menu_home_evDrawGUI_2(l)
 	if (l == LVL_LANG)
 	{
 		// Draws flags and their selector
-		for (var f = 0; f < opt_amt[l]; f++)
+		for (var f = 0; f < opt_len[l]; f++)
 		{
 			var fPos = (f == opt_move_pos[l]);
 			

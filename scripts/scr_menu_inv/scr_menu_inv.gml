@@ -13,7 +13,7 @@ function fn_menu_inv_evCreate_0()
 	
 	
 	// All levels
-	for (var l = 0; l < lvl_amtMax; l++)
+	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Dark translucent background
 		var _rect_alp = 0.5;
@@ -46,8 +46,7 @@ function fn_menu_inv_evCreate_0()
 			// Player's picture
 	main_pic_spr = obj_player.move_dir_spr[obj_player.MOVE_DIR_DN];
 	main_pic_snd = snd_player_fstep;
-	var c = irandom_range(1, 100);
-	if (c == 1)
+	if (irandom_range(1, 100) == 1)
 	{
 		main_pic_spr = spr_entity_macaco_citizen;
 		main_pic_snd = snd_entity_macaco_citizen_1;
@@ -59,7 +58,7 @@ function fn_menu_inv_evCreate_0()
 	main_pic_y = (main_picFrm_y + round(main_picFrm_h / 2) + round(main_pic_h / 2) - 1);
 	main_pic_xSc = 1;
 	main_pic_ySc = 1;
-	main_pic_scAmt = 0.2;
+	main_pic_scLen = 0.2;
 	main_pic_scSpd = 0.35;
 	
 			// Player's name
@@ -80,7 +79,7 @@ function fn_menu_inv_evCreate_0()
 	var _ccy_h = info_h[l, 1];
 	
 			// Player's money [#0]
-	var _mny_text = global.money[global.player_awake];
+	var _mny_text = global.money_amt[global.player_awake];
 	fn_menu_info_add(l, 2, _mny_text);
 	var _mny_w = info_w[l, 2];
 	
@@ -135,10 +134,10 @@ function fn_menu_inv_evCreate_0()
 	var _optIco_wAll = (main_optIco_w + _optIco_xTextGap + opt_wMax[l]);
 	main_optIco_x = (box_x[l, 1] + round(box_w[l, 1] / 2) - round(_optIco_wAll / 2) - 1);
 	var _optIco_yDist = draw_dist;
-	var _optIco_hAll = ((_optIco_yDist * (opt_amt[l] - 1)) + main_optIco_h);
+	var _optIco_hAll = ((_optIco_yDist * (opt_len[l] - 1)) + main_optIco_h);
 	
 			// Icon of the options [#1], options [#1]
-	for (var o = 0; o < opt_amt[l]; o++)
+	for (var o = 0; o < opt_len[l]; o++)
 	{
 		// Icon of the options [#1]
 		main_optIco_y[o] = (box_y[l, 1] + round(box_h[l, 1] / 2) - round(_optIco_hAll / 2) + (_optIco_yDist * o));
@@ -185,7 +184,7 @@ function fn_menu_inv_evCreate_0()
 			other_descArr = global.thm_desc;
 		}
 		
-		other_amtMax = 14;
+		other_lenMax = 14;
 		
 		
 		// Title
@@ -204,7 +203,7 @@ function fn_menu_inv_evCreate_0()
 		// Options
 		var _opt_xMul = 0;
 		var _opt_yMul = 0;
-		for (var o = 0; o < other_amtMax; o++)
+		for (var o = 0; o < other_lenMax; o++)
 		{
 			// Options
 			var _opt_text = "----------";
@@ -267,10 +266,10 @@ function fn_menu_inv_evDrawGUI_2(l)
 			var _ptr_meet = (_ptr_xMeet == true && _ptr_yMeet == true)
 			if (_ptr_meet == true)
 			{
-				var _pic_scAmt_mulMin = 0.75;
-				var _pic_scAmt_mulMax = 1.5;
-				main_pic_xSc += (main_pic_scAmt * random_range(_pic_scAmt_mulMin, _pic_scAmt_mulMax));
-				main_pic_ySc -= (main_pic_scAmt * random_range(_pic_scAmt_mulMin, _pic_scAmt_mulMax));
+				var _pic_scLen_mulMin = 0.75;
+				var _pic_scLen_mulMax = 1.5;
+				main_pic_xSc += (main_pic_scLen * random_range(_pic_scLen_mulMin, _pic_scLen_mulMax));
+				main_pic_ySc -= (main_pic_scLen * random_range(_pic_scLen_mulMin, _pic_scLen_mulMax));
 				
 				var _ptr_snd_pitch = random_range(0.75, 2.25);
 				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_VOLTYPE.PLAYER);
@@ -288,7 +287,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 		
 		// Option box
 			// Icon of the options
-		for (var o = 0; o < opt_amt[l]; o++)
+		for (var o = 0; o < opt_len[l]; o++)
 			fn_draw_spr(main_optIco_spr, o, main_optIco_x, main_optIco_y[o], opt_col[l][o][0], (opt_alp[l, o] * lvl_alp[l] * draw_alp), , , , true);
 	}
 }

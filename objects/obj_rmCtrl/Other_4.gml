@@ -20,12 +20,6 @@ view_set_camera(0, cam);
 fn_rmCtrl_cam_lock_act();
 
 
-// Room's music
-mus_amtMax = 3;
-for (var i = 0; i < mus_amtMax; i++)
-	fn_rmCtrl_mus_add(i, -1);
-
-
 // Room's background
 bg_clouds[0] = -1;
 bg_sky[0] = -1;

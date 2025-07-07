@@ -20,7 +20,7 @@ menu_key[0] = CONFIG_KEY.MENU_INV;
 menu_id[1] = "pse";
 menu_key[1] = CONFIG_KEY.MENU_PSE;
 
-menu_amt = array_length(menu_id);
+menu_len = array_length(menu_id);
 
 menu_delay_dur = 0;
 

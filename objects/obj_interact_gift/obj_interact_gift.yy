@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_interact_nexus_gift",
-    "path":"sprites/spr_interact_nexus_gift/spr_interact_nexus_gift.yy",
+    "name":"spr_interact_gift",
+    "path":"sprites/spr_interact_gift/spr_interact_gift.yy",
   },
   "spriteMaskId":null,
   "visible":true,

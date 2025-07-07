@@ -38,7 +38,11 @@ function fn_menu_unlock_evCreate_1()
 {
 	// Main level
 	lvl = LVL_MAIN;
-	fn_aud_play(choose(global.thm_unlock_snd[global.thm, 0], global.thm_unlock_snd[global.thm, 1], global.thm_unlock_snd[global.thm, 2]), CONFIG_VOLTYPE.MENU);
+	
+	var _unlock_snd = choose(global.thm_unlock_snd[global.thm, 0], global.thm_unlock_snd[global.thm, 1], global.thm_unlock_snd[global.thm, 2]);
+	if (irandom_range(1, 100) <= 5)
+		_unlock_snd = snd_;
+	fn_aud_play(_unlock_snd, CONFIG_VOLTYPE.MENU);
 }
 function fn_menu_unlock_evStep()
 {

@@ -87,7 +87,7 @@ if (move_stg == -1) // Checks for menu key inputs and created the menu object
 {
 	if (menu_delay_dur <= 0)
 	{
-		for (var m = 0; m < menu_amt; m++)
+		for (var m = 0; m < menu_len; m++)
 		{
 			if (fn_config_key_press(menu_key[m]) == true && fn_obj_exists(obj_menu) == false)
 			{

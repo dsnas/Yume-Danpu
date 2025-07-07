@@ -21,7 +21,7 @@ INTERACT_TYPE_MEOW = 0; // ID number of the type
 interact_meow_asset[0] = -1;
 interact_meow_volType = CONFIG_VOLTYPE.INTERACT;
 interact_meow_idx = 0;
-interact_meow_amt = 0;
+interact_meow_len = 0;
 
 	// Portal type, starts a room transition sequence as response
 INTERACT_TYPE_RMTRANS = 1; // ID number of the type

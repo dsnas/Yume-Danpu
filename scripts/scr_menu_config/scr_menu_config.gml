@@ -16,7 +16,7 @@ function fn_menu_config_evCreate_0()
 	
 	
 	// All levels [#0]
-	for (var l = 0; l < lvl_amtMax; l++)
+	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Dark translucent background
 		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
@@ -50,12 +50,12 @@ function fn_menu_config_evCreate_0()
 	var _opt_yDist_1 = draw_dist;
 	
 	var _opt_hAll = _opt_yDist_0;
-	for (var o = 1; o < (opt_amt[l] - 1); o++)
+	for (var o = 1; o < (opt_len[l] - 1); o++)
 		_opt_hAll += _opt_yDist_1;
 	_opt_hAll += global.GAME_FNT_H;
 	
 	var _opt_yAdd = 0;
-	for (var o = 0; o < opt_amt[l]; o++)
+	for (var o = 0; o < opt_len[l]; o++)
 	{	
 		if (o == 0)
 			opt_x[l, o] = (box_x[l, 0] + draw_dist);
@@ -120,10 +120,10 @@ function fn_menu_config_evCreate_0()
 	
 	
 	// All levels [#1]
-	for (var l = 0; l < lvl_amtMax; l++)
+	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Options and their settings
-		for (var o = 0; o < opt_amt[l]; o++)
+		for (var o = 0; o < opt_len[l]; o++)
 		{
 			if (opt_x[l, o] == 0 && opt_y[l, o] == 0)
 			{
@@ -217,8 +217,8 @@ function fn_menu_config_opt_config_move()
 				
 				_config_lang += (press_rt - press_lt);
 				if (_config_lang < 0)
-					_config_lang = (global.config_lang_amt - 1);
-				if (_config_lang >= global.config_lang_amt)
+					_config_lang = (global.config_lang_len - 1);
+				if (_config_lang >= global.config_lang_len)
 					_config_lang = 0;
 			
 				if (_config_langOld != _config_lang)
@@ -298,7 +298,7 @@ function fn_menu_config_opt_config_update()
 	// Music & Sounds level
 	else if (l == LVL_AUD)
 	{
-		for (var v = 0; v < global.config_volType_amt; v++)
+		for (var v = 0; v < global.config_volType_len; v++)
 			opt_config_text[l, v] = $"{round(global.config_volType[v] * 100)}%";
 	}
 	

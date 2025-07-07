@@ -66,22 +66,22 @@ function fn_rmCtrl_evCreate() // Create Event determined by the room's ID
 	// Debug World
 	if (rm_id == "dbgwrld")
 	{	
-		var _spr_amt = 0;
+		var _spr_len = 0;
 		for (var s = 0; s < 99; s++)
 		{
 			if (sprite_exists(s) == true)
 				continue;
 			else
 			{
-				_spr_amt = s;
+				_spr_len = s;
 				break;
 			}
 		}
 		
-		fn_rmCtrl_bg_sky_add(0, irandom_range(0, (_spr_amt - 1)), , 0.25);
+		fn_rmCtrl_bg_sky_add(0, irandom_range(0, (_spr_len - 1)), , 0.25);
 		bg_sky[0].sky_img = (sprite_get_number(bg_sky[0].sky_spr) - 1);
 		
-		fn_rmCtrl_bg_clouds_add(1, irandom_range(0, (_spr_amt - 1)), , , 0.5, 160, 120);
+		fn_rmCtrl_bg_clouds_add(1, irandom_range(0, (_spr_len - 1)), , , 0.5, 160, 120);
 		bg_clouds[1].clouds_img = (sprite_get_number(bg_clouds[1].clouds_spr) - 1);
 		
 		
@@ -171,15 +171,16 @@ function fn_rmCtrl_bg_clouds_add(_idx, _spr, _xSc = 1, _ySc = 1, _alp = 1, _xDis
 		
 		
 		clouds_loop_xDist = _xDist;
-		clouds_loop_xAmt_outRm = (ceil(320 / clouds_loop_xDist) * 2);
-		clouds_loop_xAmt = (clouds_loop_xAmt_outRm + ceil(room_width / clouds_loop_xDist) + clouds_loop_xAmt_outRm);
+		clouds_loop_xLen_outRm = (ceil(320 / clouds_loop_xDist) * 2);
+		clouds_loop_xLen = (clouds_loop_xLen_outRm + ceil(room_width / clouds_loop_xDist) + clouds_loop_xLen_outRm);
 		
 		clouds_loop_yDist = _yDist;
-		clouds_loop_yAmt_outRm = (ceil(240 / clouds_loop_yDist) * 2);
-		clouds_loop_yAmt = (clouds_loop_yAmt_outRm + ceil(room_height / clouds_loop_yDist) + clouds_loop_yAmt_outRm);
+		clouds_loop_yLen_outRm = (ceil(240 / clouds_loop_yDist) * 2);
+		clouds_loop_yLen = (clouds_loop_yLen_outRm + ceil(room_height / clouds_loop_yDist) + clouds_loop_yLen_outRm);
 		
 		
 		clouds_move_xStart = clouds_x;
+		fn_log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		clouds_move_xDur = (_move_xDurInSec * 60);
 		clouds_move_xDist = (clouds_loop_xDist * choose(-1, 1));
 		clouds_move_xTgt = (clouds_move_xStart + clouds_move_xDist);
@@ -224,10 +225,10 @@ function fn_rmCtrl_bg_sky_add(_idx, _spr, _col = c_white, _alp = 1, _move_xDurIn
 		
 		sky_loop_xDist = sky_w;
 		sky_loop_yDist = sky_h;
-		sky_loop_xAmt_outRm = ceil(320 / sky_loop_xDist);
-		sky_loop_yAmt_outRm = ceil(240 / sky_loop_yDist);
-		sky_loop_xAmt = (sky_loop_xAmt_outRm + ceil(room_width / sky_loop_xDist) + sky_loop_xAmt_outRm);		
-		sky_loop_yAmt = (sky_loop_yAmt_outRm + ceil(room_height / sky_loop_yDist) + sky_loop_yAmt_outRm);
+		sky_loop_xLen_outRm = ceil(320 / sky_loop_xDist);
+		sky_loop_yLen_outRm = ceil(240 / sky_loop_yDist);
+		sky_loop_xLen = (sky_loop_xLen_outRm + ceil(room_width / sky_loop_xDist) + sky_loop_xLen_outRm);		
+		sky_loop_yLen = (sky_loop_yLen_outRm + ceil(room_height / sky_loop_yDist) + sky_loop_yLen_outRm);
 		
 		
 		sky_move_xStart = sky_x;

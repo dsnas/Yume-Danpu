@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_menu_pse",
   "parent":{
-    "name":"menu",
-    "path":"folders/menu.yy",
+    "name":"pse",
+    "path":"folders/menu/pse.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

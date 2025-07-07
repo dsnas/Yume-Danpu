@@ -15,14 +15,14 @@ fn_menu_getId();
 
 
 // Levels, the different sections of the menu the player can navigate through (like "Effects", "Items" and "Themes" from the inventory, or "Start" from the main menu)
-lvl_amtMax = 10; // Maximum amount of levels there can be
+lvl_lenMax = 10; // Maximum amount of levels there can be
 
-LVL_EMPTY = lvl_amtMax; // Index of the menu level that should remain empty (outside the range of most for() loops)
+LVL_EMPTY = lvl_lenMax; // Index of the menu level that should remain empty (outside the range of most for() loops)
 lvl = LVL_EMPTY; // Index of the current menu level
 
 
 // Levels and their rectangles, boxes, options, information and titles
-for (var l = 0; l < (lvl_amtMax + 1); l++)
+for (var l = 0; l < (lvl_lenMax + 1); l++)
 {
 	// Levels
 	lvl_alp[l] = 0; // Alpha of all elements drawn at the level
@@ -34,15 +34,15 @@ for (var l = 0; l < (lvl_amtMax + 1); l++)
 	
 	
 	// Rectangles
-	rect_amt[l] = 0;
+	rect_len[l] = 0;
 	fn_menu_rect_add(l, 0);
 	
 	// Boxes
-	box_amt[l] = 0;
+	box_len[l] = 0;
 	fn_menu_box_add(l, 0);
 	
 	// Options
-	opt_amt[l] = 0;
+	opt_len[l] = 0;
 	fn_menu_opt_add(l, 0);
 	fn_menu_opt_slctr_add(l, 0); // Option selector
 	fn_menu_opt_desc_add(l, 0); // Options' description
@@ -50,7 +50,7 @@ for (var l = 0; l < (lvl_amtMax + 1); l++)
 	fn_menu_opt_config_slctr_add(l, 0); // Selector of the options' settings
 	
 	// Information
-	info_amt[l] = 0;
+	info_len[l] = 0;
 	fn_menu_info_add(l, 0);
 	
 	// Titles

@@ -17,7 +17,7 @@ function fn_menu_pse_evCreate_0()
 	opt_slct_snd[l, 2] = global.thm_opt_fail_snd[global.thm];
 	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_PSE;
 	var _opt_yDist = draw_dist;
-	var _opt_hAll = (_opt_yDist * (opt_amt[l] - 1) + global.GAME_FNT_H);
+	var _opt_hAll = (_opt_yDist * (opt_len[l] - 1) + global.GAME_FNT_H);
 	
 		// Box
 	var _box_wDist = round(draw_dist * 1.5);
@@ -32,7 +32,7 @@ function fn_menu_pse_evCreate_0()
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 		// Options [#1]
-	for (var o = 0; o < opt_amt[l]; o++)
+	for (var o = 0; o < opt_len[l]; o++)
 	{
 		opt_x[l, o] = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(opt_w[l, o] / 2));
 		opt_y[l, o] = (box_y[l, 0] + round(box_h[l, 0] / 2) - round(_opt_hAll / 2) + (_opt_yDist * o));
@@ -43,7 +43,7 @@ function fn_menu_pse_evCreate_0()
 	
 	
 	// All levels
-	for (var l = 0; l < lvl_amtMax; l++)
+	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Dark translucent background
 		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
