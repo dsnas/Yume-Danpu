@@ -2,7 +2,7 @@
 //////// Functions related to effects
 
 
-function fn_eff_setup()
+function fn_eff_setup() // Sets up the effects
 {
 	enum EFF // Index of each effect in their arrays
 	{

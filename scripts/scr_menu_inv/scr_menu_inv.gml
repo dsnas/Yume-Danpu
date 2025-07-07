@@ -84,20 +84,20 @@ function fn_menu_inv_evCreate_0()
 	fn_menu_info_add(l, 2, _mny_text);
 	var _mny_w = info_w[l, 2];
 	
-			// Icon of the player's money [#0]
-	main_mnyIcon_spr = spr_menu_inv_mnyIcon;
-	main_mnyIcon_w = fn_spr_w(main_mnyIcon_spr);
-	main_mnyIcon_h = fn_spr_h(main_mnyIcon_spr);
-	var _mnyIcon_xTextGap = round(draw_dist / 4);
-	var _mnyIcon_wAll = (main_mnyIcon_w + _mnyIcon_xTextGap + _ccy_w + _mny_w);
-	main_mnyIcon_x = (main_picFrm_x + round(main_picFrm_w / 2) - round(_mnyIcon_wAll / 2) - 1);
-	var _mnyIcon_yNameGap = (draw_dist / 2);
-	main_mnyIcon_y = (_name_y + _name_h + _mnyIcon_yNameGap);
-	main_mnyIcon_col = global.thm_col[global.thm].whiteLight;
+			// Icon of the player's money
+	main_mnyIco_spr = spr_menu_inv_mnyIco;
+	main_mnyIco_w = fn_spr_w(main_mnyIco_spr);
+	main_mnyIco_h = fn_spr_h(main_mnyIco_spr);
+	var _mnyIco_xTextGap = round(draw_dist / 4);
+	var _mnyIco_wAll = (main_mnyIco_w + _mnyIco_xTextGap + _ccy_w + _mny_w);
+	main_mnyIco_x = (main_picFrm_x + round(main_picFrm_w / 2) - round(_mnyIco_wAll / 2) - 1);
+	var _mnyIco_yNameGap = (draw_dist / 2);
+	main_mnyIco_y = (_name_y + _name_h + _mnyIco_yNameGap);
+	main_mnyIco_col = global.thm_col[global.thm].whiteLight;
 	
 			// Player's currency [#1]
-	var _ccy_x = (main_mnyIcon_x + main_mnyIcon_w + _mnyIcon_xTextGap);
-	var _ccy_y = (main_mnyIcon_y + round(main_mnyIcon_h / 2) - round(_ccy_h / 2) - 1);
+	var _ccy_x = (main_mnyIco_x + main_mnyIco_w + _mnyIco_xTextGap);
+	var _ccy_y = (main_mnyIco_y + round(main_mnyIco_h / 2) - round(_ccy_h / 2) - 1);
 	var _ccy_col_0 = global.thm_col[global.thm].grayLight;
 	var _ccy_col_1 = global.thm_col[global.thm].grayDark;
 	info_x[l, 1] = _ccy_x;
@@ -128,29 +128,29 @@ function fn_menu_inv_evCreate_0()
 	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_INV;
 	
 			// Icon of the options [#0]
-	main_optIcon_spr = spr_menu_inv_optIcon;
-	main_optIcon_w = fn_spr_w(main_optIcon_spr);
-	main_optIcon_h = fn_spr_h(main_optIcon_spr);
-	var _optIcon_xTextGap = _mnyIcon_xTextGap;
-	var _optIcon_wAll = (main_optIcon_w + _optIcon_xTextGap + opt_wMax[l]);
-	main_optIcon_x = (box_x[l, 1] + round(box_w[l, 1] / 2) - round(_optIcon_wAll / 2) - 1);
-	var _optIcon_yDist = round(draw_dist / 1);
-	var _optIcon_hAll = ((_optIcon_yDist * (opt_amt[l] - 1)) + main_optIcon_h);
+	main_optIco_spr = spr_menu_inv_optIco;
+	main_optIco_w = fn_spr_w(main_optIco_spr);
+	main_optIco_h = fn_spr_h(main_optIco_spr);
+	var _optIco_xTextGap = _mnyIco_xTextGap;
+	var _optIco_wAll = (main_optIco_w + _optIco_xTextGap + opt_wMax[l]);
+	main_optIco_x = (box_x[l, 1] + round(box_w[l, 1] / 2) - round(_optIco_wAll / 2) - 1);
+	var _optIco_yDist = draw_dist;
+	var _optIco_hAll = ((_optIco_yDist * (opt_amt[l] - 1)) + main_optIco_h);
 	
 			// Icon of the options [#1], options [#1]
 	for (var o = 0; o < opt_amt[l]; o++)
 	{
 		// Icon of the options [#1]
-		main_optIcon_y[o] = (box_y[l, 1] + round(box_h[l, 1] / 2) - round(_optIcon_hAll / 2) + (_optIcon_yDist * o));
+		main_optIco_y[o] = (box_y[l, 1] + round(box_h[l, 1] / 2) - round(_optIco_hAll / 2) + (_optIco_yDist * o));
 		
 		// Options [#1]
-		opt_x[l, o] = (main_optIcon_x + main_optIcon_w + _optIcon_xTextGap);
-		opt_y[l, o] = (main_optIcon_y[o] + round(main_optIcon_h / 2) - round(opt_h[l, o] / 2) - 1);
+		opt_x[l, o] = (main_optIco_x + main_optIco_w + _optIco_xTextGap);
+		opt_y[l, o] = (main_optIco_y[o] + round(main_optIco_h / 2) - round(opt_h[l, o] / 2) - 1);
 		
 			// Option selector
 		fn_menu_opt_slctr_add(l, o);
-		opt_slctr_x[l, o] = (opt_slctr_x[l, o] - _optIcon_xTextGap - main_optIcon_w - 1);
-		opt_slctr_w[l, o] = (opt_slctr_w[l, o] + _optIcon_xTextGap + main_optIcon_w + 1);
+		opt_slctr_x[l, o] = (opt_slctr_x[l, o] - _optIco_xTextGap - main_optIco_w - 1);
+		opt_slctr_w[l, o] = (opt_slctr_w[l, o] + _optIco_xTextGap + main_optIco_w + 1);
 	}
 	
 	
@@ -258,8 +258,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 		fn_draw_spr(main_picFrm_spr, 0, main_picFrm_x, main_picFrm_y, , (lvl_alp[l] * draw_alp));
 		
 			// Draws the player's picture
-		var _ptr_press = mouse_check_button_pressed(mb_left);
-		if (_ptr_press == true)
+		if (mouse_check_button_pressed(mb_any) == true)
 		{
 			var _ptr_x = (window_mouse_get_x() / 2);
 			var _ptr_y = (window_mouse_get_y() / 2);
@@ -284,13 +283,13 @@ function fn_menu_inv_evDrawGUI_2(l)
 		main_pic_ySc = lerp(main_pic_ySc, 1, main_pic_scSpd);
 		
 			// Draws the icon of the player's money
-		fn_draw_spr(main_mnyIcon_spr, 0, main_mnyIcon_x, main_mnyIcon_y, main_mnyIcon_col, (lvl_alp[l] * draw_alp), , , , true);
+		fn_draw_spr(main_mnyIco_spr, 0, main_mnyIco_x, main_mnyIco_y, main_mnyIco_col, (lvl_alp[l] * draw_alp), , , , true);
 		
 		
 		// Option box
 			// Icon of the options
 		for (var o = 0; o < opt_amt[l]; o++)
-			fn_draw_spr(main_optIcon_spr, o, main_optIcon_x, main_optIcon_y[o], opt_col[l][o][0], (opt_alp[l, o] * lvl_alp[l] * draw_alp), , , , true);
+			fn_draw_spr(main_optIco_spr, o, main_optIco_x, main_optIco_y[o], opt_col[l][o][0], (opt_alp[l, o] * lvl_alp[l] * draw_alp), , , , true);
 	}
 }
 

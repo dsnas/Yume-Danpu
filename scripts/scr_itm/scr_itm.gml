@@ -2,7 +2,7 @@
 //////// Functions related to items
 
 
-function fn_itm_setup()
+function fn_itm_setup() // Sets up the items
 {
 	enum ITM // Index of each item in their arrays
 	{
@@ -14,9 +14,9 @@ function fn_itm_setup()
 	
 	global.itm = -1; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)
 }
-function fn_itm_add(_idx)
+function fn_itm_add(_itm)
 {
-	var i = _idx;
+	var i = _itm;
 	
 	global.itm_unlocked[i] = false;
 	global.itm_name[i] = fn_getText($"itm_name_{i}");

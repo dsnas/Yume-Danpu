@@ -37,6 +37,9 @@ if (global.dbg_act == true && keyboard_check(global.dbg_cmd_key) == true)
 		}
 	}
 	
+	if (keyboard_check_pressed(ord("T")) == true)
+		fn_loot_unlock(LOOT.ITM, ITM.DBG_AXE);
+	
 	if (keyboard_check_pressed(ord("D")) == true)
 		file_delete(global.config_file_name);
 	

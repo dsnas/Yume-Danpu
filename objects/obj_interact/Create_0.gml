@@ -16,15 +16,20 @@ interact_delay_durMax = 0;
 // Types, which determine the interaction sequence's behavior
 interact_type = -1; // ID number of the current type (-1 == none)
 
-	// Audio type, plays an audio as response
-interact_type_meow = 0; // ID number of the audio type
+	// Meow type, plays an audio as response
+INTERACT_TYPE_MEOW = 0; // ID number of the type
 interact_meow_asset[0] = -1;
 interact_meow_volType = CONFIG_VOLTYPE.INTERACT;
 interact_meow_idx = 0;
 interact_meow_amt = 0;
 
 	// Portal type, starts a room transition sequence as response
-interact_type_portal = 1;
+INTERACT_TYPE_RMTRANS = 1; // ID number of the type
+
+	// Loot type, unlocks an effect, item or theme as response
+INTERACT_TYPE_LOOT = 2; // ID number of the type
+interact_loot_id = -1;
+interact_loot_piece = -1;
 
 
 

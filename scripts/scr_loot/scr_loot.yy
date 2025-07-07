@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_thm",
+  "%Name":"scr_loot",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_thm",
+  "name":"scr_loot",
   "parent":{
     "name":"profile",
     "path":"folders/profile.yy",

@@ -12,11 +12,11 @@ function fn_thm_setup() // Sets up the themes
 	
 	// Default theme
 	fn_thm_add(THM.DFLT, #949299, #949299, #545359, #545359, #100F11, #100F11, 0);
-	fn_thm_unlock(THM.DFLT);
+	global.thm_unlocked[THM.DFLT] = true;
 	
 	// Madotsuki theme
 	fn_thm_add(THM.MADOT, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1);
-	fn_thm_unlock(THM.MADOT);
+	global.thm_unlocked[THM.MADOT] = true;
 	
 	global.thm = THM.DFLT;
 }
@@ -70,6 +70,10 @@ function fn_thm_add(_idx, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_
 		// Inventory  →  Frame of the player's picture
 	global.thm_inv_picFrm_spr[t] = fn_thm_getAsset(t, "spr_thm_inv_picFrm_");
 	
+		// Unlock
+	for (var s = 0; s < 3; s++)
+		global.thm_unlock_snd[t, s] = fn_thm_getAsset(t, $"snd_thm_unlock_{s}_");
+	
 		// Misc
 	global.thm_start_snd[t] = fn_thm_getAsset(t, "snd_thm_start_");
 }
@@ -82,18 +86,4 @@ function fn_thm_getAsset(_idx, _asset_nameWithoutIdx)
 		_asset = asset_get_index($"{_asset_nameWithoutIdx}0");
 	
 	return _asset;
-}
-
-
-function fn_thm_unlock(_idx)
-{
-	var t = _idx;
-	
-	global.thm_unlocked[t] = true;
-	
-	/*
-	if (fn_obj_exists(obj_player) == true && 
-	
-	fn_menu_obj_create("unlock");
-	*/
 }

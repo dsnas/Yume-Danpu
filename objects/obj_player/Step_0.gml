@@ -123,7 +123,7 @@ if (move_stg == 0) // Moves
 		
 		
 		if (global.dbg_act == true && global.dbg_excessLog == true)
-			fn_log($"position = [{x}, {y}] | grid position = [{x / 16}, {y / 16}] | depth = {depth} | camera id = {cam_id} | camera position = {cam_x}, {cam_y}}");
+			fn_log($"position = [{x}, {y}] | grid position = [{x / 16}, {y / 16}] | depth = {depth} | camera = {cam} | camera position = {cam_x}, {cam_y}}");
 	}
 	
 	

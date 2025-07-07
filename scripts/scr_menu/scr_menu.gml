@@ -2,9 +2,11 @@
 //////// Functions related to the core menu system
 
 
-function fn_menu_obj_create(_menu_id)
+function fn_menu_obj_create(_id = "%%%", _info_0 = "%%%", _info_1 = "%%%")
 {
-	global.menu_idTemp = _menu_id;
+	global.menu_idTemp = _id;
+	global.menu_infoTemp[0] = _info_0;
+	global.menu_infoTemp[1] = _info_1;
 	fn_obj_create(obj_menu);
 }
 function fn_menu_obj_find(_menu_id)
@@ -24,11 +26,13 @@ function fn_menu_obj_find(_menu_id)
 function fn_menu_getId() // Retrieves the ID of the menu, which determines its behavior and appearance
 {
 	menu_id = "";
-	if (variable_global_exists("menu_idTemp") == false)
-		global.menu_idTemp = "";
-	else
+	if (global.menu_idTemp != "%%%")
 		menu_id = global.menu_idTemp;
 	global.menu_idTemp = "";
+	
+	for (var i = 0; i < array_length(global.menu_infoTemp); i++)
+		menu_info[i] = global.menu_infoTemp[i];
+	
 	
 	// Room-specific menus
 	if (menu_id == "")
@@ -55,6 +59,10 @@ function fn_menu_evCreate_0() // Create Event (that may be run more than once if
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_evCreate_0();
+	
+	// Unlock menu
+	if (menu_id == "unlock")
+		fn_menu_unlock_evCreate_0();
 }
 function fn_menu_evCreate_1() // Create Event (that must be run only once) determined by the menu's ID
 {
@@ -73,12 +81,20 @@ function fn_menu_evCreate_1() // Create Event (that must be run only once) deter
 	// Pause menu
 	if (menu_id == "pse")
 		fn_menu_pse_evCreate_1();
+	
+	// Unlock menu
+	if (menu_id == "unlock")
+		fn_menu_unlock_evCreate_1();
 }
 function fn_menu_evStep() // Step Event determined by the menu's ID
 {
 	// Main menu
 	if (menu_id == "home")
 		fn_menu_home_evStep();
+	
+	// Unlock menu
+	if (menu_id == "unlock")
+		fn_menu_unlock_evStep();
 }
 function fn_menu_evDrawGUI_0(l) // Draw GUI Event (outside the levels loop) determined by the menu's ID
 {
@@ -99,6 +115,10 @@ function fn_menu_evDrawGUI_2(l) // Draw GUI Event (inside the levels loop, post-
 	// Inventory menu
 	if (menu_id == "inv")
 		fn_menu_inv_evDrawGUI_2(l);
+	
+	// Unlock menu
+	if (menu_id == "unlock")
+		fn_menu_unlock_evDrawGUI_2(l);
 }
 function fn_menu_evDestroy() // Destroy Event determined by the menu's ID
 {
@@ -139,7 +159,7 @@ function fn_menu_rect_add(_lvl, _rect, _rect_x = 0, _rect_y = 0, _rect_w = 0, _r
 
 
 // Functions related to the boxes
-function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h = 0, _box_alp = 1)
+function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h = 0)
 {
 	var l = _lvl;
 	var b = _box;
@@ -149,7 +169,7 @@ function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h 
 	box_y[l, b] = _box_y;
 	box_w[l, b] = _box_w;
 	box_h[l, b] = _box_h;
-	box_alp[l, b] = _box_alp;
+	box_alp[l, b] = 1;
 	
 	
 	if (b == 0)

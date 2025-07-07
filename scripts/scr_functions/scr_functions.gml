@@ -47,9 +47,9 @@ function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops
 {
 	aud_asset = _asset; // ID of the audio's asset
 	aud_volType = _volType;
-	aud_vol = _vol; // MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
-	aud_offset = _offset; // MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
-	aud_pitch = _pitch; // MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
+	aud_vol = _vol;
+	aud_offset = _offset;
+	aud_pitch = _pitch;
 	aud_loops = _loops;
 	
 	
@@ -68,6 +68,11 @@ function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops
 }
 function fn_aud_playData()
 {
+	// aud_vol MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
+	// aud_offset MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
+	// aud_pitch MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
+	
+	
 	// Menu
 	if (aud_asset == snd_thm_start_0)
 		aud_offset += 0.15;
@@ -77,6 +82,8 @@ function fn_aud_playData()
 		aud_vol *= 1.35;
 	if (aud_asset == snd_thm_opt_cncl_0)
 		aud_vol *= 0.9;
+	if (aud_asset == snd_thm_unlock_0_0) || (aud_asset == snd_thm_unlock_1_0) || (aud_asset == snd_thm_unlock_2_0)
+		aud_vol *= 0.45;
 	if (aud_asset == snd_thm_opt_move_1)
 		aud_vol *= 0.4;
 	if (aud_asset == snd_thm_opt_slct_1)
@@ -202,7 +209,7 @@ function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp) // D
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
-function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shadow_act) // Draws the specified sprite
+function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shadow_act = false) // Draws the specified sprite
 {
 	if (_spr != -1)
 	{

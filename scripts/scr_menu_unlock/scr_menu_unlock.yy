@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_thm",
+  "%Name":"scr_menu_unlock",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_thm",
+  "name":"scr_menu_unlock",
   "parent":{
-    "name":"profile",
-    "path":"folders/profile.yy",
+    "name":"unlock",
+    "path":"folders/menu/unlock.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

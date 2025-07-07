@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_interact_dgwrld_door",
+  "%Name":"obj_interact_gift",
   "eventList":[],
   "managed":true,
-  "name":"obj_interact_dgwrld_door",
+  "name":"obj_interact_gift",
   "overriddenProperties":[],
   "parent":{
-    "name":"Debug World",
-    "path":"folders/Debug World.yy",
+    "name":"interact",
+    "path":"folders/interact.yy",
   },
   "parentObjectId":{
     "name":"obj_interact",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_interact_dbgwrld_door",
-    "path":"sprites/spr_interact_dbgwrld_door/spr_interact_dbgwrld_door.yy",
+    "name":"spr_interact_nexus_gift",
+    "path":"sprites/spr_interact_nexus_gift/spr_interact_nexus_gift.yy",
   },
   "spriteMaskId":null,
   "visible":true,
