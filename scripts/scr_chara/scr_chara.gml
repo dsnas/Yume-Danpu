@@ -2,66 +2,264 @@
 //////// Functions related to characters, like entities and the player
 
 
-function fn_chara_start() // Sets up the main variables of the character (Some of them are used only by entities or by the player)
+function fn_chara_setup(_move_preset = "") // Sets up the main variables of the character
 {
 	fn_draw_self_setup();
 	
 	
+	// Directions
+	DIR_LT = 0; // Index number of each direction the character can look towards
+	DIR_RT = 1;
+	DIR_UP = 2;
+	DIR_DN = 3;
+	dir = DIR_DN; // Current direction the character is looking towards
+	
+	DIR_AXIS_HOR = 0; // ID number of each axis the character can look towards
+	DIR_AXIS_VER = 1;
+	dir_axis[DIR_LT] = DIR_AXIS_HOR; // Axis of each direction the character can look towards
+	dir_axis[DIR_RT] = DIR_AXIS_HOR;
+	dir_axis[DIR_UP] = DIR_AXIS_VER;
+	dir_axis[DIR_DN] = DIR_AXIS_VER;
+	
+	dir_amt = 4;
+	for (var d = 0; d < dir_amt; d++)
+		dir_spr[d] = spr_player_dn; // The character's sprite asset of each direction the character can look towards
+	
+	
 	// Movement sequence
-	MOVE_DIR_LT = 0; // ID numbers of each direction the character can move to
-	MOVE_DIR_RT = 1;
-	MOVE_DIR_UP = 2;
-	MOVE_DIR_DN = 3;
-	move_dir = MOVE_DIR_DN; // Current direction the character is looking to
+	move_act = true;
+	move_stg = -1; // ID of the current stage of the movement sequence
+	if (fn_obj_exists(obj_rmTrans) == true && obj_rmTrans.destroy == false) // Freezes the character if the room transition sequence is active
+		move_stg = -2;
+	move_dist = 16; // Distance the character will move
+	move_durMax = 15; // Time in frames the character will take to walk the distance
+	move_dur = 0;
 	
-	MOVE_DIR_AXIS_HOR = 0; // ID numbers of each axis the character can move to
-	MOVE_DIR_AXIS_VER = 1;
-	move_dir_axis[MOVE_DIR_LT] = MOVE_DIR_AXIS_HOR; // Axis of each direction the character can move to
-	move_dir_axis[MOVE_DIR_RT] = MOVE_DIR_AXIS_HOR;
-	move_dir_axis[MOVE_DIR_UP] = MOVE_DIR_AXIS_VER;
-	move_dir_axis[MOVE_DIR_DN] = MOVE_DIR_AXIS_VER;
+		// Delay (customizable)
+	move_dly_act = false; // Determines if the character's movement will be delayed
+	move_dly_durMin = 0;
+	move_dly_durMax = 240;
+	move_dly_dur = 0;
 	
-	for (var d = 0; d < 4; d++)
+		// Types (customizable)
+	MOVE_TYPE_MANUAL = 0; // Manual, moves only after receiving a key input (ex.: the player)
+	MOVE_TYPE_AUTO = 1; // Automatic, moves to a random direction (ex.: entities)
+	move_type = -1;
+	
+			// Automatic type
+	move_auto_chaseTgt = -1; // Index of the object the character will chase (-1 == no one)
+	
+		// Directions
+	move_dir_spdMul[DIR_LT] = -1;
+	move_dir_spdMul[DIR_RT] = 1;
+	move_dir_spdMul[DIR_UP] = -1;
+	move_dir_spdMul[DIR_DN] = 1;
+	
+	move_dir_key[DIR_LT] = CONFIG_KEY.LT;
+	move_dir_key[DIR_RT] = CONFIG_KEY.RT;
+	move_dir_key[DIR_UP] = CONFIG_KEY.UP;
+	move_dir_key[DIR_DN] = CONFIG_KEY.DN;
+	
+	for (var d = 0; d < dir_amt; d++)
 	{
-		move_dir_spr[d] = -1;
 		move_dir_x[d] = 0;
 		move_dir_y[d] = 0;
 	}
 	
-	move_dir_spdMul[MOVE_DIR_LT] = -1;
-	move_dir_spdMul[MOVE_DIR_RT] = 1;
-	move_dir_spdMul[MOVE_DIR_UP] = -1;
-	move_dir_spdMul[MOVE_DIR_DN] = 1;
+		// Chain
+	move_chain_act = false; // Determines if the character can NOT move too far from their starting position
+	move_chain_dist = 48;
 	
-	move_dir_key[MOVE_DIR_LT] = CONFIG_KEY.LT;
-	move_dir_key[MOVE_DIR_RT] = CONFIG_KEY.RT;
-	move_dir_key[MOVE_DIR_UP] = CONFIG_KEY.UP;
-	move_dir_key[MOVE_DIR_DN] = CONFIG_KEY.DN;
+		// Presets
+	MOVE_PRESET_PLAYER = "player";
+	MOVE_PRESET_ENTITY = "entity";
+	move_preset = _move_preset;
 	
-	move_stg = -1; // ID of the current stage of the movement sequence (-2 == frozen, -1 == idle, 0+ active)
-		// Freezes the character if the room transition sequence is active
-	if (fn_obj_exists(obj_rmTrans) == true && obj_rmTrans.destroy == false)
-		move_stg = -2;
-	move_spd = 1;
-	move_dur = 0;
-	move_durMax = 16;
-	move_tgtX = 0;
-	move_tgtY = 0;
-	move_chasePlayer = false;
+	if (move_preset == MOVE_PRESET_PLAYER) // Player preset
+	{
+		dir_spr[DIR_LT] = spr_player_lt;
+		dir_spr[DIR_RT] = spr_player_rt;
+		dir_spr[DIR_UP] = spr_player_up;
+		dir_spr[DIR_DN] = spr_player_dn;
+		
+		move_type = MOVE_TYPE_MANUAL;
+	}
 	
-	moveDelay_stg = -1;
-	moveDelay_dur = 0;
-	moveDelay_durMin = 0;
-	moveDelay_durMax = 240;
-	moveDelay_act = false;
+	if (move_preset == MOVE_PRESET_ENTITY) // Entity preset
+	{
+		dir_spr[DIR_LT] = spr_player_lt;
+		dir_spr[DIR_RT] = spr_player_rt;
+		dir_spr[DIR_UP] = spr_player_up;
+		dir_spr[DIR_DN] = spr_player_dn;
+		
+		move_type = MOVE_TYPE_AUTO;
+		move_durMax = 30;
+		
+		move_dly_act = true;
+		move_chain_act = true;
+	}
 	
-	moveChain_act = false; // Determines if the character can NOT move too far from their starting position
-	moveChain_dist = 48;
+	/*
+			// Manual type
+	move_manual_atwlk_act = false; // Determines if the character will automatically walk to the latest inputed direction
+	move_manual_atwlk_lastDir = -1;
+	
+			// Entity preset
+	if (move_preset == MOVE_PRESET_ENTITY)
+	{
+		move_type = MOVE_TYPE_AUTO;
+		move_durMax = 30;
+		
+		move_dly_act = true;
+		move_chain_act = true;
+		
+		if (move_auto_chaseTgt != -1)
+		{
+			move_dly_durMax = 0;
+			move_chain_act = false;
+		}
+	}
+	*/
 	
 	
 	// Cutscenes
 	cutsc_act = false;
 }
+
+
+function fn_chara_move()
+{
+	if (move_act == true)
+	{
+		// Idle, inactive movement sequence
+		if (move_stg == -1)
+		{
+			if (move_dly_act == false) || (move_dly_act == true && move_dly_dur <= 0)
+			{
+				move_dly_dur = irandom_range(move_dly_durMin, move_dly_durMax);
+				
+				// Retrieves the direction the character will move towards
+				var _dir = -1;
+				if (move_type == MOVE_TYPE_MANUAL) // Manual type
+				{
+					for (var d = 0; d < dir_amt; d++)
+					{
+						if (fn_config_key_hold(move_dir_key[d]) == true)
+							_dir = d;
+					}
+				}
+				else if (move_type == MOVE_TYPE_AUTO) // Auto type
+				{
+					_dir = choose(DIR_LT, DIR_RT, DIR_UP, DIR_DN);
+					if (move_auto_chaseTgt != -1)
+					{
+						var d = point_direction(x, y, move_auto_chaseTgt.x, move_auto_chaseTgt.y);
+						if (d >= 0 && d < 45) || (d >= 315 && d < 360)
+							_dir = DIR_RT;
+						else if (d >= 45 && d < 135)
+							_dir = DIR_UP;
+						else if (d >= 135 && d < 225)
+							_dir = DIR_LT;
+						else if (d >= 225 && d < 315)
+							_dir = DIR_DN;
+					}
+				}
+			
+				// Calculates movement target position and checks for collision
+				if (_dir != -1)
+				{
+					dir = _dir;
+					sprite_index = dir_spr[dir];
+				
+					// Calculates target position of the movement
+					move_dir_x[dir] = (x + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
+					move_dir_y[dir] = (y + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
+				
+					// Checks for collision
+					if (instance_place(move_dir_x[dir], move_dir_y[dir], obj_player) == noone && instance_place(move_dir_x[dir], move_dir_y[dir], obj_solid_parent) == noone)
+					{
+						// Checks if the character would move too far from their starting position
+						if (move_chain_act == true)
+						{
+							var _move_chain_xDiff = abs(xstart - move_dir_x[dir]);
+							var _move_chain_yDiff = abs(ystart - move_dir_y[dir]);
+							
+							if (global.dbg_act == true && global.dbg_excessLog == true)
+								fn_log($"move_chain_xDiff = {_move_chain_xDiff} | move_chain_yDiff = {_move_chain_yDiff}");
+						}
+						if (move_chain_act == false)
+						|| (move_chain_act == true && _move_chain_xDiff < move_chain_dist && _move_chain_yDiff < move_chain_dist)
+						{
+							x = move_dir_x[dir];
+							y = move_dir_y[dir];
+							move_stg = 0;
+							move_dur = 0;
+						}
+					}
+				}
+			}
+			else if (move_dly_act == true)
+				move_dly_dur -= 1;
+		}
+		
+		// Moving, active movement sequence
+		if (move_stg == 0) // Moves
+		{
+			self_x += (((move_dist / move_durMax) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
+			self_y += (((move_dist / move_durMax) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
+			depth = -self_y;
+		
+			move_dur += 1;
+			if (move_dur >= move_durMax)
+			{
+				depth = -y;
+				self_x = x;
+				self_y = y;
+				
+				move_stg = -1;
+				
+				if (global.dbg_act == true && global.dbg_excessLog == true)
+					fn_log($"x = {x} | self_x = {self_x} | y = {y} | self_y = {self_y} | depth = {depth}");
+			}
+		}
+	}
+}
+
+/*
+function fn_chara_move() // The character's movement sequence
+{
+	
+		
+		// Manual type  →  Autowalk
+		if (move_manual_atwlk_act == true)
+		{
+			for (var d = 0; d < 4; d++)
+			{
+				if (fn_config_key_hold(move_dir_key[d]) == true)
+					move_manual_atwlk_lastDir = d;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+// Autowalk
+				if (move_manual_atwlk_act == true && _move_dir == -1)
+				{
+					_move_dir = move_dir;
+					if (move_manual_atwlk_lastDir != -1)
+						_move_dir = move_manual_atwlk_lastDir;
+					move_manual_atwlk_lastDir = -1;
+				}
+*/
 
 
 function fn_chara_rm_loop() // Room looping system

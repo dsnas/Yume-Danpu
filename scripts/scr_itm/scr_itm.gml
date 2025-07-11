@@ -6,13 +6,13 @@ function fn_itm_setup() // Sets up the items
 {
 	enum ITM // Index of each item in their arrays
 	{
-		DBG_AXE = 0
+		KART = 0
 	}
 	
 	// Debug items
-	fn_itm_add(ITM.DBG_AXE);
+	fn_itm_add(ITM.KART);
 	
-	global.itm = -1; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)
+	global.itm = ITM.KART; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)
 }
 function fn_itm_add(_itm)
 {

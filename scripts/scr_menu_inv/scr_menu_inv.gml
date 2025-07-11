@@ -257,7 +257,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 		fn_draw_spr(main_picFrm_spr, 0, main_picFrm_x, main_picFrm_y, , (lvl_alp[l] * draw_alp));
 		
 			// Draws the player's picture
-		if (mouse_check_button_pressed(mb_any) == true)
+		if (global.config_hideCsr == false && mouse_check_button_pressed(mb_any) == true)
 		{
 			var _ptr_x = (window_mouse_get_x() / 2);
 			var _ptr_y = (window_mouse_get_y() / 2);
@@ -303,7 +303,12 @@ function fn_menu_inv_opt_slct()
 	if (l == LVL_MAIN)
 		fn_menu_lvlNew((o + 1));
 	
-	// Other levels (Effects, Items and Themes)
+	// Other levels (effects, items and themes)
+	else if (l == LVL_OTHER_ITM)
+	{
+		if (global.itm_unlocked[o] == true)
+			global.itm = o;
+	}
 	else if (l == LVL_OTHER_THM)
 	{
 		if (global.thm_unlocked[o] == true)

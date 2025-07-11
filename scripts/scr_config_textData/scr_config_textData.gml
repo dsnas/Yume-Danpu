@@ -44,9 +44,8 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	fn_config_lang_textData_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.", "O Salenis é um símbolo político.\nA textura dele é horrível.");
 	
 		// Items
-	fn_config_lang_textData_addText("itm_name_0", "Axenis", "Machenis");
-	
-	fn_config_lang_textData_addText("itm_desc_0", "The powerful axe of the world-famous\nwriter Sal de Enis.", "O poderoso machado do Sal de Enis,\num escritor famoso mundialmente.");
+	fn_config_lang_textData_addText("itm_name_0", "Kart");
+	fn_config_lang_textData_addText("itm_desc_0", "...?", "...?");
 	
 		// Themes
 	fn_config_lang_textData_addText("thm_name_0", "Default", "Padrão");
@@ -77,9 +76,10 @@ function fn_config_lang_textData_setup() // Sets up all the text of the current 
 	fn_config_lang_textData_dupeText("menu_config_gfx_ttl", "menu_config_main_opt_1");
 	fn_config_lang_textData_addText("menu_config_gfx_opt_0", "Fullscreen", "Tela Cheia");
 	fn_config_lang_textData_addText("menu_config_gfx_opt_1", "Low Graphics", "Gráficos Baixos");
-	fn_config_lang_textData_addText("menu_config_gfx_opt_2", "Show FPS", "Mostrar FPS");
-	fn_config_lang_textData_addText("menu_config_gfx_opt_3", "Show Border", "Mostrar Borda");
-	fn_config_lang_textData_addText("menu_config_gfx_opt_4", "Show Version", "Mostrar Versão");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_2", "Hide Cursor", "Esconder Cursor");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_3", "Show FPS", "Mostrar FPS");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_4", "Show Border", "Mostrar Borda");
+	fn_config_lang_textData_addText("menu_config_gfx_opt_5", "Show Version", "Mostrar Versão");
 	
 		// Music & Sounds
 	fn_config_lang_textData_dupeText("menu_config_aud_ttl", "menu_config_main_opt_2");
@@ -161,24 +161,31 @@ function fn_getText(_lang_textData_key) // Retrieves the specified entry from th
 
 
 /*
-// Keybinds
-		ds_map_add(t, "config_key_name_0", "Go Left");
-		ds_map_add(t, "config_key_name_1", "Go Right");
-		ds_map_add(t, "config_key_name_2", "Go Up");
-		ds_map_add(t, "config_key_name_3", "Go Down");
-		
-		ds_map_add(t, "config_key_name_4", "Select");
-		ds_map_add(t, "config_key_name_5", "Cancel");
-		
-		ds_map_add(t, "config_key_name_6", "Open Inventory");
-		ds_map_add(t, "config_key_name_7", "Pause Game");
-		
-		ds_map_add(t, "config_key_name_8", "Toggle Autowalk");
-		ds_map_add(t, "config_key_name_9", "Toggle Fullscreen");
 
-	// Languages (unused)
-		ds_map_add(t, "menu_config_lang_ttl", ds_map_find_value(t, "menu_config_main_opt_0"));
+
+// Keybinds
+ds_map_add(t, "config_key_name_0", "Go Left");
+ds_map_add(t, "config_key_name_1", "Go Right");
+ds_map_add(t, "config_key_name_2", "Go Up");
+ds_map_add(t, "config_key_name_3", "Go Down");
 		
-			// Keybinds (unused)
-		ds_map_add(t, "menu_config_key_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
+ds_map_add(t, "config_key_name_4", "Select");
+ds_map_add(t, "config_key_name_5", "Cancel");
+		
+ds_map_add(t, "config_key_name_6", "Open Inventory");
+ds_map_add(t, "config_key_name_7", "Pause Game");
+		
+ds_map_add(t, "config_key_name_8", "Toggle Autowalk");
+ds_map_add(t, "config_key_name_9", "Toggle Fullscreen");
+
+// Languages (unused)
+ds_map_add(t, "menu_config_lang_ttl", ds_map_find_value(t, "menu_config_main_opt_0"));
+		
+	// Keybinds (unused)
+ds_map_add(t, "menu_config_key_ttl", ds_map_find_value(t, "menu_config_main_opt_1"));
+
+
+//fn_config_lang_textData_addText("itm_name_0", "Axenis", "Machenis");
+//fn_config_lang_textData_addText("itm_desc_0", "The powerful axe of the world-famous\nwriter Sal de Enis.", "O poderoso machado do Sal de Enis,\num escritor famoso mundialmente.");
+	
 */

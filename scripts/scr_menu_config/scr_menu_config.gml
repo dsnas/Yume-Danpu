@@ -237,16 +237,20 @@ function fn_menu_config_opt_config_move()
 			if (o == 1)
 				global.config_lowGfx = !global.config_lowGfx;
 			
-			// "Show FPS"
+			// "Hide Cursor"
 			if (o == 2)
+				global.config_hideCsr = !global.config_hideCsr;
+			
+			// "Show FPS"
+			if (o == 3)
 				global.config_showFps = !global.config_showFps;
 			
 			// "Show Border"
-			if (o == 3)
+			if (o == 4)
 				global.config_showBdr = !global.config_showBdr;
 			
 			// "Show Version"
-			if (o == 4)
+			if (o == 5)
 				global.config_showVer = !global.config_showVer;
 		}
 		
@@ -290,9 +294,10 @@ function fn_menu_config_opt_config_update()
 	{
 		opt_config_text[l, 0] = fn_getText($"menu_config_all_opt_config_{global.config_fscr}");
 		opt_config_text[l, 1] = fn_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
-		opt_config_text[l, 2] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
-		opt_config_text[l, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
-		opt_config_text[l, 4] = fn_getText($"menu_config_all_opt_config_{global.config_showVer}");
+		opt_config_text[l, 2] = fn_getText($"menu_config_all_opt_config_{global.config_hideCsr}");
+		opt_config_text[l, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
+		opt_config_text[l, 4] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
+		opt_config_text[l, 5] = fn_getText($"menu_config_all_opt_config_{global.config_showVer}");
 	}
 	
 	// Music & Sounds level

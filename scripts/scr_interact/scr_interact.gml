@@ -55,7 +55,7 @@ function fn_interact_evCreate() // Create Event determined by the interactable's
 		if (interact_id == "gift_kart")
 		{
 			interact_loot = LOOT.ITM;
-			interact_loot_piece = ITM.DBG_AXE;
+			interact_loot_piece = ITM.KART;
 		}
 		
 		

@@ -11,6 +11,7 @@ function fn_config_setup_0() // Sets up the game's settings (does not require th
 	// Graphics
 	global.config_fscr = false; // Fullscreen
 	global.config_lowGfx = false; // Low Graphics
+	global.config_hideCsr = false; // Hide Cursor
 	global.config_showFps = false; // Show FPS
 	global.config_showBdr = true; // Show Border
 	global.config_showVer = true; // Show Version
@@ -272,6 +273,7 @@ function fn_config_file_save()
 	// Video Settings
 	ini_write_real("vid", "fscr", global.config_fscr);
 	ini_write_real("vid", "lowGfx", global.config_lowGfx);
+	ini_write_real("vid", "hideCsr", global.config_hideCsr);
 	ini_write_real("vid", "showFps", global.config_showFps);
 	ini_write_real("vid", "showBdr", global.config_showBdr);
 	
@@ -304,6 +306,7 @@ function fn_config_file_load()
 		// Video Settings
 		global.config_fscr = ini_read_real("vid", "fscr", 0);
 		global.config_lowGfx = ini_read_real("vid", "lowGfx", 0);
+		global.config_hideCsr = ini_read_real("vid", "hideCsr", 0);
 		global.config_showFps = ini_read_real("vid", "showFps", 0);
 		global.config_showBdr = ini_read_real("vid", "showBdr", 0);
 	
