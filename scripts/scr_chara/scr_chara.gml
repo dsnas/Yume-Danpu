@@ -2,7 +2,7 @@
 //////// Functions related to characters, like entities and the player
 
 
-function fn_chara_setup(_move_preset = "") // Sets up the main variables of the character
+function fn_chara_setup_0() // Sets up the main variables of the character
 {
 	fn_draw_self_setup();
 	
@@ -31,9 +31,9 @@ function fn_chara_setup(_move_preset = "") // Sets up the main variables of the 
 	move_stg = -1; // ID of the current stage of the movement sequence
 	if (fn_obj_exists(obj_rmTrans) == true && obj_rmTrans.destroy == false) // Freezes the character if the room transition sequence is active
 		move_stg = -2;
+	move_dur = 15; // Time in frames the character will take to walk the distance
 	move_dist = 16; // Distance the character will move
-	move_durMax = 15; // Time in frames the character will take to walk the distance
-	move_dur = 0;
+	move_durCurr = 0;
 	
 		// Delay (customizable)
 	move_dly_act = false; // Determines if the character's movement will be delayed
@@ -62,19 +62,53 @@ function fn_chara_setup(_move_preset = "") // Sets up the main variables of the 
 	
 	for (var d = 0; d < dir_amt; d++)
 	{
-		move_dir_x[d] = 0;
-		move_dir_y[d] = 0;
+		move_dir_pos_x[d] = 0;
+		move_dir_pos_y[d] = 0;
+		move_dir_pos_free[d] = true;
 	}
+	
+		// Walking animation
+	move_walk_act = true; // Determines if the character will animate as walking
+	move_walk_snd_asset = -1; // ID of the asset of the character's walking sound
+	move_walk_snd_volType = -1;
 	
 		// Chain
 	move_chain_act = false; // Determines if the character can NOT move too far from their starting position
 	move_chain_dist = 48;
 	
-		// Presets
-	MOVE_PRESET_PLAYER = "player";
-	MOVE_PRESET_ENTITY = "entity";
-	move_preset = _move_preset;
+		// "Zoom"
+	move_zoom_act = false; // Determines if the character will "zoom" when moving
+	move_zoom_durMin = 30;
+	move_zoom_durMax = 5;
+	move_zoom_time = 90;
+	move_zoom_timeCurr = 0;
+	move_zoom_dirOld = -1;
 	
+			// Sound
+	move_zoom_snd_asset = -1;
+	move_zoom_snd_volType = -1;
+	move_zoom_snd_pitMin = 0.75;
+	move_zoom_snd_pitMax = 1.25;
+	move_zoom_snd_id = -1;
+	
+		// Presets
+	MOVE_PRESET_PLAYER = "player"; // Player
+	MOVE_PRESET_ENTITY_PEACE = "entity_peace"; // Peaceful entity
+	MOVE_PRESET_ENTITY_HOSTL = "entity_hostl"; // Hostile entity
+	move_preset = MOVE_PRESET_ENTITY_PEACE;
+	
+	
+	// Cutscenes
+	cutsc_act = false;
+}
+function fn_chara_setup_1()
+{
+	// Directions
+	sprite_index = dir_spr[dir];
+	
+	
+	// Movement
+		// Presets
 	if (move_preset == MOVE_PRESET_PLAYER) // Player preset
 	{
 		dir_spr[DIR_LT] = spr_player_lt;
@@ -83,47 +117,26 @@ function fn_chara_setup(_move_preset = "") // Sets up the main variables of the 
 		dir_spr[DIR_DN] = spr_player_dn;
 		
 		move_type = MOVE_TYPE_MANUAL;
+		move_walk_snd_asset = snd_player_fstep;
+		move_walk_snd_volType = CONFIG_VOLTYPE.PLAYER;
 	}
-	
-	if (move_preset == MOVE_PRESET_ENTITY) // Entity preset
-	{
-		dir_spr[DIR_LT] = spr_player_lt;
-		dir_spr[DIR_RT] = spr_player_rt;
-		dir_spr[DIR_UP] = spr_player_up;
-		dir_spr[DIR_DN] = spr_player_dn;
-		
-		move_type = MOVE_TYPE_AUTO;
-		move_durMax = 30;
-		
-		move_dly_act = true;
-		move_chain_act = true;
-	}
-	
-	/*
-			// Manual type
-	move_manual_atwlk_act = false; // Determines if the character will automatically walk to the latest inputed direction
-	move_manual_atwlk_lastDir = -1;
-	
-			// Entity preset
-	if (move_preset == MOVE_PRESET_ENTITY)
+	if (move_preset == MOVE_PRESET_ENTITY_PEACE) || (move_preset == MOVE_PRESET_ENTITY_HOSTL) // Entity preset
 	{
 		move_type = MOVE_TYPE_AUTO;
-		move_durMax = 30;
+		move_dur = 30;
 		
-		move_dly_act = true;
-		move_chain_act = true;
-		
-		if (move_auto_chaseTgt != -1)
+		if (move_preset == MOVE_PRESET_ENTITY_PEACE)
 		{
-			move_dly_durMax = 0;
-			move_chain_act = false;
+			move_dly_act = true;
+			move_chain_act = true;
 		}
 	}
-	*/
 	
-	
-	// Cutscenes
-	cutsc_act = false;
+		// Walking animation
+	move_walk_amt = ceil(move_dist / move_dur);
+	move_walk_amtCurr = 0;
+	move_walk_dly_dur = floor(move_dur / move_walk_amt);
+	move_walk_dly_durCurr = 0;
 }
 
 
@@ -131,6 +144,67 @@ function fn_chara_move()
 {
 	if (move_act == true)
 	{
+		// "Zoom" (Kart)
+		if (move_zoom_act == true)
+		{
+			// Sound
+			if (move_zoom_snd_asset != -1)
+			{
+				if (move_zoom_snd_id == -1)
+					move_zoom_snd_id = fn_aud_play(move_zoom_snd_asset, move_zoom_snd_volType, , , , true);
+				var _zoom_snd_pitch = move_zoom_snd_pitMin + ((move_zoom_timeCurr / move_zoom_time) * (move_zoom_snd_pitMax - move_zoom_snd_pitMin));
+				fn_aud_pitch(move_zoom_snd_id, _zoom_snd_pitch);
+			}
+			
+			
+			
+			var _key_hold = false;
+			for (var d = 0; d < dir_amt; d++)
+			{
+				if (fn_config_key_hold(move_dir_key[d]) == true)
+				{
+					_key_hold = true;
+					break;
+				}
+				else
+					continue;
+			}
+			
+			if (move_dir_pos_free[dir] == false && move_zoom_timeCurr > 0)
+			{
+				move_zoom_timeCurr = 0;
+				fn_aud_play(snd_itm_kart_break, CONFIG_VOLTYPE.PLAYER);
+			}
+			
+			if (_key_hold == false)
+			{
+				if (move_zoom_timeCurr > 0)
+					move_zoom_timeCurr -= 1;
+			}
+			else if (_key_hold == true && move_stg > -1)
+			{
+				if (move_zoom_timeCurr < move_zoom_time)
+					move_zoom_timeCurr += 1;
+			}
+			
+			if (move_stg == -1)
+			{
+				if (move_zoom_dirOld != dir)
+				{
+					if (move_zoom_dirOld != -1 && move_zoom_timeCurr > 0)
+					{
+						if (move_zoom_timeCurr >= move_zoom_time)
+							fn_aud_play(snd_itm_kart_turn, CONFIG_VOLTYPE.PLAYER);
+						move_zoom_timeCurr /= 1.5;
+					}
+					move_zoom_dirOld = dir;
+				}
+				
+				move_dur = move_zoom_durMin - ((move_zoom_durMin - move_zoom_durMax) * (move_zoom_timeCurr / move_zoom_time));
+			}
+		}
+		
+		
 		// Idle, inactive movement sequence
 		if (move_stg == -1)
 		{
@@ -145,7 +219,18 @@ function fn_chara_move()
 					for (var d = 0; d < dir_amt; d++)
 					{
 						if (fn_config_key_hold(move_dir_key[d]) == true)
+						{
 							_dir = d;
+							break;
+						}
+						else
+							continue;
+					}					
+					
+					if (_dir == -1)
+					{
+						if (move_zoom_act == true && move_dur < move_zoom_durMin)
+							_dir = dir;
 					}
 				}
 				else if (move_type == MOVE_TYPE_AUTO) // Auto type
@@ -172,17 +257,18 @@ function fn_chara_move()
 					sprite_index = dir_spr[dir];
 				
 					// Calculates target position of the movement
-					move_dir_x[dir] = (x + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
-					move_dir_y[dir] = (y + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
-				
+					move_dir_pos_x[dir] = (x + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
+					move_dir_pos_y[dir] = (y + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
+					move_dir_pos_free[dir] = true;
+					
 					// Checks for collision
-					if (instance_place(move_dir_x[dir], move_dir_y[dir], obj_player) == noone && instance_place(move_dir_x[dir], move_dir_y[dir], obj_solid_parent) == noone)
+					if (instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_player) == noone && instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_solid_parent) == noone)
 					{
 						// Checks if the character would move too far from their starting position
 						if (move_chain_act == true)
 						{
-							var _move_chain_xDiff = abs(xstart - move_dir_x[dir]);
-							var _move_chain_yDiff = abs(ystart - move_dir_y[dir]);
+							var _move_chain_xDiff = abs(xstart - move_dir_pos_x[dir]);
+							var _move_chain_yDiff = abs(ystart - move_dir_pos_y[dir]);
 							
 							if (global.dbg_act == true && global.dbg_excessLog == true)
 								fn_log($"move_chain_xDiff = {_move_chain_xDiff} | move_chain_yDiff = {_move_chain_yDiff}");
@@ -190,33 +276,66 @@ function fn_chara_move()
 						if (move_chain_act == false)
 						|| (move_chain_act == true && _move_chain_xDiff < move_chain_dist && _move_chain_yDiff < move_chain_dist)
 						{
-							x = move_dir_x[dir];
-							y = move_dir_y[dir];
+							x = move_dir_pos_x[dir];
+							y = move_dir_pos_y[dir];
 							move_stg = 0;
-							move_dur = 0;
 						}
+						else
+							move_dir_pos_free[dir] = false;
 					}
+					else
+						move_dir_pos_free[dir] = false;
 				}
 			}
 			else if (move_dly_act == true)
 				move_dly_dur -= 1;
 		}
 		
+		
 		// Moving, active movement sequence
 		if (move_stg == 0) // Moves
 		{
-			self_x += (((move_dist / move_durMax) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
-			self_y += (((move_dist / move_durMax) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
+			self_x += (((move_dist / move_dur) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
+			self_y += (((move_dist / move_dur) * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
+			fn_chara_rm_loop();
 			depth = -self_y;
-		
-			move_dur += 1;
-			if (move_dur >= move_durMax)
+			
+			
+			// Walking animation
+			if (move_walk_act == true)
+			{
+				if (move_walk_dly_durCurr <= 0)
+				{
+					if (move_walk_amtCurr < move_walk_amt)
+					{
+						image_index += 1;
+						move_walk_amtCurr += 1;
+						if (move_walk_snd_asset != -1 && image_index % 2 == 1)
+							fn_aud_play(move_walk_snd_asset, move_walk_snd_volType);
+					}
+					move_walk_dly_durCurr = move_walk_dly_dur;
+				}
+				else
+					move_walk_dly_durCurr -= 1;
+			}
+			
+			
+			move_durCurr += 1;
+			if (move_durCurr >= move_dur)
 			{
 				depth = -y;
+				if (image_index % 2 == 1)
+					image_index += 1;
 				self_x = x;
 				self_y = y;
 				
 				move_stg = -1;
+				move_durCurr = 0;
+				if (move_walk_act == true)
+				{
+					move_walk_amtCurr = 0;
+					move_walk_dly_durCurr = 0;
+				}
 				
 				if (global.dbg_act == true && global.dbg_excessLog == true)
 					fn_log($"x = {x} | self_x = {self_x} | y = {y} | self_y = {self_y} | depth = {depth}");
@@ -224,6 +343,57 @@ function fn_chara_move()
 		}
 	}
 }
+
+/* Zoom
+if (move_zoom_act == true)
+		{
+			if (move_stg > -1)
+			{
+				if (move_zoom_time < move_zoom_timeMax)
+					move_zoom_time += 1;
+			}
+			else if (move_stg == -1)
+			{
+				if (move_zoom_time > 0)
+					move_zoom_time -= 1;
+				
+				move_dur = move_zoom_durMin - ((move_zoom_durMin - move_zoom_durMax) * (move_zoom_time / move_zoom_timeMax));
+			}
+		}
+
+if (_dir == -1 && move_zoom_act == true && move_dur < move_zoom_durMin)
+					{
+						_dir = dir;
+					}
+
+
+
+
+
+
+var _zoom = false;
+for (var d = 0; d < dir_amt; d++)
+{
+	if (fn_config_key_hold(move_dir_key[d]) == true)
+	{
+		_zoom = true;
+		break;
+	}
+	else
+		continue;
+}
+			
+if (_zoom == false)
+{
+	if (move_dur > 0)
+		move_dur -= 0.01;
+}
+else if (_zoom == true)
+{
+	if (move_dur < 
+}
+*/
+
 
 /*
 function fn_chara_move() // The character's movement sequence

@@ -47,6 +47,8 @@ function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops
 {
 	aud_asset = _asset; // ID of the audio's asset
 	aud_volType = _volType;
+	if (aud_volType == -1)
+		aud_volType = CONFIG_VOLTYPE.MASTER;
 	aud_vol = _vol;
 	aud_offset = _offset;
 	aud_pitch = _pitch;
@@ -97,6 +99,14 @@ function fn_aud_playData()
 	// Player
 	if (aud_asset == snd_player_fstep)
 		aud_vol *= 0.75;
+	
+		// Items
+	if (aud_asset == snd_itm_kart_run)
+		aud_vol *= 0.65;
+	if (aud_asset == snd_itm_kart_break)
+		aud_vol *= 0.75;
+	if (aud_asset == snd_itm_kart_turn)
+		aud_vol *= 0.5;
 	
 	
 	// Macacolandia
@@ -258,11 +268,25 @@ function fn_draw_self_setup() // Sets up variables for manual self-drawing
 	self_ySc = image_yscale;
 	self_ang = image_angle;
 	
+	self_custom = false;
 	self_ignoreRdcdMot = false;
 }
 function fn_draw_self() // Manually self-draws
 {
-	fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
+	if (self_custom == false)
+		fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
+	else if (self_custom == true)
+	{
+		if (object_index == obj_player)
+		{
+			// Items
+			if (global.itm == ITM.KART) // Kart
+			{	
+				fn_draw_spr(spr_itm_kart_dn, dir, self_x, self_y);
+				fn_draw_spr_part(sprite_index, image_index, 0, 4, 16, 17, self_x, (self_y - sprite_height + 5), image_blend, image_alpha, self_xSc, self_ySc);
+			}
+		}
+	}
 	
 	// Animates the object
 	if (self_imgSpd > 0)

@@ -7,31 +7,42 @@ if (move_stg == -2)
 	sprite_index = dir_spr[dir];
 
 
-// Movement sequence
-move_manual_atwlk_act = global.config_atwlk;
+// Movement sequence //move_manual_atwlk_act = global.config_atwlk;
+if (global.itm == -1)
+{
+	self_custom = false;
+	
+	move_walk_act = true;
+	
+	move_zoom_act = false;
+}
+else if (global.itm == ITM.KART)
+{
+	self_custom = true;
+	
+	move_walk_act = false;
+	
+	move_zoom_act = true;
+	move_zoom_snd_asset = snd_itm_kart_run;
+}
 fn_chara_move();
 
 
 // Interaction sequence
-for (var d = 0; d < dir_amt; d++)
+if (move_stg == -1)
 {
-	var _interact_obj = instance_place(move_dir_x[d], move_dir_y[d], obj_interact);
-	if (d == dir && press_slct && _interact_obj != noone)
+	var _interact_obj = instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_interact);
+	if (press_slct == true && _interact_obj != noone)
 	{
 		if (_interact_obj.solid_type == _interact_obj.solid_type_interact)
 		|| (_interact_obj.solid_type == _interact_obj.solid_type_entity && _interact_obj.move_stg == -1)
 		{
-			// Starts the interactable's interaction sequence
 			_interact_obj.interact_stg = 0;
 			if (_interact_obj.solid_type == _interact_obj.solid_type_entity)
 				_interact_obj.move_stg = -2;
 				
 			move_stg = -2;
-				
-			break;
 		}
-		else
-			continue;
 	}
 }
 
@@ -57,7 +68,3 @@ if (move_stg == -1) // Checks for menu key inputs and created the menu object
 	else
 		menu_dly_dur -= 1;
 }
-
-/*
-
-*/

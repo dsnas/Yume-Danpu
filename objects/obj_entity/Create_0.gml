@@ -9,11 +9,9 @@ interact_meow_volType = CONFIG_VOLTYPE.ENTITY;
 fn_entity_getId();
 
 
-fn_chara_setup("entity");
-
-
+fn_chara_setup_0();
 fn_entity_evCreate();
-sprite_index = dir_spr[dir];
+fn_chara_setup_1();
 
 
 

@@ -37,8 +37,14 @@ if (global.dbg_act == true && keyboard_check(global.dbg_cmd_key) == true)
 		}
 	}
 	
-	if (keyboard_check_pressed(ord("D")) == true)
-		file_delete(global.config_file_name);
+	if (keyboard_check(ord("D")) == true)
+	{
+		if (keyboard_check_pressed(ord("C")) == true)
+			file_delete(global.config_file_name);
+		
+		if (keyboard_check_pressed(ord("P")) == true)
+			file_delete(global.profile_file_name);
+	}
 	
 	if (keyboard_check_pressed(ord("R")) == true)
 		game_restart();

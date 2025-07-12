@@ -44,7 +44,7 @@ function fn_menu_inv_evCreate_0()
 	main_picFrm_y = (box_y[l, 0] + draw_dist);
 	
 			// Player's picture
-	main_pic_spr = obj_player.move_dir_spr[obj_player.MOVE_DIR_DN];
+	main_pic_spr = obj_player.dir_spr[obj_player.DIR_DN];
 	main_pic_snd = snd_player_fstep;
 	if (irandom_range(1, 100) == 1)
 	{
@@ -306,12 +306,12 @@ function fn_menu_inv_opt_slct()
 	// Other levels (effects, items and themes)
 	else if (l == LVL_OTHER_ITM)
 	{
-		if (global.itm_unlocked[o] == true)
+		if (o < array_length(global.itm_name) && global.itm_unlocked[o] == true)
 			global.itm = o;
 	}
 	else if (l == LVL_OTHER_THM)
 	{
-		if (global.thm_unlocked[o] == true)
+		if (o < array_length(global.thm_name) && global.thm_unlocked[o] == true)
 			global.thm = o;
 	}
 }

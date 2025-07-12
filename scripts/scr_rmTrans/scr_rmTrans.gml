@@ -22,7 +22,7 @@ function fn_rmTrans_start() // Starts the transition sequence
 function fn_rmTrans_getData()
 {
 	if (fn_obj_exists(obj_player) == true)
-		end_player_dir = obj_player.MOVE_DIR_DN;
+		end_player_dir = obj_player.DIR_DN;
 	delay_durMax = 10;
 	type = TYPE_FADE;
 	

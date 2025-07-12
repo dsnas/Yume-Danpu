@@ -74,7 +74,7 @@ if (room == end_rm && end_player_changed == false && fn_obj_exists(obj_player) =
 		}
 	}
 	if (end_player_dir != -1)
-		obj_player.move_dir = end_player_dir;
+		obj_player.dir = end_player_dir;
 	fn_obj_depth(obj_player);
 	
 	end_player_changed = true;

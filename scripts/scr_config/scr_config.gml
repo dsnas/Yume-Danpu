@@ -11,7 +11,7 @@ function fn_config_setup_0() // Sets up the game's settings (does not require th
 	// Graphics
 	global.config_fscr = false; // Fullscreen
 	global.config_lowGfx = false; // Low Graphics
-	global.config_hideCsr = false; // Hide Cursor
+	global.config_hideCsr = true; // Hide Cursor
 	global.config_showFps = false; // Show FPS
 	global.config_showBdr = true; // Show Border
 	global.config_showVer = true; // Show Version

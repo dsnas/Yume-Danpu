@@ -18,10 +18,12 @@ function fn_entity_evCreate() // Create Event determined by the NPC's ID
 	{
 		self_imgSpd = (random_range(0.5, 1.5) / 30);
 		
-		move_dir_spr[MOVE_DIR_LT] = spr_entity_macaco_citizen
-		move_dir_spr[MOVE_DIR_RT] = move_dir_spr[MOVE_DIR_LT];
-		move_dir_spr[MOVE_DIR_UP] = move_dir_spr[MOVE_DIR_LT];
-		move_dir_spr[MOVE_DIR_DN] = move_dir_spr[MOVE_DIR_LT];
+		dir_spr[DIR_LT] = spr_entity_macaco_citizen;
+		dir_spr[DIR_RT] = dir_spr[DIR_LT];
+		dir_spr[DIR_UP] = dir_spr[DIR_LT];
+		dir_spr[DIR_DN] = dir_spr[DIR_LT];
+		
+		move_preset = MOVE_PRESET_ENTITY_PEACE;
 		
 		interact_type = INTERACT_TYPE_MEOW;
 		
