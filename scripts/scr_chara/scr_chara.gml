@@ -13,6 +13,7 @@ function fn_chara_setup_0() // Sets up the main variables of the character
 	DIR_UP = 2;
 	DIR_DN = 3;
 	dir = DIR_DN; // Current direction the character is looking towards
+	dirOld = -1;
 	
 	DIR_AXIS_HOR = 0; // ID number of each axis the character can look towards
 	DIR_AXIS_VER = 1;
@@ -31,6 +32,7 @@ function fn_chara_setup_0() // Sets up the main variables of the character
 	move_stg = -1; // ID of the current stage of the movement sequence
 	if (fn_obj_exists(obj_rmTrans) == true && obj_rmTrans.destroy == false) // Freezes the character if the room transition sequence is active
 		move_stg = -2;
+	move_stgOld = -1;
 	move_dur = 15; // Time in frames the character will take to walk the distance
 	move_dist = 16; // Distance the character will move
 	move_durCurr = 0;
@@ -62,9 +64,10 @@ function fn_chara_setup_0() // Sets up the main variables of the character
 	
 	for (var d = 0; d < dir_amt; d++)
 	{
+		move_dir_key_inp[d] = false;
+		
 		move_dir_pos_x[d] = 0;
 		move_dir_pos_y[d] = 0;
-		move_dir_pos_free[d] = true;
 	}
 	
 		// Walking animation
@@ -76,20 +79,30 @@ function fn_chara_setup_0() // Sets up the main variables of the character
 	move_chain_act = false; // Determines if the character can NOT move too far from their starting position
 	move_chain_dist = 48;
 	
-		// "Zoom"
-	move_zoom_act = false; // Determines if the character will "zoom" when moving
-	move_zoom_durMin = 30;
-	move_zoom_durMax = 5;
-	move_zoom_time = 90;
-	move_zoom_timeCurr = 0;
-	move_zoom_dirOld = -1;
+		// Sliding
+	move_slide_act = false; // Determines if the character will slide when moving
+	move_slide_acted = false;
+	move_slide_durSpdStart = 2;
+	move_slide_durSpdStop = 3;
+	move_slide_durFast = 6;
+	move_slide_durFastSkip = 10;
+	move_slide_durSlow = 45;
 	
-			// Sound
-	move_zoom_snd_asset = -1;
-	move_zoom_snd_volType = -1;
-	move_zoom_snd_pitMin = 0.75;
-	move_zoom_snd_pitMax = 1.25;
-	move_zoom_snd_id = -1;
+			// Sounds
+	move_slide_sndEng_asset = -1;
+	move_slide_sndEng_pitMin = 0.6;
+	move_slide_sndEng_pitMax = 1.2;
+	move_slide_sndEng_id = -1;
+	move_slide_sndBrk_asset = -1;
+	move_slide_sndHit_asset = -1;
+	move_slide_snd_volType = -1;
+	
+			// Shaking
+	move_slide_shkBrk_act = true;
+	move_slide_shkHit_act = true;
+	move_slide_shk_dist = 1;
+	move_slide_shk_dur = (5 * !global.config_rdcdMot); // Duration in frames of the character's shake
+	move_slide_shk_durCurr = 0;
 	
 		// Presets
 	MOVE_PRESET_PLAYER = "player"; // Player
@@ -117,8 +130,14 @@ function fn_chara_setup_1()
 		dir_spr[DIR_DN] = spr_player_dn;
 		
 		move_type = MOVE_TYPE_MANUAL;
+		
 		move_walk_snd_asset = snd_player_fstep;
 		move_walk_snd_volType = CONFIG_VOLTYPE.PLAYER;
+		
+		move_slide_sndEng_asset = snd_itm_kart_eng;
+		move_slide_sndBrk_asset = snd_itm_kart_brk;
+		move_slide_sndHit_asset = snd_itm_kart_hit;
+		move_slide_snd_volType = CONFIG_VOLTYPE.PLAYER;
 	}
 	if (move_preset == MOVE_PRESET_ENTITY_PEACE) || (move_preset == MOVE_PRESET_ENTITY_HOSTL) // Entity preset
 	{
@@ -144,65 +163,7 @@ function fn_chara_move()
 {
 	if (move_act == true)
 	{
-		// "Zoom" (Kart)
-		if (move_zoom_act == true)
-		{
-			// Sound
-			if (move_zoom_snd_asset != -1)
-			{
-				if (move_zoom_snd_id == -1)
-					move_zoom_snd_id = fn_aud_play(move_zoom_snd_asset, move_zoom_snd_volType, , , , true);
-				var _zoom_snd_pitch = move_zoom_snd_pitMin + ((move_zoom_timeCurr / move_zoom_time) * (move_zoom_snd_pitMax - move_zoom_snd_pitMin));
-				fn_aud_pitch(move_zoom_snd_id, _zoom_snd_pitch);
-			}
-			
-			
-			
-			var _key_hold = false;
-			for (var d = 0; d < dir_amt; d++)
-			{
-				if (fn_config_key_hold(move_dir_key[d]) == true)
-				{
-					_key_hold = true;
-					break;
-				}
-				else
-					continue;
-			}
-			
-			if (move_dir_pos_free[dir] == false && move_zoom_timeCurr > 0)
-			{
-				move_zoom_timeCurr = 0;
-				fn_aud_play(snd_itm_kart_break, CONFIG_VOLTYPE.PLAYER);
-			}
-			
-			if (_key_hold == false)
-			{
-				if (move_zoom_timeCurr > 0)
-					move_zoom_timeCurr -= 1;
-			}
-			else if (_key_hold == true && move_stg > -1)
-			{
-				if (move_zoom_timeCurr < move_zoom_time)
-					move_zoom_timeCurr += 1;
-			}
-			
-			if (move_stg == -1)
-			{
-				if (move_zoom_dirOld != dir)
-				{
-					if (move_zoom_dirOld != -1 && move_zoom_timeCurr > 0)
-					{
-						if (move_zoom_timeCurr >= move_zoom_time)
-							fn_aud_play(snd_itm_kart_turn, CONFIG_VOLTYPE.PLAYER);
-						move_zoom_timeCurr /= 1.5;
-					}
-					move_zoom_dirOld = dir;
-				}
-				
-				move_dur = move_zoom_durMin - ((move_zoom_durMin - move_zoom_durMax) * (move_zoom_timeCurr / move_zoom_time));
-			}
-		}
+		dirOld = dir;
 		
 		
 		// Idle, inactive movement sequence
@@ -212,24 +173,34 @@ function fn_chara_move()
 			{
 				move_dly_dur = irandom_range(move_dly_durMin, move_dly_durMax);
 				
+				
 				// Retrieves the direction the character will move towards
 				var _dir = -1;
 				if (move_type == MOVE_TYPE_MANUAL) // Manual type
 				{
 					for (var d = 0; d < dir_amt; d++)
 					{
-						if (fn_config_key_hold(move_dir_key[d]) == true)
+						move_dir_key_inp[d] = fn_config_key_hold(move_dir_key[d]);
+						if (move_dir_key_inp[d] == true)
 						{
 							_dir = d;
 							break;
 						}
 						else
 							continue;
-					}					
+					}
 					
-					if (_dir == -1)
+					// Sliding
+					if (move_slide_act == true)
 					{
-						if (move_zoom_act == true && move_dur < move_zoom_durMin)
+						if (move_slide_acted == false)
+						{
+							move_dur = move_slide_durSlow;
+							if (move_slide_sndEng_asset != -1)
+								move_slide_sndEng_id = fn_aud_play(move_slide_sndEng_asset, move_slide_snd_volType, , , move_slide_sndEng_pitMin, true);
+						}
+						move_slide_acted = true;
+						if (_dir == -1 && move_dur < move_slide_durSlow)
 							_dir = dir;
 					}
 				}
@@ -249,42 +220,90 @@ function fn_chara_move()
 							_dir = DIR_DN;
 					}
 				}
-			
+				
+				
 				// Calculates movement target position and checks for collision
 				if (_dir != -1)
 				{
 					dir = _dir;
 					sprite_index = dir_spr[dir];
-				
+					
 					// Calculates target position of the movement
 					move_dir_pos_x[dir] = (x + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_HOR));
 					move_dir_pos_y[dir] = (y + (move_dist * move_dir_spdMul[dir]) * (dir_axis[dir] == DIR_AXIS_VER));
-					move_dir_pos_free[dir] = true;
 					
 					// Checks for collision
 					if (instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_player) == noone && instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_solid_parent) == noone)
 					{
 						// Checks if the character would move too far from their starting position
-						if (move_chain_act == true)
-						{
-							var _move_chain_xDiff = abs(xstart - move_dir_pos_x[dir]);
-							var _move_chain_yDiff = abs(ystart - move_dir_pos_y[dir]);
-							
-							if (global.dbg_act == true && global.dbg_excessLog == true)
-								fn_log($"move_chain_xDiff = {_move_chain_xDiff} | move_chain_yDiff = {_move_chain_yDiff}");
-						}
 						if (move_chain_act == false)
-						|| (move_chain_act == true && _move_chain_xDiff < move_chain_dist && _move_chain_yDiff < move_chain_dist)
+						|| (move_chain_act == true && abs(xstart - move_dir_pos_x[dir]) < move_chain_dist && abs(ystart - move_dir_pos_y[dir]) < move_chain_dist)
 						{
+							// Sliding
+							if (move_slide_act == true && move_type == MOVE_TYPE_MANUAL)
+							{
+								if (move_slide_sndEng_id != -1)
+								{
+									var _slide_sndEng_pitDiff = (move_slide_sndEng_pitMax - move_slide_sndEng_pitMin);
+									var _slide_sndEng_pitch = (move_slide_sndEng_pitMin + (_slide_sndEng_pitDiff * (move_slide_durFast / move_dur)));
+									fn_aud_pitch(move_slide_sndEng_id, _slide_sndEng_pitch);
+									fn_log(_slide_sndEng_pitch);
+								}
+								
+								// Checks if the movement key is being held and reduces the duration of the slide
+								if (move_dir_key_inp[dir] == true)
+								{
+									// Brake animation
+									if (dirOld != dir && move_dur <= move_slide_durFast)
+									{
+										move_dur *= 10;
+										if (move_slide_sndBrk_asset != -1)
+											fn_aud_play(move_slide_sndBrk_asset, move_slide_snd_volType);
+										if (move_slide_shkBrk_act == true)
+											move_slide_shk_durCurr = move_slide_shk_dur;
+									}
+									
+									if (move_dur > move_slide_durFast)
+									{
+										if (move_dur > move_slide_durFastSkip)
+											move_dur = move_slide_durFastSkip;
+										else
+											move_dur -= move_slide_durSpdStart;
+							
+										if (move_dur < move_slide_durFast)
+											move_dur = move_slide_durFast;
+									}
+								}
+								
+								// Checks if the movement key isn't been held and increases the duration of the slide
+								else if (move_dir_key_inp[dir] == false && move_dur < move_slide_durSlow)
+								{
+									move_dur += move_slide_durSpdStop;
+									if (move_dur > move_slide_durSlow)
+										move_dur = move_slide_durSlow;
+								}
+							}
+							
+							// Starts the movement sequence
 							x = move_dir_pos_x[dir];
 							y = move_dir_pos_y[dir];
 							move_stg = 0;
 						}
-						else
-							move_dir_pos_free[dir] = false;
 					}
 					else
-						move_dir_pos_free[dir] = false;
+					{
+						// Sliding
+						if (move_slide_act == true && move_dur < move_slide_durSlow && move_stgOld > -1)
+						{
+							move_dur = move_slide_durSlow;
+							if (move_slide_sndHit_asset != -1)
+								fn_aud_play(move_slide_sndHit_asset, move_slide_snd_volType);
+							if (move_slide_shkHit_act == true)
+								move_slide_shk_durCurr = move_slide_shk_dur;
+						}
+					}
+					
+					move_stgOld = move_stg;
 				}
 			}
 			else if (move_dly_act == true)
@@ -329,13 +348,9 @@ function fn_chara_move()
 				self_x = x;
 				self_y = y;
 				
+				move_stgOld = move_stg;
 				move_stg = -1;
 				move_durCurr = 0;
-				if (move_walk_act == true)
-				{
-					move_walk_amtCurr = 0;
-					move_walk_dly_durCurr = 0;
-				}
 				
 				if (global.dbg_act == true && global.dbg_excessLog == true)
 					fn_log($"x = {x} | self_x = {self_x} | y = {y} | self_y = {self_y} | depth = {depth}");
@@ -343,93 +358,6 @@ function fn_chara_move()
 		}
 	}
 }
-
-/* Zoom
-if (move_zoom_act == true)
-		{
-			if (move_stg > -1)
-			{
-				if (move_zoom_time < move_zoom_timeMax)
-					move_zoom_time += 1;
-			}
-			else if (move_stg == -1)
-			{
-				if (move_zoom_time > 0)
-					move_zoom_time -= 1;
-				
-				move_dur = move_zoom_durMin - ((move_zoom_durMin - move_zoom_durMax) * (move_zoom_time / move_zoom_timeMax));
-			}
-		}
-
-if (_dir == -1 && move_zoom_act == true && move_dur < move_zoom_durMin)
-					{
-						_dir = dir;
-					}
-
-
-
-
-
-
-var _zoom = false;
-for (var d = 0; d < dir_amt; d++)
-{
-	if (fn_config_key_hold(move_dir_key[d]) == true)
-	{
-		_zoom = true;
-		break;
-	}
-	else
-		continue;
-}
-			
-if (_zoom == false)
-{
-	if (move_dur > 0)
-		move_dur -= 0.01;
-}
-else if (_zoom == true)
-{
-	if (move_dur < 
-}
-*/
-
-
-/*
-function fn_chara_move() // The character's movement sequence
-{
-	
-		
-		// Manual type  →  Autowalk
-		if (move_manual_atwlk_act == true)
-		{
-			for (var d = 0; d < 4; d++)
-			{
-				if (fn_config_key_hold(move_dir_key[d]) == true)
-					move_manual_atwlk_lastDir = d;
-			}
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-// Autowalk
-				if (move_manual_atwlk_act == true && _move_dir == -1)
-				{
-					_move_dir = move_dir;
-					if (move_manual_atwlk_lastDir != -1)
-						_move_dir = move_manual_atwlk_lastDir;
-					move_manual_atwlk_lastDir = -1;
-				}
-*/
 
 
 function fn_chara_rm_loop() // Room looping system

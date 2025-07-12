@@ -1,5 +1,5 @@
 
-if (global.dbg_act == true) || (room == rm_dbgwrld)
+if (global.dbg_act == true && global.dbg_hud_act == true) || (room == rm_dbgwrld)
 {
 	draw_set_color(c_red);
 	draw_set_alpha(0.5);

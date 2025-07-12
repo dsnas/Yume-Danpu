@@ -101,12 +101,12 @@ function fn_aud_playData()
 		aud_vol *= 0.75;
 	
 		// Items
-	if (aud_asset == snd_itm_kart_run)
+	if (aud_asset == snd_itm_kart_eng)
 		aud_vol *= 0.65;
-	if (aud_asset == snd_itm_kart_break)
-		aud_vol *= 0.75;
-	if (aud_asset == snd_itm_kart_turn)
+	if (aud_asset == snd_itm_kart_brk)
 		aud_vol *= 0.5;
+	if (aud_asset == snd_itm_kart_hit)
+		aud_vol *= 0.75;
 	
 	
 	// Macacolandia
@@ -282,8 +282,17 @@ function fn_draw_self() // Manually self-draws
 			// Items
 			if (global.itm == ITM.KART) // Kart
 			{	
-				fn_draw_spr(spr_itm_kart_dn, dir, self_x, self_y);
-				fn_draw_spr_part(sprite_index, image_index, 0, 4, 16, 17, self_x, (self_y - sprite_height + 5), image_blend, image_alpha, self_xSc, self_ySc);
+				var _self_x = self_x;
+				var _self_y = self_y;
+				if (move_slide_shk_durCurr > 0)
+				{
+					_self_x += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
+					_self_y += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
+					move_slide_shk_durCurr -= 1;
+				}
+				
+				fn_draw_spr(spr_itm_kart_dn, dir, _self_x, _self_y);
+				fn_draw_spr_part(sprite_index, image_index, 0, 4, 16, 17, _self_x, (_self_y - sprite_height + 5), image_blend, image_alpha, self_xSc, self_ySc);
 			}
 		}
 	}

@@ -12,7 +12,7 @@ function fn_itm_setup() // Sets up the items
 	// Debug items
 	fn_itm_add(ITM.KART);
 	
-	global.itm = -1; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)
+	global.itm = ITM.KART; // Determines which item is currently active (-1 == none, so must check if it equals or is higher than zero before using it to get data from the array)
 }
 function fn_itm_add(_itm)
 {

@@ -11,19 +11,14 @@ if (move_stg == -2)
 if (global.itm == -1)
 {
 	self_custom = false;
-	
 	move_walk_act = true;
-	
-	move_zoom_act = false;
+	move_slide_act = false;
 }
 else if (global.itm == ITM.KART)
 {
 	self_custom = true;
-	
 	move_walk_act = false;
-	
-	move_zoom_act = true;
-	move_zoom_snd_asset = snd_itm_kart_run;
+	move_slide_act = true;
 }
 fn_chara_move();
 
