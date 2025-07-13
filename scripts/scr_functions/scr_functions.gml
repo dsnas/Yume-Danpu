@@ -42,123 +42,170 @@ function fn_obj_depth(_asset = id, _val = -_asset.bbox_bottom)
 		depth = _val;
 }
 
-// Functions related to audio
-function fn_aud_play(_asset, _volType, _vol = 1, _offset = 0, _pitch = 1, _loops = false) // Starts playing the specified audio
+
+// Functions related to audio, like sounds and music
+function fn_aud_play(_asset, _volType, _vol = 1, _ofs = 0, _pit = 1, _loops = false) // Starts playing the specified audio
 {
-	aud_asset = _asset; // ID of the audio's asset
-	aud_volType = _volType;
-	if (aud_volType == -1)
-		aud_volType = CONFIG_VOLTYPE.MASTER;
-	aud_vol = _vol;
-	aud_offset = _offset;
-	aud_pitch = _pitch;
-	aud_loops = _loops;
+	var _id = audio_play_sound(_asset, 0, false);
+	fn_aud_vol(_asset, _id, _volType, _vol);
+	fn_aud_ofs(_asset, _id, _ofs);
+	fn_aud_pit(_asset, _id, _pit);
+	audio_sound_loop(_id, _loops);
 	
-	
-	fn_aud_playData();
-	
-	
-	aud_id = audio_play_sound(aud_asset, 0, false);
-	fn_aud_vol(aud_id, aud_volType, aud_vol);
-	if (aud_offset > 0)
-		audio_sound_set_track_position(aud_id, aud_offset);
-	fn_aud_pitch(aud_id, aud_pitch);
-	audio_sound_loop(aud_id, aud_loops);
-	
-	
-	return aud_id;
-}
-function fn_aud_playData()
-{
-	// aud_vol MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
-	// aud_offset MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
-	// aud_pitch MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
-	
-	
-	// Menu
-	if (aud_asset == snd_thm_start_0)
-		aud_offset += 0.15;
-	if (aud_asset == snd_thm_opt_move_0)
-		aud_vol = 1;
-	if (aud_asset == snd_thm_opt_slct_0)
-		aud_vol *= 1.35;
-	if (aud_asset == snd_thm_opt_cncl_0)
-		aud_vol *= 0.9;
-	if (aud_asset == snd_thm_unlock_0_0) || (aud_asset == snd_thm_unlock_1_0) || (aud_asset == snd_thm_unlock_2_0)
-		aud_vol *= 0.45;
-	if (aud_asset == snd_thm_opt_move_1)
-		aud_vol *= 0.4;
-	if (aud_asset == snd_thm_opt_slct_1)
-		aud_vol *= 0.2;
-	if (aud_asset == snd_thm_opt_cncl_1)
-		aud_vol *= 0.2;
-	if (aud_asset == snd_thm_opt_fail_1)
-		aud_vol *= 0.4;
-	
-	
-	// Player
-	if (aud_asset == snd_player_fstep)
-		aud_vol *= 0.75;
-	
-		// Items
-	if (aud_asset == snd_itm_kart_eng)
-		aud_vol *= 0.65;
-	if (aud_asset == snd_itm_kart_brk)
-		aud_vol *= 0.5;
-	if (aud_asset == snd_itm_kart_hit)
-		aud_vol *= 0.75;
-	
-	
-	// Macacolandia
-	if (aud_asset == snd_entity_macaco_citizen_0)
-	{
-		aud_vol *= 0.5;
-		aud_offset = 0.25;
-	}
-	if (aud_asset == snd_entity_macaco_citizen_1)
-		aud_offset = 0.25;
-	if (aud_asset == snd_entity_macaco_citizen_2)
-		aud_vol *= 0.3;
-	if (aud_asset == snd_entity_macaco_citizen_3)
-	{
-		aud_vol *= 0.85;
-		aud_offset = 0.25;
-	}
-	if (aud_asset == snd_entity_macaco_citizen_4)
-		aud_vol *= 0.65;
-	if (aud_asset == snd_entity_macaco_citizen_5)
-		aud_vol *= 0.5;
-	if (aud_asset == snd_entity_macaco_citizen_6)
-	{
-		aud_vol *= 0.35;
-		aud_offset = 0.25;
-	}
-	
-	
-	// Other
-	if (aud_asset == snd_hulapoca)
-		aud_vol *= 0.5;
-	if (aud_asset == snd_penyplocde)
-		aud_vol *= 0.35;
-	
-	
-	// the WORST fucking FUNCTION i've EVER made in my LIFE. Jesus       !!!!!
+	return _id;
 }
 
-function fn_aud_vol(_id, _volType, _vol) // Changes the playing audio's volume to the specified value
+function fn_aud_vol(_asset, _id, _volType, _vol = 1) // Changes the playing audio's volume to the fixed specified value
 {
-	_vol = ((_vol * global.config_volType[_volType]) * global.config_volType[CONFIG_VOLTYPE.MASTER]); // Multiplies the audio's volume to the one in the array
+	_vol = fn_aud_volData(_asset, _vol);
+	_vol *= global.config_volType[_volType];
+	_vol *= global.config_volType[CONFIG_VOLTYPE.MASTER];
+	
 	audio_sound_gain(_id, _vol, 0);
 }
-function fn_aud_pitch(_id, _pitch)
+function fn_aud_volData(_asset, _vol)
 {
-	audio_sound_pitch(_id, _pitch);
+	// _vol MUST ONLY BE MULTIPLIED, NOT ADDED or SUBTRACTED
+	
+	
+	switch (_asset)
+	{
+		// Menu sounds
+			// Default theme
+		case snd_thm_opt_move_0: // The sound that should be used as reference for all others
+			_vol = 1;
+			break;
+		case snd_thm_opt_slct_0:
+			_vol *= 1.35;
+			break;
+		case snd_thm_opt_cncl_0:
+			_vol *= 0.9;
+			break;
+		case snd_thm_unlock_0_0:
+		case snd_thm_unlock_1_0:
+		case snd_thm_unlock_2_0:
+			_vol *= 0.45;
+			break;
+			// Madotsuki theme
+		case snd_thm_opt_move_1:
+			_vol *= 0.4;
+			break;
+		case snd_thm_opt_slct_1:
+			_vol *= 0.2;
+			break;
+		case snd_thm_opt_cncl_1:
+			_vol *= 0.2;
+			break;
+		case snd_thm_opt_fail_1:
+			_vol *= 0.4;
+			break;
+		
+		
+		// Player sounds
+		case snd_player_fstep:
+			_vol *= 0.75;
+			break;
+		
+		
+		// Item sounds
+		case snd_itm_kart_eng:
+			_vol *= 0.65;
+			break;
+		case snd_itm_kart_brk:
+			_vol *= 0.5;
+			break;
+		case snd_itm_kart_hit:
+			_vol *= 0.75;
+			break;
+		
+		
+		// Interaction
+		case snd_hulapoca:
+			_vol *= 0.5;
+			break;
+		case snd_penyplocde:
+			_vol *= 0.35;
+			break;
+		
+		
+		// Macacolandia citizens
+		case snd_entity_macaco_citizen_0:
+			_vol *= 0.5;
+			break;
+		case snd_entity_macaco_citizen_2:
+			_vol *= 0.3;
+			break;
+		case snd_entity_macaco_citizen_3:
+			_vol *= 0.85;
+			break;
+		case snd_entity_macaco_citizen_4:
+			_vol *= 0.65;
+			break;
+		case snd_entity_macaco_citizen_5:
+			_vol *= 0.5;
+			break;
+		case snd_entity_macaco_citizen_6:
+			_vol *= 0.35;
+			break;
+	}
+	
+	
+	return _vol;
+	// one of the WORST fucking FUNCTION i've EVER made in my LIFE. Jesus       !!!!!
 }
 
-function fn_aud_stop(_asset) // Stops playing the specified audio
+function fn_aud_ofs(_asset, _id, _ofs = 0) // Changes the playing audio's offset to the fixed specified value
 {
-	audio_stop_sound(_asset);
+	_ofs = fn_aud_ofsData(_asset, _ofs);
+	
+	audio_sound_set_track_position(_id, _ofs);
 }
+function fn_aud_ofsData(_asset, _ofs)
+{
+	// _ofs MUST ONLY BE ADDED, NOT SUBTRACTED or MULTIPLIED
+	
+	
+	switch (_asset)
+	{
+		// Menu sounds
+			// Default theme
+		case snd_thm_start_0:
+			_ofs += 0.15;
+			break;
+		
+		
+		// Sounds of Macacolandia citizens
+		case snd_entity_macaco_citizen_0:
+			_ofs += 0.25;
+			break;
+		case snd_entity_macaco_citizen_1:
+			_ofs += 0.25;
+			break;
+		case snd_entity_macaco_citizen_3:
+			_ofs += 0.25;
+			break;
+		case snd_entity_macaco_citizen_6:
+			_ofs += 0.25;
+			break;
+	}
+	
+	
+	return _ofs;
+	// one of the WORST fucking FUNCTION i've EVER made in my LIFE. Jesus       !!!!!
+}
+
+function fn_aud_pit(_asset, _id, _pit = 1)
+{
+	audio_sound_pitch(_id, _pit);
+	
+	// _pit MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
+}
+
+function fn_aud_stop(_id) // Stops playing the specified audio
+{
+	audio_stop_sound(_id);
+}
+
 
 // Functions related to sprites
 function fn_spr_w(_asset) // Returns the width of the specified sprite
@@ -273,30 +320,6 @@ function fn_draw_self_setup() // Sets up variables for manual self-drawing
 }
 function fn_draw_self() // Manually self-draws
 {
-	if (self_custom == false)
-		fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
-	else if (self_custom == true)
-	{
-		if (object_index == obj_player)
-		{
-			// Items
-			if (global.itm == ITM.KART) // Kart
-			{	
-				var _self_x = self_x;
-				var _self_y = self_y;
-				if (move_slide_shk_durCurr > 0)
-				{
-					_self_x += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
-					_self_y += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
-					move_slide_shk_durCurr -= 1;
-				}
-				
-				fn_draw_spr(spr_itm_kart_dn, dir, _self_x, _self_y);
-				fn_draw_spr_part(sprite_index, image_index, 0, 4, 16, 17, _self_x, (_self_y - sprite_height + 5), image_blend, image_alpha, self_xSc, self_ySc);
-			}
-		}
-	}
-	
 	// Animates the object
 	if (self_imgSpd > 0)
 	{
@@ -304,6 +327,10 @@ function fn_draw_self() // Manually self-draws
 		if (global.config_rdcdMot == true && self_ignoreRdcdMot == false)
 			image_index = 0;
 	}
+	
+	// Draws the object
+	if (self_custom == false)
+		fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
 }
 
 
@@ -361,3 +388,4 @@ function fn_log(_msg) // Sends a message to the log
 {
 	show_debug_message($"[{current_time}]  [{object_get_name(object_index)}]  {_msg}");
 }
+

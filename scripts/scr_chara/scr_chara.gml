@@ -83,15 +83,15 @@ function fn_chara_setup_0() // Sets up the main variables of the character
 	move_slide_act = false; // Determines if the character will slide when moving
 	move_slide_acted = false;
 	move_slide_durSpdStart = 2;
-	move_slide_durSpdStop = 3;
+	move_slide_durSpdStop = 4;
 	move_slide_durFast = 6;
-	move_slide_durFastSkip = 10;
+	move_slide_durFastSkip = 12;
 	move_slide_durSlow = 45;
 	
 			// Sounds
 	move_slide_sndEng_asset = -1;
-	move_slide_sndEng_pitMin = 0.6;
-	move_slide_sndEng_pitMax = 1.2;
+	move_slide_sndEng_pitMin = 0.5;
+	move_slide_sndEng_pitMax = 1.5;
 	move_slide_sndEng_id = -1;
 	move_slide_sndBrk_asset = -1;
 	move_slide_sndHit_asset = -1;
@@ -166,6 +166,14 @@ function fn_chara_move()
 		dirOld = dir;
 		
 		
+		// Sliding
+		if (move_slide_act == true && move_slide_acted == false)
+		{
+			move_dur = move_slide_durSlow;
+			move_slide_acted = true;
+		}
+		
+		
 		// Idle, inactive movement sequence
 		if (move_stg == -1)
 		{
@@ -193,13 +201,6 @@ function fn_chara_move()
 					// Sliding
 					if (move_slide_act == true)
 					{
-						if (move_slide_acted == false)
-						{
-							move_dur = move_slide_durSlow;
-							if (move_slide_sndEng_asset != -1)
-								move_slide_sndEng_id = fn_aud_play(move_slide_sndEng_asset, move_slide_snd_volType, , , move_slide_sndEng_pitMin, true);
-						}
-						move_slide_acted = true;
 						if (_dir == -1 && move_dur < move_slide_durSlow)
 							_dir = dir;
 					}
@@ -242,14 +243,6 @@ function fn_chara_move()
 							// Sliding
 							if (move_slide_act == true && move_type == MOVE_TYPE_MANUAL)
 							{
-								if (move_slide_sndEng_id != -1)
-								{
-									var _slide_sndEng_pitDiff = (move_slide_sndEng_pitMax - move_slide_sndEng_pitMin);
-									var _slide_sndEng_pitch = (move_slide_sndEng_pitMin + (_slide_sndEng_pitDiff * (move_slide_durFast / move_dur)));
-									fn_aud_pitch(move_slide_sndEng_id, _slide_sndEng_pitch);
-									fn_log(_slide_sndEng_pitch);
-								}
-								
 								// Checks if the movement key is being held and reduces the duration of the slide
 								if (move_dir_key_inp[dir] == true)
 								{
@@ -311,6 +304,22 @@ function fn_chara_move()
 		}
 		
 		
+		// Sliding
+		if (move_slide_act == true)
+		{
+			if (move_slide_sndEng_asset != -1)
+			{
+				if (move_slide_sndEng_id == -1)
+					move_slide_sndEng_id = fn_aud_play(move_slide_sndEng_asset, move_slide_snd_volType, , , move_slide_sndEng_pitMin, true);
+				
+				fn_aud_vol(move_slide_sndEng_asset, move_slide_sndEng_id, move_slide_snd_volType);
+				var _slide_sndEng_pitDiff = (move_slide_sndEng_pitMax - move_slide_sndEng_pitMin);
+				var _slide_sndEng_pitch = (move_slide_sndEng_pitMin + (_slide_sndEng_pitDiff * (move_slide_durFast / move_dur)));
+				fn_aud_pit(move_slide_sndEng_asset, move_slide_sndEng_id, _slide_sndEng_pitch);
+			}
+		}
+		
+		
 		// Moving, active movement sequence
 		if (move_stg == 0) // Moves
 		{
@@ -351,6 +360,11 @@ function fn_chara_move()
 				move_stgOld = move_stg;
 				move_stg = -1;
 				move_durCurr = 0;
+				if (move_walk_act == true)
+				{
+					move_walk_amtCurr = 0;
+					move_walk_dly_durCurr = 0;
+				}
 				
 				if (global.dbg_act == true && global.dbg_excessLog == true)
 					fn_log($"x = {x} | self_x = {self_x} | y = {y} | self_y = {self_y} | depth = {depth}");

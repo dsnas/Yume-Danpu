@@ -132,13 +132,13 @@ function fn_rmCtrl_cam_lock_act(_xAct = false, _x = 0, _yAct = false, _y = 0)
 
 
 // Functions related to the room's music
-function fn_rmCtrl_mus_add(_idx, _asset, _vol = 1, _pitch = 1, _volType = CONFIG_VOLTYPE.MUS)
+function fn_rmCtrl_mus_add(_idx, _asset, _vol = 1, _pit = 1, _volType = CONFIG_VOLTYPE.MUS)
 {
 	var m = _idx;
 	
 	mus_asset[m] = _asset;
 	mus_vol[m] = _vol;
-	mus_pitch[m] = _pitch;
+	mus_pit[m] = _pit;
 	mus_volType[m] = _volType;
 	
 	mus_id[m] = -1;
