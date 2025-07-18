@@ -21,16 +21,6 @@ If you want to see what we're doing next, check out [the playlist](https://www.y
 
 &nbsp;
 
-## Infrequently asked questions
-
-### Why use GameMaker?
-> I started using GameMaker back in 2021, so I've picked up a thing or two since then. Also, GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.
-
-### Why is it open-source?
-> During the development of version 0.02, the GameMaker project randomly got corrupted. That's when I decided to put the game on GitHub, since it makes backing up way faster and easier. I made the repository public because, well... **What Could Possibly Go Wrong™**? We'd be more than happy if someone used what we made to create something new, even though that's not really our Mango.
-
-&nbsp;
-
 <p align="center">
   <a href="https://dsnas.itch.io/yume-danpu">
     <img src="./sprites/spr_entity_macaco_citizen/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="12" /></a>
