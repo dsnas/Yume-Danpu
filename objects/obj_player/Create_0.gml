@@ -5,9 +5,9 @@ view_enabled = true;
 view_visible[0] = true;
 
 
-fn_chara_setup_0();
-move_preset = "player";
-fn_chara_setup_1();
+fn_chara_setup();
+move_preset = MOVE_PRESET_PLAYER;
+fn_chara_move_preset();
 
 
 // Opening and closing menus

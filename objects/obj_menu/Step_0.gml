@@ -1,5 +1,5 @@
 
-fn_config_key_quick();
+fn_key_quick();
 
 fn_menu_evStep();
 
@@ -63,7 +63,7 @@ if (opt_len[lvl] > 0 && lvl_alp[lvl] == 1)
 		
 		// Starts playing the option movement sound
 		if (_opt_move_posOld != opt_move_pos[lvl])
-			fn_aud_play(opt_move_snd[lvl], CONFIG_VOLTYPE.MENU);
+			fn_aud_play(opt_move_snd[lvl], CONFIG_AUD_STYLE.MENU);
 	}
 	
 	
@@ -76,23 +76,23 @@ if (opt_len[lvl] > 0 && lvl_alp[lvl] == 1)
 		fn_menu_opt_config_move();
 	
 		// Option selection sequence
-	if (opt_slct_act[l] == true && opt_slct_key[l] != -1 && fn_config_key_press(opt_slct_key[l]) == true)
+	if (opt_slct_act[l] == true && opt_slct_key[l] != -1 && fn_key_pressed(opt_slct_key[l]) == true)
 	{
 		fn_menu_opt_slct(); // Retrieves the option selection sequence determined by the menu's ID
 		
 		// Starts playing the option selection sound
 		if (opt_slct_snd[l, o] != -1)
-			fn_aud_play(opt_slct_snd[l, o], CONFIG_VOLTYPE.MENU);
+			fn_aud_play(opt_slct_snd[l, o], CONFIG_AUD_STYLE.MENU);
 	}
 	
 		// Option cancellation sequence
-	else if (opt_cncl_act[l] == true && ((opt_cncl_key[l, 0] != -1 && fn_config_key_press(opt_cncl_key[l, 0]) == true) || (opt_cncl_key[l, 1] != -1 && fn_config_key_press(opt_cncl_key[l, 1]) == true)))
+	else if (opt_cncl_act[l] == true && ((opt_cncl_key[l, 0] != -1 && fn_key_pressed(opt_cncl_key[l, 0]) == true) || (opt_cncl_key[l, 1] != -1 && fn_key_pressed(opt_cncl_key[l, 1]) == true)))
 	{
 		fn_menu_opt_cncl(); // Retrieves the option cancellation sequence determined by the menu's ID
 		
 		// Starts playing the option cancellation sound
 		if (opt_cncl_snd[l] != -1)
-			fn_aud_play(opt_cncl_snd[l], CONFIG_VOLTYPE.MENU);
+			fn_aud_play(opt_cncl_snd[l], CONFIG_AUD_STYLE.MENU);
 	}
 }
 

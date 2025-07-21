@@ -13,7 +13,7 @@
   "name":"snd_itm_kart_hit",
   "parent":{
     "name":"itm",
-    "path":"folders/profile/itm.yy",
+    "path":"folders/player/itm.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

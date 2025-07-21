@@ -49,7 +49,7 @@
   "origin":9,
   "parent":{
     "name":"itm",
-    "path":"folders/profile/itm.yy",
+    "path":"folders/player/itm.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

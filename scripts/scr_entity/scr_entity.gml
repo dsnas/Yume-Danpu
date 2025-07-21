@@ -6,13 +6,26 @@ function fn_entity_getId() // Retrieves the ID of the NPC, which determines its 
 {
 	entity_id = "";
 	
-	// Macacolandia monkey citizen
-	if (room == rm_dbgwrld) || (room == rm_macaco)
-		entity_id = "macaco_citizen";
+	switch (room)
+	{
+		case rm_nexus: // Nexus
+			entity_id = "help";
+			break;
+		case rm_macaco: // Macacolandia
+		case rm_dbgwrld: // Debug World
+			entity_id = "macaco_citizen";
+	}
 }
 
 function fn_entity_evCreate() // Create Event determined by the NPC's ID
 {
+	// Nexus
+	if (entity_id == "help")
+	{
+		move_auto_flee = obj_player;
+		move_preset = MOVE_PRESET_ENTITY_SLOW;
+	}
+	
 	// Macacolandia monkey citizen
 	if (entity_id == "macaco_citizen")
 	{
@@ -23,7 +36,7 @@ function fn_entity_evCreate() // Create Event determined by the NPC's ID
 		dir_spr[DIR_UP] = dir_spr[DIR_LT];
 		dir_spr[DIR_DN] = dir_spr[DIR_LT];
 		
-		move_preset = MOVE_PRESET_ENTITY_PEACE;
+		move_preset = MOVE_PRESET_ENTITY_SLOW;
 		
 		interact_type = INTERACT_TYPE_MEOW;
 		

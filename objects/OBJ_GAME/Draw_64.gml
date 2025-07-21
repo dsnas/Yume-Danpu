@@ -8,8 +8,8 @@ if (global.config_showFps == true)
 	var _fps_x = (320 - 4 - _fps_w);
 	var _fps_y = 2;
 	
-	var _fps_col_0 = global.thm_col[global.thm].whiteLight;
-	var _fps_col_1 = global.thm_col[global.thm].whiteDark;
+	var _fps_col_0 = global.player_thm[global.player_thmCurr].col.whiteLight;
+	var _fps_col_1 = global.player_thm[global.player_thmCurr].col.whiteDark;
 	var _fps_alp = 0.5;
 	
 	fn_draw_text(_fps_text, _fps_x, _fps_y, _fps_col_0, _fps_col_1, _fps_alp);
@@ -36,8 +36,8 @@ if (global.config_showVer == true)
 	var _ver_x = (320 - 4 - _ver_w);
 	var _ver_y = (240 - 4 - _ver_h);
 	
-	var _ver_col_0 = global.thm_col[global.thm].grayLight;
-	var _ver_col_1 = global.thm_col[global.thm].whiteLight;
+	var _ver_col_0 = global.player_thm[global.player_thmCurr].col.whiteDark;
+	var _ver_col_1 = global.player_thm[global.player_thmCurr].col.whiteLight;
 	var _ver_alp = 0.5;
 	
 	for (var v = 0; v < 2; v++)

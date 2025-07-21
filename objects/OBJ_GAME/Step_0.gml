@@ -1,5 +1,5 @@
 
-fn_config_key_quick();
+fn_key_quick();
 
 
 // Toggles Fullscreen on/off

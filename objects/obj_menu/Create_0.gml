@@ -2,7 +2,7 @@
 fn_obj_img( , , , , 0);
 fn_obj_depth( , -10000);
 
-fn_config_key_quick();
+fn_key_quick();
 
 
 draw_x = 0;

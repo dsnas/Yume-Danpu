@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_config_lang",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_config_lang",
+  "parent":{
+    "name":"config",
+    "path":"folders/config.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

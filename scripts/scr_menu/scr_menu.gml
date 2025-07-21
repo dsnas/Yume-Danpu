@@ -244,7 +244,7 @@ function fn_menu_opt_add_ext(_lvl, _info_textDataKeyWithoutIdx) // Adds as optio
 	for (var o = 0; o < 25; o++)
 	{	
 		var _opt_textKey = (string(_info_textDataKeyWithoutIdx) + string(o));
-		var _opt_text = fn_getText(_opt_textKey);
+		var _opt_text = fn_config_lang_data_getText(_opt_textKey);
 		
 		if (_opt_text != undefined)
 		{
@@ -443,7 +443,7 @@ function fn_menu_info_add_ext(_lvl, _info, _info_textDataKeyWithoutIdx)	// Adds 
 	var l = _lvl;
 	var i = _info;
 	
-	var _info_text = fn_getText(_info_textDataKeyWithoutIdx);
+	var _info_text = fn_config_lang_data_getText(_info_textDataKeyWithoutIdx);
 	if (_info_text != undefined)
 	{
 		fn_menu_info_add(l, i, _info_text);
@@ -542,7 +542,7 @@ function fn_menu_lbl_textdata(_lvl_id, _lbl_idx, _lbl_textdata_key)
 	var l = _lvl_id;
 	var i = _lbl_idx;
 	
-	var _lbl_text = fn_getText(_lbl_textdata_key);
+	var _lbl_text = fn_config_lang_data_getText(_lbl_textdata_key);
 	if (_lbl_text != undefined)
 	{
 		lbl_text[l, i] = _lbl_text;
@@ -567,7 +567,7 @@ function fn_menu_ttl_textdata(_lvl_id, _ttl_textdata_key)
 {
 	var l = _lvl_id;
 	
-	var _ttl_text = fn_getText(_ttl_textdata_key);
+	var _ttl_text = fn_config_lang_data_getText(_ttl_textdata_key);
 	if (_ttl_text != undefined)
 		ttl_text[l] = _ttl_text
 }

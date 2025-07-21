@@ -10,7 +10,7 @@ function fn_menu_pse_evCreate_0()
 	var l = LVL_MAIN;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_pse_main_ttl"));
+	fn_menu_ttl_add(l, fn_config_lang_data_getText("menu_pse_main_ttl"));
 	
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_pse_main_opt_");
@@ -78,7 +78,7 @@ function fn_menu_pse_evCreate_1()
 	instance_activate_object(obj_rmCtrl);
 	instance_activate_object(obj_dbg);
 	audio_pause_all();
-	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_VOLTYPE.MENU);
+	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_AUD_STYLE.MENU);
 }
 function fn_menu_pse_evDrawGUI_0(l)
 {

@@ -79,7 +79,7 @@ function fn_menu_home_evCreate_0()
 	
 		// Production
 	main_prod_spr = spr_menu_home_prod;
-	main_prod_img = global.config_lang;
+	main_prod_img = global.config_langCurr;
 	main_prod_w = fn_spr_w(main_prod_spr);
 	main_prod_h = fn_spr_h(main_prod_spr);
 	main_prod_x = (main_logo_x + (main_logo_w / 2) - (main_prod_w / 2));
@@ -130,7 +130,7 @@ function fn_menu_home_evStep()
 	// Plays menu start sound when the languages level opens
 	if (lvl == LVL_LANG && lvl_alp[lvl] == 1 && lang_snd_act == false)
 	{
-		fn_aud_play(lang_snd, CONFIG_VOLTYPE.MENU);
+		fn_aud_play(lang_snd, CONFIG_AUD_STYLE.MENU);
 		lang_snd_act = true;
 	}
 	
@@ -178,16 +178,16 @@ function fn_menu_home_opt_slct()
 	// Languages level
 	if (l == LVL_LANG)
 	{
-		var _config_lang = global.config_lang;
+		var _config_lang = global.config_langCurr;
 		var _config_langOld = _config_lang;
 		
 		// Flag of United States
 		if (o == 0)
-			_config_lang = CONFIG_LANG.EN_US;
+			_config_lang = CONFIG_LANGLIST.EN_US;
 		
 		// Flag of Brazil
 		else if (o == 1)
-			_config_lang = CONFIG_LANG.PT_BR;
+			_config_lang = CONFIG_LANGLIST.PT_BR;
 		
 		// Flag of United States, flag of Brazil
 		global.config_lang_hasChosen = true;

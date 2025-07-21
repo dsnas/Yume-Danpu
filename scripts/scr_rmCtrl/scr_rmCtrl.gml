@@ -27,7 +27,7 @@ function fn_rmCtrl_getId() // Retrieves the ID of the room, which determines the
 	
 	
 	if (rm_name == "")
-		rm_name = fn_getText("rm_" + string(rm_id));
+		rm_name = fn_config_lang_data_getText("rm_" + string(rm_id));
 }
 
 function fn_rmCtrl_evCreate() // Create Event determined by the room's ID
@@ -132,14 +132,14 @@ function fn_rmCtrl_cam_lock_act(_xAct = false, _x = 0, _yAct = false, _y = 0)
 
 
 // Functions related to the room's music
-function fn_rmCtrl_mus_add(_idx, _asset, _vol = 1, _pit = 1, _volType = CONFIG_VOLTYPE.MUS)
+function fn_rmCtrl_mus_add(_idx, _asset, _vol = 1, _pit = 1, _style = CONFIG_AUD_STYLE.MUS)
 {
 	var m = _idx;
 	
 	mus_asset[m] = _asset;
+	mus_style[m] = _style;
 	mus_vol[m] = _vol;
-	mus_pit[m] = _pit;
-	mus_volType[m] = _volType;
+	mus_pch[m] = _pit;
 	
 	mus_id[m] = -1;
 }
@@ -202,7 +202,7 @@ function fn_rmCtrl_bg_sky_add(_idx, _spr, _col = c_white, _alp = 1, _move_xDurIn
 	{
 		depth = _depth;
 		
-		
+		tilemode = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 		sky_sprOrig = _spr;
 		sky_spr = sprite_duplicate(_spr);
 		sky_9slc = sprite_nineslice_create();

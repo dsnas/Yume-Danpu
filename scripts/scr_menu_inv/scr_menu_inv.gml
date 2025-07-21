@@ -188,7 +188,7 @@ function fn_menu_inv_evCreate_0()
 		
 		
 		// Title
-		fn_menu_ttl_add(l, fn_getText($"menu_inv_{other_textData_key}_ttl"));
+		fn_menu_ttl_add(l, fn_config_lang_data_getText($"menu_inv_{other_textData_key}_ttl"));
 		
 		// Box
 		var _box_xMargin = (draw_dist * 2);
@@ -245,7 +245,7 @@ function fn_menu_inv_evCreate_1()
 {
 	// Main level
 	lvl = LVL_MAIN;
-	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_VOLTYPE.MENU);
+	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_AUD_STYLE.MENU);
 }
 function fn_menu_inv_evDrawGUI_2(l)
 {
@@ -272,7 +272,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 				main_pic_ySc -= (main_pic_scLen * random_range(_pic_scLen_mulMin, _pic_scLen_mulMax));
 				
 				var _ptr_snd_pitch = random_range(0.75, 2.25);
-				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_VOLTYPE.PLAYER);
+				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_AUD_STYLE.PLAYER);
 				fn_aud_pitch(_ptr_snd, _ptr_snd_pitch);
 			}
 		}

@@ -10,7 +10,7 @@ function fn_menu_config_evCreate_0()
 	var l = LVL_MAIN;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_main_ttl"));
+	fn_menu_ttl_add(l, fn_config_lang_data_getText("menu_config_main_ttl"));
 	
 	
 	
@@ -86,7 +86,7 @@ function fn_menu_config_evCreate_0()
 	var l = LVL_GFX;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_gfx_ttl"));
+	fn_menu_ttl_add(l, fn_config_lang_data_getText("menu_config_gfx_ttl"));
 	
 		// Options
 	fn_menu_opt_add_ext(l, "menu_config_gfx_opt_");
@@ -99,7 +99,7 @@ function fn_menu_config_evCreate_0()
 	var l = LVL_AUD;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_aud_ttl"));
+	fn_menu_ttl_add(l, fn_config_lang_data_getText("menu_config_aud_ttl"));
 	
 		// Options
 	fn_menu_opt_add_ext(l, "menu_config_aud_opt_");
@@ -112,7 +112,7 @@ function fn_menu_config_evCreate_0()
 	var l = LVL_A11Y;
 	
 		// Title
-	fn_menu_ttl_add(l, fn_getText("menu_config_a11y_ttl"));
+	fn_menu_ttl_add(l, fn_config_lang_data_getText("menu_config_a11y_ttl"));
 	
 		// Options
 	fn_menu_opt_add_ext(l, "menu_config_a11y_opt_");
@@ -212,8 +212,8 @@ function fn_menu_config_opt_config_move()
 			// "Language"
 			if (o == 0)
 			{
-				var _config_lang = global.config_lang;
-				var _config_langOld = global.config_lang;
+				var _config_lang = global.config_langCurr;
+				var _config_langOld = _config_lang;
 				
 				_config_lang += (press_rt - press_lt);
 				if (_config_lang < 0)
@@ -257,7 +257,7 @@ function fn_menu_config_opt_config_move()
 		// Music & Sounds level
 		else if (l == LVL_AUD)
 		{
-			var _volType = global.config_volType[o];
+			var _volType = global.CONFIG_AUD_STYLE[o];
 			
 			// Volumes
 			_volType += ((press_rt - press_lt) * 0.1);
@@ -266,7 +266,7 @@ function fn_menu_config_opt_config_move()
 			else if (_volType > 1)
 				_volType = 0;
 			
-			global.config_volType[o] = _volType;
+			global.CONFIG_AUD_STYLE[o] = _volType;
 		}
 		
 		// Accessibility level
@@ -277,7 +277,7 @@ function fn_menu_config_opt_config_move()
 				global.config_rdcdMot = !global.config_rdcdMot;
 		}
 		
-		fn_aud_play(opt_move_snd[l], CONFIG_VOLTYPE.MENU);
+		fn_aud_play(opt_move_snd[l], CONFIG_AUD_STYLE.MENU);
 		fn_config_file_save();
 	}	
 }
@@ -287,27 +287,27 @@ function fn_menu_config_opt_config_update()
 	
 	// Main level
 	if (l == LVL_MAIN)
-		opt_config_text[l, 0] = global.config_lang_name[global.config_lang];
+		opt_config_text[l, 0] = global.config_lang[global.config_langCurr].name;
 	
 	// Graphics level
 	else if (l == LVL_GFX)
 	{
-		opt_config_text[l, 0] = fn_getText($"menu_config_all_opt_config_{global.config_fscr}");
-		opt_config_text[l, 1] = fn_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
-		opt_config_text[l, 2] = fn_getText($"menu_config_all_opt_config_{global.config_hideCsr}");
-		opt_config_text[l, 3] = fn_getText($"menu_config_all_opt_config_{global.config_showFps}");
-		opt_config_text[l, 4] = fn_getText($"menu_config_all_opt_config_{global.config_showBdr}");
-		opt_config_text[l, 5] = fn_getText($"menu_config_all_opt_config_{global.config_showVer}");
+		opt_config_text[l, 0] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_fscr}");
+		opt_config_text[l, 1] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_lowGfx}");
+		opt_config_text[l, 2] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_hideCsr}");
+		opt_config_text[l, 3] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_showFps}");
+		opt_config_text[l, 4] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_showBdr}");
+		opt_config_text[l, 5] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_showVer}");
 	}
 	
 	// Music & Sounds level
 	else if (l == LVL_AUD)
 	{
-		for (var v = 0; v < global.config_volType_len; v++)
-			opt_config_text[l, v] = $"{round(global.config_volType[v] * 100)}%";
+		for (var v = 0; v < global.CONFIG_AUD_STYLE_len; v++)
+			opt_config_text[l, v] = $"{round(global.CONFIG_AUD_STYLE[v] * 100)}%";
 	}
 	
 	// Accessibility level
 	else if (l == LVL_A11Y)
-		opt_config_text[l, 0] = fn_getText($"menu_config_all_opt_config_{global.config_rdcdMot}");
+		opt_config_text[l, 0] = fn_config_lang_data_getText($"menu_config_all_opt_config_{global.config_rdcdMot}");
 }

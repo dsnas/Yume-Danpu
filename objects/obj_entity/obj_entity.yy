@@ -13,8 +13,8 @@
     "path":"folders/entity.yy",
   },
   "parentObjectId":{
-    "name":"obj_interact",
-    "path":"objects/obj_interact/obj_interact.yy",
+    "name":"obj_talker",
+    "path":"objects/obj_talker/obj_talker.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
