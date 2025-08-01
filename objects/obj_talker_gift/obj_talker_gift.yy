@@ -10,8 +10,8 @@
     "path":"folders/talker.yy",
   },
   "parentObjectId":{
-    "name":"obj_talker",
-    "path":"objects/obj_talker/obj_talker.yy",
+    "name":"obj_talker_parent",
+    "path":"objects/obj_talker_parent/obj_talker_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

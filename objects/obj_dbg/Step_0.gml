@@ -6,46 +6,27 @@ if (string_ends_with(keyboard_string, global.dbg_actPwd) == true)
 }
 
 
+// Commands
 if (global.dbg_act == true && keyboard_check(global.dbg_cmd_key) == true)
 {
-	if (keyboard_check_pressed(ord("M")) == true)
-		show_debug_overlay(!is_debug_overlay_open());
+	// Restarts game
+	if (keyboard_check_pressed(ord("R")) == true)
+		game_restart();
 	
-	if (keyboard_check(ord("G")) == true)
-	{
-		for (var i = 0; i < array_length(global.dbg_cmd_rm); i++)
-		{
-			if (keyboard_check_pressed(ord(i)) == true)
-				room_goto(global.dbg_cmd_rm[i]);
-		}
-	}
 	
-	if (keyboard_check(ord("I")) == true)
+	// Commands that require obj_rmCtrl in the room
+	if (fn_obj_exists(obj_rmCtrl) == true)
 	{
-		if (fn_obj_exists(obj_rmCtrl) == true)
+		// Zooms the camera in/out
+		if (keyboard_check(ord("I")) == true)
 		{
 			obj_rmCtrl.cam_w -= 8;
 			obj_rmCtrl.cam_h -= 6;
 		}
-	}
-	else if (keyboard_check(ord("O")) == true)
-	{
-		if (fn_obj_exists(obj_rmCtrl) == true)
+		else if (keyboard_check(ord("O")) == true)
 		{
 			obj_rmCtrl.cam_w += 8;
 			obj_rmCtrl.cam_h += 6;
 		}
 	}
-	
-	if (keyboard_check(ord("D")) == true)
-	{
-		if (keyboard_check_pressed(ord("C")) == true)
-			file_delete(global.config_file_name);
-		
-		if (keyboard_check_pressed(ord("P")) == true)
-			file_delete(global.profile_file_name);
-	}
-	
-	if (keyboard_check_pressed(ord("R")) == true)
-		game_restart();
 }

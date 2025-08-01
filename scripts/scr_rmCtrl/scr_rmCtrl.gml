@@ -98,7 +98,7 @@ function fn_rmCtrl_evStep() // Step Event determined by the room's ID
 	{
 		var m = fn_menu_obj_find("home");
 		if (m != -1 && global.config_lang_hasChosen == true && m.lvl_alpDelay[m.lvl] <= 0 && m.lvl_alpTgt_gameEnd[m.lvl] == false)
-			fn_rmCtrl_mus_add(0, mus_menu_home, 0.45);
+			fn_rmCtrl_mus_add(0, mus_menu_home);
 	}
 	
 	// Nexus
@@ -107,16 +107,16 @@ function fn_rmCtrl_evStep() // Step Event determined by the room's ID
 		nexus_siner += 0.1;
 		bg_sky[0].sky_alp = (0.5 + ((sin(nexus_siner / 6) + 1) / 10));
 		
-		fn_rmCtrl_mus_add(0, mus_nexus, 0.35);
+		//fn_rmCtrl_mus_add(0, mus_nexus);
 	}
 	
 	// Macacolandia
 	if (rm_id == "macaco")
-		fn_rmCtrl_mus_add(0, mus_macaco, 0.25);
+		fn_rmCtrl_mus_add(0, mus_macaco);
 	
 	// Debug World
 	if (rm_id = "dbgwrld")
-		fn_rmCtrl_mus_add(0, mus_dbgwrld, 0.75);
+		fn_rmCtrl_mus_add(0, mus_dbgwrld);
 }
 
 
@@ -132,14 +132,13 @@ function fn_rmCtrl_cam_lock_act(_xAct = false, _x = 0, _yAct = false, _y = 0)
 
 
 // Functions related to the room's music
-function fn_rmCtrl_mus_add(_idx, _asset, _vol = 1, _pit = 1, _style = CONFIG_AUD_STYLE.MUS)
+function fn_rmCtrl_mus_add(_idx, _asset, _pch = 1, _style = CONFIG_AUD_STYLE.MUS)
 {
 	var m = _idx;
 	
 	mus_asset[m] = _asset;
 	mus_style[m] = _style;
-	mus_vol[m] = _vol;
-	mus_pch[m] = _pit;
+	mus_pch[m] = _pch;
 	
 	mus_id[m] = -1;
 }

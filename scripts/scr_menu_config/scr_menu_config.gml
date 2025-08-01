@@ -19,7 +19,7 @@ function fn_menu_config_evCreate_0()
 	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.player_thm[global.player_thmCurr].col.blur, 0.75);
 		
 		// Box
 		var _box_xMargin = (draw_dist * 4);
@@ -52,7 +52,7 @@ function fn_menu_config_evCreate_0()
 	var _opt_hAll = _opt_yDist_0;
 	for (var o = 1; o < (opt_len[l] - 1); o++)
 		_opt_hAll += _opt_yDist_1;
-	_opt_hAll += global.GAME_FNT_H;
+	_opt_hAll += global.game.fnt_h;
 	
 	var _opt_yAdd = 0;
 	for (var o = 0; o < opt_len[l]; o++)
@@ -257,7 +257,7 @@ function fn_menu_config_opt_config_move()
 		// Music & Sounds level
 		else if (l == LVL_AUD)
 		{
-			var _volType = global.CONFIG_AUD_STYLE[o];
+			var _volType = global.config_aud_style[o].vol;
 			
 			// Volumes
 			_volType += ((press_rt - press_lt) * 0.1);
@@ -266,7 +266,7 @@ function fn_menu_config_opt_config_move()
 			else if (_volType > 1)
 				_volType = 0;
 			
-			global.CONFIG_AUD_STYLE[o] = _volType;
+			global.config_aud_style[o].vol = _volType;
 		}
 		
 		// Accessibility level
@@ -303,8 +303,8 @@ function fn_menu_config_opt_config_update()
 	// Music & Sounds level
 	else if (l == LVL_AUD)
 	{
-		for (var v = 0; v < global.CONFIG_AUD_STYLE_len; v++)
-			opt_config_text[l, v] = $"{round(global.CONFIG_AUD_STYLE[v] * 100)}%";
+		for (var v = 0; v < array_length(global.config_aud_style); v++)
+			opt_config_text[l, v] = $"{round(global.config_aud_style[v].vol * 100)}%";
 	}
 	
 	// Accessibility level

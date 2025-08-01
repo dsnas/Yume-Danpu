@@ -28,7 +28,7 @@ function fn_menu_home_evCreate_0()
 	
 		// Flag selector [#0]
 	lang_flag_slctr_spr = spr_menu_home_flag_slctr;
-	lang_flag_slctr_col = global.thm_col[global.thm].whiteLight;
+	lang_flag_slctr_col = global.player_thm[global.player_thmCurr].col.whiteLight;
 	
 		// Title info [#0]
 	fn_menu_info_add_ext(l, 0, "menu_home_lang_info_0");
@@ -89,7 +89,7 @@ function fn_menu_home_evCreate_0()
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_home_main_opt_");
 	var _opt_yDist = round(draw_dist * 1.25);
-	var _opt_hAll = (round(_opt_yDist * (opt_len[l] - 1)) + global.GAME_FNT_H);
+	var _opt_hAll = (round(_opt_yDist * (opt_len[l] - 1)) + global.game.fnt_h);
 		
 		// Box
 	var _box_wDist = round(draw_dist * 1.25);

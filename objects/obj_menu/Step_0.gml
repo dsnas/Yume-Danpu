@@ -155,14 +155,14 @@ for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, includin
 
 
 // Reloads all the text if the language or theme changed
-if (config_langOld != global.config_lang) || (thmOld != global.thm)
+if (config_langOld != global.config_langCurr) || (thmOld != global.player_thmCurr)
 {
 	for (l = 0; l < lvl_lenMax; l++)
 		opt_move_posOld[l] = opt_move_pos[l];
 	
 	fn_menu_evCreate_0();
-	config_langOld = global.config_lang;
-	thmOld = global.thm;
+	config_langOld = global.config_langCurr;
+	thmOld = global.player_thmCurr;
 	
 	for (var l = 0; l < lvl_lenMax; l++)
 		opt_move_pos[l] = opt_move_posOld[l];

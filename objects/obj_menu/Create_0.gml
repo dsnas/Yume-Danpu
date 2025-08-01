@@ -62,8 +62,8 @@ for (var l = 0; l < (lvl_lenMax + 1); l++)
 fn_menu_lvlNew(); // There's no need for the child menu to call this function again, it only needs to set "lvlTrans_tgt" to the child's main level
 
 
-config_langOld = global.config_lang;
-thmOld = global.thm;
+config_langOld = global.config_langCurr;
+thmOld = global.player_thmCurr;
 
 
 fn_menu_evCreate_0();

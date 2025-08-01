@@ -17,8 +17,14 @@ function fn_config_lang_setup()
 	global.config_langSlcted = false; // Determines if the player has selected a language on game start
 	
 	
-	global.config_lang_file_name = "config_lang.ini";
-	if (file_exists(global.config_lang_file_name) == false)
+	// Save/Load the current language
+	global.config_lang_file =
+	{
+		name : "config_lang.ini",
+		msg : "Oh. Oh, my God. What is this? Is this Notepad World? Oooh, spooky!"
+	}
+	
+	if (file_exists(global.config_lang_file.name) == false)
 		fn_config_lang_file_save();
 	else
 		fn_config_lang_file_load();
@@ -34,7 +40,7 @@ function fn_config_lang_add(_lang, _name)
 }
 function fn_config_lang_mod(_lang)
 {
-	global.config_lang = _lang;
+	global.config_langCurr = _lang;
 	fn_config_lang_file_save();
 	fn_config_lang_data_setup();
 	fn_config_setup();
@@ -43,9 +49,9 @@ function fn_config_lang_mod(_lang)
 
 function fn_config_lang_file_save()
 {
-	ini_open(global.config_lang_file_name);
-	ini_write_real("game", "ver", global.GAME_VER);
-	ini_write_string("game", "msg", "Oh. Oh, my God. What is this? Is this Notepad World? Oooh, spooky!");
+	ini_open(global.config_lang_file.name);
+	ini_write_real("game", "ver", global.game.ver);
+	ini_write_string("game", "msg", global.config_lang_file.msg);
 	
 	ini_write_real("lang", "curr", global.config_langCurr);
 	ini_write_real("lang", "slcted", global.config_langSlcted);
@@ -54,9 +60,9 @@ function fn_config_lang_file_save()
 }
 function fn_config_lang_file_load()
 {
-	ini_open(global.config_lang_file_name);
+	ini_open(global.config_lang_file.name);
 	
-	if (ini_read_real("game", "ver", 0) == global.GAME_VER)
+	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		global.config_langCurr = ini_read_real("lang", "curr", CONFIG_LANG.EN_US);
 		global.config_langSlcted = ini_read_real("lang", "slcted", CONFIG_LANG.EN_US);
@@ -73,7 +79,7 @@ function fn_config_lang_file_load()
 }
 function fn_config_lang_file_erase()
 {
-	file_delete(global.config_lang_file_name);
+	file_delete(global.config_lang_file.name);
 }
 
 

@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_solid_wall",
-    "path":"sprites/spr_solid_wall/spr_solid_wall.yy",
+    "name":"spr_solid_parent",
+    "path":"sprites/spr_solid_parent/spr_solid_parent.yy",
   },
   "spriteMaskId":null,
   "visible":true,

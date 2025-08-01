@@ -13,8 +13,8 @@
     "path":"folders/entity.yy",
   },
   "parentObjectId":{
-    "name":"obj_talker",
-    "path":"objects/obj_talker/obj_talker.yy",
+    "name":"obj_talker_parent",
+    "path":"objects/obj_talker_parent/obj_talker_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_entity",
-    "path":"sprites/spr_entity/spr_entity.yy",
+    "name":"spr_entity_good",
+    "path":"sprites/spr_entity_good/spr_entity_good.yy",
   },
   "spriteMaskId":null,
   "visible":true,

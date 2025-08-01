@@ -1,17 +1,13 @@
 /// @descr start NPC
 
 event_inherited();
-image_alpha = 1;
-solid_type = solid_type_entity;
-interact_meow_volType = CONFIG_AUD_STYLE.ENTITY;
+solid_typeCurr = SOLID_TYPE.ENTITY;
+talk_type.bell.aud_style = CONFIG_AUD_STYLE.ENTITY;
 
 
 fn_entity_getId();
-
-
-fn_chara_setup_0();
 fn_entity_evCreate();
-fn_chara_setup_1();
+sprite_index = dir[dirCurr].spr;
 
 
 

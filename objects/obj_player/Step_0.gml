@@ -1,71 +1,35 @@
 
-fn_key_quick();
-
+event_inherited();
 
 fn_chara_move();
 
 
-
-/*
-// Frozen, movement sequence will not activate
-if (move_stg == -2)
-	sprite_index = dir_spr[dir];
-
-
-// Movement sequence //move_manual_atwlk_act = global.config_atwlk;
-if (global.player_itmCurr == -1)
+if (talk_act == true && fn_key_pressed(talk_key) == true && move_stg == -1)
 {
-	self_custom = false;
-	move_walk_act = true;
-	move_slide_act = false;
-}
-else if (global.player_itmCurr == PLAYER_ITM.KART)
-{
-	self_custom = true;
-	move_walk_act = false;
-	move_slide_act = true;
-}
-fn_chara_move();
-
-
-// Interaction sequence
-if (move_stg == -1)
-{
-	var _interact_obj = instance_place(move_dir_pos_x[dir], move_dir_pos_y[dir], obj_talker);
-	if (press_slct == true && _interact_obj != noone)
+	var _objAhead = instance_place(fn_chara_get_xAhead(id), fn_chara_get_yAhead(id), obj_talker_parent)
+	if (_objAhead != noone)
 	{
-		if (_interact_obj.solid_type == _interact_obj.solid_type_interact)
-		|| (_interact_obj.solid_type == _interact_obj.solid_type_entity && _interact_obj.move_stg == -1)
+		with (_objAhead)
 		{
-			_interact_obj.interact_stg = 0;
-			if (_interact_obj.solid_type == _interact_obj.solid_type_entity)
-				_interact_obj.move_stg = -2;
-				
-			move_stg = -2;
-		}
-	}
-}
-
-
-// Menu-opening sequence
-if (move_stg == -1) // Checks for menu key inputs and created the menu object
-{
-	if (menu_dly_dur <= 0)
-	{
-		for (var m = 0; m < menu_len; m++)
-		{
-			if (fn_key_pressed(menu_key[m]) == true && fn_obj_exists(obj_menu) == false)
+			if (solid_typeCurr == SOLID_TYPE.TALKER)
+			|| (solid_typeCurr == SOLID_TYPE.ENTITY && move_stg == -1)
 			{
-				fn_menu_obj_create(menu_id[m]);
-				move_stg = -2;
-			
-				break;
+				talk_stg = 0;
+				if (solid_typeCurr == SOLID_TYPE.ENTITY)
+					move_stg = -2;
+				
+				other.move_stg = -2;
 			}
-			else
-				continue;
 		}
 	}
-	else
-		menu_dly_dur -= 1;
 }
-*/
+
+
+if (menu_act == true && move_stg == -1)
+{
+	for (var i = 0; i < array_length(menu_key); i++)
+	{
+		if (fn_key_pressed(menu_key[i]) == true)
+			fn_menu_obj_create(menu_id[i]);
+	}
+}

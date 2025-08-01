@@ -14,10 +14,10 @@ function fn_menu_pse_evCreate_0()
 	
 		// Options [#0]
 	fn_menu_opt_add_ext(l, "menu_pse_main_opt_");
-	opt_slct_snd[l, 2] = global.thm_opt_fail_snd[global.thm];
+	opt_slct_snd[l, 2] = global.player_thm[global.player_thmCurr].opt_fail_snd;
 	opt_cncl_key[l, 1] = CONFIG_KEY.MENU_PSE;
 	var _opt_yDist = draw_dist;
-	var _opt_hAll = (_opt_yDist * (opt_len[l] - 1) + global.GAME_FNT_H);
+	var _opt_hAll = (_opt_yDist * (opt_len[l] - 1) + global.game.fnt_h);
 	
 		// Box
 	var _box_wDist = round(draw_dist * 1.5);
@@ -46,7 +46,7 @@ function fn_menu_pse_evCreate_0()
 	for (var l = 0; l < lvl_lenMax; l++)
 	{
 		// Dark translucent background
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, 0.75);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.player_thm[global.player_thmCurr].col.blur, 0.75);
 	}
 }
 function fn_menu_pse_evCreate_1()
@@ -74,11 +74,11 @@ function fn_menu_pse_evCreate_1()
 	
 	// Deactivates/Pauses everything in the room, excluding the ones that should persist
 	instance_deactivate_all(true);
-	instance_activate_object(OBJ_GAME);
+	instance_activate_object(obj_game);
 	instance_activate_object(obj_rmCtrl);
 	instance_activate_object(obj_dbg);
 	audio_pause_all();
-	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_AUD_STYLE.MENU);
+	fn_aud_play(global.player_thm[global.player_thmCurr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
 }
 function fn_menu_pse_evDrawGUI_0(l)
 {

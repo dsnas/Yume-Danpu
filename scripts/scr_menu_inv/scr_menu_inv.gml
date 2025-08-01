@@ -19,7 +19,7 @@ function fn_menu_inv_evCreate_0()
 		var _rect_alp = 0.5;
 		if (l != LVL_MAIN)
 			_rect_alp = 0.75;
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.thm_col[global.thm].blur, _rect_alp);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.player_thm[global.player_thmCurr].col.blur, _rect_alp);
 	}
 	
 	
@@ -92,13 +92,13 @@ function fn_menu_inv_evCreate_0()
 	main_mnyIco_x = (main_picFrm_x + round(main_picFrm_w / 2) - round(_mnyIco_wAll / 2) - 1);
 	var _mnyIco_yNameGap = (draw_dist / 2);
 	main_mnyIco_y = (_name_y + _name_h + _mnyIco_yNameGap);
-	main_mnyIco_col = global.thm_col[global.thm].whiteLight;
+	main_mnyIco_col = global.player_thm[global.player_thmCurr].col.whiteLight;
 	
 			// Player's currency [#1]
 	var _ccy_x = (main_mnyIco_x + main_mnyIco_w + _mnyIco_xTextGap);
 	var _ccy_y = (main_mnyIco_y + round(main_mnyIco_h / 2) - round(_ccy_h / 2) - 1);
-	var _ccy_col_0 = global.thm_col[global.thm].grayLight;
-	var _ccy_col_1 = global.thm_col[global.thm].grayDark;
+	var _ccy_col_0 = global.player_thm[global.player_thmCurr].col.grayLight;
+	var _ccy_col_1 = global.player_thm[global.player_thmCurr].col.grayDark;
 	info_x[l, 1] = _ccy_x;
 	info_y[l, 1] = _ccy_y;
 	info_col[l][1][0] = _ccy_col_0;
@@ -107,8 +107,8 @@ function fn_menu_inv_evCreate_0()
 			// Player's money [#1]
 	var _mny_x = (_ccy_x + _ccy_w);
 	var _mny_y = _ccy_y;
-	var _mny_col_0 = global.thm_col[global.thm].whiteLight;
-	var _mny_col_1 = global.thm_col[global.thm].whiteDark;
+	var _mny_col_0 = global.player_thm[global.player_thmCurr].col.whiteLight;
+	var _mny_col_1 = global.player_thm[global.player_thmCurr].col.whiteDark;
 	info_x[l, 2] = _mny_x;
 	info_y[l, 2] = _mny_y;
 	info_col[l][2][0] = _mny_col_0;

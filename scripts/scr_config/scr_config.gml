@@ -99,7 +99,7 @@ function fn_config_setup()
 	global.config_wndSc = 1; // Window Scale
 	global.config_vsync = false; // Vsync (display_reset)
 	global.config_lowGfx = false; // Low Graphics
-	global.config_hideCsr = true; // Hide Cursor
+	global.config_hideCsr = false; // Hide Cursor
 	global.config_showFps = false; // Show FPS
 	global.config_showBdr = true; // Show Border
 	global.config_showVer = true; // Show Version
@@ -112,7 +112,7 @@ function fn_config_setup()
 		MUS,		// Music
 		MENU,		// Menu
 		PLAYER,		// Player
-		INTERACT,	// Interaction
+		TALKER,		// Interactables
 		ENTITY,		// Entities
 		AMB			// Ambience
 	}
@@ -120,7 +120,7 @@ function fn_config_setup()
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.MUS);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.MENU);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.PLAYER);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.INTERACT);
+	fn_config_aud_style_add(CONFIG_AUD_STYLE.TALKER);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.ENTITY);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.AMB);
 	
@@ -134,8 +134,13 @@ function fn_config_setup()
 	
 	
 	// Save/Load the settings
-	global.config_file_name = "config.ini";
-	if (file_exists(global.config_file_name) == false)
+	global.config_file =
+	{
+		name : "config.ini",
+		msg : "You know, there's an in-game options menu. I think you'll like it!"
+	};
+	
+	if (file_exists(global.config_file.name) == false)
 		fn_config_file_save();
 	else
 		fn_config_file_load();
@@ -178,9 +183,9 @@ function fn_config_aud_style_add(_aud_style)
 // Functions related to saving and loading the game's settings
 function fn_config_file_save()
 {
-	ini_open(global.config_file_name);
-	ini_write_real("game", "ver", global.GAME_VER);
-	ini_write_string("game", "msg", "You know, there's an in-game options menu. I think you'll like it!");
+	ini_open(global.config_file.name);
+	ini_write_real("game", "ver", global.game.ver);
+	ini_write_string("game", "msg", global.config_file.msg);
 	
 	
 	// Keybinds
@@ -209,9 +214,9 @@ function fn_config_file_save()
 }
 function fn_config_file_load()
 {
-	ini_open(global.config_file_name);
+	ini_open(global.config_file.name);
 	
-	if (ini_read_real("game", "ver", 0) == global.GAME_VER)
+	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		// Keybinds
 		for (var k = 0; k < array_length(global.config_key); k++)
@@ -247,5 +252,5 @@ function fn_config_file_load()
 }
 function fn_config_file_erase()
 {
-	file_delete(global.config_file_name);
+	file_delete(global.config_file.name);
 }

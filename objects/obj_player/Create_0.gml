@@ -1,24 +1,19 @@
 
-fn_obj_img(id);
-fn_obj_depth();
-view_enabled = true;
-view_visible[0] = true;
+event_inherited();
+solid_typeCurr = SOLID_TYPE.PLAYER;
 
 
-fn_chara_setup();
-move_preset = MOVE_PRESET_PLAYER;
-fn_chara_move_preset();
+fn_chara_setup("player");
 
 
-// Opening and closing menus
+talk_act = true;
+talk_key = CONFIG_KEY.SLCT;
+
+menu_act = true;
 menu_id[0] = "inv";
 menu_key[0] = CONFIG_KEY.MENU_INV;
-
 menu_id[1] = "pse";
 menu_key[1] = CONFIG_KEY.MENU_PSE;
-
-menu_len = array_length(menu_id);
-menu_dly_dur = 0;
 
 
 

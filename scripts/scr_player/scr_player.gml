@@ -8,18 +8,21 @@ function fn_player_setup()
 	global.player_awake = false;
 	
 	
+	
+	
 	// Money
 	global.player_money[false] = // While sleeping (player_awake == false)
 	{
 		amt : 0,
 		ccy : "₢$ "
 	}
-	
 	global.player_money[true] = // While awake (player_awake == true)
 	{
 		amt : irandom_range( (15 + irandom_range(1, 4)), (25 + irandom_range(1, 4)) ),
 		ccy : "R$ "
 	}
+	
+	
 	
 	
 	// Effects
@@ -36,6 +39,8 @@ function fn_player_setup()
 	global.player_effCurr = -1; // Determines which effect is currently active (-1 == none)
 	
 	
+	
+	
 	// Items
 	enum PLAYER_ITM
 	{
@@ -44,6 +49,8 @@ function fn_player_setup()
 	fn_player_itm_add(PLAYER_ITM.KART);
 	
 	global.player_itmCurr = -1; // Determines which item is currently active (-1 == none)
+	
+	
 	
 	
 	// Themes
@@ -58,9 +65,16 @@ function fn_player_setup()
 	global.player_thmCurr = PLAYER_THM.DFLT; // Determines which theme is currently active (-1 == none)
 	
 	
+	
+	
 	// Save/Load the player's data
-	global.player_file_name = "player.ini";
-	if (file_exists(global.player_file_name) == false)
+	global.player_file =
+	{
+		name : "player.ini",
+		msg : "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?"
+	};
+	
+	if (file_exists(global.player_file.name) == false)
 		fn_player_file_save();
 	else
 		fn_player_file_load();
@@ -181,9 +195,9 @@ function fn_player_thm_unlock(_thm)
 // Saving and loading the player's data
 function fn_player_file_save()
 {
-	ini_open(global.player_file_name);
-	ini_write_real("game", "ver", global.GAME_VER);
-	ini_write_string("game", "msg", "Gosh, I wonder why someone would come here. It wouldn’t be to cheat, would it?");
+	ini_open(global.player_file.name);
+	ini_write_real("game", "ver", global.game.ver);
+	ini_write_string("game", "msg", global.player_file.msg);
 	
 	
 	ini_write_string("main", "name", global.player_name);
@@ -209,9 +223,9 @@ function fn_player_file_save()
 }
 function fn_player_file_load()
 {
-	ini_open(global.player_file_name);
+	ini_open(global.player_file.name);
 	
-	if (ini_read_real("game", "ver", 0) == global.GAME_VER)
+	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		global.player_name = ini_read_string("main", "name", "Salenis");
 		
@@ -244,5 +258,5 @@ function fn_player_file_load()
 }
 function fn_player_file_erase()
 {
-	file_delete(global.player_file_name);
+	file_delete(global.player_file.name);
 }

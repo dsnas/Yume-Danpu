@@ -42,12 +42,12 @@ if (type == TYPE_FADE) || (type == TYPE_DOORNORMAL) // Fade type, normal door ty
 			
 		if (doorNormal_stg == 0)
 		{
-			fn_aud_play(snd_rmTrans_door_0, CONFIG_AUD_STYLE.INTERACT);
+			fn_aud_play(snd_rmTrans_door_0, CONFIG_AUD_STYLE.TALKER);
 			doorNormal_stg = -1;
 		}
 		else if (doorNormal_stg == 1 && delay_dur <= (delay_durMax / 4))
 		{
-			fn_aud_play(snd_rmTrans_door_1, CONFIG_AUD_STYLE.INTERACT);
+			fn_aud_play(snd_rmTrans_door_1, CONFIG_AUD_STYLE.TALKER);
 			doorNormal_stg = -1;
 		}
 	}
