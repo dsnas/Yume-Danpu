@@ -131,14 +131,8 @@ for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, includin
 				// Destroys itself
 				if (lvl_alpTgt_selfDstr[l] == true)
 				{
-					if (fn_obj_exists(obj_player) == true)
-					{
-						with (obj_player)
-						{
-							move_stg = -1;
-							menu_delay_dur = 5;
-						}
-					}
+					if (fn_obj_exists(obj_player) == true && obj_player.move_stg == -2)
+						obj_player.move_stg = -1;
 					
 					fn_obj_destroy();
 				}

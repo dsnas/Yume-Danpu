@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_entity_macaco_monkey_6",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":5.355102,
+  "name":"snd_entity_macaco_monkey_6",
+  "parent":{
+    "name":"Macacolandia",
+    "path":"folders/Macacolandia.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_entity_macaco_monkey_6.mp3",
+  "type":0,
+  "volume":1.0,
+}

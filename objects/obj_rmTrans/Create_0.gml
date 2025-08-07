@@ -12,7 +12,7 @@ end_rm = -1;
 
 end_player_x = 0;
 end_player_y = 0;
-end_player_dir = -1;
+end_player_dirCurr = -1;
 end_player_changed = false; // Determines if the player's data has already been changed
 
 

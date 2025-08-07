@@ -32,14 +32,14 @@ if (active == true)
 		// Starts playing the current music
 		if (mus_asset[m] != -1 && mus_asset[m] != musOld_asset[m])
 		{
-			mus_id[m] = fn_aud_play(mus_asset[m], mus_style[m], mus_vol[m], , mus_pch[m], true);
+			mus_id[m] = fn_aud_play(mus_asset[m], mus_style[m], , , mus_pch[m], true);
 			fn_log($"Started playing the current music ({audio_get_name(mus_asset[m])})");
 		}
 	
 		// Updates the current music's data
 		else if (mus_asset[m] != -1 && mus_asset[m] == musOld_asset[m] && mus_id[m] != -1)
 		{
-			fn_aud_vol(mus_asset[m], mus_id[m], mus_style[m], mus_vol[m]);
+			fn_aud_vol(mus_asset[m], mus_id[m], mus_style[m], );
 			fn_aud_pch(mus_asset[m], mus_id[m], mus_pch[m]);
 		}
 	}

@@ -11,6 +11,6 @@ global.dbg_cmd_key = vk_alt; // Modifier key
 global.dbg_cmd_rm[0] = rm_dbgwrld;
 global.dbg_cmd_rm[1] = rm_macaco;
 
-global.dbg_hud_act = true; // Determines if the drawings of Debug Mode will be shown
+global.dbg_hud_act = false; // Determines if the drawings of Debug Mode will be shown
 
 global.dbg_excessLog = false; // Determines if log messages will show excessively and unnecessarily (DO NOT TURN IT ON)

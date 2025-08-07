@@ -2,51 +2,78 @@
 //////// Functions related to entities/NPCs
 
 
-function fn_entity_getId() // Retrieves the ID of the NPC, which determines its behavior and appearance
+function fn_entity_getId() // Retrieves the ID of the entity, which determines its behavior and appearance
 {
 	entity_id = "";
-	chara_preset = "";
+	entity_preset = "";
 	
-	switch (room)
+	switch (object_index)
 	{
-		case rm_nexus: // Nexus
-			entity_id = "help";
-			chara_preset = "entity_evil";
+		case obj_entity_macaco_monkey:
+			entity_id = "macaco_monkey";
+			entity_preset = "good";
 			break;
-		case rm_macaco: // Macacolandia
-		case rm_dbgwrld: // Debug World
-			entity_id = "macaco_citizen";
+		
+		case obj_entity_dbgwrld_blood:
+			entity_id = "dbgwrld_blood";
+			entity_preset = "evil";
+			break;
 	}
 }
 
-function fn_entity_evCreate() // Create Event determined by the NPC's ID
+function fn_entity_evCreate() // Create Event determined by the entity's ID
 {
-	fn_chara_setup(chara_preset);
-	
-	
-	// Macacolandia monkey citizen
-	if (entity_id == "macaco_citizen")
+	fn_actor_evCreate();
+	fn_actor_set_dir_spr(id, sprite_index);
+	move_dur = 32;
+	move_type.walk.act = true;
+	move_mode.rnd.act = true;
+	if (entity_preset == "good") // Peaceful
 	{
-		self_imgSpd = (random_range(0.5, 1.5) / 30);
+		image_index = 1;
+		move_type.walk.act = true;
+		move_mode.rnd.act = true;
+		move_delay.act = true;
+		move_chain.act = true;
+	}
+	else if (entity_preset == "evil") // Hostile
+	{
+		image_index = 2;
+		noise.aud_asset = snd_entity_evil_noise;
+		move_mode.chase.act = true;
+		move_mode.chase.tgt = obj_player;
+	}
 		
-		dir[DIR_LT].spr = spr_entity_macaco_citizen;
-		dir[DIR_RT].spr = dir[DIR_LT].spr;
-		dir[DIR_UP].spr = dir[DIR_LT].spr;
-		dir[DIR_DN].spr = dir[DIR_LT].spr;
+	
+	switch (entity_id)
+	{
+		case "macaco_monkey":
+			render.imgSpd = (random_range(0.5, 1.5) / 30);
+			talk_type.bell.act = true;
+			fn_talker_talk_type_bell_aud_asset("snd_entity_macaco_monkey_");
+			break;
 		
-		talk_type.bell.act = true;
+		case "dbgwrld_blood":
+			render.imgSpd = (random_range(0.5, 1.5) / 30);
+			break;
 	}
 }
-function fn_entity_evStep() // Step Event determined by the NPC's ID
+function fn_entity_evStep() // Step Event determined by the entity's ID
 {
-	fn_chara_move();
-	
-	
-	// Macacolandia monkey citizen
-	if (entity_id == "macaco_citizen")
+	if (talk_type.bell.act == true && talk_stg == 0)
 	{
-		
+		switch (entity_id)
+		{
+			case "macaco_monkey": // Macacolandia monkey
+				talk_type.bell.aud_idx = irandom_range(0, 4);
+				if (irandom_range(1, 100) <= 5)
+					talk_type.bell.aud_idx = irandom_range(5, 6);
+				break;
+		}
 	}
+	
+	event_inherited();
+	fn_actor_evStep();
 }
 
 

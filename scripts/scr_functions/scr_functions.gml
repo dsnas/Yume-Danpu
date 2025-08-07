@@ -68,7 +68,7 @@ function fn_obj_exists(_asset) // Returns whether if the specified object exists
 {
 	return instance_exists(_asset);
 }
-function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = image_blend, _alp = image_alpha, _xSc = image_xscale, _ySc = image_yscale, _ang = image_angle) // Adjusts the specified object's image
+function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0) // Adjusts the specified object's image
 {
 	with (_asset)
 	{
@@ -88,10 +88,9 @@ function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = image_blend, _alp = 
 		}
 	}
 }
-function fn_obj_depth(_asset = id, _val = -_asset.bbox_bottom)
+function fn_obj_depth(_asset = id, _val = -_asset.y)
 {
-	with (_asset)
-		depth = _val;
+	_asset.depth = _val;
 }
 
 
@@ -158,34 +157,6 @@ function fn_draw_line(_x1, _y1, _x2, _y2, _col = c_white, _alp = 1, _thickness =
 	draw_line_width(_x1, _y1, _x2, _y2, _thickness);
 }
 
-	// Self
-function fn_draw_self_setup()
-{
-	self_imgSpd = 0;
-	self_x = x;
-	self_y = y;
-	self_xSc = image_xscale;
-	self_ySc = image_yscale;
-	self_ang = image_angle;
-	
-	self_custom = false;
-	self_ignoreRdcdMot = false;
-}
-function fn_draw_self()
-{
-	// Animates the object
-	if (self_imgSpd > 0)
-	{
-		image_index += self_imgSpd;
-		if (global.config_rdcdMot == true && self_ignoreRdcdMot == false)
-			image_index = 0;
-	}
-	
-	// Draws the object
-	if (self_custom == false)
-		fn_draw_spr(sprite_index, image_index, self_x, self_y, image_blend, image_alpha, self_xSc, self_ySc, self_ang, false);
-}
-
 
 
 
@@ -237,16 +208,16 @@ function fn_aud_volData(_asset, _vol)
 			_vol *= 0.45;
 			break;
 			// Madotsuki theme
-		case snd_player_thm_opt_move_1:
+		case snd_player_thm_opt_move_2:
 			_vol *= 0.4;
 			break;
-		case snd_player_thm_opt_slct_1:
+		case snd_player_thm_opt_slct_2:
 			_vol *= 0.2;
 			break;
-		case snd_player_thm_opt_cncl_1:
+		case snd_player_thm_opt_cncl_2:
 			_vol *= 0.2;
 			break;
-		case snd_player_thm_opt_fail_1:
+		case snd_player_thm_opt_fail_2:
 			_vol *= 0.4;
 			break;
 		
@@ -258,26 +229,26 @@ function fn_aud_volData(_asset, _vol)
 		
 		
 		// Items
-		case snd_itm_kart_eng:
-			_vol *= 0.65;
-			break;
-		case snd_itm_kart_brk:
+		case snd_player_itm_kart:
 			_vol *= 0.5;
 			break;
-		case snd_itm_kart_hit:
-			_vol *= 0.75;
+		case snd_player_itm_kart_turn:
+			_vol *= 0.5;
+			break;
+		case snd_player_itm_kart_hit:
+			_vol *= 0.5;
 			break;
 		
 		
 		// Interaction
 		case snd_hulapoca:
-			_vol *= 1;
+			_vol *= 1.25;
 			break;
 		case snd_penyplocde:
-			_vol *= 1;
+			_vol *= 1.25;
 			break;
 		case snd_ponkawonka:
-			_vol *= 1;
+			_vol *= 1.25;
 			break;
 		
 		
@@ -303,22 +274,22 @@ function fn_aud_volData(_asset, _vol)
 		case mus_macaco:
 			_vol *= 0.25;
 			break;
-		case snd_entity_macaco_citizen_0:
+		case snd_entity_macaco_monkey_0:
 			_vol *= 0.5;
 			break;
-		case snd_entity_macaco_citizen_2:
+		case snd_entity_macaco_monkey_2:
 			_vol *= 0.3;
 			break;
-		case snd_entity_macaco_citizen_3:
+		case snd_entity_macaco_monkey_3:
 			_vol *= 0.85;
 			break;
-		case snd_entity_macaco_citizen_4:
+		case snd_entity_macaco_monkey_4:
 			_vol *= 0.65;
 			break;
-		case snd_entity_macaco_citizen_5:
+		case snd_entity_macaco_monkey_5:
 			_vol *= 0.5;
 			break;
-		case snd_entity_macaco_citizen_6:
+		case snd_entity_macaco_monkey_6:
 			_vol *= 0.35;
 			break;
 		
@@ -354,16 +325,16 @@ function fn_aud_ofsData(_asset, _ofs)
 		
 		
 		// Macacolandia citizens
-		case snd_entity_macaco_citizen_0:
+		case snd_entity_macaco_monkey_0:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_citizen_1:
+		case snd_entity_macaco_monkey_1:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_citizen_3:
+		case snd_entity_macaco_monkey_3:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_citizen_6:
+		case snd_entity_macaco_monkey_6:
 			_ofs += 0.25;
 			break;
 	}

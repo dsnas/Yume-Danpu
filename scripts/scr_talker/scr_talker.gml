@@ -26,6 +26,26 @@ function fn_talker_getId() // Retrieves the ID of the interactable, which determ
 }
 function fn_talker_evCreate() // Create Event determined by the interactable's ID
 {
+	fn_talker_talk_setup();
+	// "talk_type" is assigned automatically
+	
+	if (talker_id == "gift_itm_kart") // Kart Gift
+		talk_type.gift.content_index = PLAYER_ITM.KART;
+}
+function fn_talker_evStep() // Step Event determined by the interactable's ID
+{
+	fn_talker_talk();
+	
+	
+	if (talker_id == "door_dbgwrld" && room == rm_dbgwrld) // Door of Debug World
+	{
+		var _alp = clamp((abs(distance_to_object(obj_player)) / 32), 0, 1);
+		image_alpha = fn_lerp(image_alpha, (1 - _alp), 0.05);
+	}
+}
+
+function fn_talker_talk_setup()
+{
 	talk_act = true; // Determines if the object can be interacted with
 	talk_stg = -1; // ID number of the current stage of the interaction sequence (-1 == inactive, 0+ active)
 	talk_dur = 0;
@@ -59,9 +79,6 @@ function fn_talker_evCreate() // Create Event determined by the interactable's I
 		}
 	}
 	
-	
-	
-	
 	if (string_starts_with(talker_id, "bell") == true)
 	{
 		talk_type.bell.act = true;
@@ -79,25 +96,9 @@ function fn_talker_evCreate() // Create Event determined by the interactable's I
 		else if (string_starts_with(talker_id, "gift_thm") == true)
 			talk_type.gift.content_array = global.player_thm;
 	}
-	
-	
-	if (talker_id == "door_dbgwrld" && room == rm_dbgwrld) // Door of Debug World
-		
-	if (talker_id == "gift_itm_kart") // Kart Gift
-		talk_type.gift.content_index = PLAYER_ITM.KART;
 }
-function fn_talker_evStep() // Step Event determined by the NPC's ID
+function fn_talker_talk() // Interaction sequence determined by the interactable's type
 {
-	if (talker_id == "door_dbgwrld" && room == rm_dbgwrld) // Door of Debug World
-	{
-		var _alp = clamp((abs(distance_to_object(obj_player)) / 32), 0, 1);
-		image_alpha = fn_lerp(image_alpha, (1 - _alp), 0.05);
-	}
-	
-	
-	
-	
-	// Interaction sequence determined by its type
 	if (talk_type.bell.act == true) // Bell type
 	{
 		if (talk_stg == 0)
@@ -162,5 +163,20 @@ function fn_talker_evStep() // Step Event determined by the NPC's ID
 					obj_player.move_stg = -1;
 			}
 		}
+	}
+}
+
+function fn_talker_talk_type_bell_aud_asset(_asset_nameWithoutIdx)
+{
+	for (var a = 0; a < 35; a++)
+	{
+		var _asset = asset_get_index($"{_asset_nameWithoutIdx}{a}");
+		if (_asset != undefined)
+		{
+			talk_type.bell.aud_asset[a] = _asset;
+			continue;
+		}
+		else
+			break;
 	}
 }

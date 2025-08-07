@@ -3,7 +3,9 @@ event_inherited();
 solid_typeCurr = SOLID_TYPE.PLAYER;
 
 
-fn_chara_setup("player");
+itmOld = global.player_itmCurr;
+fn_actor_evCreate();
+fn_player_setup_actor();
 
 
 talk_act = true;

@@ -3,7 +3,6 @@
   "%Name":"obj_nonsolid_parent",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
   "name":"obj_nonsolid_parent",
@@ -12,7 +11,10 @@
     "name":"nonsolid",
     "path":"folders/nonsolid.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_prop_parent",
+    "path":"objects/obj_prop_parent/obj_prop_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_parent",
-    "path":"sprites/spr_parent/spr_parent.yy",
+    "name":"spr_nonsolid_parent",
+    "path":"sprites/spr_nonsolid_parent/spr_nonsolid_parent.yy",
   },
   "spriteMaskId":null,
   "visible":true,

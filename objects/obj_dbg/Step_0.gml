@@ -29,4 +29,9 @@ if (global.dbg_act == true && keyboard_check(global.dbg_cmd_key) == true)
 			obj_rmCtrl.cam_h += 6;
 		}
 	}
+	
+	
+	// Toggles the drawings of Debug Mode
+	if (keyboard_check_pressed(ord("H")) == true)
+		global.dbg_hud_act = !global.dbg_hud_act;
 }

@@ -1,5 +1,5 @@
 
-//////// Functions related to the player's data
+//////// Functions related to the player
 
 
 function fn_player_setup()
@@ -18,7 +18,7 @@ function fn_player_setup()
 	}
 	global.player_money[true] = // While awake (player_awake == true)
 	{
-		amt : irandom_range( (15 + irandom_range(1, 4)), (25 + irandom_range(1, 4)) ),
+		amt : irandom_range((15 + irandom_range(1, 4)), (25 + irandom_range(1, 4))),
 		ccy : "R$ "
 	}
 	
@@ -46,7 +46,7 @@ function fn_player_setup()
 	{
 		KART
 	}
-	fn_player_itm_add(PLAYER_ITM.KART);
+	fn_player_itm_add(PLAYER_ITM.KART, true);
 	
 	global.player_itmCurr = -1; // Determines which item is currently active (-1 == none)
 	
@@ -57,12 +57,31 @@ function fn_player_setup()
 	enum PLAYER_THM
 	{
 		DFLT,	// Default theme
+		SIMPLE, // Simple theme
 		MADOT	// Madotsuki theme
 	}
 	fn_player_thm_add(PLAYER_THM.DFLT, true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
+	fn_player_thm_add(PLAYER_THM.SIMPLE, true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Default theme
 	fn_player_thm_add(PLAYER_THM.MADOT, true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki
 	
 	global.player_thmCurr = PLAYER_THM.DFLT; // Determines which theme is currently active (-1 == none)
+	
+	
+	
+	
+	// Room-specific data
+	for (var i = 0; i < 50; i++)
+	{
+		if (room_exists(i) == true)
+		{
+			global.player_rm[i] =
+			{
+				visited : false
+			}
+		}
+		else
+			break;
+	}
 	
 	
 	
@@ -78,15 +97,71 @@ function fn_player_setup()
 		fn_player_file_save();
 	else
 		fn_player_file_load();
+	
+	
+	// Erase files from previous versions
+	if (file_exists("settings.txt") == true)
+		file_delete("settings.txt");
+	if (file_exists("collectables.txt") == true)
+		file_delete("collectables.txt");
+}
+
+
+function fn_player_setup_actor()
+{
+	render.act = true;
+	
+	dir[DIR_LT].spr = spr_player_dir_lt;
+	dir[DIR_RT].spr = spr_player_dir_rt;
+	dir[DIR_UP].spr = spr_player_dir_up;
+	dir[DIR_DN].spr = spr_player_dir_dn;
+	
+	move_type.walk.act = true;
+	move_type.walk.fstep.act = true;
+	move_type.walk.fstep.snd_asset = snd_player_fstep;
+	move_type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
+	move_type.roll.act = false;
+	move_mode.key.act = true;
+	move_precise.act = false;
+	
+	if (global.player_effCurr == -1 && global.player_itmCurr == -1)
+	{
+		if (itmOld != global.player_itmCurr && itmOld == PLAYER_ITM.KART)
+		{
+			x = fn_actor_round_x(id, x);
+			y = fn_actor_round_x(id, y);
+			self_x = x;
+			self_y = y;
+		}
+	}
+	else if (global.player_itmCurr != -1)
+	{
+		switch (global.player_itmCurr)
+		{
+			case PLAYER_ITM.KART:
+				render.act = false;
+				
+				move_type.walk.act = false;
+				move_type.roll.act = true;
+				move_type.roll.snd_asset = snd_player_itm_kart;
+				move_type.roll.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move_type.roll.turn_snd.asset = snd_player_itm_kart_turn;
+				move_type.roll.turn_snd.style = CONFIG_AUD_STYLE.PLAYER;
+				move_type.roll.hit_snd.asset = snd_player_itm_kart_hit;
+				move_type.roll.hit_snd.style = CONFIG_AUD_STYLE.PLAYER;
+				move_precise.act = true;
+				break;
+		}
+	}
 }
 
 
 // Effects
-function fn_player_eff_add(_eff)
+function fn_player_eff_add(_eff, _unlocked = false)
 {
 	global.player_eff[_eff] =
 	{
-		unlocked : false,
+		unlocked : _unlocked,
 		name : fn_config_lang_data_getText($"eff_name_{_eff}"),
 		desc : fn_config_lang_data_getText($"eff_desc_{_eff}")
 	}
@@ -105,11 +180,11 @@ function fn_player_eff_unlock(_eff)
 
 
 // Items
-function fn_player_itm_add(_itm)
+function fn_player_itm_add(_itm, _unlocked = false)
 {
 	global.player_itm[_itm] =
 	{
-		unlocked : false,
+		unlocked : _unlocked,
 		name : fn_config_lang_data_getText($"itm_name_{_itm}"),
 		desc : fn_config_lang_data_getText($"itm_desc_{_itm}")
 	}
@@ -143,7 +218,7 @@ function fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteD
 			grayLight : _col_grayLight,
 			grayDark : _col_grayDark,
 			
-			shadow : _col_shadow, // Color for the shadow of options, information, etc.
+			shadow : _col_shadow, // Color for the shadow of elements (options, information, etc.)
 			blur : _col_blur // Color for dimmed background
 		},
 		

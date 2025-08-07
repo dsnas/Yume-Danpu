@@ -62,7 +62,7 @@ if (room == end_rm && end_player_changed == false && fn_obj_exists(obj_player) =
 		with (obj_player)
 		{
 			x = other.end_player_x;
-			self_x = x;
+			render.x = x;
 		}
 	}
 	if (end_player_y != 0)
@@ -70,25 +70,25 @@ if (room == end_rm && end_player_changed == false && fn_obj_exists(obj_player) =
 		with (obj_player)
 		{
 			y = other.end_player_y;
-			self_y = y;
+			render.y = y;
 		}
 	}
-	if (end_player_dir != -1)
-		obj_player.dir = end_player_dir;
+	if (end_player_dirCurr != -1)
+		obj_player.dirCurr = end_player_dirCurr;
 	fn_obj_depth(obj_player);
 	
 	end_player_changed = true;
 }
 
 
-// Unfreezes the characters and destroys the sequence
+// Unfreezes the actorcters and destroys the sequence
 if (destroy == true)
 {
-	if (fn_obj_exists(obj_player) == true && obj_player.move_stg == -2 && obj_player.cutsc_act == false)
+	if (fn_obj_exists(obj_player) == true && obj_player.move_stg == -2)
 		obj_player.move_stg = -1;
-	for (var e = 0; e < instance_number(obj_entity); e++)
+	for (var e = 0; e < instance_number(obj_entity_parent); e++)
 	{
-		var i = instance_find(obj_entity, e);
+		var i = instance_find(obj_entity_parent, e);
 		if (i.move_stg == -2)
 			i.move_stg = -1;
 	}

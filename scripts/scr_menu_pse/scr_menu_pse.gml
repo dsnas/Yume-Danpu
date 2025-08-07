@@ -132,6 +132,9 @@ function fn_menu_pse_resume() // Resumes the game
 	
 	instance_activate_all();
 	audio_resume_all();
+	
+	if (fn_obj_exists(obj_player) == true && obj_player.move_stg == -2)
+		obj_player.move_stg = -1;
 }
 function fn_menu_pse_sshot_destroy()
 {

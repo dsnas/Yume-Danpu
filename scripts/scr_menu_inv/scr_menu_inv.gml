@@ -37,19 +37,19 @@ function fn_menu_inv_evCreate_0()
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 			// Player's picture frame
-	main_picFrm_spr = global.thm_inv_picFrm_spr[global.thm];
+	main_picFrm_spr = global.player_thm[global.player_thmCurr].inv_picFrm_spr;
 	main_picFrm_w = fn_spr_w(main_picFrm_spr);
 	main_picFrm_h = fn_spr_h(main_picFrm_spr);
 	main_picFrm_x = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(main_picFrm_w / 2));
 	main_picFrm_y = (box_y[l, 0] + draw_dist);
 	
 			// Player's picture
-	main_pic_spr = obj_player.dir_spr[obj_player.DIR_DN];
+	main_pic_spr = obj_player.dir[obj_player.DIR_DN].spr;
 	main_pic_snd = snd_player_fstep;
 	if (irandom_range(1, 100) == 1)
 	{
-		main_pic_spr = spr_entity_macaco_citizen;
-		main_pic_snd = snd_entity_macaco_citizen_1;
+		main_pic_spr = spr_entity_macaco_monkey;
+		main_pic_snd = snd_entity_macaco_monkey_1;
 	}
 	
 	main_pic_w = fn_spr_w(main_pic_spr);
@@ -73,13 +73,13 @@ function fn_menu_inv_evCreate_0()
 	info_y[l, 0] = _name_y;
 	
 			// Player's currency [#0]
-	var _ccy_text = global.money_ccy[global.player_awake];
+	var _ccy_text = global.player_money[global.player_awake].ccy;
 	fn_menu_info_add(l, 1, _ccy_text);
 	var _ccy_w = info_w[l, 1];
 	var _ccy_h = info_h[l, 1];
 	
 			// Player's money [#0]
-	var _mny_text = global.money_amt[global.player_awake];
+	var _mny_text = global.player_money[global.player_awake].amt;
 	fn_menu_info_add(l, 2, _mny_text);
 	var _mny_w = info_w[l, 2];
 	
@@ -164,24 +164,18 @@ function fn_menu_inv_evCreate_0()
 	{
 		// Get data of the current level
 		other_textData_key = "eff";
-		other_unlockedArr = global.eff_unlocked;
-		other_nameArr = global.eff_name;
-		other_descArr = global.eff_desc;
+		other_arr = global.player_eff;
 		
 		if (l == LVL_OTHER_ITM)
 		{
 			other_textData_key = "itm";
-			other_unlockedArr = global.itm_unlocked;
-			other_nameArr = global.itm_name;
-			other_descArr = global.itm_desc;
+			other_arr = global.player_itm;
 		}
 		
 		else if (l == LVL_OTHER_THM)
 		{
 			other_textData_key = "thm";
-			other_unlockedArr = global.thm_unlocked;
-			other_nameArr = global.thm_name;
-			other_descArr = global.thm_desc;
+			other_arr = global.player_thm;
 		}
 		
 		other_lenMax = 14;
@@ -207,11 +201,11 @@ function fn_menu_inv_evCreate_0()
 		{
 			// Options
 			var _opt_text = "----------";
-			var _opt_slct_snd = global.thm_opt_fail_snd[global.thm];
-			if (o < array_length(other_unlockedArr) && array_get(other_unlockedArr, o) == true)
+			var _opt_slct_snd = global.player_thm[global.player_thmCurr].opt_fail_snd;
+			if (o < array_length(other_arr) && array_get(other_arr, o).unlocked == true)
 			{
-				_opt_text = array_get(other_nameArr, o);
-				_opt_slct_snd = global.thm_opt_slct_snd[global.thm];
+				_opt_text = array_get(other_arr, o).name;
+				_opt_slct_snd = global.player_thm[global.player_thmCurr].opt_slct_snd;
 			}
 			fn_menu_opt_add(l, o, _opt_text);
 			
@@ -229,9 +223,9 @@ function fn_menu_inv_evCreate_0()
 			
 			
 				// Options' description
-			if (o < array_length(other_unlockedArr) && array_get(other_unlockedArr, o) == true)
+			if (o < array_length(other_arr) && array_get(other_arr, o).unlocked == true)
 			{
-				var _info_text = array_get(other_descArr, o);
+				var _info_text = array_get(other_arr, o).desc;
 				fn_menu_opt_desc_add(l, o, _info_text);
 				
 				opt_desc_x[l, o] = (box_x[l, 0] + draw_dist);
@@ -245,7 +239,7 @@ function fn_menu_inv_evCreate_1()
 {
 	// Main level
 	lvl = LVL_MAIN;
-	fn_aud_play(global.thm_opt_slct_snd[global.thm], CONFIG_AUD_STYLE.MENU);
+	fn_aud_play(global.player_thm[global.player_thmCurr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
 }
 function fn_menu_inv_evDrawGUI_2(l)
 {
@@ -273,7 +267,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 				
 				var _ptr_snd_pitch = random_range(0.75, 2.25);
 				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_AUD_STYLE.PLAYER);
-				fn_aud_pitch(_ptr_snd, _ptr_snd_pitch);
+				fn_aud_pch(_ptr_snd, _ptr_snd_pitch);
 			}
 		}
 		
@@ -306,13 +300,18 @@ function fn_menu_inv_opt_slct()
 	// Other levels (effects, items and themes)
 	else if (l == LVL_OTHER_ITM)
 	{
-		if (o < array_length(global.itm_name) && global.itm_unlocked[o] == true)
-			global.itm = o;
+		if (o < array_length(global.player_itm) && global.player_itm[o].unlocked == true)
+		{
+			if (o != global.player_itmCurr)
+				global.player_itmCurr = o;
+			else
+				global.player_itmCurr = -1;
+		}
 	}
 	else if (l == LVL_OTHER_THM)
 	{
-		if (o < array_length(global.thm_name) && global.thm_unlocked[o] == true)
-			global.thm = o;
+		if (o < array_length(global.player_thm) && global.player_thm[o].unlocked == true)
+			global.player_thmCurr = o;
 	}
 }
 function fn_menu_inv_opt_cncl()

@@ -1,22 +1,31 @@
 
-fn_draw_self();
+event_inherited();
 
-if (self_custom == true)
+fn_actor_evDraw();
+
+
+if (render.act == false)
 {
-	// Items
-	if (global.itm == ITM.KART) // Kart
-	{	
-		var _self_x = self_x;
-		var _self_y = self_y;
-		if (move_slide_shk_durCurr > 0)
+	if (global.player_itmCurr != -1) // An item is equipped
+	{
+		switch (global.player_itmCurr)
 		{
-			_self_x += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
-			_self_y += irandom_range(-move_slide_shk_dist, move_slide_shk_dist);
-			move_slide_shk_durCurr -= 1;
+			// Kart item
+			case PLAYER_ITM.KART:			
+				var _x = (render.x + render.xOfs);
+				var _y = (render.y + render.yOfs);
+				fn_draw_spr(spr_player_itm_kart_0, dirCurr, _x, _y);
+				fn_draw_spr_part(sprite_index, image_index, 0, 4, sprite_width, 17, _x, (_y - sprite_height + 5), image_blend, image_alpha, render.xSc, render.ySc);
+				fn_draw_spr(spr_player_itm_kart_1, dirCurr, _x, _y);
+				break;
 		}
-				
-		fn_draw_spr(spr_itm_kart_0, dir, _self_x, _self_y);
-		fn_draw_spr_part(sprite_index, image_index, 0, 4, 16, 17, _self_x, (_self_y - sprite_height + 5), image_blend, image_alpha, self_xSc, self_ySc);
-		fn_draw_spr(spr_itm_kart_1, dir, _self_x, _self_y);
 	}
+	//else if (global.player_effCurr != -1)
+	//{
+	//	switch (global.player_effCurr)
+	//	{
+			
+	//	}
+	//}
 }
+

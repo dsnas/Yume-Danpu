@@ -107,7 +107,7 @@ function fn_rmCtrl_evStep() // Step Event determined by the room's ID
 		nexus_siner += 0.1;
 		bg_sky[0].sky_alp = (0.5 + ((sin(nexus_siner / 6) + 1) / 10));
 		
-		//fn_rmCtrl_mus_add(0, mus_nexus);
+		fn_rmCtrl_mus_add(0, mus_nexus);
 	}
 	
 	// Macacolandia

@@ -37,7 +37,7 @@ function fn_rmTrans_getData()
 	}
 	
 	// Door of Macacolandia
-	if (start_obj == obj_interact_macaco_door)
+	if (start_obj == obj_talker_macaco_door)
 	{
 		end_rm = rm_macaco;
 		if (room == rm_macaco)
@@ -50,7 +50,7 @@ function fn_rmTrans_getData()
 	}
 	
 	// Door of Debug World
-	if (start_obj == obj_interact_dgwrld_door)
+	if (start_obj == obj_talker_dbgwrld_door)
 	{
 		end_rm = rm_dbgwrld
 		if (room == rm_dbgwrld)
