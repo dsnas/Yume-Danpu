@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_entity_macaco_monkey_0",
+  "%Name":"snd_player_thm_equip_0_0",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":3.2653062,
-  "name":"snd_entity_macaco_monkey_0",
+  "duration":0.580839,
+  "name":"snd_player_thm_equip_0_0",
   "parent":{
-    "name":"Macacolandia",
-    "path":"folders/Macacolandia.yy",
+    "name":"Default (0)",
+    "path":"folders/player/thm/Default (0).yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_entity_macaco_monkey_0.mp3",
+  "soundFile":"snd_player_thm_equip_0_0.mp3",
   "type":0,
   "volume":1.0,
 }

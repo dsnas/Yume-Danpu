@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_entity_macaco_monkey_0",
+  "%Name":"unused_snd_player_itm_kart_turn",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":3.2653062,
-  "name":"snd_entity_macaco_monkey_0",
+  "duration":1.7142857,
+  "name":"unused_snd_player_itm_kart_turn",
   "parent":{
-    "name":"Macacolandia",
-    "path":"folders/Macacolandia.yy",
+    "name":"[!] unused",
+    "path":"folders/[!] unused.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_entity_macaco_monkey_0.mp3",
+  "soundFile":"unused_snd_player_itm_kart_turn.wav",
   "type":0,
   "volume":1.0,
 }

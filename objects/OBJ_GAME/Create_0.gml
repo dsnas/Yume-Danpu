@@ -30,7 +30,7 @@ fn_config_lang_setup();
 fn_config_lang_data_setup();
 fn_config_setup();
 
-fn_player_setup();
+fn_player_setup(false);
 
 
 fn_obj_create(obj_rmCtrl);

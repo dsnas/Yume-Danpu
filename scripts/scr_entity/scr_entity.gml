@@ -25,14 +25,12 @@ function fn_entity_evCreate() // Create Event determined by the entity's ID
 {
 	fn_actor_evCreate();
 	fn_actor_set_dir_spr(id, sprite_index);
-	move_dur = 32;
+	move_type.walk.dur = 32;
 	move_type.walk.act = true;
 	move_mode.rnd.act = true;
 	if (entity_preset == "good") // Peaceful
 	{
 		image_index = 1;
-		move_type.walk.act = true;
-		move_mode.rnd.act = true;
 		move_delay.act = true;
 		move_chain.act = true;
 	}

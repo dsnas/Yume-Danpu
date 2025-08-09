@@ -301,17 +301,12 @@ function fn_menu_inv_opt_slct()
 	else if (l == LVL_OTHER_ITM)
 	{
 		if (o < array_length(global.player_itm) && global.player_itm[o].unlocked == true)
-		{
-			if (o != global.player_itmCurr)
-				global.player_itmCurr = o;
-			else
-				global.player_itmCurr = -1;
-		}
+			fn_player_itm_equip(o);
 	}
 	else if (l == LVL_OTHER_THM)
 	{
 		if (o < array_length(global.player_thm) && global.player_thm[o].unlocked == true)
-			global.player_thmCurr = o;
+			fn_player_thm_equip(o);
 	}
 }
 function fn_menu_inv_opt_cncl()

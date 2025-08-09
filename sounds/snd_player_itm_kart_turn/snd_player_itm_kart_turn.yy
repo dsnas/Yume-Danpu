@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.7142857,
+  "duration":0.21478458,
   "name":"snd_player_itm_kart_turn",
   "parent":{
     "name":"itm",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_player_itm_kart_turn.wav",
+  "soundFile":"snd_player_itm_kart_turn.mp3",
   "type":0,
   "volume":1.0,
 }

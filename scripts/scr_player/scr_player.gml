@@ -2,7 +2,7 @@
 //////// Functions related to the player
 
 
-function fn_player_setup()
+function fn_player_setup(_file_act = false)
 {
 	global.player_name = "Eleanor";
 	global.player_awake = false;
@@ -11,13 +11,11 @@ function fn_player_setup()
 	
 	
 	// Money
-	global.player_money[false] = // While sleeping (player_awake == false)
-	{
+	global.player_money[false] = { // While sleeping (player_awake == false)
 		amt : 0,
 		ccy : "₢$ "
 	}
-	global.player_money[true] = // While awake (player_awake == true)
-	{
+	global.player_money[true] = { // While awake (player_awake == true)
 		amt : irandom_range((15 + irandom_range(1, 4)), (25 + irandom_range(1, 4))),
 		ccy : "R$ "
 	}
@@ -46,7 +44,7 @@ function fn_player_setup()
 	{
 		KART
 	}
-	fn_player_itm_add(PLAYER_ITM.KART, true);
+	fn_player_itm_add(PLAYER_ITM.KART);
 	
 	global.player_itmCurr = -1; // Determines which item is currently active (-1 == none)
 	
@@ -86,72 +84,76 @@ function fn_player_setup()
 	
 	
 	
-	// Save/Load the player's data
-	global.player_file =
-	{
-		name : "player.ini",
-		msg : "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?"
-	};
-	
-	if (file_exists(global.player_file.name) == false)
-		fn_player_file_save();
-	else
-		fn_player_file_load();
-	
-	
-	// Erase files from previous versions
-	if (file_exists("settings.txt") == true)
-		file_delete("settings.txt");
-	if (file_exists("collectables.txt") == true)
-		file_delete("collectables.txt");
+	// Prepare to save/load the player's data
+	global.player_file = {
+		act : _file_act
+	}
+	if (global.player_file.act == true)
+		fn_player_file_setup();
 }
 
 
-function fn_player_setup_actor()
-{
-	render.act = true;
-	
-	dir[DIR_LT].spr = spr_player_dir_lt;
-	dir[DIR_RT].spr = spr_player_dir_rt;
-	dir[DIR_UP].spr = spr_player_dir_up;
-	dir[DIR_DN].spr = spr_player_dir_dn;
-	
-	move_type.walk.act = true;
-	move_type.walk.fstep.act = true;
-	move_type.walk.fstep.snd_asset = snd_player_fstep;
-	move_type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
-	move_type.roll.act = false;
-	move_mode.key.act = true;
-	move_precise.act = false;
-	
-	if (global.player_effCurr == -1 && global.player_itmCurr == -1)
+function fn_player_actor_setup()
+{	
+	if (global.player_effCurr != effOld) || (global.player_itmCurr != itmOld)
 	{
-		if (itmOld != global.player_itmCurr && itmOld == PLAYER_ITM.KART)
-		{
-			x = fn_actor_round_x(id, x);
-			y = fn_actor_round_x(id, y);
-			self_x = x;
-			self_y = y;
+		dir[DIR_LT].spr = spr_player_dir_lt;
+		dir[DIR_RT].spr = spr_player_dir_rt;
+		dir[DIR_UP].spr = spr_player_dir_up;
+		dir[DIR_DN].spr = spr_player_dir_dn;
+		
+		render.act = true;
+		
+		move_type.walk.act = true;
+		move_type.walk.fstep.act = true;
+		move_type.walk.fstep.snd_asset = snd_player_fstep;
+		move_type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
+		move_type.roll.act = false;
+		move_mode.key.act = true;
+		move_precise.act = false;
+		
+		if (global.player_effCurr == -1 && global.player_itmCurr == -1)
+		{		
+			if (itmOld == PLAYER_ITM.KART)
+			{
+				x = fn_actor_round_x(id, x);
+				y = fn_actor_round_x(id, y);
+				render.x = x;
+				render.y = y;
+			}
 		}
-	}
-	else if (global.player_itmCurr != -1)
-	{
-		switch (global.player_itmCurr)
+		else
 		{
-			case PLAYER_ITM.KART:
-				render.act = false;
+			//if (global.player_effCurr != -1)
+			//{
+			//	switch (global.player_effCurr)
+			//	{
 				
-				move_type.walk.act = false;
-				move_type.roll.act = true;
-				move_type.roll.snd_asset = snd_player_itm_kart;
-				move_type.roll.snd_style = CONFIG_AUD_STYLE.PLAYER;
-				move_type.roll.turn_snd.asset = snd_player_itm_kart_turn;
-				move_type.roll.turn_snd.style = CONFIG_AUD_STYLE.PLAYER;
-				move_type.roll.hit_snd.asset = snd_player_itm_kart_hit;
-				move_type.roll.hit_snd.style = CONFIG_AUD_STYLE.PLAYER;
-				move_precise.act = true;
-				break;
+			//	}
+			//}
+			if (global.player_itmCurr != -1)
+			{
+				switch (global.player_itmCurr)
+				{
+					case PLAYER_ITM.KART:
+						render.act = false;
+						
+						move_type.walk.act = false;
+						move_type.roll.act = true;
+						move_type.roll.snd.asset = snd_player_itm_kart;
+						move_type.roll.snd.style = CONFIG_AUD_STYLE.PLAYER;
+						move_type.roll.turn_snd.asset = snd_player_itm_kart_turn;
+						move_type.roll.turn_snd.style = CONFIG_AUD_STYLE.PLAYER;
+						move_type.roll.hit_snd.asset = snd_player_itm_kart_hit;
+						move_type.roll.hit_snd.style = CONFIG_AUD_STYLE.PLAYER;
+						move_precise.act = true;
+						break;
+				}
+			}
 		}
+		
+		effOld = global.player_effCurr;
+		itmOld = global.player_itmCurr;
 	}
 }
 
@@ -171,7 +173,7 @@ function fn_player_eff_unlock(_eff)
 	if (global.player_eff[_eff].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_eff[_eff].unlocked = true;
-		fn_profile_file_save();
+		fn_player_file_save();
 		
 		fn_menu_obj_create("unlock", 0, global.player_eff[_eff].name);
 		obj_player.move_stg = -2;
@@ -194,11 +196,25 @@ function fn_player_itm_unlock(_itm)
 	if (global.player_itm[_itm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_itm[_itm].unlocked = true;
-		fn_profile_file_save();
+		fn_player_file_save();
 		
 		fn_menu_obj_create("unlock", 1, global.player_itm[_itm].name);
 		obj_player.move_stg = -2;
 	}
+}
+function fn_player_itm_equip(_itm)
+{
+	var _equip_sndIdx = 0;
+	
+	if (_itm != global.player_itmCurr)
+		global.player_itmCurr = _itm;
+	else
+	{
+		global.player_itmCurr = -1;
+		_equip_sndIdx = 1;
+	}
+	
+	fn_aud_play(global.player_thm[global.player_thmCurr].equip_snd[_equip_sndIdx], CONFIG_AUD_STYLE.MENU);
 }
 
 
@@ -244,7 +260,8 @@ function fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteD
 		inv_picFrm_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_inv_picFrm_"),
 		
 		start_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_start_"),
-		unlock_snd : [fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_0_"), fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_1_"), fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_2_")]
+		unlock_snd : [fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_0_"), fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_1_"), fn_player_thm_getAsset(_thm, "snd_player_thm_unlock_2_")],
+		equip_snd : [fn_player_thm_getAsset(_thm, "snd_player_thm_equip_0_"), fn_player_thm_getAsset(_thm, "snd_player_thm_equip_1_")]
 	}
 }
 function fn_player_thm_getAsset(_thm, _asset_nameWithoutIdx)
@@ -259,15 +276,31 @@ function fn_player_thm_unlock(_thm)
 	if (global.player_thm[_thm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_thm[_thm].unlocked = true;
-		fn_profile_file_save();
+		fn_player_file_save();
 		
 		fn_menu_obj_create("unlock", 2, global.player_thm[_thm].name);
 		obj_player.move_stg = -2;
 	}
 }
+function fn_player_thm_equip(_thm)
+{
+	global.player_thmCurr = _thm;
+	fn_player_file_save();
+}
 
 
 // Saving and loading the player's data
+function fn_player_file_setup()
+{
+	// Save/Load the player's data
+	global.player_file.name = "player.ini";
+	global.player_file.msg = "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?";
+	
+	if (file_exists(global.player_file.name) == false)
+		fn_player_file_save();
+	else
+		fn_player_file_load();
+}
 function fn_player_file_save()
 {
 	ini_open(global.player_file.name);
@@ -292,6 +325,7 @@ function fn_player_file_save()
 	// Themes
 	for (var t = 0; t < array_length(global.player_thm); t++)
 		ini_write_real("thm", $"unlocked_{t}", global.player_thm[t].unlocked);
+	ini_write_real("thm", "curr", global.player_thmCurr);
 	
 	
 	ini_close();
@@ -319,6 +353,7 @@ function fn_player_file_load()
 		// Themes
 		for (var t = 0; t < array_length(global.player_thm); t++)
 			global.player_thm[t].unlocked = ini_read_real("thm", $"unlocked_{t}", false);
+		global.player_thmCurr = ini_read_real("thm", "curr", PLAYER_THM.DFLT);
 		
 		
 		ini_close();

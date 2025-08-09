@@ -78,7 +78,16 @@ function fn_rmCtrl_evCreate() // Create Event determined by the room's ID
 			}
 		}
 		
-		fn_rmCtrl_bg_sky_add(0, irandom_range(0, (_spr_len - 1)), , 0.25);
+		var i = 0;
+		var _sky_sprIdx = -1;
+		while (_sky_sprIdx == -1) || (_sky_sprIdx == spr_px)
+		{
+			_sky_sprIdx = irandom_range(0, (_spr_len - 1));
+			i += 1;
+			if (i >= 16)
+				break;
+		}
+		fn_rmCtrl_bg_sky_add(0, _sky_sprIdx, , 0.25);
 		bg_sky[0].sky_img = (sprite_get_number(bg_sky[0].sky_spr) - 1);
 		
 		fn_rmCtrl_bg_clouds_add(1, irandom_range(0, (_spr_len - 1)), , , 0.5, 160, 120);
@@ -154,7 +163,6 @@ function fn_rmCtrl_bg_clouds_add(_idx, _spr, _xSc = 1, _ySc = 1, _alp = 1, _xDis
 	{
 		depth = _depth;
 		
-		
 		clouds_spr = _spr;
 		clouds_imgSpd = 0;
 		clouds_img = 0;
@@ -176,10 +184,10 @@ function fn_rmCtrl_bg_clouds_add(_idx, _spr, _xSc = 1, _ySc = 1, _alp = 1, _xDis
 		clouds_loop_yDist = _yDist;
 		clouds_loop_yLen_outRm = (ceil(240 / clouds_loop_yDist) * 2);
 		clouds_loop_yLen = (clouds_loop_yLen_outRm + ceil(room_height / clouds_loop_yDist) + clouds_loop_yLen_outRm);
+		fn_log($"clouds    spr_name = {sprite_get_name(clouds_spr)} | loop_xLen = {clouds_loop_xLen} | loop_yLen = {clouds_loop_yLen}");
 		
 		
 		clouds_move_xStart = clouds_x;
-		fn_log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		clouds_move_xDur = (_move_xDurInSec * 60);
 		clouds_move_xDist = (clouds_loop_xDist * choose(-1, 1));
 		clouds_move_xTgt = (clouds_move_xStart + clouds_move_xDist);
@@ -228,6 +236,7 @@ function fn_rmCtrl_bg_sky_add(_idx, _spr, _col = c_white, _alp = 1, _move_xDurIn
 		sky_loop_yLen_outRm = ceil(240 / sky_loop_yDist);
 		sky_loop_xLen = (sky_loop_xLen_outRm + ceil(room_width / sky_loop_xDist) + sky_loop_xLen_outRm);		
 		sky_loop_yLen = (sky_loop_yLen_outRm + ceil(room_height / sky_loop_yDist) + sky_loop_yLen_outRm);
+		fn_log($"blue sky    wh = {sky_w}|{sky_h} | spr_name = {sprite_get_name(sky_sprOrig)} | loop_xLen = {sky_loop_xLen} | loop_yLen = {sky_loop_yLen}");
 		
 		
 		sky_move_xStart = sky_x;

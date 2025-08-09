@@ -53,6 +53,8 @@ function fn_actor_evCreate()
 	// Movement
 	move_act = true; // Determines if the actorcter can move
 	move_stg = -1; // ID of the current stage of the movement sequence
+	if (fn_obj_exists(obj_rmTrans) == true)
+		move_stg = -2;
 	
 	
 		// Types
@@ -62,6 +64,8 @@ function fn_actor_evCreate()
 		walk :
 		{
 			act : false,
+			
+			dist : 16, // Distance the actor will walk
 			dur : 16, // Duration in frames of the movement sequence
 			durCurr : 0,
 			
@@ -79,16 +83,22 @@ function fn_actor_evCreate()
 		roll :
 		{
 			act : false,
-			spdMin : 0.25,
-			spdMax : 4,
-			accel : 0.1,
-			decel : 0.1,
 			
-			snd_asset : -1,
-			snd_style : -1,
-			snd_id : -1,
-			snd_pchMin : 0.5,
-			snd_pchMax : 1.5,
+			distMin : 0.5,
+			distMax : 4,
+			distCurr : 0,
+			
+			distAccel : 0.1,
+			distDecel : 0.1,
+			
+			snd :
+			{
+				asset : -1,
+				style : -1,
+				pchMin : 0.5,
+				pchMax : 1.5,
+				id : -1
+			},
 			
 			turn_snd :
 			{
@@ -119,7 +129,6 @@ function fn_actor_evCreate()
 			}
 		}
 	}
-	move_type.roll.spdCurr = move_type.roll.spdMin;
 	
 	
 		// Modes
@@ -172,6 +181,23 @@ function fn_actor_evStep()
 {
 	// WHAT THE FUCK IS GOING ON
 	
+	if (move_type.roll.act == true && move_type.roll.snd.asset != -1 && move_type.roll.snd.style != -1)
+	{
+		if (move_type.roll.snd.id == -1)
+			move_type.roll.snd.id = fn_aud_play(move_type.roll.snd.asset, move_type.roll.snd.style, , , , true);
+		
+		var _distMax = move_type.roll.distMax;
+		var _aud_pchDiff = (move_type.roll.snd.pchMax - move_type.roll.snd.pchMin);
+		var _aud_pch = (move_type.roll.snd.pchMin + (_aud_pchDiff * (( _distMax * (move_type.roll.distCurr / _distMax)) / _distMax)));
+		fn_aud_pch(move_type.roll.snd.asset, move_type.roll.snd.id, _aud_pch);
+		fn_aud_vol(move_type.roll.snd.asset, move_type.roll.snd.id, move_type.roll.snd.style);
+	}
+	else if (move_type.roll.snd.id != -1)
+	{
+		fn_aud_stop(move_type.roll.snd.id);
+		move_type.roll.snd.id = -1;
+	}
+	
 	if (move_act == true)
 	{
 		// Idle, movement sequence inactive
@@ -181,7 +207,7 @@ function fn_actor_evStep()
 			var _dirCurrOld = dirCurr;
 			
 			
-			// Gets direction of the movement sequence
+			// Gets the direction of the actor will move towards
 			if (move_delay.act == false) || (move_delay.act == true && move_delay.durCurr <= 0) // Delay (delays the start of the movement sequence)
 			{	
 				if (move_mode.key.act == true) // Key input mode
@@ -225,7 +251,7 @@ function fn_actor_evStep()
 					}
 				}
 				
-				if (move_type.roll.act == true && move_type.roll.spdCurr > move_type.roll.spdMin && _dirCurr == -1)
+				if (move_type.roll.act == true && move_type.roll.distCurr > move_type.roll.distMin && _dirCurr == -1)
 					_dirCurr = dirCurr;
 				
 				move_delay.durCurr = (irandom_range(move_delay.durMin, move_delay.durMax) * move_delay.act);
@@ -234,18 +260,21 @@ function fn_actor_evStep()
 				move_delay.durCurr -= 1;
 			
 			
-			// Direction of the movements sequence was found
+			// Direction the actor will move towards was found
 			if (_dirCurr != -1)
 			{
 				dirCurr = _dirCurr;
-				var _move_dist = 16;
+				var _move_dist = 0;
 				
-				if (move_type.roll.act == true) // Roll type
+				
+				// Gets the distance the actor will move
+				if (move_type.walk.act == true)
+					_move_dist = move_type.walk.dist;
+				else if (move_type.roll.act == true)
 				{
-					// Resets speed
-					if (_dirCurrOld != _dirCurr) || (move_amt <= 0)
-						move_type.roll.spdCurr = move_type.roll.spdMin;
-					_move_dist = move_type.roll.spdCurr;
+					if (move_type.roll.distCurr == 0) || (_dirCurrOld != _dirCurr) || (move_amt <= 0)
+						move_type.roll.distCurr = move_type.roll.distMin;
+					_move_dist = move_type.roll.distCurr;
 					
 					// Starts turning animation
 					if (_dirCurrOld != _dirCurr)
@@ -260,7 +289,9 @@ function fn_actor_evStep()
 					}
 				}
 				
-				while (move_precise.act == false) || (move_precise.act == true && _move_dist > 0)
+				
+				// Distance the actor will move was found
+				while (_move_dist > 0)
 				{
 					var _move_xTgt = fn_actor_get_xAhead(id, x, _move_dist);
 					var _move_yTgt = fn_actor_get_yAhead(id, y, _move_dist);
@@ -274,8 +305,8 @@ function fn_actor_evStep()
 							move_xStart = x;
 							move_yStart = y;
 							
-							x = _move_xTgt;
-							y = _move_yTgt;
+							x = move_xTgt;
+							y = move_yTgt;
 							
 							if (global.dbg_act == true && global.dbg_excessLog == true)
 								fn_log($"x = {x} | y = {y} | self_x = {render.x} | self_y = {render.y} | depth = {depth}");
@@ -283,20 +314,34 @@ function fn_actor_evStep()
 						}
 						else
 						{
-							move_amt = 0;
+							move_amt = -2;
 							break;
 						}
 					}
 					else
 					{
+						if (move_mode.chase.act == true && distance_to_object(move_mode.chase.tgt) <= 16 && move_mode.chase.tgt.move_stg == -1)
+						{
+							if (room == rm_dbgwrld)
+							{
+								move_mode.chase.tgt.x = 112;
+								move_mode.chase.tgt.y = 432;
+								move_mode.chase.tgt.render.x = move_mode.chase.tgt.x;
+								move_mode.chase.tgt.render.y = move_mode.chase.tgt.y;
+								fn_obj_depth(move_mode.chase.tgt);
+								
+								fn_aud_play(snd_entity_macaco_monkey_0, CONFIG_AUD_STYLE.ENTITY, , , 0.5);
+							}
+						}
+						
 						if (move_precise.act == false)
 						{
 							move_amt = -1;
 							break;
 						}
-						else if (move_precise.act == true)
+						else
 						{
-							_move_dist -= 0.1;
+							_move_dist -= 0.5;
 							if (_move_dist > 0)
 								continue;
 							else
@@ -305,15 +350,15 @@ function fn_actor_evStep()
 								{
 									if (move_type.roll.hit_snd.asset != -1 && move_type.roll.hit_snd.style != -1)
 										fn_aud_play(move_type.roll.hit_snd.asset, move_type.roll.hit_snd.style);
-						
+									
 									if (move_type.roll.hit_shk.act == true)
 									{
-										var _spdMax = move_type.roll.spdMax;
-										var _spdCurr = move_type.roll.spdCurr;
+										var _spdMax = move_type.roll.distMax;
+										var _spdCurr = move_type.roll.distCurr;
 										move_type.roll.hit_shk.durCurr = (move_type.roll.hit_shk.dur * (( _spdMax * (_spdCurr / _spdMax)) / _spdMax));
 									}
 								}
-								
+									
 								move_amt = -1;
 								break;
 							}
@@ -332,6 +377,7 @@ function fn_actor_evStep()
 			{
 				render.x += ((move_xTgt - move_xStart) / move_type.walk.dur);
 				render.y += ((move_yTgt - move_yStart) / move_type.walk.dur);
+				fn_actor_rm_loop();
 				depth = -render.y;
 				
 				// Walking animation
@@ -384,10 +430,10 @@ function fn_actor_evStep()
 				depth = -render.y;
 				
 				if (dir[dirCurr].key_held == true)
-					move_type.roll.spdCurr += move_type.roll.accel;
+					move_type.roll.distCurr += move_type.roll.distAccel;
 				else
-					move_type.roll.spdCurr -= move_type.roll.decel;
-				move_type.roll.spdCurr = clamp(move_type.roll.spdCurr, move_type.roll.spdMin, move_type.roll.spdMax);
+					move_type.roll.distCurr -= move_type.roll.distDecel;
+				move_type.roll.distCurr = clamp(move_type.roll.distCurr, move_type.roll.distMin, move_type.roll.distMax);
 				
 				move_stg = -1;
 				move_amt = (clamp(move_amt, 0, infinity) + 1);
@@ -436,8 +482,8 @@ function fn_actor_evDraw()
 }
 function fn_actor_evClean()
 {
-	if (move_type.roll.act == true && move_type.roll.snd_id != -1)
-		fn_aud_stop(move_type.roll.snd_id);
+	if (move_type.roll.act == true && move_type.roll.snd.id != -1)
+		fn_aud_stop(move_type.roll.snd.id);
 }
 
 
@@ -461,19 +507,29 @@ function fn_actor_round_x(_obj, _x)
 {
 	if (fn_obj_exists(_obj) == true)
 		return (16 * round(_x / 16));
+	else
+		return 0;
 }
 function fn_actor_round_y(_obj, _y)
 {
 	if (fn_obj_exists(_obj) == true)
 		return (16 * round(_y / 16));
+	else
+		return 0;
 }
 function fn_actor_get_xAhead(_obj, _x, _dist = 16)
 {
-	return (_x + ((_dist * _obj.dir[_obj.dirCurr].sign) * (_obj.dir[_obj.dirCurr].axis == _obj.DIR_AXIS_HOR)));
+	if (fn_obj_exists(_obj) == true)
+		return (_x + ((_dist * _obj.dir[_obj.dirCurr].sign) * (_obj.dir[_obj.dirCurr].axis == _obj.DIR_AXIS_HOR)));
+	else
+		return 0;
 }
 function fn_actor_get_yAhead(_obj, _y, _dist = 16)
 {
-	return (_y + ((_dist * _obj.dir[_obj.dirCurr].sign) * (_obj.dir[_obj.dirCurr].axis == _obj.DIR_AXIS_VER)));
+	if (fn_obj_exists(_obj) == true)
+		return (_y + ((_dist * _obj.dir[_obj.dirCurr].sign) * (_obj.dir[_obj.dirCurr].axis == _obj.DIR_AXIS_VER)));
+	else
+		return 0;
 }
 
 

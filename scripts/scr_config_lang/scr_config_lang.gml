@@ -14,7 +14,7 @@ function fn_config_lang_setup()
 	
 	
 	global.config_langCurr = CONFIG_LANG.EN_US; // Current language
-	global.config_langSlcted = false; // Determines if the player has selected a language on game start
+	global.config_lang_hasChosen = false; // Determines if the player has selected a language on game start
 	
 	
 	// Save/Load the current language
@@ -38,12 +38,15 @@ function fn_config_lang_add(_lang, _name)
 	}
 	global.config_lang_len = array_length(global.config_lang);
 }
-function fn_config_lang_mod(_lang)
+function fn_config_lang_mod(_langNew)
 {
-	global.config_langCurr = _lang;
+	global.config_langCurr = _langNew;
 	fn_config_lang_file_save();
 	fn_config_lang_data_setup();
 	fn_config_setup();
+	
+	var _player_act = global.player_file.act;
+	fn_player_setup(_player_act);
 }
 
 
@@ -54,7 +57,7 @@ function fn_config_lang_file_save()
 	ini_write_string("game", "msg", global.config_lang_file.msg);
 	
 	ini_write_real("lang", "curr", global.config_langCurr);
-	ini_write_real("lang", "slcted", global.config_langSlcted);
+	ini_write_real("lang", "hasChosen", global.config_lang_hasChosen);
 	
 	ini_close();
 }
@@ -65,7 +68,7 @@ function fn_config_lang_file_load()
 	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		global.config_langCurr = ini_read_real("lang", "curr", CONFIG_LANG.EN_US);
-		global.config_langSlcted = ini_read_real("lang", "slcted", CONFIG_LANG.EN_US);
+		global.config_lang_hasChosen = ini_read_real("lang", "hasChosen", CONFIG_LANG.EN_US);
 		
 		ini_close();
 	}
@@ -139,8 +142,8 @@ function fn_config_lang_data_setup()
 	fn_config_lang_data_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.", "O Salenis é um símbolo político.\nA textura dele é horrível.");
 	
 		// Items
-	fn_config_lang_data_addText("itm_name_0", "Kart");
-	fn_config_lang_data_addText("itm_desc_0", "...?", "...?");
+	fn_config_lang_data_addText("itm_name_0", "Kart", "Kart");
+	fn_config_lang_data_addText("itm_desc_0", "", "...?");
 	
 		// Themes
 	fn_config_lang_data_addText("thm_name_0", "Default", "Padrão");

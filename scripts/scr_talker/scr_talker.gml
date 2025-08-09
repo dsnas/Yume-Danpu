@@ -29,15 +29,20 @@ function fn_talker_evCreate() // Create Event determined by the interactable's I
 	fn_talker_talk_setup();
 	// "talk_type" is assigned automatically
 	
+	if (talker_id == "door_dbgwrld" && room == rm_nexus)
+		image_alpha = 0;
 	if (talker_id == "gift_itm_kart") // Kart Gift
 		talk_type.gift.content_index = PLAYER_ITM.KART;
+	
+	if (talk_type.gift.act == true && array_get(talk_type.gift.content_array, talk_type.gift.content_index).unlocked == true)
+		image_index = 1;
 }
 function fn_talker_evStep() // Step Event determined by the interactable's ID
 {
 	fn_talker_talk();
 	
 	
-	if (talker_id == "door_dbgwrld" && room == rm_dbgwrld) // Door of Debug World
+	if (talker_id == "door_dbgwrld" && room == rm_nexus) // Door of Debug World
 	{
 		var _alp = clamp((abs(distance_to_object(obj_player)) / 32), 0, 1);
 		image_alpha = fn_lerp(image_alpha, (1 - _alp), 0.05);
@@ -103,6 +108,8 @@ function fn_talker_talk() // Interaction sequence determined by the interactable
 	{
 		if (talk_stg == 0)
 		{
+			fn_log($"Crazsy i cwas crazy once     movestg = {obj_player.move_stg}");
+			
 			if (talk_type.bell.aud_idx == -1)
 				talk_type.bell.aud_idx = irandom_range(0, (array_length(talk_type.bell.aud_asset) - 1));
 			fn_aud_play(talk_type.bell.aud_asset[talk_type.bell.aud_idx], talk_type.bell.aud_style);
@@ -120,7 +127,6 @@ function fn_talker_talk() // Interaction sequence determined by the interactable
 					obj_player.move_stg = -1;
 				
 				talk_stg = -1;
-				
 				if (solid_typeCurr == SOLID_TYPE.ENTITY)
 					move_stg = -1;
 			}
@@ -141,7 +147,7 @@ function fn_talker_talk() // Interaction sequence determined by the interactable
 			var _content_array = talk_type.gift.content_array;
 			var _content_index = talk_type.gift.content_index;
 			
-			if (_content_index != -1 && _content_array != -1 && struct_get(array_get(_content_array, _content_index), "unlocked") == false)
+			if (_content_index != -1 && _content_array != -1 && array_get(_content_array, _content_index).unlocked == false)
 			{
 				image_index = 1;
 				switch (_content_array)
@@ -159,9 +165,12 @@ function fn_talker_talk() // Interaction sequence determined by the interactable
 			}
 			else
 			{
+				fn_log("!!!!!!!!!!!!!!!!!!!");
 				if (fn_obj_exists(obj_player) == true)
 					obj_player.move_stg = -1;
 			}
+			
+			talk_stg = -1;
 		}
 	}
 }

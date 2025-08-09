@@ -182,7 +182,6 @@ function fn_aud_vol(_asset, _id, _style, _vol = 1)
 	_vol = fn_aud_volData(_asset, _vol);
 	_vol *= global.config_aud_style[_style].vol;
 	_vol *= global.config_aud_style[CONFIG_AUD_STYLE.MASTER].vol;
-	
 	audio_sound_gain(_id, _vol, 0);
 }
 function fn_aud_volData(_asset, _vol)
@@ -191,8 +190,13 @@ function fn_aud_volData(_asset, _vol)
 	
 	switch (_asset)
 	{
-		// Menu
-			// Default theme
+		// Player
+		case snd_player_fstep:
+			_vol *= 0.75;
+			break;
+		
+			// Themes
+				// Default theme
 		case snd_player_thm_opt_move_0: // The sound that should be used as reference for all others
 			_vol = 1;
 			break;
@@ -207,7 +211,11 @@ function fn_aud_volData(_asset, _vol)
 		case snd_player_thm_unlock_2_0:
 			_vol *= 0.45;
 			break;
-			// Madotsuki theme
+		case snd_player_thm_equip_0_0:
+		case snd_player_thm_equip_1_0:
+			_vol *= 0.65;
+			break;
+				// Madotsuki theme
 		case snd_player_thm_opt_move_2:
 			_vol *= 0.4;
 			break;
@@ -221,22 +229,15 @@ function fn_aud_volData(_asset, _vol)
 			_vol *= 0.4;
 			break;
 		
-		
-		// Player
-		case snd_player_fstep:
-			_vol *= 0.75;
-			break;
-		
-		
-		// Items
+			// Items
 		case snd_player_itm_kart:
 			_vol *= 0.5;
 			break;
 		case snd_player_itm_kart_turn:
-			_vol *= 0.5;
+			_vol *= 0.35;
 			break;
 		case snd_player_itm_kart_hit:
-			_vol *= 0.5;
+			_vol *= 0.65;
 			break;
 		
 		
@@ -308,7 +309,6 @@ function fn_aud_volData(_asset, _vol)
 function fn_aud_ofs(_asset, _id, _ofs = 0)
 {
 	_ofs = fn_aud_ofsData(_asset, _ofs);
-	
 	audio_sound_set_track_position(_id, _ofs);
 }
 function fn_aud_ofsData(_asset, _ofs)
@@ -317,8 +317,9 @@ function fn_aud_ofsData(_asset, _ofs)
 	
 	switch (_asset)
 	{
-		// Menu sounds
-			// Default theme
+		// Player
+			// Themes
+				// Default theme
 		case snd_player_thm_start_0:
 			_ofs += 0.15;
 			break;
@@ -346,9 +347,25 @@ function fn_aud_ofsData(_asset, _ofs)
 	// Pitch
 function fn_aud_pch(_asset, _id, _pch = 1)
 {
+	_pch = fn_aud_pchData(_asset, _pch);
 	audio_sound_pitch(_id, _pch);
-	
+}
+function fn_aud_pchData(_asset, _pch)
+{
 	// _pch MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
+	
+	switch (_asset)
+	{
+		// Player
+			// Items
+				// Kart
+		case snd_player_itm_kart_turn:
+			_pch -= 0.35 + (random(0.1) * choose(-1, 1));
+			break;
+	}
+	
+	return _pch;
+	// one of the WORST fucking FUNCTIONS i've EVER made in my LIFE Part III: The Final Chapter.  Jesus       !!!!!
 }
 
 

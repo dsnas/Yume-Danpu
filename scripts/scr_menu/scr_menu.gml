@@ -29,12 +29,15 @@ function fn_menu_obj_find(_menu_id)
 function fn_menu_getId() // Retrieves the ID of the menu, which determines its behavior and appearance
 {
 	menu_id = "";
-	if (global.menu_idTemp != "%%%")
+	if (variable_global_exists("menu_idTemp") == true && global.menu_idTemp != "%%%")
 		menu_id = global.menu_idTemp;
 	global.menu_idTemp = "";
 	
-	for (var i = 0; i < array_length(global.menu_infoTemp); i++)
-		menu_info[i] = global.menu_infoTemp[i];
+	if (variable_global_exists("menu_infoTemp") == true)
+	{
+		for (var i = 0; i < array_length(global.menu_infoTemp); i++)
+			menu_info[i] = global.menu_infoTemp[i];
+	}
 	
 	
 	// Room-specific menus

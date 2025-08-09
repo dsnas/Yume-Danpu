@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":-1.0,
+  "duration":3.1869388,
   "name":"snd_entity_macaco_monkey_1",
   "parent":{
     "name":"Macacolandia",

@@ -62,7 +62,7 @@ function fn_menu_home_evCreate_0()
 		lang_flag_slctr_alp[f] = 0;
 	}
 	
-	lang_snd = global.thm_start_snd[global.thm];
+	lang_snd = global.player_thm[global.player_thmCurr].start_snd;
 	
 	
 	
@@ -135,7 +135,7 @@ function fn_menu_home_evStep()
 	}
 	
 	if (lvl == LVL_MAIN && lvl_alpDelay[lvl] <= 0 && window_get_caption() == "")
-		fn_wnd_caption("Yume Danpu");
+		fn_wnd_name("Yume Danpu");
 }
 function fn_menu_home_evDrawGUI_2(l)
 {
@@ -178,21 +178,21 @@ function fn_menu_home_opt_slct()
 	// Languages level
 	if (l == LVL_LANG)
 	{
-		var _config_lang = global.config_langCurr;
-		var _config_langOld = _config_lang;
+		var _config_langNew = global.config_langCurr;
+		var _config_langOld = _config_langNew;
 		
 		// Flag of United States
 		if (o == 0)
-			_config_lang = CONFIG_LANGLIST.EN_US;
+			_config_langNew = CONFIG_LANG.EN_US;
 		
 		// Flag of Brazil
 		else if (o == 1)
-			_config_lang = CONFIG_LANGLIST.PT_BR;
+			_config_langNew = CONFIG_LANG.PT_BR;
 		
 		// Flag of United States, flag of Brazil
 		global.config_lang_hasChosen = true;
-		if (_config_langOld != _config_lang)
-			fn_config_lang_mod(_config_lang);
+		if (_config_langOld != _config_langNew)
+			fn_config_lang_mod(_config_langNew);
 		
 		fn_menu_lvlNew(LVL_MAIN, 180);
 	}
@@ -203,6 +203,8 @@ function fn_menu_home_opt_slct()
 		// "Start"
 		if (o == 0)
 		{
+			global.player_file.act = true;
+			fn_player_file_setup();
 			fn_menu_lvlNew(LVL_EMPTY);
 			fn_rmTrans_start();
 		}
