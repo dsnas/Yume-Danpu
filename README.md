@@ -1,7 +1,7 @@
 <h1 align="center">Yume Danpu</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.02-4BFF84" alt="Game version" />
+  <img src="https://img.shields.io/badge/version-0.03-4BFF84" alt="Game version" />
   <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
   <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License" />
   <a href="https://dsnas.itch.io/yume-danpu">
@@ -23,5 +23,5 @@ If you want to see what we're doing next, check out [the playlist](https://www.y
 
 <p align="center">
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_entity_macaco_citizen/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="12" /></a>
+    <img src="./sprites/spr_entity_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="12" /></a>
 </p>
