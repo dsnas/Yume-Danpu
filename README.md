@@ -16,8 +16,7 @@ This repository is updated regularly while we're working on it, not just when ne
 &nbsp;
 
 ## Development and release videos
-We occasionally post videos on YouTube showcasing upcoming or newly released changes and features.  
-If you want to see what we're doing next, check out [the playlist](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)! I guess it would blow some of the surprises, though...
+If you wanna see what we're doing next, check out [our devlog on YouTube](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)! I guess it would blow some of the surprises, though...
 
 &nbsp;
 
