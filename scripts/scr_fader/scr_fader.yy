@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_fader",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_fader",
+  "parent":{
+    "name":"rmTrans",
+    "path":"folders/rmTrans.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

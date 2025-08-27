@@ -9,7 +9,7 @@ if (press_fscr == true)
 	fn_config_file_save();
 }
 
-// Toggles fullscreen mode with a delay to avoid issues
+// Toggles Fullscreen with a delay to avoid issues
 if (fscr_delay <= 0)
 {
 	if (fscr_act != global.config_fscr)

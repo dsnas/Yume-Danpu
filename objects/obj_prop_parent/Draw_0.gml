@@ -1,13 +1,20 @@
 
-// Render (self-drawing)
-if (render.act == true)
+// Myself
+if (myself.shake.act == true && myself.shake.durCurr > 0 && global.config_rdcdMot == false)
 {
-	if (render.imgSpd > 0)
+	myself.xOfs += (irandom(myself.shake.dist) * choose(-1, 1));
+	myself.yOfs += (irandom(myself.shake.dist) * choose(-1, 1));
+	myself.shake.durCurr -= 1;
+}
+	
+if (myself.draw.act == true)
+{
+	if (myself.imgSpd > 0)
 	{
-		image_index += render.imgSpd;
+		image_index += myself.imgSpd;
 		if (global.config_rdcdMot == true)
 			image_index = 0;
 	}
-	
-	fn_draw_spr(sprite_index, image_index, (render.x + render.xOfs), (render.y + render.yOfs), image_blend, image_alpha, render.xSc, render.ySc, render.ang, false);
+		
+	fn_draw_spr(sprite_index, image_index, (myself.x + myself.xOfs), (myself.y + myself.yOfs), image_blend, image_alpha, myself.xSc, myself.ySc, myself.ang, false);
 }

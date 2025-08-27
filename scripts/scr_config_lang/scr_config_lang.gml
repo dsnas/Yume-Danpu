@@ -16,12 +16,11 @@ function fn_config_lang_setup()
 	global.config_langCurr = CONFIG_LANG.EN_US; // Current language
 	global.config_lang_hasChosen = false; // Determines if the player has selected a language on game start
 	
-	
 	// Save/Load the current language
 	global.config_lang_file =
 	{
 		name : "config_lang.ini",
-		msg : "Oh. Oh, my God. What is this? Is this Notepad World? Oooh, spooky!"
+		msg : "Oh. Oh my God. What is this? Is this Notepad World? Oooh, spooky!"
 	}
 	
 	if (file_exists(global.config_lang_file.name) == false)
@@ -41,12 +40,13 @@ function fn_config_lang_add(_lang, _name)
 function fn_config_lang_mod(_langNew)
 {
 	global.config_langCurr = _langNew;
+	global.config_lang_hasChosen = true;
 	fn_config_lang_file_save();
 	fn_config_lang_data_setup();
 	fn_config_setup();
 	
-	var _player_act = global.player_file.act;
-	fn_player_setup(_player_act);
+	var _player_fileCurr = global.player_fileCurr;
+	fn_player_setup(_player_fileCurr);
 }
 
 
@@ -68,7 +68,7 @@ function fn_config_lang_file_load()
 	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		global.config_langCurr = ini_read_real("lang", "curr", CONFIG_LANG.EN_US);
-		global.config_lang_hasChosen = ini_read_real("lang", "hasChosen", CONFIG_LANG.EN_US);
+		global.config_lang_hasChosen = ini_read_real("lang", "hasChosen", false);
 		
 		ini_close();
 	}

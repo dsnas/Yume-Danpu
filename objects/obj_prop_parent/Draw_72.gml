@@ -1,4 +1,4 @@
 
-// Render (self-drawing)
-render.xOfs = 0;
-render.yOfs = 0;
+// Myself
+myself.xOfs = 0;
+myself.yOfs = 0;

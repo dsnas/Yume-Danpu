@@ -2,7 +2,7 @@
 //////// Functions related to the player
 
 
-function fn_player_setup(_file_act = false)
+function fn_player_setup(_fileCurr = -1)
 {
 	global.player_name = "Eleanor";
 	global.player_awake = false;
@@ -85,76 +85,10 @@ function fn_player_setup(_file_act = false)
 	
 	
 	// Prepare to save/load the player's data
-	global.player_file = {
-		act : _file_act
-	}
-	if (global.player_file.act == true)
-		fn_player_file_setup();
-}
-
-
-function fn_player_actor_setup()
-{	
-	if (global.player_effCurr != effOld) || (global.player_itmCurr != itmOld)
-	{
-		dir[DIR_LT].spr = spr_player_dir_lt;
-		dir[DIR_RT].spr = spr_player_dir_rt;
-		dir[DIR_UP].spr = spr_player_dir_up;
-		dir[DIR_DN].spr = spr_player_dir_dn;
-		
-		render.act = true;
-		
-		move_type.walk.act = true;
-		move_type.walk.fstep.act = true;
-		move_type.walk.fstep.snd_asset = snd_player_fstep;
-		move_type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
-		move_type.roll.act = false;
-		move_mode.key.act = true;
-		move_precise.act = false;
-		
-		if (global.player_effCurr == -1 && global.player_itmCurr == -1)
-		{		
-			if (itmOld == PLAYER_ITM.KART)
-			{
-				x = fn_actor_round_x(id, x);
-				y = fn_actor_round_x(id, y);
-				render.x = x;
-				render.y = y;
-			}
-		}
-		else
-		{
-			//if (global.player_effCurr != -1)
-			//{
-			//	switch (global.player_effCurr)
-			//	{
-				
-			//	}
-			//}
-			if (global.player_itmCurr != -1)
-			{
-				switch (global.player_itmCurr)
-				{
-					case PLAYER_ITM.KART:
-						render.act = false;
-						
-						move_type.walk.act = false;
-						move_type.roll.act = true;
-						move_type.roll.snd.asset = snd_player_itm_kart;
-						move_type.roll.snd.style = CONFIG_AUD_STYLE.PLAYER;
-						move_type.roll.turn_snd.asset = snd_player_itm_kart_turn;
-						move_type.roll.turn_snd.style = CONFIG_AUD_STYLE.PLAYER;
-						move_type.roll.hit_snd.asset = snd_player_itm_kart_hit;
-						move_type.roll.hit_snd.style = CONFIG_AUD_STYLE.PLAYER;
-						move_precise.act = true;
-						break;
-				}
-			}
-		}
-		
-		effOld = global.player_effCurr;
-		itmOld = global.player_itmCurr;
-	}
+	global.player_fileAmt = 3;
+	global.player_fileCurr = _fileCurr;
+	for (var f = 0; f < global.player_fileAmt; f++)
+		fn_player_file_setup(f);
 }
 
 
@@ -173,7 +107,7 @@ function fn_player_eff_unlock(_eff)
 	if (global.player_eff[_eff].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_eff[_eff].unlocked = true;
-		fn_player_file_save();
+		fn_player_file_save(global.player_fileCurr);
 		
 		fn_menu_obj_create("unlock", 0, global.player_eff[_eff].name);
 		obj_player.move_stg = -2;
@@ -196,7 +130,7 @@ function fn_player_itm_unlock(_itm)
 	if (global.player_itm[_itm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_itm[_itm].unlocked = true;
-		fn_player_file_save();
+		fn_player_file_save(global.player_fileCurr);
 		
 		fn_menu_obj_create("unlock", 1, global.player_itm[_itm].name);
 		obj_player.move_stg = -2;
@@ -276,7 +210,7 @@ function fn_player_thm_unlock(_thm)
 	if (global.player_thm[_thm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
 	{
 		global.player_thm[_thm].unlocked = true;
-		fn_player_file_save();
+		fn_player_file_save(global.player_fileCurr);
 		
 		fn_menu_obj_create("unlock", 2, global.player_thm[_thm].name);
 		obj_player.move_stg = -2;
@@ -285,27 +219,31 @@ function fn_player_thm_unlock(_thm)
 function fn_player_thm_equip(_thm)
 {
 	global.player_thmCurr = _thm;
-	fn_player_file_save();
+	fn_player_file_save(global.player_fileCurr);
 }
 
 
 // Saving and loading the player's data
-function fn_player_file_setup()
+function fn_player_file_setup(_file)
 {
-	// Save/Load the player's data
-	global.player_file.name = "player.ini";
-	global.player_file.msg = "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?";
+	var f = _file;
+	global.player_file[f] =
+	{
+		name : $"player_{f}.ini",
+		msg : "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?"
+	}
 	
-	if (file_exists(global.player_file.name) == false)
-		fn_player_file_save();
+	if (file_exists(global.player_file[f].name) == false)
+		fn_player_file_save(f);
 	else
-		fn_player_file_load();
+		fn_player_file_load(f);
 }
-function fn_player_file_save()
+function fn_player_file_save(_file)
 {
-	ini_open(global.player_file.name);
+	var f = _file;
+	ini_open(global.player_file[f].name);
 	ini_write_real("game", "ver", global.game.ver);
-	ini_write_string("game", "msg", global.player_file.msg);
+	ini_write_string("game", "msg", global.player_file[f].msg);
 	
 	
 	ini_write_string("main", "name", global.player_name);
@@ -330,10 +268,10 @@ function fn_player_file_save()
 	
 	ini_close();
 }
-function fn_player_file_load()
+function fn_player_file_load(_file)
 {
-	ini_open(global.player_file.name);
-	
+	var f = _file;
+	ini_open(global.player_file[f].name);
 	if (ini_read_real("game", "ver", 0) == global.game.ver)
 	{
 		global.player_name = ini_read_string("main", "name", "Salenis");
@@ -361,12 +299,12 @@ function fn_player_file_load()
 	else
 	{
 		ini_close();
-		
-		fn_player_file_erase();
-		fn_player_file_save();
+		fn_player_file_erase(f);
+		fn_player_file_save(f);
 	}
 }
-function fn_player_file_erase()
+function fn_player_file_erase(_file)
 {
-	file_delete(global.player_file.name);
+	var f = _file;
+	file_delete(global.player_file[f].name);
 }

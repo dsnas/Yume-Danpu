@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_actor",
   "parent":{
-    "name":"Yume Danpu",
-    "path":"Yume Danpu.yyp",
+    "name":"actor",
+    "path":"folders/actor.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

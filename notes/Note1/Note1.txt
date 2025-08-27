@@ -1,0 +1,378 @@
+// Movement
+move =
+{
+	act : true, // Determines if the actor can move
+	stg : (-1 - (1 * (fn_obj_exists(obj_rmTrans) == true))), // ID of the current stage of the movement sequence
+}
+
+	// Types
+move_type =
+{
+	walk : // Walk type
+	{
+		act : false,
+			
+		dist : 16, // Distance the actor will walk
+		dur : 16, // Duration in frames of the movement sequence
+		durCurr : 0,
+			
+		fstep :
+		{
+			act : false,
+			amtCurr : 0,
+			delayCurr : 0,
+			snd_asset : -1,
+			snd_style : -1
+		}
+	},
+	
+	roll : // Roll type (ex.: Kart item)
+	{
+		act : false,
+		
+		distMin : 0.5,
+		distMax : 4,
+		distCurr : 0,
+		
+		distAccel : 0.1,
+		distDecel : 0.1,
+		
+		snd :
+		{
+			asset : -1,
+			style : -1,
+			pchMin : 0.5,
+			pchMax : 1.5,
+			id : -1
+		},
+		
+		turn :
+		{
+			snd_asset : -1,
+			snd_style : -1,
+				
+			shake_act : true,
+			shake_dist : 1,
+			shake_dur : 8
+		},
+		
+		hit :
+		{
+			snd_asset : -1,
+			snd_style : -1,
+				
+			shake_act : true,
+			shake_dist : 1,
+			shake_dur : 6
+		}
+	}
+}
+
+	// Modes
+move_mode =
+{
+	key : // Key mode
+	{
+		act : false
+	},
+	
+	rnd :
+	{
+		act : false,
+		
+		chase :
+		{
+			act : false,
+			tgt : -1
+		}
+	},
+}
+
+	// Delay (delays the start of the movement sequence)
+move_delay =
+{
+	act : false,
+	durMin : 30,
+	durMax : 240,
+	durCurr : 0
+}
+
+	// Precise
+move_precise =
+{
+	act : false
+}
+
+	// Chain
+move_chain =
+{
+	act : false,
+	dist : 48
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (move_type.roll.act == true && move_type.roll.snd.asset != -1 && move_type.roll.snd.style != -1)
+{
+	if (move_type.roll.snd.id == -1)
+		move_type.roll.snd.id = fn_aud_play(move_type.roll.snd.asset, move_type.roll.snd.style, , , , true);
+		
+	var _distMax = move_type.roll.distMax;
+	var _aud_pchDiff = (move_type.roll.snd.pchMax - move_type.roll.snd.pchMin);
+	var _aud_pch = (move_type.roll.snd.pchMin + (_aud_pchDiff * (( _distMax * (move_type.roll.distCurr / _distMax)) / _distMax)));
+	fn_aud_pch(move_type.roll.snd.asset, move_type.roll.snd.id, _aud_pch);
+	fn_aud_vol(move_type.roll.snd.asset, move_type.roll.snd.id, move_type.roll.snd.style);
+}
+else if (move_type.roll.snd.id != -1)
+{
+	fn_aud_stop(move_type.roll.snd.id);
+	move_type.roll.snd.id = -1;
+}
+
+
+	
+if (move.act == true)
+{
+	if (move.stg == -1)
+	{
+		var _dirCurr = -1;
+		var _dirCurrOld = dirCurr;
+		
+		if (move_delay.act == false) || (move_delay.act == true && move_delay.durCurr <= 0)
+		{
+			if (move_mode.key.act == true) 
+			{
+				for (var d = 0; d < 4; d++)
+				{
+					dir[d].key_held = fn_key_held(dir[d].key);
+					if (dir[d].key_held == true)
+					{
+						_dirCurr = d;
+						break;
+					}
+					else
+						continue;
+				}
+			}
+			if (move_mode.rnd.act == true)
+			{
+				_dirCurr = choose(DIR_LT, DIR_RT, DIR_UP, DIR_DN);
+			}
+			if (move_mode.chase.act == true)
+			{
+				var _chase_tgt = instance_nearest(x, y, move_mode.chase.tgt);
+				if (_chase_tgt != noone && _chase_tgt != id)
+				{
+					var _chase_tgtSolid = collision_line((x + (sprite_width / 2)), (y + (sprite_height / 4)), (_chase_tgt.x + (_chase_tgt.sprite_width / 2)), (_chase_tgt.y + (_chase_tgt.sprite_height / 4)), obj_solid_parent, false, true);
+					if (_chase_tgtSolid == id) || (_chase_tgtSolid == _chase_tgt)
+						_chase_tgtSolid = noone;
+					if (_chase_tgtSolid == noone)
+					{
+						var d = point_direction(x, y, _chase_tgt.x, _chase_tgt.y);
+						if (d >= 0 && d < 45) || (d >= 315 && d < 360)
+							_dirCurr = DIR_RT;
+						else if (d >= 45 && d < 135)
+							_dirCurr = DIR_UP;
+						else if (d >= 135 && d < 225)
+							_dirCurr = DIR_LT;
+						else if (d >= 225 && d < 315)
+							_dirCurr = DIR_DN;
+					}
+				}
+			}
+				
+			if (move_type.roll.act == true && move_type.roll.distCurr > move_type.roll.distMin && _dirCurr == -1)
+				_dirCurr = dirCurr;
+				
+			move_delay.durCurr = (irandom_range(move_delay.durMin, move_delay.durMax) * move_delay.act);
+		}
+		else if (move_delay.act == true && move_delay.durCurr > 0)
+			move_delay.durCurr -= 1;
+			
+			
+		// Direction the actor will move towards was found
+		if (_dirCurr != -1)
+		{
+			dirCurr = _dirCurr;
+			var _move_dist = 0;
+				
+				
+			// Gets the distance the actor will move
+			if (move_type.walk.act == true)
+				_move_dist = move_type.walk.dist;
+			else if (move_type.roll.act == true)
+			{
+				if (move_type.roll.distCurr == 0) || (_dirCurrOld != _dirCurr) || (move.amt <= 0)
+					move_type.roll.distCurr = move_type.roll.distMin;
+				_move_dist = move_type.roll.distCurr;
+					
+				// Starts turning animation
+				if (_dirCurrOld != _dirCurr)
+				{
+					// Plays sound
+					if (move_type.roll.turn.snd_asset != -1 && move_type.roll.turn.snd_style != -1)
+						fn_aud_play(move_type.roll.turn.snd_asset, move_type.roll.turn.snd_style);
+						
+					// Starts shaking
+					if (move_type.roll.turn.shake_act == true)
+					{
+						render.shake.dist = move_type.roll.turn.shake_dist;
+						render.shake.durCurr = move_type.roll.turn.shake_dur;
+					}
+				}
+			}
+				
+				
+			// Distance the actor will move was found
+			while (_move_dist > 0)
+			{
+				var _move_xTgt = fn_actor_get_xAhead(id, x, _move_dist);
+				var _move_yTgt = fn_actor_get_yAhead(id, y, _move_dist);
+				if (place_meeting(_move_xTgt, _move_yTgt, obj_solid_parent) == false)
+				{
+					if (move_chain.act == false) || (move_chain.act == true && abs(xstart - _move_xTgt) < move_chain.dist && abs(ystart - _move_yTgt) < move_chain.dist)
+					{
+						move.stg = 0;
+						move_xTgt = _move_xTgt;
+						move_yTgt = _move_yTgt;
+						move_xStart = x;
+						move_yStart = y;
+							
+						x = move_xTgt;
+						y = move_yTgt;
+							
+						if (global.dbg_act == true && global.dbg_excessLog == true)
+							fn_log($"x = {x} | y = {y} | self_x = {render.x} | self_y = {render.y} | depth = {depth}");
+						break;
+					}
+					else
+					{
+						move.amt = -2;
+						break;
+					}
+				}
+				else
+				{
+					if (move_mode.chase.act == true && distance_to_object(move_mode.chase.tgt) <= 16 && move_mode.chase.tgt.move.stg == -1)
+					{
+						if (room == rm_dbgwrld)
+						{
+							move_mode.chase.tgt.x = 112;
+							move_mode.chase.tgt.y = 432;
+							move_mode.chase.tgt.render.x = move_mode.chase.tgt.x;
+							move_mode.chase.tgt.render.y = move_mode.chase.tgt.y;
+							fn_obj_depth(move_mode.chase.tgt);
+								
+							fn_aud_play(snd_entity_macaco_monkey_0, CONFIG_AUD_STYLE.ENTITY, , , 0.5);
+						}
+					}
+						
+					if (move_precise.act == false)
+					{
+						move.amt = -1;
+						break;
+					}
+					else
+					{
+						_move_dist -= 0.5;
+						if (_move_dist > 0)
+							continue;
+						else
+						{
+							if (move_type.roll.act == true && move.amt >= 1) // Roll type
+							{
+								// Plays sound
+								if (move_type.roll.hit.snd_asset != -1 && move_type.roll.hit.snd_style != -1)
+									fn_aud_play(move_type.roll.hit.snd_asset, move_type.roll.hit.snd_style);
+						
+								// Starts shaking
+								if (move_type.roll.hit.shake_act == true)
+								{
+									var _spdMax = move_type.roll.distMax;
+									var _spdCurr = move_type.roll.distCurr;
+									render.shake.dist = move_type.roll.hit.shake_dist;
+									render.shake.durCurr = (move_type.roll.hit.shake_dur * (( _spdMax * (_spdCurr / _spdMax)) / _spdMax));
+								}
+							}
+									
+							move.amt = -1;
+							break;
+						}
+					}
+				}
+			}
+		}
+		else
+			move.amt = 0;
+	}
+		
+	// Moving, movement sequence active
+	if (move.stg == 0)
+	{
+		if (move_type.walk.act == true) // Walk type
+		{
+			render.x += ((move_xTgt - move_xStart) / move_type.walk.dur);
+			render.y += ((move_yTgt - move_yStart) / move_type.walk.dur);
+			fn_actor_rm_loop();
+			depth = -render.y;
+				
+			// Walking animation
+			if (move_type.walk.fstep.act == true)
+			{
+				var _fstep_amt = clamp((round(16 / move_type.walk.dur) + 1), 2, infinity);
+				if (move_type.walk.fstep.amtCurr < _fstep_amt)
+				{
+					if (move_type.walk.fstep.delayCurr <= 0)
+					{
+						image_index += 1;
+						if (move_type.walk.fstep.snd_asset != -1 && image_index % 2 == 1)
+							fn_aud_play(move_type.walk.fstep.snd_asset, move_type.walk.fstep.snd_style);
+							
+						move_type.walk.fstep.amtCurr += 1;
+						move_type.walk.fstep.delayCurr = floor(move_type.walk.dur / _fstep_amt);
+					}
+					else
+						move_type.walk.fstep.delayCurr -= 1;
+				}
+			}
+				
+			//
+			move_type.walk.durCurr += 1;
+			if (move_type.walk.durCurr >= move_type.walk.dur)
+			{
+				render.x = x;
+				render.y = y;
+				depth = -render.y;
+					
+				move.stg = -1;
+				move.amt = (clamp(move.amt, 0, infinity) + 1);
+				move_type.walk.durCurr = 0;
+					
+				// Walking animation
+				if (move_type.walk.act == true && move_type.walk.fstep.act == true)
+				{
+					if (image_index % 2 == 1)
+						image_index += 1;
+					move_type.walk.fstep.amtCurr = 0;
+					move_type.walk.fstep.delayCurr = 0;
+				}
+			}
+		}
+	}
+}

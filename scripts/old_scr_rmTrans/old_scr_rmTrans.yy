@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"old_scr_rmTrans",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"old_scr_rmTrans",
+  "parent":{
+    "name":"rmTrans",
+    "path":"folders/rmTrans.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

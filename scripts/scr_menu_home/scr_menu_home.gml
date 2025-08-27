@@ -179,20 +179,11 @@ function fn_menu_home_opt_slct()
 	if (l == LVL_LANG)
 	{
 		var _config_langNew = global.config_langCurr;
-		var _config_langOld = _config_langNew;
-		
-		// Flag of United States
-		if (o == 0)
+		if (o == 0) // Flag of United States
 			_config_langNew = CONFIG_LANG.EN_US;
-		
-		// Flag of Brazil
-		else if (o == 1)
+		else if (o == 1) // Flag of Brazil
 			_config_langNew = CONFIG_LANG.PT_BR;
-		
-		// Flag of United States, flag of Brazil
-		global.config_lang_hasChosen = true;
-		if (_config_langOld != _config_langNew)
-			fn_config_lang_mod(_config_langNew);
+		fn_config_lang_mod(_config_langNew);
 		
 		fn_menu_lvlNew(LVL_MAIN, 180);
 	}
@@ -203,8 +194,8 @@ function fn_menu_home_opt_slct()
 		// "Start"
 		if (o == 0)
 		{
-			global.player_file.act = true;
-			fn_player_file_setup();
+			global.player_fileCurr = 0;
+			fn_player_file_setup(global.player_fileCurr);
 			fn_menu_lvlNew(LVL_EMPTY);
 			fn_rmTrans_start();
 		}

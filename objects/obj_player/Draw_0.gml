@@ -1,10 +1,10 @@
 
 event_inherited();
 
-fn_actor_evDraw();
 
+/*
 
-if (render.act == false)
+if (render.draw.act == false)
 {
 	if (global.player_itmCurr != -1) // An item is equipped
 	{
@@ -28,4 +28,5 @@ if (render.act == false)
 	//	}
 	//}
 }
+*/
 

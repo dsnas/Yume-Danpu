@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_prop",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_prop",
+  "parent":{
+    "name":"prop",
+    "path":"folders/prop.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

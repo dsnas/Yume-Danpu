@@ -4,7 +4,7 @@ randomize();
 
 global.game =
 {
-	ver : "0.03",
+	ver : "0.04",
 		
 	wnd_name : "Yume Danpu",
 	wnd_w : 640,
@@ -30,7 +30,7 @@ fn_config_lang_setup();
 fn_config_lang_data_setup();
 fn_config_setup();
 
-fn_player_setup(false);
+fn_player_setup();
 
 
 fn_obj_create(obj_rmCtrl);
@@ -39,6 +39,10 @@ var _rmStart = temp_rm_menu_home;
 if (global.dbg_act == true && global.dbg_actRm != -1)
 	_rmStart = global.dbg_actRm;
 room_goto(_rmStart);
+
+
+
+
 
 
 

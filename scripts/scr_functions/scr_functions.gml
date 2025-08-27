@@ -241,7 +241,7 @@ function fn_aud_volData(_asset, _vol)
 			break;
 		
 		
-		// Interaction
+		// Props
 		case snd_hulapoca:
 			_vol *= 1.25;
 			break;
@@ -251,10 +251,7 @@ function fn_aud_volData(_asset, _vol)
 		case snd_ponkawonka:
 			_vol *= 1.25;
 			break;
-		
-		
-		// Entities
-		case snd_entity_evil_noise:
+		case snd_prop_noise_weird:
 			_vol *= 1.5;
 			break;
 		
@@ -354,15 +351,10 @@ function fn_aud_pchData(_asset, _pch)
 {
 	// _pch MUST ONLY BE ADDED or SUBTRACTED, NOT MULTIPLIED
 	
-	switch (_asset)
-	{
-		// Player
-			// Items
-				// Kart
-		case snd_player_itm_kart_turn:
-			_pch -= 0.35 + (random(0.1) * choose(-1, 1));
-			break;
-	}
+	//switch (_asset)
+	//{
+		
+	//}
 	
 	return _pch;
 	// one of the WORST fucking FUNCTIONS i've EVER made in my LIFE Part III: The Final Chapter.  Jesus       !!!!!
