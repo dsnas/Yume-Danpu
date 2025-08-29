@@ -118,6 +118,13 @@ function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp)
 	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
 }
 
+	// Circles
+function fn_draw_circle(_x, _y, _rad, _prec)
+{
+	draw_set_circle_precision(_prec);
+	draw_circle(_x, _y, _rad, false);
+}
+
 	// Sprites
 function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shadow_act = false)
 {

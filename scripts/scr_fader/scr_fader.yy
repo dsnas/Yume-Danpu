@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scr_fader",
   "parent":{
-    "name":"rmTrans",
-    "path":"folders/rmTrans.yy",
+    "name":"fader",
+    "path":"folders/fader.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -12,8 +12,8 @@
   "duration":0.11823129,
   "name":"snd_rmTrans_door_0",
   "parent":{
-    "name":"rmTrans",
-    "path":"folders/rmTrans.yy",
+    "name":"fader",
+    "path":"folders/fader.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

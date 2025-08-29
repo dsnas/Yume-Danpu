@@ -39,4 +39,8 @@ if (global.dbg_act == true && keyboard_check(global.dbg_cmd_key) == true)
 	// Deletes a saved file previously
 	if (keyboard_check_pressed(ord("P")) == true && file_exists(global.player_file.name) == true)
 		fn_player_file_erase();
+	
+	
+	if (keyboard_check_pressed(ord("G")) == true)
+		fn_obj_create(obj_fader);
 }

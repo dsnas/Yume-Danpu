@@ -1,58 +1,76 @@
 
 fn_obj_img( , , , , 0);
+fn_obj_depth( , -11000);
 
 
-fader = // :3
+
+
+stg = -1; // ID number of the current stage of the movement sequence
+
+
+// Source (data about the transition's origin)
+src =
 {
-	stg : 0, // ID number of the current stage of the movement sequence
+	rm : -1,
+	obj : -1,
+}
+
+
+// Target (data about the transition's target)
+tgt =
+{
+	rm : -1,
 	
-	
-	// Source (data about the transition's origin)
-	src :
+	player_x : 0,
+	player_y : 0,
+	player_dir : -1
+}
+
+
+// Types
+type =
+{
+	// Fade type
+	fade :
 	{
-		rm : -1,
-		obj : -1,
-	},
-	
-	
-	// Target (data about the transition's target)
-	tgt :
-	{
-		rm : -1,
+		act : true,
+		col : c_black,
+		alp : 0,
+		alpSpd : 0.15, // Alpha speed (speed at which the alpha changes during the fade tranition) (1 == instantaneous)
+		alpJump : 0.05, // Alpha jump (if the difference between the current alpha and the target alpha reaches this value, the current alpha will jump to the target alpha)
 		
-		player_x : 0,
-		player_y : 0,
-		player_dir : -1
-	},
-	
-	
-	// Types
-	type :
-	{
-		// Fade type
-		fade :
+		iris :
 		{
 			act : true,
+			x : 160,
+			y : 120,
+			xOfs : 0,
+			yOfs : 0,
+			siner : 0,
+			
+			rad : 240,
+			radTgt : 48,
+			radSpd : 0.015,
+			prec : 32,
+			
 			col : c_black,
 			alp : 0,
-			alpSpd : 0.15
+			alpSpd : 0.02,
+			alpJump : 0.05,
+			
+			surf : -1
 		},
 		
-		
-		// Standard/Normal door type
-		door_std :
+		wait :
 		{
-			
-		},
-		
-		
-		// Unique/Special door type
-		door_uniq :
-		{
-			
+			dur : 0,
+			durTgt : 30
 		}
 	}
 }
+
+
+// <--------- FUNCÇÃO 
 
 
 
