@@ -9,16 +9,17 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 	{
 		// Player
 		case obj_player:
+			myself.draw.act = true;
+			talk.act = true;
+			talk.type.trig.act = true;
 			dir[DIR_LT].spr = spr_player_dir_lt;
 			dir[DIR_RT].spr = spr_player_dir_rt;
 			dir[DIR_UP].spr = spr_player_dir_up;
 			dir[DIR_DN].spr = spr_player_dir_dn;
-			myself.draw.act = true;	
-			talk.act = true;
-			talk.type.trig.act = true;
 			move.precise = false;
 			move.mode.manual.act = true;
 			move.type.walk.act = true;
+			move.type.walk.fstep.act = true;
 			move.type.walk.fstep.snd_asset = snd_player_fstep;
 			move.type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
 			move.type.roll.act = false;
@@ -73,7 +74,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 	}
 	
 	
-	// Other data (per-object personalization)
+	// Other data (object-specific personalization)
 	switch (object_index)
 	{
 		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
@@ -100,7 +101,7 @@ function fn_actor_evStep() // Step Event determined by the actor's object index
 	{
 		switch (object_index)
 		{
-			case obj_entity_macaco_monkey: // Macacolandia monkey citizen
+			case obj_actor_macaco_monkey: // Macacolandia monkey citizen
 				talk.type.bell.aud_idx = irandom_range(0, 4);
 				if (irandom_range(1, 100) <= 5)
 					talk.type.bell.aud_idx = irandom_range(5, 6);

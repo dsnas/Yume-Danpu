@@ -41,7 +41,9 @@ if (talk.act == true)
 	{
 		if (talk.stg == 0)
 		{
-			fn_rmTrans_start();
+			fn_log("kill myself");
+			
+			fn_fader_start();
 			talk.stg = 1;
 		}
 	}

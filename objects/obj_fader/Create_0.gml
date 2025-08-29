@@ -5,7 +5,7 @@ fn_obj_depth( , -11000);
 
 
 
-stg = -1; // ID number of the current stage of the movement sequence
+stg = -1; // ID number of the current stage of the transition
 
 
 // Source (data about the transition's origin)
@@ -21,9 +21,12 @@ tgt =
 {
 	rm : -1,
 	
-	player_x : 0,
-	player_y : 0,
-	player_dir : -1
+	player :
+	{
+		x : 0,
+		y : 0,
+		dir : -1
+	}
 }
 
 
@@ -33,17 +36,17 @@ type =
 	// Fade type
 	fade :
 	{
-		act : true,
+		act : false,
 		col : c_black,
 		alp : 0,
-		alpSpd : 0.15, // Alpha speed (speed at which the alpha changes during the fade tranition) (1 == instantaneous)
+		alpSpd : 0.15, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
 		alpJump : 0.05, // Alpha jump (if the difference between the current alpha and the target alpha reaches this value, the current alpha will jump to the target alpha)
 		
 		iris :
 		{
-			act : true,
-			x : 160,
-			y : 120,
+			act : false,
+			x : (320 / 2),
+			y : (240 / 2),
 			xOfs : 0,
 			yOfs : 0,
 			siner : 0,
@@ -55,7 +58,7 @@ type =
 			
 			col : c_black,
 			alp : 0,
-			alpSpd : 0.02,
+			alpSpd : 0.025,
 			alpJump : 0.05,
 			
 			surf : -1
@@ -68,9 +71,6 @@ type =
 		}
 	}
 }
-
-
-// <--------- FUNCÇÃO 
 
 
 

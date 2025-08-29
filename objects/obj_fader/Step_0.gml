@@ -23,9 +23,9 @@ if (type.fade.act == true) // Fade type
 		type.fade.alp = fn_lerp(type.fade.alp, 1, type.fade.alpSpd);
 		if (type.fade.alp >= (1 - type.fade.alpJump))
 		{
+			stg = 1;
 			if (tgt.rm != -1)
 				room_goto(tgt.rm);
-			stg = 1;
 			type.fade.alp = 1;
 			type.fade.wait.dur = type.fade.wait.durTgt;
 		}
@@ -38,13 +38,31 @@ if (type.fade.act == true) // Fade type
 		type.fade.alp = fn_lerp(type.fade.alp, 0, type.fade.alpSpd);
 		if (type.fade.alp <= type.fade.alpJump)
 		{
-			fn_obj_destroy();
 			stg = 2;
 			type.fade.alp = 0;
+			fn_obj_destroy();
 		}
 	}
 	else if (stg == 1 && type.fade.wait.dur > 0)
+	{
 		type.fade.wait.dur -= 1;
+		
+		with (obj_player)
+		{
+			if (other.tgt.player.x != 0)
+			{
+				x = other.tgt.player.x;
+				myself.x = x;
+			}
+			if (other.tgt.player.y != 0)
+			{
+				y = other.tgt.player.y;
+				myself.y = y;
+			}
+			if (other.tgt.player.dir != -1)
+				dir_curr = other.tgt.player.dir;
+		}
+	}
 }
 
 

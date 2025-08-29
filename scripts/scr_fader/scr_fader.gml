@@ -4,12 +4,21 @@
 
 function fn_fader_evCreate()
 {
-	if (fader.src.obj == obj_prop_macaco_door)
+	if (src.obj.object_index == obj_prop_macaco_door) // Door of Macacolandia
 	{
-		
-		if (fader.tgt.rm == rm_macaco)
+		type.fade.act = true;
+		if (src.rm == rm_nexus)
 		{
-			
+			tgt.rm = rm_macaco;
+			type.fade.iris.act = true;
+			type.fade.iris.x = (src.obj.x + (src.obj.sprite_width / 2));
+			type.fade.iris.y = (src.obj.y - (src.obj.sprite_height / 4));
+		}
+		else if (src.rm == rm_macaco)
+		{
+			tgt.rm = rm_nexus;
+			tgt.player.x = 160;
+			tgt.player.y = 112;
 		}
 	}
 }
@@ -17,12 +26,9 @@ function fn_fader_evCreate()
 
 function fn_fader_start()
 {
-	var _obj = fn_obj_create(obj_fader);
-	with (_obj)
-	{
-		fader.src.rm = room;
-		fader.src.obj = object_index;
-		
+	fader = fn_obj_create(obj_fader);
+	fader.src.rm = room;
+	fader.src.obj = id;
+	with (fader)
 		fn_fader_evCreate();
-	}
 }

@@ -10,8 +10,8 @@
     "path":"folders/Macacolandia.yy",
   },
   "parentObjectId":{
-    "name":"old_obj_entity_parent",
-    "path":"objects/old_obj_entity_parent/old_obj_entity_parent.yy",
+    "name":"obj_actor_parent",
+    "path":"objects/obj_actor_parent/obj_actor_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

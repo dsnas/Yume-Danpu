@@ -10,8 +10,8 @@
   "name":"old_obj_rmTrans",
   "overriddenProperties":[],
   "parent":{
-    "name":"fader",
-    "path":"folders/fader.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "parentObjectId":null,
   "persistent":true,

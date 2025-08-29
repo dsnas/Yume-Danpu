@@ -111,7 +111,7 @@ move =
 			// Walking animation
 			fstep :
 			{
-				act : true,
+				act : false,
 				amtCurr : 0,
 				
 				wait_durCurr : 0,
