@@ -22,5 +22,5 @@ If you wanna see what we're doing next, check out [our devlog on YouTube](https:
 
 <p align="center">
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_entity_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="12" /></a>
+    <img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia citizen" height="12" /></a>
 </p>
