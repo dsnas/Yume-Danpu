@@ -112,16 +112,16 @@ function fn_config_setup()
 		MUS,		// Music
 		MENU,		// Menu
 		PLAYER,		// Player
-		TALKER,		// Interactables
-		ENTITY,		// Entities
+		PROP,		// Interactables
+		ACTOR,		// Entities
 		AMB			// Ambience
 	}
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.MASTER);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.MUS);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.MENU);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.PLAYER);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.TALKER);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.ENTITY);
+	fn_config_aud_style_add(CONFIG_AUD_STYLE.PROP);
+	fn_config_aud_style_add(CONFIG_AUD_STYLE.ACTOR);
 	fn_config_aud_style_add(CONFIG_AUD_STYLE.AMB);
 	
 	

@@ -1,7 +1,7 @@
 
 event_inherited();
-noise.aud.style = CONFIG_AUD_STYLE.ENTITY;
-talk.type.bell.aud_style = CONFIG_AUD_STYLE.ENTITY;
+noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
+talk.type.bell.aud_style = CONFIG_AUD_STYLE.ACTOR;
 
 
 

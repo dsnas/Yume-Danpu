@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_rmTrans_door_1",
+  "%Name":"snd_prop_talk_door_open",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,17 +9,17 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.51469386,
-  "name":"snd_rmTrans_door_1",
+  "duration":0.11823129,
+  "name":"snd_prop_talk_door_open",
   "parent":{
-    "name":"fader",
-    "path":"folders/fader.yy",
+    "name":"prop",
+    "path":"folders/prop.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_rmTrans_door_1.WAV",
+  "soundFile":"snd_prop_talk_door_open.WAV",
   "type":0,
   "volume":1.0,
 }

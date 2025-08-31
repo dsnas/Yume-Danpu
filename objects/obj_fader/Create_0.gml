@@ -13,6 +13,7 @@ src =
 {
 	rm : -1,
 	obj : -1,
+	obj_id : -1
 }
 
 
@@ -49,19 +50,22 @@ type =
 			y : (240 / 2),
 			xOfs : 0,
 			yOfs : 0,
-			siner : 0,
-			
-			rad : 240,
-			radTgt : 48,
-			radSpd : 0.015,
-			prec : 32,
+			sineVal : 0,
 			
 			col : c_black,
 			alp : 0,
 			alpSpd : 0.025,
 			alpJump : 0.05,
 			
-			surf : -1
+			rad : 180,
+			radTgt : 48,
+			radSpd : 0.02,
+			prec : 32,
+			surf : -1,
+			
+			snd_asset : -1,
+			snd_style : -1,
+			snd_id : -1
 		},
 		
 		wait :

@@ -2,8 +2,22 @@
 
 function fn_prop_evCreate()
 {
+	// Main data (presets)
 	switch (object_index)
 	{
+		// Doors
+		case obj_prop_macaco_door: // Door of Macacolandia
+		case obj_prop_dbgwrld_door: // Door of Debug World
+		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
+			talk.act = true;
+			talk.type.door.act = true;
+			talk.type.door.open.snd_asset = snd_prop_talk_door_open;
+			talk.type.door.open.snd_style = CONFIG_AUD_STYLE.PROP;
+			talk.type.door.close.snd_asset = snd_prop_talk_door_close;
+			talk.type.door.close.snd_style = CONFIG_AUD_STYLE.PROP;
+			break;
+		
+		
 		// Gift
 		case obj_prop_gift:
 			talk.act = true;
@@ -16,17 +30,20 @@ function fn_prop_evCreate()
 			break;
 		
 		
-		// Doors
-		case obj_prop_macaco_door: // Door of Macacolandia
-		case obj_prop_dbgwrld_door: // Door of Debug World
-			talk.act = true;
-			talk.type.door.act = true;
-			break;
-		
-		
 		// Grasses
 		case obj_prop_dbgwrld_grass: // Debug World grass
 			solid = false;
+			break;
+	}
+	
+	
+	// Other data (object-specific personalization)
+	switch (object_index)
+	{
+		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
+			talk.type.door.open.imgSpd = 0;
+			talk.type.door.open.snd_asset = -1;
+			talk.type.door.close.snd_asset = -1;
 			break;
 	}
 }
@@ -40,22 +57,6 @@ function fn_prop_evStep()
 				var _alp = clamp((abs(distance_to_object(obj_player)) / 32), 0, 1);
 				image_alpha = fn_lerp(image_alpha, (1 - _alp), 0.05);
 			}
-			break;
-	}
-}
-
-
-function fn_prop_talk_type_bell_aud_asset(_asset_nameWithoutIdx)
-{
-	for (var a = 0; a < 35; a++)
-	{
-		var _asset = asset_get_index($"{_asset_nameWithoutIdx}{a}");
-		if (_asset != undefined)
-		{
-			talk_type.bell.aud_asset[a] = _asset;
-			continue;
-		}
-		else
 			break;
 	}
 }

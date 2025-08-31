@@ -39,12 +39,18 @@ if (talk.act == true)
 	// Door type (starts a room transition)
 	else if (talk.type.door.act == true)
 	{
+		var _door = talk.type.door;
 		if (talk.stg == 0)
-		{
-			fn_log("kill myself");
-			
+		{			
+			if (_door.open.snd_asset != -1 && _door.open.snd_style != -1)
+				fn_aud_play(_door.open.snd_asset, _door.open.snd_style);
 			fn_fader_start();
 			talk.stg = 1;
+		}
+		else if (talk.stg == 1)
+		{
+			if (_door.open.imgSpd > 0 && (image_index + _door.open.imgSpd) < image_number)
+				image_index += _door.open.imgSpd;
 		}
 	}
 	

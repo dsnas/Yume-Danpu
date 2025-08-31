@@ -52,9 +52,9 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 		
 		// Good/Peaceful entities
 		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
-			noise.aud.style = CONFIG_AUD_STYLE.ENTITY;
+			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
 			move.mode.auto.act = true;
-			talk.type.bell.aud_style = CONFIG_AUD_STYLE.ENTITY;
+			talk.type.bell.aud_style = CONFIG_AUD_STYLE.ACTOR;
 			move.type.walk.act = true;
 			move.type.walk.dur = 32;
 			move.wait.act = true;
@@ -64,7 +64,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 		
 		// Evil/Hostile entities
 		case obj_actor_dbgwrld_blood: // Debug World blood monkey
-			noise.aud.style = CONFIG_AUD_STYLE.ENTITY;
+			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
 			noise.aud.asset = snd_prop_noise_weird;
 			move.mode.auto.chase_act = true;
 			move.mode.auto.chase_tgt = obj_player;

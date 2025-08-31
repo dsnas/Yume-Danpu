@@ -126,6 +126,13 @@ function fn_rmCtrl_evStep() // Step Event determined by the room's ID
 	// Debug World
 	if (rm_id = "dbgwrld")
 		fn_rmCtrl_mus_add(0, mus_dbgwrld);
+	
+	
+	if (fn_obj_exists(obj_fader) == true)
+	{
+		for (var i = 0; i < mus_lenMax; i++)
+			fn_rmCtrl_mus_add(i, -1);
+	}
 }
 
 

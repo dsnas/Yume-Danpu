@@ -62,7 +62,7 @@ talk =
 			act : false,
 			
 			aud_asset : [-1],
-			aud_style : CONFIG_AUD_STYLE.TALKER,
+			aud_style : CONFIG_AUD_STYLE.PROP,
 			aud_idx : -1
 		},
 		
@@ -70,7 +70,21 @@ talk =
 		// Door type (starts a room transition)
 		door :
 		{
-			act : false
+			act : false,
+			
+			open :
+			{	
+				imgSpd : 0.5,
+				
+				snd_asset : -1,
+				snd_style : -1
+			},
+			
+			close :
+			{
+				snd_asset : -1,
+				snd_style : -1
+			}
 		},
 		
 		
