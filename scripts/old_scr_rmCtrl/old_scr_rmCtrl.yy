@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_functions",
+  "%Name":"old_scr_rmCtrl",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_functions",
+  "name":"old_scr_rmCtrl",
   "parent":{
-    "name":"[!] Scripts",
-    "path":"folders/[!] Scripts.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

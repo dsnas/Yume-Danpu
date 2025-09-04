@@ -33,12 +33,8 @@ fn_config_setup();
 fn_player_setup();
 
 
-fn_obj_create(obj_rmCtrl);
 fn_obj_create(obj_dbg);
-var _rmStart = temp_rm_menu_home;
-if (global.dbg_act == true && global.dbg_actRm != -1)
-	_rmStart = global.dbg_actRm;
-room_goto(_rmStart);
+alarm[0] = 30;
 
 
 

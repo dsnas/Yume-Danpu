@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_rmCtrl",
+  "%Name":"scr_stage",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_rmCtrl",
+  "name":"scr_stage",
   "parent":{
-    "name":"rmCtrl",
-    "path":"folders/rmCtrl.yy",
+    "name":"stage",
+    "path":"folders/stage.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

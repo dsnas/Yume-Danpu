@@ -1,6 +1,6 @@
 {
   "$GMObject":"",
-  "%Name":"obj_rmCtrl",
+  "%Name":"old_obj_rmCtrl",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
@@ -9,11 +9,11 @@
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":5,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_rmCtrl",
+  "name":"old_obj_rmCtrl",
   "overriddenProperties":[],
   "parent":{
-    "name":"rmCtrl",
-    "path":"folders/rmCtrl.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "parentObjectId":null,
   "persistent":true,

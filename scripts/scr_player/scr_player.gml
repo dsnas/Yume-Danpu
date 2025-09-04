@@ -11,11 +11,13 @@ function fn_player_setup(_fileCurr = -1)
 	
 	
 	// Money
-	global.player_money[false] = { // While sleeping (player_awake == false)
+	global.player_money[false] = // While sleeping (player_awake == false)
+	{
 		amt : 0,
 		ccy : "₢$ "
 	}
-	global.player_money[true] = { // While awake (player_awake == true)
+	global.player_money[true] = // While awake (player_awake == true)
+	{
 		amt : irandom_range((15 + irandom_range(1, 4)), (25 + irandom_range(1, 4))),
 		ccy : "R$ "
 	}
@@ -59,8 +61,8 @@ function fn_player_setup(_fileCurr = -1)
 		MADOT	// Madotsuki theme
 	}
 	fn_player_thm_add(PLAYER_THM.DFLT, true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
-	fn_player_thm_add(PLAYER_THM.SIMPLE, true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Default theme
-	fn_player_thm_add(PLAYER_THM.MADOT, true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki
+	fn_player_thm_add(PLAYER_THM.SIMPLE, true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
+	fn_player_thm_add(PLAYER_THM.MADOT, true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
 	
 	global.player_thmCurr = PLAYER_THM.DFLT; // Determines which theme is currently active (-1 == none)
 	
@@ -76,6 +78,8 @@ function fn_player_setup(_fileCurr = -1)
 			{
 				visited : false
 			}
+			
+			continue;
 		}
 		else
 			break;
