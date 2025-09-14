@@ -105,8 +105,8 @@ function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _h
 	draw_set_valign(_vAl);
 	draw_set_halign(_hAl);
 	
-	var _shadow_col = global.player_thm[global.player_thmCurr].col.shadow;
-	var _shadow_alp = (global.player_thm[global.player_thmCurr].alp.shadow * _alp);
+	var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
+	var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
 	draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _shadow_col, _shadow_col, _shadow_col, _shadow_col, _shadow_alp);
 	
 	draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
@@ -132,8 +132,8 @@ function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _yS
 	{
 		if (_shadow_act == true)
 		{
-			var _shadow_col = global.player_thm[global.player_thmCurr].col.shadow;
-			var _shadow_alp = (global.player_thm[global.player_thmCurr].alp.shadow * _alp);
+			var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
+			var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
 			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, _shadow_col, _shadow_alp);
 		}
 		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
@@ -279,22 +279,22 @@ function fn_aud_volData(_asset, _vol)
 		case mus_macaco:
 			_vol *= 0.25;
 			break;
-		case snd_entity_macaco_monkey_0:
+		case snd_actor_macaco_monkey_0:
 			_vol *= 0.5;
 			break;
-		case snd_entity_macaco_monkey_2:
+		case snd_actor_macaco_monkey_2:
 			_vol *= 0.3;
 			break;
-		case snd_entity_macaco_monkey_3:
+		case snd_actor_macaco_monkey_3:
 			_vol *= 0.85;
 			break;
-		case snd_entity_macaco_monkey_4:
+		case snd_actor_macaco_monkey_4:
 			_vol *= 0.65;
 			break;
-		case snd_entity_macaco_monkey_5:
+		case snd_actor_macaco_monkey_5:
 			_vol *= 0.5;
 			break;
-		case snd_entity_macaco_monkey_6:
+		case snd_actor_macaco_monkey_6:
 			_vol *= 0.35;
 			break;
 		
@@ -330,16 +330,16 @@ function fn_aud_ofsData(_asset, _ofs)
 		
 		
 		// Macacolandia citizens
-		case snd_entity_macaco_monkey_0:
+		case snd_actor_macaco_monkey_0:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_monkey_1:
+		case snd_actor_macaco_monkey_1:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_monkey_3:
+		case snd_actor_macaco_monkey_3:
 			_ofs += 0.25;
 			break;
-		case snd_entity_macaco_monkey_6:
+		case snd_actor_macaco_monkey_6:
 			_ofs += 0.25;
 			break;
 	}

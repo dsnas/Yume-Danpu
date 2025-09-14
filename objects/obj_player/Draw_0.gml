@@ -6,9 +6,9 @@ event_inherited();
 
 if (render.draw.act == false)
 {
-	if (global.player_itmCurr != -1) // An item is equipped
+	if (global.player.itm_curr != -1) // An item is equipped
 	{
-		switch (global.player_itmCurr)
+		switch (global.player.itm_curr)
 		{
 			// Kart item
 			case PLAYER_ITM.KART:			
@@ -20,9 +20,9 @@ if (render.draw.act == false)
 				break;
 		}
 	}
-	//else if (global.player_effCurr != -1)
+	//else if (global.player.eff_curr != -1)
 	//{
-	//	switch (global.player_effCurr)
+	//	switch (global.player.eff_curr)
 	//	{
 			
 	//	}

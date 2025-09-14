@@ -16,7 +16,7 @@ function fn_stage_evCreate()
 	}
 	else if (room == rm_macaco) // Macacolandia
 	{
-		fn_stage_bg_sky_add(0, temp_spr_rmCtrl_bg_sky_macaco, , 0.175, 180, 180);
+		fn_stage_bg_sky_add(0, temp_spr_rmCtrl_bg_sky_macaco, , 0.175, 270, 270);
 		fn_stage_bg_clouds_add(1, temp_spr_rmCtrl_bg_clouds_macaco, 0.75, 0.75, 0.35, , , 90, 90); 
 		
 		loop.xAct = true;
@@ -53,6 +53,11 @@ function fn_stage_evStep()
 {
 	switch (room)
 	{
+		case temp_rm_menu_home:
+			fn_stage_mus_add(0, mus_menu_home);
+			break;
+		
+		
 		case rm_nexus: // Nexus
 			fn_stage_mus_add(0, mus_nexus);
 			break;
@@ -73,7 +78,7 @@ function fn_stage_evStep()
 	if (fn_obj_exists(obj_fader) == true)
 	{
 		for (var i = 0; i < mus_lenMax; i++)
-			fn_rmCtrl_mus_add(i, -1);
+			fn_stage_mus_add(i, -1);
 	}
 }
 

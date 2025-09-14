@@ -63,7 +63,7 @@ fn_menu_lvlNew(); // There's no need for the child menu to call this function ag
 
 
 config_langOld = global.config_langCurr;
-thmOld = global.player_thmCurr;
+thmOld = global.player.thm_curr;
 
 
 fn_menu_evCreate_0();

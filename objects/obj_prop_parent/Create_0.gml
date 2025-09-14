@@ -49,8 +49,7 @@ talk =
 	act : false,
 	stg : -1,
 	
-	dur : 0, // Duration in frames of the interaction sequence
-	durCurr : 0,
+	freezeTrig : true,
 	
 	
 	// Types
@@ -60,6 +59,8 @@ talk =
 		bell :
 		{
 			act : false,
+			dur : 30,
+			dur_curr : 0,
 			
 			aud_asset : [-1],
 			aud_style : CONFIG_AUD_STYLE.PROP,
@@ -93,19 +94,19 @@ talk =
 		{
 			act : false,
 			
-			loot_idx : -1,
-			loot_arr : -1
+			content : [-1],
+			content_idx : 0,
 		},
-		
-		
-		// Trigger type (starts other objects' interaction sequences)
-		trig :
-		{
-			act : false,
-			key : CONFIG_KEY.SLCT,
-			dist : 16,
-		}
 	}
+}
+
+
+// Talk trigger (starts other objects' interaction sequences)
+talkTrig =
+{
+	act : false,
+	key : CONFIG_KEY.SLCT,
+	dist : 16
 }
 
 
@@ -115,7 +116,16 @@ talk =
 noise =
 {
 	act : false,
-	distMin : (160 * 1.25),
+	stg : -1,
+	dist : (160 * 1.25),
+	
+	wait :
+	{
+		act : false,
+		dur_min : 0,
+		dur_max : 0,
+		dur_curr : 0
+	},
 	
 	aud :
 	{
@@ -125,14 +135,6 @@ noise =
 		vol : 0,
 		id : -1,
 	},
-	
-	wait :
-	{
-		act : false,
-		durMin : 0,
-		durMax : 0,
-		durCurr : 0
-	}
 }
 
 

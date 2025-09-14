@@ -28,7 +28,7 @@ function fn_menu_home_evCreate_0()
 	
 		// Flag selector [#0]
 	lang_flag_slctr_spr = spr_menu_home_flag_slctr;
-	lang_flag_slctr_col = global.player_thm[global.player_thmCurr].col.whiteLight;
+	lang_flag_slctr_col = global.player.thm[global.player.thm_curr].col.whiteLight;
 	
 		// Title info [#0]
 	fn_menu_info_add_ext(l, 0, "menu_home_lang_info_0");
@@ -62,7 +62,7 @@ function fn_menu_home_evCreate_0()
 		lang_flag_slctr_alp[f] = 0;
 	}
 	
-	lang_snd = global.player_thm[global.player_thmCurr].start_snd;
+	lang_snd = global.player.thm[global.player.thm_curr].start_snd;
 	
 	
 	
@@ -194,10 +194,8 @@ function fn_menu_home_opt_slct()
 		// "Start"
 		if (o == 0)
 		{
-			global.player_fileCurr = 0;
-			fn_player_file_setup(global.player_fileCurr);
 			fn_menu_lvlNew(LVL_EMPTY);
-			fn_rmTrans_start();
+			fn_fader_obj_create();
 		}
 		
 		// "Options"

@@ -6,8 +6,8 @@
   "name":"obj_prop_condo_apt_bed",
   "overriddenProperties":[],
   "parent":{
-    "name":"Condo",
-    "path":"folders/Condo.yy",
+    "name":"Apt",
+    "path":"folders/Condo/Apt.yy",
   },
   "parentObjectId":{
     "name":"obj_prop_parent",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_prop_condo_apt_bed",
-    "path":"sprites/spr_prop_condo_apt_bed/spr_prop_condo_apt_bed.yy",
+    "name":"temp_spr_prop_condo_apt_bed",
+    "path":"sprites/temp_spr_prop_condo_apt_bed/temp_spr_prop_condo_apt_bed.yy",
   },
   "spriteMaskId":null,
   "visible":true,

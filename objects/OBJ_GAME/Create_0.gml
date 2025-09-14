@@ -55,3 +55,8 @@ fscr_delayMax = 30;
 
 // For toggling Hide Cursor
 hideCsr_act = -1;
+
+
+
+
+// Yes! Yes! This is the pineapple of society! Ha! Haha-ha!

@@ -102,7 +102,7 @@ for (var l = 0; l < lvl_lenMax; l++) // Loops through each level until the maxim
 
 // Animates the option selector
 if (global.config_rdcdMot == false) // Checks if the Reduced Motion setting is disabled
-	opt_slctr_img += global.player_thm[global.player_thmCurr].opt_slctr_imgSpd;
+	opt_slctr_img += global.player.thm[global.player.thm_curr].opt_slctr_imgSpd;
 else
 	opt_slctr_img = 0;
 

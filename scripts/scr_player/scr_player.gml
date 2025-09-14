@@ -1,31 +1,59 @@
 
-//////// Functions related to the player
-
-
-function fn_player_setup(_fileCurr = -1)
+function fn_player_setup(_file_curr = -1)
 {
-	global.player_name = "Eleanor";
-	global.player_awake = false;
+	/*
+	para o menu de unlock, enviar como argumento da função {fn_menu_obj_create} uma struct, assim como {fn_obj_create} tem.
+	enviar a struct daquele efeito/item/tema, para qual o menu vai apenas utilizar as variáveis {name}, {icon_spr} e {icon_img}
+	*/
 	
 	
-	
-	
-	// Money
-	global.player_money[false] = // While sleeping (player_awake == false)
+	// Player's data
+	global.player =
 	{
-		amt : 0,
-		ccy : "₢$ "
+		name : "Eleanor",
+		awake : true,
+		
+		
+		// Money
+		money :
+			// While sleeping
+		[{
+			amt : 0,
+			ccy : "₢$ "
+		},
+			// While awake
+		{
+			amt : (choose(20, 30) + (choose(1, 3, 7, 9) * choose(-1, 1))),
+			ccy : "R$ "
+		}],
+		
+		
+		// Effects
+		eff : [-1],
+		eff_amt : 0,
+		eff_curr : -1, // Determines which effect is currently active (-1 == none)
+		
+		
+		// Items
+		itm : [-1],
+		itm_amt : 0,
+		itm_curr : -1, // Determines which item is currently active (-1 == none)
+		
+		
+		// Themes
+		thm : [-1],
+		thm_amt : 0,
+		thm_curr : 0, // Determines which theme is currently active
+		
+		
+		// Save files
+		file : [-1],
+		file_curr : _file_curr, // Determines which save file is currently active
+		file_amtMax : 10
 	}
-	global.player_money[true] = // While awake (player_awake == true)
-	{
-		amt : irandom_range((15 + irandom_range(1, 4)), (25 + irandom_range(1, 4))),
-		ccy : "R$ "
-	}
 	
 	
-	
-	
-	// Effects
+		// Effects
 	enum PLAYER_EFF
 	{
 		DBG_SAL0,
@@ -36,24 +64,16 @@ function fn_player_setup(_fileCurr = -1)
 	fn_player_eff_add(PLAYER_EFF.DBG_SAL1);
 	fn_player_eff_add(PLAYER_EFF.DBG_SAL2);
 	
-	global.player_effCurr = -1; // Determines which effect is currently active (-1 == none)
 	
-	
-	
-	
-	// Items
+		// Items
 	enum PLAYER_ITM
 	{
 		KART
 	}
 	fn_player_itm_add(PLAYER_ITM.KART);
 	
-	global.player_itmCurr = -1; // Determines which item is currently active (-1 == none)
 	
-	
-	
-	
-	// Themes
+		// Themes
 	enum PLAYER_THM
 	{
 		DFLT,	// Default theme
@@ -64,106 +84,79 @@ function fn_player_setup(_fileCurr = -1)
 	fn_player_thm_add(PLAYER_THM.SIMPLE, true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
 	fn_player_thm_add(PLAYER_THM.MADOT, true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
 	
-	global.player_thmCurr = PLAYER_THM.DFLT; // Determines which theme is currently active (-1 == none)
 	
-	
-	
-	
-	// Room-specific data
-	for (var i = 0; i < 50; i++)
+		// Save files
+	for (var f = 0; f < global.player.file_amtMax; f++)
 	{
-		if (room_exists(i) == true)
+		global.player.file[f] =
 		{
-			global.player_rm[i] =
-			{
-				visited : false
-			}
-			
-			continue;
+			name : $"player_{f}.ini",
+			ver : global.game.ver,
+			msg : choose("Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?", "Got bored of walking?", "Simon says turn all the zeros into ones.", "As long as you're having fun, right?", "At least you'll be playing the game.", "Viva la revolución!", "Just do what you gotta do.")
 		}
-		else
-			break;
 	}
-	
-	
-	
-	
-	// Prepare to save/load the player's data
-	global.player_fileAmt = 3;
-	global.player_fileCurr = _fileCurr;
-	for (var f = 0; f < global.player_fileAmt; f++)
-		fn_player_file_setup(f);
+	if (global.player.file_curr != -1)
+	{
+		if (file_exists(global.player.file[global.player.file_curr].name) == false)
+			fn_player_file_save();
+		else
+			fn_player_file_load();
+	}
 }
+
+
 
 
 // Effects
-function fn_player_eff_add(_eff, _unlocked = false)
+function fn_player_eff_add(_idx, _unlocked = false)
 {
-	global.player_eff[_eff] =
+	global.player.eff[_idx] =
 	{
+		name : fn_config_lang_data_getText($"player_eff_name_{_idx}"),
+		desc : fn_config_lang_data_getText($"player_eff_desc_{_idx}"),
 		unlocked : _unlocked,
-		name : fn_config_lang_data_getText($"eff_name_{_eff}"),
-		desc : fn_config_lang_data_getText($"eff_desc_{_eff}")
-	}
-}
-function fn_player_eff_unlock(_eff)
-{
-	if (global.player_eff[_eff].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
-	{
-		global.player_eff[_eff].unlocked = true;
-		fn_player_file_save(global.player_fileCurr);
 		
-		fn_menu_obj_create("unlock", 0, global.player_eff[_eff].name);
-		obj_player.move_stg = -2;
+		icon_spr : spr_menu_inv_optIco,
+		icon_img : 0
 	}
+	global.player.eff_amt += 1;
 }
 
 
 // Items
-function fn_player_itm_add(_itm, _unlocked = false)
+function fn_player_itm_add(_idx, _unlocked = false)
 {
-	global.player_itm[_itm] =
+	global.player.itm[_idx] =
 	{
+		name : fn_config_lang_data_getText($"player_itm_name_{_idx}"),
+		desc : fn_config_lang_data_getText($"player_itm_desc_{_idx}"),
 		unlocked : _unlocked,
-		name : fn_config_lang_data_getText($"itm_name_{_itm}"),
-		desc : fn_config_lang_data_getText($"itm_desc_{_itm}")
-	}
-}
-function fn_player_itm_unlock(_itm)
-{
-	if (global.player_itm[_itm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
-	{
-		global.player_itm[_itm].unlocked = true;
-		fn_player_file_save(global.player_fileCurr);
 		
-		fn_menu_obj_create("unlock", 1, global.player_itm[_itm].name);
-		obj_player.move_stg = -2;
+		icon_spr : spr_menu_inv_optIco,
+		icon_img : 1
 	}
+	global.player.itm_amt += 1;
 }
-function fn_player_itm_equip(_itm)
+function fn_player_itm_unlock(_idx)
 {
-	var _equip_sndIdx = 0;
-	
-	if (_itm != global.player_itmCurr)
-		global.player_itmCurr = _itm;
-	else
-	{
-		global.player_itmCurr = -1;
-		_equip_sndIdx = 1;
-	}
-	
-	fn_aud_play(global.player_thm[global.player_thmCurr].equip_snd[_equip_sndIdx], CONFIG_AUD_STYLE.MENU);
+	global.player.itm[_idx].unlocked = true;
+	fn_player_file_save();
+		
+	fn_menu_obj_create("unlock", 1, global.player.itm[_idx].name);
 }
 
 
 // Themes
-function fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurDark = 0.75)
+function fn_player_thm_add(_idx, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurDark = 0.75)
 {
-	global.player_thm[_thm] =
+	global.player.thm[_idx] =
 	{
+		name : fn_config_lang_data_getText($"player_thm_name_{_idx}"),
+		desc : fn_config_lang_data_getText($"player_thm_desc_{_idx}"),
 		unlocked : _unlocked,
-		name : fn_config_lang_data_getText($"thm_name_{_thm}"),
-		desc : fn_config_lang_data_getText($"thm_desc_{_thm}"),
+		
+		icon_spr : spr_menu_inv_optIco,
+		icon_img : 2,
 		
 		col :
 		{
@@ -183,132 +176,90 @@ function fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteD
 			blurDark : _alp_blurDark // Alpha for heavily dimmed background
 		},
 		
-		box_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_box_"),
+		box_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_box_"),
 		
-		opt_move_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_move_"),
-		opt_slct_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_slct_"),
-		opt_cncl_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_cncl_"),
-		opt_fail_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_fail_"),
+		opt_move_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_move_"),
+		opt_slct_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_slct_"),
+		opt_cncl_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_cncl_"),
+		opt_fail_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_fail_"),
 		
-		opt_slctr_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_opt_slctr_"),
+		opt_slctr_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_opt_slctr_"),
 		opt_slctr_imgSpd : 0.1,
 		opt_slctr_xDist : 6,
 		opt_slctr_yDist : 4,
 		
-		inv_picFrm_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_inv_picFrm_"),
+		inv_picFrm_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_inv_picFrm_"),
 		
-		start_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_start_"),
-		unlock_snd : [fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_0_"), fn_player_thm_getAsset(_thm, $"snd_player_thm_unlock_1_"), fn_player_thm_getAsset(_thm, "snd_player_thm_unlock_2_")],
-		equip_snd : [fn_player_thm_getAsset(_thm, "snd_player_thm_equip_0_"), fn_player_thm_getAsset(_thm, "snd_player_thm_equip_1_")]
+		start_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_start_"),
+		unlock_snd : [fn_player_thm_getAsset(_idx, $"snd_player_thm_unlock_0_"), fn_player_thm_getAsset(_idx, $"snd_player_thm_unlock_1_"), fn_player_thm_getAsset(_idx, "snd_player_thm_unlock_2_")],
+		equip_snd : [fn_player_thm_getAsset(_idx, "snd_player_thm_equip_0_"), fn_player_thm_getAsset(_idx, "snd_player_thm_equip_1_")]
 	}
+	global.player.thm_amt += 1;
 }
-function fn_player_thm_getAsset(_thm, _asset_nameWithoutIdx)
+function fn_player_thm_getAsset(_idx, _asset_name_noIdx)
 {
-	var _asset = asset_get_index($"{_asset_nameWithoutIdx}{_thm}");
+	var _asset = asset_get_index($"{_asset_name_noIdx}{_idx}");
 	if (_asset == -1)
-		_asset = asset_get_index($"{_asset_nameWithoutIdx}0");
+		_asset = asset_get_index($"{_asset_name_noIdx}0");
 	return _asset;
 }
-function fn_player_thm_unlock(_thm)
+function fn_player_thm_equip(_idx)
 {
-	if (global.player_thm[_thm].unlocked == false && fn_obj_exists(obj_player) == true && obj_player.move_stg <= -1)
+	if (_idx != -1)
 	{
-		global.player_thm[_thm].unlocked = true;
-		fn_player_file_save(global.player_fileCurr);
-		
-		fn_menu_obj_create("unlock", 2, global.player_thm[_thm].name);
-		obj_player.move_stg = -2;
+		global.player.thm_curr = _idx;
+		fn_player_file_save();
 	}
-}
-function fn_player_thm_equip(_thm)
-{
-	global.player_thmCurr = _thm;
-	fn_player_file_save(global.player_fileCurr);
 }
 
 
-// Saving and loading the player's data
-function fn_player_file_setup(_file)
+// Save files
+function fn_player_file_save()
 {
-	var f = _file;
-	global.player_file[f] =
-	{
-		name : $"player_{f}.ini",
-		msg : "Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?"
-	}
-	
-	if (file_exists(global.player_file[f].name) == false)
-		fn_player_file_save(f);
-	else
-		fn_player_file_load(f);
-}
-function fn_player_file_save(_file)
-{
-	var f = _file;
-	ini_open(global.player_file[f].name);
-	ini_write_real("game", "ver", global.game.ver);
-	ini_write_string("game", "msg", global.player_file[f].msg);
+	var _file = global.player.file[global.player.file_curr];	
+	ini_open(_file.name);
+	ini_write_string("about", "ver", _file.ver);
+	ini_write_string("about", "msg", _file.msg);
 	
 	
-	ini_write_string("main", "name", global.player_name);
-	
-	// Money
+	ini_write_string("main", "name", global.player.name);
 	for (var m = 0; m < 2; m++)
-		ini_write_real("money", $"amt_{m}", global.player_money[m].amt);
-	
-	// Effects
-	for (var e = 0; e < array_length(global.player_eff); e++)
-		ini_write_real("eff", $"unlocked_{e}", global.player_eff[e].unlocked);
-	
-	// Items
-	for (var i = 0; i < array_length(global.player_itm); i++)
-		ini_write_real("itm", $"unlocked_{i}", global.player_itm[i].unlocked);
-	
-	// Themes
-	for (var t = 0; t < array_length(global.player_thm); t++)
-		ini_write_real("thm", $"unlocked_{t}", global.player_thm[t].unlocked);
-	ini_write_real("thm", "curr", global.player_thmCurr);
+		ini_write_string("money", $"amt_{m}", global.player.money[m].amt);
+	for (var e = 0; e < global.player.eff_amt; e++)
+		ini_write_string("eff", $"unlocked_{e}", global.player.eff[e].unlocked);
+	for (var e = 0; e < global.player.itm_amt; e++)
+		ini_write_string("itm", $"unlocked_{e}", global.player.itm[e].unlocked);
+	for (var e = 0; e < global.player.thm_amt; e++)
+		ini_write_string("thm", $"unlocked_{e}", global.player.thm[e].unlocked);
+	ini_write_string("thm", "curr", global.player.thm_curr);
 	
 	
 	ini_close();
 }
-function fn_player_file_load(_file)
+function fn_player_file_load()
 {
-	var f = _file;
-	ini_open(global.player_file[f].name);
-	if (ini_read_real("game", "ver", 0) == global.game.ver)
+	var _idx = global.player.file_curr;
+	ini_open(global.player.file[_idx].name);
+	
+	
+	if (ini_read_real("about", "ver", -1) == global.player.file[_idx].ver)
 	{
-		global.player_name = ini_read_string("main", "name", "Salenis");
-		
-		// Money
+		global.player.name = ini_read_string("main", "name", "Salenis");
 		for (var m = 0; m < 2; m++)
-			global.player_money[m].amt = ini_read_real("money", $"amt_{m}", 0);
-		
-		// Effects
-		for (var e = 0; e < array_length(global.player_eff); e++)
-			global.player_eff[e].unlocked = ini_read_real("eff", $"unlocked_{e}", false);
-		
-		// Items
-		for (var i = 0; i < array_length(global.player_itm); i++)
-			global.player_itm[i].unlocked = ini_read_real("itm", $"unlocked_{i}", false);
-		
-		// Themes
-		for (var t = 0; t < array_length(global.player_thm); t++)
-			global.player_thm[t].unlocked = ini_read_real("thm", $"unlocked_{t}", false);
-		global.player_thmCurr = ini_read_real("thm", "curr", PLAYER_THM.DFLT);
-		
-		
-		ini_close();
+			global.player.money[m].amt = real(ini_read_string("money", $"amt_{m}", "0"));
+		for (var e = 0; e < global.player.eff_amt; e++)
+			global.player.eff[e].unlocked = real(ini_read_string("eff", $"unlocked_{e}", "0"));
+		for (var e = 0; e < global.player.itm_amt; e++)
+			global.player.itm[e].unlocked = real(ini_read_string("itm", $"unlocked_{e}", "0"));
+		for (var e = 0; e < global.player.thm_amt; e++)
+			global.player.thm[e].unlocked = real(ini_read_string("thm", $"unlocked_{e}", "0"));
+		global.player.thm_curr = real(ini_read_string("thm", "curr", "0"));
 	}
-	else
-	{
-		ini_close();
-		fn_player_file_erase(f);
-		fn_player_file_save(f);
-	}
+	
+	
+	ini_close();
 }
-function fn_player_file_erase(_file)
+function fn_player_file_erase(_idx)
 {
-	var f = _file;
-	file_delete(global.player_file[f].name);
+	file_delete(global.player.file[_idx].name);
 }

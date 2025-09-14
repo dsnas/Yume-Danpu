@@ -6,7 +6,7 @@ if (myself.shake.act == true && myself.shake.durCurr > 0 && global.config_rdcdMo
 	myself.yOfs += (irandom(myself.shake.dist) * choose(-1, 1));
 	myself.shake.durCurr -= 1;
 }
-	
+
 if (myself.draw.act == true)
 {
 	if (myself.imgSpd > 0)

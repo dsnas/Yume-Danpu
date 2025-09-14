@@ -10,8 +10,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 		// Player
 		case obj_player:
 			myself.draw.act = true;
-			talk.act = true;
-			talk.type.trig.act = true;
+			talkTrig.act = true;
 			dir[DIR_LT].spr = spr_player_dir_lt;
 			dir[DIR_RT].spr = spr_player_dir_rt;
 			dir[DIR_UP].spr = spr_player_dir_up;
@@ -24,7 +23,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 			move.type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
 			move.type.roll.act = false;
 			
-			if (global.player_effCurr == -1 && global.player_itmCurr == -1)
+			if (global.player.eff_curr == -1 && global.player.itm_curr == -1)
 			{
 				if (itm_old == PLAYER_ITM.KART)
 				{
@@ -34,7 +33,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 					myself.y = y;
 				}
 			}
-			else if (global.player_itmCurr == PLAYER_ITM.KART)
+			else if (global.player.itm_curr == PLAYER_ITM.KART)
 			{
 				myself.draw.act = false;
 				move.precise = false;
@@ -81,13 +80,8 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 			myself.imgSpd = (random_range(0.5, 1.5) / 30);
 			talk.act = true;
 			talk.type.bell.act = true;
-			talk.type.bell.aud_asset[0] = snd_entity_macaco_monkey_0;
-			talk.type.bell.aud_asset[1] = snd_entity_macaco_monkey_1;
-			talk.type.bell.aud_asset[2] = snd_entity_macaco_monkey_2;
-			talk.type.bell.aud_asset[3] = snd_entity_macaco_monkey_3;
-			talk.type.bell.aud_asset[4] = snd_entity_macaco_monkey_4;
-			talk.type.bell.aud_asset[5] = snd_entity_macaco_monkey_5;
-			talk.type.bell.aud_asset[6] = snd_entity_macaco_monkey_6;
+			for (var a = 0; a < 7; a++)
+				talk.type.bell.aud_asset[a] = asset_get_index($"snd_actor_macaco_monkey_{a}");
 			break;
 		
 		case obj_actor_dbgwrld_blood: // Debug World blood monkey

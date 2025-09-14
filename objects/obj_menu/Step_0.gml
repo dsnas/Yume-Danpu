@@ -131,11 +131,8 @@ for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, includin
 				// Destroys itself
 				if (lvl_alpTgt_selfDstr[l] == true)
 				{
-					if (fn_obj_exists(obj_player) == true && obj_player.move_stg == -2)
-					{
-						fn_log("Kill");
-						obj_player.move_stg = -1;
-					}
+					if (fn_obj_exists(obj_player) == true && obj_player.move.stg == -2)
+						obj_player.move.stg = -1;
 					
 					fn_obj_destroy();
 				}
@@ -152,14 +149,14 @@ for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, includin
 
 
 // Reloads all the text if the language or theme changed
-if (config_langOld != global.config_langCurr) || (thmOld != global.player_thmCurr)
+if (config_langOld != global.config_langCurr) || (thmOld != global.player.thm_curr)
 {
 	for (l = 0; l < lvl_lenMax; l++)
 		opt_move_posOld[l] = opt_move_pos[l];
 	
 	fn_menu_evCreate_0();
 	config_langOld = global.config_langCurr;
-	thmOld = global.player_thmCurr;
+	thmOld = global.player.thm_curr;
 	
 	for (var l = 0; l < lvl_lenMax; l++)
 		opt_move_pos[l] = opt_move_posOld[l];

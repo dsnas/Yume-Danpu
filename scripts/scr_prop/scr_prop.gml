@@ -6,9 +6,9 @@ function fn_prop_evCreate()
 	switch (object_index)
 	{
 		// Doors
+		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 		case obj_prop_macaco_door: // Door of Macacolandia
 		case obj_prop_dbgwrld_door: // Door of Debug World
-		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 			talk.act = true;
 			talk.type.door.act = true;
 			talk.type.door.open.snd_asset = snd_prop_talk_door_open;
@@ -18,21 +18,20 @@ function fn_prop_evCreate()
 			break;
 		
 		
+		// Grasses
+		case obj_prop_dbgwrld_grass: // Debug World grass
+			solid = false;
+			break;
+		
+		
 		// Gift
 		case obj_prop_gift:
 			talk.act = true;
 			talk.type.gift.act = true;
-			talk.type.gift.loot_arr = global.player_itm;
-			talk.type.gift.loot_idx = PLAYER_ITM.KART;
+			talk.type.gift.content[0] = global.player.itm[PLAYER_ITM.KART];
 			
-			if (array_get(talk.type.gift.loot_arr, talk.type.gift.loot_idx).unlocked == true)
+			if (talk.type.gift.content[0].unlocked == true)
 				image_index = 1;
-			break;
-		
-		
-		// Grasses
-		case obj_prop_dbgwrld_grass: // Debug World grass
-			solid = false;
 			break;
 	}
 	
@@ -40,10 +39,21 @@ function fn_prop_evCreate()
 	// Other data (object-specific personalization)
 	switch (object_index)
 	{
+		// Doors
 		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 			talk.type.door.open.imgSpd = 0;
 			talk.type.door.open.snd_asset = -1;
 			talk.type.door.close.snd_asset = -1;
+			break;
+		
+		case obj_prop_dbgwrld_door: // Door of Debug World
+			image_alpha = 0;
+			break;
+		
+		
+		// Wall
+		case obj_prop_wall:
+			image_alpha = 0;
 			break;
 	}
 }
@@ -51,6 +61,7 @@ function fn_prop_evStep()
 {
 	switch (object_index)
 	{
+		// Doors
 		case obj_prop_dbgwrld_door: // Door of Debug World
 			if (room == rm_nexus)
 			{

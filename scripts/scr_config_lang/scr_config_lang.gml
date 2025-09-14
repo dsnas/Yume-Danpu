@@ -45,8 +45,7 @@ function fn_config_lang_mod(_langNew)
 	fn_config_lang_data_setup();
 	fn_config_setup();
 	
-	var _player_fileCurr = global.player_fileCurr;
-	fn_player_setup(_player_fileCurr);
+	fn_player_setup(global.player.file_curr);
 }
 
 
@@ -131,28 +130,27 @@ function fn_config_lang_data_setup()
 	fn_config_lang_data_addText("config_aud_style_name_6", "Ambience", "Ambiente");
 	
 	
-	// Loot
-		// Effects
-	fn_config_lang_data_addText("eff_name_0", "Salenis 0", "Salenis 0");
-	fn_config_lang_data_addText("eff_name_1", "Salenis 1", "Salenis 1");
-	fn_config_lang_data_addText("eff_name_2", "Salenis 2", "Salenis 2");
+	// Effects
+	fn_config_lang_data_addText("player_eff_name_0", "Salenis 0", "Salenis 0");
+	fn_config_lang_data_addText("player_eff_name_1", "Salenis 1", "Salenis 1");
+	fn_config_lang_data_addText("player_eff_name_2", "Salenis 2", "Salenis 2");
 	
-	fn_config_lang_data_addText("eff_desc_0", "The Salenis is a world-famous dish.\nIt tastes funny.", "O Salenis é uma comida muito famosa.\nO gosto dele é peculiar.");
-	fn_config_lang_data_addText("eff_desc_1", "The Salenis is a fascinating creation.\nIts smell is pleasing.", "O Salenis é uma criação fascinante.\nO cheiro dele é delicioso.");
-	fn_config_lang_data_addText("eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.", "O Salenis é um símbolo político.\nA textura dele é horrível.");
+	fn_config_lang_data_addText("player_eff_desc_0", "The Salenis is a world-famous dish.\nIt tastes funny.", "O Salenis é uma comida muito famosa.\nO gosto dele é peculiar.");
+	fn_config_lang_data_addText("player_eff_desc_1", "The Salenis is a fascinating creation.\nIts smell is pleasing.", "O Salenis é uma criação fascinante.\nO cheiro dele é delicioso.");
+	fn_config_lang_data_addText("player_eff_desc_2", "The Salenis is a political symbol.\nIts texture is horrifying.", "O Salenis é um símbolo político.\nA textura dele é horrível.");
 	
-		// Items
-	fn_config_lang_data_addText("itm_name_0", "Kart", "Kart");
-	fn_config_lang_data_addText("itm_desc_0", "", "...?");
+	// Items
+	fn_config_lang_data_addText("player_itm_name_0", "Kart", "Kart");
+	fn_config_lang_data_addText("player_itm_desc_0", "...?", "...?");
 	
-		// Themes
-	fn_config_lang_data_addText("thm_name_0", "Default", "Padrão");
-	fn_config_lang_data_addText("thm_name_1", "Simple", "Simples");
-	fn_config_lang_data_addText("thm_name_2", "Madotsuki", "Madotsuki");
+	// Themes
+	fn_config_lang_data_addText("player_thm_name_0", "Default", "Padrão");
+	fn_config_lang_data_addText("player_thm_name_1", "Simple", "Simples");
+	fn_config_lang_data_addText("player_thm_name_2", "Madotsuki", "Madotsuki");
 	
-	fn_config_lang_data_addText("thm_desc_0", "The default theme.", "O tema padrão.");
-	fn_config_lang_data_addText("thm_desc_1", "A simple, yet elegant, theme.", "Um tema simples, mas elegante.");
-	fn_config_lang_data_addText("thm_desc_2", "The classic theme.", "O tema clássico.");
+	fn_config_lang_data_addText("player_thm_desc_0", "The default theme.", "O tema padrão.");
+	fn_config_lang_data_addText("player_thm_desc_1", "A simple, yet elegant, theme.", "Um tema simples, mas elegante.");
+	fn_config_lang_data_addText("player_thm_desc_2", "The classic theme.", "O tema clássico.");
 	
 	
 	// Main menu

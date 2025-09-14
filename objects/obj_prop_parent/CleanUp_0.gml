@@ -1,6 +1,6 @@
 
 // Talk (interaction sequence)
-if (talk.act == true && talk.type.door.act == true)
+if (talk.act == true && talk.type.door.act == true && talk.stg == 1)
 {
 	var _door = talk.type.door;
 	if (_door.close.snd_asset != -1 && _door.close.snd_style != -1)

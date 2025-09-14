@@ -4,6 +4,14 @@
 
 function fn_fader_evCreate()
 {
+	// Menus
+	if (src.obj == obj_menu)
+	{
+		type.fade.act = true;
+		tgt.rm = rm_menu_load;
+	}
+	
+	
 	// Doors
 	if (src.obj == obj_prop_macaco_door) // Door of Macacolandia
 	{
@@ -32,7 +40,7 @@ function fn_fader_evCreate()
 }
 
 
-function fn_fader_start()
+function fn_fader_obj_create()
 {
 	fader = fn_obj_create(obj_fader);
 	fader.src.rm = room;

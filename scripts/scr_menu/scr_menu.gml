@@ -170,7 +170,7 @@ function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h 
 	var l = _lvl;
 	var b = _box;
 	
-	box_spr = global.player_thm[global.player_thmCurr].box_spr; // Asset of the box's sprite
+	box_spr = global.player.thm[global.player.thm_curr].box_spr; // Asset of the box's sprite
 	box_x[l, b] = _box_x;
 	box_y[l, b] = _box_y;
 	box_w[l, b] = _box_w;
@@ -186,7 +186,7 @@ function fn_menu_box_add(_lvl, _box, _box_x = 0, _box_y = 0, _box_w = 0, _box_h 
 
 
 // Functions related to the options
-function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, _opt_colTgt_0_0 = global.player_thm[global.player_thmCurr].col.grayLight, _opt_colTgt_1_0 = global.player_thm[global.player_thmCurr].col.grayDark, _opt_colTgt_0_1 = global.player_thm[global.player_thmCurr].col.whiteLight, _opt_colTgt_1_1 = global.player_thm[global.player_thmCurr].col.whiteDark, _opt_alp = 1, _opt_vAl = fa_top, _opt_hAl = fa_left)
+function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, _opt_colTgt_0_0 = global.player.thm[global.player.thm_curr].col.grayLight, _opt_colTgt_1_0 = global.player.thm[global.player.thm_curr].col.grayDark, _opt_colTgt_0_1 = global.player.thm[global.player.thm_curr].col.whiteLight, _opt_colTgt_1_1 = global.player.thm[global.player.thm_curr].col.whiteDark, _opt_alp = 1, _opt_vAl = fa_top, _opt_hAl = fa_left)
 {
 	var l = _lvl;
 	var o = _opt;
@@ -219,20 +219,20 @@ function fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y = 0, 
 	
 	opt_move_act[l] = true; // Determines if the player can move through the options
 	opt_move_pos[l] = 0; // Index of the player's current position in the array of options
-	opt_move_snd[l] = global.player_thm[global.player_thmCurr].opt_move_snd; // Asset of the option movement sound
+	opt_move_snd[l] = global.player.thm[global.player.thm_curr].opt_move_snd; // Asset of the option movement sound
 	
 	
 	// Option selection
 	opt_slct_act[l] = true;
 	opt_slct_key[l] = CONFIG_KEY.SLCT; // Key to check for input
-	opt_slct_snd[l, o] = global.player_thm[global.player_thmCurr].opt_slct_snd; // Asset of the option selection sound
+	opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].opt_slct_snd; // Asset of the option selection sound
 	
 	
 	// Option cancellation
 	opt_cncl_act[l] = true;
 	opt_cncl_key[l, 0] = CONFIG_KEY.CNCL; // Default cancellation key
 	opt_cncl_key[l, 1] = -1; // Alt cancellation key
-	opt_cncl_snd[l] = global.player_thm[global.player_thmCurr].opt_cncl_snd; // Asset of the option cancellation sound
+	opt_cncl_snd[l] = global.player.thm[global.player.thm_curr].opt_cncl_snd; // Asset of the option cancellation sound
 	
 	
 	opt_slctr_act[l, o] = false;
@@ -319,11 +319,11 @@ function fn_menu_opt_slctr_add(_lvl, _opt)
 	var o = _opt;
 	
 	opt_slctr_act[l, o] = true; // Determines if the selector is active for this option
-	opt_slctr_spr = global.player_thm[global.player_thmCurr].opt_slctr_spr; // Asset of option selector's sprite
+	opt_slctr_spr = global.player.thm[global.player.thm_curr].opt_slctr_spr; // Asset of option selector's sprite
 	opt_slctr_img = 0;
 	
-	opt_slctr_xDist[l, o] = global.player_thm[global.player_thmCurr].opt_slctr_xDist;
-	opt_slctr_yDist[l, o] = global.player_thm[global.player_thmCurr].opt_slctr_yDist;
+	opt_slctr_xDist[l, o] = global.player.thm[global.player.thm_curr].opt_slctr_xDist;
+	opt_slctr_yDist[l, o] = global.player.thm[global.player.thm_curr].opt_slctr_yDist;
 	opt_slctr_xFix[l, o] = 1; // Fixes the font sprite's empty space on the left
 	opt_slctr_yFix[l][o][0] = 3; // Fixes acute, grave, and circumflex accent diacritics
 	opt_slctr_yFix[l][o][1] = 1; // Fixes descenders
@@ -336,7 +336,7 @@ function fn_menu_opt_slctr_add(_lvl, _opt)
 }
 
 	// Functions related to the options' settings
-function fn_menu_opt_config_add(_lvl, _opt, _opt_config_text = "%%%", _opt_config_x = 0, _opt_config_y = 0, _opt_config_col_0 = global.player_thm[global.player_thmCurr].col.grayLight, _opt_config_col_1 = global.player_thm[global.player_thmCurr].col.grayDark, _opt_config_alp = 1)
+function fn_menu_opt_config_add(_lvl, _opt, _opt_config_text = "%%%", _opt_config_x = 0, _opt_config_y = 0, _opt_config_col_0 = global.player.thm[global.player.thm_curr].col.grayLight, _opt_config_col_1 = global.player.thm[global.player.thm_curr].col.grayDark, _opt_config_alp = 1)
 {
 	var l = _lvl;
 	var o = _opt;
@@ -386,8 +386,8 @@ function fn_menu_opt_config_slctr_add(_lvl, _opt)
 	opt_config_slctr_w[l, o] = fn_text_w(opt_config_slctr_text[l][o][0]);
 	opt_config_slctr_y[l, o] = opt_config_y[l, o];
 	
-	opt_config_slctr_col[l][o][0] = global.player_thm[global.player_thmCurr].col.whiteLight;
-	opt_config_slctr_col[l][o][1] = global.player_thm[global.player_thmCurr].col.whiteDark;
+	opt_config_slctr_col[l][o][0] = global.player.thm[global.player.thm_curr].col.whiteLight;
+	opt_config_slctr_col[l][o][1] = global.player.thm[global.player.thm_curr].col.whiteDark;
 	opt_config_slctr_alp[l, o] = 0;
 	
 	opt_config_slctr_shk_spd[l, o] = 1;
@@ -398,7 +398,7 @@ function fn_menu_opt_config_slctr_add(_lvl, _opt)
 }
 
 	// Functions related to the options' description
-function fn_menu_opt_desc_add(_lvl, _opt, _opt_desc_text = "%%%", _opt_desc_x = 0, _opt_desc_y = 0, _opt_desc_col_0 = global.player_thm[global.player_thmCurr].col.whiteLight, _opt_desc_col_1 = global.player_thm[global.player_thmCurr].col.whiteDark, _opt_desc_alp = 1, _opt_desc_vAl = fa_top, _opt_desc_hAl = fa_left)
+function fn_menu_opt_desc_add(_lvl, _opt, _opt_desc_text = "%%%", _opt_desc_x = 0, _opt_desc_y = 0, _opt_desc_col_0 = global.player.thm[global.player.thm_curr].col.whiteLight, _opt_desc_col_1 = global.player.thm[global.player.thm_curr].col.whiteDark, _opt_desc_alp = 1, _opt_desc_vAl = fa_top, _opt_desc_hAl = fa_left)
 {
 	var l = _lvl;
 	var o = _opt;
@@ -420,7 +420,7 @@ function fn_menu_opt_desc_add(_lvl, _opt, _opt_desc_text = "%%%", _opt_desc_x = 
 
 
 // Functions related to information
-function fn_menu_info_add(_lvl, _info, _info_text = "%%%", _info_x = 0, _info_y = 0, _info_col_0 = global.player_thm[global.player_thmCurr].col.whiteLight, _info_col_1 = global.player_thm[global.player_thmCurr].col.whiteDark, _info_alp = 1, _info_vAl = fa_top, _info_hAl = fa_left)
+function fn_menu_info_add(_lvl, _info, _info_text = "%%%", _info_x = 0, _info_y = 0, _info_col_0 = global.player.thm[global.player.thm_curr].col.whiteLight, _info_col_1 = global.player.thm[global.player.thm_curr].col.whiteDark, _info_alp = 1, _info_vAl = fa_top, _info_hAl = fa_left)
 {
 	var l = _lvl;
 	var i = _info;
@@ -485,8 +485,8 @@ function fn_menu_ttl_add(_lvl, _ttl_text = "%%%")
 	ttl_x[l] = (ttl_box_x[l] + (ttl_box_w[l] / 2));
 	ttl_y[l] = ((ttl_box_h[l] - abs(ttl_box_y[l])) / 4);
 	
-	ttl_col[l][0] = global.player_thm[global.player_thmCurr].col.whiteLight;
-	ttl_col[l][1] = global.player_thm[global.player_thmCurr].col.whiteDark;
+	ttl_col[l][0] = global.player.thm[global.player.thm_curr].col.whiteLight;
+	ttl_col[l][1] = global.player.thm[global.player.thm_curr].col.whiteDark;
 	
 	ttl_vAl[l] = fa_top;
 	ttl_hAl[l] = fa_center;

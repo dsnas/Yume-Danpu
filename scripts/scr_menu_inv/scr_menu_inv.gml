@@ -19,7 +19,7 @@ function fn_menu_inv_evCreate_0()
 		var _rect_alp = 0.5;
 		if (l != LVL_MAIN)
 			_rect_alp = 0.75;
-		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.player_thm[global.player_thmCurr].col.blur, _rect_alp);
+		fn_menu_rect_add(l, 0, 0, 0, 320, 240, global.player.thm[global.player.thm_curr].col.blur, _rect_alp);
 	}
 	
 	
@@ -37,7 +37,7 @@ function fn_menu_inv_evCreate_0()
 	fn_menu_box_add(l, 0, _box_x, _box_y, _box_w, _box_h);
 	
 			// Player's picture frame
-	main_picFrm_spr = global.player_thm[global.player_thmCurr].inv_picFrm_spr;
+	main_picFrm_spr = global.player.thm[global.player.thm_curr].inv_picFrm_spr;
 	main_picFrm_w = fn_spr_w(main_picFrm_spr);
 	main_picFrm_h = fn_spr_h(main_picFrm_spr);
 	main_picFrm_x = (box_x[l, 0] + round(box_w[l, 0] / 2) - round(main_picFrm_w / 2));
@@ -48,8 +48,8 @@ function fn_menu_inv_evCreate_0()
 	main_pic_snd = snd_player_fstep;
 	if (irandom_range(1, 100) == 1)
 	{
-		main_pic_spr = spr_entity_macaco_monkey;
-		main_pic_snd = snd_entity_macaco_monkey_1;
+		main_pic_spr = spr_actor_macaco_monkey;
+		main_pic_snd = snd_actor_macaco_monkey_1;
 	}
 	
 	main_pic_w = fn_spr_w(main_pic_spr);
@@ -62,7 +62,7 @@ function fn_menu_inv_evCreate_0()
 	main_pic_scSpd = 0.35;
 	
 			// Player's name
-	var _name_text = global.player_name;
+	var _name_text = global.player.name;
 	fn_menu_info_add(l, 0, _name_text);
 	var _name_w = info_w[l, 0];
 	var _name_h = info_h[l, 0];
@@ -73,13 +73,13 @@ function fn_menu_inv_evCreate_0()
 	info_y[l, 0] = _name_y;
 	
 			// Player's currency [#0]
-	var _ccy_text = global.player_money[global.player_awake].ccy;
+	var _ccy_text = global.player.money[global.player.awake].ccy;
 	fn_menu_info_add(l, 1, _ccy_text);
 	var _ccy_w = info_w[l, 1];
 	var _ccy_h = info_h[l, 1];
 	
 			// Player's money [#0]
-	var _mny_text = global.player_money[global.player_awake].amt;
+	var _mny_text = global.player.money[global.player.awake].amt;
 	fn_menu_info_add(l, 2, _mny_text);
 	var _mny_w = info_w[l, 2];
 	
@@ -92,13 +92,13 @@ function fn_menu_inv_evCreate_0()
 	main_mnyIco_x = (main_picFrm_x + round(main_picFrm_w / 2) - round(_mnyIco_wAll / 2) - 1);
 	var _mnyIco_yNameGap = (draw_dist / 2);
 	main_mnyIco_y = (_name_y + _name_h + _mnyIco_yNameGap);
-	main_mnyIco_col = global.player_thm[global.player_thmCurr].col.whiteLight;
+	main_mnyIco_col = global.player.thm[global.player.thm_curr].col.whiteLight;
 	
 			// Player's currency [#1]
 	var _ccy_x = (main_mnyIco_x + main_mnyIco_w + _mnyIco_xTextGap);
 	var _ccy_y = (main_mnyIco_y + round(main_mnyIco_h / 2) - round(_ccy_h / 2) - 1);
-	var _ccy_col_0 = global.player_thm[global.player_thmCurr].col.grayLight;
-	var _ccy_col_1 = global.player_thm[global.player_thmCurr].col.grayDark;
+	var _ccy_col_0 = global.player.thm[global.player.thm_curr].col.grayLight;
+	var _ccy_col_1 = global.player.thm[global.player.thm_curr].col.grayDark;
 	info_x[l, 1] = _ccy_x;
 	info_y[l, 1] = _ccy_y;
 	info_col[l][1][0] = _ccy_col_0;
@@ -107,8 +107,8 @@ function fn_menu_inv_evCreate_0()
 			// Player's money [#1]
 	var _mny_x = (_ccy_x + _ccy_w);
 	var _mny_y = _ccy_y;
-	var _mny_col_0 = global.player_thm[global.player_thmCurr].col.whiteLight;
-	var _mny_col_1 = global.player_thm[global.player_thmCurr].col.whiteDark;
+	var _mny_col_0 = global.player.thm[global.player.thm_curr].col.whiteLight;
+	var _mny_col_1 = global.player.thm[global.player.thm_curr].col.whiteDark;
 	info_x[l, 2] = _mny_x;
 	info_y[l, 2] = _mny_y;
 	info_col[l][2][0] = _mny_col_0;
@@ -164,18 +164,18 @@ function fn_menu_inv_evCreate_0()
 	{
 		// Get data of the current level
 		other_textData_key = "eff";
-		other_arr = global.player_eff;
+		other_arr = global.player.eff;
 		
 		if (l == LVL_OTHER_ITM)
 		{
 			other_textData_key = "itm";
-			other_arr = global.player_itm;
+			other_arr = global.player.itm;
 		}
 		
 		else if (l == LVL_OTHER_THM)
 		{
 			other_textData_key = "thm";
-			other_arr = global.player_thm;
+			other_arr = global.player.thm;
 		}
 		
 		other_lenMax = 14;
@@ -201,11 +201,11 @@ function fn_menu_inv_evCreate_0()
 		{
 			// Options
 			var _opt_text = "----------";
-			var _opt_slct_snd = global.player_thm[global.player_thmCurr].opt_fail_snd;
+			var _opt_slct_snd = global.player.thm[global.player.thm_curr].opt_fail_snd;
 			if (o < array_length(other_arr) && array_get(other_arr, o).unlocked == true)
 			{
 				_opt_text = array_get(other_arr, o).name;
-				_opt_slct_snd = global.player_thm[global.player_thmCurr].opt_slct_snd;
+				_opt_slct_snd = global.player.thm[global.player.thm_curr].opt_slct_snd;
 			}
 			fn_menu_opt_add(l, o, _opt_text);
 			
@@ -239,7 +239,7 @@ function fn_menu_inv_evCreate_1()
 {
 	// Main level
 	lvl = LVL_MAIN;
-	fn_aud_play(global.player_thm[global.player_thmCurr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
+	fn_aud_play(global.player.thm[global.player.thm_curr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
 }
 function fn_menu_inv_evDrawGUI_2(l)
 {
@@ -300,12 +300,12 @@ function fn_menu_inv_opt_slct()
 	// Other levels (effects, items and themes)
 	else if (l == LVL_OTHER_ITM)
 	{
-		if (o < array_length(global.player_itm) && global.player_itm[o].unlocked == true)
+		if (o < array_length(global.player.itm) && global.player.itm[o].unlocked == true)
 			fn_player_itm_equip(o);
 	}
 	else if (l == LVL_OTHER_THM)
 	{
-		if (o < array_length(global.player_thm) && global.player_thm[o].unlocked == true)
+		if (o < array_length(global.player.thm) && global.player.thm[o].unlocked == true)
 			fn_player_thm_equip(o);
 	}
 }
