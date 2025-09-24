@@ -1,5 +1,7 @@
 <h1 align="center">Yume Danpu</h1>
 
+<p align="center"><b><i>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</i></b>
+
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.03-4BFF84" alt="Game version" />
   <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
@@ -10,7 +12,6 @@
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube" /></a>
 </p>
 
-**[Yume Danpu](https://dsnas.itch.io/yume-danpu) is an open-source Yume Nikki fangame created in Brazil by dsans and migel8022.**  
 This repository is updated regularly while we're working on it, not just when new versions are released.
 
 &nbsp;
@@ -23,10 +24,13 @@ If you wanna see what we're doing next, check out [our devlog on YouTube](https:
 ## Never asked questions
 
 ### Why is it open-source?
-> A shark plushie told me to. Not sure why though.
+> A shark plushie told me to. Not sure why, though.
 
-### Why did you choose GameMaker over RPG Maker 2003?
+### Why use GameMaker?
 > GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.
+
+### Does that mean the style will be completely different from Yume Nikki?
+> Not really. The foundation will be the same but we'll *try* to innovate the rest, even if it takes a while. Also, I recently lost a monkey. If you find it can you please give it to me?
 
 &nbsp;
 
