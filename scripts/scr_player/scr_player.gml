@@ -144,6 +144,14 @@ function fn_player_itm_unlock(_idx)
 		
 	fn_menu_obj_create("unlock", 1, global.player.itm[_idx].name);
 }
+function fn_player_itm_equip(_idx)
+{
+	if (_idx != -1)
+	{
+		global.player.itm_curr = _idx;
+		fn_player_file_save();
+	}
+}
 
 
 // Themes

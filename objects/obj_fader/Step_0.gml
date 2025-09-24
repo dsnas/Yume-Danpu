@@ -18,7 +18,9 @@ if (type.fade.act == true) // Fade type
 		if (_iris.rad <= _iris.radTgt && stg == -1)
 			stg = 0;
 	}
+	/////////////// PORQUE TA ESCURECENDO
 	
+	fn_log(type.fade.alp);
 	
 	// Fades out of the source room
 	if (stg == 0)

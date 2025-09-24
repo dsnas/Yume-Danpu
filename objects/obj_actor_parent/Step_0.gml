@@ -85,7 +85,7 @@ if (move.act == true)
 					x = move.tgtX;
 					y = move.tgtY;
 					
-					if (global.dbg_act == true && global.dbg_excessLog == true)
+					if (global.dbg.act == true && global.dbg.logOverdose == true)
 						fn_log($"x = {x} | y = {y} | self_x = {myself.x} | self_y = {myself.y} | depth = {depth}");
 					break;
 				}
@@ -183,6 +183,8 @@ if (move.act == true)
 			}
 		}
 		
+		
+		fn_actor_stage_loop();
 		depth = -myself.y;
 	}
 }

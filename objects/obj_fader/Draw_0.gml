@@ -8,6 +8,7 @@ if (type.fade.act == true && type.fade.iris.act == true && stg < 1)
 	draw_clear_alpha(_iris.col, _iris.alp);
 	gpu_set_blendmode(bm_subtract);
 	
+	draw_set_alpha(1);
 	fn_draw_circle((_iris.x + _iris.xOfs), (_iris.y + _iris.yOfs), round(_iris.rad), _iris.prec);
 	
 	gpu_set_blendmode(bm_normal);

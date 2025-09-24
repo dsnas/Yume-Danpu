@@ -40,12 +40,18 @@ function fn_fader_evCreate()
 }
 
 
-function fn_fader_obj_create()
+function fn_fader_obj_create(_tgt_rm = -1)
 {
 	fader = fn_obj_create(obj_fader);
 	fader.src.rm = room;
 	fader.src.obj = object_index;
 	fader.src.obj_id = id;
+	if (_tgt_rm != -1)
+	{
+		fader.type.fade.act = true;
+		fader.tgt.rm = _tgt_rm;
+		fn_log(room_get_name(_tgt_rm));
+	}
 	with (fader)
 		fn_fader_evCreate();
 }
