@@ -59,10 +59,10 @@ move =
 	stg : -1, // ID number of the current stage of the movement sequence
 	amt : 0, // Amount of consecutive movement sequences in any direction, mode and type
 	
-	tgtX : 0,
-	tgtY : 0,
-	startX : 0,
-	startY : 0,
+	xTgt : 0,
+	yTgt : 0,
+	xStart : 0,
+	yStart : 0,
 	
 	
 	// Wait (delays the start of the movement sequence)
@@ -78,12 +78,15 @@ move =
 	// Modes
 	mode :
 	{
+		// Manual mode
 		manual :
 		{
 			act : false,
 			held : false
 		},
-			
+		
+		
+		// Automatic mode
 		auto :
 		{
 			act : false,

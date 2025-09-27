@@ -7,6 +7,34 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 	// Main data (presets)
 	switch (object_index)
 	{
+		// Good/Peaceful entities
+		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
+			talk.type.bell.aud_style = CONFIG_AUD_STYLE.ACTOR;
+			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
+			move.wait.act = true;
+			move.mode.auto.act = true;
+			move.type.walk.act = true;
+			move.type.walk.dur = 32;
+			move.chain.act = true;
+		break;
+		
+		
+		// Evil/Hostile entities
+		case obj_actor_dbgwrld_blood: // Debug World blood monkey
+			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
+			noise.aud.asset = snd_prop_noise_weird;
+			move.mode.auto.act = true;
+			move.mode.auto.chase_act = true;
+			move.mode.auto.chase_tgt = obj_player;
+			move.type.walk.act = true;
+			move.type.walk.dur = 24;
+		break;
+	}
+	
+	
+	// Other data (object-specific personalization)
+	switch (object_index)
+	{
 		// Player
 		case obj_player:
 			myself.draw.act = true;
@@ -46,47 +74,23 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 				move.type.roll.hit.snd_asset = snd_player_itm_kart_hit;
 				move.type.roll.hit.snd_style = CONFIG_AUD_STYLE.PLAYER;
 			}
-			break;
+		break;
 		
 		
 		// Good/Peaceful entities
-		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
-			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
-			move.mode.auto.act = true;
-			talk.type.bell.aud_style = CONFIG_AUD_STYLE.ACTOR;
-			move.type.walk.act = true;
-			move.type.walk.dur = 32;
-			move.wait.act = true;
-			move.chain.act = true;
-			break;
-		
-		
-		// Evil/Hostile entities
-		case obj_actor_dbgwrld_blood: // Debug World blood monkey
-			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
-			noise.aud.asset = snd_prop_noise_weird;
-			move.mode.auto.chase_act = true;
-			move.mode.auto.chase_tgt = obj_player;
-			move.type.walk.act = true;
-			move.type.walk.dur = 32;
-			break;
-	}
-	
-	
-	// Other data (object-specific personalization)
-	switch (object_index)
-	{
 		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
 			myself.imgSpd = (random_range(0.5, 1.5) / 30);
 			talk.act = true;
 			talk.type.bell.act = true;
 			for (var a = 0; a < 7; a++)
 				talk.type.bell.aud_asset[a] = asset_get_index($"snd_actor_macaco_monkey_{a}");
-			break;
+		break;
 		
+		
+		// Evil/Hostile entities
 		case obj_actor_dbgwrld_blood: // Debug World blood monkey
 			myself.imgSpd = (random_range(0.5, 1.5) / 30);
-			break;
+		break;
 	}
 }
 function fn_actor_evStep() // Step Event determined by the actor's object index

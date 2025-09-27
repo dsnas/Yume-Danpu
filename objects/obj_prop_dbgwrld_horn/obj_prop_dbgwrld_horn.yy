@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_actor_dbgwrld_blood",
+  "%Name":"obj_prop_dbgwrld_horn",
   "eventList":[],
   "managed":true,
-  "name":"obj_actor_dbgwrld_blood",
+  "name":"obj_prop_dbgwrld_horn",
   "overriddenProperties":[],
   "parent":{
     "name":"Debug World",
     "path":"folders/Debug World.yy",
   },
   "parentObjectId":{
-    "name":"obj_actor_parent",
-    "path":"objects/obj_actor_parent/obj_actor_parent.yy",
+    "name":"obj_prop_parent",
+    "path":"objects/obj_prop_parent/obj_prop_parent.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_actor_dbgwrld_blood",
-    "path":"sprites/spr_actor_dbgwrld_blood/spr_actor_dbgwrld_blood.yy",
+    "name":"spr_prop_dbgwrld_horn",
+    "path":"sprites/spr_prop_dbgwrld_horn/spr_prop_dbgwrld_horn.yy",
   },
   "spriteMaskId":null,
   "visible":true,

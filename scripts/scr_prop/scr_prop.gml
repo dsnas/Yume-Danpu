@@ -5,6 +5,13 @@ function fn_prop_evCreate()
 	// Main data (presets)
 	switch (object_index)
 	{
+		// Bells
+		case obj_prop_dbgwrld_horn: // Debug World horn
+			talk.act = true;
+			talk.type.bell.act = true;
+		break;
+		
+		
 		// Doors
 		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 		case obj_prop_macaco_door: // Door of Macacolandia
@@ -15,13 +22,13 @@ function fn_prop_evCreate()
 			talk.type.door.open.snd_style = CONFIG_AUD_STYLE.PROP;
 			talk.type.door.close.snd_asset = snd_prop_talk_door_close;
 			talk.type.door.close.snd_style = CONFIG_AUD_STYLE.PROP;
-			break;
+		break;
 		
 		
 		// Grasses
 		case obj_prop_dbgwrld_grass: // Debug World grass
 			solid = false;
-			break;
+		break;
 		
 		
 		// Gift
@@ -32,35 +39,52 @@ function fn_prop_evCreate()
 			
 			if (talk.type.gift.content[0].unlocked == true)
 				image_index = 1;
-			break;
+		break;
 	}
 	
 	
 	// Other data (object-specific personalization)
 	switch (object_index)
 	{
+		// Bells
+		case obj_prop_dbgwrld_horn: // Debug World horn
+			talk.type.bell.aud_asset[0] = snd_hulapoca;
+			talk.type.bell.aud_asset[1] = snd_penyplocde;
+			talk.type.bell.aud_asset[2] = snd_ponkawonka;
+		break;
+		
+		
 		// Doors
 		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 			talk.type.door.open.imgSpd = 0;
 			talk.type.door.open.snd_asset = -1;
 			talk.type.door.close.snd_asset = -1;
-			break;
+		break;
 		
 		case obj_prop_dbgwrld_door: // Door of Debug World
 			image_alpha = 0;
-			break;
+		break;
 		
 		
 		// Wall
 		case obj_prop_wall:
 			image_alpha = 0;
-			break;
+		break;
 	}
 }
 function fn_prop_evStep()
 {
 	switch (object_index)
 	{
+		// Bells
+		case obj_prop_dbgwrld_horn: // Debug World horn
+			if (talk.stg < 0)
+				image_index = 0;
+			else
+				image_index = 1;
+		break;
+		
+		
 		// Doors
 		case obj_prop_dbgwrld_door: // Door of Debug World
 			if (room == rm_nexus)
@@ -68,6 +92,6 @@ function fn_prop_evStep()
 				var _alp = clamp((abs(distance_to_object(obj_player)) / 32), 0, 1);
 				image_alpha = fn_lerp(image_alpha, (1 - _alp), 0.05);
 			}
-			break;
+		break;
 	}
 }
