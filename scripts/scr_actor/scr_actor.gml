@@ -59,6 +59,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 					y = fn_actor_xRound(id, y);
 					myself.x = x;
 					myself.y = y;
+					move.type.roll.dist = 0;
 				}
 			}
 			else if (global.player.itm_curr == PLAYER_ITM.KART)
@@ -69,6 +70,8 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 				move.type.roll.act = true;
 				move.type.roll.snd_asset = snd_player_itm_kart;
 				move.type.roll.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move.type.roll.start.snd_asset = snd_player_itm_kart_start;
+				move.type.roll.start.snd_style = CONFIG_AUD_STYLE.PLAYER;
 				move.type.roll.turn.snd_asset = snd_player_itm_kart_turn;
 				move.type.roll.turn.snd_style = CONFIG_AUD_STYLE.PLAYER;
 				move.type.roll.hit.snd_asset = snd_player_itm_kart_hit;

@@ -203,10 +203,8 @@ function fn_menu_inv_evCreate_0()
 			var _opt_text = "----------";
 			var _opt_slct_snd = global.player.thm[global.player.thm_curr].opt_fail_snd;
 			if (o < array_length(other_arr) && array_get(other_arr, o).unlocked == true)
-			{
 				_opt_text = array_get(other_arr, o).name;
-				_opt_slct_snd = global.player.thm[global.player.thm_curr].opt_slct_snd;
-			}
+			
 			fn_menu_opt_add(l, o, _opt_text);
 			
 			opt_x[l, o] = (box_x[l, 0] + ((box_w[l, 0] / 2) * _opt_xMul) + (draw_dist * 2));
@@ -301,12 +299,31 @@ function fn_menu_inv_opt_slct()
 	else if (l == LVL_OTHER_ITM)
 	{
 		if (o < array_length(global.player.itm) && global.player.itm[o].unlocked == true)
-			fn_player_itm_equip(o);
+		{
+			if (global.player.itm_curr != o)
+			{
+				fn_player_itm_equip(o);
+				opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].equip_snd[0];
+			}
+			else
+			{
+				global.player.itm_curr = -1;
+				opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].equip_snd[1];
+			}
+		}
 	}
 	else if (l == LVL_OTHER_THM)
 	{
 		if (o < array_length(global.player.thm) && global.player.thm[o].unlocked == true)
-			fn_player_thm_equip(o);
+		{
+			if (global.player.thm_curr != o)
+			{
+				fn_player_thm_equip(o);
+				opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].equip_snd[0];
+			}
+		}
+		else
+			opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].opt_fail_snd;
 	}
 }
 function fn_menu_inv_opt_cncl()

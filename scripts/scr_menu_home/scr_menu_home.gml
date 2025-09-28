@@ -134,6 +134,11 @@ function fn_menu_home_evStep()
 		lang_snd_act = true;
 	}
 	
+	if (lvl == LVL_LANG && opt_len[lvl] > 0 && lvl_alp[lvl] == 1 && opt_move_act[lvl] == true && opt_move_pos[lvl] > -1)
+	{
+		fn_config_lang_mod(opt_move_pos[lvl]);
+	}
+	
 	if (lvl == LVL_MAIN && lvl_alpDelay[lvl] <= 0 && window_get_caption() == "")
 		fn_wnd_name("Yume Danpu");
 }
@@ -183,6 +188,7 @@ function fn_menu_home_opt_slct()
 			_config_langNew = CONFIG_LANG.EN_US;
 		else if (o == 1) // Flag of Brazil
 			_config_langNew = CONFIG_LANG.PT_BR;
+		global.config_lang_hasChosen = true;
 		fn_config_lang_mod(_config_langNew);
 		
 		fn_menu_lvlNew(LVL_MAIN, 180);

@@ -68,7 +68,6 @@ function fn_fader_obj_create(_tgt_rm = -1)
 	{
 		fader.type.fade.act = true;
 		fader.tgt.rm = _tgt_rm;
-		fn_log(room_get_name(_tgt_rm));
 	}
 	with (fader)
 		fn_fader_evCreate();

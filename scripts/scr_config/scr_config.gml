@@ -96,8 +96,8 @@ function fn_config_setup()
 	
 	// Graphics
 	global.config_fscr = false; // Fullscreen
-	global.config_wndSc = 1; // Window Scale
-	global.config_vsync = false; // Vsync (display_reset)
+	//global.config_wndSc = 1; // Window Scale
+	//global.config_vsync = false; // Vsync (display_reset)
 	global.config_lowGfx = false; // Low Graphics
 	global.config_hideCsr = false; // Hide Cursor
 	global.config_showFps = false; // Show FPS
@@ -252,5 +252,6 @@ function fn_config_file_load()
 }
 function fn_config_file_erase()
 {
-	file_delete(global.config_file.name);
+	if (file_exists(global.config_file.name) == true)
+		file_delete(global.config_file.name);
 }

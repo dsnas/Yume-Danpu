@@ -19,7 +19,7 @@
   "option_windows_interpolate_pixels":false,
   "option_windows_license":"${base_options_dir}/windows/installer/license.txt",
   "option_windows_nsis_file":"${base_options_dir}/windows/installer/nsis_script.nsi",
-  "option_windows_product_info":"Produced by dsans and migel8022",
+  "option_windows_product_info":"Created by dsans and migel8022",
   "option_windows_resize_window":false,
   "option_windows_save_location":0,
   "option_windows_scale":0,

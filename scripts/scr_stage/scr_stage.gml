@@ -4,26 +4,33 @@
 
 function fn_stage_evCreate()
 {
-	if (room == rm_nexus) // Nexus
+	if (room == temp_rm_condo_apt) // Eleanor's Apartment
 	{
+		global.player.awake = true;
+	}
+	else if (room == rm_nexus) // Nexus
+	{
+		global.player.awake = false;
+		
 		cam.lock.x = 0;
 		cam.lock.y = 0;
-		
 		fn_stage_bg_sky_add(0, temp_spr_stage_bg_sky_nexus, make_color_hsv(color_get_hue(#07070E), color_get_saturation(#07070E), 50), 0.35, 30);
-		
 		loop.xAct = true;
 		loop.yAct = true;
 	}
 	else if (room == rm_macaco) // Macacolandia
 	{
+		global.player.awake = false;
+		
 		fn_stage_bg_sky_add(0, temp_spr_rmCtrl_bg_sky_macaco, , 0.175, 270, 270);
 		fn_stage_bg_clouds_add(1, temp_spr_rmCtrl_bg_clouds_macaco, 0.75, 0.75, 0.35, , , 90, 90); 
-		
 		loop.xAct = true;
 		loop.yAct = true;
 	}
 	else if (room == rm_dbgwrld) // Debug World
 	{
+		global.player.awake = false;
+		
 		var _sky_spr = -1;
 		var _clouds_spr = -1;
 		for (var s = 0; s < 99; s++)
@@ -39,38 +46,36 @@ function fn_stage_evCreate()
 				break;
 			}
 		}
-		
 		fn_stage_bg_sky_add(0, _sky_spr, , 0.25);
 		bg[0].sky.img = (sprite_get_number(bg[0].sky.spr) - 1);
 		fn_stage_bg_clouds_add(1, _clouds_spr, , , 0.5, 160, 120);
 		bg[1].clouds.img = (sprite_get_number(bg[1].clouds.spr) - 1);
-		
 		loop.xAct = true;
 		loop.yAct = true;
 	}
 }
 function fn_stage_evStep()
 {
-	switch (room)
+	if (room == temp_rm_menu_home) // Main Menu
 	{
-		case temp_rm_menu_home:
-			fn_stage_mus_add(0, mus_menu_home);
-			break;
-		
-		
-		case rm_nexus: // Nexus
-			fn_stage_mus_add(0, mus_nexus);
-			break;
-		
-		
-		case rm_macaco: // Macacolandia
-			fn_stage_mus_add(0, mus_macaco);
-			break;
-		
-		
-		case rm_dbgwrld: // Debug World
-			fn_stage_mus_add(0, mus_dbgwrld);
-			break;
+		if (fn_obj_exists(obj_menu) == true)
+		{
+			var m = fn_menu_obj_find("home");
+			if (m != -1 && global.config_lang_hasChosen == true && m.lvl_alpDelay[m.lvl] <= 0 && m.lvl_alpTgt_gameEnd[m.lvl] == false)
+				fn_stage_mus_add(0, mus_menu_home);
+		}
+	}
+	else if (room == rm_nexus) // Nexus
+	{
+		fn_stage_mus_add(0, mus_nexus);
+	}
+	else if (room == rm_macaco) // Macacolandia
+	{
+		fn_stage_mus_add(0, mus_macaco);
+	}
+	else if (room == rm_dbgwrld) // Debug World
+	{
+		fn_stage_mus_add(0, mus_dbgwrld);
 	}
 	
 	

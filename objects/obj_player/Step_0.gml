@@ -15,7 +15,7 @@ event_inherited();
 
 if (move.stg == -1)
 {
-	if (fn_key_pressed(CONFIG_KEY.MENU_INV) == true) || (fn_key_pressed(CONFIG_KEY.MENU_PSE) == true)
+	if (MENUDELAY <= 0 && (fn_key_pressed(CONFIG_KEY.MENU_INV) == true || fn_key_pressed(CONFIG_KEY.MENU_PSE) == true))
 	{
 		move.stg = -2;
 		
@@ -28,6 +28,8 @@ if (move.stg == -1)
 			fn_menu_obj_create("pse");
 		}
 	}
+	else if (MENUDELAY > 0)
+		MENUDELAY -= 1;
 }
 
 

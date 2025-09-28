@@ -6,7 +6,7 @@ fn_obj_depth( , -14000);
 // Debug Mode
 global.dbg =
 {
-	act : true, // Determines if Debug Mode is enabled
+	act : false, // Determines if Debug Mode is enabled
 	pwd : "hunter2", // Password to enter to toggle Debug Mode (type it with your keyboard anywhere at anytime)
 	
 	

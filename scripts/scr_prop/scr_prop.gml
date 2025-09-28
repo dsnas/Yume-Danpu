@@ -31,14 +31,10 @@ function fn_prop_evCreate()
 		break;
 		
 		
-		// Gift
+		// Gifts
 		case obj_prop_gift:
 			talk.act = true;
 			talk.type.gift.act = true;
-			talk.type.gift.content[0] = global.player.itm[PLAYER_ITM.KART];
-			
-			if (talk.type.gift.content[0].unlocked == true)
-				image_index = 1;
 		break;
 	}
 	
@@ -54,6 +50,13 @@ function fn_prop_evCreate()
 		break;
 		
 		
+		// Gifts
+		case obj_prop_gift:
+			if (room == rm_nexus)
+				talk.type.gift.content[0] = global.player.itm[PLAYER_ITM.KART];
+		break;
+		
+		
 		// Doors
 		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 			talk.type.door.open.imgSpd = 0;
@@ -62,7 +65,8 @@ function fn_prop_evCreate()
 		break;
 		
 		case obj_prop_dbgwrld_door: // Door of Debug World
-			image_alpha = 0;
+			if (room == rm_nexus)
+				image_alpha = 0;
 		break;
 		
 		
@@ -71,6 +75,10 @@ function fn_prop_evCreate()
 			image_alpha = 0;
 		break;
 	}
+	
+	
+	if (talk.type.gift.act == true && talk.type.gift.content[0].unlocked == true)
+		image_index = 1;
 }
 function fn_prop_evStep()
 {

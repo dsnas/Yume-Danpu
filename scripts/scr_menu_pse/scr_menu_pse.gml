@@ -134,7 +134,10 @@ function fn_menu_pse_resume() // Resumes the game
 	audio_resume_all();
 	
 	if (fn_obj_exists(obj_player) == true && obj_player.move.stg == -2)
+	{
 		obj_player.move.stg = -1;
+		obj_player.MENUDELAY = 5;
+	}
 }
 function fn_menu_pse_sshot_destroy()
 {

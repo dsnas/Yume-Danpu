@@ -40,7 +40,6 @@ function fn_config_lang_add(_lang, _name)
 function fn_config_lang_mod(_langNew)
 {
 	global.config_langCurr = _langNew;
-	global.config_lang_hasChosen = true;
 	fn_config_lang_file_save();
 	fn_config_lang_data_setup();
 	fn_config_setup();
@@ -81,7 +80,8 @@ function fn_config_lang_file_load()
 }
 function fn_config_lang_file_erase()
 {
-	file_delete(global.config_lang_file.name);
+	if (file_exists(global.config_lang_file.name) == true)
+		file_delete(global.config_lang_file.name);
 }
 
 

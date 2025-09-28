@@ -132,7 +132,10 @@ for (var l = 0; l < (lvl_lenMax + 1); l++) // Loops through each level, includin
 				if (lvl_alpTgt_selfDstr[l] == true)
 				{
 					if (fn_obj_exists(obj_player) == true && obj_player.move.stg == -2)
+					{
 						obj_player.move.stg = -1;
+						obj_player.MENUDELAY = 5;
+					}
 					
 					fn_obj_destroy();
 				}

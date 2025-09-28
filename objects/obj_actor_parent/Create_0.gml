@@ -132,7 +132,7 @@ move =
 			
 			dist : 0, // Distance in pixels the actor will walk
 			distMin : 0.5, // Minimum allowed distance for {move.type.roll.dist}
-			distMax : 4, // Maximum allowed distance for {move.type.roll.dist}
+			distMax : 3, // Maximum allowed distance for {move.type.roll.dist}
 			distAccel : 0.1,
 			distDecel : 0.1,
 			precise : true, // Whether movement checks for collisions in distances smaller than {move.type.roll.dist}
@@ -142,6 +142,12 @@ move =
 			snd_pchMin : 0.5,
 			snd_pchMax : 1.5,
 			snd_id : -1,
+			
+			start :
+			{
+				snd_asset : -1,
+				snd_style : -1
+			},
 			
 			turn :
 			{

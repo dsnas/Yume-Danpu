@@ -128,6 +128,7 @@
     {"id":{"name":"snd_penyplocde","path":"sounds/snd_penyplocde/snd_penyplocde.yy",},},
     {"id":{"name":"snd_player_fstep","path":"sounds/snd_player_fstep/snd_player_fstep.yy",},},
     {"id":{"name":"snd_player_itm_kart_hit","path":"sounds/snd_player_itm_kart_hit/snd_player_itm_kart_hit.yy",},},
+    {"id":{"name":"snd_player_itm_kart_start","path":"sounds/snd_player_itm_kart_start/snd_player_itm_kart_start.yy",},},
     {"id":{"name":"snd_player_itm_kart_turn","path":"sounds/snd_player_itm_kart_turn/snd_player_itm_kart_turn.yy",},},
     {"id":{"name":"snd_player_itm_kart","path":"sounds/snd_player_itm_kart/snd_player_itm_kart.yy",},},
     {"id":{"name":"snd_player_thm_equip_0_0","path":"sounds/snd_player_thm_equip_0_0/snd_player_thm_equip_0_0.yy",},},
