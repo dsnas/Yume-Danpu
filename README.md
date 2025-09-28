@@ -3,7 +3,7 @@
 <p align="center"><b><i>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</i></b>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.03-4BFF84" alt="Game version" />
+  <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version" />
   <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
   <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License" />
   <a href="https://dsnas.itch.io/yume-danpu">
@@ -30,7 +30,7 @@ If you wanna see what we're doing next, check out [our devlog on YouTube](https:
 > GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.
 
 ### Does that mean the style will be completely different from Yume Nikki?
-> Not really. The foundation will be the same but we'll *try* to innovate the rest, even if it takes a while. Also, I recently lost a monkey. If you find it can you please give it to me?
+> Not really. The foundation will be the same but we'll *try* to innovate the rest, even if it takes a while.
 
 &nbsp;
 
