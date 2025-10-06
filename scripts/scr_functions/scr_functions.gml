@@ -17,42 +17,6 @@ function fn_wnd_name(_text)
 
 
 
-// Functions related to key inputs
-function fn_key_pressed(_key_idx) // Returns if the specified keybind has been pressed
-{
-	var _key_inp = keyboard_check_pressed(global.config_key[_key_idx].dflt);
-	if (_key_inp == false)
-		_key_inp = keyboard_check_pressed(global.config_key[_key_idx].alt);
-	return _key_inp;
-}
-function fn_key_held(_key_idx) // Returns if the specified keybind is currently being held
-{
-	var _key_inp = keyboard_check(global.config_key[_key_idx].dflt);
-	if (_key_inp == false)
-		_key_inp = keyboard_check(global.config_key[_key_idx].alt);
-	return _key_inp;
-}
-function fn_key_quick() // Provides several variables to make input-checking tasks quicker
-{
-	press_lt = fn_key_pressed(CONFIG_KEY.LT);
-	press_rt = fn_key_pressed(CONFIG_KEY.RT);
-	press_up = fn_key_pressed(CONFIG_KEY.UP);
-	press_dn = fn_key_pressed(CONFIG_KEY.DN);
-	press_slct = fn_key_pressed(CONFIG_KEY.SLCT);
-	press_cncl = fn_key_pressed(CONFIG_KEY.CNCL);
-	press_inv = fn_key_pressed(CONFIG_KEY.MENU_INV);
-	press_pse = fn_key_pressed(CONFIG_KEY.MENU_PSE);
-	press_fscr = fn_key_pressed(CONFIG_KEY.FSCR);
-	press_atwlk = fn_key_pressed(CONFIG_KEY.ATWLK);
-	
-	hold_lt = fn_key_held(CONFIG_KEY.LT);
-	hold_rt = fn_key_held(CONFIG_KEY.RT);
-	hold_up = fn_key_held(CONFIG_KEY.UP);
-	hold_dn = fn_key_held(CONFIG_KEY.DN);
-}
-
-
-
 
 // Functions related to objects
 function fn_obj_create(_asset = id, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
@@ -79,13 +43,6 @@ function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = c_white, _alp = 1, _
 		image_xscale = _xSc;
 		image_yscale = _ySc;
 		image_angle = _ang;
-		
-		// Disables animation
-		if (global.config_rdcdMot == true) // Checks if the configing Reduced Motion is active
-		{
-			image_speed = 0;
-			image_index = 0;
-		}
 	}
 }
 function fn_obj_depth(_asset = id, _val = -_asset.y)
@@ -100,16 +57,19 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 	// Text
 function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _hAl = fa_left, _xSc = 1, _ySc = 1, _ang = 0)
 {
-	var _fnt = global.game.fnt;
-	draw_set_font(_fnt);
-	draw_set_valign(_vAl);
-	draw_set_halign(_hAl);
-	
-	var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
-	var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
-	draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _shadow_col, _shadow_col, _shadow_col, _shadow_col, _shadow_alp);
-	
-	draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
+	var _fnt = global.config.lang[global.config.lang_curr].fnt;
+	if (font_exists(_fnt) == true)
+	{
+		draw_set_font(_fnt);
+		draw_set_valign(_vAl);
+		draw_set_halign(_hAl);
+		
+		var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
+		var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
+		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _shadow_col, _shadow_col, _shadow_col, _shadow_col, _shadow_alp);
+		
+		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
+	}
 }
 
 	// Rectangles
@@ -398,15 +358,25 @@ function fn_spr_h(_asset) // Returns the height of the specified sprite
 // Functions related to text
 function fn_text_w(_text) // Returns the width of the specified text
 {
-	if (font_exists(global.game.fnt) == true)
-		draw_set_font(global.game.fnt);
-	return string_width(_text);
+	var _fnt = global.config.lang[global.config.lang_curr].fnt;
+	if (font_exists(_fnt) == true)
+	{
+		draw_set_font(_fnt);
+		return string_width(_text);
+	}
+	else
+		return 0;
 }
 function fn_text_h(_text) // Returns the height of the specified text
 {
-	if (font_exists(global.game.fnt) == true)
-		draw_set_font(global.game.fnt);
-	return string_height(_text);
+	var _fnt = global.config.lang[global.config.lang_curr].fnt;
+	if (font_exists(_fnt) == true)
+	{
+		draw_set_font(_fnt);
+		return string_height(_text);
+	}
+	else
+		return 0;
 }
 
 

@@ -1,257 +1,294 @@
 
-//////// Functions related to the settings
+//////// Functions related to the player's settings 
 
 
 function fn_config_setup()
-{	
-	// Keybinds
+{
+	global.config =
+	{
+		// Main
+		name : (irandom_range(1, 100) != 1) ? "Yume Danpu" : choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume-Danpu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu", "Yummy Nicky", "Yum Dnampy", "Yume Dhanpy"),
+		ver : 0.05,
+		
+		// Languages
+		lang : [-1],
+		lang_curr : 0,
+		lang_data : -1,
+		
+		// Keybinds
+		key : [-1],
+		
+		// Video
+		vid :
+		{
+			resW : 320,
+			resH : 240,
+			resMult : 2,
+			
+			fscr : // Fullscreen
+			{
+				act : false,
+				name : ""
+			},
+			
+			vsync : // Vsync
+			{
+				act : false,
+				name : ""
+			},
+			
+			showVer : // Show Version
+			{
+				act : true,
+				name : ""
+			},
+			
+			showCsr : // Show Cursor
+			{
+				act : true,
+				name : ""
+			},
+			
+			showFps : // Show FPS
+			{
+				act : false,
+				name : ""
+			},
+			
+			showBdr : // Show Border
+			{
+				act : true,
+				name : ""
+			},
+		},
+		
+		// Music & Sounds
+		aud :
+		{
+			emtr : [-1]
+		},
+		
+		// Accessibility
+		access :
+		{
+			rdcdMot : false
+		},	
+	}
+	
+		// File [#0] (Creates the file directory if needed; Loads a previously selected language if there's already a file)
+	global.config.file_name = string(global.config.ver) + "/config.ini";
+	global.config.file_msg = choose("There's an in-game options menu. I think you'll like it.", "Is this Notepad World?", "Are you by any chance on Linux?", "Looking for super-secret settings?");
+	if (directory_exists(global.config.ver) == false)
+		directory_create(global.config.ver);
+	else if (file_exists(global.config.file_name) == true)
+	{
+		ini_open(global.config.file_name);
+		global.config.lang_curr = ini_read_real("lang", "curr", CONFIG_LANG.enUS);
+		ini_close();
+	}
+	
+		// Languages
+	global.config.lang_data = load_csv("config_lang_data.csv");
+	enum CONFIG_LANG
+	{
+		enUS,
+		ptBR
+	}
+	fn_config_lang_add(CONFIG_LANG.enUS, "enUS");
+	fn_config_lang_add(CONFIG_LANG.ptBR, "ptBR");
+	
+		// Keybinds
 	enum CONFIG_KEY
 	{
-		LT,			// Left
-		RT,			// Right
-		UP,			// Up
-		DN,			// Down
-		SLCT,		// Select
-		CNCL,		// Cancel
-		MENU_INV,	// Inventory menu
-		MENU_PSE,	// Pause menu
-		ATWLK,		// Autowalk
-		FSCR		// Fullscreen
+		LT,		// Left
+		RT,		// Right
+		UP,		// Up
+		DN,		// Down
+		SLCT,	// Confirm
+		CNCL,	// Cancel
+		INV,	// Inventory
+		USE,	// Effect/Item
+		ATWLK,	// Autowalk
+		PSE,	// Pause
+		FSCR,	// Fullscreen
 	}
-	fn_config_key_add(CONFIG_KEY.LT,			vk_left,	ord("A"));
-	fn_config_key_add(CONFIG_KEY.RT,			vk_right,	ord("D"));
-	fn_config_key_add(CONFIG_KEY.UP,			vk_up,		ord("W"));
-	fn_config_key_add(CONFIG_KEY.DN,			vk_down,	ord("S"));
-	fn_config_key_add(CONFIG_KEY.SLCT,			ord("Z"),	vk_enter);
-	fn_config_key_add(CONFIG_KEY.CNCL,			ord("X"),	vk_shift);
-	fn_config_key_add(CONFIG_KEY.MENU_INV,		ord("C"),	vk_control);
-	fn_config_key_add(CONFIG_KEY.MENU_PSE,		vk_escape);
-	fn_config_key_add(CONFIG_KEY.ATWLK,			ord("R"));
-	fn_config_key_add(CONFIG_KEY.FSCR,			vk_f4,		vk_f11);
+	fn_config_key_add(CONFIG_KEY.LT,	"lt",		vk_left, ord("A"));
+	fn_config_key_add(CONFIG_KEY.RT,	"rt",		vk_right, ord("D"));
+	fn_config_key_add(CONFIG_KEY.UP,	"up",		vk_up, ord("W"));
+	fn_config_key_add(CONFIG_KEY.DN,	"dn",		vk_down, ord("S"));
+	fn_config_key_add(CONFIG_KEY.SLCT,	"slct",		ord("Z"), vk_enter);
+	fn_config_key_add(CONFIG_KEY.CNCL,	"cncl",		ord("X"), vk_shift);
+	fn_config_key_add(CONFIG_KEY.INV,	"inv",		ord("C"), vk_control);
+	fn_config_key_add(CONFIG_KEY.USE,	"use",		ord("F"));
+	fn_config_key_add(CONFIG_KEY.ATWLK,	"atwlk",	ord("R"));
+	fn_config_key_add(CONFIG_KEY.PSE,	"pse",		vk_escape);
+	fn_config_key_add(CONFIG_KEY.FSCR,	"fscr",		vk_f4, vk_f11);
 	
+		// Video
+	global.config.vid.fscr.name = textdata("config_vid_fscr_name");
+	global.config.vid.vsync.name = textdata("config_vid_vsync_name");
+	global.config.vid.showVer.name = textdata("config_vid_showVer_name");
+	global.config.vid.showCsr.name = textdata("config_vid_showCsr_name");
+	global.config.vid.showFps.name = textdata("config_vid_showFps_name");
+	global.config.vid.showBdr.name = textdata("config_vid_showBdr_name");
 	
-	// Keys the player can bind an action to
-	var k = 0;
-	fn_config_keyList_add(k++, vk_left, "←");
-	fn_config_keyList_add(k++, vk_right, "→");
-	fn_config_keyList_add(k++, vk_up, "↑");
-	fn_config_keyList_add(k++, vk_down, "↓");
-	fn_config_keyList_add(k++, ord("A"), "A");
-	fn_config_keyList_add(k++, ord("B"), "B");
-	fn_config_keyList_add(k++, ord("C"), "C");
-	fn_config_keyList_add(k++, ord("D"), "D");
-	fn_config_keyList_add(k++, ord("E"), "E");
-	fn_config_keyList_add(k++, ord("F"), "F");
-	fn_config_keyList_add(k++, ord("G"), "G");
-	fn_config_keyList_add(k++, ord("H"), "H");
-	fn_config_keyList_add(k++, ord("I"), "I");
-	fn_config_keyList_add(k++, ord("J"), "J");
-	fn_config_keyList_add(k++, ord("K"), "K");
-	fn_config_keyList_add(k++, ord("L"), "L");
-	fn_config_keyList_add(k++, ord("M"), "M");
-	fn_config_keyList_add(k++, ord("N"), "N");
-	fn_config_keyList_add(k++, ord("O"), "O");
-	fn_config_keyList_add(k++, ord("P"), "P");
-	fn_config_keyList_add(k++, ord("Q"), "Q");
-	fn_config_keyList_add(k++, ord("R"), "R");
-	fn_config_keyList_add(k++, ord("S"), "S");
-	fn_config_keyList_add(k++, ord("T"), "T");
-	fn_config_keyList_add(k++, ord("U"), "U");
-	fn_config_keyList_add(k++, ord("V"), "V");
-	fn_config_keyList_add(k++, ord("W"), "W");
-	fn_config_keyList_add(k++, ord("X"), "X");
-	fn_config_keyList_add(k++, ord("Y"), "Y");
-	fn_config_keyList_add(k++, ord("Z"), "Z");
-	fn_config_keyList_add(k++, vk_space, "Space");
-	fn_config_keyList_add(k++, vk_enter, "Enter");
-	fn_config_keyList_add(k++, vk_backspace, "Backspace");
-	fn_config_keyList_add(k++, vk_shift, "Shift");
-	fn_config_keyList_add(k++, vk_control, "Ctrl");
-	fn_config_keyList_add(k++, vk_alt, "Alt");
-	fn_config_keyList_add(k++, vk_tab, "Tab");
-	fn_config_keyList_add(k++, vk_escape, "Esc");
-	fn_config_keyList_add(k++, vk_numpad0, "0");
-	fn_config_keyList_add(k++, vk_numpad1, "1");
-	fn_config_keyList_add(k++, vk_numpad2, "2");
-	fn_config_keyList_add(k++, vk_numpad3, "3");
-	fn_config_keyList_add(k++, vk_numpad4, "4");
-	fn_config_keyList_add(k++, vk_numpad5, "5");
-	fn_config_keyList_add(k++, vk_numpad6, "6");
-	fn_config_keyList_add(k++, vk_numpad7, "7");
-	fn_config_keyList_add(k++, vk_numpad8, "8");
-	fn_config_keyList_add(k++, vk_numpad9, "9");
-	fn_config_keyList_add(k++, vk_f1, "F1");
-	fn_config_keyList_add(k++, vk_f2, "F2");
-	fn_config_keyList_add(k++, vk_f3, "F3");
-	fn_config_keyList_add(k++, vk_f4, "F4");
-	fn_config_keyList_add(k++, vk_f5, "F5");
-	fn_config_keyList_add(k++, vk_f6, "F6");
-	fn_config_keyList_add(k++, vk_f7, "F7");
-	fn_config_keyList_add(k++, vk_f8, "F8");
-	fn_config_keyList_add(k++, vk_f9, "F9");
-	fn_config_keyList_add(k++, vk_f10, "F10");
-	fn_config_keyList_add(k++, vk_f11, "F11");
-	fn_config_keyList_add(k++, vk_f12, "F12");
-	
-	
-	// Graphics
-	global.config_fscr = false; // Fullscreen
-	//global.config_wndSc = 1; // Window Scale
-	//global.config_vsync = false; // Vsync (display_reset)
-	global.config_lowGfx = false; // Low Graphics
-	global.config_hideCsr = false; // Hide Cursor
-	global.config_showFps = false; // Show FPS
-	global.config_showBdr = true; // Show Border
-	global.config_showVer = true; // Show Version
-	
-	
-	// Music & Sounds
-	enum CONFIG_AUD_STYLE // Audio styles
+		// Music & Sounds
+	enum CONFIG_AUD_EMTR
 	{
-		MASTER,		// Master
-		MUS,		// Music
-		MENU,		// Menu
-		PLAYER,		// Player
-		PROP,		// Interactables
-		ACTOR,		// Entities
-		AMB			// Ambience
+		MASTER, // Master
+		
+		MUS, // Music
+		AMB, // Ambience
+		
+		MENU, // Menu
+		PLAYER, // Player
+		PROP, // Props
+		ACTOR, // Entities
 	}
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.MASTER);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.MUS);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.MENU);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.PLAYER);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.PROP);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.ACTOR);
-	fn_config_aud_style_add(CONFIG_AUD_STYLE.AMB);
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.MASTER,	"master");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.MUS,		"mus");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.AMB,		"amb");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.MENU,	"menu");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.PLAYER,	"player");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.PROP,	"prop");
+	fn_config_aud_emtr_add(CONFIG_AUD_EMTR.ACTOR,	"actor");
 	
-	
-	// Accessibility
-	global.config_rdcdMot = false; // Reduced Motion
-	
-	
-	// Other
-	global.config_atwlk = false; // Autowalk
-	
-	
-	// Save/Load the settings
-	global.config_file =
-	{
-		name : "config.ini",
-		msg : "You know, there's an in-game options menu. I think you'll like it!"
-	};
-	
-	if (file_exists(global.config_file.name) == false)
+		// File [#1]
+	if (file_exists(global.config.file_name) == false)
 		fn_config_file_save();
 	else
 		fn_config_file_load();
 }
 
 
-// Keybinds
-function fn_config_key_add(_key_idx, _key_dflt, _key_alt = -1)
-{
-	global.config_key[_key_idx] =
-	{
-		dflt : _key_dflt,
-		alt : _key_alt
-	}
-}
-
-
-// Keys the player can bind an action to
-function fn_config_keyList_add(_key_idx, _key, _key_name)
-{
-	global.config_keyList[_key_idx] =
-	{
-		key: _key,
-		key_name: _key_name
-	}
-}
-
-
-// Music & Sounds
-function fn_config_aud_style_add(_aud_style)
-{
-	global.config_aud_style[_aud_style] = 
-	{
-		name : fn_config_lang_data_getText($"config_aud_style_name_{_aud_style}"), //"Stylish Baby";
-		vol : 1
-	}
-}
-
-
-// Functions related to saving and loading the game's settings
+	// File
 function fn_config_file_save()
 {
-	ini_open(global.config_file.name);
-	ini_write_real("game", "ver", global.game.ver);
-	ini_write_string("game", "msg", global.config_file.msg);
+	ini_open(global.config.file_name);
+	ini_write_string("README", "msg", global.config.file_msg);
 	
 	
-	// Keybinds
-	for (var k = 0; k < array_length(global.config_key); k++)
-	{
-		ini_write_real("key", $"dflt_{k}", global.config_key[k].dflt);
-		ini_write_real("key", $"alt_{k}", global.config_key[k].alt);
-	}	
+	// Languages
+	ini_write_real("lang", "curr", global.config.lang_curr);
 	
 	// Graphics
-	ini_write_real("vid", "fscr", global.config_fscr);
-	ini_write_real("vid", "lowGfx", global.config_lowGfx);
-	ini_write_real("vid", "hideCsr", global.config_hideCsr);
-	ini_write_real("vid", "showFps", global.config_showFps);
-	ini_write_real("vid", "showBdr", global.config_showBdr);
+	ini_write_real("vid", "fscr_act", global.config.vid.fscr.act);
+	ini_write_real("vid", "vsync_act", global.config.vid.vsync.act);
+	ini_write_real("vid", "showVer_act", global.config.vid.showVer.act);
+	ini_write_real("vid", "showCsr_act", global.config.vid.showCsr.act);
+	ini_write_real("vid", "showFps_act", global.config.vid.showFps.act);
+	ini_write_real("vid", "showBdr_act", global.config.vid.showBdr.act);
 	
 	// Music & Sounds
-	for (var s = 0; s < array_length(global.config_aud_style); s++)
-		ini_write_real("aud", $"style_vol_{s}", global.config_aud_style[s].vol);
+	for (var e = 0; e < array_length(global.config.aud.emtr); e++)
+		ini_write_real("aud", $"emtr_{e}_vol", global.config.aud.emtr[e].vol);
 	
 	// Accessibility
-	ini_write_real("a11y", "rdcdMot", global.config_rdcdMot);
+	ini_write_real("access", "rdcdMot", global.config.access.rdcdMot);
 	
 	
 	ini_close();
 }
 function fn_config_file_load()
 {
-	ini_open(global.config_file.name);
+	ini_open(global.config.file_name);
 	
-	if (ini_read_real("game", "ver", 0) == global.game.ver)
-	{
-		// Keybinds
-		for (var k = 0; k < array_length(global.config_key); k++)
-		{
-			global.config_key[k].dflt = ini_read_real("key", $"dflt_{k}", global.config_key[k].dflt);
-			global.config_key[k].alt = ini_read_real("key", $"alt_{k}", global.config_key[k].alt);
-		}
-		
-		// Graphics
-		global.config_fscr = ini_read_real("vid", "fscr", false);
-		global.config_lowGfx = ini_read_real("vid", "lowGfx", false);
-		global.config_hideCsr = ini_read_real("vid", "hideCsr", false);
-		global.config_showFps = ini_read_real("vid", "showFps", false);
-		global.config_showBdr = ini_read_real("vid", "showBdr", false);
 	
-		// Music & Sounds
-		for (var s = 0; s < array_length(global.config_aud_style); s++)
-			global.config_aud_style[s].vol = ini_read_real("aud", $"style_vol_{s}", 1);
+	// Languages
+	global.config.lang_curr = ini_read_real("lang", "curr", CONFIG_LANG.enUS);
+	
+	// Graphics
+	global.config.vid.fscr.act = ini_read_real("vid", "fscr_act", false);
+	global.config.vid.vsync.act = ini_read_real("vid", "vsync_act", false);
+	global.config.vid.showVer.act = ini_read_real("vid", "showVer_act", true);
+	global.config.vid.showCsr.act = ini_read_real("vid", "showCsr_act", true);
+	global.config.vid.showFps.act = ini_read_real("vid", "showFps_act", false);
+	global.config.vid.showBdr.act = ini_read_real("vid", "showBdr_act", true);
 		
-		// Accessibility
-		global.config_rdcdMot = ini_read_real("a11y", "rdcdMot", 0);
-		
-		
-		ini_close();
-	}
-	else
-	{
-		ini_close();
-		
-		fn_config_file_erase();
-		fn_config_file_save();
-	}
+	// Music & Sounds
+	for (var e = 0; e < array_length(global.config.aud.emtr); e++)
+		global.config.aud.emtr[e].vol = ini_read_real("aud", $"emtr_{e}_vol", 1);
+	
+	// Accessibility
+	global.config.access.rdcdMot = ini_read_real("access", "rdcdMot", false);
+	
+	
+	ini_close();
 }
 function fn_config_file_erase()
 {
-	if (file_exists(global.config_file.name) == true)
-		file_delete(global.config_file.name);
+	file_delete(global.config.file_name)
+}
+
+
+	// Languages
+function fn_config_lang_add(_idx, _code)
+{
+	global.config.lang[_idx] =
+	{
+		name : textdata($"config_lang_{_code}"),
+		code : _code,
+		
+		fnt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, -1)
+	}
+}
+function textdata(_key)
+{
+	var _text = global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), _key)];
+	if (_text != undefined)
+		return _text;
+	else
+	{
+		fn_log($"The function lang_data() was called and unable to retrieve the desired text. The provided key was \"{_key}\".");
+		return "Salenis";
+	}
+	
+	//fn_log( $"!!!!!!!!!!!!!!!!!!!!!! {global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), "config_key_rt")]}" );
+}
+
+
+	// Keybinds
+function fn_config_key_add(_idx, _code, _main, _alt = -1)
+{
+	global.config.key[_idx] =
+	{
+		name : textdata($"config_key_{_code}"),
+		code : _code,
+		
+		main : _main,
+		alt : _alt,
+	}
+}
+function fn_config_key_held(_idx)
+{
+	return (keyboard_check(global.config.key[_idx].main) == true) ? true : keyboard_check(global.config.key[_idx].alt)
+}
+function fn_config_key_pressed(_idx)
+{
+	return (keyboard_check_pressed(global.config.key[_idx].main) == true) ? true : keyboard_check_pressed(global.config.key[_idx].alt)
+}
+function fn_config_key_lazy()
+{
+	for (var k = 0; k < array_length(global.config.key); k++)
+	{
+		held[k] = fn_config_key_held(k);
+		pressed[k] = fn_config_key_pressed(k);
+	}
+}
+
+
+	// Music & Sounds
+function fn_config_aud_emtr_add(_idx, _code, _vol = 1, _pitch = 1)
+{
+	global.config.aud.emtr[_idx] =
+	{
+		name : textdata($"config_aud_emtr_{_code}"),
+		code : _code,
+		
+		id : audio_emitter_create(),
+		bus : audio_bus_create(),
+		vol : _vol,
+		pitch : _pitch
+	}
+	audio_emitter_bus(global.config.aud.emtr[_idx].id, global.config.aud.emtr[_idx].bus);
 }

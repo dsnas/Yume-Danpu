@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"home",
-    "path":"folders/menu/home.yy",
+    "path":"folders/old menu/home.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

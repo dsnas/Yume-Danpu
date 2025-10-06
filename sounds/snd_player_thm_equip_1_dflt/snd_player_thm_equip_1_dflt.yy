@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_player_thm_equip_1_dflt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.6989796,
+  "name":"snd_player_thm_equip_1_dflt",
+  "parent":{
+    "name":"Default (0)",
+    "path":"folders/player/thm/Default (0).yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_player_thm_equip_1_dflt.mp3",
+  "type":0,
+  "volume":1.0,
+}

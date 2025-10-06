@@ -13,7 +13,7 @@
   "name":"mus_menu_home",
   "parent":{
     "name":"home",
-    "path":"folders/menu/home.yy",
+    "path":"folders/old menu/home.yy",
   },
   "preload":false,
   "resourceType":"GMSound",

@@ -1,16 +1,6 @@
 
-itm_old = global.player.itm_curr;
-eff_old = global.player.eff_curr;
+fn_player_setup();
 
 
-
-
-// the actual code is at {obj_prop_parent} and {obj_actor_parent}, you silly
-event_inherited();
-
-
-MENUDELAY = 0;
-
-
-
-// Dear diary, i've had one of those bad dreams again...
+fn_obj_img( , , , , 0);
+fn_obj_depth( , -15000);

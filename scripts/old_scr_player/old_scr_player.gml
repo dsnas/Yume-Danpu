@@ -33,10 +33,8 @@ function old_fn_player_setup(_fileCurr = -1)
 		DBG_SAL1,
 		DBG_SAL2
 	}
-	*/
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL0);
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL1);
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL2);
+
+
 	
 	global.player.eff_curr = -1; // Determines which effect is currently active (-1 == none)
 	
@@ -160,7 +158,7 @@ function old_fn_player_itm_equip(_itm)
 
 
 // Themes
-function old_fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurDark = 0.75)
+function old_fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurHeavy = 0.75)
 {
 	global.player.thm[_thm] =
 	{
@@ -183,7 +181,7 @@ function old_fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_wh
 		{
 			shadow: _alp_shadow, // Shadow alpha for elements (options, information, etc.)
 			blurLight : _alp_blurLight, // Alpha for lightly dimmed background
-			blurDark : _alp_blurDark // Alpha for heavily dimmed background
+			blurHeavy : _alp_blurHeavy // Alpha for heavily dimmed background
 		},
 		
 		box_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_box_"),

@@ -9,7 +9,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"load",
-    "path":"folders/menu/load.yy",
+    "path":"folders/old menu/load.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -185,9 +185,9 @@ function fn_menu_home_opt_slct()
 	{
 		var _config_langNew = global.config_langCurr;
 		if (o == 0) // Flag of United States
-			_config_langNew = CONFIG_LANG.EN_US;
+			_config_langNew = CONFIG_LANG.enUS;
 		else if (o == 1) // Flag of Brazil
-			_config_langNew = CONFIG_LANG.PT_BR;
+			_config_langNew = CONFIG_LANG.ptBR;
 		global.config_lang_hasChosen = true;
 		fn_config_lang_mod(_config_langNew);
 		

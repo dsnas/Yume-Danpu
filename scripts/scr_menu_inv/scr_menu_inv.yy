@@ -6,7 +6,7 @@
   "name":"scr_menu_inv",
   "parent":{
     "name":"inv",
-    "path":"folders/menu/inv.yy",
+    "path":"folders/old menu/inv.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

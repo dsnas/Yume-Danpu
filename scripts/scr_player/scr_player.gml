@@ -1,50 +1,41 @@
 
+//////// Functions related to the player
+
+
 function fn_player_setup(_file_curr = -1)
 {
-	/*
-	para o menu de unlock, enviar como argumento da função {fn_menu_obj_create} uma struct, assim como {fn_obj_create} tem.
-	enviar a struct daquele efeito/item/tema, para qual o menu vai apenas utilizar as variáveis {name}, {icon_spr} e {icon_img}
-	*/
-	
-	
 	// Player's data
 	global.player =
 	{
 		name : "Eleanor",
 		awake : true,
 		
-		
 		// Money
 		money :
-			// While sleeping
-		[{
+		[{ // While sleeping
 			amt : 0,
 			ccy : "₢$ "
 		},
-			// While awake
-		{
+			
+		{ // While awake
 			amt : (choose(20, 30) + (choose(1, 3, 7, 9) * choose(-1, 1))),
 			ccy : "R$ "
 		}],
-		
 		
 		// Effects
 		eff : [-1],
 		eff_amt : 0,
 		eff_curr : -1, // Determines which effect is currently active (-1 == none)
 		
-		
 		// Items
 		itm : [-1],
 		itm_amt : 0,
 		itm_curr : -1, // Determines which item is currently active (-1 == none)
 		
-		
 		// Themes
 		thm : [-1],
 		thm_amt : 0,
 		thm_curr : 0, // Determines which theme is currently active
-		
 		
 		// Save files
 		file : [-1],
@@ -52,26 +43,18 @@ function fn_player_setup(_file_curr = -1)
 		file_amtMax : 10
 	}
 	
-	
 		// Effects
 	enum PLAYER_EFF
 	{
-		DBG_SAL0,
-		DBG_SAL1,
-		DBG_SAL2
+		
 	}
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL0);
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL1);
-	fn_player_eff_add(PLAYER_EFF.DBG_SAL2);
-	
 	
 		// Items
 	enum PLAYER_ITM
 	{
 		KART
 	}
-	fn_player_itm_add(PLAYER_ITM.KART);
-	
+	fn_player_itm_add(PLAYER_ITM.KART, "kart");
 	
 		// Themes
 	enum PLAYER_THM
@@ -80,19 +63,17 @@ function fn_player_setup(_file_curr = -1)
 		SIMPLE, // Simple theme
 		MADOT	// Madotsuki theme
 	}
-	fn_player_thm_add(PLAYER_THM.DFLT, true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
-	fn_player_thm_add(PLAYER_THM.SIMPLE, true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
-	fn_player_thm_add(PLAYER_THM.MADOT, true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
-	
+	fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
+	fn_player_thm_add(PLAYER_THM.SIMPLE, "simple", true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
+	fn_player_thm_add(PLAYER_THM.MADOT, "madot", true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
 	
 		// Save files
 	for (var f = 0; f < global.player.file_amtMax; f++)
 	{
 		global.player.file[f] =
 		{
-			name : $"player_{f}.ini",
-			ver : global.game.ver,
-			msg : choose("Gosh, I wonder why someone would come here. It wouldn't be to cheat, would it?", "Got bored of walking?", "Simon says turn all the zeros into ones.", "As long as you're having fun, right?", "At least you'll be playing the game.", "Viva la revolución!", "Just do what you gotta do.")
+			name : $"{global.config.ver}/player_{f}.ini",
+			msg : choose("I wonder why someone would come here. It wouldn't be to cheat, would it?", "Got bored of walking?", "Simon says turn all the zeros into ones.", "As long as you're having fun, right?", "At least you'll be playing the game.", "Viva la revolución!", "Just do what you gotta do.", "So many numbers... It's like a number world...")
 		}
 	}
 	if (global.player.file_curr != -1)
@@ -105,15 +86,14 @@ function fn_player_setup(_file_curr = -1)
 }
 
 
-
-
-// Effects
-function fn_player_eff_add(_idx, _unlocked = false)
+	// Effects
+function fn_player_eff_add(_idx, _code, _unlocked = false)
 {
 	global.player.eff[_idx] =
 	{
-		name : fn_config_lang_data_getText($"player_eff_name_{_idx}"),
-		desc : fn_config_lang_data_getText($"player_eff_desc_{_idx}"),
+		name : textdata($"player_eff_name_{_code}"),
+		desc : textdata($"player_eff_desc_{_code}"),
+		code : _code,
 		unlocked : _unlocked,
 		
 		icon_spr : spr_menu_inv_optIco,
@@ -123,13 +103,14 @@ function fn_player_eff_add(_idx, _unlocked = false)
 }
 
 
-// Items
-function fn_player_itm_add(_idx, _unlocked = false)
+	// Items
+function fn_player_itm_add(_idx, _code, _unlocked = false)
 {
 	global.player.itm[_idx] =
 	{
-		name : fn_config_lang_data_getText($"player_itm_name_{_idx}"),
-		desc : fn_config_lang_data_getText($"player_itm_desc_{_idx}"),
+		name : textdata($"player_itm_name_{_code}"),
+		desc : textdata($"player_itm_desc_{_code}"),
+		code : _code,
 		unlocked : _unlocked,
 		
 		icon_spr : spr_menu_inv_optIco,
@@ -154,19 +135,18 @@ function fn_player_itm_equip(_idx)
 }
 
 
-// Themes
-function fn_player_thm_add(_idx, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurDark = 0.75)
+	// Themes
+function fn_player_thm_add(_idx, _code, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurHeavy = 0.75)
 {
 	global.player.thm[_idx] =
 	{
-		name : fn_config_lang_data_getText($"player_thm_name_{_idx}"),
-		desc : fn_config_lang_data_getText($"player_thm_desc_{_idx}"),
+		name : textdata($"player_thm_name_{_code}"),
+		desc : textdata($"player_thm_desc_{_code}"),
+		code : _code,
 		unlocked : _unlocked,
 		
-		icon_spr : spr_menu_inv_optIco,
-		icon_img : 2,
 		
-		col :
+		col : // Colors
 		{
 			whiteLight : _col_whiteLight,
 			whiteDark : _col_whiteDark,
@@ -177,38 +157,43 @@ function fn_player_thm_add(_idx, _unlocked = false, _col_whiteLight, _col_whiteD
 			blur : _col_blur // Color for dimmed background
 		},
 		
-		alp :
+		
+		alp : // Alpha
 		{
 			shadow: _alp_shadow, // Shadow alpha for elements (options, information, etc.)
 			blurLight : _alp_blurLight, // Alpha for lightly dimmed background
-			blurDark : _alp_blurDark // Alpha for heavily dimmed background
+			blurHeavy : _alp_blurHeavy // Alpha for heavily dimmed background
 		},
 		
-		box_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_box_"),
 		
-		opt_move_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_move_"),
-		opt_slct_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_slct_"),
-		opt_cncl_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_cncl_"),
-		opt_fail_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_opt_fail_"),
+		icon_spr : spr_menu_inv_optIco,
+		icon_img : 2,
 		
-		opt_slctr_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_opt_slctr_"),
+		box_spr : fn_player_thm_asset("spr_player_thm_box_", _code),
+		
+		opt_move_snd : fn_player_thm_asset("snd_player_thm_opt_move_", _code),
+		opt_slct_snd : fn_player_thm_asset("snd_player_thm_opt_slct_", _code),
+		opt_cncl_snd : fn_player_thm_asset("snd_player_thm_opt_cncl_", _code),
+		opt_fail_snd : fn_player_thm_asset("snd_player_thm_opt_fail_", _code),
+		
+		opt_slctr_spr : fn_player_thm_asset("spr_player_thm_opt_slctr_", _code),
 		opt_slctr_imgSpd : 0.1,
 		opt_slctr_xDist : 6,
 		opt_slctr_yDist : 4,
 		
-		inv_picFrm_spr : fn_player_thm_getAsset(_idx, "spr_player_thm_inv_picFrm_"),
+		inv_picFrm_spr : fn_player_thm_asset("spr_player_thm_inv_picFrm_", _code),
 		
-		start_snd : fn_player_thm_getAsset(_idx, "snd_player_thm_start_"),
-		unlock_snd : [fn_player_thm_getAsset(_idx, $"snd_player_thm_unlock_0_"), fn_player_thm_getAsset(_idx, $"snd_player_thm_unlock_1_"), fn_player_thm_getAsset(_idx, "snd_player_thm_unlock_2_")],
-		equip_snd : [fn_player_thm_getAsset(_idx, "snd_player_thm_equip_0_"), fn_player_thm_getAsset(_idx, "snd_player_thm_equip_1_")]
+		start_snd : fn_player_thm_asset("snd_player_thm_start_", _code),
+		unlock_snd : [fn_player_thm_asset($"snd_player_thm_unlock_0_", _code), fn_player_thm_asset($"snd_player_thm_unlock_1_", _code), fn_player_thm_asset("snd_player_thm_unlock_2_", _code)],
+		equip_snd : [fn_player_thm_asset("snd_player_thm_equip_0_", _code), fn_player_thm_asset("snd_player_thm_equip_1_", _code)]
 	}
 	global.player.thm_amt += 1;
 }
-function fn_player_thm_getAsset(_idx, _asset_name_noIdx)
+function fn_player_thm_asset(_asset_name_noCode, _code)
 {
-	var _asset = asset_get_index($"{_asset_name_noIdx}{_idx}");
+	var _asset = asset_get_index($"{_asset_name_noCode}{_code}");
 	if (_asset == -1)
-		_asset = asset_get_index($"{_asset_name_noIdx}0");
+		_asset = asset_get_index($"{_asset_name_noCode}{global.player.thm[0].code}");
 	return _asset;
 }
 function fn_player_thm_equip(_idx)
@@ -221,12 +206,12 @@ function fn_player_thm_equip(_idx)
 }
 
 
-// Save files
+	// Save files
 function fn_player_file_save()
 {
 	var _file = global.player.file[global.player.file_curr];	
 	ini_open(_file.name);
-	ini_write_string("about", "ver", _file.ver);
+	ini_write_string("about", "ver", global.game.ver);
 	ini_write_string("about", "msg", _file.msg);
 	
 	
