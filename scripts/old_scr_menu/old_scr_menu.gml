@@ -224,13 +224,13 @@ function old_fn_menu_opt_add(_lvl, _opt, _opt_text = "%%%", _opt_x = 0, _opt_y =
 	
 	// Option selection
 	opt_slct_act[l] = true;
-	opt_slct_key[l] = CONFIG_KEY.SLCT; // Key to check for input
+	opt_slct_key[l] = CONFIG_KEY.CONFIRM; // Key to check for input
 	opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].opt_slct_snd; // Asset of the option selection sound
 	
 	
 	// Option cancellation
 	opt_cncl_act[l] = true;
-	opt_cncl_key[l, 0] = CONFIG_KEY.CNCL; // Default cancellation key
+	opt_cncl_key[l, 0] = CONFIG_KEY.CANCEL; // Default cancellation key
 	opt_cncl_key[l, 1] = -1; // Alt cancellation key
 	opt_cncl_snd[l] = global.player.thm[global.player.thm_curr].opt_cncl_snd; // Asset of the option cancellation sound
 	

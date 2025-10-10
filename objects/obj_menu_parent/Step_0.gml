@@ -1,0 +1,86 @@
+
+if (is_array(lvl) == true)
+{
+	var l = lvl_curr;
+	
+	
+	// Options
+	if (is_array(lvl[l].option) == true)
+	{
+		var o = lvl[l].option_curr;
+		
+		
+		// Movement
+		if (lvl[l].option_move.act == true)
+		{
+			var _option_move = lvl[l].option_move;
+			var _option_currOld = lvl[l].option_curr;
+			
+			// List type
+			if (_option_move.list.act == true)
+			{
+				lvl[l].option_curr += (fn_config_key_pressed(_option_move.list.key[1]) - fn_config_key_pressed(_option_move.list.key[0]));
+				if (lvl[l].option_curr <= -1)
+					lvl[l].option_curr = (array_length(lvl[l].option) - 1);
+				if (lvl[l].option_curr >= array_length(lvl[l].option))
+					lvl[l].option_curr = 0;
+			}
+			
+			// Starts playing sound
+			if (_option_currOld != lvl[l].option_curr)
+				fn_aud_play(lvl[l].option_move.snd, CONFIG_AUD_EMTR.MENU);
+		}
+		
+		// Confirmation
+		if (lvl[l].option_confirm.act == true && fn_config_key_pressed(lvl[l].option_confirm.key) == true)
+		{
+			_option_curr = lvl[l].option_curr;
+			_confirm_snd = lvl[l].option_confirm.snd;
+			
+			event_user(0);
+			
+			if (_confirm_snd != -1)
+				fn_aud_play(_confirm_snd, CONFIG_AUD_EMTR.MENU);
+		}
+		
+		// Cancellation
+		else if (lvl[l].option_cancel.act == true && fn_config_key_pressed(lvl[l].option_cancel.key) == true)
+		{
+			_cancel_snd = lvl[l].option_cancel.snd;
+			
+			event_user(1);
+			
+			if (_cancel_snd != -1)
+				fn_aud_play(_cancel_snd, CONFIG_AUD_EMTR.MENU);
+		}
+		
+		// Value cycling
+		else if (lvl[l].option[o].value.act == true && (fn_config_key_pressed(lvl[l].option[o].value.key[0]) == true || fn_config_key_pressed(lvl[l].option[o].value.key[1]) == true))
+		{
+			_option_curr = lvl[l].option_curr;
+			
+			event_user(2);
+			
+			fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
+			for (var a = 0; a < 2; a++)
+			{
+				if (fn_config_key_pressed(lvl[l].option[o].value.key[a]) == true)
+					lvl[l].option[o].value.arrow[a].scale = lvl[l].option[o].value.arrow[a].scaleMax;
+			}
+		}
+		
+		// Value update
+		else
+		{
+			for (var o = 0; o < array_length(lvl[l].option); o++)
+			{
+				if (lvl[l].option[o].value.act == true)
+				{
+					_option_curr = lvl[l].option_curr;
+					event_user(3);
+					break;
+				}
+			}
+		}
+	}
+}

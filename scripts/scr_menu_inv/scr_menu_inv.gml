@@ -201,7 +201,7 @@ function fn_menu_inv_evCreate_0()
 		{
 			// Options
 			var _opt_text = "----------";
-			var _opt_slct_snd = global.player.thm[global.player.thm_curr].opt_fail_snd;
+			var _opt_slct_snd = global.player.thm[global.player.thm_curr].opt_error_snd;
 			if (o < array_length(other_arr) && array_get(other_arr, o).unlocked == true)
 				_opt_text = array_get(other_arr, o).name;
 			
@@ -323,7 +323,7 @@ function fn_menu_inv_opt_slct()
 			}
 		}
 		else
-			opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].opt_fail_snd;
+			opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].opt_error_snd;
 	}
 }
 function fn_menu_inv_opt_cncl()

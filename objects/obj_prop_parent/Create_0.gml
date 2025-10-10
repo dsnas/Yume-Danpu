@@ -105,7 +105,7 @@ talk =
 talkTrig =
 {
 	act : false,
-	key : CONFIG_KEY.SLCT,
+	key : CONFIG_KEY.CONFIRM,
 	dist : 16
 }
 

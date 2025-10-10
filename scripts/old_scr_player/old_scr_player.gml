@@ -189,7 +189,7 @@ function old_fn_player_thm_add(_thm, _unlocked = false, _col_whiteLight, _col_wh
 		opt_move_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_move_"),
 		opt_slct_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_slct_"),
 		opt_cncl_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_cncl_"),
-		opt_fail_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_fail_"),
+		opt_error_snd : fn_player_thm_getAsset(_thm, "snd_player_thm_opt_error_"),
 		
 		opt_slctr_spr : fn_player_thm_getAsset(_thm, "spr_player_thm_opt_slctr_"),
 		opt_slctr_imgSpd : 0.1,

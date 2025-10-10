@@ -55,72 +55,74 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 
 // Functions related to drawing
 	// Text
-function fn_draw_text(_text, _x, _y, _col_0, _col_1, _alp = 1, _vAl = fa_top, _hAl = fa_left, _xSc = 1, _ySc = 1, _ang = 0)
+function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_top, _yAlign = fa_left, _angle = 0)
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
 	{
 		draw_set_font(_fnt);
-		draw_set_valign(_vAl);
-		draw_set_halign(_hAl);
+		draw_set_halign(_xAlign);
+		draw_set_valign(_yAlign);
 		
-		var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
-		var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
-		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xSc, _ySc, _ang, _shadow_col, _shadow_col, _shadow_col, _shadow_col, _shadow_alp);
+		var _shadow_color = global.player.thm[global.player.thm_curr].color.shadow;
+		var _shadow_alpha = (global.player.thm[global.player.thm_curr].alpha.shadow * _alpha);
+		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xScale, _yScale, _angle, _shadow_color, _shadow_color, _shadow_color, _shadow_color, _shadow_alpha);
 		
-		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xSc, _ySc, _ang, _col_0, _col_0, _col_1, _col_1, _alp);
+		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xScale, _yScale, _angle, _color_0, _color_0, _color_1, _color_1, _alpha);
 	}
 }
 
 	// Rectangles
-function fn_draw_rect(_x, _y, _w, _h, _col_0, _col_1, _col_2, _col_3, _alp)
+function fn_draw_rect(_x, _y, _weight, _height, _color_0, _color_1, _color_2, _color_3, _alpha)
 {
-	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _w, _h, 0, _col_0, _col_1, _col_2, _col_3, _alp);
+	draw_sprite_general(spr_px, 0, 0, 0, 1, 1, _x, _y, _weight, _height, 0, _color_0, _color_1, _color_2, _color_3, _alpha);
 }
 
 	// Circles
-function fn_draw_circle(_x, _y, _rad, _prec)
+function fn_draw_circle(_x, _y, _radius, _precision)
 {
-	draw_set_circle_precision(_prec);
-	draw_circle(_x, _y, _rad, false);
+	draw_set_circle_precision(_precision);
+	draw_circle(_x, _y, _radius, false);
 }
 
 	// Sprites
-function fn_draw_spr(_spr, _img, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0, _shadow_act = false)
+function fn_draw_spr(_spr, _img, _x, _y, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1, _angle = 0, _shadow_act = false)
 {
 	if (_spr != -1)
 	{
 		if (_shadow_act == true)
 		{
-			var _shadow_col = global.player.thm[global.player.thm_curr].col.shadow;
-			var _shadow_alp = (global.player.thm[global.player.thm_curr].alp.shadow * _alp);
-			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xSc, _ySc, _ang, _shadow_col, _shadow_alp);
+			var _shadow_color = global.player.thm[global.player.thm_curr].color.shadow;
+			var _shadow_alpha = (global.player.thm[global.player.thm_curr].alpha.shadow * _alpha);
+			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xScale, _yScale, _angle, _shadow_color, _shadow_alpha);
 		}
-		draw_sprite_ext(_spr, _img, _x, _y, _xSc, _ySc, _ang, _col, _alp);
+		draw_sprite_ext(_spr, _img, _x, _y, _xScale, _yScale, _angle, _color, _alpha);
 	}
 	else
 		fn_log("The function fn_draw_spr() was called with an invalid sprite ID");
 }
-function fn_draw_spr_stretch(_spr, _img, _x, _y, _w, _h, _col = c_white, _alp = 1)
+function fn_draw_spr_stretch(_spr, _img, _x, _y, _width, _height, _color = c_white, _alpha = 1)
 {
 	if (_spr != -1)
-		draw_sprite_stretched_ext(_spr, _img, _x, _y, _w, _h, _col, _alp);
+	{
+		draw_sprite_stretched_ext(_spr, _img, _x, _y, _width, _height, _color, _alpha);
+	}
 	else
 		fn_log("The function fn_draw_spr_stretch() was called with an invalid sprite ID");
 }
-function fn_draw_spr_part(_spr, _img, _lt, _top, _w, _h, _x, _y, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1)
+function fn_draw_spr_part(_spr, _img, _x, _y, _lt, _top, _width, _height, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1)
 {
 	if (_spr != -1)
-		draw_sprite_part_ext(_spr, _img, _lt, _top, _w, _h, _x, _y, _xSc, _ySc, _col, _alp);
+		draw_sprite_part_ext(_spr, _img, _lt, _top, _width, _height, _x, _y, _xScale, _yScale, _color, _alpha);
 	else
 		fn_log("The function fn_draw_spr_part() was called with an invalid sprite ID");
 }
 
 	// Lines
-function fn_draw_line(_x1, _y1, _x2, _y2, _col = c_white, _alp = 1, _thickness = 1)
+function fn_draw_line(_x1, _y1, _x2, _y2, _color = c_white, _alpha = 1, _thickness = 1)
 {
-	draw_set_color(_col);
-	draw_set_alpha(_alp);
+	draw_set_color(_color);
+	draw_set_alpha(_alpha);
 	draw_line_width(_x1, _y1, _x2, _y2, _thickness);
 }
 
@@ -144,11 +146,11 @@ function fn_aud_stop(_id) // Stops the audio with the specified ID (or asset)
 }
 
 	// Volume
-function fn_aud_vol(_asset, _id, _style, _vol = 1)
+function fn_aud_vol(_asset, _id, _emtr, _vol = 1)
 {
 	_vol = fn_aud_volData(_asset, _vol);
-	_vol *= global.config_aud_style[_style].vol;
-	_vol *= global.config_aud_style[CONFIG_AUD_STYLE.MASTER].vol;
+	_vol *= global.config.aud.emtr[_emtr].vol;
+	_vol *= global.config.aud.emtr[CONFIG_AUD_EMTR.MASTER].vol;
 	audio_sound_gain(_id, _vol, 0);
 }
 function fn_aud_volData(_asset, _vol)
@@ -164,35 +166,35 @@ function fn_aud_volData(_asset, _vol)
 		
 			// Themes
 				// Default theme
-		case snd_player_thm_opt_move_0: // The sound that should be used as reference for all others
+		case snd_player_thm_move_dflt: // The sound that should be used as reference for all others
 			_vol = 1;
 			break;
-		case snd_player_thm_opt_slct_0:
+		case snd_player_thm_confirm_dflt:
 			_vol *= 1.35;
 			break;
-		case snd_player_thm_opt_cncl_0:
+		case snd_player_thm_cancel_dflt:
 			_vol *= 0.9;
 			break;
-		case snd_player_thm_unlock_0_0:
-		case snd_player_thm_unlock_1_0:
-		case snd_player_thm_unlock_2_0:
+		case snd_player_thm_unlock_0_dflt:
+		case snd_player_thm_unlock_1_dflt:
+		case snd_player_thm_unlock_2_dflt:
 			_vol *= 0.45;
 			break;
-		case snd_player_thm_equip_0_0:
-		case snd_player_thm_equip_1_0:
+		case snd_player_thm_equip_0_dflt:
+		case snd_player_thm_equip_1_dflt:
 			_vol *= 0.65;
 			break;
 				// Madotsuki theme
-		case snd_player_thm_opt_move_2:
+		case snd_player_thm_move_madot:
 			_vol *= 0.4;
 			break;
-		case snd_player_thm_opt_slct_2:
+		case snd_player_thm_slct_madot:
 			_vol *= 0.2;
 			break;
-		case snd_player_thm_opt_cncl_2:
+		case snd_player_thm_cncl_madot:
 			_vol *= 0.2;
 			break;
-		case snd_player_thm_opt_fail_2:
+		case snd_player_thm_error_madot:
 			_vol *= 0.4;
 			break;
 		
@@ -284,7 +286,7 @@ function fn_aud_ofsData(_asset, _ofs)
 		// Player
 			// Themes
 				// Default theme
-		case snd_player_thm_start_0:
+		case snd_player_thm_start_dflt:
 			_ofs += 0.15;
 			break;
 		

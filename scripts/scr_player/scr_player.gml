@@ -136,7 +136,7 @@ function fn_player_itm_equip(_idx)
 
 
 	// Themes
-function fn_player_thm_add(_idx, _code, _unlocked = false, _col_whiteLight, _col_whiteDark, _col_grayLight, _col_grayDark, _col_shadow, _col_blur, _alp_shadow = 1, _alp_blurLight = 0.5, _alp_blurHeavy = 0.75)
+function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _color_whiteDark, _color_grayLight, _color_grayDark, _color_shadow, _color_blur, _alpha_shadow = 1, _alpha_blurLight = 0.5, _alpha_blurHeavy = 0.75)
 {
 	global.player.thm[_idx] =
 	{
@@ -145,47 +145,45 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _col_whiteLight, _col
 		code : _code,
 		unlocked : _unlocked,
 		
-		
-		col : // Colors
-		{
-			whiteLight : _col_whiteLight,
-			whiteDark : _col_whiteDark,
-			grayLight : _col_grayLight,
-			grayDark : _col_grayDark,
-			
-			shadow : _col_shadow, // Color for the shadow of elements (options, information, etc.)
-			blur : _col_blur // Color for dimmed background
-		},
-		
-		
-		alp : // Alpha
-		{
-			shadow: _alp_shadow, // Shadow alpha for elements (options, information, etc.)
-			blurLight : _alp_blurLight, // Alpha for lightly dimmed background
-			blurHeavy : _alp_blurHeavy // Alpha for heavily dimmed background
-		},
-		
-		
 		icon_spr : spr_menu_inv_optIco,
 		icon_img : 2,
 		
-		box_spr : fn_player_thm_asset("spr_player_thm_box_", _code),
+		color : // Colors
+		{
+			whiteLight : _color_whiteLight,
+			whiteDark : _color_whiteDark,
+			grayLight : _color_grayLight,
+			grayDark : _color_grayDark,
+			
+			shadow : _color_shadow, // Color for the shadow of elements (options, information, etc.)
+			blur : _color_blur // Color for dimmed background
+		},
 		
-		opt_move_snd : fn_player_thm_asset("snd_player_thm_opt_move_", _code),
-		opt_slct_snd : fn_player_thm_asset("snd_player_thm_opt_slct_", _code),
-		opt_cncl_snd : fn_player_thm_asset("snd_player_thm_opt_cncl_", _code),
-		opt_fail_snd : fn_player_thm_asset("snd_player_thm_opt_fail_", _code),
+		alpha : // Alpha
+		{
+			shadow: _alpha_shadow, // Shadow alpha for elements (options, information, etc.)
+			blurLight : _alpha_blurLight, // Alpha for lightly dimmed background
+			blurHeavy : _alpha_blurHeavy // Alpha for heavily dimmed background
+		},
 		
-		opt_slctr_spr : fn_player_thm_asset("spr_player_thm_opt_slctr_", _code),
-		opt_slctr_imgSpd : 0.1,
-		opt_slctr_xDist : 6,
-		opt_slctr_yDist : 4,
+		spr : // Sprites
+		{
+			panel : fn_player_thm_asset("spr_player_thm_panel_", _code),
+			option_select : fn_player_thm_asset("spr_player_thm_option_select_", _code),
+			option_button : fn_player_thm_asset("spr_player_thm_option_select_", _code),
+			picFrame : fn_player_thm_asset("spr_player_thm_picFrame_", _code),
+		},
 		
-		inv_picFrm_spr : fn_player_thm_asset("spr_player_thm_inv_picFrm_", _code),
-		
-		start_snd : fn_player_thm_asset("snd_player_thm_start_", _code),
-		unlock_snd : [fn_player_thm_asset($"snd_player_thm_unlock_0_", _code), fn_player_thm_asset($"snd_player_thm_unlock_1_", _code), fn_player_thm_asset("snd_player_thm_unlock_2_", _code)],
-		equip_snd : [fn_player_thm_asset("snd_player_thm_equip_0_", _code), fn_player_thm_asset("snd_player_thm_equip_1_", _code)]
+		snd : // Sounds
+		{
+			start : fn_player_thm_asset("snd_player_thm_start_", _code),
+			move : fn_player_thm_asset("snd_player_thm_move_", _code),
+			confirm : fn_player_thm_asset("snd_player_thm_confirm_", _code),
+			cancel : fn_player_thm_asset("snd_player_thm_cancel_", _code),
+			error : fn_player_thm_asset("snd_player_thm_error_", _code),
+			unlock : [fn_player_thm_asset($"snd_player_thm_unlock_0_", _code), fn_player_thm_asset($"snd_player_thm_unlock_1_", _code), fn_player_thm_asset("snd_player_thm_unlock_2_", _code)],
+			equip : [fn_player_thm_asset("snd_player_thm_equip_0_", _code), fn_player_thm_asset("snd_player_thm_equip_1_", _code)],
+		}
 	}
 	global.player.thm_amt += 1;
 }

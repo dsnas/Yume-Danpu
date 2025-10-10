@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_player_thm_unlock_1_dflt",
+  "%Name":"snd_player_thm_move_dflt",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":1.3583673,
-  "name":"snd_player_thm_unlock_1_dflt",
+  "duration":1.7502041,
+  "name":"snd_player_thm_move_dflt",
   "parent":{
     "name":"Default (0)",
     "path":"folders/player/thm/Default (0).yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_player_thm_unlock_1_dflt.mp3",
+  "soundFile":"snd_player_thm_move_dflt.mp3",
   "type":0,
   "volume":1.0,
 }

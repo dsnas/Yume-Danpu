@@ -4,8 +4,8 @@ config_key_lt,Left,Esquerda
 config_key_rt,Right,Direita
 config_key_up,Up,Cima
 config_key_dn,Down,Baixo
-config_key_slct,Confirm,Confirmar
-config_key_cncl,Cancel,Cancelar
+config_key_confirm,Confirm,Confirmar
+config_key_cancel,Cancel,Cancelar
 config_key_inv,Inventory,Inventário
 config_key_use,Effect/Item,Efeito/Item
 config_key_atwlk,Autowalk,Autowalk

@@ -104,8 +104,8 @@ function fn_config_setup()
 		RT,		// Right
 		UP,		// Up
 		DN,		// Down
-		SLCT,	// Confirm
-		CNCL,	// Cancel
+		CONFIRM,	// Confirm
+		CANCEL,	// Cancel
 		INV,	// Inventory
 		USE,	// Effect/Item
 		ATWLK,	// Autowalk
@@ -116,8 +116,8 @@ function fn_config_setup()
 	fn_config_key_add(CONFIG_KEY.RT,	"rt",		vk_right, ord("D"));
 	fn_config_key_add(CONFIG_KEY.UP,	"up",		vk_up, ord("W"));
 	fn_config_key_add(CONFIG_KEY.DN,	"dn",		vk_down, ord("S"));
-	fn_config_key_add(CONFIG_KEY.SLCT,	"slct",		ord("Z"), vk_enter);
-	fn_config_key_add(CONFIG_KEY.CNCL,	"cncl",		ord("X"), vk_shift);
+	fn_config_key_add(CONFIG_KEY.CONFIRM,	"confirm",	ord("Z"), vk_enter);
+	fn_config_key_add(CONFIG_KEY.CANCEL,	"cancel",	ord("X"), vk_shift);
 	fn_config_key_add(CONFIG_KEY.INV,	"inv",		ord("C"), vk_control);
 	fn_config_key_add(CONFIG_KEY.USE,	"use",		ord("F"));
 	fn_config_key_add(CONFIG_KEY.ATWLK,	"atwlk",	ord("R"));
