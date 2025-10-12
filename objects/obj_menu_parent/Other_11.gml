@@ -3,6 +3,8 @@
 
 if (lvl_curr = LVL_OTHER)
 {
-	lvl_curr = LVL_MAIN;
+	fn_menu_lvl_fader_start(LVL_MAIN);
 }
+else
+	_cancel_snd = -1;
 

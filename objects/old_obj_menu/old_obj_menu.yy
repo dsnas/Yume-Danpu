@@ -11,8 +11,8 @@
   "name":"old_obj_menu",
   "overriddenProperties":[],
   "parent":{
-    "name":"old menu",
-    "path":"folders/old menu.yy",
+    "name":"[!] old",
+    "path":"folders/[!] old.yy",
   },
   "parentObjectId":null,
   "persistent":false,

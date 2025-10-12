@@ -5,11 +5,8 @@ if (is_array(lvl) == true)
 	
 	
 	// Options
-	if (is_array(lvl[l].option) == true)
+	if (is_array(lvl[l].option) == true && lvl_fader.stg == -1)
 	{
-		var o = lvl[l].option_curr;
-		
-		
 		// Movement
 		if (lvl[l].option_move.act == true)
 		{
@@ -30,6 +27,9 @@ if (is_array(lvl) == true)
 			if (_option_currOld != lvl[l].option_curr)
 				fn_aud_play(lvl[l].option_move.snd, CONFIG_AUD_EMTR.MENU);
 		}
+		
+		var o = lvl[l].option_curr;
+		
 		
 		// Confirmation
 		if (lvl[l].option_confirm.act == true && fn_config_key_pressed(lvl[l].option_confirm.key) == true)
@@ -62,25 +62,51 @@ if (is_array(lvl) == true)
 			event_user(2);
 			
 			fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
-			for (var a = 0; a < 2; a++)
+			for (var a = 0; a < (2 * !global.config.access.rdcdMot); a++)
 			{
 				if (fn_config_key_pressed(lvl[l].option[o].value.key[a]) == true)
 					lvl[l].option[o].value.arrow[a].scale = lvl[l].option[o].value.arrow[a].scaleMax;
 			}
 		}
 		
+		
 		// Value update
-		else
+		for (var o = 0; o < array_length(lvl[l].option); o++)
 		{
-			for (var o = 0; o < array_length(lvl[l].option); o++)
+			if (lvl[l].option[o].value.act == true)
 			{
-				if (lvl[l].option[o].value.act == true)
-				{
-					_option_curr = lvl[l].option_curr;
-					event_user(3);
-					break;
-				}
+				_option_curr = lvl[l].option_curr;
+				event_user(3);
+				break;
 			}
 		}
+	}
+	
+	
+	// Fade transition
+	if (lvl_fader.stg > -1)
+	{
+		if (lvl_fader.stg == 0)
+		{
+			lvl[l].alpha = fn_lerp(lvl[l].alpha, 0, lvl_fader.alpSpd);
+			if (lvl[l].alpha <= lvl_fader.alpJump)
+			{
+				lvl[l].alpha = 0;
+				lvl_curr = lvl_fader.tgt.lvl;
+				lvl_fader.stg = 1;
+			}
+		}
+		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur <= 0)
+		{
+			lvl[l].alpha = fn_lerp(lvl[l].alpha, 1, lvl_fader.alpSpd);
+			if (lvl[l].alpha >= (1 - lvl_fader.alpJump))
+			{
+				lvl[l].alpha = 1;
+				lvl_fader.stg = -1;
+				lvl_fader.wait_dur = 0;
+			}
+		}
+		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur > 0)
+			lvl_fader.wait_dur -= 1;
 	}
 }

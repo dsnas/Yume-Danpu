@@ -46,7 +46,7 @@ if (is_array(lvl) == true)
 			if (_opt.value.act == true)
 			{
 				var _val = _opt.value;
-				fn_draw_text(_val.text, _val.x, _val.y, _val.color[0], _val.color[1], _val.alpha[(o == lvl[l].option_curr)], , , _val.xAlign, _val.yAlign);
+				fn_draw_text(_val.text, _val.x, _val.y, _val.color[0], _val.color[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), , , _val.xAlign, _val.yAlign);
 				
 				// Value label's arrows
 				if (_val.arrow != -1 && o == lvl[l].option_curr)
@@ -78,7 +78,7 @@ if (is_array(lvl) == true)
 							
 							lvl[l].option[o].value.arrow[a].scale = lerp(_arrow.scale, _arrow.scaleMin, _arrow.scaleSpd);
 							
-							fn_draw_text(_arrow.text, (_arrow.x + (_arrow.move.xCurr * _arrow.move.xSign * _arrow.move.act) + (fn_text_w(_arrow.text) / 2)), (_val.y + (fn_text_h(_arrow.text) / 2)), _arrow.color[0], _arrow.color[1], 1, _arrow.scale, _arrow.scale, _arrow.xAlign, _arrow.yAlign);
+							fn_draw_text(_arrow.text, (_arrow.x + (_arrow.move.xCurr * _arrow.move.xSign * _arrow.move.act) + (fn_text_w(_arrow.text) / 2)), (_val.y + (fn_text_h(_arrow.text) / 2)), _arrow.color[0], _arrow.color[1], lvl[l].alpha, _arrow.scale, _arrow.scale, _arrow.xAlign, _arrow.yAlign);
 						}
 					}
 				}

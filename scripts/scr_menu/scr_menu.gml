@@ -7,7 +7,7 @@ function fn_menu_lvl_add(_idx)
 {
 	lvl[_idx] =
 	{
-		alpha : 1,
+		alpha : 0,
 		
 		
 		// Panels
@@ -57,6 +57,26 @@ function fn_menu_lvl_add(_idx)
 			key : CONFIG_KEY.CANCEL,
 			snd : global.player.thm[global.player.thm_curr].snd.cancel
 		}
+	}
+}
+
+	// Fade transition
+function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = -1, _tgt_destroy = false)
+{
+	lvl_fader =
+	{
+		stg : 0, // ID number of the current stage of the fade transition
+		alpSpd : 0.3, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
+		alpJump : 0.05, // Alpha jump (if the difference between the current alpha and the target alpha reaches this value, the current alpha will jump to the target alpha)
+		
+		tgt :
+		{
+			lvl : _tgt_lvl,
+			snd : _tgt_snd,
+			destroy : _tgt_destroy
+		},
+		
+		wait_dur : 0,
 	}
 }
 
@@ -203,7 +223,7 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 				
 				move :
 				{
-					act : true,
+					act : !global.config.access.rdcdMot,
 					xCurr : 0,
 					xMax : 2,
 					xSpd : 1,
@@ -220,6 +240,8 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 			
 		lvl[l].option[o].value.arrow[1].text = ">";
 		lvl[l].option[o].value.arrow[1].move.xSign = 1;
+		
+		event_user(3);
 	}
 	
 		// Button

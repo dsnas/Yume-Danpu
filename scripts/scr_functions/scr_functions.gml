@@ -387,13 +387,7 @@ function fn_text_h(_text) // Returns the height of the specified text
 // Functions related to math
 function fn_lerp(_valCur, _valTgt, _spd)
 {
-	var _val = lerp(_valCur, _valTgt, _spd);
-	
-	// Checks if the configing Reduced Motion is on to skip lerp()'s animation
-	if (global.config_rdcdMot == true)
-		_val = _valTgt;
-	
-	return _val;
+	return lerp(_valCur, _valTgt, _spd);
 }
 function fn_lerp_col(_colCur, _colTgt, _spd)
 {
