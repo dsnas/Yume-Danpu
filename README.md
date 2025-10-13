@@ -24,13 +24,13 @@ If you wanna see what we're doing next, check out [our devlog on YouTube](https:
 ## Never asked questions
 
 ### Why is it open-source?
-> A shark plushie told me to. Not sure why, though.
+> A shark plushie asked me to. Not sure why, though.
 
 ### Why use GameMaker?
 > GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.
 
-### Does that mean the style will be completely different from Yume Nikki?
-> Not really. The foundation will be the same but we'll *try* to innovate the rest, even if it takes a while.
+### Does that mean the style is completely different from Yume Nikki?
+> Not really, the difference is mostly improvements and additions.
 
 &nbsp;
 
