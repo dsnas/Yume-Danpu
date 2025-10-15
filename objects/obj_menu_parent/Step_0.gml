@@ -103,6 +103,9 @@ if (is_array(lvl) == true)
 			{
 				lvl[l].alpha = 1;
 				lvl_fader.stg = -1;
+				if (lvl_fader.tgt.snd != -1)
+					fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
+				lvl_fader.tgt.snd = -1;
 				lvl_fader.wait_dur = 0;
 			}
 		}

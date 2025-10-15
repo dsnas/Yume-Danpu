@@ -18,6 +18,14 @@ function fn_menu_lvl_add(_idx)
 		card : -1,
 		
 		
+		// Labels
+		label : -1,
+		
+		
+		// Decorations
+		decor : -1,
+		
+		
 		// Options
 		option : -1,
 		option_curr : 0,
@@ -61,7 +69,7 @@ function fn_menu_lvl_add(_idx)
 }
 
 	// Fade transition
-function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = -1, _tgt_destroy = false)
+function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = -1, _tgt_destroy = false, _wait_dur = 0)
 {
 	lvl_fader =
 	{
@@ -76,12 +84,12 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = -1, _tgt_destroy = false)
 			destroy : _tgt_destroy
 		},
 		
-		wait_dur : 0,
+		wait_dur : _wait_dur,
 	}
 }
 
 	// Panels
-function fn_menu_lvl_panel_add(_lvl, _idx, _spr = global.player.thm[global.player.thm_curr].spr.panel, _img, _x, _y, _width, _height)
+function fn_menu_lvl_panel_add(_lvl, _idx, _spr = global.player.thm[global.player.thm_curr].spr.panel, _img = 0, _x, _y, _width, _height)
 {
 	var l = _lvl;
 	var p = _idx;
@@ -116,12 +124,49 @@ function fn_menu_lvl_card_add(_lvl, _idx, _spr = global.player.thm[global.player
 	}
 }
 
+	// Labels
+function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight])
+{
+	var l = _lvl;
+	var a = _idx;
+	
+	lvl[l].label[a] =
+	{
+		text : _text,
+		x : _x,
+		y : _y,
+		
+		color : _color
+	}
+}
+
+	// Decorations
+function fn_menu_lvl_decor_add(_lvl, _idx, _spr, _img = 0, _x = 0, _y = 0, _color = c_white, _alpha = 1)
+{
+	var l = _lvl;
+	var d = _idx;
+	
+	lvl[l].decor[d] =
+	{
+		spr : _spr,
+		img : _img,
+		
+		x : _x,
+		y : _y,
+		
+		color : _color,
+		alpha : _alpha
+	}
+}
+
 	// Options
-function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _value_act = false, _value_xDist = 32, _button_act = false, _button_xDist = 6, _button_yDist = 3)
+function fn_menu_lvl_option_add(_lvl, _idx, _text, _x = 0, _y = 0, _select_act = true, _value_act = false, _value_xDist = 48, _icon_spr = -1, _button_act = false, _button_xDist = 6, _button_yDist = 3)
 {	
 	var l = _lvl;
 	var o = _idx;
 	
+	
+	// Option
 	lvl[l].option[o] =
 	{
 		text : _text,
@@ -134,11 +179,14 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 			[global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight] // Active (Selected)
 		],
 		
+		
 		// Selection indicator
 		select :
 		{
-			act : _cursor_act,
+			act : _select_act,
+			
 			spr : global.player.thm[global.player.thm_curr].spr.option_select,
+			img : 1,
 			
 			x : 0,
 			y : 0,
@@ -148,69 +196,71 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 			height : 0,
 		},
 		
+		
 		// Value label (the text beside the options in the settings menu, like "Yes", "No" and "100%")
 		value :
 		{
 			act : _value_act,
 			key : [CONFIG_KEY.LT, CONFIG_KEY.RT],
-			text : "",
 			
-			x : undefined,
-			y : undefined,
+			text : "Salenis",
+			
+			x : 0,
+			y : 0,
 			xDist : _value_xDist,
-			yDist : 0,
 			
 			color : [global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.grayDark],
 			alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */],
 			
-			xAlign : fa_center,
-			yAlign : fa_top,
 			
 			// Arrows
 			arrow : -1
 		},
 		
+		
+		// Icon
+		icon :
+		{
+			spr : _icon_spr,
+			img : 0,
+			
+			x : 0,
+			y : 0,
+			xDist : 5,
+			
+			color : c_white,
+			alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
+		},
+		
+		
 		// Button
 		button :
 		{
 			act : _button_act,
+			
 			spr : global.player.thm[global.player.thm_curr].spr.option_button,
 			img_inact : 0, // image_index while inactive (unselected)
 			img_act : 1, // image_index while active (selected)
 			
-			x : undefined,
-			y : undefined,
+			x : 0,
+			y : 0,
 			width : 0,
 			height : 0,
 		}
 	}
+	var _opt = lvl[l].option[o];
 	
-		// Selection indicator
-	if (lvl[l].option[o].select.act == true)
-	{
-		var _xDist = lvl[l].option[o].select.xDist;
-		var _yDist = lvl[l].option[o].select.yDist;
-		lvl[l].option[o].select.x = (lvl[l].option[o].x - _xDist);
-		lvl[l].option[o].select.y = (lvl[l].option[o].y - _yDist);
-		lvl[l].option[o].select.width = ((_xDist * 2) + fn_text_w(lvl[l].option[o].text) + 1);
-		lvl[l].option[o].select.height = ((_yDist * 2) + fn_text_h(lvl[l].option[o].text) + 2);
-	}
 	
 		// Value label (the text beside the options in the settings menu, like "Yes", "No" and "100%")
-	if (lvl[l].option[o].value.act == true)
+	if (_opt.value.act == true)
 	{
-		lvl[l].option[o].value.x = (lvl[l].option[o].x + fn_text_w(lvl[l].option[o].text) + lvl[l].option[o].value.xDist);
-		lvl[l].option[o].value.y = (lvl[l].option[o].y + lvl[l].option[o].value.yDist);
-		
 		// Arrows
 		for (var a = 0; a < 2; a++)
 		{
 			lvl[l].option[o].value.arrow[a] =
 			{
-				act : true,
-				text : undefined,
+				text : ((a == 0) ? "<" : ">"),
 				
-				x : undefined,
 				xDist : 6,
 				color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight],
 				
@@ -218,8 +268,6 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 				scaleMin : 1,
 				scaleMax : 1.5,
 				scaleSpd : 0.15,
-				xAlign : fa_center,
-				yAlign : fa_middle,
 				
 				move :
 				{
@@ -227,7 +275,7 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 					xCurr : 0,
 					xMax : 2,
 					xSpd : 1,
-					xSign : undefined,
+					xSign : ((a == 0) ? -1 : 1),
 					
 					wait : 0,
 					waitMax : 8
@@ -235,21 +283,6 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x, _y, _cursor_act = true, _
 			}
 		}
 		
-		lvl[l].option[o].value.arrow[0].text = "<";
-		lvl[l].option[o].value.arrow[0].move.xSign = -1;
-			
-		lvl[l].option[o].value.arrow[1].text = ">";
-		lvl[l].option[o].value.arrow[1].move.xSign = 1;
-		
 		event_user(3);
-	}
-	
-		// Button
-	if (lvl[l].option[o].button.act == true)
-	{
-		lvl[l].option[o].button.x = (lvl[l].option[o].x - lvl[l].option[o].button.xDist);
-		lvl[l].option[o].button.y = (lvl[l].option[o].y - lvl[l].option[o].button.yDist);
-		lvl[l].option[o].button.width = ((lvl[l].option[o].button.xDist * 2) + fn_text_w(lvl[l].option[o].text) + 1);
-		lvl[l].option[o].button.height = ((lvl[l].option[o].button.yDist * 2) + fn_text_h(lvl[l].option[o].text) + 2);
 	}
 }

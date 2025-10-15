@@ -38,3 +38,7 @@ player_thm_name_madot,Madotsuki,Madotsuki
 player_thm_desc_dflt,The default theme.,O tema padrão.
 player_thm_desc_simple,"A simple, yet elegant, theme.","Um tema simples, mas elegante."
 player_thm_desc_madot,A familiar theme.,Um tema familiar.
+menu_home_lang_label,Language,Idioma
+menu_home_main_option_0,Start,Jogar
+menu_home_main_option_1,Options,Opções
+menu_home_main_option_2,Exit,Sair

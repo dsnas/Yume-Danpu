@@ -55,7 +55,7 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 
 // Functions related to drawing
 	// Text
-function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_top, _yAlign = fa_left, _angle = 0)
+function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_left, _yAlign = fa_top, _angle = 0)
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
@@ -188,10 +188,10 @@ function fn_aud_volData(_asset, _vol)
 		case snd_player_thm_move_madot:
 			_vol *= 0.4;
 			break;
-		case snd_player_thm_slct_madot:
+		case snd_player_thm_confirm_madot:
 			_vol *= 0.2;
 			break;
-		case snd_player_thm_cncl_madot:
+		case snd_player_thm_cancel_madot:
 			_vol *= 0.2;
 			break;
 		case snd_player_thm_error_madot:

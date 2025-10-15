@@ -232,6 +232,13 @@ function fn_config_lang_add(_idx, _code)
 		fnt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, -1)
 	}
 }
+function fn_config_lang_mod(_new)
+{
+	global.config.lang_curr = _new;
+	fn_config_file_save();
+	fn_config_setup();
+	fn_player_setup(global.player.file_curr);
+}
 function textdata(_key)
 {
 	var _text = global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), _key)];

@@ -18,8 +18,28 @@ if (is_array(lvl) == true)
 	{
 		for (var c = 0; c < array_length(lvl[l].card); c++)
 		{
-			var _card = lvl[l].card;
+			var _card = lvl[l].card[c];
 			fn_draw_spr_stretch(_card.spr, _card.img, _card.x, _card.y, _card.width, _card.height, , lvl[l].alpha);
+		}
+	}
+	
+	// Labels
+	if (is_array(lvl[l].label) == true)
+	{
+		for (var a = 0; a < array_length(lvl[l].label); a++)
+		{
+			var _label = lvl[l].label[a];
+			fn_draw_text(_label.text, _label.x, _label.y, _label.color[0], _label.color[1], lvl[l].alpha);
+		}
+	}
+	
+	// Decorations
+	if (is_array(lvl[l].decor) == true)
+	{
+		for (var d = 0; d < array_length(lvl[l].decor); d++)
+		{
+			var _decor = lvl[l].decor[d];
+			fn_draw_spr(_decor.spr, _decor.img, _decor.x, _decor.y, _decor.color, (_decor.alpha * lvl[l].alpha));
 		}
 	}
 	
@@ -29,57 +49,78 @@ if (is_array(lvl) == true)
 		for (var o = 0; o < array_length(lvl[l].option); o++)
 		{
 			var _opt = lvl[l].option[o];
-			var _opt_color = lvl[l].option[o].color;
+			var _opt_color = _opt.color;
+			
 			
 			// Option's button
 			if (_opt.button.act == true)
-				fn_draw_spr_stretch(_opt.button.spr, ((o != lvl[l].option_curr) ? _opt.button.img_inact : _opt.button.img_act), _opt.button.x, _opt.button.y, _opt.button.width, _opt.button.height, , lvl[l].alpha);
+			{
+				var _button_x = ((_opt.button.x != 0) ? _opt.button.x : (_opt.x - _opt.button.xDist));
+				var _button_y = ((_opt.button.y != 0) ? _opt.button.y : (_opt.y - _opt.button.yDist));
+				var _button_width = ((_opt.button.width != 0) ? _opt.button.width : ((_opt.button.xDist * 2) + fn_text_w(_opt.text) + 1));
+				var _button_height = ((_opt.button.height != 0) ? _opt.button.height : ((_opt.button.yDist * 2) + fn_text_h(_opt.text) + 2));
+				fn_draw_spr_stretch(_opt.button.spr, ((o != lvl[l].option_curr) ? _opt.button.img_inact : _opt.button.img_act), _button_x, _button_y, _button_width, _button_height, , lvl[l].alpha);
+			}
+			
 			
 			// Option's selection indicator
 			if (_opt.select.act == true && o == lvl[l].option_curr)
-				fn_draw_spr_stretch(_opt.select.spr, 0, _opt.select.x, _opt.select.y, _opt.select.width, _opt.select.height, , lvl[l].alpha);
+			{
+				var _select_x = ((_opt.select.x != 0) ? _opt.select.x : (_opt.x - _opt.select.xDist));
+				var _select_y = ((_opt.select.y != 0) ? _opt.select.y : (_opt.y - _opt.select.yDist));
+				var _select_width = ((_opt.select.width != 0) ? _opt.select.width : ((_opt.select.xDist * 2) + fn_text_w(_opt.text) + 1));
+				var _select_height = ((_opt.select.height != 0) ? _opt.select.height : ((_opt.select.yDist * 2) + fn_text_h(_opt.text) + 2));
+				fn_draw_spr_stretch(_opt.select.spr, _opt.select.img, _select_x, _select_y, _select_width, _select_height, , lvl[l].alpha);
+			}
+			
+			
+			// Option's icon
+			if (_opt.icon.spr != -1)
+			{
+				var _icon_x = ((_opt.icon.x != 0) ? _opt.icon.x : (_opt.x - (fn_spr_w(_opt.icon.spr) / 2) - _opt.icon.xDist));
+				var _icon_y = ((_opt.icon.y != 0) ? _opt.icon.y : (_opt.y + (fn_text_h(_opt.text) / 2) + 1));
+				fn_draw_spr(_opt.icon.spr, _opt.icon.img, _icon_x, _icon_y, _opt.icon.color, (_opt.icon.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha));
+			}
+			
 			
 			// Option
 			fn_draw_text(_opt.text, _opt.x, _opt.y, _opt_color[(o == lvl[l].option_curr), 0], _opt_color[(o == lvl[l].option_curr), 1], lvl[l].alpha);
+			
 			
 			// Option's value label (the text beside the options in the settings menu, like "Yes", "No" and "100%")
 			if (_opt.value.act == true)
 			{
 				var _val = _opt.value;
-				fn_draw_text(_val.text, _val.x, _val.y, _val.color[0], _val.color[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), , , _val.xAlign, _val.yAlign);
+				var _val_x = ((_val.x != 0) ? _val.x : (_opt.x + fn_text_w(_opt.text) + _opt.value.xDist));
+				var _val_y = ((_val.y != 0) ? _val.y : _opt.y);
+				fn_draw_text(_val.text, _val_x, _val_y, _val.color[0], _val.color[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), , , fa_center);
+				
 				
 				// Value label's arrows
 				if (_val.arrow != -1 && o == lvl[l].option_curr)
 				{
+					var _arrow_x;
+					_arrow_x[0] = (_val_x - (fn_text_w(_val.text) / 2) - _val.arrow[0].xDist - fn_text_w(_val.arrow[0].text));
+					_arrow_x[1] = (_val_x + (fn_text_w(_val.text) / 2) + _val.arrow[1].xDist);
+					
 					for (var a = 0; a < 2; a++)
 					{
-						if (_val.arrow[a].act == true)
+						var _arrow = _val.arrow[a];
+						if (_arrow.move.act == true)
 						{
-							var _arrow = _val.arrow[a];
-							
-							if (a == 0)
-								lvl[l].option[o].value.arrow[0].x = (_val.x - (fn_text_w(_val.text) / 2) - _arrow.xDist - fn_text_w(_arrow.text));
-							else
-								lvl[l].option[o].value.arrow[1].x = (_val.x + (fn_text_w(_val.text) / 2) + _arrow.xDist);
-							
-							if (_arrow.move.act == true)
+							if (_arrow.move.wait >= _arrow.move.waitMax)
 							{
-								if (_arrow.move.wait >= _arrow.move.waitMax)
-								{
-									if (_arrow.move.xCurr < _arrow.move.xMax)
-										_arrow.move.xCurr += _arrow.move.xSpd;
-									else
-										_arrow.move.xCurr = 0;
-									lvl[l].option[o].value.arrow[a].move.wait = 0;
-								}
+								if (_arrow.move.xCurr < _arrow.move.xMax)
+									_arrow.move.xCurr += _arrow.move.xSpd;
 								else
-									lvl[l].option[o].value.arrow[a].move.wait += 1;
+									_arrow.move.xCurr = 0;
+								lvl[l].option[o].value.arrow[a].move.wait = 0;
 							}
-							
-							lvl[l].option[o].value.arrow[a].scale = lerp(_arrow.scale, _arrow.scaleMin, _arrow.scaleSpd);
-							
-							fn_draw_text(_arrow.text, (_arrow.x + (_arrow.move.xCurr * _arrow.move.xSign * _arrow.move.act) + (fn_text_w(_arrow.text) / 2)), (_val.y + (fn_text_h(_arrow.text) / 2)), _arrow.color[0], _arrow.color[1], lvl[l].alpha, _arrow.scale, _arrow.scale, _arrow.xAlign, _arrow.yAlign);
+							else
+								lvl[l].option[o].value.arrow[a].move.wait += 1;
 						}
+						lvl[l].option[o].value.arrow[a].scale = lerp(_arrow.scale, _arrow.scaleMin, _arrow.scaleSpd);
+						fn_draw_text(_arrow.text, (_arrow_x[a] + (_arrow.move.xCurr * _arrow.move.xSign * _arrow.move.act) + (fn_text_w(_arrow.text) / 2)), (_val_y + (fn_text_h(_arrow.text) / 2)), _arrow.color[0], _arrow.color[1], lvl[l].alpha, _arrow.scale, _arrow.scale, fa_center, fa_middle);
 					}
 				}
 			}
