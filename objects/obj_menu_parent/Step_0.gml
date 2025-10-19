@@ -54,7 +54,7 @@ if (is_array(lvl) == true)
 		}
 		
 		// Value cycling
-		else if (lvl[l].option[o].value.act == true && (fn_config_key_pressed(lvl[l].option[o].value.key[0]) == true || fn_config_key_pressed(lvl[l].option[o].value.key[1]) == true))
+		else if (lvl[l].option[o].value != -1 && (fn_config_key_pressed(lvl[l].option[o].value.key[0]) == true || fn_config_key_pressed(lvl[l].option[o].value.key[1]) == true))
 		{
 			event_user(2);
 			fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
@@ -69,7 +69,7 @@ if (is_array(lvl) == true)
 		// Value update
 		for (var o = 0; o < array_length(lvl[l].option); o++)
 		{
-			if (lvl[l].option[o].value.act == true)
+			if (lvl[l].option[o].value != -1)
 			{
 				_option_curr = lvl[l].option_curr;
 				event_user(3);

@@ -24,6 +24,7 @@ config_aud_emtr_menu,Menu,Menu
 config_aud_emtr_player,Player,Jogador
 config_aud_emtr_prop,Props,Objetos
 config_aud_emtr_actor,Entities,Entidades
+config_access_rdcdMot_name,Reduced Motion,Reduzir Movimento
 player_eff_name_sal0,Salenis 0,Salenis 0
 player_eff_name_sal1,Salenis 1,Salenis 1
 player_eff_name_sal2,Salenis 2,Salenis 2
@@ -38,7 +39,12 @@ player_thm_name_madot,Madotsuki,Madotsuki
 player_thm_desc_dflt,The default theme.,O tema padrão.
 player_thm_desc_simple,"A simple, yet elegant, theme.","Um tema simples, mas elegante."
 player_thm_desc_madot,A familiar theme.,Um tema familiar.
-menu_home_lang_label,Language,Idioma
 menu_home_main_option_0,Start,Jogar
 menu_home_main_option_1,Options,Opções
 menu_home_main_option_2,Exit,Sair
+menu_config_main_option_0,Language,Idioma
+menu_config_main_option_1,Graphics,Gráficos
+menu_config_main_option_2,Music & Sounds,Músicas & Sons
+menu_config_main_option_3,Accessibility,Acessibilidade
+menu_config_all_option_value_0,ON,Sim
+menu_config_all_option_value_1,OFF,Não

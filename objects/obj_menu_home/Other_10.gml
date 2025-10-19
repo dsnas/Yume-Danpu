@@ -8,3 +8,11 @@ if (lvl_curr == LVL_LANG)
 	fn_config_file_save();
 	fn_menu_lvl_fader_start(LVL_MAIN, , , 120);
 }
+else if (lvl_curr == LVL_MAIN)
+{
+	if (_opt_curr == 1)
+	{
+		fn_menu_lvl_fader_start(LVL_EMPTY);
+		fn_obj_create(obj_menu_config);
+	}
+}

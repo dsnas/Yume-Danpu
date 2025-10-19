@@ -236,7 +236,12 @@ function textdata(_key)
 {
 	var _text = global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), _key)];
 	if (_text != undefined)
+	{
+		var _text_dbg = "";
+		for (var i = 0; i < string_length(_text); i++)
+			_text_dbg = $"{_text_dbg}Â"
 		return _text;
+	}
 	else
 	{
 		fn_log($"The function lang_data() was called and unable to retrieve the desired text. The provided key was \"{_key}\".");

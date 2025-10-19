@@ -20,7 +20,7 @@ lvl[l].option_move.list.key = [CONFIG_KEY.LT, CONFIG_KEY.RT];
 var _panel_xMargin = 16;
 var _panel_yMargin = 16;
 
-var _label_text = "menu_home_lang_label";
+var _label_text = "menu_config_main_option_0";
 var _label_width = fn_textdata_width(_label_text);
 var _label_height = fn_textdata_height(_label_text);
 var _label_yOfs = _panel_yMargin; // Vertical offset from {panel_y}
@@ -37,20 +37,19 @@ var _panel_width = max( (_panel_xMargin + _flag_widthAll + _panel_xMargin), (_pa
 var _panel_height = (_flag_yOfs + _flag_height + _panel_yMargin);
 var _panel_x = (160 - round(_panel_width / 2));
 var _panel_y = (120 - round(_panel_height / 2));
-fn_menu_lvl_panel_add(LVL_LANG, 0, , , _panel_x, _panel_y, _panel_width, _panel_height);
+fn_menu_lvl_panel_add(LVL_LANG, 0, , _panel_x, _panel_y, _panel_width, _panel_height);
 
 fn_menu_lvl_label_add(LVL_LANG, 0, _label_text, (_panel_x + round(_panel_width / 2)), (_panel_y + _label_yOfs), , _label_xAlign);
 
-for (var f = 0; f < _opt_len; f++)
+for (var o = 0; o < _opt_len; o++)
 {
-	var _flag_x = (_panel_x + round(_panel_width / 2) - round(_flag_widthAll / 2) + (_flag_xDist * f));
+	var _flag_x = (_panel_x + round(_panel_width / 2) - round(_flag_widthAll / 2) + (_flag_xDist * o));
 	var _flag_y = (_panel_y + _flag_yOfs);
-	lvl[l].option[f].icon.spr = _flag_spr;
-	lvl[l].option[f].icon.img = f;
-	lvl[l].option[f].icon.x = _flag_x;
-	lvl[l].option[f].icon.y = _flag_y;
+	fn_menu_lvl_option_icon_add(l, o, _flag_spr, o);
+	lvl[l].option[o].icon.x = _flag_x;
+	lvl[l].option[o].icon.y = _flag_y;
 	
-	fn_menu_lvl_decor_add(LVL_LANG, f, spr_menu_home_flag_select, , (_flag_x + round(_flag_width / 2)), (_flag_y + _flag_height + 5), global.player.thm[global.player.thm_curr].color.whiteLight, 0);
+	fn_menu_lvl_decor_add(LVL_LANG, o, spr_menu_home_flag_select, , (_flag_x + round(_flag_width / 2)), (_flag_y + _flag_height + 5), global.player.thm[global.player.thm_curr].color.whiteLight, 0);
 }
 
 
@@ -59,7 +58,7 @@ LVL_MAIN = 2;
 var l = LVL_MAIN;
 fn_menu_lvl_add(l);
 if (global.config.lang_hasChosen == true)
-	fn_menu_lvl_fader_start(l, , , 0 /*120*/);
+	fn_menu_lvl_fader_start(l, , , (120 * !fn_obj_exists(obj_dbg)));
 
 var _opt_len = 3;
 var _opt_yCenter = (120 + 45);
@@ -83,7 +82,7 @@ var _panel_width = (_panel_xMargin + _opt_widthMax + _panel_xMargin);
 var _panel_height = (_panel_yMargin + _opt_heightAll + _panel_yMargin);
 var _panel_x = round(160 - (_panel_width / 2));
 var _panel_y = round(_opt_yCenter - (_panel_height / 2));
-fn_menu_lvl_panel_add(l, 0, , , _panel_x, _panel_y, _panel_width, _panel_height);
+fn_menu_lvl_panel_add(l, 0, , _panel_x, _panel_y, _panel_width, _panel_height);
 
 var _logo_spr = spr_menu_home_logo;
 var _logo_width = fn_spr_width(_logo_spr);
