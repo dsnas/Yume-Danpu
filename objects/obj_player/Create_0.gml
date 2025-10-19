@@ -1,6 +1,6 @@
 
 fn_player_setup();
-//room_goto(temp_rm_menu_home);
+room_goto(temp_rm_menu_home);
 
 
 fn_obj_img( , , , , 0);

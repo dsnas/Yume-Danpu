@@ -125,7 +125,7 @@ function fn_menu_lvl_card_add(_lvl, _idx, _spr = global.player.thm[global.player
 }
 
 	// Labels
-function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight])
+function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight], _xAlign = fa_left, _yAlign = fa_top)
 {
 	var l = _lvl;
 	var a = _idx;
@@ -136,7 +136,10 @@ function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [glob
 		x : _x,
 		y : _y,
 		
-		color : _color
+		color : _color,
+		
+		xAlign : _xAlign,
+		yAlign : _yAlign,
 	}
 }
 
@@ -179,6 +182,9 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x = 0, _y = 0, _select_act =
 			[global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight] // Active (Selected)
 		],
 		
+		xAlign : fa_left,
+		yAlign : fa_top,
+		
 		
 		// Selection indicator
 		select :
@@ -190,8 +196,8 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x = 0, _y = 0, _select_act =
 			
 			x : 0,
 			y : 0,
-			xDist : 6,
-			yDist : 3,
+			xDist : 5,
+			yDist : 2,
 			width : 0,
 			height : 0,
 		},
@@ -229,7 +235,7 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text, _x = 0, _y = 0, _select_act =
 			xDist : 5,
 			
 			color : c_white,
-			alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
+			alpha : [0.35 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
 		},
 		
 		

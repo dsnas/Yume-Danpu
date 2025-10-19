@@ -333,23 +333,23 @@ function fn_aud_pchData(_asset, _pch)
 
 
 // Functions related to sprites
-function fn_spr_w(_asset) // Returns the width of the specified sprite
+function fn_spr_width(_asset) // Returns the width of the specified sprite
 {
 	if (_asset != -1)
 		return sprite_get_width(_asset);
 	else
 	{
-		fn_log("The function fn_spr_w() was called with an invalid sprite asset");
+		fn_log("The function fn_spr_width() was called with an invalid sprite asset");
 		return 0;
 	}
 }
-function fn_spr_h(_asset) // Returns the height of the specified sprite
+function fn_spr_height(_asset) // Returns the height of the specified sprite
 {
 	if (_asset != -1)
 		return sprite_get_height(_asset);
 	else
 	{
-		fn_log("The function fn_spr_h() was called with an invalid sprite asset");
+		fn_log("The function fn_spr_height() was called with an invalid sprite asset");
 		return 0;
 	}
 }
@@ -358,7 +358,7 @@ function fn_spr_h(_asset) // Returns the height of the specified sprite
 
 
 // Functions related to text
-function fn_text_w(_text) // Returns the width of the specified text
+function fn_text_width(_text) // Returns the width of the specified text
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
@@ -369,7 +369,7 @@ function fn_text_w(_text) // Returns the width of the specified text
 	else
 		return 0;
 }
-function fn_text_h(_text) // Returns the height of the specified text
+function fn_text_height(_text) // Returns the height of the specified text
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
@@ -379,6 +379,15 @@ function fn_text_h(_text) // Returns the height of the specified text
 	}
 	else
 		return 0;
+}
+
+function fn_textdata_width(_text) // Returns the width of the specified textdata
+{
+	return fn_text_width(textdata(_text));
+}
+function fn_textdata_height(_text) // Returns the height of the specified textdata
+{
+	return fn_text_height(textdata(_text));
 }
 
 

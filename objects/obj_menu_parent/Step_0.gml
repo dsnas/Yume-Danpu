@@ -23,22 +23,23 @@ if (is_array(lvl) == true)
 					lvl[l].option_curr = 0;
 			}
 			
-			// Starts playing sound
 			if (_option_currOld != lvl[l].option_curr)
-				fn_aud_play(lvl[l].option_move.snd, CONFIG_AUD_EMTR.MENU);
+			{
+				_opt_curr = lvl[l].option_curr;
+				_move_snd = lvl[l].option_move.snd;
+				event_user(4);
+				fn_aud_play(_move_snd, CONFIG_AUD_EMTR.MENU);
+			}
 		}
-		
 		var o = lvl[l].option_curr;
+		_opt_curr = lvl[l].option_curr;
 		
 		
 		// Confirmation
 		if (lvl[l].option_confirm.act == true && fn_config_key_pressed(lvl[l].option_confirm.key) == true)
 		{
-			_option_curr = lvl[l].option_curr;
 			_confirm_snd = lvl[l].option_confirm.snd;
-			
 			event_user(0);
-			
 			if (_confirm_snd != -1)
 				fn_aud_play(_confirm_snd, CONFIG_AUD_EMTR.MENU);
 		}
@@ -47,9 +48,7 @@ if (is_array(lvl) == true)
 		else if (lvl[l].option_cancel.act == true && fn_config_key_pressed(lvl[l].option_cancel.key) == true)
 		{
 			_cancel_snd = lvl[l].option_cancel.snd;
-			
 			event_user(1);
-			
 			if (_cancel_snd != -1)
 				fn_aud_play(_cancel_snd, CONFIG_AUD_EMTR.MENU);
 		}
@@ -57,10 +56,7 @@ if (is_array(lvl) == true)
 		// Value cycling
 		else if (lvl[l].option[o].value.act == true && (fn_config_key_pressed(lvl[l].option[o].value.key[0]) == true || fn_config_key_pressed(lvl[l].option[o].value.key[1]) == true))
 		{
-			_option_curr = lvl[l].option_curr;
-			
 			event_user(2);
-			
 			fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
 			for (var a = 0; a < (2 * !global.config.access.rdcdMot); a++)
 			{
@@ -112,4 +108,20 @@ if (is_array(lvl) == true)
 		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur > 0)
 			lvl_fader.wait_dur -= 1;
 	}
+}
+
+
+if (lang_curr != global.config.lang_curr) || (thm_curr != global.player.thm_curr)
+{
+	var _lvl_curr = lvl_curr;
+	var _lvl_option_curr = -1;
+	for (var l = 0; l < array_length(lvl); l++)
+		_lvl_option_curr[l] = lvl[l].option_curr;
+	event_perform(ev_create, 0);
+	lvl_curr = _lvl_curr;
+	lvl[lvl_curr].alpha = 1;
+	for (var l = 0; l < array_length(lvl); l++)
+		lvl[l].option_curr = _lvl_option_curr[l];
+	lvl_fader.stg = -1;
+	lvl_fader.tgt.lvl = -1;
 }

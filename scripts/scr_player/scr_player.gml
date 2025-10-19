@@ -18,7 +18,7 @@ function fn_player_setup(_file_curr = -1)
 		},
 			
 		{ // While awake
-			amt : (choose(20, 30) + (choose(1, 3, 7, 9) * choose(-1, 1))),
+			amt : (choose(10, 20) + (choose(1, 3, 7, 9) * choose(-1, 1))),
 			ccy : "R$ "
 		}],
 		
@@ -91,8 +91,8 @@ function fn_player_eff_add(_idx, _code, _unlocked = false)
 {
 	global.player.eff[_idx] =
 	{
-		name : textdata($"player_eff_name_{_code}"),
-		desc : textdata($"player_eff_desc_{_code}"),
+		name : $"player_eff_name_{_code}",
+		desc : $"player_eff_desc_{_code}",
 		code : _code,
 		unlocked : _unlocked,
 		
@@ -108,8 +108,8 @@ function fn_player_itm_add(_idx, _code, _unlocked = false)
 {
 	global.player.itm[_idx] =
 	{
-		name : textdata($"player_itm_name_{_code}"),
-		desc : textdata($"player_itm_desc_{_code}"),
+		name : $"player_itm_name_{_code}",
+		desc : $"player_itm_desc_{_code}",
 		code : _code,
 		unlocked : _unlocked,
 		
@@ -140,8 +140,8 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 {
 	global.player.thm[_idx] =
 	{
-		name : textdata($"player_thm_name_{_code}"),
-		desc : textdata($"player_thm_desc_{_code}"),
+		name : $"player_thm_name_{_code}",
+		desc : $"player_thm_desc_{_code}",
 		code : _code,
 		unlocked : _unlocked,
 		

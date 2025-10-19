@@ -20,8 +20,8 @@ function fn_menu_home_evCreate_0()
 	
 		// Flags [#0]
 	lang_flag_spr = spr_menu_home_flag;
-	lang_flag_w = fn_spr_w(lang_flag_spr);
-	lang_flag_h = fn_spr_h(lang_flag_spr);
+	lang_flag_w = fn_spr_width(lang_flag_spr);
+	lang_flag_h = fn_spr_height(lang_flag_spr);
 	var _flag_xDist = round(draw_dist * 2.5);
 	var _flag_yDistInfo = (draw_dist * 1.5); // The flags' vertical distance from the title info
 	var _flag_wAll = ((_flag_xDist * (opt_len[l] - 1)) + lang_flag_w);
@@ -73,15 +73,15 @@ function fn_menu_home_evCreate_0()
 	
 		// Logo
 	main_logo_spr = spr_menu_home_logo;
-	main_logo_w = fn_spr_w(main_logo_spr);
+	main_logo_w = fn_spr_width(main_logo_spr);
 	main_logo_x = (160 - (main_logo_w / 2));
 	main_logo_y = (draw_dist * 2);
 	
 		// Production
 	main_prod_spr = spr_menu_home_prod;
 	main_prod_img = global.config_langCurr;
-	main_prod_w = fn_spr_w(main_prod_spr);
-	main_prod_h = fn_spr_h(main_prod_spr);
+	main_prod_w = fn_spr_width(main_prod_spr);
+	main_prod_h = fn_spr_height(main_prod_spr);
 	main_prod_x = (main_logo_x + (main_logo_w / 2) - (main_prod_w / 2));
 	main_prod_y = (240 - 4 - main_prod_h);
 	main_prod_alp = 0.5;

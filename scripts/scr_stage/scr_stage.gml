@@ -173,8 +173,8 @@ function fn_stage_bg_sky_add(_idx, _spr, _col = c_white, _alp = 1, _move_xDurInS
 		
 		// Sky background
 		var _sprOrig = _spr;
-		var _wOrig = fn_spr_w(_sprOrig);
-		var _hOrig = fn_spr_h(_sprOrig);
+		var _wOrig = fn_spr_width(_sprOrig);
+		var _hOrig = fn_spr_height(_sprOrig);
 		
 		_spr = sprite_duplicate(_spr);
 		var _slice = sprite_nineslice_create();

@@ -1,4 +1,10 @@
 /// @descr Option confirm results
-// Disable the confirmation sound by modifying the variable "_confirm_snd" to -1
+// Refer to {lvl[lvl_curr].option_curr} as {_opt_curr}
+// Disable the confirmation sound by modifying the variable {_confirm_snd} to -1
 
-
+if (lvl_curr == LVL_LANG)
+{
+	global.config.lang_hasChosen = true;
+	fn_config_file_save();
+	fn_menu_lvl_fader_start(LVL_MAIN, , , 120);
+}

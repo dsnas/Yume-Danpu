@@ -14,6 +14,7 @@ function fn_config_setup()
 		lang : [-1],
 		lang_curr : 0,
 		lang_data : -1,
+		lang_hasChosen : false,
 		
 		// Keybinds
 		key : [-1],
@@ -28,37 +29,37 @@ function fn_config_setup()
 			fscr : // Fullscreen
 			{
 				act : false,
-				name : ""
+				name : "config_vid_fscr_name"
 			},
 			
 			vsync : // Vsync
 			{
 				act : false,
-				name : ""
+				name : "config_vid_vsync_name"
 			},
 			
 			showVer : // Show Version
 			{
 				act : true,
-				name : ""
+				name : "config_vid_showVer_name"
 			},
 			
 			showCsr : // Show Cursor
 			{
 				act : true,
-				name : ""
+				name : "config_vid_showCsr_name"
 			},
 			
 			showFps : // Show FPS
 			{
 				act : false,
-				name : ""
+				name : "config_vid_showFps_name"
 			},
 			
 			showBdr : // Show Border
 			{
 				act : true,
-				name : ""
+				name : "config_vid_showBdr_name"
 			},
 		},
 		
@@ -124,14 +125,6 @@ function fn_config_setup()
 	fn_config_key_add(CONFIG_KEY.PSE,	"pse",		vk_escape);
 	fn_config_key_add(CONFIG_KEY.FSCR,	"fscr",		vk_f4, vk_f11);
 	
-		// Video
-	global.config.vid.fscr.name = textdata("config_vid_fscr_name");
-	global.config.vid.vsync.name = textdata("config_vid_vsync_name");
-	global.config.vid.showVer.name = textdata("config_vid_showVer_name");
-	global.config.vid.showCsr.name = textdata("config_vid_showCsr_name");
-	global.config.vid.showFps.name = textdata("config_vid_showFps_name");
-	global.config.vid.showBdr.name = textdata("config_vid_showBdr_name");
-	
 		// Music & Sounds
 	enum CONFIG_AUD_EMTR
 	{
@@ -170,6 +163,7 @@ function fn_config_file_save()
 	
 	// Languages
 	ini_write_real("lang", "curr", global.config.lang_curr);
+	ini_write_real("lang", "hasChosen", global.config.lang_hasChosen);
 	
 	// Graphics
 	ini_write_real("vid", "fscr_act", global.config.vid.fscr.act);
@@ -196,6 +190,7 @@ function fn_config_file_load()
 	
 	// Languages
 	global.config.lang_curr = ini_read_real("lang", "curr", CONFIG_LANG.enUS);
+	global.config.lang_hasChosen = ini_read_real("lang", "hasChosen", false);
 	
 	// Graphics
 	global.config.vid.fscr.act = ini_read_real("vid", "fscr_act", false);
@@ -226,7 +221,7 @@ function fn_config_lang_add(_idx, _code)
 {
 	global.config.lang[_idx] =
 	{
-		name : textdata($"config_lang_{_code}"),
+		name : $"config_lang_{_code}",
 		code : _code,
 		
 		fnt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, -1)
@@ -236,8 +231,6 @@ function fn_config_lang_mod(_new)
 {
 	global.config.lang_curr = _new;
 	fn_config_file_save();
-	fn_config_setup();
-	fn_player_setup(global.player.file_curr);
 }
 function textdata(_key)
 {
@@ -247,10 +240,8 @@ function textdata(_key)
 	else
 	{
 		fn_log($"The function lang_data() was called and unable to retrieve the desired text. The provided key was \"{_key}\".");
-		return "Salenis";
-	}
-	
-	//fn_log( $"!!!!!!!!!!!!!!!!!!!!!! {global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), "config_key_rt")]}" );
+		return _key;
+	}	
 }
 
 
@@ -259,7 +250,7 @@ function fn_config_key_add(_idx, _code, _main, _alt = -1)
 {
 	global.config.key[_idx] =
 	{
-		name : textdata($"config_key_{_code}"),
+		name : $"config_key_{_code}",
 		code : _code,
 		
 		main : _main,
@@ -289,7 +280,7 @@ function fn_config_aud_emtr_add(_idx, _code, _vol = 1, _pitch = 1)
 {
 	global.config.aud.emtr[_idx] =
 	{
-		name : textdata($"config_aud_emtr_{_code}"),
+		name : $"config_aud_emtr_{_code}",
 		code : _code,
 		
 		id : audio_emitter_create(),
