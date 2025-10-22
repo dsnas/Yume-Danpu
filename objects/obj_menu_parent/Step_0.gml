@@ -56,6 +56,7 @@ if (is_array(lvl) == true)
 		// Value cycling
 		else if (lvl[l].option[o].value != -1 && (fn_config_key_pressed(lvl[l].option[o].value.key[0]) == true || fn_config_key_pressed(lvl[l].option[o].value.key[1]) == true))
 		{
+			_cycle_sign = (fn_config_key_pressed(lvl[l].option[o].value.key[1]) - fn_config_key_pressed(lvl[l].option[o].value.key[0]));
 			event_user(2);
 			fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
 			for (var a = 0; a < (2 * !global.config.access.rdcdMot); a++)
@@ -108,20 +109,4 @@ if (is_array(lvl) == true)
 		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur > 0)
 			lvl_fader.wait_dur -= 1;
 	}
-}
-
-
-if (lang_curr != global.config.lang_curr) || (thm_curr != global.player.thm_curr)
-{
-	var _lvl_curr = lvl_curr;
-	var _lvl_option_curr = -1;
-	for (var l = 0; l < array_length(lvl); l++)
-		_lvl_option_curr[l] = lvl[l].option_curr;
-	event_perform(ev_create, 0);
-	lvl_curr = _lvl_curr;
-	lvl[lvl_curr].alpha = 1;
-	for (var l = 0; l < array_length(lvl); l++)
-		lvl[l].option_curr = _lvl_option_curr[l];
-	lvl_fader.stg = -1;
-	lvl_fader.tgt.lvl = -1;
 }

@@ -92,8 +92,8 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = -1, _tgt_destroy = false, 
 	}
 }
 
-	// Title element
-function fn_menu_lvl_title_add(_lvl, _text)
+	// Title
+function fn_menu_lvl_title_add(_lvl, _text = "")
 {
 	var l = _lvl;
 	
@@ -131,8 +131,8 @@ function fn_menu_lvl_title_add(_lvl, _text)
 	lvl[l].title.y = round(((_title.panel.height - abs(_title.panel.y)) / 2) - (fn_textdata_height(_title.text) / 2) - 2)
 }
 
-	// Panel element
-function fn_menu_lvl_panel_add(_lvl, _idx, _img = 0, _x, _y, _width, _height)
+	// Panels
+function fn_menu_lvl_panel_add(_lvl, _idx, _img = 0, _x = 0, _y = 0, _width = 0, _height = 0)
 {
 	var l = _lvl;
 	var p = _idx;
@@ -149,8 +149,8 @@ function fn_menu_lvl_panel_add(_lvl, _idx, _img = 0, _x, _y, _width, _height)
 	}
 }
 
-	// Card element
-function fn_menu_lvl_card_add(_lvl, _idx, _img = 0, _x, _y, _width, _height)
+	// Cards
+function fn_menu_lvl_card_add(_lvl, _idx, _img = 0, _x = 0, _y = 0, _width = 0, _height = 0)
 {
 	var l = _lvl;
 	var c = _idx;
@@ -167,8 +167,8 @@ function fn_menu_lvl_card_add(_lvl, _idx, _img = 0, _x, _y, _width, _height)
 	}
 }
 
-	// Label element
-function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight], _xAlign = fa_left, _yAlign = fa_top)
+	// Labels
+function fn_menu_lvl_label_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _color = [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight], _xAlign = fa_left, _yAlign = fa_top)
 {
 	var l = _lvl;
 	var a = _idx;
@@ -186,8 +186,8 @@ function fn_menu_lvl_label_add(_lvl, _idx, _text, _x = 0, _y = 0, _color = [glob
 	}
 }
 
-	// Decoration element
-function fn_menu_lvl_decor_add(_lvl, _idx, _spr, _img = 0, _x = 0, _y = 0, _color = c_white, _alpha = 1)
+	// Decorations
+function fn_menu_lvl_decor_add(_lvl, _idx, _spr = -1, _img = 0, _x = 0, _y = 0, _color = c_white, _alpha = 1)
 {
 	var l = _lvl;
 	var d = _idx;
@@ -205,8 +205,8 @@ function fn_menu_lvl_decor_add(_lvl, _idx, _spr, _img = 0, _x = 0, _y = 0, _colo
 	}
 }
 
-	// Option element
-function fn_menu_lvl_option_add(_lvl, _idx, _text, _x = 0, _y = 0, _select_act = true, _button_act = false, _button_xDist = 6, _button_yDist = 3)
+	// Options
+function fn_menu_lvl_option_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _select_act = true, _button_act = false, _button_xDist = 6, _button_yDist = 3)
 {	
 	var l = _lvl;
 	var o = _idx;
@@ -308,7 +308,7 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 				
 			scale : 1,
 			scaleMin : 1,
-			scaleMax : 1.5,
+			scaleMax : 1.75,
 			scaleSpd : 0.15,
 				
 			move :
@@ -330,7 +330,7 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 }
 
 		// Icon
-function fn_menu_lvl_option_icon_add(_lvl, _idx, _spr, _img = 0)
+function fn_menu_lvl_option_icon_add(_lvl, _idx, _spr = -1, _img = 0)
 {
 	var l = _lvl;
 	var o = _idx;

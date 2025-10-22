@@ -57,7 +57,6 @@
   },
   "name":"Yume Danpu",
   "resources":[
-    {"id":{"name":"obj_","path":"objects/obj_/obj_.yy",},},
     {"id":{"name":"obj_actor_dbgwrld_blood","path":"objects/obj_actor_dbgwrld_blood/obj_actor_dbgwrld_blood.yy",},},
     {"id":{"name":"obj_actor_macaco_monkey","path":"objects/obj_actor_macaco_monkey/obj_actor_macaco_monkey.yy",},},
     {"id":{"name":"obj_actor_parent","path":"objects/obj_actor_parent/obj_actor_parent.yy",},},
