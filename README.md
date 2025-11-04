@@ -1,7 +1,5 @@
 <h1 align="center">Yume Danpu</h1>
-
-<p align="center"><b><i>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</i></b>
-
+<p align="center"><b>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</b>
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version" />
   <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
@@ -11,30 +9,34 @@
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube" /></a>
 </p>
-
-This repository is updated regularly while we're working on it, not just when new versions are released.
-
-&nbsp;
-
-## Development and release videos
-If you wanna see what we're doing next, check out [our devlog on YouTube](https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd)! I guess it would blow some of the surprises, though...
-
-&nbsp;
-
-## Never asked questions
-
-### Why is it open-source?
-> A shark plushie asked me to. Not sure why, though.
-
-### Why use GameMaker?
-> GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.
-
-### Does that mean the style is completely different from Yume Nikki?
-> Not really, the difference is mostly improvements and additions.
-
-&nbsp;
-
-<p align="center">
-  <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia monkey" height="6" /></a>
+<p>
+  Yume Danpu is currently in development by me, dsans, and migel8022, who made all the music. Updates may take a while because of school or other life matters.
+  This repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
+
+<h2><br>Featuring</h2>
+<ul>
+  <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
+  <li><strong>Not one, but three types of collectibles:</strong> effects, items, and themes.</li>
+  <li><strong>A driveable go-kart.</strong> Very important</li>
+</ul>
+
+<h2><br>Development and release videos</h2>
+<p>
+  If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube<a>! I guess it would blow some of the surprises, though...
+</p>
+
+<h2><br>Never asked questions</h2>
+<h3>Why is it open-source?</h3>
+<blockquote>A shark plushie asked me to. Not sure why, though.</blockquote>
+<h3>Why use GameMaker?</h3>
+<blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
+<h3>Does that mean the style is completely different from Yume Nikki?</h3>
+<blockquote>Not really, the difference is mostly improvements and additions.</blockquote>
+
+<h3 align="center">
+  <br><br>Think the game is ugly? Yeah, we do too.
+  <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼
+  <br><br><a href="https://dsnas.itch.io/yume-danpu">
+    <img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia monkey" height="6" /></a>
+</h3>
