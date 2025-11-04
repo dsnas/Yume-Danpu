@@ -1,13 +1,13 @@
-<h1 align="center">Yume Danpu</h1>
-<p align="center"><b>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</b>
+<h1 align="center"><b>Yume Danpu</b></h1>
+<p align="center"><b>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</b></p>
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version" />
-  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity" />
-  <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License" />
+  <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version"/>
+  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity"/>
+  <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License"/>
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5" alt="Itch.io" /></a>
+    <img src="https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5" alt="Itch.io"/></a>
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube" /></a>
+    <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"/></a>
 </p>
 <p>
   Yume Danpu is currently in development by me, dsans, and migel8022, who made all the music. Updates may take a while because of school or other life matters.
@@ -23,7 +23,7 @@
 
 <h2><br>Development and release videos</h2>
 <p>
-  If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube<a>! I guess it would blow some of the surprises, though...
+  If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube</a>! I guess it would blow some of the surprises, though...
 </p>
 
 <h2><br>Never asked questions</h2>
