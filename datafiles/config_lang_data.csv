@@ -46,5 +46,5 @@ menu_config_main_option_0,Language,Idioma
 menu_config_main_option_1,Graphics,Gráficos
 menu_config_main_option_2,Music & Sounds,Músicas & Sons
 menu_config_main_option_3,Accessibility,Acessibilidade
-menu_config_all_option_value_0,ON,Sim
-menu_config_all_option_value_1,OFF,Não
+menu_config_all_option_value_0,Yes,Sim
+menu_config_all_option_value_1,No,Não

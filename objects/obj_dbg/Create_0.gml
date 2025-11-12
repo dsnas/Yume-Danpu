@@ -29,5 +29,6 @@ global.dbg =
 	},
 	
 	
-	logOverdose : false // Determines if log messages will show excessively and unnecesarily (may affect performance)
+	textdataCorruption : false, // Determines if the function "textdata()" returns ÂÂÂÂÂÂ
+	logOverdose : false // Determines if log messages will show excessively and unnecesarily (affects performance)
 }

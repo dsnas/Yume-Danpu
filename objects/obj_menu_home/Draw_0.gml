@@ -57,7 +57,7 @@ if (l == LVL_LANG) // Language level
 		lvl[l].decor[o].alpha = (o == lvl[l].option_curr);
 	}
 }
-else if (l == LVL_MAIN)
+else if (l == LVL_MAIN) // Main level
 {
 	// Options
 	var _opt_len = array_length(lvl[l].option);

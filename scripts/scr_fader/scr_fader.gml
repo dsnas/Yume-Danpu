@@ -7,18 +7,11 @@ function fn_fader_evCreate()
 	type.fade.iris.x = (src.obj.x + (src.obj_id.sprite_width / 2));
 	type.fade.iris.y = (src.obj.y - (src.obj_id.sprite_height / 4));
 	type.fade.iris.snd_asset = snd_fader_portal;
-	type.fade.iris.snd_style = CONFIG_AUD_STYLE.PROP;
+	type.fade.iris.snd_style = CONFIG_AUD_EMTR.PROP;
 	
 	
 	switch (src.obj)
 	{
-		// Menus
-		case obj_menu:
-			type.fade.act = true;
-			tgt.rm = rm_menu_load;
-		break;
-		
-		
 		// Doors
 		case obj_prop_condo_apt_bed: // Bed in Eleanor's Apartment
 			tgt.rm = rm_nexus;

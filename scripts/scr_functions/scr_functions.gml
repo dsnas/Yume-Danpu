@@ -55,7 +55,7 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 
 // Functions related to drawing
 	// Text
-function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_left, _yAlign = fa_top, _angle = 0)
+function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_left, _yAlign = fa_top, _shadow_color = global.player.thm[global.player.thm_curr].color.blackDark)
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
@@ -64,11 +64,10 @@ function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1
 		draw_set_halign(_xAlign);
 		draw_set_valign(_yAlign);
 		
-		var _shadow_color = global.player.thm[global.player.thm_curr].color.shadow;
 		var _shadow_alpha = (global.player.thm[global.player.thm_curr].alpha.shadow * _alpha);
-		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xScale, _yScale, _angle, _shadow_color, _shadow_color, _shadow_color, _shadow_color, _shadow_alpha);
+		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xScale, _yScale, 0, _shadow_color, _shadow_color, _shadow_color, _shadow_color, _shadow_alpha);
 		
-		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xScale, _yScale, _angle, _color_0, _color_0, _color_1, _color_1, _alpha);
+		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xScale, _yScale, 0, _color_0, _color_0, _color_1, _color_1, _alpha);
 	}
 }
 
@@ -86,7 +85,7 @@ function fn_draw_circle(_x, _y, _radius, _precision)
 }
 
 	// Sprites
-function fn_draw_spr(_spr, _img, _x, _y, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1, _angle = 0, _shadow_act = false)
+function fn_draw_spr(_spr, _img, _x, _y, _color = c_white, _alpha = 1, _xScale = 1, _yScale = _xScale, _angle = 0, _shadow_act = false)
 {
 	if (_spr != -1)
 	{
@@ -110,7 +109,7 @@ function fn_draw_spr_stretch(_spr, _img, _x, _y, _width, _height, _color = c_whi
 	else
 		fn_log("The function fn_draw_spr_stretch() was called with an invalid sprite ID");
 }
-function fn_draw_spr_part(_spr, _img, _x, _y, _lt, _top, _width, _height, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1)
+function fn_draw_spr_part(_spr, _img, _x, _y, _lt, _top, _width, _height, _color = c_white, _alpha = 1, _xScale = 1, _yScale = _xScale)
 {
 	if (_spr != -1)
 		draw_sprite_part_ext(_spr, _img, _lt, _top, _width, _height, _x, _y, _xScale, _yScale, _color, _alpha);
@@ -364,7 +363,7 @@ function fn_text_width(_text) // Returns the width of the specified text
 	if (font_exists(_fnt) == true)
 	{
 		draw_set_font(_fnt);
-		return string_width(_text);
+		return (string_width(_text) - 1);
 	}
 	else
 		return 0;

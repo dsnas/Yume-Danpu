@@ -63,7 +63,7 @@ talk =
 			dur_curr : 0,
 			
 			aud_asset : [-1],
-			aud_style : CONFIG_AUD_STYLE.PROP,
+			aud_style : CONFIG_AUD_EMTR.PROP,
 			aud_idx : -1
 		},
 		

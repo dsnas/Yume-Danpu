@@ -63,7 +63,8 @@ function fn_player_setup(_file_curr = -1)
 		SIMPLE, // Simple theme
 		MADOT	// Madotsuki theme
 	}
-	fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
+	fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #FFFFFF, #CCCCCC, #595959, #484848, #1E1E1E, #0F0F0F); // Default theme
+	//fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
 	fn_player_thm_add(PLAYER_THM.SIMPLE, "simple", true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
 	fn_player_thm_add(PLAYER_THM.MADOT, "madot", true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
 	
@@ -73,7 +74,7 @@ function fn_player_setup(_file_curr = -1)
 		global.player.file[f] =
 		{
 			name : $"{global.config.ver}/player_{f}.ini",
-			msg : choose("I wonder why someone would come here. It wouldn't be to cheat, would it?", "Got bored of walking?", "Simon says turn all the zeros into ones.", "As long as you're having fun, right?", "At least you'll be playing the game.", "Viva la revolución!", "Just do what you gotta do.", "So many numbers... It's like a number world...")
+			msg : choose("I wonder why someone would come here. It wouldn't be to cheat, would it?", "Got bored of walking?", "Simon says turn all the zeros into ones.", "As long as you're having fun, right?", "At least you'll be playing the game.", "Viva la revolución!", "Just do what you gotta do.", "So many numbers... It's like a number world...", "Please write your name: ", "Don't forget to save changes.")
 		}
 	}
 	if (global.player.file_curr != -1)
@@ -84,7 +85,6 @@ function fn_player_setup(_file_curr = -1)
 			fn_player_file_load();
 	}
 }
-
 
 	// Effects
 function fn_player_eff_add(_idx, _code, _unlocked = false)
@@ -101,7 +101,6 @@ function fn_player_eff_add(_idx, _code, _unlocked = false)
 	}
 	global.player.eff_amt += 1;
 }
-
 
 	// Items
 function fn_player_itm_add(_idx, _code, _unlocked = false)
@@ -134,9 +133,8 @@ function fn_player_itm_equip(_idx)
 	}
 }
 
-
 	// Themes
-function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _color_whiteDark, _color_grayLight, _color_grayDark, _color_shadow, _color_blur, _alpha_shadow = 1, _alpha_blurLight = 0.5, _alpha_blurHeavy = 0.75)
+function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _color_whiteDark, _color_grayLight, _color_grayDark, _color_blackLight, _color_blackDark, _alpha_shadow = 1, _alpha_blurLight = 0.5, _alpha_blurHeavy = 0.75)
 {
 	global.player.thm[_idx] =
 	{
@@ -154,9 +152,8 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 			whiteDark : _color_whiteDark,
 			grayLight : _color_grayLight,
 			grayDark : _color_grayDark,
-			
-			shadow : _color_shadow, // Color for the shadow of elements (options, information, etc.)
-			blur : _color_blur // Color for dimmed background
+			blackLight : _color_blackLight,
+			blackDark : _color_blackDark
 		},
 		
 		alpha : // Alpha
@@ -169,8 +166,11 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 		spr : // Sprites
 		{
 			panel : fn_player_thm_asset("spr_player_thm_panel_", _code),
+			card : fn_player_thm_asset("spr_player_thm_card_", _code),
 			option_select : fn_player_thm_asset("spr_player_thm_option_select_", _code),
 			option_button : fn_player_thm_asset("spr_player_thm_option_select_", _code),
+			option_check : fn_player_thm_asset("spr_player_thm_option_check_", _code),
+			option_check_mark : fn_player_thm_asset("spr_player_thm_option_check_mark_", _code),
 			picFrame : fn_player_thm_asset("spr_player_thm_picFrame_", _code),
 		},
 		
@@ -202,7 +202,6 @@ function fn_player_thm_equip(_idx)
 		fn_player_file_save();
 	}
 }
-
 
 	// Save files
 function fn_player_file_save()

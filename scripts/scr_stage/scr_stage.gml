@@ -91,7 +91,7 @@ function fn_stage_evStep()
 
 
 // Music
-function fn_stage_mus_add(_idx, _asset, _style = CONFIG_AUD_STYLE.MUS, _pch = 1)
+function fn_stage_mus_add(_idx, _asset, _style = CONFIG_AUD_EMTR.MUS, _pch = 1)
 {
 	var m = _idx;
 	

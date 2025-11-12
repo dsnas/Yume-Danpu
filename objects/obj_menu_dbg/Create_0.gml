@@ -12,8 +12,10 @@ for (var i = 0; i < 3; i++)
 }
 fn_menu_lvl_option_add(LVL_MAIN, 3, $"Call me", 32, 128);
 fn_menu_lvl_option_value_add(LVL_MAIN, 3);
-fn_menu_lvl_option_add(LVL_MAIN, 4, $"Then I Said: Image!", 32, 160);
+fn_menu_lvl_option_add(LVL_MAIN, 4, $"Then I Said: Image!", 32, 160, false);
 fn_menu_lvl_option_icon_add(LVL_MAIN, 4, spr_menu_inv_mnyIco);
+fn_menu_lvl_option_add(LVL_MAIN, 5, $"check me out ;)", 32, 192, false);
+fn_menu_lvl_option_check_add(LVL_MAIN, 5);
 
 LVL_OTHER = 2;
 fn_menu_lvl_add(LVL_OTHER);

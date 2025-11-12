@@ -1,5 +1,5 @@
 {
-  "$GMSprite":"",
+  "$GMSprite":"v2",
   "%Name":"unused_spr_entity_pikini_citizen",
   "bboxMode":2,
   "bbox_bottom":47,
@@ -12,9 +12,9 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"d5d74b13-108c-4cea-adec-77e336f36fd1","name":"d5d74b13-108c-4cea-adec-77e336f36fd1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"b876025b-b588-40c2-a273-401816ce865e","name":"b876025b-b588-40c2-a273-401816ce865e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d5d74b13-108c-4cea-adec-77e336f36fd1","name":"d5d74b13-108c-4cea-adec-77e336f36fd1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"b876025b-b588-40c2-a273-401816ce865e","name":"b876025b-b588-40c2-a273-401816ce865e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":8,
   "gridY":8,
@@ -72,15 +72,9 @@
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d5d74b13-108c-4cea-adec-77e336f36fd1","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"65517f59-6191-4f5d-b324-c7bad19daeee","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"b876025b-b588-40c2-a273-401816ce865e","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"a9859713-c28d-4376-8158-3aa03b3a123d","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"b7622b2c-8d34-4a9f-b873-f29722a02f84","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"d5d74b13-108c-4cea-adec-77e336f36fd1","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"65517f59-6191-4f5d-b324-c7bad19daeee","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"b876025b-b588-40c2-a273-401816ce865e","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"a9859713-c28d-4376-8158-3aa03b3a123d","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"d728b0fa-fe7c-4ddb-aaf8-f50b0396ec12","path":"sprites/unused_spr_entity_pikini_citizen/unused_spr_entity_pikini_citizen.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"b7622b2c-8d34-4a9f-b873-f29722a02f84","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

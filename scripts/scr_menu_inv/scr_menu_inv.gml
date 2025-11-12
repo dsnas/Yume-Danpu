@@ -237,7 +237,7 @@ function fn_menu_inv_evCreate_1()
 {
 	// Main level
 	lvl = LVL_MAIN;
-	fn_aud_play(global.player.thm[global.player.thm_curr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
+	fn_aud_play(global.player.thm[global.player.thm_curr].opt_slct_snd, CONFIG_AUD_EMTR.MENU);
 }
 function fn_menu_inv_evDrawGUI_2(l)
 {
@@ -264,7 +264,7 @@ function fn_menu_inv_evDrawGUI_2(l)
 				main_pic_ySc -= (main_pic_scLen * random_range(_pic_scLen_mulMin, _pic_scLen_mulMax));
 				
 				var _ptr_snd_pitch = random_range(0.75, 2.25);
-				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_AUD_STYLE.PLAYER);
+				var _ptr_snd = fn_aud_play(main_pic_snd, CONFIG_AUD_EMTR.PLAYER);
 				fn_aud_pch(_ptr_snd, _ptr_snd_pitch);
 			}
 		}

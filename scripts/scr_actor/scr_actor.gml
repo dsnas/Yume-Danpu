@@ -9,8 +9,8 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 	{
 		// Good/Peaceful entities
 		case obj_actor_macaco_monkey: // Macacolandia monkey citizen
-			talk.type.bell.aud_style = CONFIG_AUD_STYLE.ACTOR;
-			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
+			talk.type.bell.aud_style = CONFIG_AUD_EMTR.ACTOR;
+			noise.aud.style = CONFIG_AUD_EMTR.ACTOR;
 			move.wait.act = true;
 			move.mode.auto.act = true;
 			move.type.walk.act = true;
@@ -21,7 +21,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 		
 		// Evil/Hostile entities
 		case obj_actor_dbgwrld_blood: // Debug World blood monkey
-			noise.aud.style = CONFIG_AUD_STYLE.ACTOR;
+			noise.aud.style = CONFIG_AUD_EMTR.ACTOR;
 			noise.aud.asset = snd_prop_noise_weird;
 			move.mode.auto.act = true;
 			move.mode.auto.chase_act = true;
@@ -48,7 +48,7 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 			move.type.walk.act = true;
 			move.type.walk.fstep.act = true;
 			move.type.walk.fstep.snd_asset = snd_player_fstep;
-			move.type.walk.fstep.snd_style = CONFIG_AUD_STYLE.PLAYER;
+			move.type.walk.fstep.snd_style = CONFIG_AUD_EMTR.PLAYER;
 			move.type.roll.act = false;
 			
 			if (global.player.eff_curr == -1 && global.player.itm_curr == -1)
@@ -69,13 +69,13 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 				move.type.walk.act = false;
 				move.type.roll.act = true;
 				move.type.roll.snd_asset = snd_player_itm_kart;
-				move.type.roll.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move.type.roll.snd_style = CONFIG_AUD_EMTR.PLAYER;
 				move.type.roll.start.snd_asset = snd_player_itm_kart_start;
-				move.type.roll.start.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move.type.roll.start.snd_style = CONFIG_AUD_EMTR.PLAYER;
 				move.type.roll.turn.snd_asset = snd_player_itm_kart_turn;
-				move.type.roll.turn.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move.type.roll.turn.snd_style = CONFIG_AUD_EMTR.PLAYER;
 				move.type.roll.hit.snd_asset = snd_player_itm_kart_hit;
-				move.type.roll.hit.snd_style = CONFIG_AUD_STYLE.PLAYER;
+				move.type.roll.hit.snd_style = CONFIG_AUD_EMTR.PLAYER;
 			}
 		break;
 		

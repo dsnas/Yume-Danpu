@@ -257,7 +257,7 @@ function fn_menu_config_opt_config_move()
 		// Music & Sounds level
 		else if (l == LVL_AUD)
 		{
-			var _volType = global.config_aud_style[o].vol;
+			var _volType = global.CONFIG_AUD_EMTR[o].vol;
 			
 			// Volumes
 			_volType += ((press_rt - press_lt) * 0.1);
@@ -266,7 +266,7 @@ function fn_menu_config_opt_config_move()
 			else if (_volType > 1)
 				_volType = 0;
 			
-			global.config_aud_style[o].vol = _volType;
+			global.CONFIG_AUD_EMTR[o].vol = _volType;
 		}
 		
 		// Accessibility level
@@ -277,7 +277,7 @@ function fn_menu_config_opt_config_move()
 				global.config_rdcdMot = !global.config_rdcdMot;
 		}
 		
-		fn_aud_play(opt_move_snd[l], CONFIG_AUD_STYLE.MENU);
+		fn_aud_play(opt_move_snd[l], CONFIG_AUD_EMTR.MENU);
 		fn_config_file_save();
 	}	
 }
@@ -303,8 +303,8 @@ function fn_menu_config_opt_config_update()
 	// Music & Sounds level
 	else if (l == LVL_AUD)
 	{
-		for (var v = 0; v < array_length(global.config_aud_style); v++)
-			opt_config_text[l, v] = $"{round(global.config_aud_style[v].vol * 100)}%";
+		for (var v = 0; v < array_length(global.CONFIG_AUD_EMTR); v++)
+			opt_config_text[l, v] = $"{round(global.CONFIG_AUD_EMTR[v].vol * 100)}%";
 	}
 	
 	// Accessibility level

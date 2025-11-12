@@ -1,15 +1,17 @@
 {
-  "$GMSound":"",
+  "$GMSound":"v2",
   "%Name":"mus_sr_him",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "bitRate":128,
+  "channelFormat":1,
   "compression":0,
+  "compressionQuality":4,
   "conversionMode":0,
   "duration":22.471588,
+  "exportDir":"",
   "name":"mus_sr_him",
   "parent":{
     "name":"[!] Music",
@@ -20,6 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"mus_sr_him.ogg",
-  "type":1,
   "volume":1.0,
 }

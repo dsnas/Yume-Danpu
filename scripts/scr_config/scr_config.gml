@@ -12,8 +12,12 @@ function fn_config_setup()
 		
 		// Languages
 		lang : [-1],
-		lang_curr : 0,
 		lang_data : -1,
+		lang_fnt :
+		{
+			dflt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, 1)
+		},
+		lang_curr : 0,
 		lang_hasChosen : false,
 		
 		// Keybinds
@@ -224,7 +228,7 @@ function fn_config_lang_add(_idx, _code)
 		name : $"config_lang_{_code}",
 		code : _code,
 		
-		fnt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, -1)
+		fnt : global.config.lang_fnt.dflt
 	}
 }
 function fn_config_lang_mod(_new)
@@ -234,19 +238,26 @@ function fn_config_lang_mod(_new)
 }
 function textdata(_key)
 {
-	var _text = global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(global.config.lang_data, 0, 0, ds_grid_width(global.config.lang_data), ds_grid_height(global.config.lang_data), _key)];
-	if (_text != undefined)
+	var _grid = global.config.lang_data;
+	var _text = undefined;
+	if (ds_exists(_grid, ds_type_grid) == true && ds_grid_value_exists(_grid, 0, 0, ds_grid_width(_grid), ds_grid_height(_grid), _key) == true)
+		_text = global.config.lang_data[# (1 + global.config.lang_curr), ds_grid_value_y(_grid, 0, 0, ds_grid_width(_grid), ds_grid_height(_grid), _key)];
+	if (_text == undefined)
 	{
-		var _text_dbg = "";
-		for (var i = 0; i < string_length(_text); i++)
-			_text_dbg = $"{_text_dbg}Â"
-		return _text;
+		if (global.dbg.logOverdose == true) 
+			fn_log($"The function lang_data() was called and unable to retrieve the desired text. The provided key was \"{_key}\".");
+		_text = _key;
 	}
-	else
+	
+	if (global.dbg.textdataCorruption == true)
 	{
-		fn_log($"The function lang_data() was called and unable to retrieve the desired text. The provided key was \"{_key}\".");
-		return _key;
-	}	
+		var _text_old = _text;
+		_text = "";
+		for (var i = 0; i < string_length(_text_old); i++)
+			_text = $"{_text}Â"
+	}
+	
+	return _text;
 }
 
 

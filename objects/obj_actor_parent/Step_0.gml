@@ -166,7 +166,7 @@ if (move.act == true)
 						_chase_tgt.myself.x = _chase_tgt.x;
 						_chase_tgt.myself.y = _chase_tgt.y;
 						fn_obj_depth(_chase_tgt);
-						fn_aud_play(snd_actor_macaco_monkey_0, CONFIG_AUD_STYLE.ACTOR, , , 0.5);
+						fn_aud_play(snd_actor_macaco_monkey_0, CONFIG_AUD_EMTR.ACTOR, , , 0.5);
 					}
 					
 					

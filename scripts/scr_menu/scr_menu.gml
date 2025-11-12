@@ -157,7 +157,7 @@ function fn_menu_lvl_card_add(_lvl, _idx, _img = 0, _x = 0, _y = 0, _width = 0, 
 	
 	lvl[l].card[c] =
 	{
-		spr :  global.player.thm[global.player.thm_curr].spr.panel,
+		spr :  global.player.thm[global.player.thm_curr].spr.card,
 		img : _img,
 		
 		x : _x,
@@ -206,7 +206,7 @@ function fn_menu_lvl_decor_add(_lvl, _idx, _spr = -1, _img = 0, _x = 0, _y = 0, 
 }
 
 	// Options
-function fn_menu_lvl_option_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _select_act = true, _button_act = false, _button_xDist = 6, _button_yDist = 3)
+function fn_menu_lvl_option_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _select_act = true)
 {	
 	var l = _lvl;
 	var o = _idx;
@@ -222,7 +222,7 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _select_
 		color : // Colors
 		[
 			[global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.grayDark], // Inactive (Unselected)
-			[global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight] // Active (Selected)
+			[global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteDark] // Active (Selected)
 		],
 		
 		xAlign : fa_left,
@@ -235,43 +235,32 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text = "", _x = 0, _y = 0, _select_
 			act : _select_act,
 			
 			spr : global.player.thm[global.player.thm_curr].spr.option_select,
-			img : 1,
+			img : 0,
 			
 			x : 0,
 			y : 0,
-			xDist : 6,
+			xDist : 4,
 			yDist : 2,
 			width : 0,
 			height : 0,
 		},
 		
 		
+		// Checkbox
+		check : -1,
+		
 		// Value label (the text beside the options in the settings menu, like "Yes", "No" and "100%")
 		value : -1,
-		
 		
 		// Icon
 		icon : -1,
 		
-		
 		// Button
-		button :
-		{
-			act : _button_act,
-			
-			spr : global.player.thm[global.player.thm_curr].spr.option_button,
-			img_inact : 0, // image_index while inactive (unselected)
-			img_act : 1, // image_index while active (selected)
-			
-			x : 0,
-			y : 0,
-			width : 0,
-			height : 0,
-		}
+		button : -1
 	}
 }
 
-		// Value label (the text beside the options in the settings menu, like "Yes", "No" and "100%")
+		// Value (the text beside the options in the settings menu, like "Yes", "No" and "100%")
 function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 {
 	var l = _lvl;
@@ -304,12 +293,12 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 			text : ((a == 0) ? "<" : ">"),
 				
 			xDist : 6,
+			
 			color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight],
-				
+			
 			scale : 1,
-			scaleMin : 1,
-			scaleMax : 1.75,
-			scaleSpd : 0.15,
+			scaleTgt : [1 /* Inactive (Unselected) */, 2 /* Active (Selected) */],
+			scaleSpd : 0.2,
 				
 			move :
 			{
@@ -318,7 +307,6 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 				xMax : 2,
 				xSpd : 1,
 				xSign : ((a == 0) ? -1 : 1),
-					
 				wait : 0,
 				waitMax : 8
 			}
@@ -342,9 +330,61 @@ function fn_menu_lvl_option_icon_add(_lvl, _idx, _spr = -1, _img = 0)
 			
 		x : 0,
 		y : 0,
-		xDist : 5,
-			
+		xPad : (16 / 2),
+		
 		color : c_white,
 		alpha : [0.35 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
+	}
+}
+
+		// Checkbox
+function fn_menu_lvl_option_check_add(_lvl, _idx)
+{
+	var l = _lvl;
+	var o = _idx;
+	
+	lvl[l].option[o].check =
+	{
+		spr : global.player.thm[global.player.thm_curr].spr.option_check,
+			
+		x : 0,
+		y : 0,
+		xPad : (16 / 2),
+			
+		color : c_white,
+		alpha : [0.35 /* Inactive (Unselected) */, 1 /* Active (Selected) */],
+		
+		// Mark
+		mark :
+		{
+			act : false,
+			spr : global.player.thm[global.player.thm_curr].spr.option_check_mark,
+			
+			x : 0,
+			y : 0,
+			
+			alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
+		}
+	}
+}
+
+		// Button
+function fn_menu_lvl_option_button_add(_lvl, _idx)
+{
+	var l = _lvl;
+	var o = _idx;
+	
+	lvl[l].option[o].button =
+	{
+		spr : global.player.thm[global.player.thm_curr].spr.option_button,
+		img_inact : 0, // image_index while inactive (unselected)
+		img_act : 1, // image_index while active (selected)
+			
+		x : 0,
+		y : 0,
+		xPad : 6,
+		yPad : 3,
+		width : 0,
+		height : 0,
 	}
 }

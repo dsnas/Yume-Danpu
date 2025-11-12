@@ -4,5 +4,3 @@
 
 if (lvl_curr = LVL_MAIN && _opt_curr < 3)
 	fn_menu_lvl_fader_start(LVL_OTHER);
-else
-	_confirm_snd = -1;

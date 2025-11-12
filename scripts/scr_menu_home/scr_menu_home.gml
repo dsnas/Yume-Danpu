@@ -130,7 +130,7 @@ function fn_menu_home_evStep()
 	// Plays menu start sound when the languages level opens
 	if (lvl == LVL_LANG && lvl_alp[lvl] == 1 && lang_snd_act == false)
 	{
-		fn_aud_play(lang_snd, CONFIG_AUD_STYLE.MENU);
+		fn_aud_play(lang_snd, CONFIG_AUD_EMTR.MENU);
 		lang_snd_act = true;
 	}
 	

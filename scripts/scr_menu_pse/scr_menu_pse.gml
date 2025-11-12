@@ -78,7 +78,7 @@ function fn_menu_pse_evCreate_1()
 	instance_activate_object(obj_stage);
 	instance_activate_object(obj_dbg);
 	audio_pause_all();
-	fn_aud_play(global.player.thm[global.player.thm_curr].opt_slct_snd, CONFIG_AUD_STYLE.MENU);
+	fn_aud_play(global.player.thm[global.player.thm_curr].opt_slct_snd, CONFIG_AUD_EMTR.MENU);
 }
 function fn_menu_pse_evDrawGUI_0(l)
 {
