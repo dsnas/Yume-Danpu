@@ -6,17 +6,16 @@ function fn_config_setup()
 {
 	global.config =
 	{
-		// Main
-		name : (irandom_range(1, 100) != 1) ? "Yume Danpu" : choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume-Danpu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu", "Yummy Nicky", "Yum Dnampy", "Yume Dhanpy"),
+		name : "Yume Danpu",
 		ver : 0.05,
 		
 		// Languages
 		lang : [-1],
-		lang_data : -1,
 		lang_fnt :
 		{
 			dflt : font_add_sprite_ext(spr_config_lang_fnt_dflt, "aáàâãbcçdeéèêfghiíìîjklmnoóòôõpqrstuúùûvwxyzAÁÀÂÃBCÇ₢DEÉÈÊFGHIÍÌÎJKLMNOÓÒÔÕPQRS$TUÚÙÛVWXYZ' ,.?!:;\"&1234567890%()[]/_-—<>←→↑↓", false, 1)
 		},
+		lang_data : -1,
 		lang_curr : 0,
 		lang_hasChosen : false,
 		
@@ -80,13 +79,16 @@ function fn_config_setup()
 		},	
 	}
 	
-		// File [#0] (Creates the file directory if needed; Loads a previously selected language if there's already a file)
+		// File [#0] (Creates the file directory if needed; Loads the previously selected language if there's already a file)
 	global.config.file_name = string(global.config.ver) + "/config.ini";
 	global.config.file_msg = choose("There's an in-game options menu. I think you'll like it.", "Is this Notepad World?", "Are you by any chance on Linux?", "Looking for super-secret settings?");
 	if (directory_exists(global.config.ver) == false)
 		directory_create(global.config.ver);
 	else if (file_exists(global.config.file_name) == true)
 	{
+		if (irandom_range(1, 100) <= 5)
+			global.config.name = choose("Danpu Nikki", "Yume Nikki", "Yume Dapnu", "Yume Danpy", "Yume Dangu", "Yume-Danpu", "Yume Fanpu", "Dume Yanpu", "Yume Champu", "Yummy Danpu", "Yummy Nicky", "Yum Dnampy", "Yume Dhanpy", "Yum Djampp");
+		
 		ini_open(global.config.file_name);
 		global.config.lang_curr = ini_read_real("lang", "curr", CONFIG_LANG.enUS);
 		ini_close();
@@ -227,7 +229,6 @@ function fn_config_lang_add(_idx, _code)
 	{
 		name : $"config_lang_{_code}",
 		code : _code,
-		
 		fnt : global.config.lang_fnt.dflt
 	}
 }

@@ -75,30 +75,48 @@ if (is_array(lvl) == true)
 	// Fade transition is active
 	else if (lvl_fader.stg > -1)
 	{
-		if (lvl_fader.stg == 0)
+		lvl[lvl_curr].alpha = fn_lerp(lvl[lvl_curr].alpha, 0, lvl_fader.alpSpd);
+		
+		if (lvl_fader.wait_dur <= 0)
 		{
-			lvl[l].alpha = fn_lerp(lvl[l].alpha, 0, lvl_fader.alpSpd);
-			if (lvl[l].alpha <= lvl_fader.alpJump)
+			lvl[lvl_fader.tgt.lvl].alpha = fn_lerp(lvl[lvl_fader.tgt.lvl].alpha, 1, lvl_fader.alpSpd);
+			if (lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump) && lvl_fader.tgt.snd != undefined)
 			{
-				lvl[l].alpha = 0;
-				lvl_curr = lvl_fader.tgt.lvl;
-				lvl_fader.stg = 1;
+				fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
+				lvl_fader.tgt.snd = undefined;
 			}
 		}
-		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur <= 0)
-		{
-			lvl[l].alpha = fn_lerp(lvl[l].alpha, 1, lvl_fader.alpSpd);
-			if (lvl[l].alpha >= (1 - lvl_fader.alpJump))
-			{
-				lvl[l].alpha = 1;
-				lvl_fader.stg = -1;
-				if (lvl_fader.tgt.snd != -1)
-					fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
-				lvl_fader.tgt.snd = -1;
-				lvl_fader.wait_dur = 0;
-			}
-		}
-		else if (lvl_fader.stg == 1 && lvl_fader.wait_dur > 0)
+		else
 			lvl_fader.wait_dur -= 1;
+		
+		if (lvl[lvl_curr].alpha <= lvl_fader.alpJump && lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump))
+		{
+			lvl[lvl_curr].alpha = 0;
+			lvl[lvl_fader.tgt.lvl].alpha = 1;
+			lvl_curr = lvl_fader.tgt.lvl;
+			lvl_fader.stg = -1;
+		}
+		
+		
+		
+		/*
+		lvl[lvl_curr].alpha = fn_lerp(lvl[lvl_curr].alpha, 0, lvl_fader.alpSpd);
+		if (lvl_fader.wait_dur <= 0)
+			lvl[lvl_fader.tgt.lvl].alpha = fn_lerp(lvl[lvl_fader.tgt.lvl].alpha, 1, lvl_fader.alpSpd);
+		else
+			lvl_fader.wait_dur -= 1;
+		if (lvl[lvl_curr].alpha <= lvl_fader.alpJump && lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump))
+		{
+			lvl[lvl_curr].alpha = 0;
+			lvl[lvl_fader.tgt.lvl].alpha = 1;
+			if (lvl_fader.tgt.snd != undefined)
+				fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
+			
+			lvl_curr = lvl_fader.tgt.lvl;
+			lvl_fader.stg = -1;
+			lvl_fader.tgt.snd = undefined;
+			lvl_fader.wait_dur = 0;
+		}
+		*/
 	}
 }

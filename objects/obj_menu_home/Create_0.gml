@@ -28,14 +28,35 @@ var l = LVL_MAIN;
 fn_menu_lvl_add(l);
 if (global.config.lang_hasChosen == true)
 	fn_menu_lvl_fader_start(l, , , 0);
-
-	// Options
 for (var o = 0; o < 3; o++)
 	fn_menu_lvl_option_add(l, o);
-
-fn_menu_lvl_panel_add(l, 0); // Panel
-
-	// Decorations
-fn_menu_lvl_decor_add(l, 0);
 for (var p = 0; p < 2; p++)
-	fn_menu_lvl_decor_add(l, (1 + p));
+	fn_menu_lvl_panel_add(l, p);
+fn_menu_lvl_train_add(l, 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

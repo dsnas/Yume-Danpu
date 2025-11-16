@@ -32,17 +32,17 @@ function fn_obj_exists(_asset) // Returns whether if the specified object exists
 {
 	return instance_exists(_asset);
 }
-function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _col = c_white, _alp = 1, _xSc = 1, _ySc = 1, _ang = 0) // Adjusts the specified object's image
+function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1, _angle = 0) // Adjusts the specified object's image
 {
 	with (_asset)
 	{
 		image_speed = _spd;
 		image_index = _idx;
-		image_blend = _col;
-		image_alpha = _alp;
-		image_xscale = _xSc;
-		image_yscale = _ySc;
-		image_angle = _ang;
+		image_blend = _color;
+		image_alpha = _alpha;
+		image_xscale = _xScale;
+		image_yscale = _yScale;
+		image_angle = _angle;
 	}
 }
 function fn_obj_depth(_asset = id, _val = -_asset.y)
