@@ -17,11 +17,11 @@
 <h2><br>Featuring</h2>
 <ul>
   <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
-  <li><strong>Not one, but three types of collectibles:</strong>
+  <li><strong>Not one, but three types of collectibles you can find while exploring:</strong>
     <ul>
-      <li><strong>Effects</strong> are magical eggs you can eat to get a new body and abilities.</li>
-      <li><strong>Items</strong> are ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
-      <li><strong>Themes</strong> change the appearance of menus. They are ultimately useless.</li>
+      <li><strong>Effects</strong>, magical eggs that give you a new body with special abilities.</li>
+      <li><strong>Items</strong>, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
+      <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless.</li>
     </ul>
   </li>
 </ul>
