@@ -11,14 +11,19 @@
 </p>
 <p>
   Yume Danpu is currently in development by me, dsans, and migel8022, who made all the music. Updates may take a while because of school or other life matters.
-  This repository is updated regularly while we're working on it, not just when new versions are released.
+  Also, this repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
 
 <h2><br>Featuring</h2>
 <ul>
   <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
-  <li><strong>Not one, but three types of collectibles:</strong> effects, items, and themes.</li>
-  <li><strong>A driveable go-kart.</strong> Very important</li>
+  <li><strong>Not one, but three types of collectibles:</strong>
+    <ul>
+      <li><strong>Effects</strong> are magical eggs you can eat to get a new body and abilities.</li>
+      <li><strong>Items</strong> are ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
+      <li><strong>Themes</strong> change the appearance of menus. They are ultimately useless.</li>
+    </ul>
+  </li>
 </ul>
 
 <h2><br>Development and release videos</h2>
@@ -31,8 +36,10 @@
 <blockquote>A shark plushie asked me to. Not sure why, though.</blockquote>
 <h3>Why use GameMaker?</h3>
 <blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
-<h3>Does that mean the style is completely different from Yume Nikki?</h3>
-<blockquote>Not really, the difference is mostly improvements and additions.</blockquote>
+<h3>So the style is different from Yume Nikki?</h3>
+<blockquote>No, but we're trying not to make more of the same.</blockquote>
+<h3>Do I need to download anything besides the .zip file?</h3>
+<blockquote>No, GameMaker runs beautifully on its own, unlike RPG Maker 2003.</blockquote>
 
 <h3 align="center">
   <br><br>Think the game is ugly? Yeah, we do too.
