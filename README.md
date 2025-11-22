@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"/></a>
 </p>
 <p>
-  Yume Danpu is currently in development by me, dsans, and migel8022, who made all the music. Updates may take a while because of school or other life matters.
+  Yume Danpu is currently in development by me, <strong>dsans</strong>, and <strong>migel8022</strong>, who made all the music. Updates may take a while because of school or other life matters.
   Also, this repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
 
@@ -33,17 +33,14 @@
 
 <h2><br>Never asked questions</h2>
 <h3>Why is it open-source?</h3>
-<blockquote>A shark plushie asked me to. Not sure why, though.</blockquote>
+<blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why use GameMaker?</h3>
 <blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
-<h3>So the style is different from Yume Nikki?</h3>
-<blockquote>No, but we're trying not to make more of the same.</blockquote>
+<h3>Is the style different from Yume Nikki's?</h3>
+<blockquote>No but we're trying not to make more of the same.</blockquote>
 <h3>Do I need to download anything besides the .zip file?</h3>
 <blockquote>No, GameMaker runs beautifully on its own, unlike RPG Maker 2003.</blockquote>
 
-<h3 align="center">
-  <br><br>Think the game is ugly? Yeah, we do too.
-  <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼
-  <br><br><a href="https://dsnas.itch.io/yume-danpu">
-    <img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia monkey" height="6" /></a>
-</h3>
+<h3 align="center"><br><br>Think the game is ugly? Yeah, we do too.<br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
+<h6 align="center">The hardest part of having a lot of ideas is actually making them...</h6>
+<a href="https://dsnas.itch.io/yume-danpu"><img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia monkey" height="6"/></a>
