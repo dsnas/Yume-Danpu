@@ -1,5 +1,5 @@
-<h1 align="center"><b>Yume Danpu</b></h1>
-<p align="center"><b>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</b></p>
+<h1 align="center"><strong>Yume Danpu</strong></h1>
+<p align="center"><strong>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</strong></p>
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version"/>
   <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity"/>
@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"/></a>
 </p>
 <p>
-  Yume Danpu is currently in development by me, <strong>dsans</strong>, and <strong>migel8022</strong>, who made all the music. Updates may take a while because of school or other life matters.
+  Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>, who made all the music. Updates may take a while because of school or other life matters.
   Also, this repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
 
@@ -19,9 +19,9 @@
   <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
   <li><strong>Not one, but three types of collectibles you can find while exploring:</strong>
     <ul>
-      <li><strong>Effects</strong>, magical eggs that give you a new body with special abilities.</li>
-      <li><strong>Items</strong>, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
-      <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless.</li>
+      <li><strong>Effects</strong>, magical eggs that give you a new body with special abilities. <i>(0)</i></li>
+      <li><strong>Items</strong>, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>. <i>(1)</i></li>
+      <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless. <i>(3)</i></li>
     </ul>
   </li>
 </ul>
