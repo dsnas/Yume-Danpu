@@ -1,16 +1,16 @@
 <h1 align="center"><strong>Yume Danpu</strong></h1>
 <p align="center"><strong>An open-source Yume Nikki fangame created in Brazil by dsans and migel8022</strong></p>
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version"/>
-  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity"/>
-  <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License"/>
+  <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version">
+  <img src="https://img.shields.io/github/commit-activity/m/dsnas/Yume-Danpu?color=4BFF84" alt="Commit activity">
+  <img src="https://img.shields.io/github/license/dsnas/Yume-Danpu?color=4BFF84" alt="License">
   <a href="https://dsnas.itch.io/yume-danpu">
-    <img src="https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5" alt="Itch.io"/></a>
+    <img src="https://img.shields.io/badge/Itch.io-FA5C5C?logo=itchdotio&logoColor=f5f5f5" alt="Itch.io"></a>
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"/></a>
+    <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"></a>
 </p>
 <p>
-  Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>, who made all the music. Updates may take a while because of school or other life matters.
+  Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>, who made all the music. Updates may take a while because of school and other life matters.
   Also, this repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
 
@@ -27,9 +27,7 @@
 </ul>
 
 <h2><br>Development and release videos</h2>
-<p>
-  If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube</a>! I guess it would blow some of the surprises, though...
-</p>
+<p>If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube</a>! I guess it would blow some of the surprises, though...</p>
 
 <h2><br>Never asked questions</h2>
 <h3>Why is it open-source?</h3>
@@ -43,4 +41,4 @@
 
 <h3 align="center"><br><br>Think the game is ugly? Yeah, we do too.<br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
 <h6 align="center">The hardest part of having a lot of ideas is actually making them...</h6>
-<a href="https://dsnas.itch.io/yume-danpu"><img src="./sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="Macacolandia monkey" height="6"/></a>
+<a href="https://dsnas.itch.io/yume-danpu"><img src="https://raw.githubusercontent.com/dsnas/Yume-Danpu/refs/heads/main/sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="If you're reading this, I messed up somehow."></a>
