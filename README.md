@@ -14,7 +14,7 @@
   Also, this repository is updated regularly while we're working on it, not just when new versions are released.
 </p>
 
-<h2><br>Featuring</h2>
+<h2><br>Features</h2>
 <ul>
   <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
   <li><strong>Not one, but three types of collectibles you can find while exploring:</strong>
@@ -24,22 +24,23 @@
       <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless. <i>(3)</i></li>
     </ul>
   </li>
+  <li><strong>An original soundtrack made entirely by migel8022!</strong> It even has tracks longer than three seconds!!</li>
 </ul>
 
 <h2><br>Development and release videos</h2>
 <p>If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube</a>! I guess it would blow some of the surprises, though...</p>
 
 <h2><br>Never asked questions</h2>
+<h3>Is Yume Danpu associated with Yume Nikki?</h3>
+<blockquote>No, it's purely a fan game.</blockquote>
 <h3>Is anything else needed besides the .zip file?</h3>
-<blockquote>No. GameMaker isn't like RPG Maker 2003.</blockquote>
-<h3>Is Yume Danpu associated with KIKIYAMA?</h3>
-<blockquote>No. It is purely a fan game of Yume Nikki.</blockquote>
+<blockquote>No, GameMaker isn't like RPG Maker 2003.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
 <blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
 <h3>Why do updates take so long?</h3>
-<blockquote>Mostly because of school and other life matters, and I'm the only one programming Yume Danpu. One must imagine.</blockquote>
+<blockquote>School and other life matters, and I'm the only one programming Yume Danpu.</blockquote>
 
 <h3 align="center"><br><br>Think the game is ugly? Yeah, we do too.<br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
 <h6 align="center">The hardest part of having a lot of ideas is actually making them...</h6>
