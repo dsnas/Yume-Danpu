@@ -77,17 +77,19 @@ if (is_array(lvl) == true)
 		lvl[l].panel[0].y = _panel_y;
 		lvl[l].panel[0].width = _panel_width;
 		lvl[l].panel[0].height = _panel_height;
+		lvl[l].panel[0].alpha = 0.5;
 		
-		// Triangle train decorations
+		// Triangle train
 		lvl[l].train[0].xStart = 0;
-		lvl[l].train[0].yStart = (_panel_y - (fn_spr_height(lvl[l].train[0].spr) / 2));
+		lvl[l].train[0].yStart = (_panel_y - fn_spr_height(lvl[l].train[0].spr));
 		lvl[l].train[0].xSpd = -0.5;
+		lvl[l].train[0].alpha = 0.5;
 		
 		// Panel (start menu)
 		var _panel_outDist = 8;
 		var _panel_x = -_panel_outDist;
-		var _panel_y = ((global.config.vid.resH / 2) - 8);
-		var _panel_width = ((16 * 7) + abs(_panel_x));
+		var _panel_y = (global.config.vid.resH / 2);
+		var _panel_width = (abs(_panel_x) + (16 * 7));
 		var _panel_height = ((global.config.vid.resH - _panel_y) + _panel_outDist);
 		/*
 		var _panel_xMargin = 16;
@@ -104,24 +106,31 @@ if (is_array(lvl) == true)
 		
 		// Card
 		var _card_xMargLT = (_panel_outDist + 8);
-		var _card_xMargRT = 32;
+		var _card_xMargRT = ((_panel_outDist / 2) + 8);
 		var _card_yMargUP = ((_panel_outDist / 2) + 8);
-		var _card_yMargDN = (_panel_outDist + 16);
+		var _card_yMargDN = (_panel_outDist + 8);
 		var _card_x = (_panel_x + _card_xMargLT);
 		var _card_y = (_panel_y + _card_yMargUP);
 		var _card_width = (-_card_xMargLT + _panel_width - _card_xMargRT);
 		var _card_height = (-_card_yMargUP + _panel_height - _card_yMargDN);
-		fn_menu_lvl_card_add(l, 0, _card_x, _card_y, _card_width, _card_height);
+		/*
+		lvl[l].card[0].x = _card_x;
+		lvl[l].card[0].y = _card_y;
+		lvl[l].card[0].width = _card_width;
+		lvl[l].card[0].height = _card_height;
+		*/
+		
 		
 		// Options
 		var _opt_len = array_length(lvl[l].option);
-		var _opt_yGap = (fn_text_height("Salenis") + 6);
+		var _opt_yGap = (fn_text_height("Salenis") + 9);
 		var _opt_heightAll = ((_opt_yGap * (_opt_len - 1)) + fn_text_height("Salenis"));
 		for (var o = 0; o < _opt_len; o++)
 		{
 			lvl[l].option[o].text = $"menu_home_main_option_{o}";
-			lvl[l].option[o].x = round(_card_x + (_card_width / 2) - (fn_textdata_width(lvl[l].option[o].text) / 2));
+			lvl[l].option[o].x = round(_card_x + (_card_width / 2) - (fn_menu_lvl_option_getWidthMax(l) / 2) + (fn_menu_lvl_option_icon_xGap_getDflt(l, o) / 2));
 			lvl[l].option[o].y = round((_card_y + (_card_height / 2)) - (_opt_heightAll / 2) + (_opt_yGap * o));
+			lvl[l].option[o].icon.color = [global.player.thm[global.player.thm_curr].color.grayDark /* Inactive (Unselected) */, global.player.thm[global.player.thm_curr].color.whiteLight /* Active (Selected) */];
 		}
 	
 		/*

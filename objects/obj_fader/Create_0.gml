@@ -3,12 +3,9 @@ fn_obj_img( , , , , 0);
 fn_obj_depth( , -11000);
 
 
-
-
 stg = -1; // ID number of the current stage of the transition
 
-
-// Source (data about the transition's origin)
+// Source, data about the transition's origin
 src =
 {
 	rm : -1,
@@ -16,8 +13,7 @@ src =
 	obj_id : -1
 }
 
-
-// Target (data about the transition's target)
+// Target, data about the transition's target)
 tgt =
 {
 	rm : -1,
@@ -30,7 +26,6 @@ tgt =
 	}
 }
 
-
 // Types
 type =
 {
@@ -38,6 +33,7 @@ type =
 	fade :
 	{
 		act : false,
+		
 		col : c_black,
 		alp : 0,
 		alpSpd : 0.15, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
@@ -46,6 +42,7 @@ type =
 		iris :
 		{
 			act : false,
+			
 			x : (320 / 2),
 			y : (240 / 2),
 			xOfs : 0,

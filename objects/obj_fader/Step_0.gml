@@ -1,5 +1,6 @@
 
-if (type.fade.act == true) // Fade type
+// Fade type
+if (type.fade.act == true)
 {
 	var _iris = type.fade.iris;
 	if (_iris.act == false && stg == -1)
@@ -19,7 +20,6 @@ if (type.fade.act == true) // Fade type
 			stg = 0;
 	}
 	
-	
 	// Fades out of the source room
 	if (stg == 0)
 	{
@@ -34,14 +34,13 @@ if (type.fade.act == true) // Fade type
 		}
 	}
 	
-	
 	// Fades in to the target room
 	else if (stg == 1 && type.fade.wait.dur > 0)
 	{
 		type.fade.wait.dur -= 1;
-		if (fn_obj_exists(obj_player) == true)
+		if (fn_obj_exists(obj_actor_player) == true)
 		{
-			with (obj_player)
+			with (obj_actor_player)
 			{
 				if (other.tgt.player.x != 0)
 				{
@@ -69,8 +68,8 @@ if (type.fade.act == true) // Fade type
 			type.fade.alp = 0;
 			fn_obj_destroy();
 			
-			if (fn_obj_exists(obj_player) == true)
-				obj_player.move.stg = -1;
+			if (fn_obj_exists(obj_actor_player) == true)
+				obj_actor_player.move.stg = -1;
 		}
 	}
 }

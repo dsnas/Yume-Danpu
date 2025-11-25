@@ -35,10 +35,7 @@ if (global.dbg.act == true && keyboard_check(global.dbg.cmd.key) == true)
 		if (keyboard_check(_cmd.reset_key[1]) == true && global.player.file_curr != -1)
 			fn_player_file_erase(global.player.file_curr);
 		if (keyboard_check(_cmd.reset_key[2]) == true)
-		{
 			fn_config_file_erase();
-			fn_config_lang_file_erase();
-		}
 		
 		game_restart();
 	}

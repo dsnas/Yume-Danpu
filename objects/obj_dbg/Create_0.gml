@@ -6,7 +6,7 @@ fn_obj_depth( , -14000);
 // Debug Mode
 global.dbg =
 {
-	act : false, // Determines if Debug Mode is enabled
+	act : true, // Determines if Debug Mode is enabled
 	pwd : "hunter2", // Password to enter to toggle Debug Mode (type it with your keyboard anywhere at anytime)
 	
 	
@@ -22,7 +22,7 @@ global.dbg =
 		
 		// Fader, starts a room transition to the specified room
 		fader_key : ord("F"),
-		fader_rm : [rm_dbgwrld, rm_nexus],
+		fader_rm : [rm_menu_dbg, temp_rm_menu_home, rm_dbgwrld],
 		
 		// Reset, restarts the game
 		reset_key : [ord("R"), vk_shift, vk_control]

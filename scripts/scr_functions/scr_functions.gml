@@ -2,7 +2,6 @@
 //////// Functions that are basic for the game to work
 
 
-
 // Functions related to the window
 function fn_wnd_name(_text)
 {
@@ -16,23 +15,21 @@ function fn_wnd_name(_text)
 }
 
 
-
-
 // Functions related to objects
-function fn_obj_create(_asset = id, _x = 0, _y = 0, _varStruct = {}) // Creates the specified object at the given position
+function fn_obj_create(_asset = id, _x = 0, _y = 0, _varStruct = {})
 {
 	obj_id = instance_create_layer(_x, _y, "Instances", _asset, _varStruct);
 	return obj_id;
 }
-function fn_obj_destroy(_asset = id) // Destroys the specified object
+function fn_obj_destroy(_asset = id)
 {
 	instance_destroy(_asset);
 }
-function fn_obj_exists(_asset) // Returns whether if the specified object exists
+function fn_obj_exists(_asset)
 {
 	return instance_exists(_asset);
 }
-function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1, _angle = 0) // Adjusts the specified object's image
+function fn_obj_img(_asset = id, _spd = 0, _idx = 0, _color = c_white, _alpha = 1, _xScale = 1, _yScale = 1, _angle = 0)
 {
 	with (_asset)
 	{
@@ -49,8 +46,6 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 {
 	_asset.depth = _val;
 }
-
-
 
 
 // Functions related to drawing
@@ -85,13 +80,12 @@ function fn_draw_circle(_x, _y, _radius, _precision)
 }
 
 	// Sprites
-function fn_draw_spr(_spr, _img, _x, _y, _color = c_white, _alpha = 1, _xScale = 1, _yScale = _xScale, _angle = 0, _shadow_act = false)
+function fn_draw_spr(_spr, _img, _x, _y, _color = c_white, _alpha = 1, _xScale = 1, _yScale = _xScale, _angle = 0, _shadow_act = false, _shadow_color = global.player.thm[global.player.thm_curr].color.blackDark)
 {
 	if (_spr != -1)
 	{
 		if (_shadow_act == true)
 		{
-			var _shadow_color = global.player.thm[global.player.thm_curr].color.shadow;
 			var _shadow_alpha = (global.player.thm[global.player.thm_curr].alpha.shadow * _alpha);
 			draw_sprite_ext(_spr, _img, (_x + 1), (_y + 1), _xScale, _yScale, _angle, _shadow_color, _shadow_alpha);
 		}
@@ -126,8 +120,6 @@ function fn_draw_line(_x1, _y1, _x2, _y2, _color = c_white, _alpha = 1, _thickne
 }
 
 
-
-
 // Functions related to audio, like music and sounds
 function fn_aud_play(_asset, _style, _vol = 1, _ofs = 0, _pch = 1, _loops = false) // Plays the specified audio
 {
@@ -159,7 +151,7 @@ function fn_aud_volData(_asset, _vol)
 	switch (_asset)
 	{
 		// Player
-		case snd_player_fstep:
+		case snd_actor_player_fstep:
 			_vol *= 0.75;
 			break;
 		
@@ -329,8 +321,6 @@ function fn_aud_pchData(_asset, _pch)
 }
 
 
-
-
 // Functions related to sprites
 function fn_spr_width(_asset) // Returns the width of the specified sprite
 {
@@ -352,8 +342,6 @@ function fn_spr_height(_asset) // Returns the height of the specified sprite
 		return 0;
 	}
 }
-
-
 
 
 // Functions related to text
@@ -390,8 +378,6 @@ function fn_textdata_height(_text) // Returns the height of the specified textda
 }
 
 
-
-
 // Functions related to math
 function fn_lerp(_valCur, _valTgt, _spd)
 {
@@ -413,8 +399,6 @@ function fn_lerp_col(_colCur, _colTgt, _spd)
 	
 	return make_color_hsv(_col_hue, _col_sat, _col_vAl);
 }
-
-
 
 
 // Other functions

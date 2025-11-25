@@ -10,7 +10,7 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":-1.0,
+  "duration":12.199183,
   "exportDir":"",
   "name":"unused_mus_wrld_pikini_1",
   "parent":{

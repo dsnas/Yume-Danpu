@@ -1,4 +1,5 @@
 
+// Fade type
 if (type.fade.act == true)
 {
 	var _fade = type.fade;

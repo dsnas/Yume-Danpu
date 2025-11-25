@@ -25,20 +25,22 @@ if (is_array(lvl) == true)
 					var _train = lvl[l].train[t];
 					if (_train.xStart != undefined && _train.yStart != undefined)
 					{
+						var _train_xGap = lengthdir_x(fn_spr_width(_train.spr), _train.angle);
+						var _train_yGap = lengthdir_y(fn_spr_height(_train.spr), _train.angle);
 						if (_train.xSpd != 0)
 						{
 							lvl[l].train[t].xOfs += _train.xSpd;
-							if (abs(lvl[l].train[t].xOfs) >= fn_spr_width(_train.spr))
+							if (abs(lvl[l].train[t].xOfs) >= abs(_train_xGap))
 								lvl[l].train[t].xOfs = 0;
 						}
 						if (_train.ySpd != 0)
 						{
 							lvl[l].train[t].yOfs += _train.ySpd;
-							if (abs(lvl[l].train[t].yOfs) >= fn_spr_height(_train.spr))
+							if (abs(lvl[l].train[t].yOfs) >= abs(_train_yGap))
 								lvl[l].train[t].yOfs = 0;
 						}
 						for (var c = 0; c < 21; c++)
-							fn_draw_spr(_train.spr, 0, _train.xStart + lvl[l].train[t].xOfs + (lengthdir_x(fn_spr_width(_train.spr), _train.angle) * c), _train.yStart + lvl[l].train[t].yOfs + (lengthdir_y(fn_spr_height(_train.spr), _train.angle) * c), , lvl[l].alpha, , , _train.angle);
+							fn_draw_spr(_train.spr, 0, _train.xStart + lvl[l].train[t].xOfs + (_train_xGap * c), _train.yStart + lvl[l].train[t].yOfs + (_train_yGap * c), _train.color, (_train.alpha * lvl[l].alpha), , , _train.angle);
 					}
 				}
 			}
@@ -62,7 +64,7 @@ if (is_array(lvl) == true)
 				{
 					var _panel = lvl[l].panel[p];
 					if (_panel.spr != undefined && _panel.x != undefined && _panel.y != undefined && _panel.width != undefined && _panel.height != undefined)
-						fn_draw_spr_stretch(_panel.spr, _panel.img, round(_panel.x), round(_panel.y), _panel.width, _panel.height, , lvl[l].alpha);
+						fn_draw_spr_stretch(_panel.spr, _panel.img, round(_panel.x), round(_panel.y), _panel.width, _panel.height, , (_panel.alpha * lvl[l].alpha));
 				}
 			}
 			
@@ -107,6 +109,8 @@ if (is_array(lvl) == true)
 					var _opt = lvl[l].option[o];
 					if (_opt.text != undefined && _opt.x != undefined && _opt.y != undefined)
 					{
+						var _opt_shadow_col = ((o == lvl[l].option_curr) ? global.player.thm[global.player.thm_curr].color.blackLight : global.player.thm[global.player.thm_curr].color.blackDark);
+						
 							// Button
 						if (is_struct(_opt.button) == true)
 						{
@@ -124,15 +128,24 @@ if (is_array(lvl) == true)
 							var _select_y = round((_opt.select.y != 0) ? _opt.select.y : (_opt.y - _opt.select.yDist + 1));
 							var _select_width = round((_opt.select.width != 0) ? _opt.select.width : ((_opt.select.xDist * 2) + fn_textdata_width(_opt.text)));
 							var _select_height = round((_opt.select.height != 0) ? _opt.select.height : ((_opt.select.yDist * 2) + fn_textdata_height(_opt.text)));
+							if (is_struct(_opt.icon) == true && _opt.icon.spr != -1)
+							{
+								var _icon_xGap = round((_opt.icon.xGap != 0) ? _opt.icon.xGap : fn_menu_lvl_option_icon_xGap_getDflt(l, o));
+								_select_x -= _icon_xGap;
+								_select_width += _icon_xGap;
+							}
 							fn_draw_spr_stretch(_opt.select.spr, _opt.select.img, _select_x, _select_y, _select_width, _select_height, , lvl[l].alpha);
 						}
 			
 							// Icon
 						if (is_struct(_opt.icon) == true && _opt.icon.spr != -1)
 						{
-							var _icon_x = round((_opt.icon.x != 0) ? _opt.icon.x : (_opt.x - _opt.icon.xPad - fn_spr_width(_opt.icon.spr)));
+							var _icon_xGap = round((_opt.icon.xGap != 0) ? _opt.icon.xGap : fn_menu_lvl_option_icon_xGap_getDflt(l, o));
+							var _icon_x = round((_opt.icon.x != 0) ? _opt.icon.x : (_opt.x - _icon_xGap));
 							var _icon_y = round((_opt.icon.y != 0) ? _opt.icon.y : (_opt.y + round(fn_textdata_height(_opt.text) / 2) - round(fn_spr_height(_opt.icon.spr) / 2) + 1));
-							fn_draw_spr(_opt.icon.spr, _opt.icon.img, _icon_x, _icon_y, _opt.icon.color, (_opt.icon.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha));
+							var _icon_color = _opt.icon.color[(o == lvl[l].option_curr)];
+							var _icon_alpha = (_opt.icon.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha);
+							fn_draw_spr(_opt.icon.spr, _opt.icon.img, _icon_x, _icon_y, _icon_color, _icon_alpha, , , , true, _opt_shadow_col);
 						}
 			
 							// Checkbox
@@ -141,7 +154,7 @@ if (is_array(lvl) == true)
 							var _check_x = round((_opt.check.x != 0) ? _opt.check.x : (_opt.x - _opt.check.xPad - fn_spr_width(_opt.check.spr)));
 							var _check_y = round((_opt.check.y != 0) ? _opt.check.y : (_opt.y + round(fn_textdata_height(_opt.text) / 2) - round(fn_spr_height(_opt.check.spr) / 2) + 1));
 							fn_draw_spr(_opt.check.spr, 0, _check_x, _check_y, _opt.check.color, (_opt.check.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha));
-			
+							
 							// Mark
 							if (_opt.check.mark.act == true)
 							{
@@ -155,7 +168,6 @@ if (is_array(lvl) == true)
 						// Option
 						var _opt_x = round(_opt.x);
 						var _opt_y = round(_opt.y);
-						var _opt_shadow_col = ((o == lvl[l].option_curr) ? global.player.thm[global.player.thm_curr].color.blackLight : global.player.thm[global.player.thm_curr].color.blackDark);
 						fn_draw_text(textdata(_opt.text), _opt_x, _opt_y, _opt.color[(o == lvl[l].option_curr), 0], _opt.color[(o == lvl[l].option_curr), 1], lvl[l].alpha, , , _opt.xAlign, _opt.yAlign, _opt_shadow_col);
 			
 							// Value (the text beside the options in the settings menu, like "Yes", "No" and "100%")

@@ -1,4 +1,5 @@
 
+// Fade type
 if (type.fade.act == true && type.fade.iris.act == true && stg < 1)
 {
 	var _iris = type.fade.iris;

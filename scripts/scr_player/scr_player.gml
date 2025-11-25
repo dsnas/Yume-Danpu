@@ -39,8 +39,8 @@ function fn_player_setup(_file_curr = -1)
 		
 		// Save files
 		file : [-1],
-		file_curr : _file_curr, // Determines which save file is currently active
-		file_amtMax : 10
+		file_curr : _file_curr, // Determines which save file is currently active (-1 == none)
+		file_amtMax : 3
 	}
 	
 		// Effects

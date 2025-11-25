@@ -9,37 +9,28 @@ function fn_menu_lvl_add(_idx)
 	{
 		alpha : 0,
 		
-		
 		// Triangle trains
 		train : -1,
-		
 		
 		// Title
 		title : -1,
 		
-		
 		// Panels
 		panel : -1,
-		
 		
 		// Cards
 		card : -1,
 		
-		
 		// Labels
 		label : -1,
-		
 		
 		// Decorations
 		decor : -1,
 		
-		
 		// Options
 		option : -1,
-		option_curr : 0,
-		
-			// Movement
-		option_move :
+		option_curr : 0,	
+		option_move : // Movement
 		{
 			act : true,
 			snd : global.player.thm[global.player.thm_curr].snd.move,
@@ -57,17 +48,13 @@ function fn_menu_lvl_add(_idx)
 				act : false
 			}
 		},
-		
-			// Confirmation
-		option_confirm :
+		option_confirm : // Confirmation
 		{
 			act : true,
 			key : CONFIG_KEY.CONFIRM,
 			snd : global.player.thm[global.player.thm_curr].snd.confirm
 		},
-		
-			// Cancellation
-		option_cancel :
+		option_cancel : // Cancellation
 		{
 			act : true,
 			key : CONFIG_KEY.CANCEL,
@@ -97,7 +84,7 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = undefined, _tgt_destroy = 
 }
 
 	// Triangle trains
-function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefined, _xSpd = 0, _ySpd = 0, _angle = 0)
+function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefined, _xSpd = 0, _ySpd = 0, _angle = 0, _color = global.player.thm[global.player.thm_curr].color.grayLight, _alpha = 1)
 {
 	var l = _lvl;
 	var t = _idx;
@@ -112,6 +99,9 @@ function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefi
 		ySpd : _ySpd,
 		xOfs : 0,
 		yOfs : 0,
+		
+		color : _color,
+		alpha : _alpha,
 		
 		angle : _angle
 	}
@@ -157,7 +147,7 @@ function fn_menu_lvl_title_add(_lvl, _text = undefined)
 }
 
 	// Panels
-function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined)
+function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined, _alpha = 1)
 {
 	var l = _lvl;
 	var p = _idx;
@@ -170,7 +160,9 @@ function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _widt
 		x : _x,
 		y : _y,
 		width : _width,
-		height : _height
+		height : _height,
+		
+		alpha : _alpha
 	}
 }
 
@@ -284,6 +276,14 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text = undefined, _x = undefined, _
 		button : -1
 	}
 }
+function fn_menu_lvl_option_getWidthMax(_lvl)
+{
+	var l = _lvl;
+	var _widthMax = 0;
+	for (var o = 0; o < array_length(lvl[l].option); o++)
+		_widthMax = max(_widthMax, fn_text_width(textdata(lvl[l].option[o].text)));
+	return _widthMax;
+}
 
 		// Value (the text beside the options in the settings menu, like "Yes", "No" and "100%")
 function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
@@ -355,11 +355,15 @@ function fn_menu_lvl_option_icon_add(_lvl, _idx, _spr = undefined, _img = 0)
 			
 		x : 0,
 		y : 0,
-		xPad : (16 / 2),
+		xGap : 0,
 		
-		color : c_white,
-		alpha : [0.35 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
+		color : [c_gray /* Inactive (Unselected) */, c_white /* Active (Selected) */],
+		alpha : [1 /* Inactive (Unselected) */, 1 /* Active (Selected) */]
 	}
+}
+function fn_menu_lvl_option_icon_xGap_getDflt(_lvl, _idx)
+{
+	return ((16 / 2) - 2 + fn_spr_width(lvl[_lvl].option[_idx].icon.spr))
 }
 
 		// Checkbox
