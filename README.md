@@ -9,26 +9,26 @@
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"></a>
 </p>
-<p>
-  Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>, who made all the music.
-  Also, this repository is updated regularly while we're working on it, not just when new versions are released.
-</p>
-
 <h2><br>Features</h2>
 <ul>
-  <li><strong>Only 3 worlds...?</strong> The next version will change that.</li>
-  <li><strong>Not one, but three types of collectibles you can find while exploring:</strong>
-    <ul>
-      <li><strong>Effects</strong>, magical eggs that give you a new body with special abilities. <i>(0)</i></li>
-      <li><strong>Items</strong>, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>. <i>(1)</i></li>
-      <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless. <i>(3)</i></li>
-    </ul>
-  </li>
-  <li><strong>An original soundtrack made entirely by migel8022!</strong> It even has tracks longer than three seconds!!</li>
+  <li><strong>Only two worlds to explore...?</strong></li>
+  <li><strong>Not one, but three types of collectibles you can find while exploring:</strong><ul>
+    <li><strong>Effects</strong>, magical eggs that give you a new body with special abilities.</li>
+    <li><strong>Items</strong>, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
+    <li><strong>Themes</strong>, visual styles for menus. They are ultimately useless.</li>
+  </ul></li>
+  <li><strong>Original soundtrack by migel8022</strong> (not with just three-second loops!!)</li>
+  <li><strong>Customizable settings, with many more to come:</strong><ul>
+    <li>Multiple languages (English, Brazilian Portuguese)</li>
+    <li>Navigation and optimization (Fullscreen, Low Quality, Show FPS, etc.)</li>
+    <li>Separate volume sliders (Music, Menu, Player, etc.)</li>
+    <li>Accessibility option (Reduced Motion)</li>
+  </ul></li>
+  <li><strong>A lot of monkeys. I really hope you like monkeys.</strong></li>
 </ul>
 
-<h2><br>Development and release videos</h2>
-<p>If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlog on YouTube</a>! I guess it would blow some of the surprises, though...</p>
+<h2><br>Development and devlogs</h2>
+<p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. Since we're always working on something, this repository will be updated even when we don't release a new version. If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlogs on YouTube</a>! Though I guess it'd give away too many surprises...</p>
 
 <h2><br>Never asked questions</h2>
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
