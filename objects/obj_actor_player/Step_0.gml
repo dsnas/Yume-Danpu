@@ -1,8 +1,8 @@
 
-if (itm_old != global.player.itm_curr) || (eff_old != global.player.eff_curr)
+if (fcn_old != global.player.fcn_curr) || (eff_old != global.player.eff_curr)
 {
 	fn_actor_evCreate();
-	itm_old = global.player.itm_curr;
+	fcn_old = global.player.fcn_curr;
 	eff_old = global.player.eff_curr;
 }
 

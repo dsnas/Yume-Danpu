@@ -1,5 +1,5 @@
 
-itm_old = global.player.itm_curr;
+fcn_old = global.player.fcn_curr;
 eff_old = global.player.eff_curr;
 
 

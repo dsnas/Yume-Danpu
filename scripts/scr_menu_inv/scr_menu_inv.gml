@@ -157,7 +157,7 @@ function fn_menu_inv_evCreate_0()
 	
 	// Other levels (Effects, Items and Themes)
 	LVL_OTHER_EFF = 1;
-	LVL_OTHER_ITM = 2;
+	LVL_OTHER_FCN = 2;
 	LVL_OTHER_THM = 3;
 	
 	for (var l = LVL_OTHER_EFF; l <= LVL_OTHER_THM; l++)
@@ -166,10 +166,10 @@ function fn_menu_inv_evCreate_0()
 		other_textData_key = "eff";
 		other_arr = global.player.eff;
 		
-		if (l == LVL_OTHER_ITM)
+		if (l == LVL_OTHER_FCN)
 		{
-			other_textData_key = "itm";
-			other_arr = global.player.itm;
+			other_textData_key = "fcn";
+			other_arr = global.player.fcn;
 		}
 		
 		else if (l == LVL_OTHER_THM)
@@ -296,18 +296,18 @@ function fn_menu_inv_opt_slct()
 		fn_menu_lvlNew((o + 1));
 	
 	// Other levels (effects, items and themes)
-	else if (l == LVL_OTHER_ITM)
+	else if (l == LVL_OTHER_FCN)
 	{
-		if (o < array_length(global.player.itm) && global.player.itm[o].unlocked == true)
+		if (o < array_length(global.player.fcn) && global.player.fcn[o].unlocked == true)
 		{
-			if (global.player.itm_curr != o)
+			if (global.player.fcn_curr != o)
 			{
-				fn_player_itm_equip(o);
+				fn_player_fcn_equip(o);
 				opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].equip_snd[0];
 			}
 			else
 			{
-				global.player.itm_curr = -1;
+				global.player.fcn_curr = -1;
 				opt_slct_snd[l, o] = global.player.thm[global.player.thm_curr].equip_snd[1];
 			}
 		}

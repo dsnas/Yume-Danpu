@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_player_itm_kart_hit",
+  "%Name":"snd_player_fcn_kart_turn",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":1.7142857,
+  "duration":0.21478458,
   "exportDir":"",
-  "name":"snd_player_itm_kart_hit",
+  "name":"snd_player_fcn_kart_turn",
   "parent":{
-    "name":"itm",
-    "path":"folders/player/itm.yy",
+    "name":"fcn",
+    "path":"folders/player/fcn.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_player_itm_kart_hit.wav",
+  "soundFile":"snd_player_fcn_kart_turn.mp3",
   "volume":1.0,
 }

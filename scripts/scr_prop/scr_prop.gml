@@ -53,7 +53,7 @@ function fn_prop_evCreate()
 		// Gifts
 		case obj_prop_gift:
 			if (room == rm_nexus)
-				talk.type.gift.content[0] = global.player.itm[PLAYER_ITM.KART];
+				talk.type.gift.content[0] = global.player.fcn[PLAYER_FCN.KART];
 		break;
 		
 		

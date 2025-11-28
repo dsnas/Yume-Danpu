@@ -64,7 +64,19 @@ if (is_array(lvl) == true)
 				{
 					var _panel = lvl[l].panel[p];
 					if (_panel.spr != undefined && _panel.x != undefined && _panel.y != undefined && _panel.width != undefined && _panel.height != undefined)
-						fn_draw_spr_stretch(_panel.spr, _panel.img, round(_panel.x), round(_panel.y), _panel.width, _panel.height, , (_panel.alpha * lvl[l].alpha));
+					{
+						var _panel_img = 0;
+						if (_panel.title.act == true && _panel.title.spr != undefined && _panel.title.label.text != undefined)
+						{
+							_panel_img = 1;
+							var _title = _panel.title;
+							var _title_label_x = round(_panel.x + _title.label.xMarg);
+							var _title_label_y = round(_panel.y - (_panel.title.height / 2) - (fn_text_height("Salenis") / 2) + 1);
+							fn_draw_spr_stretch(_panel.title.spr, 0, round(_panel.x), round(_panel.y - _panel.title.height), _panel.width, _panel.title.height, , (_panel.alpha * lvl[l].alpha));
+							fn_draw_text(textdata(_panel.title.label.text), _title_label_x, _title_label_y, _panel.title.label.color[0], _panel.title.label.color[1], (_panel.alpha * lvl[l].alpha), , , , , , _panel.title.label.shadow_alpha);
+						}
+						fn_draw_spr_stretch(_panel.spr, _panel_img, round(_panel.x), round(_panel.y), _panel.width, _panel.height, , (_panel.alpha * lvl[l].alpha));
+					}
 				}
 			}
 			
@@ -136,7 +148,7 @@ if (is_array(lvl) == true)
 							}
 							fn_draw_spr_stretch(_opt.select.spr, _opt.select.img, _select_x, _select_y, _select_width, _select_height, , lvl[l].alpha);
 						}
-			
+						
 							// Icon
 						if (is_struct(_opt.icon) == true && _opt.icon.spr != -1)
 						{

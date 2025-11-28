@@ -69,8 +69,8 @@ if (talk.act == true && talk.stg > -1)
 			{
 				
 			}
-			else if (array_contains(global.player.itm, _content) == true)
-				fn_player_itm_unlock(array_get_index(global.player.itm, _content));
+			else if (array_contains(global.player.fcn, _content) == true)
+				fn_player_fcn_unlock(array_get_index(global.player.fcn, _content));
 			else if (array_contains(global.player.thm, _content) == true)
 			{
 				

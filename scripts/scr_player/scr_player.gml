@@ -28,9 +28,9 @@ function fn_player_setup(_file_curr = -1)
 		eff_curr : -1, // Determines which effect is currently active (-1 == none)
 		
 		// Items
-		itm : [-1],
-		itm_amt : 0,
-		itm_curr : -1, // Determines which item is currently active (-1 == none)
+		fcn : [-1],
+		fcn_amt : 0,
+		fcn_curr : -1, // Determines which item is currently active (-1 == none)
 		
 		// Themes
 		thm : [-1],
@@ -50,11 +50,11 @@ function fn_player_setup(_file_curr = -1)
 	}
 	
 		// Items
-	enum PLAYER_ITM
+	enum PLAYER_FCN
 	{
 		KART
 	}
-	fn_player_itm_add(PLAYER_ITM.KART, "kart");
+	fn_player_fcn_add(PLAYER_FCN.KART, "kart");
 	
 		// Themes
 	enum PLAYER_THM
@@ -63,8 +63,7 @@ function fn_player_setup(_file_curr = -1)
 		SIMPLE, // Simple theme
 		MADOT	// Madotsuki theme
 	}
-	fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #FFFFFF, #CCCCCC, #595959, #484848, #1E1E1E, #0F0F0F); // Default theme
-	//fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #949299, #949299, #545359, #545359, #100F11, #100F11, 0); // Default theme
+	fn_player_thm_add(PLAYER_THM.DFLT, "dflt", true, #FFFFFF, #FFFFFF, #595959, #595959, c_black, c_black, 0); // Default theme
 	fn_player_thm_add(PLAYER_THM.SIMPLE, "simple", true, c_white, c_ltgray, c_gray, c_dkgray, -1, c_black, 0); // Simple theme
 	fn_player_thm_add(PLAYER_THM.MADOT, "madot", true, #DEB2E7, #9C619C, #7B5184, #420439, #290831, c_black, , 1, 1); // Madotsuki theme
 	
@@ -103,32 +102,32 @@ function fn_player_eff_add(_idx, _code, _unlocked = false)
 }
 
 	// Items
-function fn_player_itm_add(_idx, _code, _unlocked = false)
+function fn_player_fcn_add(_idx, _code, _unlocked = false)
 {
-	global.player.itm[_idx] =
+	global.player.fcn[_idx] =
 	{
-		name : $"player_itm_name_{_code}",
-		desc : $"player_itm_desc_{_code}",
+		name : $"player_fcn_name_{_code}",
+		desc : $"player_fcn_desc_{_code}",
 		code : _code,
 		unlocked : _unlocked,
 		
 		icon_spr : spr_menu_inv_optIco,
 		icon_img : 1
 	}
-	global.player.itm_amt += 1;
+	global.player.fcn_amt += 1;
 }
-function fn_player_itm_unlock(_idx)
+function fn_player_fcn_unlock(_idx)
 {
-	global.player.itm[_idx].unlocked = true;
+	global.player.fcn[_idx].unlocked = true;
 	fn_player_file_save();
 		
-	fn_menu_obj_create("unlock", 1, global.player.itm[_idx].name);
+	fn_menu_obj_create("unlock", 1, global.player.fcn[_idx].name);
 }
-function fn_player_itm_equip(_idx)
+function fn_player_fcn_equip(_idx)
 {
 	if (_idx != -1)
 	{
-		global.player.itm_curr = _idx;
+		global.player.fcn_curr = _idx;
 		fn_player_file_save();
 	}
 }
@@ -158,7 +157,7 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 		
 		alpha : // Alpha
 		{
-			shadow: _alpha_shadow, // Shadow alpha for elements (options, information, etc.)
+			shadow: _alpha_shadow,
 			blurLight : _alpha_blurLight, // Alpha for lightly dimmed background
 			blurHeavy : _alpha_blurHeavy // Alpha for heavily dimmed background
 		},
@@ -166,6 +165,7 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 		spr : // Sprites
 		{
 			panel : fn_player_thm_asset("spr_player_thm_panel_", _code),
+			panel_title : fn_player_thm_asset("spr_player_thm_panel_title_", _code),
 			card : fn_player_thm_asset("spr_player_thm_card_", _code),
 			option_select : fn_player_thm_asset("spr_player_thm_option_select_", _code),
 			option_button : fn_player_thm_asset("spr_player_thm_option_select_", _code),
@@ -217,8 +217,8 @@ function fn_player_file_save()
 		ini_write_string("money", $"amt_{m}", global.player.money[m].amt);
 	for (var e = 0; e < global.player.eff_amt; e++)
 		ini_write_string("eff", $"unlocked_{e}", global.player.eff[e].unlocked);
-	for (var e = 0; e < global.player.itm_amt; e++)
-		ini_write_string("itm", $"unlocked_{e}", global.player.itm[e].unlocked);
+	for (var e = 0; e < global.player.fcn_amt; e++)
+		ini_write_string("fcn", $"unlocked_{e}", global.player.fcn[e].unlocked);
 	for (var e = 0; e < global.player.thm_amt; e++)
 		ini_write_string("thm", $"unlocked_{e}", global.player.thm[e].unlocked);
 	ini_write_string("thm", "curr", global.player.thm_curr);
@@ -239,8 +239,8 @@ function fn_player_file_load()
 			global.player.money[m].amt = real(ini_read_string("money", $"amt_{m}", "0"));
 		for (var e = 0; e < global.player.eff_amt; e++)
 			global.player.eff[e].unlocked = real(ini_read_string("eff", $"unlocked_{e}", "0"));
-		for (var e = 0; e < global.player.itm_amt; e++)
-			global.player.itm[e].unlocked = real(ini_read_string("itm", $"unlocked_{e}", "0"));
+		for (var e = 0; e < global.player.fcn_amt; e++)
+			global.player.fcn[e].unlocked = real(ini_read_string("fcn", $"unlocked_{e}", "0"));
 		for (var e = 0; e < global.player.thm_amt; e++)
 			global.player.thm[e].unlocked = real(ini_read_string("thm", $"unlocked_{e}", "0"));
 		global.player.thm_curr = real(ini_read_string("thm", "curr", "0"));

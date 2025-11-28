@@ -9,7 +9,7 @@ fn_config_lang_data_addText("menu_inv_main_opt_1", "Items", "Itens");
 fn_config_lang_data_addText("menu_inv_main_opt_2", "Themes", "Temas");
 	
 	fn_config_lang_data_dupeText("menu_inv_eff_ttl", "menu_inv_main_opt_0");
-	fn_config_lang_data_dupeText("menu_inv_itm_ttl", "menu_inv_main_opt_1");
+	fn_config_lang_data_dupeText("menu_inv_fcn_ttl", "menu_inv_main_opt_1");
 	fn_config_lang_data_dupeText("menu_inv_thm_ttl", "menu_inv_main_opt_2");
 	
 	

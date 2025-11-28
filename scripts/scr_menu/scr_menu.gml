@@ -84,7 +84,7 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = undefined, _tgt_destroy = 
 }
 
 	// Triangle trains
-function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefined, _xSpd = 0, _ySpd = 0, _angle = 0, _color = global.player.thm[global.player.thm_curr].color.grayLight, _alpha = 1)
+function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefined, _xSpd = 0, _ySpd = 0, _angle = 0, _alpha = 1)
 {
 	var l = _lvl;
 	var t = _idx;
@@ -100,7 +100,7 @@ function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefi
 		xOfs : 0,
 		yOfs : 0,
 		
-		color : _color,
+		color : global.player.thm[global.player.thm_curr].color.grayDark,
 		alpha : _alpha,
 		
 		angle : _angle
@@ -147,7 +147,7 @@ function fn_menu_lvl_title_add(_lvl, _text = undefined)
 }
 
 	// Panels
-function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined, _alpha = 1)
+function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined, _alpha = 1, _title_act = false, _title_text = undefined)
 {
 	var l = _lvl;
 	var p = _idx;
@@ -162,7 +162,25 @@ function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _widt
 		width : _width,
 		height : _height,
 		
-		alpha : _alpha
+		alpha : _alpha,
+		
+		
+		// Title
+		title :
+		{
+			act : _title_act,
+			
+			spr : global.player.thm[global.player.thm_curr].spr.panel_title,
+			height : (fn_text_height("Salenis") + 4),
+			
+			label :
+			{
+				text : "",
+				xMarg : 7,
+				color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteDark],
+				shadow_alpha : 0,
+			}
+		}
 	}
 }
 
@@ -363,7 +381,7 @@ function fn_menu_lvl_option_icon_add(_lvl, _idx, _spr = undefined, _img = 0)
 }
 function fn_menu_lvl_option_icon_xGap_getDflt(_lvl, _idx)
 {
-	return ((16 / 2) - 2 + fn_spr_width(lvl[_lvl].option[_idx].icon.spr))
+	return (4 + fn_spr_width(lvl[_lvl].option[_idx].icon.spr))
 }
 
 		// Checkbox

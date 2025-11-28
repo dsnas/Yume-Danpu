@@ -80,21 +80,18 @@ if (is_array(lvl) == true)
 		if (lvl_fader.wait_dur <= 0)
 		{
 			lvl[lvl_fader.tgt.lvl].alpha = fn_lerp(lvl[lvl_fader.tgt.lvl].alpha, 1, lvl_fader.alpSpd);
-			if (lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump) && lvl_fader.tgt.snd != undefined)
+			if (lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump))
 			{
-				fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
+				lvl[lvl_curr].alpha = 0;
+				lvl[lvl_fader.tgt.lvl].alpha = 1;
+				lvl_curr = lvl_fader.tgt.lvl;
+				lvl_fader.stg = -1;
+				if (lvl_fader.tgt.snd != undefined)
+					fn_aud_play(lvl_fader.tgt.snd, CONFIG_AUD_EMTR.MENU);
 				lvl_fader.tgt.snd = undefined;
 			}
 		}
 		else
 			lvl_fader.wait_dur -= 1;
-		
-		if (lvl[lvl_curr].alpha <= lvl_fader.alpJump && lvl[lvl_fader.tgt.lvl].alpha >= (1 - lvl_fader.alpJump))
-		{
-			lvl[lvl_curr].alpha = 0;
-			lvl[lvl_fader.tgt.lvl].alpha = 1;
-			lvl_curr = lvl_fader.tgt.lvl;
-			lvl_fader.stg = -1;
-		}
 	}
 }

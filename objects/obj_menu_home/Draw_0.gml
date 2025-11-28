@@ -9,45 +9,42 @@ if (is_array(lvl) == true)
 		// Options
 		var _opt_len = array_length(lvl[l].option);
 		for (var o = 0; o < _opt_len; o++)
+		{
+			lvl[l].option[o].text = "";
+			lvl[l].option[o].x = 0;
+			lvl[l].option[o].y = 0;
 			lvl[l].option[o].select.act = false;
+		}
 	
 		// Panel
 		var _panel_xMargin = 16;
 		var _panel_yMargin = 16;
-	
-		// Label
-		var _label_text = "menu_config_main_option_0";
-		var _label_width = fn_textdata_width(_label_text);
-		var _label_height = fn_textdata_height(_label_text);
-		var _label_yOfs = _panel_yMargin; // Vertical offset from {panel_y}
-	
+		
 		// Options' icon
 		var _flag_spr = spr_menu_home_flag;
 		var _flag_width = fn_spr_width(_flag_spr);
 		var _flag_height = fn_spr_height(_flag_spr);
-		var _flag_xDist = (_flag_width + 16); // Horizontal distance between each flag
-		var _flag_yOfs = (_label_yOfs + _label_height + round(_panel_yMargin / 2)); // Vertical offset from {panel_y}
-		var _flag_widthAll = ((_flag_xDist * (_opt_len - 1)) + _flag_width);
+		var _flag_xGap = (_flag_width + 16); // Horizontal distance between each flag
+		var _flag_widthAll = ((_flag_xGap * (_opt_len - 1)) + _flag_width);
 	
-		// Panel and panel
-		var _panel_width = max( (_panel_xMargin + _flag_widthAll + _panel_xMargin), (_panel_xMargin + _label_width + _panel_xMargin) );
-		var _panel_height = (_flag_yOfs + _flag_height + _panel_yMargin);
+		// Panel
+		var _panel_width = (_panel_xMargin + _flag_widthAll + _panel_xMargin);
+		var _panel_height = (_panel_yMargin + _flag_height + _panel_yMargin);
 		var _panel_x = (160 - round(_panel_width / 2));
 		var _panel_y = (120 - round(_panel_height / 2));
 		lvl[l].panel[0].x = _panel_x;
 		lvl[l].panel[0].y = _panel_y;
 		lvl[l].panel[0].width = _panel_width;
 		lvl[l].panel[0].height = _panel_height;
-		lvl[l].label[0].text = _label_text;
-		lvl[l].label[0].x = (_panel_x + round(_panel_width / 2) - (fn_textdata_width(lvl[l].label[0].text) / 2));
-		lvl[l].label[0].y = (_panel_y + _label_yOfs);
+		lvl[l].panel[0].title.act = true;
+		lvl[l].panel[0].title.label.text = "menu_config_main_option_0";
 	
 		// Options' icon and decorations
 		for (var o = 0; o < _opt_len; o++)
 		{
 			// Option's icon
-			var __flag_x = (_panel_x + round(_panel_width / 2) - round(_flag_widthAll / 2) + (_flag_xDist * o));
-			var __flag_y = (_panel_y + _flag_yOfs);
+			var __flag_x = (_panel_x + round(_panel_width / 2) - round(_flag_widthAll / 2) + (_flag_xGap * o));
+			var __flag_y = (_panel_y + _panel_yMargin);
 			lvl[l].option[o].icon.spr = _flag_spr;
 			lvl[l].option[o].icon.img = o;
 			lvl[l].option[o].icon.x = __flag_x;
@@ -63,27 +60,28 @@ if (is_array(lvl) == true)
 	}
 	
 	// Main level
-	else if (lvl_curr == LVL_MAIN) || (lvl_fader.tgt.lvl == LVL_MAIN)
+	if (lvl_curr == LVL_MAIN) || (lvl_fader.tgt.lvl == LVL_MAIN)
 	{	
 		var l = LVL_MAIN;
 		
 		// Panel (task bar)
+		var _panel = lvl[l].panel[0];
 		var _panel_outDist = 8;
 		var _panel_x = -_panel_outDist;
 		var _panel_y = (global.config.vid.resH - 16);
 		var _panel_width = (global.config.vid.resW + (_panel_outDist * 2));
 		var _panel_height = ((global.config.vid.resH - _panel_y) + _panel_outDist);
-		lvl[l].panel[0].x = _panel_x;
-		lvl[l].panel[0].y = _panel_y;
-		lvl[l].panel[0].width = _panel_width;
-		lvl[l].panel[0].height = _panel_height;
-		lvl[l].panel[0].alpha = 0.5;
+		_panel.x = _panel_x;
+		_panel.y = _panel_y;
+		_panel.width = _panel_width;
+		_panel.height = _panel_height;
+		_panel.alpha = 0.75;
 		
 		// Triangle train
 		lvl[l].train[0].xStart = 0;
 		lvl[l].train[0].yStart = (_panel_y - fn_spr_height(lvl[l].train[0].spr));
 		lvl[l].train[0].xSpd = -0.5;
-		lvl[l].train[0].alpha = 0.5;
+		lvl[l].train[0].alpha = 0.75;
 		
 		// Panel (start menu)
 		var _panel_outDist = 8;
@@ -91,14 +89,6 @@ if (is_array(lvl) == true)
 		var _panel_y = (global.config.vid.resH / 2);
 		var _panel_width = (abs(_panel_x) + (16 * 7));
 		var _panel_height = ((global.config.vid.resH - _panel_y) + _panel_outDist);
-		/*
-		var _panel_xMargin = 16;
-		var _panel_yMargin = (16 - 4);
-		var _panel_width = (_panel_xMargin + _opt_widthMax + _panel_xMargin);
-		var _panel_height = (_panel_yMargin + _opt_heightAll + _panel_yMargin);
-		var _panel_x = round(160 - (_panel_width / 2));
-		var _panel_y = round(_opt_yCenter - (_panel_height / 2));
-		*/
 		lvl[l].panel[1].x = _panel_x;
 		lvl[l].panel[1].y = _panel_y;
 		lvl[l].panel[1].width = _panel_width;
@@ -120,7 +110,6 @@ if (is_array(lvl) == true)
 		lvl[l].card[0].height = _card_height;
 		*/
 		
-		
 		// Options
 		var _opt_len = array_length(lvl[l].option);
 		var _opt_yGap = (fn_text_height("Salenis") + 9);
@@ -132,33 +121,14 @@ if (is_array(lvl) == true)
 			lvl[l].option[o].y = round((_card_y + (_card_height / 2)) - (_opt_heightAll / 2) + (_opt_yGap * o));
 			lvl[l].option[o].icon.color = [global.player.thm[global.player.thm_curr].color.grayDark /* Inactive (Unselected) */, global.player.thm[global.player.thm_curr].color.whiteLight /* Active (Selected) */];
 		}
-	
-		/*
+		
 		// Logo decoration
 		var _logo_spr = spr_menu_home_logo;
 		var _logo_width = fn_spr_width(_logo_spr);
 		var _logo_height = fn_spr_height(_logo_spr);
 		lvl[l].decor[0].spr = _logo_spr;
-		lvl[l].decor[0].x = round(160 - (_logo_width / 2));
-		lvl[l].decor[0].y = round(60 - (_logo_height / 2));
-	
-		// Credits decoration
-		var _prod_spr = spr_menu_home_prod;
-		var _prod_width = fn_spr_width(_prod_spr);
-		var _prod_height = fn_spr_height(_prod_spr);
-		var _prod_x = round((global.config.vid.resW / 2) - (_prod_width / 2));
-		var _prod_y = (global.config.vid.resH - _prod_height - 4);
-		var _prod_color = [global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.whiteLight];
-		for (var p = 1; p < (2 + 1); p++)
-		{
-			lvl[l].decor[p].spr = _prod_spr;
-			lvl[l].decor[p].img = ((2 * global.config.lang_curr) + (p - 1));
-			lvl[l].decor[p].x = _prod_x;
-			lvl[l].decor[p].y = _prod_y;
-			lvl[l].decor[p].color = _prod_color[(p - 1)];
-			lvl[l].decor[p].alpha = 0.5;
-		}
-		*/
+		lvl[l].decor[0].x = round(_panel_x + _panel_width + ((global.config.vid.resW - (_panel_x + _panel_width)) / 2) - (_logo_width / 2));
+		lvl[l].decor[0].y = round((global.config.vid.resH * 0.35) - (_logo_height / 2));
 	}
 }
 

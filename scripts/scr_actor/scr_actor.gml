@@ -51,9 +51,9 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 			move.type.walk.fstep.snd_style = CONFIG_AUD_EMTR.PLAYER;
 			move.type.roll.act = false;
 			
-			if (global.player.eff_curr == -1 && global.player.itm_curr == -1)
+			if (global.player.eff_curr == -1 && global.player.fcn_curr == -1)
 			{
-				if (itm_old == PLAYER_ITM.KART)
+				if (fcn_old == PLAYER_FCN.KART)
 				{
 					x = fn_actor_xRound(id, x);
 					y = fn_actor_xRound(id, y);
@@ -62,19 +62,19 @@ function fn_actor_evCreate() // Create Event determined by the actor's object in
 					move.type.roll.dist = 0;
 				}
 			}
-			else if (global.player.itm_curr == PLAYER_ITM.KART)
+			else if (global.player.fcn_curr == PLAYER_FCN.KART)
 			{
 				myself.draw.act = false;
 				move.precise = false;
 				move.type.walk.act = false;
 				move.type.roll.act = true;
-				move.type.roll.snd_asset = snd_player_itm_kart;
+				move.type.roll.snd_asset = snd_player_fcn_kart;
 				move.type.roll.snd_style = CONFIG_AUD_EMTR.PLAYER;
-				move.type.roll.start.snd_asset = snd_player_itm_kart_start;
+				move.type.roll.start.snd_asset = snd_player_fcn_kart_start;
 				move.type.roll.start.snd_style = CONFIG_AUD_EMTR.PLAYER;
-				move.type.roll.turn.snd_asset = snd_player_itm_kart_turn;
+				move.type.roll.turn.snd_asset = snd_player_fcn_kart_turn;
 				move.type.roll.turn.snd_style = CONFIG_AUD_EMTR.PLAYER;
-				move.type.roll.hit.snd_asset = snd_player_itm_kart_hit;
+				move.type.roll.hit.snd_asset = snd_player_fcn_kart_hit;
 				move.type.roll.hit.snd_style = CONFIG_AUD_EMTR.PLAYER;
 			}
 		break;

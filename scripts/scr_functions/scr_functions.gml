@@ -50,7 +50,7 @@ function fn_obj_depth(_asset = id, _val = -_asset.y)
 
 // Functions related to drawing
 	// Text
-function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_left, _yAlign = fa_top, _shadow_color = global.player.thm[global.player.thm_curr].color.blackDark)
+function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1, _yScale = 1, _xAlign = fa_left, _yAlign = fa_top, _shadow_color = global.player.thm[global.player.thm_curr].color.blackDark, _shadow_alpha = 1)
 {
 	var _fnt = global.config.lang[global.config.lang_curr].fnt;
 	if (font_exists(_fnt) == true)
@@ -59,7 +59,7 @@ function fn_draw_text(_text, _x, _y, _color_0, _color_1, _alpha = 1, _xScale = 1
 		draw_set_halign(_xAlign);
 		draw_set_valign(_yAlign);
 		
-		var _shadow_alpha = (global.player.thm[global.player.thm_curr].alpha.shadow * _alpha);
+		_shadow_alpha = (_alpha * _shadow_alpha * global.player.thm[global.player.thm_curr].alpha.shadow);
 		draw_text_ext_transformed_color((_x + 1), (_y + 1), _text, -1, 640, _xScale, _yScale, 0, _shadow_color, _shadow_color, _shadow_color, _shadow_color, _shadow_alpha);
 		
 		draw_text_ext_transformed_color(_x, _y, _text, -1, 640, _xScale, _yScale, 0, _color_0, _color_0, _color_1, _color_1, _alpha);
@@ -190,13 +190,13 @@ function fn_aud_volData(_asset, _vol)
 			break;
 		
 			// Items
-		case snd_player_itm_kart:
+		case snd_player_fcn_kart:
 			_vol *= 0.5;
 			break;
-		case snd_player_itm_kart_turn:
+		case snd_player_fcn_kart_turn:
 			_vol *= 0.35;
 			break;
-		case snd_player_itm_kart_hit:
+		case snd_player_fcn_kart_hit:
 			_vol *= 0.65;
 			break;
 		

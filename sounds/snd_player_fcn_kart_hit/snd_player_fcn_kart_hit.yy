@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"unused_snd_player_itm_kart_turn",
+  "%Name":"snd_player_fcn_kart_hit",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -12,15 +12,15 @@
   "conversionMode":0,
   "duration":1.7142857,
   "exportDir":"",
-  "name":"unused_snd_player_itm_kart_turn",
+  "name":"snd_player_fcn_kart_hit",
   "parent":{
-    "name":"[!] unused",
-    "path":"folders/[!] unused.yy",
+    "name":"fcn",
+    "path":"folders/player/fcn.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"unused_snd_player_itm_kart_turn.wav",
+  "soundFile":"snd_player_fcn_kart_hit.wav",
   "volume":1.0,
 }

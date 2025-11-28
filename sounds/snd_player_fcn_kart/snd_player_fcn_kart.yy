@@ -1,6 +1,6 @@
 {
   "$GMSound":"v2",
-  "%Name":"snd_player_itm_kart_start",
+  "%Name":"snd_player_fcn_kart",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -10,17 +10,17 @@
   "compression":0,
   "compressionQuality":4,
   "conversionMode":0,
-  "duration":2.037551,
+  "duration":2.7374604,
   "exportDir":"",
-  "name":"snd_player_itm_kart_start",
+  "name":"snd_player_fcn_kart",
   "parent":{
-    "name":"itm",
-    "path":"folders/player/itm.yy",
+    "name":"fcn",
+    "path":"folders/player/fcn.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_player_itm_kart_start.mp3",
+  "soundFile":"snd_player_fcn_kart.wav",
   "volume":1.0,
 }

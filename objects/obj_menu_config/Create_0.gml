@@ -8,8 +8,6 @@ var l = LVL_MAIN;
 fn_menu_lvl_add(l);
 fn_menu_lvl_fader_start(l);
 fn_menu_lvl_panel_add(l, 0); // Panel
-fn_menu_lvl_card_add(l, 0); // Card
-fn_menu_lvl_label_add(l, 0); // Label
 
 	// Options
 fn_menu_lvl_option_add(l, 0, "menu_config_main_option_0");
@@ -22,7 +20,6 @@ for (var o = 1; o < (3 + 1); o++)
 LVL_VID = 2;
 var l = LVL_VID;
 fn_menu_lvl_add(l);
-fn_menu_lvl_title_add(l, "menu_config_main_option_1"); // Title
 fn_menu_lvl_panel_add(l, 0); // Panel
 
 	// Options
