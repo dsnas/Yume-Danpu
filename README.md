@@ -45,6 +45,5 @@ Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https
 <h3>Why do updates take so long?</h3>
 <blockquote>I'm the only one actively making Yume Danpu.</blockquote>
 
-<h3 align="center"><br><br>Think the game is ugly? Yeah, we do too.<br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
-<h6 align="center">The hardest part of having a lot of ideas is actually making them...</h6>
+<h2 align="center"><br><br>Think the game is ugly? Yeah, we do too. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
 <a href="https://dsnas.itch.io/yume-danpu"><img src="https://raw.githubusercontent.com/dsnas/Yume-Danpu/refs/heads/main/sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="If you're reading this, I messed up somehow." height="8"></a>
