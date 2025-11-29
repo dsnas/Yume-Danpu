@@ -30,6 +30,9 @@
 <h2><br>Development and devlogs</h2>
 <p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We update this repository even when we're not releasing a new version, but that's not really a good way to watch our progress. If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlogs on YouTube</a>! Though I guess it'd give away too many surprises...</p>
 
+<h2><br>Report a bug</h2>
+Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)
+
 <h2><br>Never asked questions</h2>
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
 <blockquote>No, it's purely a fan game.</blockquote>
@@ -40,7 +43,7 @@
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
 <blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
 <h3>Why do updates take so long?</h3>
-<blockquote>School and other life matters, and I'm the only one programming Yume Danpu.</blockquote>
+<blockquote>I'm the only one actively making Yume Danpu.</blockquote>
 
 <h3 align="center"><br><br>Think the game is ugly? Yeah, we do too.<br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
 <h6 align="center">The hardest part of having a lot of ideas is actually making them...</h6>
