@@ -8,12 +8,13 @@ var l = LVL_MAIN;
 fn_menu_lvl_add(l);
 fn_menu_lvl_fader_start(l);
 fn_menu_lvl_panel_add(l, 0); // Panel
-
-	// Options
-fn_menu_lvl_option_add(l, 0, "menu_config_main_option_0");
-fn_menu_lvl_option_value_add(l, 0);
-for (var o = 1; o < (3 + 1); o++)
+fn_menu_lvl_panel_title_add(l, 0); // Panel's title
+for (var o = 0; o < 4; o++) // Options
+{
 	fn_menu_lvl_option_add(l, o, $"menu_config_main_option_{o}");
+	fn_menu_lvl_option_icon_add(l, o); // Option's icon
+}
+fn_menu_lvl_option_value_add(l, 0); // Language option's value
 
 
 // Graphics level

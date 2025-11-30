@@ -69,7 +69,7 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = undefined, _tgt_destroy = 
 	lvl_fader =
 	{
 		stg : 0, // ID number of the current stage of the fade transition
-		alpSpd : 0.25, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
+		alpSpd : 0.2, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
 		alpJump : 0.05, // Alpha jump (if the difference between the current alpha and the target alpha reaches this value, the current alpha will jump to the target alpha)
 		
 		tgt :
@@ -107,47 +107,8 @@ function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefi
 	}
 }
 
-	// Title
-function fn_menu_lvl_title_add(_lvl, _text = undefined)
-{
-	var l = _lvl;
-	
-	lvl[l].title =
-	{
-		text : _text,
-		x : 0,
-		y : 0,
-		
-		color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight],
-		
-		xAlign : fa_center,
-		yAlign : fa_top,
-		
-			// Title's panel
-		panel :
-		{
-			spr : global.player.thm[global.player.thm_curr].spr.panel,
-			img : 0,
-			
-			x : 0,
-			y : 0,
-			width : 0,
-			height : 0
-		}
-	}
-	var _title = lvl[l].title;
-	
-	lvl[l].title.panel.x = -16;
-	lvl[l].title.panel.y = -16;
-	lvl[l].title.panel.width = ((abs(_title.panel.x) * 2) + global.config.vid.resW);
-	lvl[l].title.panel.height = (abs(_title.panel.y) + 32);
-	
-	lvl[l].title.x = round(_title.panel.x + (_title.panel.width / 2));
-	lvl[l].title.y = round(((_title.panel.height - abs(_title.panel.y)) / 2) - (fn_textdata_height(_title.text) / 2) - 2)
-}
-
 	// Panels
-function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined, _alpha = 1, _title_act = false, _title_text = undefined)
+function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _width = undefined, _height = undefined, _alpha = 1, _title_act = false)
 {
 	var l = _lvl;
 	var p = _idx;
@@ -166,20 +127,26 @@ function fn_menu_lvl_panel_add(_lvl, _idx, _x = undefined, _y = undefined, _widt
 		
 		
 		// Title
-		title :
+		title : -1
+	}
+}
+function fn_menu_lvl_panel_title_add(_lvl, _idx, _title_label_text = undefined)
+{
+	var l = _lvl;
+	var p = _idx;
+	
+	lvl[l].panel[p].title =
+	{
+		spr : global.player.thm[global.player.thm_curr].spr.panel_title,
+		height : (fn_text_height("Salenis") + 4),
+			
+		label :
 		{
-			act : _title_act,
-			
-			spr : global.player.thm[global.player.thm_curr].spr.panel_title,
-			height : (fn_text_height("Salenis") + 4),
-			
-			label :
-			{
-				text : "",
-				xMarg : 7,
-				color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteDark],
-				shadow_alpha : 0,
-			}
+			text : _title_label_text,
+			xMarg : 7,
+			color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteDark],
+			alpha : 0.5,
+			shadow_alpha : 0,
 		}
 	}
 }
@@ -304,7 +271,7 @@ function fn_menu_lvl_option_getWidthMax(_lvl)
 }
 
 		// Value (the text beside the options in the settings menu, like "Yes", "No" and "100%")
-function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
+function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 {
 	var l = _lvl;
 	var o = _idx;
@@ -318,12 +285,15 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 			
 		x : 0,
 		y : 0,
-		xDist : _xDist,
+		xGap : _xGap,
 			
 		color : [global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.grayDark],
+		colorval : 0,
+		colorvalTgt : [0 /* Inactive (Not cycling) */, 100 /* Active (Cycling) */],
+		colorvalSpd : 0.1,
 		alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */],
-			
-			
+		
+		
 		// Arrows
 		arrow : -1
 	}
@@ -335,12 +305,15 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 		{
 			text : ((a == 0) ? "<" : ">"),
 				
-			xDist : 6,
+			xGap : 6,
 			
 			color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight],
+			alpha : 0.5,
+			alphaTgt : [0.5 /* Inactive (Not cycling) */, 1.5 /* Active (Cycling) */],
+			alphaSpd : 0.1,
 			
 			scale : 1,
-			scaleTgt : [1 /* Inactive (Unselected) */, 2 /* Active (Selected) */],
+			scaleTgt : [1 /* Inactive (Not cycling) */, 2 /* Active (Cycling) */],
 			scaleSpd : 0.2,
 				
 			move :
@@ -351,7 +324,7 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xDist = 64)
 				xSpd : 1,
 				xSign : ((a == 0) ? -1 : 1),
 				wait : 0,
-				waitMax : 8
+				waitMax : 12
 			}
 		}
 	}

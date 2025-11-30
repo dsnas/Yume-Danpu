@@ -36,7 +36,6 @@ if (is_array(lvl) == true)
 		lvl[l].panel[0].y = _panel_y;
 		lvl[l].panel[0].width = _panel_width;
 		lvl[l].panel[0].height = _panel_height;
-		lvl[l].panel[0].title.act = true;
 		lvl[l].panel[0].title.label.text = "menu_config_main_option_0";
 	
 		// Options' icon and decorations
@@ -117,9 +116,11 @@ if (is_array(lvl) == true)
 		for (var o = 0; o < _opt_len; o++)
 		{
 			lvl[l].option[o].text = $"menu_home_main_option_{o}";
+			lvl[l].option[o].icon.spr = spr_menu_home_main_option_icon;
+			lvl[l].option[o].icon.img = o;
 			lvl[l].option[o].x = round(_card_x + (_card_width / 2) - (fn_menu_lvl_option_getWidthMax(l) / 2) + (fn_menu_lvl_option_icon_xGap_getDflt(l, o) / 2));
 			lvl[l].option[o].y = round((_card_y + (_card_height / 2)) - (_opt_heightAll / 2) + (_opt_yGap * o));
-			lvl[l].option[o].icon.color = [global.player.thm[global.player.thm_curr].color.grayDark /* Inactive (Unselected) */, global.player.thm[global.player.thm_curr].color.whiteLight /* Active (Selected) */];
+			//lvl[l].option[o].icon.color = [global.player.thm[global.player.thm_curr].color.grayDark /* Inactive (Unselected) */, global.player.thm[global.player.thm_curr].color.whiteLight /* Active (Selected) */];
 		}
 		
 		// Logo decoration

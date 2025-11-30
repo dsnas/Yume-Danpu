@@ -66,7 +66,11 @@ if (is_array(lvl) == true)
 				for (var a = 0; a < (2 * !global.config.access.rdcdMot); a++)
 				{
 					if (fn_config_key_pressed(lvl[l].option[o].value.key[a]) == true)
+					{
+						lvl[l].option[o].value.colorval = lvl[l].option[o].value.colorvalTgt[true];
+						lvl[l].option[o].value.arrow[a].alpha = lvl[l].option[o].value.arrow[a].alphaTgt[true];
 						lvl[l].option[o].value.arrow[a].scale = lvl[l].option[o].value.arrow[a].scaleTgt[true];
+					}
 				}
 			}
 		}

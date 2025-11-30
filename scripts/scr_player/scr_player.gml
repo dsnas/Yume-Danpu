@@ -95,7 +95,7 @@ function fn_player_eff_add(_idx, _code, _unlocked = false)
 		code : _code,
 		unlocked : _unlocked,
 		
-		icon_spr : spr_menu_inv_optIco,
+		icon_spr : spr_menu_inv_main_option_icon,
 		icon_img : 0
 	}
 	global.player.eff_amt += 1;
@@ -111,7 +111,7 @@ function fn_player_fcn_add(_idx, _code, _unlocked = false)
 		code : _code,
 		unlocked : _unlocked,
 		
-		icon_spr : spr_menu_inv_optIco,
+		icon_spr : spr_menu_inv_main_option_icon,
 		icon_img : 1
 	}
 	global.player.fcn_amt += 1;
@@ -142,7 +142,7 @@ function fn_player_thm_add(_idx, _code, _unlocked = false, _color_whiteLight, _c
 		code : _code,
 		unlocked : _unlocked,
 		
-		icon_spr : spr_menu_inv_optIco,
+		icon_spr : spr_menu_inv_main_option_icon,
 		icon_img : 2,
 		
 		color : // Colors
