@@ -11,7 +11,7 @@
 </p>
 <h2><br>Features</h2>
 <ul>
-  <li><strong>Only two worlds to explore...?</strong></li>
+  <li><strong>Only two worlds to explore...?</strong> (The next version. The next version.)</li>
   <li><strong>Not one, but three types of collectibles you can find while exploring:</strong><ul>
     <li>Effects, strange eggs that give you a new body with special abilities.</li>
     <li>Items, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
@@ -38,6 +38,8 @@ Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https
 <blockquote>No, it's purely a fan game.</blockquote>
 <h3>Is anything else needed besides the .zip file?</h3>
 <blockquote>No, GameMaker isn't like RPG Maker 2003.</blockquote>
+<h3>Why "Yume Danpu"?</h3>
+<blockquote>It pays homage to the first game I ever made, Dumpgame. Check <a href="https://dsnas.itch.io/dumpgame">its Itch.io page</a> for more context.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
