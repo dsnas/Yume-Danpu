@@ -1,4 +1,4 @@
-<h1 align="center"><strong>Yume Danpu</strong></h1>
+<h1 align="center">ゆめダンプ<br>Yume Danpu</h1>
 <p align="center"><strong>An open-source Yume Nikki fan game created in Brazil by dsans and migel8022</strong></p>
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version">
@@ -27,8 +27,8 @@
   <li><strong>A lot of monkeys. I really hope you like monkeys.</strong></li>
 </ul>
 
-<h2><br>Development and devlogs</h2>
-<p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We update this repository even when we're not releasing a new version, but that's not really a good way to watch our progress. If you wanna see what we're doing next, check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">our devlogs on YouTube</a>! Though I guess it'd give away too many surprises...</p>
+<h2><br>Development</h2>
+<p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We keep this repository updated as we work on the game, not just when we release a new version. Also, we <b>very occasionally</b> make videos about the development of the game. If you wanna what we're doing next, check <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the YouTube playlist</a>!</p>
 
 <h2><br>Report a bug</h2>
 Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)
@@ -39,7 +39,7 @@ Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https
 <h3>Is anything else needed besides the .zip file?</h3>
 <blockquote>No, GameMaker isn't like RPG Maker 2003.</blockquote>
 <h3>Why "Yume Danpu"?</h3>
-<blockquote>It pays homage to the first game I ever made, Dumpgame. Check <a href="https://dsnas.itch.io/dumpgame">its Itch.io page</a> for more context.</blockquote>
+<blockquote>It pays homage to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame">Dumpgame</a>.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
@@ -47,5 +47,5 @@ Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https
 <h3>Why do updates take so long?</h3>
 <blockquote>I'm the only one actively making Yume Danpu.</blockquote>
 
-<h2 align="center"><br><br>Think the game is ugly? Yeah, we do too. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
+<h2 align="center"><br><br>Think the game is ugly? Yeah, we also do. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
 <a href="https://dsnas.itch.io/yume-danpu"><img src="https://raw.githubusercontent.com/dsnas/Yume-Danpu/refs/heads/main/sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="If you're reading this, I messed up somehow." height="8"></a>
