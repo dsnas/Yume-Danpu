@@ -24,14 +24,24 @@
     <li>Separate volume sliders (Music, Menu, Player, etc.)</li>
     <li>Accessibility option (Reduced Motion)</li>
   </ul></li>
-  <li><strong>A lot of monkeys. I really hope you like monkeys.</strong></li>
+  <li><strong>Monkeys!</strong></li>
 </ul>
+
+<h2><br>Install instructions</h2>
+<ol>
+  <li>Download the .zip of your desired version of the game</li>
+  <li>Wait for the .zip file to finish downloading</li>
+  <li>Right-click the .zip file and extract it</li>
+  <li>Wait for the .zip file to finish extracting</li>
+  <li>Inside the extracted folder, run the "Yume Danpu.exe" file</li>
+  <li>Ignore any pop-up warnings about an unrecognized app. Trust me</li>
+</ol>
+
+<h2><br>Report a bug</h2>
+<p>Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)</p>
 
 <h2><br>Development</h2>
 <p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We keep this repository updated as we work on the game, not just when we release a new version. Also, we <b>very occasionally</b> make videos about the development of the game. If you wanna what we're doing next, check <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the YouTube playlist</a>!</p>
-
-<h2><br>Report a bug</h2>
-Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)
 
 <h2><br>Never asked questions</h2>
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
