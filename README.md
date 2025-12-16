@@ -48,8 +48,10 @@
 <blockquote>No, it's purely a fan game.</blockquote>
 <h3>Is anything else needed besides the .zip file?</h3>
 <blockquote>No, GameMaker isn't like RPG Maker 2003.</blockquote>
+<h3>Is there a virus in the .zip file?</h3>
+<blockquote>Upload the file to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a> or scan it with your antivirus.</blockquote>
 <h3>Why "Yume Danpu"?</h3>
-<blockquote>It pays homage to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame">Dumpgame</a>.</blockquote>
+<blockquote>It pays homage to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
