@@ -44,12 +44,14 @@
 <p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We keep this repository updated as we work on the game, not just when we release a new version. Also, we <b>very occasionally</b> make videos about the development of the game. If you wanna what we're doing next, check <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the YouTube playlist</a>!</p>
 
 <h2><br>Never asked questions</h2>
-<h3>Is Yume Danpu associated with Yume Nikki?</h3>
+<h3>Is this associated with Yume Nikki?</h3>
 <blockquote>No, it's purely a fan game.</blockquote>
+<h3>Is this AI-generated?</h3>
+<blockquote>No, not even this README. I just really like writing.</blockquote>
+<h3>Is this a virus?</h3>
+<blockquote>No, scan the .zip file with your antivirus or upload it to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a>.</blockquote>
 <h3>Is anything else needed besides the .zip file?</h3>
 <blockquote>No, GameMaker isn't like RPG Maker 2003.</blockquote>
-<h3>Is there a virus in the .zip file?</h3>
-<blockquote>Upload the file to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a> or scan it with your antivirus.</blockquote>
 <h3>Why "Yume Danpu"?</h3>
 <blockquote>It pays homage to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
 <h3>Why open-source?</h3>
