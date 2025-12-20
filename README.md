@@ -9,6 +9,7 @@
   <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd">
     <img src="https://img.shields.io/badge/YouTube-FF0000?logo=youtube&logoColor=f5f5f5" alt="YouTube"></a>
 </p>
+
 <h2><br>Features</h2>
 <ul>
   <li><strong>Only two worlds to explore...?</strong> (The next version. The next version.)</li>
@@ -47,11 +48,11 @@
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
 <blockquote>No, Yume Danpu is purely a fan game.</blockquote>
 <h3>Is Yume Danpu AI-generated?</h3>
-<blockquote>No, Yume Danpu has no AI-generated content.</blockquote>
+<blockquote>No, nothing related to Yume Danpu is AI-generated.</blockquote>
 <h3>Is Yume Danpu a virus?</h3>
 <blockquote>No. Scan the .zip file with your antivirus or upload it to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a>.</blockquote>
 <h3>Why "Yume Danpu"?</h3>
-<blockquote>Yume Danpu is the spiritual successor to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
+<blockquote>Yume Danpu is like a "spiritual successor" to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
