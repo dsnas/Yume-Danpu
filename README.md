@@ -1,4 +1,4 @@
-<h1 align="center">ゆめダンプ<br>Yume Danpu</h1>
+<h1 align="center">ゆめダンプ <br>Yume Danpu</h1>
 <p align="center"><strong>An open-source Yume Nikki fan game created in Brazil by dsans and migel8022</strong></p>
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.04-4BFF84" alt="Game version">
@@ -39,12 +39,14 @@
 </ol>
 
 <h2><br>Report a bug</h2>
-<p>Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)</p>
+<p>Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks).</p>
 
 <h2><br>Development</h2>
 <p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We keep this repository updated as we work on the game, not just when we release a new version. Also, we <b>very occasionally</b> make videos about the development of the game. If you wanna what we're doing next, check <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the YouTube playlist</a>!</p>
 
 <h2><br>Never asked questions</h2>
+<h3>Is Yume Danpu still in development?</h3>
+<blockquote>Yes, as of December 22, 2025. Keep in mind it may slow down from time to time.</blockquote>
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
 <blockquote>No, Yume Danpu is purely a fan game.</blockquote>
 <h3>Is Yume Danpu AI-generated?</h3>
