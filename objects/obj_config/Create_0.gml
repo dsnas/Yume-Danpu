@@ -12,7 +12,7 @@ fscr_wait = fscr_waitMax;
 
 vsync_act = -1;
 
-showCsr_act = -1;
+hideCsr_act = -1;
 
 
 

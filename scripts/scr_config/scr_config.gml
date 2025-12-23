@@ -47,10 +47,10 @@ function fn_config_setup()
 				name : "config_vid_showVer_name"
 			},
 			
-			showCsr : // Show Cursor
+			hideCsr : // Show Cursor
 			{
 				act : true,
-				name : "config_vid_showCsr_name"
+				name : "config_vid_hideCsr_name"
 			},
 			
 			showFps : // Show FPS
@@ -175,7 +175,7 @@ function fn_config_file_save()
 	ini_write_real("vid", "fscr_act", global.config.vid.fscr.act);
 	ini_write_real("vid", "vsync_act", global.config.vid.vsync.act);
 	ini_write_real("vid", "showVer_act", global.config.vid.showVer.act);
-	ini_write_real("vid", "showCsr_act", global.config.vid.showCsr.act);
+	ini_write_real("vid", "hideCsr_act", global.config.vid.hideCsr.act);
 	ini_write_real("vid", "showFps_act", global.config.vid.showFps.act);
 	ini_write_real("vid", "showBdr_act", global.config.vid.showBdr.act);
 	
@@ -202,7 +202,7 @@ function fn_config_file_load()
 	global.config.vid.fscr.act = ini_read_real("vid", "fscr_act", false);
 	global.config.vid.vsync.act = ini_read_real("vid", "vsync_act", false);
 	global.config.vid.showVer.act = ini_read_real("vid", "showVer_act", true);
-	global.config.vid.showCsr.act = ini_read_real("vid", "showCsr_act", true);
+	global.config.vid.hideCsr.act = ini_read_real("vid", "hideCsr_act", true);
 	global.config.vid.showFps.act = ini_read_real("vid", "showFps_act", false);
 	global.config.vid.showBdr.act = ini_read_real("vid", "showBdr_act", true);
 		

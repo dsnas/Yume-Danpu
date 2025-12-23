@@ -26,7 +26,7 @@ if (is_array(lvl) == true)
 		var _flag_height = fn_spr_height(_flag_spr);
 		var _flag_xGap = (_flag_width + 16); // Horizontal distance between each flag
 		var _flag_widthAll = ((_flag_xGap * (_opt_len - 1)) + _flag_width);
-	
+		
 		// Panel
 		var _panel_width = (_panel_xMargin + _flag_widthAll + _panel_xMargin);
 		var _panel_height = (_panel_yMargin + _flag_height + _panel_yMargin);
@@ -37,7 +37,7 @@ if (is_array(lvl) == true)
 		lvl[l].panel[0].width = _panel_width;
 		lvl[l].panel[0].height = _panel_height;
 		lvl[l].panel[0].title.label.text = "menu_config_main_option_0";
-	
+		
 		// Options' icon and decorations
 		for (var o = 0; o < _opt_len; o++)
 		{

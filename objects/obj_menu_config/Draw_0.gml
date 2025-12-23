@@ -9,23 +9,19 @@ if (is_array(lvl) == true)
 		// Panel
 		var _panel = lvl[l].panel[0];
 		var _panel_xMarg = 48;
-		var _panel_yMarg = (48 + 16);
-		var _panel_width = (global.config.vid.resW - (_panel_xMarg * 2));
-		var _panel_height = (global.config.vid.resH - (_panel_yMarg * 2));
-		var _panel_x = round((global.config.vid.resW / 2) - (_panel_width / 2));
-		var _panel_y = round((global.config.vid.resH / 2) - (_panel_height / 2) + (_panel.title.height / 2));
-		_panel.x = _panel_x;
-		_panel.y = _panel_y;
-		_panel.width = _panel_width;
-		_panel.height = _panel_height;
+		var _panel_yMarg = 64;
+		_panel.width = round(global.config.vid.resW - (_panel_xMarg * 2));
+		_panel.height = round(global.config.vid.resH - (_panel_yMarg * 2));
+		_panel.x = round((global.config.vid.resW / 2) - (_panel.width / 2));
+		_panel.y = round((global.config.vid.resH / 2) - (_panel.height / 2) + (_panel.title.height / 2));
 		_panel.title.label.text = "menu_home_main_option_1";
 		var _panel_yPad = (16 + 4);
 		
 		// Options
 		 //DEPOIS FAZER option select NAS BANDERIAS DO menu home lvl lang
-		for (var o = 0; o < array_length(lvl[l].option); o++)
+		var _opt = lvl[l].option;
+		for (var o = 0; o < array_length(_opt); o++)
 		{
-			var _opt = lvl[l].option;
 			_opt[o].text = $"menu_config_main_option_{o}";
 			_opt[o].icon.spr = spr_menu_config_main_option_icon;
 			_opt[o].icon.img = o;
@@ -33,22 +29,62 @@ if (is_array(lvl) == true)
 			if (o == 0)
 			{
 				_opt[o].value.text = $"config_lang_{global.config.lang[global.config.lang_curr].code}";
-				var _opt_widthAll = (fn_textdata_width(_opt[o].text) + _opt[o].value.xGap + round(fn_textdata_width(_opt[o].value.text) / 2) + _opt[o].value.arrow[1].xGap + round(fn_textdata_width(_opt[o].value.text) / 2) + round(fn_text_width(_opt[o].value.arrow[1].text) / 2));
-				_opt[o].x = (_panel.x + round(_panel_width / 2) - round(_opt_widthAll / 2) + round(_opt[o].icon.xGap / 2));
-				_opt[o].y = (_panel.y + _panel_yPad);
-				//_opt[o].y = (_panel.y + round(_panel_height / 5.5))
+				var _opt_widthAll = (fn_textdata_width(_opt[o].text) + _opt[o].value.xGap + (fn_textdata_width(_opt[o].value.text) / 2) + _opt[o].value.arrow[1].xGap + (fn_textdata_width(_opt[o].value.text) / 2) + (fn_text_width(_opt[o].value.arrow[1].text) / 2));
+				_opt[o].x = round(_panel.x + (_panel.width / 2) - (_opt_widthAll / 2) + (_opt[o].icon.xGap / 2));
+				_opt[o].y = round(_panel.y + _panel_yPad);
 			}
 			else
 			{
 				var _opt_len = (array_length(_opt) - 1);
 				var _opt_yGap = 16;
 				var _opt_heightAll = ((_opt_yGap * (_opt_len - 1)) + fn_text_height("Salenis"));
-				_opt[o].x = (_panel.x + round(_panel_width / 2) - round(fn_textdata_width(_opt[o].text) / 2) + round(_opt[o].icon.xGap / 2));
-				_opt[o].y = (_panel.y + _panel_height - _panel_yPad - (_opt_heightAll / 1) + (_opt_yGap * (o - 1)));
-				//_opt[o].y = ((_opt[0].y + fn_textdata_height(_opt[0].text)) + ((_panel_height - (_opt[0].y + fn_textdata_height(_opt[0].text) - _panel_y)) / 2) - (_opt_heightAll / 2) + (_opt_yGap * (o - 1)));
+				_opt[o].x = round(_panel.x + (_panel.width / 2) - (fn_textdata_width(_opt[o].text) / 2) + (_opt[o].icon.xGap / 2));
+				_opt[o].y = round(_panel.y + _panel.height - _panel_yPad - _opt_heightAll + (_opt_yGap * (o - 1)));
 			}
 		}
-		
+	}
+	
+	// Video, Music & Sounds and Accessibility levels
+	for (var l = LVL_VID; l < LVL_ACCESS; l++)
+	{
+		if (lvl_curr == l) || (lvl_fader.tgt.lvl == l)
+		{
+			// Panel
+			var _panel = lvl[l].panel[0];
+			var _panel_xMarg = (48 - 16);
+			var _panel_yMarg = (64 - 16);
+			_panel.width = (global.config.vid.resW - (_panel_xMarg * 2));
+			_panel.height = (global.config.vid.resH - (_panel_yMarg * 2));
+			_panel.x = round((global.config.vid.resW / 2) - (_panel.width / 2));
+			_panel.y = round((global.config.vid.resH / 2) - (_panel.height / 2) + (_panel.title.height / 2));
+			_panel.title.label.text = $"menu_config_main_option_{l - 1}";
+			var _panel_xPad = (32 + 4);
+			
+			// Options
+			var _opt = lvl[l].option
+			var _opt_yGap = 16;
+			var _opt_heightAll = ((_opt_yGap * (array_length(_opt) - 1)) + fn_text_height("Salenis"));
+			var o = 0;
+			_opt[o++].text = global.config.vid.fscr.name;
+			_opt[o++].text = global.config.vid.vsync.name;
+			_opt[o++].text = global.config.vid.hideCsr.name;
+			_opt[o++].text = global.config.vid.showVer.name;
+			_opt[o++].text = global.config.vid.showBdr.name;
+			_opt[o++].text = global.config.vid.showFps.name;
+			var o = 0;
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.fscr.act}");
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.vsync.act}");
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.hideCsr.act}");
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showVer.act}");
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showBdr.act}");
+			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showFps.act}");
+			for (var o = 0; o < array_length(_opt); o++)
+			{
+				_opt[o].x = round(_panel.x + _panel_xPad);
+				_opt[o].y = round(_panel.y + (_panel.height / 2) - (_opt_heightAll / 2) + (_opt_yGap * o));
+				_opt[o].value.x = round(_opt[o].x + fn_menu_lvl_option_getWidthMax(l) + (((_panel.x + _panel.width) - (_opt[o].x + fn_menu_lvl_option_getWidthMax(l))) / 2));
+			}
+		}
 	}
 	
 	// Video level

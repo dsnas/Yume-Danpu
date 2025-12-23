@@ -69,7 +69,7 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = undefined, _tgt_destroy = 
 	lvl_fader =
 	{
 		stg : 0, // ID number of the current stage of the fade transition
-		alpSpd : 0.2, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
+		alpSpd : 0.25, // Alpha speed (speed at which the alpha changes during the fade transition) (1 == instantaneous)
 		alpJump : 0.05, // Alpha jump (if the difference between the current alpha and the target alpha reaches this value, the current alpha will jump to the target alpha)
 		
 		tgt :
@@ -292,8 +292,7 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 		colorvalTgt : [0 /* Inactive (Not cycling) */, 100 /* Active (Cycling) */],
 		colorvalSpd : 0.1,
 		alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */],
-		
-		
+				
 		// Arrows
 		arrow : -1
 	}
