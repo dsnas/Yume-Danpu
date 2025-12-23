@@ -28,6 +28,8 @@
   <li><strong>Monkeys</strong></li>
 </ul>
 
+<h4 align="center">Think the game is ugly? Yeah, we also do. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h4>
+
 <h2><br>Install instructions</h2>
 <ol>
   <li>Download the .zip of your desired version of the game</li>
@@ -39,10 +41,22 @@
 </ol>
 
 <h2><br>Report a bug</h2>
-<p>Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks).</p>
+<p>Noticed anything that clearly wasn't supposed to happen? Fill out <a href="https://forms.gle/zZaioLfNXEoNXhyE7" target="_blank">this Google Form</a> to help us make the game a little less broken, please!! You'll win our hearts <3 (or, if you prefer, a place in the Special Thanks.)</p>
 
-<h2><br>Development</h2>
-<p>Yume Danpu is currently in development by me, <b>dsans</b>, and <b>migel8022</b>. We keep this repository updated as we work on the game, not just when we release a new version. Also, we <b>very occasionally</b> make videos about the development of the game. If you wanna what we're doing next, check <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the YouTube playlist</a>!</p>
+<h2><br>Behind the scenes</h2>
+<p>We <b>very occasionally</b> post videos on YouTube showing upcoming updates for Yume Danpu. For those who don't really care about spoilers, if you wanna see what we're doing next, you should check out <a href="https://www.youtube.com/playlist?list=PL_pzsGsbaRMXNumNYboPS_WFcR2NDsNUd" target="_blank">the playlist by both creators!</a>
+
+Also, we keep this repository updated as we work on the game, not just when we release a new version. Below is a very cute image.</p>
+
+<p align="center">
+  <a href="https://www.star-history.com/#dsnas/Yume-Danpu&type=date&legend=top-left">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dsnas/Yume-Danpu&type=date&theme=dark&legend=top-left"/>
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dsnas/Yume-Danpu&type=date&legend=top-left"/>
+      <img height="400" src="https://api.star-history.com/svg?repos=dsnas/Yume-Danpu&type=date&legend=top-left" alt="Star History Chart"/>
+    </picture>
+  </a>
+</p>
 
 <h2><br>Never asked questions</h2>
 <h3>Is Yume Danpu still in development?</h3>
@@ -60,5 +74,6 @@
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
 <blockquote>GameMaker gives us a lot more freedom to do whatever we want compared to RPG Maker 2003.</blockquote>
 
-<h2 align="center"><br><br>Think the game is ugly? Yeah, we also do. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h3>
-<a href="https://dsnas.itch.io/yume-danpu"><img src="https://raw.githubusercontent.com/dsnas/Yume-Danpu/refs/heads/main/sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" alt="If you're reading this, I messed up somehow." height="8"></a>
+<a href="https://dsnas.itch.io/yume-danpu">
+  <img src="https://raw.githubusercontent.com/dsnas/Yume-Danpu/refs/heads/main/sprites/spr_actor_macaco_monkey/946136f4-8ae6-4231-b343-edfa8566b646.png" height="8" align="right" alt="If you're reading this, I messed up somehow.">
+</a>
