@@ -10,6 +10,6 @@ if (lvl_curr == LVL_MAIN)
 		fn_menu_lvl_fader_start(LVL_MAIN);
 }
 
-// Graphics level
-else if (lvl_curr == LVL_VID)
+// Graphics, Music & Sounds and Accessibility levels
+else if (lvl_curr >= LVL_VID && lvl_curr <= LVL_ACCESS)
 	fn_menu_lvl_fader_start(LVL_MAIN);

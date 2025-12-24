@@ -58,31 +58,44 @@ if (is_array(lvl) == true)
 			_panel.x = round((global.config.vid.resW / 2) - (_panel.width / 2));
 			_panel.y = round((global.config.vid.resH / 2) - (_panel.height / 2) + (_panel.title.height / 2));
 			_panel.title.label.text = $"menu_config_main_option_{l - 1}";
-			var _panel_xPad = (32 + 4);
+			var _panel_xPad = 16//(32 + 16);
 			
 			// Options
-			var _opt = lvl[l].option
+			var _opt = lvl[l].option;
+			if (l == LVL_VID)
+			{
+				_opt[0].text = global.config.vid.fscr.name;
+				_opt[0].value.text = $"menu_config_all_option_value_{global.config.vid.fscr.act}";
+				_opt[1].text = global.config.vid.vsync.name;
+				_opt[1].value.text = $"menu_config_all_option_value_{global.config.vid.vsync.act}";
+				_opt[2].text = global.config.vid.hideCsr.name;
+				_opt[2].value.text = $"menu_config_all_option_value_{global.config.vid.hideCsr.act}";
+				_opt[3].text = global.config.vid.showVer.name;
+				_opt[3].value.text = $"menu_config_all_option_value_{global.config.vid.showVer.act}";
+				_opt[4].text = global.config.vid.showBdr.name;
+				_opt[4].value.text = $"menu_config_all_option_value_{global.config.vid.showBdr.act}";
+				_opt[5].text = global.config.vid.showFps.name;
+				_opt[5].value.text = $"menu_config_all_option_value_{global.config.vid.showFps.act}";
+			}
+			else if (l == LVL_AUD)
+			{
+				for (var o = 0; o < array_length(global.config.aud.emtr); o++)
+				{
+					var _emtr_vol = global.config.aud.emtr[o].vol;
+					_opt[o].text = global.config.aud.emtr[o].name;
+					_opt[o].value.text = $"{round(_emtr_vol * 100)}%";
+					_opt[o].value.arrow[0].act = ((_emtr_vol > 0) ? true : false);
+					_opt[o].value.arrow[1].act = ((_emtr_vol < 1) ? true : false);
+				}
+			}
 			var _opt_yGap = 16;
 			var _opt_heightAll = ((_opt_yGap * (array_length(_opt) - 1)) + fn_text_height("Salenis"));
-			var o = 0;
-			_opt[o++].text = global.config.vid.fscr.name;
-			_opt[o++].text = global.config.vid.vsync.name;
-			_opt[o++].text = global.config.vid.hideCsr.name;
-			_opt[o++].text = global.config.vid.showVer.name;
-			_opt[o++].text = global.config.vid.showBdr.name;
-			_opt[o++].text = global.config.vid.showFps.name;
-			var o = 0;
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.fscr.act}");
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.vsync.act}");
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.hideCsr.act}");
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showVer.act}");
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showBdr.act}");
-			_opt[o++].value.text = textdata($"menu_config_all_option_value_{global.config.vid.showFps.act}");
 			for (var o = 0; o < array_length(_opt); o++)
 			{
 				_opt[o].x = round(_panel.x + _panel_xPad);
 				_opt[o].y = round(_panel.y + (_panel.height / 2) - (_opt_heightAll / 2) + (_opt_yGap * o));
-				_opt[o].value.x = round(_opt[o].x + fn_menu_lvl_option_getWidthMax(l) + (((_panel.x + _panel.width) - (_opt[o].x + fn_menu_lvl_option_getWidthMax(l))) / 2));
+				_opt[o].value.x = round(_panel.x + _panel.width - _panel_xPad - (fn_menu_lvl_option_getWidthMax(l) / 2));
+				//_opt[o].value.x = round(_opt[o].x + fn_menu_lvl_option_getWidthMax(l) + (((_panel.x + _panel.width) - (_opt[o].x + fn_menu_lvl_option_getWidthMax(l))) / 2));
 			}
 		}
 	}

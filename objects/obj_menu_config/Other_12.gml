@@ -13,24 +13,34 @@ if (lvl_curr == LVL_MAIN && _opt_curr == 0)
 }
 else if (lvl_curr == LVL_VID)
 {
-	if (_opt_curr == 0)
-		global.config.vid.fscr.act = !global.config.vid.fscr.act;
-	else if (_opt_curr == 1)
-		global.config.vid.vsync.act = !global.config.vid.vsync.act;
-	else if (_opt_curr == 2)
-		global.config.vid.hideCsr.act = !global.config.vid.hideCsr.act;
-	else if (_opt_curr == 3)
-		global.config.vid.showVer.act = !global.config.vid.showVer.act;
-	else if (_opt_curr == 4)
-		global.config.vid.showBdr.act = !global.config.vid.showBdr.act;
-	else if (_opt_curr == 5)
-		global.config.vid.showFps.act = !global.config.vid.showFps.act;
-	
+	switch (_opt_curr)
+	{
+		case 0:
+			global.config.vid.fscr.act = !global.config.vid.fscr.act;
+			break;
+		case 1:
+			global.config.vid.vsync.act = !global.config.vid.vsync.act;
+			break;
+		case 2:
+			global.config.vid.hideCsr.act = !global.config.vid.hideCsr.act;
+			break;
+		case 3:
+			global.config.vid.showVer.act = !global.config.vid.showVer.act;
+			break;
+		case 4:
+			global.config.vid.showBdr.act = !global.config.vid.showBdr.act;
+			break;
+		case 5:
+			global.config.vid.showFps.act = !global.config.vid.showFps.act;
+			break;
+	}
+
 	fn_config_file_save();
 }
 else if (lvl_curr == LVL_AUD)
 {
-	
+	global.config.aud.emtr[_opt_curr].vol = clamp((global.config.aud.emtr[_opt_curr].vol + (0.1 * _cycle_sign)), 0, 1);
+	fn_config_file_save();
 }
 else if (lvl_curr == LVL_ACCESS)
 {

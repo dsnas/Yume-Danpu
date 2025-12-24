@@ -281,7 +281,6 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 	lvl[l].option[o].value =
 	{
 		text : "Salenis",
-		key : [CONFIG_KEY.LT, CONFIG_KEY.RT],
 			
 		x : 0,
 		y : 0,
@@ -302,6 +301,8 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 	{
 		lvl[l].option[o].value.arrow[a] =
 		{
+			act : true,
+			key : ((a == 0) ? CONFIG_KEY.LT : CONFIG_KEY.RT),
 			text : ((a == 0) ? "<" : ">"),
 				
 			xGap : 6,

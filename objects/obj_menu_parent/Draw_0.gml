@@ -183,31 +183,33 @@ if (is_array(lvl) == true)
 							fn_draw_text(textdata(_val.text), _val_x, _val_y, _val_col[0], _val_col[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), , , fa_center);
 							
 								// Value's arrows
-							if (o == lvl[l].option_curr)
+							if (o == lvl[l].option_curr && (_val.arrow[0].act == true || _val.arrow[1].act == true))
 							{
+								var _arrow = _val.arrow;
 								var _arrow_x;
-								_arrow_x[0] = round(_val_x - (fn_textdata_width(_val.text) / 2) - _val.arrow[0].xGap - fn_text_width(_val.arrow[0].text));
-								_arrow_x[1] = round(_val_x + (fn_textdata_width(_val.text) / 2) + _val.arrow[1].xGap);
-								
+								_arrow_x[0] = round(_val_x - (fn_textdata_width(_val.text) / 2) - _arrow[0].xGap - fn_text_width(_arrow[0].text));
+								_arrow_x[1] = round(_val_x + (fn_textdata_width(_val.text) / 2) + _arrow[1].xGap);
 								for (var a = 0; a < 2; a++)
 								{
-									var _arrow = _val.arrow[a];
-									if (_arrow.move.act == true)
+									if (_arrow[a].act == true)
 									{
-										if (_arrow.move.wait >= _arrow.move.waitMax)
+										_arrow[a].alpha = fn_lerp(_arrow[a].alpha, _arrow[a].alphaTgt[false], _arrow[a].alphaSpd);
+										_arrow[a].scale = fn_lerp(_arrow[a].scale, _arrow[a].scaleTgt[false], _arrow[a].scaleSpd);
+										if (_arrow[a].move.act == true)
 										{
-											if (_arrow.move.xCurr < _arrow.move.xMax)
-												_arrow.move.xCurr += _arrow.move.xSpd;
+											if (_arrow[a].move.wait >= _arrow[a].move.waitMax)
+											{
+												if (_arrow[a].move.xCurr < _arrow[a].move.xMax)
+													_arrow[a].move.xCurr += _arrow[a].move.xSpd;
+												else
+													_arrow[a].move.xCurr = 0;
+												_arrow[a].move.wait = 0;
+											}
 											else
-												_arrow.move.xCurr = 0;
-											lvl[l].option[o].value.arrow[a].move.wait = 0;
+												lvl[l].option[o].value.arrow[a].move.wait += 1;
 										}
-										else
-											lvl[l].option[o].value.arrow[a].move.wait += 1;
+										fn_draw_text(_arrow[a].text, (_arrow_x[a] + (_arrow[a].move.xCurr * _arrow[a].move.xSign * _arrow[a].move.act) + (fn_text_width(_arrow[a].text) / 2)), (_val_y + (fn_text_height(_arrow[a].text) / 2)), _arrow[a].color[0], _arrow[a].color[1], (_arrow[a].alpha * lvl[l].alpha), _arrow[a].scale, _arrow[a].scale, fa_center, fa_middle);
 									}
-									_arrow.alpha = fn_lerp(_arrow.alpha, _arrow.alphaTgt[false], _arrow.alphaSpd);
-									_arrow.scale = fn_lerp(_arrow.scale, _arrow.scaleTgt[false], _arrow.scaleSpd);
-									fn_draw_text(_arrow.text, (_arrow_x[a] + (_arrow.move.xCurr * _arrow.move.xSign * _arrow.move.act) + (fn_text_width(_arrow.text) / 2)), (_val_y + (fn_text_height(_arrow.text) / 2)), _arrow.color[0], _arrow.color[1], (_arrow.alpha * lvl[l].alpha), _arrow.scale, _arrow.scale, fa_center, fa_middle);
 								}
 							}
 						}

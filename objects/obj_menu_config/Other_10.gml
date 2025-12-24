@@ -16,5 +16,10 @@ if (lvl_curr == LVL_MAIN)
 		case 1:
 			fn_menu_lvl_fader_start(LVL_VID);
 		break;
+		
+		// Music & Sounds
+		case 2:
+			fn_menu_lvl_fader_start(LVL_AUD);
+		break;
 	}
 }
