@@ -10,16 +10,20 @@ if (lvl_curr == LVL_MAIN)
 		// Language
 		case 0:
 			_confirm_snd = -1;
-		break;
+			break;
 		
 		// Graphics
 		case 1:
 			fn_menu_lvl_fader_start(LVL_VID);
-		break;
+			break;
 		
 		// Music & Sounds
 		case 2:
 			fn_menu_lvl_fader_start(LVL_AUD);
-		break;
+			break;
+		
+		case 3:
+			fn_menu_lvl_fader_start(LVL_ACCESS);
+			break;
 	}
 }

@@ -34,7 +34,7 @@ if (is_array(lvl) == true)
 			}
 			var o = lvl[l].option_curr;
 			_opt_curr = lvl[l].option_curr;
-		
+			
 			// Confirmation
 			if (lvl[l].option_confirm.act == true && fn_config_key_pressed(lvl[l].option_confirm.key) == true)
 			{
@@ -47,7 +47,7 @@ if (is_array(lvl) == true)
 				if (is_struct(lvl[l].option[o].check) == true)
 					lvl[l].option[o].check.mark.act = !lvl[l].option[o].check.mark.act;
 			}
-		
+			
 			// Cancellation
 			else if (lvl[l].option_cancel.act == true && fn_config_key_pressed(lvl[l].option_cancel.key) == true)
 			{
@@ -66,10 +66,13 @@ if (is_array(lvl) == true)
 					{
 						_cycle_sign = (fn_config_key_pressed(lvl[l].option[o].value.arrow[1].key) - fn_config_key_pressed(lvl[l].option[o].value.arrow[0].key));
 						event_user(2);
+						if (global.config.access.rdcdMot.act == false)
+						{
+							lvl[l].option[o].value.colorVal = lvl[l].option[o].value.colorValTGT[true];
+							lvl[l].option[o].value.arrow[a].alpha = lvl[l].option[o].value.arrow[a].alphaTgt[true];
+							lvl[l].option[o].value.arrow[a].scale = lvl[l].option[o].value.arrow[a].scaleTgt[true];
+						}
 						fn_aud_play(global.player.thm[global.player.thm_curr].snd.move, CONFIG_AUD_EMTR.MENU, , , 1.5);
-						lvl[l].option[o].value.colorval = lvl[l].option[o].value.colorvalTgt[true];
-						lvl[l].option[o].value.arrow[a].alpha = lvl[l].option[o].value.arrow[a].alphaTgt[true];
-						lvl[l].option[o].value.arrow[a].scale = lvl[l].option[o].value.arrow[a].scaleTgt[true];
 						break;
 					}
 				}

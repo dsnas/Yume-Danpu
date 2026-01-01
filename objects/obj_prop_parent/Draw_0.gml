@@ -1,6 +1,6 @@
 
 // Myself
-if (myself.shake.act == true && myself.shake.durCurr > 0 && global.config_rdcdMot == false)
+if (myself.shake.act == true && myself.shake.durCurr > 0 && global.config.access.rdcdMot.act == false)
 {
 	myself.xOfs += (irandom(myself.shake.dist) * choose(-1, 1));
 	myself.yOfs += (irandom(myself.shake.dist) * choose(-1, 1));
@@ -12,7 +12,7 @@ if (myself.draw.act == true)
 	if (myself.imgSpd > 0)
 	{
 		image_index += myself.imgSpd;
-		if (global.config_rdcdMot == true)
+		if (global.config.access.rdcdMot.act == true)
 			image_index = 0;
 	}
 		

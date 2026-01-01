@@ -21,7 +21,7 @@ fn_menu_lvl_option_value_add(l, 0); // Language option's value
 LVL_VID = 2;
 LVL_AUD = 3;
 LVL_ACCESS = 4;
-for (var l = LVL_VID; l < LVL_ACCESS; l++)
+for (var l = LVL_VID; l <= LVL_ACCESS; l++)
 {
 	fn_menu_lvl_add(l);
 	fn_menu_lvl_panel_add(l, 0); // Panel

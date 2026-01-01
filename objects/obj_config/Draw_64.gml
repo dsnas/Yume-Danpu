@@ -15,10 +15,8 @@ if (global.config.vid.showVer.act == true) // Draws Version
 	var _showVer_height = fn_spr_height(_showVer_spr);
 	var _showVer_x = (global.config.vid.resW - 4 - _showVer_width);
 	var _showVer_y = (global.config.vid.resH - 4 - _showVer_height);
-	
 	var _showVer_color = [global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.whiteLight];
 	var _showVer_alpha = 0.5;
-	
 	for (var v = 0; v < 2; v++)
 		fn_draw_spr(_showVer_spr, v, _showVer_x, _showVer_y, _showVer_color[v], _showVer_alpha);
 }

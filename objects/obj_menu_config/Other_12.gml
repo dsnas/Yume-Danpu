@@ -44,5 +44,9 @@ else if (lvl_curr == LVL_AUD)
 }
 else if (lvl_curr == LVL_ACCESS)
 {
-	
+	if (_opt_curr == 0)
+	{
+		global.config.access.rdcdMot.act = !global.config.access.rdcdMot.act;
+		fn_config_file_save();
+	}
 }

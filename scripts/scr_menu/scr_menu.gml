@@ -84,7 +84,7 @@ function fn_menu_lvl_fader_start(_tgt_lvl, _tgt_snd = undefined, _tgt_destroy = 
 }
 
 	// Triangle trains
-function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefined, _xSpd = 0, _ySpd = 0, _angle = 0, _alpha = 1)
+function fn_menu_lvl_train_add(_lvl, _idx, _x = undefined, _y = undefined, _xSpd = 0, _ySpd = 0, _angle = 0, _alpha = 1)
 {
 	var l = _lvl;
 	var t = _idx;
@@ -93,8 +93,8 @@ function fn_menu_lvl_train_add(_lvl, _idx, _xStart = undefined, _yStart = undefi
 	{
 		spr : spr_menu_lvl_train,
 		
-		xStart : _xStart,
-		yStart : _yStart,
+		x : _x,
+		y : _y,
 		xSpd : _xSpd,
 		ySpd : _ySpd,
 		xOfs : 0,
@@ -213,7 +213,6 @@ function fn_menu_lvl_option_add(_lvl, _idx, _text = undefined, _x = undefined, _
 	var l = _lvl;
 	var o = _idx;
 	
-	
 	// Option
 	lvl[l].option[o] =
 	{
@@ -276,7 +275,6 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 	var l = _lvl;
 	var o = _idx;
 	
-	
 	// Value label
 	lvl[l].option[o].value =
 	{
@@ -287,11 +285,18 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 		xGap : _xGap,
 			
 		color : [global.player.thm[global.player.thm_curr].color.grayLight, global.player.thm[global.player.thm_curr].color.grayDark],
-		colorval : 0,
-		colorvalTgt : [0 /* Inactive (Not cycling) */, 100 /* Active (Cycling) */],
-		colorvalSpd : 0.1,
+		colorVal : 0,
+		colorValTGT : [0 /* Inactive (Not cycling) */, 100 /* Active (Cycling) */],
+		colorValSPD : 0.1,
 		alpha : [0.5 /* Inactive (Unselected) */, 1 /* Active (Selected) */],
-				
+		
+		scale : 1,
+		scaleTgt : [1 /* Inactive (Not cycling) */, 1 /* Active (Cycling) */],
+		scaleSpd : 0.3,
+		
+		xAlign : fa_center,
+		yAlign : fa_top,
+		
 		// Arrows
 		arrow : -1
 	}
@@ -304,8 +309,9 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 			act : true,
 			key : ((a == 0) ? CONFIG_KEY.LT : CONFIG_KEY.RT),
 			text : ((a == 0) ? "<" : ">"),
-				
-			xGap : 6,
+			
+			xGap : 10,
+			xSign : ((a == 0) ? -1 : 1),
 			
 			color : [global.player.thm[global.player.thm_curr].color.whiteLight, global.player.thm[global.player.thm_curr].color.whiteLight],
 			alpha : 0.5,
@@ -318,11 +324,12 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 				
 			move :
 			{
-				act : !global.config.access.rdcdMot,
-				xCurr : 0,
-				xMax : 2,
+				act : true,
+				
 				xSpd : 1,
-				xSign : ((a == 0) ? -1 : 1),
+				xOfs : 0,
+				xOfsMAX : 2,
+				
 				wait : 0,
 				waitMax : 12
 			}
@@ -331,6 +338,18 @@ function fn_menu_lvl_option_value_add(_lvl, _idx, _xGap = 32)
 	
 	
 	event_user(3);
+}
+function fn_menu_lvl_option_value_getWidthMax(_lvl)
+{
+	var l = _lvl;
+	var _widthMax = 0;
+	for (var o = 0; o < array_length(lvl[l].option); o++)
+	{
+		var _opt = lvl[l].option[o];
+		if (_opt.value != -1)
+			_widthMax = max(_widthMax, fn_text_width(textdata(lvl[l].option[o].value.text)));
+	}
+	return _widthMax;
 }
 
 		// Icon

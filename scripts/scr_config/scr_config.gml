@@ -75,7 +75,11 @@ function fn_config_setup()
 		// Accessibility
 		access :
 		{
-			rdcdMot : false
+			rdcdMot :
+			{
+				act : false,
+				name : "config_access_rdcdMot_name"
+			}
 		},	
 	}
 	
@@ -184,7 +188,7 @@ function fn_config_file_save()
 		ini_write_real("aud", $"emtr_{e}_vol", global.config.aud.emtr[e].vol);
 	
 	// Accessibility
-	ini_write_real("access", "rdcdMot", global.config.access.rdcdMot);
+	ini_write_real("access", "rdcdMot_act", global.config.access.rdcdMot.act);
 	
 	
 	ini_close();
@@ -211,7 +215,7 @@ function fn_config_file_load()
 		global.config.aud.emtr[e].vol = ini_read_real("aud", $"emtr_{e}_vol", 1);
 	
 	// Accessibility
-	global.config.access.rdcdMot = ini_read_real("access", "rdcdMot", false);
+	global.config.access.rdcdMot.act = ini_read_real("access", "rdcdMot_act", false);
 	
 	
 	ini_close();

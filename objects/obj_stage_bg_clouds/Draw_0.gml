@@ -4,7 +4,7 @@ var _move = clouds.loop.move;
 
 
 // Movement
-if (_move.xDur > 0 && _move.yDur > 0 && global.config_rdcdMot == false)
+if (_move.xDur > 0 && _move.yDur > 0 && global.config.access.rdcdMot.act == false)
 {
 	clouds.xOfs += ((_loop.xDist * _move.xSign) / _move.xDur);
 	if (abs(clouds.x + clouds.xOfs) >= _loop.xDist)

@@ -77,8 +77,8 @@ if (is_array(lvl) == true)
 		_panel.alpha = 0.75;
 		
 		// Triangle train
-		lvl[l].train[0].xStart = 0;
-		lvl[l].train[0].yStart = (_panel_y - fn_spr_height(lvl[l].train[0].spr));
+		lvl[l].train[0].x = 0;
+		lvl[l].train[0].y = (_panel_y - fn_spr_height(lvl[l].train[0].spr));
 		lvl[l].train[0].xSpd = -0.5;
 		lvl[l].train[0].alpha = 0.75;
 		

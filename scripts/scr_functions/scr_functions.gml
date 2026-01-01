@@ -351,7 +351,7 @@ function fn_text_width(_text) // Returns the width of the specified text
 	if (font_exists(_fnt) == true)
 	{
 		draw_set_font(_fnt);
-		return (string_width(_text) - 1);
+		return string_width(_text);
 	}
 	else
 		return 0;

@@ -10,7 +10,6 @@ if (is_array(lvl) == true)
 }
 */
 
-
 if (is_array(lvl) == true)
 {
 	for (var l = 1; l < array_length(lvl); l++)
@@ -23,24 +22,18 @@ if (is_array(lvl) == true)
 				for (var t = 0; t < array_length(lvl[l].train); t++)
 				{
 					var _train = lvl[l].train[t];
-					if (_train.xStart != undefined && _train.yStart != undefined)
+					if (_train.x != undefined && _train.x != undefined)
 					{
 						var _train_xGap = lengthdir_x(fn_spr_width(_train.spr), _train.angle);
 						var _train_yGap = lengthdir_y(fn_spr_height(_train.spr), _train.angle);
-						if (_train.xSpd != 0)
-						{
-							lvl[l].train[t].xOfs += _train.xSpd;
-							if (abs(lvl[l].train[t].xOfs) >= abs(_train_xGap))
-								lvl[l].train[t].xOfs = 0;
-						}
-						if (_train.ySpd != 0)
-						{
-							lvl[l].train[t].yOfs += _train.ySpd;
-							if (abs(lvl[l].train[t].yOfs) >= abs(_train_yGap))
-								lvl[l].train[t].yOfs = 0;
-						}
+						_train.xOfs += _train.xSpd;
+						_train.yOfs += _train.ySpd;
+						if (abs(_train.xOfs) >= abs(_train_xGap)) || (global.config.access.rdcdMot.act == true)
+							_train.xOfs = 0;
+						if (abs(_train.yOfs) >= abs(_train_yGap)) || (global.config.access.rdcdMot.act == true)
+							_train.yOfs = 0;
 						for (var c = 0; c < 21; c++)
-							fn_draw_spr(_train.spr, 0, _train.xStart + lvl[l].train[t].xOfs + (_train_xGap * c), _train.yStart + lvl[l].train[t].yOfs + (_train_yGap * c), _train.color, (_train.alpha * lvl[l].alpha), , , _train.angle);
+							fn_draw_spr(_train.spr, 0, (_train.x + _train.xOfs + (_train_xGap * c)), (_train.y + _train.yOfs + (_train_yGap * c)), _train.color, (_train.alpha * lvl[l].alpha), , , _train.angle);
 					}
 				}
 			}
@@ -116,11 +109,11 @@ if (is_array(lvl) == true)
 						{
 							var _button_x = round((_opt.button.x != 0) ? _opt.button.x : (_opt.x - _opt.button.xPad));
 							var _button_y = round((_opt.button.y != 0) ? _opt.button.y : (_opt.y - _opt.button.yPad));
-							var _button_width = round((_opt.button.width != 0) ? _opt.button.width : ((_opt.button.xPad * 2) + fn_textdata_width(_opt.text) + 1));
+							var _button_width = round((_opt.button.width != 0) ? _opt.button.width : ((_opt.button.xPad * 2) + fn_textdata_width(_opt.text)));
 							var _button_height = round((_opt.button.height != 0) ? _opt.button.height : ((_opt.button.yPad * 2) + fn_textdata_height(_opt.text) + 2));
 							fn_draw_spr_stretch(_opt.button.spr, ((o != lvl[l].option_curr) ? _opt.button.img_inact : _opt.button.img_act), _button_x, _button_y, _button_width, _button_height, , lvl[l].alpha);
 						}
-			
+						
 							// Selection indicator
 						if (_opt.select.act == true && o == lvl[l].option_curr)
 						{
@@ -147,7 +140,7 @@ if (is_array(lvl) == true)
 							var _icon_alpha = (_opt.icon.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha);
 							fn_draw_spr(_opt.icon.spr, _opt.icon.img, _icon_x, _icon_y, _icon_color, _icon_alpha, , , , true, _opt_shadow_col);
 						}
-			
+						
 							// Checkbox
 						if (is_struct(_opt.check) == true && _opt.check.spr != undefined)
 						{
@@ -177,38 +170,43 @@ if (is_array(lvl) == true)
 							var _val_x = round((_val.x != 0) ? _val.x : (_opt_x + fn_textdata_width(_opt.text) + _opt.value.xGap + (fn_textdata_width(_val.text) / 2)));
 							var _val_y = round((_val.y != 0) ? _val.y : _opt_y);
 							var _val_col = [-1];
-							_val.colorval = fn_lerp(_val.colorval, _val.colorvalTgt[false], _val.colorvalSpd);
+							_val.colorVal = fn_lerp(_val.colorVal, _val.colorValTGT[false], _val.colorValSPD);
 							for (var c = 0; c < 2; c++)
-								_val_col[c] = make_colour_hsv(colour_get_hue(_val.color[c]), colour_get_saturation(_val.color[c]), (colour_get_value(_val.color[c]) + _val.colorval));
-							fn_draw_text(textdata(_val.text), _val_x, _val_y, _val_col[0], _val_col[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), , , fa_center);
+								_val_col[c] = make_colour_hsv(colour_get_hue(_val.color[c]), colour_get_saturation(_val.color[c]), (colour_get_value(_val.color[c]) + _val.colorVal));
+							_val.scale = fn_lerp(_val.scale, _val.scaleTgt[(o == lvl[l].option_curr)], _val.scaleSpd);
+							fn_draw_text(textdata(_val.text), _val_x, _val_y, _val_col[0], _val_col[1], (_val.alpha[(o == lvl[l].option_curr)] * lvl[l].alpha), _val.scale, _val.scale, _val.xAlign, _val.yAlign);
 							
 								// Value's arrows
 							if (o == lvl[l].option_curr && (_val.arrow[0].act == true || _val.arrow[1].act == true))
 							{
 								var _arrow = _val.arrow;
-								var _arrow_x;
-								_arrow_x[0] = round(_val_x - (fn_textdata_width(_val.text) / 2) - _arrow[0].xGap - fn_text_width(_arrow[0].text));
-								_arrow_x[1] = round(_val_x + (fn_textdata_width(_val.text) / 2) + _arrow[1].xGap);
 								for (var a = 0; a < 2; a++)
 								{
+									// Animates arrow
+									_arrow[a].alpha = fn_lerp(_arrow[a].alpha, _arrow[a].alphaTgt[false], _arrow[a].alphaSpd);
+									_arrow[a].scale = fn_lerp(_arrow[a].scale, _arrow[a].scaleTgt[false], _arrow[a].scaleSpd);
+									if (_arrow[a].move.act == true && global.config.access.rdcdMot.act == false)
+									{
+										if (_arrow[a].move.wait >= _arrow[a].move.waitMax)
+										{
+											if (_arrow[a].move.xOfs < _arrow[a].move.xOfsMAX)
+												_arrow[a].move.xOfs += _arrow[a].move.xSpd;
+											else
+												_arrow[a].move.xOfs = 0;
+											_arrow[a].move.wait = 0;
+										}
+										else
+											lvl[l].option[o].value.arrow[a].move.wait += 1;
+									}
+									else
+										_arrow[a].move.xOfs = 0;
+									
+									// Draws arrow
 									if (_arrow[a].act == true)
 									{
-										_arrow[a].alpha = fn_lerp(_arrow[a].alpha, _arrow[a].alphaTgt[false], _arrow[a].alphaSpd);
-										_arrow[a].scale = fn_lerp(_arrow[a].scale, _arrow[a].scaleTgt[false], _arrow[a].scaleSpd);
-										if (_arrow[a].move.act == true)
-										{
-											if (_arrow[a].move.wait >= _arrow[a].move.waitMax)
-											{
-												if (_arrow[a].move.xCurr < _arrow[a].move.xMax)
-													_arrow[a].move.xCurr += _arrow[a].move.xSpd;
-												else
-													_arrow[a].move.xCurr = 0;
-												_arrow[a].move.wait = 0;
-											}
-											else
-												lvl[l].option[o].value.arrow[a].move.wait += 1;
-										}
-										fn_draw_text(_arrow[a].text, (_arrow_x[a] + (_arrow[a].move.xCurr * _arrow[a].move.xSign * _arrow[a].move.act) + (fn_text_width(_arrow[a].text) / 2)), (_val_y + (fn_text_height(_arrow[a].text) / 2)), _arrow[a].color[0], _arrow[a].color[1], (_arrow[a].alpha * lvl[l].alpha), _arrow[a].scale, _arrow[a].scale, fa_center, fa_middle);
+										var _arrow_x = (_val_x + (((fn_textdata_width(_val.text) / 2) + _arrow[a].xGap + (_arrow[a].move.xOfs * _arrow[a].move.act)) * _arrow[a].xSign));
+										var _arrow_y = (_val_y + (fn_text_height(_arrow[a].text) / 2))
+										fn_draw_text(_arrow[a].text, _arrow_x, _arrow_y, _arrow[a].color[0], _arrow[a].color[1], (_arrow[a].alpha * lvl[l].alpha), _arrow[a].scale, _arrow[a].scale, fa_center, fa_middle);
 									}
 								}
 							}

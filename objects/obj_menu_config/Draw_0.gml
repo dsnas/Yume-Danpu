@@ -45,7 +45,7 @@ if (is_array(lvl) == true)
 	}
 	
 	// Video, Music & Sounds and Accessibility levels
-	for (var l = LVL_VID; l < LVL_ACCESS; l++)
+	for (var l = LVL_VID; l <= LVL_ACCESS; l++)
 	{
 		if (lvl_curr == l) || (lvl_fader.tgt.lvl == l)
 		{
@@ -58,7 +58,6 @@ if (is_array(lvl) == true)
 			_panel.x = round((global.config.vid.resW / 2) - (_panel.width / 2));
 			_panel.y = round((global.config.vid.resH / 2) - (_panel.height / 2) + (_panel.title.height / 2));
 			_panel.title.label.text = $"menu_config_main_option_{l - 1}";
-			var _panel_xPad = 16//(32 + 16);
 			
 			// Options
 			var _opt = lvl[l].option;
@@ -88,13 +87,20 @@ if (is_array(lvl) == true)
 					_opt[o].value.arrow[1].act = ((_emtr_vol < 1) ? true : false);
 				}
 			}
+			else if (l == LVL_ACCESS)
+			{
+				_opt[0].text = global.config.access.rdcdMot.name;
+				_opt[0].value.text = $"menu_config_all_option_value_{global.config.access.rdcdMot.act}";
+			}
 			var _opt_yGap = 16;
+			var _opt_value_xGap = (32 + 32);
+			var _opt_widthAll = (fn_menu_lvl_option_getWidthMax(l) + _opt_value_xGap + (fn_text_width("Salenis") / 2) + _opt[0].value.arrow[0].xGap);
 			var _opt_heightAll = ((_opt_yGap * (array_length(_opt) - 1)) + fn_text_height("Salenis"));
 			for (var o = 0; o < array_length(_opt); o++)
 			{
-				_opt[o].x = round(_panel.x + _panel_xPad);
+				_opt[o].x = round(_panel.x + (_panel.width / 2) - (_opt_widthAll / 2));
 				_opt[o].y = round(_panel.y + (_panel.height / 2) - (_opt_heightAll / 2) + (_opt_yGap * o));
-				_opt[o].value.x = round(_panel.x + _panel.width - _panel_xPad - (fn_menu_lvl_option_getWidthMax(l) / 2));
+				_opt[o].value.x = round(_opt[o].x + fn_menu_lvl_option_getWidthMax(l) + _opt_value_xGap);
 				//_opt[o].value.x = round(_opt[o].x + fn_menu_lvl_option_getWidthMax(l) + (((_panel.x + _panel.width) - (_opt[o].x + fn_menu_lvl_option_getWidthMax(l))) / 2));
 			}
 		}
