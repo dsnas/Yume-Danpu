@@ -11,6 +11,7 @@
 </p>
 
 <h2><br>Features</h2>
+<p>Play as Eleanor, a Brazilian hikikomori avoiding life to explore her dreams. How long until she starts avoiding her dreams, too?</p>
 <ul>
   <li><strong>Only two worlds to explore...?</strong> (The next version. The next version.)</li>
   <li><strong>Not one, but three types of collectibles you can find while exploring:</strong><ul>
@@ -18,24 +19,18 @@
     <li>Items, ordinary objects that help you in some way, like a <strong>drivable go-kart</strong>.</li>
     <li>Themes, visual styles for menus. They are ultimately useless.</li>
   </ul></li>
-  <li><strong>An original soundtrack by migel8022</strong> (not with just three-second loops!!)</li>
-  <li><strong>Several customizable settings, with many more to come:</strong><ul>
-    <li>Multiple languages (English, Brazilian Portuguese)</li>
-    <li>Navigation and optimization (Fullscreen, Low Quality, Show FPS, etc.)</li>
-    <li>Separate volume sliders (Music, Menu, Player, etc.)</li>
-    <li>Accessibility option (Reduced Motion)</li>
-  </ul></li>
-  <li><strong>Monkeys</strong></li>
+  <li><strong>An original soundtrack by migel8022!</strong> With music longer than five seconds.</li>
+  <li><strong>At least one monkey.</strong></li>
 </ul>
 <h4 align="center">Think the game is ugly? Yeah, we also do. <br>𝓦𝓸𝓻𝓴 𝓲𝓷 𝓹𝓻𝓸𝓰𝓻𝓮𝓼𝓼</h4>
 
 <h2><br>Install instructions</h2>
 <ol>
-  <li>Download the .zip of your desired version of the game</li>
-  <li>Wait for the .zip file to finish downloading</li>
-  <li>Right-click the .zip file and extract it</li>
-  <li>Wait for the .zip file to finish extracting</li>
-  <li>Inside the extracted folder, run the "Yume Danpu.exe" file</li>
+  <li>Download the .zip of your desired version of the game.</li>
+  <li>Wait for the .zip file to finish downloading.</li>
+  <li>Right-click the .zip file and extract it.</li>
+  <li>Wait for the .zip file to finish extracting.</li>
+  <li>Inside the extracted folder, run the "Yume Danpu.exe" file.</li>
   <li>Ignore any pop-up warnings about an unrecognized app. Trust me</li>
 </ol>
 
@@ -56,15 +51,15 @@
 
 <h2><br>Never asked questions</h2>
 <h3>Is Yume Danpu still in development?</h3>
-<blockquote>Yes, as of December 24, 2025. Keep in mind it may slow down from time to time.</blockquote>
+<blockquote>Yes, as of January 23, 2026. Keep in mind it may slow down from time to time.</blockquote>
 <h3>Is Yume Danpu associated with Yume Nikki?</h3>
 <blockquote>No, Yume Danpu is purely a fangame.</blockquote>
 <h3>Is Yume Danpu AI-generated?</h3>
-<blockquote>No, nothing related to Yume Danpu is AI-generated.</blockquote>
+<blockquote>No, nothing related to Yume Danpu is AI-generated, including this README.</blockquote>
 <h3>Is Yume Danpu a virus?</h3>
-<blockquote>No. Scan the .zip file with your antivirus or upload it to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a>.</blockquote>
+<blockquote>No. If you upload the .zip file to <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal</a>, reliable security vendors like Google, Microsoft, Kaspersky and Bitdefender won't flag the file as malicious.</blockquote>
 <h3>Why "Yume Danpu"?</h3>
-<blockquote>Yume Danpu is like a "spiritual successor" to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
+<blockquote>Yume Danpu is like a spiritual successor to the first game I ever made, <a href="https://dsnas.itch.io/dumpgame" target="_blank">Dumpgame</a>.</blockquote>
 <h3>Why open-source?</h3>
 <blockquote>A shark plushie asked me to. I'm not sure why, though.</blockquote>
 <h3>Why GameMaker instead of RPG Maker 2003?</h3>
